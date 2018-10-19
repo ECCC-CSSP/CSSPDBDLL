@@ -1,0 +1,671 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{F452F806-E07D-42FE-A6AE-294CEBF1D950}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CSSPDBDLL</RootNamespace>
+    <AssemblyName>CSSPDBDLL</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CSSPDHI">
+      <HintPath>..\..\CSSPDHI\CSSPDHI\bin\Debug\CSSPDHI.dll</HintPath>
+    </Reference>
+    <Reference Include="CSSPEnumsDLL, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\CSSPEnumsDLL\CSSPEnumsDLL\bin\Debug\CSSPEnumsDLL.dll</HintPath>
+    </Reference>
+    <Reference Include="CSSPLabSheetParserDLL">
+      <HintPath>..\..\CSSPLabSheetParserDLL\CSSPLabSheetParserDLL\bin\Debug\CSSPLabSheetParserDLL.dll</HintPath>
+    </Reference>
+    <Reference Include="CSSPModelsDLL">
+      <HintPath>..\..\CSSPModelsDLL\CSSPModelsDLL\bin\Debug\CSSPModelsDLL.dll</HintPath>
+    </Reference>
+    <Reference Include="CSSPReportWriterHelperDLL">
+      <HintPath>..\..\CSSPReportWriterHelperDLL\CSSPReportWriterHelperDLL\bin\Debug\CSSPReportWriterHelperDLL.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.2\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.2\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Owin, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.2.2\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.4.0.0\lib\net451\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Cors, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Cors.4.0.0\lib\net451\Microsoft.Owin.Cors.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.4.0.0\lib\net451\Microsoft.Owin.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Cookies, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.Cookies.4.0.0\lib\net451\Microsoft.Owin.Security.Cookies.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Facebook, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.Facebook.4.0.0\lib\net451\Microsoft.Owin.Security.Facebook.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Google, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.Google.4.0.0\lib\net451\Microsoft.Owin.Security.Google.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.MicrosoftAccount, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.MicrosoftAccount.4.0.0\lib\net451\Microsoft.Owin.Security.MicrosoftAccount.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.OAuth, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.OAuth.4.0.0\lib\net451\Microsoft.Owin.Security.OAuth.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Twitter, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.Twitter.4.0.0\lib\net451\Microsoft.Owin.Security.Twitter.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Net.Http.Formatting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Net.Http.WebRequest" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Cors, Version=5.2.6.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Cors.5.2.6\lib\net45\System.Web.Cors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Web.Mvc, Version=4.0.0.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Address.cs">
+      <DependentUpon>CSSPDBEDM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AppErrLog.cs">
+      <DependentUpon>CSSPDBEDM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AppTask.cs">
+      <DependentUpon>CSSPDBEDM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AppTaskLanguage.cs">
+      <DependentUpon>CSSPDBEDM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AspNetRole.cs">
+      <DependentUpon>CSSPDBEDM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AspNetUser.cs">
+      <DependentUpon>CSSPDBEDM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AspNetUserClaim.cs">
+      <DependentUpon>CSSPDBEDM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AspNetUserLogin.cs">
+      <DependentUpon>CSSPDBEDM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BoxModel.cs">
+      <DependentUpon>CSSPDBEDM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BoxModelLanguage.cs">
+      <DependentUpon>CSSPDBEDM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BoxModelResult.cs">
+      <DependentUpon>CSSPDBEDM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Classification.cs">
+      <DependentUpon>CSSPDBEDM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ClimateDataValue.cs">
+      <DependentUpon>CSSPDBEDM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ClimateSite.cs">
+      <DependentUpon>CSSPDBEDM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Contact.cs">
+      <DependentUpon>CSSPDBEDM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ContactPreference.cs">
+      <DependentUpon>CSSPDBEDM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ContactShortcut.cs">
+      <DependentUpon>CSSPDBEDM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CSSPDBEDM.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CSSPDBEDM.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CSSPDBEDM.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CSSPDBEDM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CSSPDBEDM.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CSSPDBEDM.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="DocTemplate.cs">
+      <DependentUpon>CSSPDBEDM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Email.cs">
+      <DependentUpon>CSSPDBEDM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EmailDistributionList.cs">
+      <DependentUpon>CSSPDBEDM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EmailDistributionListContact.cs">
+      <DependentUpon>CSSPDBEDM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EmailDistributionListContactLanguage.cs">
+      <DependentUpon>CSSPDBEDM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EmailDistributionListLanguage.cs">
+      <DependentUpon>CSSPDBEDM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HydrometricDataValue.cs">
+      <DependentUpon>CSSPDBEDM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HydrometricSite.cs">
+      <DependentUpon>CSSPDBEDM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Infrastructure.cs">
+      <DependentUpon>CSSPDBEDM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InfrastructureLanguage.cs">
+      <DependentUpon>CSSPDBEDM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LabSheet.cs">
+      <DependentUpon>CSSPDBEDM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LabSheetDetail.cs">
+      <DependentUpon>CSSPDBEDM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LabSheetTubeMPNDetail.cs">
+      <DependentUpon>CSSPDBEDM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Log.cs">
+      <DependentUpon>CSSPDBEDM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MapInfo.cs">
+      <DependentUpon>CSSPDBEDM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MapInfoPoint.cs">
+      <DependentUpon>CSSPDBEDM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MikeBoundaryCondition.cs">
+      <DependentUpon>CSSPDBEDM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MikeScenario.cs">
+      <DependentUpon>CSSPDBEDM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MikeSource.cs">
+      <DependentUpon>CSSPDBEDM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MikeSourceStartEnd.cs">
+      <DependentUpon>CSSPDBEDM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IdentityModel.cs" />
+    <Compile Include="MWQMAnalysisReportParameter.cs">
+      <DependentUpon>CSSPDBEDM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MWQMLookupMPN.cs">
+      <DependentUpon>CSSPDBEDM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MWQMRun.cs">
+      <DependentUpon>CSSPDBEDM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MWQMRunLanguage.cs">
+      <DependentUpon>CSSPDBEDM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MWQMSample.cs">
+      <DependentUpon>CSSPDBEDM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MWQMSampleLanguage.cs">
+      <DependentUpon>CSSPDBEDM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MWQMSite.cs">
+      <DependentUpon>CSSPDBEDM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MWQMSitePolSourceSite.cs">
+      <DependentUpon>CSSPDBEDM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MWQMSiteStartEndDate.cs">
+      <DependentUpon>CSSPDBEDM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MWQMSubsector.cs">
+      <DependentUpon>CSSPDBEDM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MWQMSubsectorLanguage.cs">
+      <DependentUpon>CSSPDBEDM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PolSourceObservation.cs">
+      <DependentUpon>CSSPDBEDM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PolSourceObservationIssue.cs">
+      <DependentUpon>CSSPDBEDM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PolSourceSite.cs">
+      <DependentUpon>CSSPDBEDM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RainExceedance.cs">
+      <DependentUpon>CSSPDBEDM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RatingCurve.cs">
+      <DependentUpon>CSSPDBEDM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RatingCurveValue.cs">
+      <DependentUpon>CSSPDBEDM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ReportSection.cs">
+      <DependentUpon>CSSPDBEDM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ReportSectionLanguage.cs">
+      <DependentUpon>CSSPDBEDM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ReportType.cs">
+      <DependentUpon>CSSPDBEDM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ReportTypeLanguage.cs">
+      <DependentUpon>CSSPDBEDM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ResetPassword.cs">
+      <DependentUpon>CSSPDBEDM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SamplingPlan.cs">
+      <DependentUpon>CSSPDBEDM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SamplingPlanEmail.cs">
+      <DependentUpon>CSSPDBEDM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SamplingPlanSubsector.cs">
+      <DependentUpon>CSSPDBEDM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SamplingPlanSubsectorSite.cs">
+      <DependentUpon>CSSPDBEDM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Services\KMZService.cs" />
+    <Compile Include="Services\AddressService.cs" />
+    <Compile Include="Services\AppErrLogService.cs" />
+    <Compile Include="Services\AppTaskLanguageService.cs" />
+    <Compile Include="Services\AppTaskService.cs" />
+    <Compile Include="Services\AspNetUserService.cs" />
+    <Compile Include="Services\BaseService.cs" />
+    <Compile Include="Services\BoxModelLanguageService.cs" />
+    <Compile Include="Services\BoxModelResultService.cs" />
+    <Compile Include="Services\BoxModelService.cs" />
+    <Compile Include="Services\ClimateDataValueService.cs" />
+    <Compile Include="Services\ClimateSiteService.cs" />
+    <Compile Include="Services\ContactPreferenceService.cs" />
+    <Compile Include="Services\ContactService.cs" />
+    <Compile Include="Services\ContactShortcutService.cs" />
+    <Compile Include="Services\MWQMSitePolSourceSiteService.cs" />
+    <Compile Include="Services\PolSourceSiteInputToolService.cs" />
+    <Compile Include="Services\ClassificationService.cs" />
+    <Compile Include="Services\ProvinceToolsService.cs" />
+    <Compile Include="Services\OpenDataService.cs" />
+    <Compile Include="Services\ReportSectionLanguageService.cs" />
+    <Compile Include="Services\ReportTypeLanguageService.cs" />
+    <Compile Include="Services\ReportSectionService.cs" />
+    <Compile Include="Services\ReportTypeService.cs" />
+    <Compile Include="Services\EmailDistributionListContactLanguageService.cs" />
+    <Compile Include="Services\EmailDistributionListContactService.cs" />
+    <Compile Include="Services\EmailDistributionListLanguageService.cs" />
+    <Compile Include="Services\EmailDistributionListService.cs" />
+    <Compile Include="Services\EmailService.cs" />
+    <Compile Include="Services\HydrometricDataValueService.cs" />
+    <Compile Include="Services\HydrometricSiteService.cs" />
+    <Compile Include="Services\InfrastructureLanguageService.cs" />
+    <Compile Include="Services\InfrastructureService.cs" />
+    <Compile Include="Services\LabSheetDetailService.cs" />
+    <Compile Include="Services\LabSheetService.cs" />
+    <Compile Include="Services\LabSheetTubeMPNDetailService.cs" />
+    <Compile Include="Services\LogService.cs" />
+    <Compile Include="Services\MapInfoPointService.cs" />
+    <Compile Include="Services\MapInfoService.cs" />
+    <Compile Include="Services\MikeBoundaryConditionService.cs" />
+    <Compile Include="Services\MikeScenarioService.cs" />
+    <Compile Include="Services\MikeSourceService.cs" />
+    <Compile Include="Services\MikeSourceStartEndService.cs" />
+    <Compile Include="Services\MWQMAnalysisReportParameterService.cs" />
+    <Compile Include="Services\MWQMLookupMPNService.cs" />
+    <Compile Include="Services\RainExceedance.cs" />
+    <Compile Include="Services\ReportServiceGeneratedSampling_Plan.cs" />
+    <Compile Include="Services\ReportServiceGeneratedSampling_Plan_Lab_Sheet.cs" />
+    <Compile Include="Services\ReportServiceGeneratedSampling_Plan_Lab_Sheet_Detail.cs" />
+    <Compile Include="Services\ReportServiceGeneratedSampling_Plan_Lab_Sheet_Tube_And_MPN_Detail.cs" />
+    <Compile Include="Services\ReportServiceGeneratedSampling_Plan_Subsector.cs" />
+    <Compile Include="Services\ReportServiceGeneratedSampling_Plan_Subsector_Site.cs" />
+    <Compile Include="Services\ReportServiceGeneratedSubsector_Special_Table.cs" />
+    <Compile Include="Services\ReportServiceSubsector_Special_Table.cs" />
+    <Compile Include="Services\SamplingPlanEmailService.cs" />
+    <Compile Include="Services\SamplingPlanService.cs" />
+    <Compile Include="Services\SamplingPlanSubsectorService.cs" />
+    <Compile Include="Services\SamplingPlanSubsectorSiteService.cs" />
+    <Compile Include="Services\MWQMRunLanguageService.cs" />
+    <Compile Include="Services\MWQMRunService.cs" />
+    <Compile Include="Services\MWQMSampleLanguageService.cs" />
+    <Compile Include="Services\MWQMSampleService.cs" />
+    <Compile Include="Services\MWQMSiteService.cs" />
+    <Compile Include="Services\MWQMSiteStartEndDateService.cs" />
+    <Compile Include="Services\MWQMSubsectorLanguageService.cs" />
+    <Compile Include="Services\MWQMSubsectorService.cs" />
+    <Compile Include="Services\PolSourceObservationIssueService.cs" />
+    <Compile Include="Services\PolSourceObservationService.cs" />
+    <Compile Include="Services\RandomService.cs" />
+    <Compile Include="Services\ReportServiceVisual_Plumes_Scenario_Result.cs" />
+    <Compile Include="Services\ReportServiceVisual_Plumes_Scenario_Ambient.cs" />
+    <Compile Include="Services\ReportServiceVisual_Plumes_Scenario.cs" />
+    <Compile Include="Services\ReportServiceSubsector_Tide_Site_Data.cs" />
+    <Compile Include="Services\ReportServiceSubsector_Tide_Site.cs" />
+    <Compile Include="Services\ReportServiceSubsector_Lab_Sheet_Tube_And_MPN_Detail.cs" />
+    <Compile Include="Services\ReportServiceSubsector_Lab_Sheet_Detail.cs" />
+    <Compile Include="Services\ReportServiceSubsector_Lab_Sheet.cs" />
+    <Compile Include="Services\ReportServiceSubsector_Hydrometric_Site_Rating_Curve_Value.cs" />
+    <Compile Include="Services\ReportServiceSubsector_Hydrometric_Site_Rating_Curve.cs" />
+    <Compile Include="Services\ReportServiceSubsector_Hydrometric_Site_Data.cs" />
+    <Compile Include="Services\ReportServiceSubsector_Hydrometric_Site.cs" />
+    <Compile Include="Services\ReportServiceSubsector_File.cs" />
+    <Compile Include="Services\ReportServiceSubsector_Climate_Site_Data.cs" />
+    <Compile Include="Services\ReportServiceSubsector_Climate_Site.cs" />
+    <Compile Include="Services\ReportServiceSubsector.cs" />
+    <Compile Include="Services\ReportServiceSector_File.cs" />
+    <Compile Include="Services\ReportServiceSector.cs" />
+    <Compile Include="Services\ReportServiceRoot_File.cs" />
+    <Compile Include="Services\ReportServiceRoot.cs" />
+    <Compile Include="Services\ReportServiceProvince_File.cs" />
+    <Compile Include="Services\ReportServiceProvince.cs" />
+    <Compile Include="Services\ReportServicePol_Source_Site_Obs_Issue.cs" />
+    <Compile Include="Services\ReportServicePol_Source_Site_Obs.cs" />
+    <Compile Include="Services\ReportServicePol_Source_Site_File.cs" />
+    <Compile Include="Services\ReportServicePol_Source_Site_Address.cs" />
+    <Compile Include="Services\ReportServicePol_Source_Site.cs" />
+    <Compile Include="Services\ReportServiceMWQM_Site_Start_And_End_Date.cs" />
+    <Compile Include="Services\ReportServiceMWQM_Site_Sample.cs" />
+    <Compile Include="Services\ReportServiceMWQM_Site_File.cs" />
+    <Compile Include="Services\ReportServiceMWQM_Site.cs" />
+    <Compile Include="Services\ReportServiceMWQM_Run_Sample.cs" />
+    <Compile Include="Services\ReportServiceMWQM_Run_Lab_Sheet_Tube_And_MPN_Detail.cs" />
+    <Compile Include="Services\ReportServiceMWQM_Run_Lab_Sheet_Detail.cs" />
+    <Compile Include="Services\ReportServiceMWQM_Run_Lab_Sheet.cs" />
+    <Compile Include="Services\ReportServiceMWQM_Run_File.cs" />
+    <Compile Include="Services\ReportServiceMWQM_Run.cs" />
+    <Compile Include="Services\ReportServiceSampling_Plan_Subsector_Site.cs" />
+    <Compile Include="Services\ReportServiceSampling_Plan_Subsector.cs" />
+    <Compile Include="Services\ReportServiceSampling_Plan_Lab_Sheet_Tube_And_MPN_Detail.cs" />
+    <Compile Include="Services\ReportServiceSampling_Plan_Lab_Sheet_Detail.cs" />
+    <Compile Include="Services\ReportServiceSampling_Plan_Lab_Sheet.cs" />
+    <Compile Include="Services\ReportServiceSampling_Plan.cs" />
+    <Compile Include="Services\ReportServiceMunicipality_File.cs" />
+    <Compile Include="Services\ReportServiceMunicipality_Contact_Tel.cs" />
+    <Compile Include="Services\ReportServiceMunicipality_Contact_Email.cs" />
+    <Compile Include="Services\ReportServiceMunicipality_Contact_Address.cs" />
+    <Compile Include="Services\ReportServiceMunicipality_Contact.cs" />
+    <Compile Include="Services\ReportServiceMunicipality.cs" />
+    <Compile Include="Services\ReportServiceMPN_Lookup.cs" />
+    <Compile Include="Services\ReportServiceMike_Source.cs" />
+    <Compile Include="Services\ReportServiceMike_Source_Start_End.cs" />
+    <Compile Include="Services\ReportServiceMike_Scenario_File.cs" />
+    <Compile Include="Services\ReportServiceMike_Scenario.cs" />
+    <Compile Include="Services\ReportServiceMike_Boundary_Condition.cs" />
+    <Compile Include="Services\ReportServiceInfrastructure_File.cs" />
+    <Compile Include="Services\ReportServiceInfrastructure_Address.cs" />
+    <Compile Include="Services\ReportServiceInfrastructure.cs" />
+    <Compile Include="Services\ReportServiceHydrometric_Site_Rating_Curve_Value.cs" />
+    <Compile Include="Services\ReportServiceHydrometric_Site_Rating_Curve.cs" />
+    <Compile Include="Services\ReportServiceHydrometric_Site_Data.cs" />
+    <Compile Include="Services\ReportServiceHydrometric_Site.cs" />
+    <Compile Include="Services\ReportServiceCountry_File.cs" />
+    <Compile Include="Services\ReportServiceCountry.cs" />
+    <Compile Include="Services\ReportServiceClimate_Site_Data.cs" />
+    <Compile Include="Services\ReportServiceClimate_Site.cs" />
+    <Compile Include="Services\ReportServiceBox_Model_Result.cs" />
+    <Compile Include="Services\ReportServiceBox_Model.cs" />
+    <Compile Include="Services\ReportServiceArea_File.cs" />
+    <Compile Include="Services\ReportServiceArea.cs" />
+    <Compile Include="Services\ReportService.cs" />
+    <Compile Include="Services\PolSourceSiteService.cs" />
+    <Compile Include="Services\RatingCurveService.cs" />
+    <Compile Include="Services\RatingCurveValueService.cs" />
+    <Compile Include="Services\ReportServiceGeneratedArea.cs" />
+    <Compile Include="Services\ReportServiceGeneratedArea_File.cs" />
+    <Compile Include="Services\ReportServiceGeneratedBox_Model.cs" />
+    <Compile Include="Services\ReportServiceGeneratedBox_Model_Result.cs" />
+    <Compile Include="Services\ReportServiceGeneratedClimate_Site.cs" />
+    <Compile Include="Services\ReportServiceGeneratedClimate_Site_Data.cs" />
+    <Compile Include="Services\ReportServiceGeneratedCountry.cs" />
+    <Compile Include="Services\ReportServiceGeneratedCountry_File.cs" />
+    <Compile Include="Services\ReportServiceGeneratedHydrometric_Site.cs" />
+    <Compile Include="Services\ReportServiceGeneratedHydrometric_Site_Data.cs" />
+    <Compile Include="Services\ReportServiceGeneratedHydrometric_Site_Rating_Curve.cs" />
+    <Compile Include="Services\ReportServiceGeneratedHydrometric_Site_Rating_Curve_Value.cs" />
+    <Compile Include="Services\ReportServiceGeneratedInfrastructure.cs" />
+    <Compile Include="Services\ReportServiceGeneratedInfrastructure_Address.cs" />
+    <Compile Include="Services\ReportServiceGeneratedInfrastructure_File.cs" />
+    <Compile Include="Services\ReportServiceGeneratedMike_Boundary_Condition.cs" />
+    <Compile Include="Services\ReportServiceGeneratedMike_Scenario.cs" />
+    <Compile Include="Services\ReportServiceGeneratedMike_Scenario_File.cs" />
+    <Compile Include="Services\ReportServiceGeneratedMike_Source.cs" />
+    <Compile Include="Services\ReportServiceGeneratedMike_Source_Start_End.cs" />
+    <Compile Include="Services\ReportServiceGeneratedMPN_Lookup.cs" />
+    <Compile Include="Services\ReportServiceGeneratedMunicipality.cs" />
+    <Compile Include="Services\ReportServiceGeneratedMunicipality_Contact.cs" />
+    <Compile Include="Services\ReportServiceGeneratedMunicipality_Contact_Address.cs" />
+    <Compile Include="Services\ReportServiceGeneratedMunicipality_Contact_Email.cs" />
+    <Compile Include="Services\ReportServiceGeneratedMunicipality_Contact_Tel.cs" />
+    <Compile Include="Services\ReportServiceGeneratedMunicipality_File.cs" />
+    <Compile Include="Services\ReportServiceGeneratedMWQM_Run.cs" />
+    <Compile Include="Services\ReportServiceGeneratedMWQM_Run_File.cs" />
+    <Compile Include="Services\ReportServiceGeneratedMWQM_Run_Lab_Sheet.cs" />
+    <Compile Include="Services\ReportServiceGeneratedMWQM_Run_Lab_Sheet_Detail.cs" />
+    <Compile Include="Services\ReportServiceGeneratedMWQM_Run_Lab_Sheet_Tube_And_MPN_Detail.cs" />
+    <Compile Include="Services\ReportServiceGeneratedMWQM_Run_Sample.cs" />
+    <Compile Include="Services\ReportServiceGeneratedMWQM_Site.cs" />
+    <Compile Include="Services\ReportServiceGeneratedMWQM_Site_File.cs" />
+    <Compile Include="Services\ReportServiceGeneratedMWQM_Site_Sample.cs" />
+    <Compile Include="Services\ReportServiceGeneratedMWQM_Site_Start_And_End_Date.cs" />
+    <Compile Include="Services\ReportServiceGeneratedPol_Source_Site.cs" />
+    <Compile Include="Services\ReportServiceGeneratedPol_Source_Site_Address.cs" />
+    <Compile Include="Services\ReportServiceGeneratedPol_Source_Site_File.cs" />
+    <Compile Include="Services\ReportServiceGeneratedPol_Source_Site_Obs.cs" />
+    <Compile Include="Services\ReportServiceGeneratedPol_Source_Site_Obs_Issue.cs" />
+    <Compile Include="Services\ReportServiceGeneratedProvince.cs" />
+    <Compile Include="Services\ReportServiceGeneratedProvince_File.cs" />
+    <Compile Include="Services\ReportServiceGeneratedRoot.cs" />
+    <Compile Include="Services\ReportServiceGeneratedRoot_File.cs" />
+    <Compile Include="Services\ReportServiceGeneratedSector.cs" />
+    <Compile Include="Services\ReportServiceGeneratedSector_File.cs" />
+    <Compile Include="Services\ReportServiceGeneratedSubsector.cs" />
+    <Compile Include="Services\ReportServiceGeneratedSubsector_Climate_Site.cs" />
+    <Compile Include="Services\ReportServiceGeneratedSubsector_Climate_Site_Data.cs" />
+    <Compile Include="Services\ReportServiceGeneratedSubsector_File.cs" />
+    <Compile Include="Services\ReportServiceGeneratedSubsector_Hydrometric_Site.cs" />
+    <Compile Include="Services\ReportServiceGeneratedSubsector_Hydrometric_Site_Data.cs" />
+    <Compile Include="Services\ReportServiceGeneratedSubsector_Hydrometric_Site_Rating_Curve.cs" />
+    <Compile Include="Services\ReportServiceGeneratedSubsector_Hydrometric_Site_Rating_Curve_Value.cs" />
+    <Compile Include="Services\ReportServiceGeneratedSubsector_Lab_Sheet.cs" />
+    <Compile Include="Services\ReportServiceGeneratedSubsector_Lab_Sheet_Detail.cs" />
+    <Compile Include="Services\ReportServiceGeneratedSubsector_Lab_Sheet_Tube_And_MPN_Detail.cs" />
+    <Compile Include="Services\ReportServiceGeneratedSubsector_Tide_Site.cs" />
+    <Compile Include="Services\ReportServiceGeneratedSubsector_Tide_Site_Data.cs" />
+    <Compile Include="Services\ReportServiceGeneratedVisual_Plumes_Scenario.cs" />
+    <Compile Include="Services\ReportServiceGeneratedVisual_Plumes_Scenario_Ambient.cs" />
+    <Compile Include="Services\ReportServiceGeneratedVisual_Plumes_Scenario_Result.cs" />
+    <Compile Include="Services\ResetPasswordService.cs" />
+    <Compile Include="Services\Resources\ServiceRes.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ServiceRes.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Services\Resources\ServiceRes.fr.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ServiceRes.fr.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Services\SpillLanguageService.cs" />
+    <Compile Include="Services\DocTemplateService.cs" />
+    <Compile Include="Services\SpillService.cs" />
+    <Compile Include="Services\TelService.cs" />
+    <Compile Include="Services\TestDBService.cs" />
+    <Compile Include="Services\TideDataValueService.cs" />
+    <Compile Include="Services\TideSiteService.cs" />
+    <Compile Include="Services\TVFileService.cs" />
+    <Compile Include="Services\TVFileLanguageService.cs" />
+    <Compile Include="Services\TVItemLanguageService.cs" />
+    <Compile Include="Services\TVItemLinkService.cs" />
+    <Compile Include="Services\TVItemService.cs" />
+    <Compile Include="Services\TVItemStatService.cs" />
+    <Compile Include="Services\TVItemUserAuthorizationService.cs" />
+    <Compile Include="Services\TVTypeUserAuthorizationService.cs" />
+    <Compile Include="Services\UseOfSiteService.cs" />
+    <Compile Include="Services\VPAmbientService.cs" />
+    <Compile Include="Services\VPResultService.cs" />
+    <Compile Include="Services\VPScenarioLanguageService.cs" />
+    <Compile Include="Services\VPScenarioService.cs" />
+    <Compile Include="Spill.cs">
+      <DependentUpon>CSSPDBEDM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SpillLanguage.cs">
+      <DependentUpon>CSSPDBEDM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Tel.cs">
+      <DependentUpon>CSSPDBEDM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TideDataValue.cs">
+      <DependentUpon>CSSPDBEDM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TideLocation.cs">
+      <DependentUpon>CSSPDBEDM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TideSite.cs">
+      <DependentUpon>CSSPDBEDM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TVFile.cs">
+      <DependentUpon>CSSPDBEDM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TVFileLanguage.cs">
+      <DependentUpon>CSSPDBEDM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TVItem.cs">
+      <DependentUpon>CSSPDBEDM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TVItemLanguage.cs">
+      <DependentUpon>CSSPDBEDM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TVItemLink.cs">
+      <DependentUpon>CSSPDBEDM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TVItemStat.cs">
+      <DependentUpon>CSSPDBEDM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TVItemUserAuthorization.cs">
+      <DependentUpon>CSSPDBEDM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TVTypeUserAuthorization.cs">
+      <DependentUpon>CSSPDBEDM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UseOfSite.cs">
+      <DependentUpon>CSSPDBEDM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VPAmbient.cs">
+      <DependentUpon>CSSPDBEDM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VPResult.cs">
+      <DependentUpon>CSSPDBEDM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VPScenario.cs">
+      <DependentUpon>CSSPDBEDM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VPScenarioLanguage.cs">
+      <DependentUpon>CSSPDBEDM.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Services\Resources\ServiceRes.fr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ServiceRes.fr.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Services\Resources\ServiceRes.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ServiceRes.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.Config">
+      <SubType>Designer</SubType>
+    </None>
+    <EntityDeploy Include="CSSPDBEDM.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>CSSPDBEDM.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="CSSPDBEDM.edmx.diagram">
+      <DependentUpon>CSSPDBEDM.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="CSSPDBEDM.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>CSSPDBEDM.edmx</DependentUpon>
+      <LastGenOutput>CSSPDBEDM.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="CSSPDBEDM.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>CSSPDBEDM.edmx</DependentUpon>
+      <LastGenOutput>CSSPDBEDM.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

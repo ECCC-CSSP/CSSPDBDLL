@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="5f554b57f82d4cbc88d078d66e16d527" Name="Diagram1">
+        <EntityTypeShape EntityType="CSSPDBModel.Address" Width="1.5" PointX="3" PointY="219.875" />
+        <EntityTypeShape EntityType="CSSPDBModel.AppErrLog" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="CSSPDBModel.AppTaskLanguage" Width="1.5" PointX="5.25" PointY="122.75" />
+        <EntityTypeShape EntityType="CSSPDBModel.AppTask" Width="1.5" PointX="3" PointY="121.875" />
+        <EntityTypeShape EntityType="CSSPDBModel.AspNetRole" Width="1.5" PointX="3.5" PointY="110.875" />
+        <EntityTypeShape EntityType="CSSPDBModel.AspNetUserClaim" Width="1.5" PointX="8" PointY="109.5" />
+        <EntityTypeShape EntityType="CSSPDBModel.AspNetUserLogin" Width="1.5" PointX="8" PointY="112.125" />
+        <EntityTypeShape EntityType="CSSPDBModel.AspNetUser" Width="1.5" PointX="5.75" PointY="109.625" />
+        <EntityTypeShape EntityType="CSSPDBModel.BoxModelLanguage" Width="1.5" PointX="5.25" PointY="65.625" />
+        <EntityTypeShape EntityType="CSSPDBModel.BoxModelResult" Width="1.5" PointX="5.25" PointY="60.125" />
+        <EntityTypeShape EntityType="CSSPDBModel.BoxModel" Width="1.5" PointX="3" PointY="62" />
+        <EntityTypeShape EntityType="CSSPDBModel.Classification" Width="1.5" PointX="3" PointY="197.375" />
+        <EntityTypeShape EntityType="CSSPDBModel.ClimateDataValue" Width="1.5" PointX="5.25" PointY="191.125" />
+        <EntityTypeShape EntityType="CSSPDBModel.ClimateSite" Width="1.5" PointX="3" PointY="190.625" />
+        <EntityTypeShape EntityType="CSSPDBModel.ContactPreference" Width="1.5" PointX="10.25" PointY="122" />
+        <EntityTypeShape EntityType="CSSPDBModel.Contact" Width="1.5" PointX="8" PointY="122.25" />
+        <EntityTypeShape EntityType="CSSPDBModel.ContactShortcut" Width="1.5" PointX="10.25" PointY="125.125" />
+        <EntityTypeShape EntityType="CSSPDBModel.DocTemplate" Width="1.5" PointX="3" PointY="233.375" />
+        <EntityTypeShape EntityType="CSSPDBModel.EmailDistributionListContactLanguage" Width="1.5" PointX="7.5" PointY="46.375" />
+        <EntityTypeShape EntityType="CSSPDBModel.EmailDistributionListContact" Width="1.5" PointX="5.25" PointY="45.875" />
+        <EntityTypeShape EntityType="CSSPDBModel.EmailDistributionListLanguage" Width="1.5" PointX="5.25" PointY="42.5" />
+        <EntityTypeShape EntityType="CSSPDBModel.EmailDistributionList" Width="1.5" PointX="3" PointY="44.75" />
+        <EntityTypeShape EntityType="CSSPDBModel.Email" Width="1.5" PointX="3" PointY="212.25" />
+        <EntityTypeShape EntityType="CSSPDBModel.HydrometricDataValue" Width="1.5" PointX="5.25" PointY="251.25" />
+        <EntityTypeShape EntityType="CSSPDBModel.HydrometricSite" Width="1.5" PointX="3" PointY="251.625" />
+        <EntityTypeShape EntityType="CSSPDBModel.InfrastructureLanguage" Width="1.5" PointX="5.25" PointY="204.75" />
+        <EntityTypeShape EntityType="CSSPDBModel.Infrastructure" Width="1.5" PointX="3" PointY="200.5" />
+        <EntityTypeShape EntityType="CSSPDBModel.LabSheetDetail" Width="1.5" PointX="7.5" PointY="145.375" />
+        <EntityTypeShape EntityType="CSSPDBModel.LabSheet" Width="1.5" PointX="5.25" PointY="149.375" />
+        <EntityTypeShape EntityType="CSSPDBModel.LabSheetTubeMPNDetail" Width="1.5" PointX="9.75" PointY="136.125" />
+        <EntityTypeShape EntityType="CSSPDBModel.Log" Width="1.5" PointX="2.75" PointY="0.75" />
+        <EntityTypeShape EntityType="CSSPDBModel.MapInfoPoint" Width="1.5" PointX="5.25" PointY="170.25" />
+        <EntityTypeShape EntityType="CSSPDBModel.MapInfo" Width="1.5" PointX="3" PointY="169.875" />
+        <EntityTypeShape EntityType="CSSPDBModel.MikeBoundaryCondition" Width="1.5" PointX="3" PointY="68.875" />
+        <EntityTypeShape EntityType="CSSPDBModel.MikeScenario" Width="1.5" PointX="3" PointY="224.875" />
+        <EntityTypeShape EntityType="CSSPDBModel.MikeSource" Width="1.5" PointX="3" PointY="55.5" />
+        <EntityTypeShape EntityType="CSSPDBModel.MikeSourceStartEnd" Width="1.5" PointX="5.25" PointY="55.5" />
+        <EntityTypeShape EntityType="CSSPDBModel.MWQMAnalysisReportParameter" Width="1.5" PointX="3" PointY="159.625" />
+        <EntityTypeShape EntityType="CSSPDBModel.MWQMLookupMPN" Width="1.5" PointX="4.75" PointY="0.75" />
+        <EntityTypeShape EntityType="CSSPDBModel.MWQMRunLanguage" Width="1.5" PointX="5.25" PointY="130.375" />
+        <EntityTypeShape EntityType="CSSPDBModel.MWQMRun" Width="1.5" PointX="3" PointY="127" />
+        <EntityTypeShape EntityType="CSSPDBModel.MWQMSampleLanguage" Width="1.5" PointX="5.25" PointY="241.125" />
+        <EntityTypeShape EntityType="CSSPDBModel.MWQMSample" Width="1.5" PointX="3" PointY="239.875" />
+        <EntityTypeShape EntityType="CSSPDBModel.MWQMSitePolSourceSite" Width="1.5" PointX="3" PointY="97.625" />
+        <EntityTypeShape EntityType="CSSPDBModel.MWQMSite" Width="1.5" PointX="3" PointY="34.5" />
+        <EntityTypeShape EntityType="CSSPDBModel.MWQMSiteStartEndDate" Width="1.5" PointX="3" PointY="166.75" />
+        <EntityTypeShape EntityType="CSSPDBModel.MWQMSubsectorLanguage" Width="1.5" PointX="5.25" PointY="173.875" />
+        <EntityTypeShape EntityType="CSSPDBModel.MWQMSubsector" Width="1.5" PointX="3" PointY="174.125" />
+        <EntityTypeShape EntityType="CSSPDBModel.PolSourceObservationIssue" Width="1.5" PointX="7.5" PointY="165.875" />
+        <EntityTypeShape EntityType="CSSPDBModel.PolSourceObservation" Width="1.5" PointX="5.25" PointY="165.625" />
+        <EntityTypeShape EntityType="CSSPDBModel.PolSourceSite" Width="1.5" PointX="3" PointY="215.375" />
+        <EntityTypeShape EntityType="CSSPDBModel.RainExceedance" Width="1.5" PointX="0.75" PointY="4.75" />
+        <EntityTypeShape EntityType="CSSPDBModel.RatingCurve" Width="1.5" PointX="5.25" PointY="255.5" />
+        <EntityTypeShape EntityType="CSSPDBModel.RatingCurveValue" Width="1.5" PointX="7.5" PointY="255.5" />
+        <EntityTypeShape EntityType="CSSPDBModel.ReportSectionLanguage" Width="1.5" PointX="8.25" PointY="117.25" />
+        <EntityTypeShape EntityType="CSSPDBModel.ReportSection" Width="1.5" PointX="6" PointY="116.5" />
+        <EntityTypeShape EntityType="CSSPDBModel.ReportTypeLanguage" Width="1.5" PointX="6" PointY="105" />
+        <EntityTypeShape EntityType="CSSPDBModel.ReportType" Width="1.5" PointX="3.75" PointY="115.375" />
+        <EntityTypeShape EntityType="CSSPDBModel.ResetPassword" Width="1.5" PointX="2.75" PointY="4.75" />
+        <EntityTypeShape EntityType="CSSPDBModel.SamplingPlanEmail" Width="1.5" PointX="5.25" PointY="186.375" />
+        <EntityTypeShape EntityType="CSSPDBModel.SamplingPlan" Width="1.5" PointX="3" PointY="181.25" />
+        <EntityTypeShape EntityType="CSSPDBModel.SamplingPlanSubsector" Width="1.5" PointX="10.25" PointY="152.25" />
+        <EntityTypeShape EntityType="CSSPDBModel.SamplingPlanSubsectorSite" Width="1.5" PointX="12.5" PointY="134.625" />
+        <EntityTypeShape EntityType="CSSPDBModel.SpillLanguage" Width="1.5" PointX="5.25" PointY="77" />
+        <EntityTypeShape EntityType="CSSPDBModel.Spill" Width="1.5" PointX="3" PointY="76.625" />
+        <EntityTypeShape EntityType="CSSPDBModel.Tel" Width="1.5" PointX="3" PointY="236.75" />
+        <EntityTypeShape EntityType="CSSPDBModel.TideDataValue" Width="1.5" PointX="3" PointY="38" />
+        <EntityTypeShape EntityType="CSSPDBModel.TideLocation" Width="1.5" PointX="6.75" PointY="0.75" />
+        <EntityTypeShape EntityType="CSSPDBModel.TideSite" Width="1.5" PointX="3" PointY="101.125" />
+        <EntityTypeShape EntityType="CSSPDBModel.TVFileLanguage" Width="1.5" PointX="5.25" PointY="246.75" />
+        <EntityTypeShape EntityType="CSSPDBModel.TVFile" Width="1.5" PointX="3" PointY="245.625" />
+        <EntityTypeShape EntityType="CSSPDBModel.TVItemLanguage" Width="1.5" PointX="3" PointY="73.375" />
+        <EntityTypeShape EntityType="CSSPDBModel.TVItemLink" Width="1.5" PointX="3" PointY="92.625" />
+        <EntityTypeShape EntityType="CSSPDBModel.TVItem" Width="1.5" PointX="0.75" PointY="117.125" />
+        <EntityTypeShape EntityType="CSSPDBModel.TVItemStat" Width="1.5" PointX="3" PointY="118.75" />
+        <EntityTypeShape EntityType="CSSPDBModel.TVItemUserAuthorization" Width="1.5" PointX="3" PointY="30.625" />
+        <EntityTypeShape EntityType="CSSPDBModel.TVTypeUserAuthorization" Width="1.5" PointX="3" PointY="104.25" />
+        <EntityTypeShape EntityType="CSSPDBModel.UseOfSite" Width="1.5" PointX="3" PointY="50.25" />
+        <EntityTypeShape EntityType="CSSPDBModel.VPAmbient" Width="1.5" PointX="5.25" PointY="87.75" />
+        <EntityTypeShape EntityType="CSSPDBModel.VPResult" Width="1.5" PointX="5.25" PointY="83.875" />
+        <EntityTypeShape EntityType="CSSPDBModel.VPScenarioLanguage" Width="1.5" PointX="5.25" PointY="80.5" />
+        <EntityTypeShape EntityType="CSSPDBModel.VPScenario" Width="1.5" PointX="3" PointY="83.125" />
+        <AssociationConnector Association="CSSPDBModel.FK_Addresses_AddressTVItemID" />
+        <AssociationConnector Association="CSSPDBModel.FK_Addresses_CountryTVItemID" />
+        <AssociationConnector Association="CSSPDBModel.FK_Addresses_MunicipalityTVItemID" />
+        <AssociationConnector Association="CSSPDBModel.FK_Addresses_ProvinceTVItemID" />
+        <AssociationConnector Association="CSSPDBModel.FK_AppTaskLanguages_AppTasks" />
+        <AssociationConnector Association="CSSPDBModel.FK_AppTasks_TVItems" />
+        <AssociationConnector Association="CSSPDBModel.FK_AppTasks_TVItems2" />
+        <AssociationConnector Association="CSSPDBModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="CSSPDBModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="CSSPDBModel.FK_Contacts_AspNetUsers" />
+        <AssociationConnector Association="CSSPDBModel.FK_BoxModelLanguages_BoxModels" />
+        <AssociationConnector Association="CSSPDBModel.FK_BoxModelResults_BoxModels" />
+        <AssociationConnector Association="CSSPDBModel.FK_BoxModels_InfrastructureTVItemID" />
+        <AssociationConnector Association="CSSPDBModel.FK_Classifications_TVItems" />
+        <AssociationConnector Association="CSSPDBModel.FK_ClimateDataValues_ClimateSites" />
+        <AssociationConnector Association="CSSPDBModel.FK_ClimateSites_TVItems" />
+        <AssociationConnector Association="CSSPDBModel.FK_ContactPreferences_Contacts" />
+        <AssociationConnector Association="CSSPDBModel.FK_Contacts_TVItems" />
+        <AssociationConnector Association="CSSPDBModel.FK_ContactShortcuts_Contacts" />
+        <AssociationConnector Association="CSSPDBModel.FK_DocTemplates_TVItems" />
+        <AssociationConnector Association="CSSPDBModel.FK_EmailDistributionListContactLanguages_EmailDistributionListContacts" />
+        <AssociationConnector Association="CSSPDBModel.FK_EmailDistributionListContacts_EmailDistributionLists" />
+        <AssociationConnector Association="CSSPDBModel.FK_EmailDistributionListLanguages_EmailDistributionLists" />
+        <AssociationConnector Association="CSSPDBModel.FK_EmailDistributionLists_TVItems" />
+        <AssociationConnector Association="CSSPDBModel.FK_EmailTVItemID_TVItems" />
+        <AssociationConnector Association="CSSPDBModel.FK_HydrometricDataValues_HydrometricSites" />
+        <AssociationConnector Association="CSSPDBModel.FK_HydrometricSites_TVItems" />
+        <AssociationConnector Association="CSSPDBModel.FK_RatingCurves_HydrometricSites" />
+        <AssociationConnector Association="CSSPDBModel.FK_InfrastructureLanguages_Infrastructures" />
+        <AssociationConnector Association="CSSPDBModel.FK_Infrastructures_CivicAddressTVItemID" />
+        <AssociationConnector Association="CSSPDBModel.FK_Infrastructures_SeeOtherTVItemID" />
+        <AssociationConnector Association="CSSPDBModel.FK_Infrastructures_TVItems" />
+        <AssociationConnector Association="CSSPDBModel.FK_LabSheetDetails_LabSheets" />
+        <AssociationConnector Association="CSSPDBModel.FK_LabSheetDetails_SamplingPlans" />
+        <AssociationConnector Association="CSSPDBModel.FK_LabSheetDetails_SubsectorTVItemID" />
+        <AssociationConnector Association="CSSPDBModel.FK_LabSheetTubeMPNDetails_LabSheetDetails" />
+        <AssociationConnector Association="CSSPDBModel.FK_LabSheets_ApprovedByContactTVItemID" />
+        <AssociationConnector Association="CSSPDBModel.FK_LabSheets_MWQMRunTVItemID" />
+        <AssociationConnector Association="CSSPDBModel.FK_LabSheets_SamplingPlans" />
+        <AssociationConnector Association="CSSPDBModel.FK_LabSheets_SubsectorTVItemID" />
+        <AssociationConnector Association="CSSPDBModel.FK_LabSheetTubeMPNDetails_TVItems" />
+        <AssociationConnector Association="CSSPDBModel.FK_MapInfoPoints_MapInfos" />
+        <AssociationConnector Association="CSSPDBModel.FK_MapInfos_TVItems" />
+        <AssociationConnector Association="CSSPDBModel.FK_MikeBoundaryConditions_TVItems" />
+        <AssociationConnector Association="CSSPDBModel.FK_MikeScenarios_MikeScenarios" />
+        <AssociationConnector Association="CSSPDBModel.FK_MikeScenarios_TVItems" />
+        <AssociationConnector Association="CSSPDBModel.FK_MikeSources_HydrometricTVItemID" />
+        <AssociationConnector Association="CSSPDBModel.FK_MikeSources_TVItems" />
+        <AssociationConnector Association="CSSPDBModel.FK_MikeSourceStartEnds_MikeSources" />
+        <AssociationConnector Association="CSSPDBModel.FK_MWQMAnalysisReportParameters_ExcelTVFileTVItemID" />
+        <AssociationConnector Association="CSSPDBModel.FK_MWQMAnalysisReportParameters_SubsectorTVItemID" />
+        <AssociationConnector Association="CSSPDBModel.FK_MWQMRunLanguages_MWQMRuns" />
+        <AssociationConnector Association="CSSPDBModel.FK_MWQMRuns_MWQMSiteTVItems" />
+        <AssociationConnector Association="CSSPDBModel.FK_MWQMRuns_TVItems" />
+        <AssociationConnector Association="CSSPDBModel.FK_MWQMRuns_ValidatorTVItemContacts" />
+        <AssociationConnector Association="CSSPDBModel.FK_MWQMSampleLanguages_MWQMSamples" />
+        <AssociationConnector Association="CSSPDBModel.FK_MWQMSamples_MWQMRunTVItemID" />
+        <AssociationConnector Association="CSSPDBModel.FK_MWQMSamples_MWQMSites" />
+        <AssociationConnector Association="CSSPDBModel.FK_MWQMSitePolSourceSites_TVItems" />
+        <AssociationConnector Association="CSSPDBModel.FK_MWQMSitePolSourceSites_TVItems1" />
+        <AssociationConnector Association="CSSPDBModel.FK_MWQMSites_TVItems" />
+        <AssociationConnector Association="CSSPDBModel.FK_MWQMSiteStartEndDates_TVItems" />
+        <AssociationConnector Association="CSSPDBModel.FK_MWQMSubsectorLanguages_MWQMSubsectors" />
+        <AssociationConnector Association="CSSPDBModel.FK_MWQMSubsectors_TVItems" />
+        <AssociationConnector Association="CSSPDBModel.FK_PolSourceObservationIssues_PolSourceObservations" />
+        <AssociationConnector Association="CSSPDBModel.FK_PolSourceObservations_PolSourceSites" />
+        <AssociationConnector Association="CSSPDBModel.FK_PolSourceObservations_TVItemContact" />
+        <AssociationConnector Association="CSSPDBModel.FK_PolSourceSites_TVItems" />
+        <AssociationConnector Association="CSSPDBModel.FK_PolSourceSites_TVItems1" />
+        <AssociationConnector Association="CSSPDBModel.FK_RatingCurveValues_RatingCurves" />
+        <AssociationConnector Association="CSSPDBModel.FK_ReportSectionLanguages_ReportSections" />
+        <AssociationConnector Association="CSSPDBModel.FK_ReportSections_ReportSections" />
+        <AssociationConnector Association="CSSPDBModel.FK_ReportSections_ReportSections1" />
+        <AssociationConnector Association="CSSPDBModel.FK_ReportSections_ReportTypes" />
+        <AssociationConnector Association="CSSPDBModel.FK_ReportSections_TVItems" />
+        <AssociationConnector Association="CSSPDBModel.FK_ReportTypeLanguages_ReportTypes" />
+        <AssociationConnector Association="CSSPDBModel.FK_SamplingPlanEmails_SamplingPlans" />
+        <AssociationConnector Association="CSSPDBModel.FK_SamplingPlans_CreatorTVItemID" />
+        <AssociationConnector Association="CSSPDBModel.FK_SamplingPlans_ProvinceTVItemID" />
+        <AssociationConnector Association="CSSPDBModel.FK_SamplingPlans_SamplingPlanFileTVItemID" />
+        <AssociationConnector Association="CSSPDBModel.FK_SamplingPlanSubsectors_SamplingPlans" />
+        <AssociationConnector Association="CSSPDBModel.FK_SamplingPlanSubsectors_SubsectorTVItemID" />
+        <AssociationConnector Association="CSSPDBModel.FK_SamplingPlanSubsectorSites_SamplingPlanSubsectors" />
+        <AssociationConnector Association="CSSPDBModel.FK_SamplingPlanSubsectorSites_MWQMSiteTVItemID" />
+        <AssociationConnector Association="CSSPDBModel.FK_SpillLanguages_Spills" />
+        <AssociationConnector Association="CSSPDBModel.FK_Spills_InfrastructureTVItemID" />
+        <AssociationConnector Association="CSSPDBModel.FK_Spills_MunicipalityTVItemID" />
+        <AssociationConnector Association="CSSPDBModel.FK_TelTVItemID_TVItems" />
+        <AssociationConnector Association="CSSPDBModel.FK_TideDataValues_TVItems" />
+        <AssociationConnector Association="CSSPDBModel.FK_TideSites_TVItems" />
+        <AssociationConnector Association="CSSPDBModel.FK_TVFileLanguages_TVFiles" />
+        <AssociationConnector Association="CSSPDBModel.FK_TVFiles_TVItems" />
+        <AssociationConnector Association="CSSPDBModel.FK_TVItemLanguages_TVItems" />
+        <AssociationConnector Association="CSSPDBModel.FK_TVItemLinks_FromTVItems" />
+        <AssociationConnector Association="CSSPDBModel.FK_TVItemLinks_ParentTVItemLinks" />
+        <AssociationConnector Association="CSSPDBModel.FK_TVItemLinks_ToTVItems" />
+        <AssociationConnector Association="CSSPDBModel.FK_TVItems_ParentID" />
+        <AssociationConnector Association="CSSPDBModel.FK_TVItemStats_TVItems" />
+        <AssociationConnector Association="CSSPDBModel.FK_TVItemsUserAuthorizations_TVItems" />
+        <AssociationConnector Association="CSSPDBModel.FK_TVItemUserAuthorizations_Contacts" />
+        <AssociationConnector Association="CSSPDBModel.FK_TVTypeUserAuthorizations_Contacts" />
+        <AssociationConnector Association="CSSPDBModel.FK_UseOfSites_SiteTVItems" />
+        <AssociationConnector Association="CSSPDBModel.FK_UseOfSites_SubsectorTVItems" />
+        <AssociationConnector Association="CSSPDBModel.FK_VPScenarios_InfrastructureTVItems" />
+        <AssociationConnector Association="CSSPDBModel.FK_VPAmbients_VPScenarios" />
+        <AssociationConnector Association="CSSPDBModel.FK_VPResults_VPScenarios" />
+        <AssociationConnector Association="CSSPDBModel.FK_VPScenarioLanguages_VPScenarios" />
+        <AssociationConnector Association="CSSPDBModel.AspNetUserRoles" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

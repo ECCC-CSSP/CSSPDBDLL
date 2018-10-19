@@ -1,0 +1,4056 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AcuteMixZone" xml:space="preserve">
+    <value>Acute Mix Zone</value>
+  </data>
+  <data name="AcuteMixZone_m" xml:space="preserve">
+    <value>Acute Mix Zone (meter)</value>
+  </data>
+  <data name="Address" xml:space="preserve">
+    <value>Address</value>
+  </data>
+  <data name="AddressID" xml:space="preserve">
+    <value>AddressID</value>
+  </data>
+  <data name="AddressTVItemID" xml:space="preserve">
+    <value>AddressTVItemID</value>
+  </data>
+  <data name="AddressType" xml:space="preserve">
+    <value>AddressType</value>
+  </data>
+  <data name="AddUniqueCode" xml:space="preserve">
+    <value>add unique code</value>
+  </data>
+  <data name="AlarmSystemType" xml:space="preserve">
+    <value>AlarmSystemType</value>
+  </data>
+  <data name="AlarmSystemTypeTVItemID" xml:space="preserve">
+    <value>AlarmSystemTypeTVItemID</value>
+  </data>
+  <data name="AllActivities" xml:space="preserve">
+    <value>All activities</value>
+  </data>
+  <data name="AllLocations" xml:space="preserve">
+    <value>All locations</value>
+  </data>
+  <data name="AllowableFileGeneratedTypeListCountZero" xml:space="preserve">
+    <value>AllowableFileGeneratedTypeList count equal 0</value>
+  </data>
+  <data name="AmbientCountNotEqual8" xml:space="preserve">
+    <value>Ambient count not equal to 8</value>
+  </data>
+  <data name="AmbientSalinity" xml:space="preserve">
+    <value>Ambient Salinity</value>
+  </data>
+  <data name="AmbientSalinity_PSU" xml:space="preserve">
+    <value>AmbientSalinity_PSU</value>
+  </data>
+  <data name="AmbientTemperature" xml:space="preserve">
+    <value>Ambient Temperature</value>
+  </data>
+  <data name="AmbientTemperature_C" xml:space="preserve">
+    <value>AmbientTemperature_C</value>
+  </data>
+  <data name="AnalyzeMethod" xml:space="preserve">
+    <value>AnalyzeMethod</value>
+  </data>
+  <data name="AnalyzeMethodTVItemID" xml:space="preserve">
+    <value>AnalyzeMethodTVItemID</value>
+  </data>
+  <data name="AndOrdinal" xml:space="preserve">
+    <value>and ordinal</value>
+  </data>
+  <data name="AppErrLog" xml:space="preserve">
+    <value>AppErrLog</value>
+  </data>
+  <data name="AppErrLogID" xml:space="preserve">
+    <value>AppErrLogID</value>
+  </data>
+  <data name="AppLanguage" xml:space="preserve">
+    <value>AppLanguage</value>
+  </data>
+  <data name="AppLanguageID" xml:space="preserve">
+    <value>AppLanguageID</value>
+  </data>
+  <data name="AppTask" xml:space="preserve">
+    <value>AppTask</value>
+  </data>
+  <data name="AppTaskCommand" xml:space="preserve">
+    <value>AppTaskCommand</value>
+  </data>
+  <data name="AppTaskID" xml:space="preserve">
+    <value>AppTaskID</value>
+  </data>
+  <data name="AppTaskLanguage" xml:space="preserve">
+    <value>AppTaskLanguage</value>
+  </data>
+  <data name="AppTaskLanguageID" xml:space="preserve">
+    <value>AppTaskLanguageID</value>
+  </data>
+  <data name="AppTaskLanguageModel" xml:space="preserve">
+    <value>AppTaskLanguageModel</value>
+  </data>
+  <data name="AppTaskStatus" xml:space="preserve">
+    <value>AppTaskStatus</value>
+  </data>
+  <data name="Arctic" xml:space="preserve">
+    <value>Arctic</value>
+  </data>
+  <data name="Area" xml:space="preserve">
+    <value>Area</value>
+  </data>
+  <data name="AreaDoc" xml:space="preserve">
+    <value>AreaDoc</value>
+  </data>
+  <data name="Areas" xml:space="preserve">
+    <value>Areas</value>
+  </data>
+  <data name="AskingToRunMIKEScenario" xml:space="preserve">
+    <value>Asking to run MIKE Scenario</value>
+  </data>
+  <data name="AskToRun" xml:space="preserve">
+    <value>Asked to run</value>
+  </data>
+  <data name="AspNetUser" xml:space="preserve">
+    <value>AspNetUser</value>
+  </data>
+  <data name="AtmPressure_kpa" xml:space="preserve">
+    <value>AtmPressure_kpa</value>
+  </data>
+  <data name="AutoEmailFromServer" xml:space="preserve">
+    <value>Automated email from server.</value>
+  </data>
+  <data name="AverageDepth_m" xml:space="preserve">
+    <value>AverageDepth_m</value>
+  </data>
+  <data name="AverageFlow_m3_day" xml:space="preserve">
+    <value>AverageFlow_m3_day</value>
+  </data>
+  <data name="BackgroundConcentration_MPN_100ml" xml:space="preserve">
+    <value>BackgroundConcentration_MPN_100ml</value>
+  </data>
+  <data name="BasicInformation" xml:space="preserve">
+    <value>Basic Information</value>
+  </data>
+  <data name="BCMeshTVItemID" xml:space="preserve">
+    <value>BCMeshTVItemID</value>
+  </data>
+  <data name="BodyPortionOfEmailNotWellFormed" xml:space="preserve">
+    <value>Body portion of email not well formed</value>
+  </data>
+  <data name="BoxModel" xml:space="preserve">
+    <value>Box Model</value>
+  </data>
+  <data name="BoxModelID" xml:space="preserve">
+    <value>BoxModelID</value>
+  </data>
+  <data name="BoxModelLanguage" xml:space="preserve">
+    <value>BoxModelLanguage</value>
+  </data>
+  <data name="BoxModelLanguageModel" xml:space="preserve">
+    <value>BoxModelLanguageModel</value>
+  </data>
+  <data name="BoxModelResult" xml:space="preserve">
+    <value>BoxModelResult</value>
+  </data>
+  <data name="BoxModelResultID" xml:space="preserve">
+    <value>BoxModelResultID</value>
+  </data>
+  <data name="BoxModelResultModel" xml:space="preserve">
+    <value>BoxModelResultModel</value>
+  </data>
+  <data name="BoxModelResultType" xml:space="preserve">
+    <value>BoxModelResultType</value>
+  </data>
+  <data name="BoxModelTVItemID" xml:space="preserve">
+    <value>BoxModelTVItemID</value>
+  </data>
+  <data name="BrasdOrLake" xml:space="preserve">
+    <value>Bras d'Or Lake</value>
+  </data>
+  <data name="BusyText" xml:space="preserve">
+    <value>BusyText</value>
+  </data>
+  <data name="CanOnlyLoadOneFile" xml:space="preserve">
+    <value>Can only load one file</value>
+  </data>
+  <data name="CanOnlyLoadOneFileAtATime" xml:space="preserve">
+    <value>Can only load one file at a time.</value>
+  </data>
+  <data name="CanOnlyLoadOneFileOfType_" xml:space="preserve">
+    <value>Can only load one file of type [{0}]</value>
+  </data>
+  <data name="CantDeleteOneSelf" xml:space="preserve">
+    <value>Can't delete one self.</value>
+  </data>
+  <data name="CantDisableOrEnableOneSelf" xml:space="preserve">
+    <value>Can't enable or disable one self.</value>
+  </data>
+  <data name="CantRegisterWhileLoggedOn" xml:space="preserve">
+    <value>Can't register while logged on.</value>
+  </data>
+  <data name="CantRemoveRootAutorization" xml:space="preserve">
+    <value>Can't remove Root authorization.</value>
+  </data>
+  <data name="CantSetOwnAuthorization" xml:space="preserve">
+    <value>Can't set own authorization.</value>
+  </data>
+  <data name="CategoryTVItemID" xml:space="preserve">
+    <value>CategoryTVItemID</value>
+  </data>
+  <data name="Celcius" xml:space="preserve">
+    <value>Celcius</value>
+  </data>
+  <data name="Changed" xml:space="preserve">
+    <value>Changed</value>
+  </data>
+  <data name="Changing" xml:space="preserve">
+    <value>Changing</value>
+  </data>
+  <data name="ChangingSourceNameInM21_3FMFile" xml:space="preserve">
+    <value>Changing source name in .m21fm or .m3fm file</value>
+  </data>
+  <data name="ChildTVItemID" xml:space="preserve">
+    <value>ChildTVItemID</value>
+  </data>
+  <data name="ChronicMixZone" xml:space="preserve">
+    <value>Chronic Mix Zone</value>
+  </data>
+  <data name="ChronicMixZone_m" xml:space="preserve">
+    <value>ChronicMixZone_m</value>
+  </data>
+  <data name="ClientFilePath" xml:space="preserve">
+    <value>ClientFilePath</value>
+  </data>
+  <data name="ClientFullPath" xml:space="preserve">
+    <value>ClientFullPath</value>
+  </data>
+  <data name="ClimateDataStartDate" xml:space="preserve">
+    <value>ClimateDataStartDate</value>
+  </data>
+  <data name="ClimateDataStartDateID" xml:space="preserve">
+    <value>ClimateDataStartDateID</value>
+  </data>
+  <data name="ClimateDataType" xml:space="preserve">
+    <value>ClimateDataType</value>
+  </data>
+  <data name="ClimateDataValue" xml:space="preserve">
+    <value>ClimateDataValue</value>
+  </data>
+  <data name="ClimateDataValueID" xml:space="preserve">
+    <value>ClimateDataValueID</value>
+  </data>
+  <data name="ClimateID" xml:space="preserve">
+    <value>ClimateID</value>
+  </data>
+  <data name="ClimateSite" xml:space="preserve">
+    <value>ClimateSite</value>
+  </data>
+  <data name="ClimateSiteID" xml:space="preserve">
+    <value>ClimateSiteID</value>
+  </data>
+  <data name="ClimateSiteName" xml:space="preserve">
+    <value>ClimateSiteName</value>
+  </data>
+  <data name="ClimateSiteTVItemID" xml:space="preserve">
+    <value>ClimateSiteTVItemID</value>
+  </data>
+  <data name="Code" xml:space="preserve">
+    <value>Code</value>
+  </data>
+  <data name="CodeEmail" xml:space="preserve">
+    <value>CodeEmail</value>
+  </data>
+  <data name="CodeIN" xml:space="preserve">
+    <value>code</value>
+  </data>
+  <data name="CodeIs" xml:space="preserve">
+    <value>Code is:</value>
+  </data>
+  <data name="Code_ForEmail_DoesNotExist" xml:space="preserve">
+    <value>Code {0} for email {1} does not exist.</value>
+  </data>
+  <data name="CollectionSystemType" xml:space="preserve">
+    <value>CollectionSystemType</value>
+  </data>
+  <data name="CollectionSystemTypeTVItemID" xml:space="preserve">
+    <value>CollectionSystemTypeTVItemID</value>
+  </data>
+  <data name="Command" xml:space="preserve">
+    <value>Command</value>
+  </data>
+  <data name="Command_NotRecognized" xml:space="preserve">
+    <value>Command {0} is not recognized.</value>
+  </data>
+  <data name="Comment" xml:space="preserve">
+    <value>Comment</value>
+  </data>
+  <data name="CompareTableNotEqual_And_" xml:space="preserve">
+    <value>Compare table not equal {0} and {1}</value>
+  </data>
+  <data name="CompareTablePlurialNotEqual_And_" xml:space="preserve">
+    <value>Compare table plurial not equal {0} and {1}</value>
+  </data>
+  <data name="Completed" xml:space="preserve">
+    <value>Completed</value>
+  </data>
+  <data name="Concentration" xml:space="preserve">
+    <value>Concentration</value>
+  </data>
+  <data name="ConcentrationIN" xml:space="preserve">
+    <value>concentration</value>
+  </data>
+  <data name="Concentration_MPN_100ml" xml:space="preserve">
+    <value>Concentration_MPN_100ml</value>
+  </data>
+  <data name="ConfirmPassword" xml:space="preserve">
+    <value>Password confirmation</value>
+  </data>
+  <data name="Contact" xml:space="preserve">
+    <value>Contact</value>
+  </data>
+  <data name="ContactID" xml:space="preserve">
+    <value>ContactID</value>
+  </data>
+  <data name="Contacts" xml:space="preserve">
+    <value>Contacts</value>
+  </data>
+  <data name="ContactTVItemID" xml:space="preserve">
+    <value>ContactTVItemID</value>
+  </data>
+  <data name="CoolDegDays_C" xml:space="preserve">
+    <value>CoolDegDays_C</value>
+  </data>
+  <data name="Copied" xml:space="preserve">
+    <value>Copied</value>
+  </data>
+  <data name="Copy" xml:space="preserve">
+    <value>Copy</value>
+  </data>
+  <data name="Copying" xml:space="preserve">
+    <value>Copying</value>
+  </data>
+  <data name="CopyOf" xml:space="preserve">
+    <value>copy of</value>
+  </data>
+  <data name="CouldNotAddError_" xml:space="preserve">
+    <value>Could not add. Error {0}</value>
+  </data>
+  <data name="CouldNotChange_NameError_" xml:space="preserve">
+    <value>Could not change {0} name. Error: {1}.</value>
+  </data>
+  <data name="CouldNotCreateCopyOf__" xml:space="preserve">
+    <value>Could not create copy of  [{0}] [{1}].</value>
+  </data>
+  <data name="CouldNotCreateInputSummary" xml:space="preserve">
+    <value>Could not create input summary</value>
+  </data>
+  <data name="CouldNotCreateNewSource" xml:space="preserve">
+    <value>Could not create new source</value>
+  </data>
+  <data name="CouldNotCreate_For_With_Equal_" xml:space="preserve">
+    <value>Could not create [{0}] for [{1}] with [{2}] equal [{3}]</value>
+  </data>
+  <data name="CouldNotCreate_With_Equal_" xml:space="preserve">
+    <value>Could not create [{0}] with [{1}] equal [{2}]</value>
+  </data>
+  <data name="CouldNotDeleteError_" xml:space="preserve">
+    <value>CouldNotDelete. Error {0}</value>
+  </data>
+  <data name="CouldNotDelete_Error_" xml:space="preserve">
+    <value>Could not delete {0} . Error: {1}.</value>
+  </data>
+  <data name="CouldNotDelete_With_Equal_Error_" xml:space="preserve">
+    <value>Could not delete {0} with {1} equal {2}. Error: {3}.</value>
+  </data>
+  <data name="CouldNotFindAny_" xml:space="preserve">
+    <value>Could not find any {0}</value>
+  </data>
+  <data name="CouldNotFindBMScenario_ToCopy" xml:space="preserve">
+    <value>Could not find Box Model scenario [{0}] to copy</value>
+  </data>
+  <data name="CouldNotFindBMScenario_ToDelete" xml:space="preserve">
+    <value>Could not find Box Model scenario [{0}] to delete</value>
+  </data>
+  <data name="CouldNotFindNewlyCreatedUser" xml:space="preserve">
+    <value>Could not find newly created user</value>
+  </data>
+  <data name="CouldNotFindParent_WithChild_Equal_" xml:space="preserve">
+    <value>Could not find parent {0} with child {1} equal {2}</value>
+  </data>
+  <data name="CouldNotFindProvinceTVTextWith_" xml:space="preserve">
+    <value>CouldNotFindProvinceTVTextWith_ {0}</value>
+  </data>
+  <data name="CouldNotFindRoot" xml:space="preserve">
+    <value>CouldNotFindRoot</value>
+  </data>
+  <data name="CouldNotFindTVItemModelWithTVItemID_" xml:space="preserve">
+    <value>Could not find TVItemModel with TVItemID {0}</value>
+  </data>
+  <data name="CouldNotFind_" xml:space="preserve">
+    <value>Could not find {0}.</value>
+  </data>
+  <data name="CouldNotFind_For_With_Equal_" xml:space="preserve">
+    <value>Could not create [{0}] for [{1}] with [{2}] equal [{3}].</value>
+  </data>
+  <data name="CouldNotFind_ToDelete" xml:space="preserve">
+    <value>Could not find {0} to delete</value>
+  </data>
+  <data name="CouldNotFind_ToUpdate" xml:space="preserve">
+    <value>Could not find {0} to update</value>
+  </data>
+  <data name="CouldNotFind_With_Equal_" xml:space="preserve">
+    <value>Could not find {0} with {1} equal {2}.</value>
+  </data>
+  <data name="CouldNotGenerateFileName" xml:space="preserve">
+    <value>Could not generate file name</value>
+  </data>
+  <data name="CouldNotParseResultFile" xml:space="preserve">
+    <value>Could not parse result file. </value>
+  </data>
+  <data name="CouldNotParseVisualPlumesResultFile" xml:space="preserve">
+    <value>Could not parse visual plumes result file</value>
+  </data>
+  <data name="CouldNotSaveFile_" xml:space="preserve">
+    <value>Could not save file [{0}]</value>
+  </data>
+  <data name="CouldNotSaveUserInformation_" xml:space="preserve">
+    <value>Could not save user information. Error: {0}</value>
+  </data>
+  <data name="CouldNotSave_" xml:space="preserve">
+    <value>Could not save [{0}].</value>
+  </data>
+  <data name="CouldNotUpdateError_" xml:space="preserve">
+    <value>Could not update. Error {0}</value>
+  </data>
+  <data name="CouldNot_for_Error_" xml:space="preserve">
+    <value>Could not {0} for {1}.\r\nError: {2}.</value>
+  </data>
+  <data name="Countries" xml:space="preserve">
+    <value>Countries</value>
+  </data>
+  <data name="Country" xml:space="preserve">
+    <value>Country</value>
+  </data>
+  <data name="CountryDoc" xml:space="preserve">
+    <value>CountryDoc</value>
+  </data>
+  <data name="CountryTVItemID" xml:space="preserve">
+    <value>CountryTVItemID</value>
+  </data>
+  <data name="CurrentDirection" xml:space="preserve">
+    <value>Current Direction</value>
+  </data>
+  <data name="CurrentDirection_deg" xml:space="preserve">
+    <value>CurrentDirection_deg</value>
+  </data>
+  <data name="CurrentSpeed" xml:space="preserve">
+    <value>Current Speed</value>
+  </data>
+  <data name="CurrentSpeed_m_s" xml:space="preserve">
+    <value>CurrentSpeed_m_s</value>
+  </data>
+  <data name="DailyEndDate_Local" xml:space="preserve">
+    <value>DailyEndDate_Local</value>
+  </data>
+  <data name="DailyOrHourlyData" xml:space="preserve">
+    <value>DailyOrHourlyData</value>
+  </data>
+  <data name="DailyStartDate_Local" xml:space="preserve">
+    <value>DailyStartDate_Local</value>
+  </data>
+  <data name="DataPathBC" xml:space="preserve">
+    <value>DataPathBC</value>
+  </data>
+  <data name="DateTime_Local" xml:space="preserve">
+    <value>DateTime_Local</value>
+  </data>
+  <data name="DateTime_UTC" xml:space="preserve">
+    <value>DateTime_UTC</value>
+  </data>
+  <data name="Day" xml:space="preserve">
+    <value>Day</value>
+  </data>
+  <data name="DayLowerCase" xml:space="preserve">
+    <value>day</value>
+  </data>
+  <data name="DaysLowerCase" xml:space="preserve">
+    <value>days</value>
+  </data>
+  <data name="DecayFactorAmplitude" xml:space="preserve">
+    <value>DecayFactorAmplitude</value>
+  </data>
+  <data name="DecayFactorAmplitude_NeedsToBeSmallerThanDecayFactor_" xml:space="preserve">
+    <value>Decay factor amplitude {0} needs to be smaller than decay factor (/ day)</value>
+  </data>
+  <data name="DecayFactor_per_day" xml:space="preserve">
+    <value>DecayFactor_per_day</value>
+  </data>
+  <data name="DecayIsConstant" xml:space="preserve">
+    <value>DecayIsConstant</value>
+  </data>
+  <data name="DecayRate" xml:space="preserve">
+    <value>Decay rate</value>
+  </data>
+  <data name="DecayRateIN" xml:space="preserve">
+    <value>decay rate</value>
+  </data>
+  <data name="DecayRate_per_day" xml:space="preserve">
+    <value>DecayRate_per_day</value>
+  </data>
+  <data name="Degrees" xml:space="preserve">
+    <value>Degrees</value>
+  </data>
+  <data name="DeleteOldUniqueCode" xml:space="preserve">
+    <value>delete previous unique code</value>
+  </data>
+  <data name="Depth" xml:space="preserve">
+    <value>Depth</value>
+  </data>
+  <data name="DepthIN" xml:space="preserve">
+    <value>depth</value>
+  </data>
+  <data name="Depth_m" xml:space="preserve">
+    <value>Depth_m</value>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="DesignFlow_m3_day" xml:space="preserve">
+    <value>DesignFlow_m3_day</value>
+  </data>
+  <data name="DetailInformation" xml:space="preserve">
+    <value>Detailed Information</value>
+  </data>
+  <data name="DewPointTemp_C" xml:space="preserve">
+    <value>DewPointTemp_C</value>
+  </data>
+  <data name="Dilution" xml:space="preserve">
+    <value>Dilution</value>
+  </data>
+  <data name="DilutionIN" xml:space="preserve">
+    <value>dilution</value>
+  </data>
+  <data name="DirMaxGust_0North" xml:space="preserve">
+    <value>DirMaxGust_0North</value>
+  </data>
+  <data name="DischargeValue_m3_s" xml:space="preserve">
+    <value>DischargeValue_m3_s</value>
+  </data>
+  <data name="DisinfectionType" xml:space="preserve">
+    <value>DisinfectionType</value>
+  </data>
+  <data name="DisinfectionTypeChlorinationNoDechlorination" xml:space="preserve">
+    <value>Chlorination No Dechlorination</value>
+  </data>
+  <data name="DisinfectionTypeChlorinationNoDechlorinationSeasonal" xml:space="preserve">
+    <value>Chlorination No Dechlorination Seasonal</value>
+  </data>
+  <data name="DisinfectionTypeChlorinationWithDechlorination" xml:space="preserve">
+    <value>Chlorination With Dechlorination</value>
+  </data>
+  <data name="DisinfectionTypeChlorinationWithDechlorinationSeasonal" xml:space="preserve">
+    <value>Chlorination With Dechlorination Seasonal</value>
+  </data>
+  <data name="DisinfectionTypeNone" xml:space="preserve">
+    <value>None</value>
+  </data>
+  <data name="DisinfectionTypeTVItemID" xml:space="preserve">
+    <value>DisinfectionTypeTVItemID</value>
+  </data>
+  <data name="DisinfectionTypeUV" xml:space="preserve">
+    <value>UV</value>
+  </data>
+  <data name="DisinfectionTypeUVSeasonal" xml:space="preserve">
+    <value>UV Seasonal</value>
+  </data>
+  <data name="DispersionDistance_m" xml:space="preserve">
+    <value>DispersionDistance_m</value>
+  </data>
+  <data name="DistanceFromShore_m" xml:space="preserve">
+    <value>DistanceFromShore_m</value>
+  </data>
+  <data name="DocType" xml:space="preserve">
+    <value>DocType</value>
+  </data>
+  <data name="DrainageArea_km2" xml:space="preserve">
+    <value>DrainageArea_km2</value>
+  </data>
+  <data name="ECDBID" xml:space="preserve">
+    <value>ECDBID</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="EffluentConcentration_MPN_100ml" xml:space="preserve">
+    <value>EffluentConcentration_MPN_100ml</value>
+  </data>
+  <data name="EffluentFlow" xml:space="preserve">
+    <value>Effluent Flow</value>
+  </data>
+  <data name="EffluentFlow_m3_day" xml:space="preserve">
+    <value>EffluentFlow_m3_day</value>
+  </data>
+  <data name="EffluentSalinity" xml:space="preserve">
+    <value>Effluent Salinity</value>
+  </data>
+  <data name="EffluentSalinity_PSU" xml:space="preserve">
+    <value>EffluentSalinity_PSU</value>
+  </data>
+  <data name="EffluentTemperature" xml:space="preserve">
+    <value>Effluent Temperature</value>
+  </data>
+  <data name="EffluentTemperature_C" xml:space="preserve">
+    <value>EffluentTemperature_C</value>
+  </data>
+  <data name="EffluentVelocity_m_s" xml:space="preserve">
+    <value>EffluentVelocity_m_s</value>
+  </data>
+  <data name="Elevation_m" xml:space="preserve">
+    <value>Elevation_m</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="EmailID" xml:space="preserve">
+    <value>EmailID</value>
+  </data>
+  <data name="EmailIN" xml:space="preserve">
+    <value>email</value>
+  </data>
+  <data name="EmailOrPasswordIncorrect" xml:space="preserve">
+    <value>The email or password provided is incorrect.</value>
+  </data>
+  <data name="EmailRequiresValidation" xml:space="preserve">
+    <value>Email requires validation.</value>
+  </data>
+  <data name="EmailTVItemID" xml:space="preserve">
+    <value>EmailTVItemID</value>
+  </data>
+  <data name="EmailType" xml:space="preserve">
+    <value>EmailType</value>
+  </data>
+  <data name="EmailTypeTVItemID" xml:space="preserve">
+    <value>EmailTypeTVItemID</value>
+  </data>
+  <data name="EmailWasNotSent_" xml:space="preserve">
+    <value>Email was not sent. Error: {0}</value>
+  </data>
+  <data name="Empty" xml:space="preserve">
+    <value>Empty</value>
+  </data>
+  <data name="EmptyLowerCase" xml:space="preserve">
+    <value>empty</value>
+  </data>
+  <data name="EndDateAndTime_Local" xml:space="preserve">
+    <value>EndDateAndTime_Local</value>
+  </data>
+  <data name="EndDateTime_Local" xml:space="preserve">
+    <value>EndDateTime_Local</value>
+  </data>
+  <data name="EndDate_Local" xml:space="preserve">
+    <value>EndDate_Local</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="ErrorText" xml:space="preserve">
+    <value>ErrorText</value>
+  </data>
+  <data name="EstimatedLength_second" xml:space="preserve">
+    <value>EstimatedLength_second</value>
+  </data>
+  <data name="ExcelText" xml:space="preserve">
+    <value>Microsoft Excel</value>
+  </data>
+  <data name="FarFieldCurrentDirection" xml:space="preserve">
+    <value>Far Field Current Direction</value>
+  </data>
+  <data name="FarFieldCurrentDirection_deg" xml:space="preserve">
+    <value>FarFieldCurrentDirection_deg</value>
+  </data>
+  <data name="FarFieldCurrentSpeed" xml:space="preserve">
+    <value>Far Field Current Speed</value>
+  </data>
+  <data name="FarFieldCurrentSpeed_m_s" xml:space="preserve">
+    <value>FarFieldCurrentSpeed_m_s</value>
+  </data>
+  <data name="FarFieldDiffusionCoefficient" xml:space="preserve">
+    <value>FarFieldDiffusionCoefficient</value>
+  </data>
+  <data name="FarFieldVelocity_m_s" xml:space="preserve">
+    <value>FarFieldVelocity_m_s</value>
+  </data>
+  <data name="FarFieldWidth_m" xml:space="preserve">
+    <value>FarFieldWidth_m</value>
+  </data>
+  <data name="FCMPNPer100ml" xml:space="preserve">
+    <value>FC MPN / 100 ml</value>
+  </data>
+  <data name="FCPreDisinfection" xml:space="preserve">
+    <value>FC pre-disinfection</value>
+  </data>
+  <data name="FCPreDisinfection_MPN_100ml" xml:space="preserve">
+    <value>FCPreDisinfection_MPN_100ml</value>
+  </data>
+  <data name="FCUntreated" xml:space="preserve">
+    <value>FC untreated</value>
+  </data>
+  <data name="FCUntreated_MPN_100ml" xml:space="preserve">
+    <value>FCUntreated_MPN_100ml</value>
+  </data>
+  <data name="FecCol_MPN_100ml" xml:space="preserve">
+    <value>FecCol_MPN_100ml</value>
+  </data>
+  <data name="FedSiteNumber" xml:space="preserve">
+    <value>FedSiteNumber</value>
+  </data>
+  <data name="FileCreatedDate_Local" xml:space="preserve">
+    <value>FileCreatedDate_Local</value>
+  </data>
+  <data name="FileCreatedDate_UTC" xml:space="preserve">
+    <value>FileCreatedDate_UTC</value>
+  </data>
+  <data name="FileDescription" xml:space="preserve">
+    <value>FileDescription</value>
+  </data>
+  <data name="FileGenerator" xml:space="preserve">
+    <value>File generator</value>
+  </data>
+  <data name="FileGeneratorType" xml:space="preserve">
+    <value>File generator type</value>
+  </data>
+  <data name="FileGeneratorTypeAndTextListCountZero" xml:space="preserve">
+    <value>FileGeneratorTypeAndTextList count equal 0</value>
+  </data>
+  <data name="FileInfo" xml:space="preserve">
+    <value>FileInfo</value>
+  </data>
+  <data name="FileNameListCountZero" xml:space="preserve">
+    <value>FileNameList count equal 0</value>
+  </data>
+  <data name="FilePurpose" xml:space="preserve">
+    <value>FilePurpose</value>
+  </data>
+  <data name="Files" xml:space="preserve">
+    <value>Files</value>
+  </data>
+  <data name="FileSize" xml:space="preserve">
+    <value>FileSize</value>
+  </data>
+  <data name="FileSize_kb" xml:space="preserve">
+    <value>FileSize_kb</value>
+  </data>
+  <data name="FileType" xml:space="preserve">
+    <value>FileType</value>
+  </data>
+  <data name="FileType_IsNotAllowed" xml:space="preserve">
+    <value>File type {0} is not allowed</value>
+  </data>
+  <data name="File_AlreadyExist" xml:space="preserve">
+    <value>File {0} already exist.</value>
+  </data>
+  <data name="File_desc" xml:space="preserve">
+    <value>File_desc</value>
+  </data>
+  <data name="File_DoesNotExist" xml:space="preserve">
+    <value>File [{0}] does not exist</value>
+  </data>
+  <data name="FirstLetter" xml:space="preserve">
+    <value>FirstLetter</value>
+  </data>
+  <data name="FirstName" xml:space="preserve">
+    <value>First Name</value>
+  </data>
+  <data name="FixLengthAndFixWidthShouldNotBeCheckedAtTheSameTime" xml:space="preserve">
+    <value>Fix length and fix width should not be checked at the same time</value>
+  </data>
+  <data name="Flow" xml:space="preserve">
+    <value>Flow</value>
+  </data>
+  <data name="FlowDuration" xml:space="preserve">
+    <value>Flow duration</value>
+  </data>
+  <data name="FlowDurationIN" xml:space="preserve">
+    <value>flow duration</value>
+  </data>
+  <data name="FlowDuration_hour" xml:space="preserve">
+    <value>FlowDuration_hour</value>
+  </data>
+  <data name="FlowEnd" xml:space="preserve">
+    <value>Flow End</value>
+  </data>
+  <data name="FlowIN" xml:space="preserve">
+    <value>flow</value>
+  </data>
+  <data name="FlowStart" xml:space="preserve">
+    <value>Flow Start</value>
+  </data>
+  <data name="Flow_m3_day" xml:space="preserve">
+    <value>Flow_m3_day</value>
+  </data>
+  <data name="Flow_m3_s" xml:space="preserve">
+    <value>Flow_m3_s</value>
+  </data>
+  <data name="FromTVItemID" xml:space="preserve">
+    <value>FromTVItemID</value>
+  </data>
+  <data name="FroudeNumber" xml:space="preserve">
+    <value>FroudeNumber</value>
+  </data>
+  <data name="FullFileName" xml:space="preserve">
+    <value>FullFileName</value>
+  </data>
+  <data name="FullName" xml:space="preserve">
+    <value>Full Name</value>
+  </data>
+  <data name="Generated" xml:space="preserve">
+    <value>Generated</value>
+  </data>
+  <data name="GeneratingWebTideNodes" xml:space="preserve">
+    <value>Generating Web Tide Nodes</value>
+  </data>
+  <data name="GlobalLEGOS" xml:space="preserve">
+    <value>Global (LEGOS France)</value>
+  </data>
+  <data name="HalifaxHarbour" xml:space="preserve">
+    <value>Halifax Harbour</value>
+  </data>
+  <data name="HeatDegDays_C" xml:space="preserve">
+    <value>HeatDegDays_C</value>
+  </data>
+  <data name="HorizontalAngle" xml:space="preserve">
+    <value>Horizontal Angle</value>
+  </data>
+  <data name="HorizontalAngle_deg" xml:space="preserve">
+    <value>HorizontalAngle_deg</value>
+  </data>
+  <data name="HourlyEndDate_Local" xml:space="preserve">
+    <value>HourlyEndDate_Local</value>
+  </data>
+  <data name="HourlyStartDate_Local" xml:space="preserve">
+    <value>HourlyStartDate_Local</value>
+  </data>
+  <data name="HoursLowerCase" xml:space="preserve">
+    <value>hours</value>
+  </data>
+  <data name="HTMLText" xml:space="preserve">
+    <value>HTML document</value>
+  </data>
+  <data name="HudsonBayIML" xml:space="preserve">
+    <value>Hudson Bay</value>
+  </data>
+  <data name="HydrometricDataStartDate" xml:space="preserve">
+    <value>HydrometricDataStartDate</value>
+  </data>
+  <data name="HydrometricDataType" xml:space="preserve">
+    <value>HydrometricDataType</value>
+  </data>
+  <data name="HydrometricDataValue" xml:space="preserve">
+    <value>HydrometricDataValue</value>
+  </data>
+  <data name="HydrometricDataValueID" xml:space="preserve">
+    <value>HydrometricDataValueID</value>
+  </data>
+  <data name="HydrometricSite" xml:space="preserve">
+    <value>HydrometricSite</value>
+  </data>
+  <data name="HydrometricSiteID" xml:space="preserve">
+    <value>HydrometricSiteID</value>
+  </data>
+  <data name="HydrometricSiteName" xml:space="preserve">
+    <value>HydrometricSiteName</value>
+  </data>
+  <data name="HydrometricSiteTVItemID" xml:space="preserve">
+    <value>HydrometricSiteTVItemID</value>
+  </data>
+  <data name="Image" xml:space="preserve">
+    <value>Image</value>
+  </data>
+  <data name="ImportingNewMIKEScenario" xml:space="preserve">
+    <value>Importing New MIKE Scenario</value>
+  </data>
+  <data name="ImportingOtherFiles" xml:space="preserve">
+    <value>Importing other files</value>
+  </data>
+  <data name="Include" xml:space="preserve">
+    <value>Include</value>
+  </data>
+  <data name="Information" xml:space="preserve">
+    <value>Information</value>
+  </data>
+  <data name="InformationIN" xml:space="preserve">
+    <value>information</value>
+  </data>
+  <data name="Infrastructure" xml:space="preserve">
+    <value>Infrastructure</value>
+  </data>
+  <data name="InfrastructureCategory" xml:space="preserve">
+    <value>InfrastructureCategory</value>
+  </data>
+  <data name="InfrastructureDoc" xml:space="preserve">
+    <value>InfrastructureDoc</value>
+  </data>
+  <data name="InfrastructureID" xml:space="preserve">
+    <value>InfrastructureID</value>
+  </data>
+  <data name="InfrastructureLanguage" xml:space="preserve">
+    <value>InfrastructureLanguage</value>
+  </data>
+  <data name="InfrastructureLanguageModel" xml:space="preserve">
+    <value>InfrastructureLanguageModel</value>
+  </data>
+  <data name="Infrastructures" xml:space="preserve">
+    <value>Infrastructures</value>
+  </data>
+  <data name="InfrastructureTVItemID" xml:space="preserve">
+    <value>InfrastructureTVItemID</value>
+  </data>
+  <data name="InfrastructureTVText" xml:space="preserve">
+    <value>InfrastructureTVText</value>
+  </data>
+  <data name="InfrastructureType" xml:space="preserve">
+    <value>InfrastructureType</value>
+  </data>
+  <data name="InfrastructureTypeLiftStation" xml:space="preserve">
+    <value>LiftStation</value>
+  </data>
+  <data name="InfrastructureTypeOutfall" xml:space="preserve">
+    <value>Outfall</value>
+  </data>
+  <data name="InfrastructureTypeTVItemID" xml:space="preserve">
+    <value>InfrastructureTypeTVItemID</value>
+  </data>
+  <data name="InfrastructureTypeWWTP" xml:space="preserve">
+    <value>WWTP</value>
+  </data>
+  <data name="InfraTVItemID" xml:space="preserve">
+    <value>InfraTVItemID</value>
+  </data>
+  <data name="Initial" xml:space="preserve">
+    <value>Initial</value>
+  </data>
+  <data name="InputDataComment" xml:space="preserve">
+    <value>InputDataComment</value>
+  </data>
+  <data name="IsArchivedData" xml:space="preserve">
+    <value>IsArchivedData</value>
+  </data>
+  <data name="IsContinuous" xml:space="preserve">
+    <value>IsContinuous</value>
+  </data>
+  <data name="IsEnteredData" xml:space="preserve">
+    <value>IsEnteredData</value>
+  </data>
+  <data name="IsForcastData" xml:space="preserve">
+    <value>IsForcastData</value>
+  </data>
+  <data name="IsIncluded" xml:space="preserve">
+    <value>Is included</value>
+  </data>
+  <data name="IsObservationData" xml:space="preserve">
+    <value>IsObservationData</value>
+  </data>
+  <data name="IsPoint" xml:space="preserve">
+    <value>IsPoint</value>
+  </data>
+  <data name="IsPointSource" xml:space="preserve">
+    <value>IsPointSource</value>
+  </data>
+  <data name="IsPolygon" xml:space="preserve">
+    <value>IsPolygon</value>
+  </data>
+  <data name="IsPolyline" xml:space="preserve">
+    <value>IsPolyline</value>
+  </data>
+  <data name="IsRiver" xml:space="preserve">
+    <value>IsRiver</value>
+  </data>
+  <data name="IsWebTide" xml:space="preserve">
+    <value>IsWebTide</value>
+  </data>
+  <data name="Keep" xml:space="preserve">
+    <value>Keep</value>
+  </data>
+  <data name="KMZText" xml:space="preserve">
+    <value>Google Earth KMZ</value>
+  </data>
+  <data name="Laboratory" xml:space="preserve">
+    <value>Laboratory</value>
+  </data>
+  <data name="LabTVItemID" xml:space="preserve">
+    <value>LabTVItemID</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Language</value>
+  </data>
+  <data name="LanguageENAnd" xml:space="preserve">
+    <value>language [en] and</value>
+  </data>
+  <data name="LastName" xml:space="preserve">
+    <value>Last Name</value>
+  </data>
+  <data name="Lat" xml:space="preserve">
+    <value>Lat</value>
+  </data>
+  <data name="Latitude" xml:space="preserve">
+    <value>Latitude</value>
+  </data>
+  <data name="LatMax" xml:space="preserve">
+    <value>LatMax</value>
+  </data>
+  <data name="LatMin" xml:space="preserve">
+    <value>LatMin</value>
+  </data>
+  <data name="Length" xml:space="preserve">
+    <value>Length</value>
+  </data>
+  <data name="LengthIN" xml:space="preserve">
+    <value>length</value>
+  </data>
+  <data name="LengthShouldNotBeZeroWhenFixLengthIsChecked" xml:space="preserve">
+    <value>Length should not be 0 when fix length is checked</value>
+  </data>
+  <data name="Length_m" xml:space="preserve">
+    <value>Length_m</value>
+  </data>
+  <data name="LineNumber" xml:space="preserve">
+    <value>Line number</value>
+  </data>
+  <data name="Lng" xml:space="preserve">
+    <value>Lng</value>
+  </data>
+  <data name="LngMax" xml:space="preserve">
+    <value>LngMax</value>
+  </data>
+  <data name="LngMin" xml:space="preserve">
+    <value>LngMin</value>
+  </data>
+  <data name="LoginEmail" xml:space="preserve">
+    <value>LoginEmail</value>
+  </data>
+  <data name="Longitude" xml:space="preserve">
+    <value>Longitude</value>
+  </data>
+  <data name="LSID" xml:space="preserve">
+    <value>LSID</value>
+  </data>
+  <data name="ManningNumber" xml:space="preserve">
+    <value>ManningNumber</value>
+  </data>
+  <data name="MapInfo" xml:space="preserve">
+    <value>MapInfo</value>
+  </data>
+  <data name="MapInfoID" xml:space="preserve">
+    <value>MapInfoID</value>
+  </data>
+  <data name="MapInfoPoint" xml:space="preserve">
+    <value>MapInfoPoint</value>
+  </data>
+  <data name="MapInfoPointID" xml:space="preserve">
+    <value>MapInfoPointID</value>
+  </data>
+  <data name="MapInfoPoly" xml:space="preserve">
+    <value>MapInfoPoly</value>
+  </data>
+  <data name="MapInfoPolyID" xml:space="preserve">
+    <value>MapInfoPolyID</value>
+  </data>
+  <data name="MapInfoPurpose" xml:space="preserve">
+    <value>MapInfoPurpose</value>
+  </data>
+  <data name="MapInfoTVItemID" xml:space="preserve">
+    <value>MapInfoTVItemID</value>
+  </data>
+  <data name="MatrixTVItemID" xml:space="preserve">
+    <value>MatrixTVItemID</value>
+  </data>
+  <data name="MaxTemp_C" xml:space="preserve">
+    <value>MaxTemp_C</value>
+  </data>
+  <data name="MeasurementDepth" xml:space="preserve">
+    <value>Measurement Depth</value>
+  </data>
+  <data name="MeasurementDepth_m" xml:space="preserve">
+    <value>MeasurementDepth_m</value>
+  </data>
+  <data name="Message" xml:space="preserve">
+    <value>Message</value>
+  </data>
+  <data name="MikeBoundaryCondition" xml:space="preserve">
+    <value>MikeBoundaryCondition</value>
+  </data>
+  <data name="MikeBoundaryConditionCode" xml:space="preserve">
+    <value>MikeBoundaryConditionCode</value>
+  </data>
+  <data name="MikeBoundaryConditionFormat" xml:space="preserve">
+    <value>MikeBoundaryConditionFormat</value>
+  </data>
+  <data name="MikeBoundaryConditionID" xml:space="preserve">
+    <value>MikeBoundaryConditionID</value>
+  </data>
+  <data name="MikeBoundaryConditionLength_m" xml:space="preserve">
+    <value>MikeBoundaryConditionLength_m</value>
+  </data>
+  <data name="MikeBoundaryConditionLevelOrVelocity" xml:space="preserve">
+    <value>MikeBoundaryConditionLevelOrVelocity</value>
+  </data>
+  <data name="MikeBoundaryConditionMeshNode" xml:space="preserve">
+    <value>MIKE Boundary Conditions Mesh Node</value>
+  </data>
+  <data name="MikeBoundaryConditionMeshOrWebTide" xml:space="preserve">
+    <value>MikeBoundaryConditionMeshOrWebTide</value>
+  </data>
+  <data name="MikeBoundaryConditionName" xml:space="preserve">
+    <value>MikeBoundaryConditionName</value>
+  </data>
+  <data name="MikeBoundaryConditionTVItemID" xml:space="preserve">
+    <value>MikeBoundaryConditionTVItemID</value>
+  </data>
+  <data name="MikeBoundaryConditionTVText" xml:space="preserve">
+    <value>MikeBoundaryConditionTVText</value>
+  </data>
+  <data name="MikeBoundaryConditionType" xml:space="preserve">
+    <value>MikeBoundaryConditionType</value>
+  </data>
+  <data name="MikeBoundaryConditionWebTideNode" xml:space="preserve">
+    <value>MIKE Boundary Conditions WebTide Node</value>
+  </data>
+  <data name="MikeInput" xml:space="preserve">
+    <value>MikeInput</value>
+  </data>
+  <data name="MikeInputMDF" xml:space="preserve">
+    <value>MikeInputMDF</value>
+  </data>
+  <data name="MikeResultDFSU" xml:space="preserve">
+    <value>MikeResultDFSU</value>
+  </data>
+  <data name="MikeResultKMZ" xml:space="preserve">
+    <value>MikeResultKMZ</value>
+  </data>
+  <data name="MikeScenario" xml:space="preserve">
+    <value>MikeScenario</value>
+  </data>
+  <data name="MikeScenarioDoc" xml:space="preserve">
+    <value>MikeScenarioDoc</value>
+  </data>
+  <data name="MikeScenarioEffluentEndDay" xml:space="preserve">
+    <value>MikeScenarioEffluentEndDay</value>
+  </data>
+  <data name="MikeScenarioEffluentEndMonth" xml:space="preserve">
+    <value>MikeScenarioEffluentEndMonth</value>
+  </data>
+  <data name="MikeScenarioEffluentEndTime" xml:space="preserve">
+    <value>MikeScenarioEffluentEndTime</value>
+  </data>
+  <data name="MikeScenarioEffluentStartDay" xml:space="preserve">
+    <value>MikeScenarioEffluentStartDay</value>
+  </data>
+  <data name="MikeScenarioEffluentStartMonth" xml:space="preserve">
+    <value>MikeScenarioEffluentStartMonth</value>
+  </data>
+  <data name="MikeScenarioEffluentStartTime" xml:space="preserve">
+    <value>MikeScenarioEffluentStartTime</value>
+  </data>
+  <data name="MikeScenarioEffluentStartYear" xml:space="preserve">
+    <value>MikeScenarioEffluentStartYear</value>
+  </data>
+  <data name="MikeScenarioEndDateAndTime_Local" xml:space="preserve">
+    <value>MikeScenarioEndDateAndTime_Local</value>
+  </data>
+  <data name="MikeScenarioEndDateTime_Local" xml:space="preserve">
+    <value>MikeScenarioEndDateTime_Local</value>
+  </data>
+  <data name="MikeScenarioEndDay" xml:space="preserve">
+    <value>MikeScenarioEndDay</value>
+  </data>
+  <data name="MikeScenarioEndMonth" xml:space="preserve">
+    <value>MikeScenarioEndMonth</value>
+  </data>
+  <data name="MikeScenarioEndTime" xml:space="preserve">
+    <value>MikeScenarioEndTime</value>
+  </data>
+  <data name="MikeScenarioEndYear" xml:space="preserve">
+    <value>MikeScenarioEndYear</value>
+  </data>
+  <data name="MikeScenarioFile" xml:space="preserve">
+    <value>Mike Scenario File</value>
+  </data>
+  <data name="MikeScenarioID" xml:space="preserve">
+    <value>MikeScenarioID</value>
+  </data>
+  <data name="MikeScenarioImport" xml:space="preserve">
+    <value>MikeScenarioImport</value>
+  </data>
+  <data name="MikeScenarioInDB" xml:space="preserve">
+    <value>MIKE Scenario in data base</value>
+  </data>
+  <data name="MikeScenarioName" xml:space="preserve">
+    <value>MikeScenarioName</value>
+  </data>
+  <data name="MikeScenarioNameToCopy" xml:space="preserve">
+    <value>MIKE Scenario Name to copy</value>
+  </data>
+  <data name="MikeScenarios" xml:space="preserve">
+    <value>MIKE Scenarios</value>
+  </data>
+  <data name="MikeScenarioSourceInDB" xml:space="preserve">
+    <value>MIKE Scenario Source in the DB</value>
+  </data>
+  <data name="MikeScenarioStartDateAndTime_Local" xml:space="preserve">
+    <value>MikeScenarioStartDateAndTime_Local</value>
+  </data>
+  <data name="MikeScenarioStartDateTime_Local" xml:space="preserve">
+    <value>MikeScenarioStartDateTime_Local</value>
+  </data>
+  <data name="MikeScenarioStartDay" xml:space="preserve">
+    <value>MikeScenarioStartDay</value>
+  </data>
+  <data name="MikeScenarioStartMonth" xml:space="preserve">
+    <value>MikeScenarioStartMonth</value>
+  </data>
+  <data name="MikeScenarioStartTime" xml:space="preserve">
+    <value>MikeScenarioStartTime</value>
+  </data>
+  <data name="MikeScenarioStartYear" xml:space="preserve">
+    <value>MikeScenarioStartYear</value>
+  </data>
+  <data name="MikeScenarioStatus" xml:space="preserve">
+    <value>MikeScenarioStatus</value>
+  </data>
+  <data name="MikeScenarioTVItemID" xml:space="preserve">
+    <value>MikeScenarioTVItemID</value>
+  </data>
+  <data name="MikeScenarioTVText" xml:space="preserve">
+    <value>MikeScenarioTVText</value>
+  </data>
+  <data name="MikeScenario_AlreadyExist" xml:space="preserve">
+    <value>MIKE Scenario [{0}] already exist.</value>
+  </data>
+  <data name="MikeSiteSample" xml:space="preserve">
+    <value>MikeSiteSample</value>
+  </data>
+  <data name="MikeSource" xml:space="preserve">
+    <value>MikeSource</value>
+  </data>
+  <data name="MikeSourceID" xml:space="preserve">
+    <value>MikeSourceID</value>
+  </data>
+  <data name="MikeSourceStartEnd" xml:space="preserve">
+    <value>MikeSourceStartEnd</value>
+  </data>
+  <data name="MikeSourceStartEndID" xml:space="preserve">
+    <value>MikeSourceStartEndID</value>
+  </data>
+  <data name="MikeSourceTVItemID" xml:space="preserve">
+    <value>MikeSourceTVItemID</value>
+  </data>
+  <data name="MikeSourceTVText" xml:space="preserve">
+    <value>MikeSourceTVText</value>
+  </data>
+  <data name="MikeSource_AlreadyExist" xml:space="preserve">
+    <value>MIKE Source [{0}] already exist.</value>
+  </data>
+  <data name="MinTemp_C" xml:space="preserve">
+    <value>MinTemp_C</value>
+  </data>
+  <data name="MinutesLowerCase" xml:space="preserve">
+    <value>minutes</value>
+  </data>
+  <data name="Month" xml:space="preserve">
+    <value>Month</value>
+  </data>
+  <data name="MonthlyEndDate_Local" xml:space="preserve">
+    <value>MonthlyEndDate_Local</value>
+  </data>
+  <data name="MonthlyStartDate_Local" xml:space="preserve">
+    <value>MonthlyStartDate_Local</value>
+  </data>
+  <data name="MPN_100ml" xml:space="preserve">
+    <value>MPN_100ml</value>
+  </data>
+  <data name="Municipalities" xml:space="preserve">
+    <value>Municipalities</value>
+  </data>
+  <data name="Municipality" xml:space="preserve">
+    <value>Municipality</value>
+  </data>
+  <data name="MunicipalityDoc" xml:space="preserve">
+    <value>MunicipalityDoc</value>
+  </data>
+  <data name="MunicipalityTVItemID" xml:space="preserve">
+    <value>MunicipalityTVItemID</value>
+  </data>
+  <data name="MWQMLookupMPN" xml:space="preserve">
+    <value>MWQMLookupMPN</value>
+  </data>
+  <data name="MWQMLookupMPNID" xml:space="preserve">
+    <value>MWQMLookupMPNID</value>
+  </data>
+  <data name="MWQMRun" xml:space="preserve">
+    <value>MWQMRun</value>
+  </data>
+  <data name="MWQMRunComment" xml:space="preserve">
+    <value>MWQMRunComment</value>
+  </data>
+  <data name="MWQMRunID" xml:space="preserve">
+    <value>MWQMRunID</value>
+  </data>
+  <data name="MWQMRunLanguage" xml:space="preserve">
+    <value>MWQMRunLanguage</value>
+  </data>
+  <data name="MWQMRuns" xml:space="preserve">
+    <value>MWQM Runs</value>
+  </data>
+  <data name="MWQMSample" xml:space="preserve">
+    <value>MWQMSample</value>
+  </data>
+  <data name="MWQMSampleID" xml:space="preserve">
+    <value>MWQMSampleID</value>
+  </data>
+  <data name="MWQMSampleLanguage" xml:space="preserve">
+    <value>MWQMSampleLanguage</value>
+  </data>
+  <data name="MWQMSampleNote" xml:space="preserve">
+    <value>MWQMSampleNote</value>
+  </data>
+  <data name="MWQMSite" xml:space="preserve">
+    <value>MWQMSite</value>
+  </data>
+  <data name="MWQMSiteDoc" xml:space="preserve">
+    <value>MWQMSiteDoc</value>
+  </data>
+  <data name="MWQMSiteID" xml:space="preserve">
+    <value>MWQMSiteID</value>
+  </data>
+  <data name="MWQMSiteLanguage" xml:space="preserve">
+    <value>MWQMSiteLanguage</value>
+  </data>
+  <data name="MWQMSiteName" xml:space="preserve">
+    <value>MWQMSiteName</value>
+  </data>
+  <data name="MWQMSiteNumber" xml:space="preserve">
+    <value>MWQMSiteNumber</value>
+  </data>
+  <data name="MWQMSites" xml:space="preserve">
+    <value>MWQM Sites</value>
+  </data>
+  <data name="MWQMSiteTVItemID" xml:space="preserve">
+    <value>MWQMSiteTVItemID</value>
+  </data>
+  <data name="MWQMSiteTVText" xml:space="preserve">
+    <value>MWQMSiteTVText</value>
+  </data>
+  <data name="MWQMSubsector" xml:space="preserve">
+    <value>MWQMSubsector</value>
+  </data>
+  <data name="MWQMSubsectorID" xml:space="preserve">
+    <value>MWQMSubsectorID</value>
+  </data>
+  <data name="MWQMSubsectorLanguage" xml:space="preserve">
+    <value>MWQMSubsectorLanguage</value>
+  </data>
+  <data name="MWQMSubsectorTVItemID" xml:space="preserve">
+    <value>MWQMSubsectorTVItemID</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="NearFieldVelocity_m_s" xml:space="preserve">
+    <value>NearFieldVelocity_m_s</value>
+  </data>
+  <data name="CSSPWebToolRequiredInformationToChangeYourPassword" xml:space="preserve">
+    <value>CSSPWebTool required information to change your password</value>
+  </data>
+  <data name="NewBoxModelScenario" xml:space="preserve">
+    <value>New box model scenario</value>
+  </data>
+  <data name="NewScenario" xml:space="preserve">
+    <value>New scenario</value>
+  </data>
+  <data name="Node" xml:space="preserve">
+    <value>Node</value>
+  </data>
+  <data name="NodeToDelete" xml:space="preserve">
+    <value>Node to delete</value>
+  </data>
+  <data name="NoNewTaskToRun" xml:space="preserve">
+    <value>No new task to run</value>
+  </data>
+  <data name="NorthEastPacificIOS" xml:space="preserve">
+    <value>Northeast Pacific</value>
+  </data>
+  <data name="NorthWestAtlantic" xml:space="preserve">
+    <value>Northwest Atlantic</value>
+  </data>
+  <data name="NotAllowedToDeleteLastEffluentForThisSource" xml:space="preserve">
+    <value>Not allowed to delete the last effluent for this source.</value>
+  </data>
+  <data name="NotSet" xml:space="preserve">
+    <value>Not Set</value>
+  </data>
+  <data name="NumberOfPorts" xml:space="preserve">
+    <value>NumberOfPorts</value>
+  </data>
+  <data name="NumberOfWebTideNodes" xml:space="preserve">
+    <value>NumberOfWebTideNodes</value>
+  </data>
+  <data name="Observation" xml:space="preserve">
+    <value>Observation</value>
+  </data>
+  <data name="ObservationDate_Local" xml:space="preserve">
+    <value>ObservationDate_Local</value>
+  </data>
+  <data name="OccupationOrRole" xml:space="preserve">
+    <value>OccupationOrRole</value>
+  </data>
+  <data name="Of" xml:space="preserve">
+    <value>of</value>
+  </data>
+  <data name="Oldsiteid" xml:space="preserve">
+    <value>Oldsiteid</value>
+  </data>
+  <data name="OnlyAdministratorsCanManageUsers" xml:space="preserve">
+    <value>Only administrators can manage accounts of users.</value>
+  </data>
+  <data name="OnlyOneOf_ShouldBeTrueAtOnce" xml:space="preserve">
+    <value>Only one of {0} should be true at once</value>
+  </data>
+  <data name="Ordinal" xml:space="preserve">
+    <value>Ordinal</value>
+  </data>
+  <data name="Param1" xml:space="preserve">
+    <value>Param1</value>
+  </data>
+  <data name="Param2" xml:space="preserve">
+    <value>Param2</value>
+  </data>
+  <data name="Param3" xml:space="preserve">
+    <value>Param3</value>
+  </data>
+  <data name="Param4" xml:space="preserve">
+    <value>Param4</value>
+  </data>
+  <data name="Parameters" xml:space="preserve">
+    <value>Parameters</value>
+  </data>
+  <data name="ParentID" xml:space="preserve">
+    <value>ParentID</value>
+  </data>
+  <data name="ParentTVItemID" xml:space="preserve">
+    <value>ParentTVItemID</value>
+  </data>
+  <data name="ParentTVItemIDListCountIsZero" xml:space="preserve">
+    <value>Parent TVItemIDList count is 0</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="PasswordAndConfirmPasswordNotIdentical" xml:space="preserve">
+    <value>Password and its confirmation are not identical.</value>
+  </data>
+  <data name="PasswordProvided" xml:space="preserve">
+    <value>PasswordProvided</value>
+  </data>
+  <data name="PathToDelete" xml:space="preserve">
+    <value>PathToDelete</value>
+  </data>
+  <data name="PeakFlow_m3_day" xml:space="preserve">
+    <value>PeakFlow_m3_day</value>
+  </data>
+  <data name="PercentCompleted" xml:space="preserve">
+    <value>PercentCompleted</value>
+  </data>
+  <data name="PercFlowOfTotal" xml:space="preserve">
+    <value>PercFlowOfTotal</value>
+  </data>
+  <data name="PH" xml:space="preserve">
+    <value>pH</value>
+  </data>
+  <data name="Picture" xml:space="preserve">
+    <value>Picture</value>
+  </data>
+  <data name="PleaseAddTimeUnderSpecialSetting" xml:space="preserve">
+    <value>"Please add the time under the 'Special Setting' under selected variables.\r\nIt needs to be the last variable.\r\n"</value>
+  </data>
+  <data name="PleaseEnterAValidNumberFor_" xml:space="preserve">
+    <value>Please enter a valid number for [{0}].</value>
+  </data>
+  <data name="PleaseEnterValidEmail" xml:space="preserve">
+    <value>Please enter a valid email.</value>
+  </data>
+  <data name="PleaseLoadFile_" xml:space="preserve">
+    <value>Please load file [{0}]</value>
+  </data>
+  <data name="PleaseSelectAFileOfType_" xml:space="preserve">
+    <value>Please select a file of type {0}.</value>
+  </data>
+  <data name="PleaseSelectAFileToUpload" xml:space="preserve">
+    <value>Please select a file to upload.</value>
+  </data>
+  <data name="PleaseSelectFileOfType_ToUpload" xml:space="preserve">
+    <value>Please select file of type [{0}] to upload</value>
+  </data>
+  <data name="PleaseSelectFileToUpload" xml:space="preserve">
+    <value>Please select file to upload</value>
+  </data>
+  <data name="PlsUseFollowingUniqueCodeEtc" xml:space="preserve">
+    <value>Please use the following unique code while resetting your password for this login email.</value>
+  </data>
+  <data name="PollutantDecayRate" xml:space="preserve">
+    <value>Pollutant Decay Rate</value>
+  </data>
+  <data name="PollutantDecayRate_per_day" xml:space="preserve">
+    <value>PollutantDecayRate_per_day</value>
+  </data>
+  <data name="PollutionEnd" xml:space="preserve">
+    <value>Pollution End</value>
+  </data>
+  <data name="PollutionStart" xml:space="preserve">
+    <value>Pollution Start</value>
+  </data>
+  <data name="PolRiskTVItemID" xml:space="preserve">
+    <value>PolRiskTVItemID</value>
+  </data>
+  <data name="PolSourceObservation" xml:space="preserve">
+    <value>PolSourceObservation</value>
+  </data>
+  <data name="PolSourceObservationID" xml:space="preserve">
+    <value>PolSourceObservationID</value>
+  </data>
+  <data name="PolSourceObservationLanguage" xml:space="preserve">
+    <value>PolSourceObservationLanguage</value>
+  </data>
+  <data name="PolSourceRisk" xml:space="preserve">
+    <value>PolSourceRisk</value>
+  </data>
+  <data name="PolSourceRiskAssessment" xml:space="preserve">
+    <value>PolSourceRiskAssessment</value>
+  </data>
+  <data name="PolSourceSite" xml:space="preserve">
+    <value>PolSourceSite</value>
+  </data>
+  <data name="PolSourceSiteDoc" xml:space="preserve">
+    <value>PolSourceSiteDoc</value>
+  </data>
+  <data name="PolSourceSiteID" xml:space="preserve">
+    <value>PolSourceSiteID</value>
+  </data>
+  <data name="PolSourceSites" xml:space="preserve">
+    <value>Pollution Source Sites</value>
+  </data>
+  <data name="PolSourceSiteTVItemID" xml:space="preserve">
+    <value>PolSourceSiteTVItemID</value>
+  </data>
+  <data name="PolSourceSiteTVText" xml:space="preserve">
+    <value>PolSourceSiteTVText</value>
+  </data>
+  <data name="PolSourceStatus" xml:space="preserve">
+    <value>PolSourceStatus</value>
+  </data>
+  <data name="PolSourceSubType" xml:space="preserve">
+    <value>PolSourceSubType</value>
+  </data>
+  <data name="PolSourceType" xml:space="preserve">
+    <value>PolSourceType</value>
+  </data>
+  <data name="PolStatusTVItemID" xml:space="preserve">
+    <value>PolStatusTVItemID</value>
+  </data>
+  <data name="PolSubTypeTVItemID" xml:space="preserve">
+    <value>PolSubTypeTVItemID</value>
+  </data>
+  <data name="PolTypeTVItemID" xml:space="preserve">
+    <value>PolTypeTVItemID</value>
+  </data>
+  <data name="PopServed" xml:space="preserve">
+    <value>PopServed</value>
+  </data>
+  <data name="PortDepth" xml:space="preserve">
+    <value>Port Depth</value>
+  </data>
+  <data name="PortDepth_m" xml:space="preserve">
+    <value>PortDepth_m</value>
+  </data>
+  <data name="PortDiameter" xml:space="preserve">
+    <value>Port Diameter</value>
+  </data>
+  <data name="PortDiameter_m" xml:space="preserve">
+    <value>PortDiameter_m</value>
+  </data>
+  <data name="PortElevation" xml:space="preserve">
+    <value>Port Elevation</value>
+  </data>
+  <data name="PortElevation_m" xml:space="preserve">
+    <value>PortElevation_m</value>
+  </data>
+  <data name="PortSpacing" xml:space="preserve">
+    <value>Port Spacing</value>
+  </data>
+  <data name="PortSpacing_m" xml:space="preserve">
+    <value>PortSpacing_m</value>
+  </data>
+  <data name="RainDay1_mm" xml:space="preserve">
+    <value>RainDay1_mm</value>
+  </data>
+  <data name="RainDay2_mm" xml:space="preserve">
+    <value>RainDay2_mm</value>
+  </data>
+  <data name="RainDay3_mm" xml:space="preserve">
+    <value>RainDay3_mm</value>
+  </data>
+  <data name="PrecHydroTide" xml:space="preserve">
+    <value>Precipitation, Hydrometry, Tide</value>
+  </data>
+  <data name="PrismID" xml:space="preserve">
+    <value>PrismID</value>
+  </data>
+  <data name="Province" xml:space="preserve">
+    <value>Province</value>
+  </data>
+  <data name="ProvinceDoc" xml:space="preserve">
+    <value>ProvinceDoc</value>
+  </data>
+  <data name="ProvinceNotCorrectNeedToBeOneOf_Its_" xml:space="preserve">
+    <value>Province not correct. Need to be one of {0}. It's {1}.</value>
+  </data>
+  <data name="Provinces" xml:space="preserve">
+    <value>Provinces</value>
+  </data>
+  <data name="ProvinceTVItemID" xml:space="preserve">
+    <value>ProvinceTVItemID</value>
+  </data>
+  <data name="ProvSiteID" xml:space="preserve">
+    <value>ProvSiteID</value>
+  </data>
+  <data name="PSU" xml:space="preserve">
+    <value>PSU</value>
+  </data>
+  <data name="QuatsinoSound" xml:space="preserve">
+    <value>Quatsino Sound</value>
+  </data>
+  <data name="QuebecSiteNumber" xml:space="preserve">
+    <value>QuebecSiteNumber</value>
+  </data>
+  <data name="Radius_m" xml:space="preserve">
+    <value>Radius_m</value>
+  </data>
+  <data name="RainfallEnteredManually_mm" xml:space="preserve">
+    <value>RainfallEnteredManually_mm</value>
+  </data>
+  <data name="Rainfall_mm" xml:space="preserve">
+    <value>Rainfall_mm</value>
+  </data>
+  <data name="RatingCurve" xml:space="preserve">
+    <value>RatingCurve</value>
+  </data>
+  <data name="RatingCurveID" xml:space="preserve">
+    <value>RatingCurveID</value>
+  </data>
+  <data name="RatingCurveNumber" xml:space="preserve">
+    <value>RatingCurveNumber</value>
+  </data>
+  <data name="RatingCurveValue" xml:space="preserve">
+    <value>RatingCurveValue</value>
+  </data>
+  <data name="RatingCurveValueID" xml:space="preserve">
+    <value>RatingCurveValueID</value>
+  </data>
+  <data name="ReceivingWaterSalinity_PSU" xml:space="preserve">
+    <value>ReceivingWaterSalinity_PSU</value>
+  </data>
+  <data name="ReceivingWaterTemperature_C" xml:space="preserve">
+    <value>ReceivingWaterTemperature_C</value>
+  </data>
+  <data name="ReceivingWater_MPN_per_100ml" xml:space="preserve">
+    <value>ReceivingWater_MPN_per_100ml</value>
+  </data>
+  <data name="RectLength_m" xml:space="preserve">
+    <value>RectLength_m</value>
+  </data>
+  <data name="RectWidth_m" xml:space="preserve">
+    <value>RectWidth_m</value>
+  </data>
+  <data name="RelativeHumidity_Perc" xml:space="preserve">
+    <value>RelativeHumidity_Perc</value>
+  </data>
+  <data name="RemainingTime_second" xml:space="preserve">
+    <value>RemainingTime_second</value>
+  </data>
+  <data name="RemovedWithParenthesis" xml:space="preserve">
+    <value>(Removed)</value>
+  </data>
+  <data name="Reported" xml:space="preserve">
+    <value>Reported</value>
+  </data>
+  <data name="Request" xml:space="preserve">
+    <value>Request</value>
+  </data>
+  <data name="ResetPassword" xml:space="preserve">
+    <value>ResetPassword</value>
+  </data>
+  <data name="ResetPasswordID" xml:space="preserve">
+    <value>ResetPasswordID</value>
+  </data>
+  <data name="ResultFileIsEmpty" xml:space="preserve">
+    <value>"Result file is empty"</value>
+  </data>
+  <data name="ResultFrequency" xml:space="preserve">
+    <value>Result Frequency</value>
+  </data>
+  <data name="ResultFrequency_min" xml:space="preserve">
+    <value>ResultFrequency_min</value>
+  </data>
+  <data name="ResultType" xml:space="preserve">
+    <value>ResultType</value>
+  </data>
+  <data name="Root" xml:space="preserve">
+    <value>Root</value>
+  </data>
+  <data name="RootDoc" xml:space="preserve">
+    <value>RootDoc</value>
+  </data>
+  <data name="RootTVItemDoesNotHaveParentTVItem" xml:space="preserve">
+    <value>Root TVItem does not have parent TVItem</value>
+  </data>
+  <data name="Row" xml:space="preserve">
+    <value>Row</value>
+  </data>
+  <data name="Running" xml:space="preserve">
+    <value>Running</value>
+  </data>
+  <data name="SalinityEnd" xml:space="preserve">
+    <value>Salinity End</value>
+  </data>
+  <data name="SalinityStart" xml:space="preserve">
+    <value>Salinity Start</value>
+  </data>
+  <data name="Salinity_PSU" xml:space="preserve">
+    <value>Salinity_PSU</value>
+  </data>
+  <data name="SampleDateTime_Local" xml:space="preserve">
+    <value>SampleDateTime_Local</value>
+  </data>
+  <data name="SampleMatrix" xml:space="preserve">
+    <value>SampleMatrix</value>
+  </data>
+  <data name="SampleStatus" xml:space="preserve">
+    <value>SampleStatus</value>
+  </data>
+  <data name="SampleType" xml:space="preserve">
+    <value>SampleType</value>
+  </data>
+  <data name="SamplingContactTVItemID" xml:space="preserve">
+    <value>SamplingContactTVItemID</value>
+  </data>
+  <data name="ScenarioAmbientSalinity" xml:space="preserve">
+    <value>Scenario Ambient Salinity</value>
+  </data>
+  <data name="ScenarioAmbientTemperature" xml:space="preserve">
+    <value>Scenario Ambient Temperature</value>
+  </data>
+  <data name="ScenarioDecayFactor" xml:space="preserve">
+    <value>Scenario Decay Factor</value>
+  </data>
+  <data name="ScenarioDecayFactorAmplitude" xml:space="preserve">
+    <value>Scenario Decay Factor Amplitude</value>
+  </data>
+  <data name="ScenarioLength" xml:space="preserve">
+    <value>Scenario Length</value>
+  </data>
+  <data name="ScenarioManningNumber" xml:space="preserve">
+    <value>Scenario Manning Number</value>
+  </data>
+  <data name="ScenarioName" xml:space="preserve">
+    <value>ScenarioName</value>
+  </data>
+  <data name="ScenarioStartDateAndTime" xml:space="preserve">
+    <value>Scenario Start Date and Time</value>
+  </data>
+  <data name="ScenarioStartDateTime" xml:space="preserve">
+    <value>Date et l'heure du début du scénario</value>
+  </data>
+  <data name="ScenarioStatus" xml:space="preserve">
+    <value>ScenarioStatus</value>
+  </data>
+  <data name="ScenarioWindDirection" xml:space="preserve">
+    <value>Scenario Wind Direction</value>
+  </data>
+  <data name="ScenarioWindSpeed" xml:space="preserve">
+    <value>Scenario Wind Speed</value>
+  </data>
+  <data name="ScenarioWithName_AlreadyExists" xml:space="preserve">
+    <value>Scenario with name [{0}] already exists.</value>
+  </data>
+  <data name="ScotianFundyMaine" xml:space="preserve">
+    <value>Scotian - Fundy - Maine</value>
+  </data>
+  <data name="SeaStateAtEnd_BeaufortScale" xml:space="preserve">
+    <value>SeaStateAtEnd_BeaufortScale</value>
+  </data>
+  <data name="SeaStateAtStart_BeaufortScale" xml:space="preserve">
+    <value>SeaStateAtStart_BeaufortScale</value>
+  </data>
+  <data name="SecondLowerCase" xml:space="preserve">
+    <value>second</value>
+  </data>
+  <data name="Sector" xml:space="preserve">
+    <value>Sector</value>
+  </data>
+  <data name="SectorDoc" xml:space="preserve">
+    <value>SectorDoc</value>
+  </data>
+  <data name="Sectors" xml:space="preserve">
+    <value>Sectors</value>
+  </data>
+  <data name="ServerFileName" xml:space="preserve">
+    <value>ServerFileName</value>
+  </data>
+  <data name="ServerFilePath" xml:space="preserve">
+    <value>ServerFilePath</value>
+  </data>
+  <data name="ServerFilePathIsEmpty" xml:space="preserve">
+    <value>ServerFilePath is empty</value>
+  </data>
+  <data name="ServerFullPath" xml:space="preserve">
+    <value>ServerFullPath</value>
+  </data>
+  <data name="ServerFullPath_NotEqualto_" xml:space="preserve">
+    <value>Server full path [{0}] not equal to [{1}]</value>
+  </data>
+  <data name="SettingBoundaryConditions" xml:space="preserve">
+    <value>Setting Boundary Conditions</value>
+  </data>
+  <data name="ShouldContainTVTypeOf_" xml:space="preserve">
+    <value>Should contain TVType of [{0)]</value>
+  </data>
+  <data name="ShouldNotBeLoggedOnToRegister" xml:space="preserve">
+    <value>Should not be logged on to register.</value>
+  </data>
+  <data name="Site" xml:space="preserve">
+    <value>Site</value>
+  </data>
+  <data name="SiteID" xml:space="preserve">
+    <value>SiteID</value>
+  </data>
+  <data name="SiteTVItemID" xml:space="preserve">
+    <value>SiteTVItemID</value>
+  </data>
+  <data name="SiteType" xml:space="preserve">
+    <value>SiteType</value>
+  </data>
+  <data name="SnowfallEnteredManually_cm" xml:space="preserve">
+    <value>SnowfallEnteredManually_cm</value>
+  </data>
+  <data name="SnowOnGround_cm" xml:space="preserve">
+    <value>SnowOnGround_cm</value>
+  </data>
+  <data name="Snow_cm" xml:space="preserve">
+    <value>Snow_cm</value>
+  </data>
+  <data name="Source" xml:space="preserve">
+    <value>Source</value>
+  </data>
+  <data name="SourceFlowEnd_m3_day" xml:space="preserve">
+    <value>SourceFlowEnd_m3_day</value>
+  </data>
+  <data name="SourceFlowStart_m3_day" xml:space="preserve">
+    <value>SourceFlowStart_m3_day</value>
+  </data>
+  <data name="SourceName" xml:space="preserve">
+    <value>SourceName</value>
+  </data>
+  <data name="SourceNumberString" xml:space="preserve">
+    <value>SourceNumberString</value>
+  </data>
+  <data name="SourcePollutionEnd_MPN_100ml" xml:space="preserve">
+    <value>SourcePollutionEnd_MPN_100ml</value>
+  </data>
+  <data name="SourcePollutionStart_MPN_100ml" xml:space="preserve">
+    <value>SourcePollutionStart_MPN_100ml</value>
+  </data>
+  <data name="Sources" xml:space="preserve">
+    <value>Sources</value>
+  </data>
+  <data name="SourceSalinityEnd_PSU" xml:space="preserve">
+    <value>SourceSalinityEnd_PSU</value>
+  </data>
+  <data name="SourceSalinityStart_PSU" xml:space="preserve">
+    <value>SourceSalinityStart_PSU</value>
+  </data>
+  <data name="SourceTemperatureEnd_C" xml:space="preserve">
+    <value>SourceTemperatureEnd_C</value>
+  </data>
+  <data name="SourceTemperatureStart_C" xml:space="preserve">
+    <value>SourceTemperatureStart_C</value>
+  </data>
+  <data name="SpdMaxGust_kmh" xml:space="preserve">
+    <value>SpdMaxGust_kmh</value>
+  </data>
+  <data name="Spill" xml:space="preserve">
+    <value>Spill</value>
+  </data>
+  <data name="SpillComment" xml:space="preserve">
+    <value>SpillComment</value>
+  </data>
+  <data name="SpillEndDate" xml:space="preserve">
+    <value>Spill End Date</value>
+  </data>
+  <data name="SpillID" xml:space="preserve">
+    <value>SpillID</value>
+  </data>
+  <data name="SpillLanguage" xml:space="preserve">
+    <value>SpillLanguage</value>
+  </data>
+  <data name="SpillStartDate" xml:space="preserve">
+    <value>Spill Start Date</value>
+  </data>
+  <data name="StageValue_m" xml:space="preserve">
+    <value>StageValue_m</value>
+  </data>
+  <data name="StartDateAndTime_Local" xml:space="preserve">
+    <value>StartDateAndTime_Local</value>
+  </data>
+  <data name="StartDateTime_Local" xml:space="preserve">
+    <value>StartDateTime_Local</value>
+  </data>
+  <data name="StartDateTime_UTC" xml:space="preserve">
+    <value>StartDateTime_UTC</value>
+  </data>
+  <data name="StartDate_Local" xml:space="preserve">
+    <value>StartDate_Local</value>
+  </data>
+  <data name="Stat" xml:space="preserve">
+    <value>Stat</value>
+  </data>
+  <data name="Status" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="StatusText" xml:space="preserve">
+    <value>StatusText</value>
+  </data>
+  <data name="StatusTVItemID" xml:space="preserve">
+    <value>StatusTVItemID</value>
+  </data>
+  <data name="StorageDataType" xml:space="preserve">
+    <value>StorageDataType</value>
+  </data>
+  <data name="StreetName" xml:space="preserve">
+    <value>Street name</value>
+  </data>
+  <data name="StreetNumber" xml:space="preserve">
+    <value>Street number</value>
+  </data>
+  <data name="StreetType" xml:space="preserve">
+    <value>StreetType</value>
+  </data>
+  <data name="StreetTypeTVItemID" xml:space="preserve">
+    <value>StreetTypeTVItemID</value>
+  </data>
+  <data name="SubjectPortionOfEmailNotWellFormed" xml:space="preserve">
+    <value>Subject portion of email not well formed</value>
+  </data>
+  <data name="Subsector" xml:space="preserve">
+    <value>Subsector</value>
+  </data>
+  <data name="SubsectorDesc" xml:space="preserve">
+    <value>SubsectorDesc</value>
+  </data>
+  <data name="SubsectorDoc" xml:space="preserve">
+    <value>SubsectorDoc</value>
+  </data>
+  <data name="SubsectorHistoricKey" xml:space="preserve">
+    <value>SubsectorHistoricKey</value>
+  </data>
+  <data name="Subsectors" xml:space="preserve">
+    <value>Subsectors</value>
+  </data>
+  <data name="SubsectorTVItemID" xml:space="preserve">
+    <value>SubsectorTVItemID</value>
+  </data>
+  <data name="Surface_m2" xml:space="preserve">
+    <value>Surface_m2</value>
+  </data>
+  <data name="T90_hour" xml:space="preserve">
+    <value>T90_hour</value>
+  </data>
+  <data name="TableListNotEqual_And_" xml:space="preserve">
+    <value>Table list not equal {0} and {1}</value>
+  </data>
+  <data name="Tag" xml:space="preserve">
+    <value>Tag</value>
+  </data>
+  <data name="TaskOf_AlreadyRunning" xml:space="preserve">
+    <value>Task of [{0}] already running</value>
+  </data>
+  <data name="TCID" xml:space="preserve">
+    <value>TCID</value>
+  </data>
+  <data name="Tel" xml:space="preserve">
+    <value>Tel</value>
+  </data>
+  <data name="TelID" xml:space="preserve">
+    <value>TelID</value>
+  </data>
+  <data name="TelNumber" xml:space="preserve">
+    <value>TelNumber</value>
+  </data>
+  <data name="TelText" xml:space="preserve">
+    <value>TelText</value>
+  </data>
+  <data name="TelTVItemID" xml:space="preserve">
+    <value>TelTVItemID</value>
+  </data>
+  <data name="TelType" xml:space="preserve">
+    <value>TelType</value>
+  </data>
+  <data name="TelTypeTVItemID" xml:space="preserve">
+    <value>TelTypeTVItemID</value>
+  </data>
+  <data name="Temperature" xml:space="preserve">
+    <value>Temperature</value>
+  </data>
+  <data name="TemperatureControl1_C" xml:space="preserve">
+    <value>TemperatureControl1_C</value>
+  </data>
+  <data name="TemperatureEnd" xml:space="preserve">
+    <value>Temperature End</value>
+  </data>
+  <data name="TemperatureIN" xml:space="preserve">
+    <value>Temperature</value>
+  </data>
+  <data name="TemperatureStart" xml:space="preserve">
+    <value>Temperature Start</value>
+  </data>
+  <data name="Temperature_C" xml:space="preserve">
+    <value>Temperature_C</value>
+  </data>
+  <data name="Temp_Locator_CanDelete" xml:space="preserve">
+    <value>Temp_Locator_CanDelete</value>
+  </data>
+  <data name="TideDataDateTime_Local" xml:space="preserve">
+    <value>TideDataDateTime_Local</value>
+  </data>
+  <data name="TideDataStartDate" xml:space="preserve">
+    <value>TideDataStartDate</value>
+  </data>
+  <data name="TideDataStartDateID" xml:space="preserve">
+    <value>TideDataStartDateID</value>
+  </data>
+  <data name="TideDataType" xml:space="preserve">
+    <value>TideDataType</value>
+  </data>
+  <data name="TideDataValue" xml:space="preserve">
+    <value>TideDataValue</value>
+  </data>
+  <data name="TideDataValueID" xml:space="preserve">
+    <value>TideDataValueID</value>
+  </data>
+  <data name="TideEnd" xml:space="preserve">
+    <value>TideEnd</value>
+  </data>
+  <data name="TideSite" xml:space="preserve">
+    <value>TideSite</value>
+  </data>
+  <data name="TideSiteID" xml:space="preserve">
+    <value>TideSiteID</value>
+  </data>
+  <data name="TideSiteTVItemID" xml:space="preserve">
+    <value>TideSiteTVItemID</value>
+  </data>
+  <data name="TideSiteTVText" xml:space="preserve">
+    <value>TideSiteTVText</value>
+  </data>
+  <data name="TideStart" xml:space="preserve">
+    <value>TideStart</value>
+  </data>
+  <data name="TideText" xml:space="preserve">
+    <value>TideText</value>
+  </data>
+  <data name="TimeOffset_hour" xml:space="preserve">
+    <value>TimeOffset_hour</value>
+  </data>
+  <data name="Time_NotWellFormed" xml:space="preserve">
+    <value>Time [{0}] not well formed</value>
+  </data>
+  <data name="ToAddFirst_Requires_TableToBeEmpty" xml:space="preserve">
+    <value>To add first {0} requires {0} table to be empty</value>
+  </data>
+  <data name="ToCopy" xml:space="preserve">
+    <value>to copy</value>
+  </data>
+  <data name="ToDelete" xml:space="preserve">
+    <value>to delete</value>
+  </data>
+  <data name="ToDeleteFirst_Requires_TableToContainOnlyOneRow" xml:space="preserve">
+    <value>To delete first {0} requires {0} table to contain only one row</value>
+  </data>
+  <data name="ToReset" xml:space="preserve">
+    <value>to reset</value>
+  </data>
+  <data name="TotalPrecip_mm_cm" xml:space="preserve">
+    <value>TotalPrecip_mm_cm</value>
+  </data>
+  <data name="ToTVItemID" xml:space="preserve">
+    <value>ToTVItemID</value>
+  </data>
+  <data name="TPID" xml:space="preserve">
+    <value>TPID</value>
+  </data>
+  <data name="TravelTime_hour" xml:space="preserve">
+    <value>TravelTime_hour</value>
+  </data>
+  <data name="TreatmentType" xml:space="preserve">
+    <value>TreatmentType</value>
+  </data>
+  <data name="TreatmentTypeActivatedSludge" xml:space="preserve">
+    <value>Activated Sludge</value>
+  </data>
+  <data name="TreatmentTypeActivatedSludgeWithBiofilter" xml:space="preserve">
+    <value>Activated Sludge With Biofilter</value>
+  </data>
+  <data name="TreatmentTypeCirculatingFluidizedBed" xml:space="preserve">
+    <value>Circulating Fluidized Bed</value>
+  </data>
+  <data name="TreatmentTypeLagoon1CellNoAeration" xml:space="preserve">
+    <value>Lagoon 1 Cell No Aeration</value>
+  </data>
+  <data name="TreatmentTypeLagoon1CellWithAeration" xml:space="preserve">
+    <value>Lagoon 1 Cell With Aeration</value>
+  </data>
+  <data name="TreatmentTypeLagoon2CellsNoAeration" xml:space="preserve">
+    <value>Lagoon 2 Cells No Aeration</value>
+  </data>
+  <data name="TreatmentTypeLagoon2CellsWithAeration" xml:space="preserve">
+    <value>Lagoon 2 Cells With Aeration</value>
+  </data>
+  <data name="TreatmentTypeLagoon3CellsNoAeration" xml:space="preserve">
+    <value>Lagoon 3 Cells No Aeration</value>
+  </data>
+  <data name="TreatmentTypeLagoon3CellsWithAeration" xml:space="preserve">
+    <value>Lagoon 3 Cells With Aeration</value>
+  </data>
+  <data name="TreatmentTypeOxidationDitchOnly" xml:space="preserve">
+    <value>Oxidation Ditch Only</value>
+  </data>
+  <data name="TreatmentTypeRecirculatingSandFilter" xml:space="preserve">
+    <value>Recirculating Sand Filter</value>
+  </data>
+  <data name="TreatmentTypeStabalizingPondOnly" xml:space="preserve">
+    <value>Stabalizing Pond Only</value>
+  </data>
+  <data name="TreatmentTypeTricklingFilter" xml:space="preserve">
+    <value>Trickling Filter</value>
+  </data>
+  <data name="TreatmentTypeTVItemID" xml:space="preserve">
+    <value>TreatmentTypeTVItemID</value>
+  </data>
+  <data name="TryingToLoad_" xml:space="preserve">
+    <value>Trying to load [{0}]</value>
+  </data>
+  <data name="Tubes01" xml:space="preserve">
+    <value>Tubes01</value>
+  </data>
+  <data name="Tubes1" xml:space="preserve">
+    <value>Tubes1</value>
+  </data>
+  <data name="Tubes10" xml:space="preserve">
+    <value>Tubes10</value>
+  </data>
+  <data name="TVAuth" xml:space="preserve">
+    <value>TVAuth</value>
+  </data>
+  <data name="TVFile" xml:space="preserve">
+    <value>TVFile</value>
+  </data>
+  <data name="TVFileID" xml:space="preserve">
+    <value>TVFileID</value>
+  </data>
+  <data name="TVFileTVItemID" xml:space="preserve">
+    <value>TVFileTVItemID</value>
+  </data>
+  <data name="TVItem" xml:space="preserve">
+    <value>TVItem</value>
+  </data>
+  <data name="TVItemID" xml:space="preserve">
+    <value>TVItemID</value>
+  </data>
+  <data name="TVItemID1" xml:space="preserve">
+    <value>TVItemID1</value>
+  </data>
+  <data name="TVItemID2" xml:space="preserve">
+    <value>TVItemID2</value>
+  </data>
+  <data name="TVItemID3" xml:space="preserve">
+    <value>TVItemID3</value>
+  </data>
+  <data name="TVItemID4" xml:space="preserve">
+    <value>TVItemID4</value>
+  </data>
+  <data name="TVItemIDParent" xml:space="preserve">
+    <value>TVItemIDParent</value>
+  </data>
+  <data name="TVItemLanguage" xml:space="preserve">
+    <value>TVItemLanguage</value>
+  </data>
+  <data name="tvItemLanguageModel" xml:space="preserve">
+    <value>tvItemLanguageModel</value>
+  </data>
+  <data name="TVItemLink" xml:space="preserve">
+    <value>TVItemLink</value>
+  </data>
+  <data name="TVItemLinkID" xml:space="preserve">
+    <value>TVItemLinkID</value>
+  </data>
+  <data name="TVItemModelParentListCountShoulBe_" xml:space="preserve">
+    <value>TVItemModelParentList count should be [{0}]</value>
+  </data>
+  <data name="TVItemRootShouldBeTheFirstOneAdded" xml:space="preserve">
+    <value>TVItem 'Root' should be the first one added</value>
+  </data>
+  <data name="TVItemStat" xml:space="preserve">
+    <value>TVItemStat</value>
+  </data>
+  <data name="TVItemUserAuthorization" xml:space="preserve">
+    <value>TVItemUserAuthorization</value>
+  </data>
+  <data name="TVItemUserAuthorizationID" xml:space="preserve">
+    <value>TVItemUserAuthorizationID</value>
+  </data>
+  <data name="TVLevel" xml:space="preserve">
+    <value>TVLevel</value>
+  </data>
+  <data name="TVPath" xml:space="preserve">
+    <value>TVPath</value>
+  </data>
+  <data name="TVText" xml:space="preserve">
+    <value>TVText</value>
+  </data>
+  <data name="TVType" xml:space="preserve">
+    <value>TVType</value>
+  </data>
+  <data name="UploadClientPath" xml:space="preserve">
+    <value>UploadClientPath</value>
+  </data>
+  <data name="UpperBayFundy" xml:space="preserve">
+    <value>Upper Fundy</value>
+  </data>
+  <data name="UseAsBestEstimate" xml:space="preserve">
+    <value>UseAsBestEstimate</value>
+  </data>
+  <data name="UseEquation" xml:space="preserve">
+    <value>UseEquation</value>
+  </data>
+  <data name="UseOfSite" xml:space="preserve">
+    <value>UseOfSite</value>
+  </data>
+  <data name="UseOfSiteID" xml:space="preserve">
+    <value>UseOfSiteID</value>
+  </data>
+  <data name="UserAccountIN" xml:space="preserve">
+    <value>user account</value>
+  </data>
+  <data name="UserInfoID" xml:space="preserve">
+    <value>UserInfoID</value>
+  </data>
+  <data name="UserNotCreatedProperly" xml:space="preserve">
+    <value>User account was not created properly.</value>
+  </data>
+  <data name="UserWithLoginEmail_AlreadyExist" xml:space="preserve">
+    <value>User with LoginEmail {0} already exist</value>
+  </data>
+  <data name="UseWeight" xml:space="preserve">
+    <value>UseWeight</value>
+  </data>
+  <data name="UVelocity_m_s" xml:space="preserve">
+    <value>UVelocity_m_s</value>
+  </data>
+  <data name="LabSampleApprovalContactTVItemID" xml:space="preserve">
+    <value>LabSampleApprovalContactTVItemID</value>
+  </data>
+  <data name="VancouverIslandMF" xml:space="preserve">
+    <value>Vancouver Island (Mike Foreman)</value>
+  </data>
+  <data name="VerticalAngle" xml:space="preserve">
+    <value>Vertical Angle</value>
+  </data>
+  <data name="VerticalAngle_deg" xml:space="preserve">
+    <value>VerticalAngle_deg</value>
+  </data>
+  <data name="Volume_m3" xml:space="preserve">
+    <value>Volume_m3</value>
+  </data>
+  <data name="VPAmbient" xml:space="preserve">
+    <value>VPAmbient</value>
+  </data>
+  <data name="VPResult" xml:space="preserve">
+    <value>VPResult</value>
+  </data>
+  <data name="VPScenario" xml:space="preserve">
+    <value>VPScenario</value>
+  </data>
+  <data name="VPScenarioID" xml:space="preserve">
+    <value>VPScenarioID</value>
+  </data>
+  <data name="VPScenarioLanguage" xml:space="preserve">
+    <value>VPScenarioLanguage</value>
+  </data>
+  <data name="VPScenarioName" xml:space="preserve">
+    <value>VPScenarioName</value>
+  </data>
+  <data name="VPScenarioStatus" xml:space="preserve">
+    <value>VPScenarioStatus</value>
+  </data>
+  <data name="VVelocity_m_s" xml:space="preserve">
+    <value>VVelocity_m_s</value>
+  </data>
+  <data name="WaterLevelAtBrook_m" xml:space="preserve">
+    <value>WaterLevelAtBrook_m</value>
+  </data>
+  <data name="WaterTemp_C" xml:space="preserve">
+    <value>WaterTemp_C</value>
+  </data>
+  <data name="WaveHightAtEnd_m" xml:space="preserve">
+    <value>WaveHightAtEnd_m</value>
+  </data>
+  <data name="WaveHightAtStart_m" xml:space="preserve">
+    <value>WaveHightAtStart_m</value>
+  </data>
+  <data name="WebName" xml:space="preserve">
+    <value>Web Name</value>
+  </data>
+  <data name="WebTideDataSet" xml:space="preserve">
+    <value>WebTideDataSet</value>
+  </data>
+  <data name="WebTideDatum_m" xml:space="preserve">
+    <value>WebTideDatum_m</value>
+  </data>
+  <data name="WebTideModel" xml:space="preserve">
+    <value>WebTideModel</value>
+  </data>
+  <data name="Weight_perc" xml:space="preserve">
+    <value>Weight_perc</value>
+  </data>
+  <data name="Width" xml:space="preserve">
+    <value>Width</value>
+  </data>
+  <data name="WidthIN" xml:space="preserve">
+    <value>width</value>
+  </data>
+  <data name="WidthShouldNotBeZeroWhenFixWidthIsChecked" xml:space="preserve">
+    <value>Width should not be 0 when fix width is checked</value>
+  </data>
+  <data name="Width_m" xml:space="preserve">
+    <value>Width_m</value>
+  </data>
+  <data name="WindDirection_0North" xml:space="preserve">
+    <value>WindDirection_0North</value>
+  </data>
+  <data name="WindDirection_deg" xml:space="preserve">
+    <value>WindDirection_deg</value>
+  </data>
+  <data name="WindSpeed_km_h" xml:space="preserve">
+    <value>WindSpeed_km_h</value>
+  </data>
+  <data name="WMOID" xml:space="preserve">
+    <value>WMOID</value>
+  </data>
+  <data name="WordText" xml:space="preserve">
+    <value>Microsoft Word</value>
+  </data>
+  <data name="WTNodeNumb" xml:space="preserve">
+    <value>WTNodeNumb</value>
+  </data>
+  <data name="Year" xml:space="preserve">
+    <value>Year</value>
+  </data>
+  <data name="YouBeenAddedInWebSiteBy_" xml:space="preserve">
+    <value>You have been added to Web Site by {0}.</value>
+  </data>
+  <data name="YourEmailIs" xml:space="preserve">
+    <value>Your email is:</value>
+  </data>
+  <data name="_AddedInWebSiteBy_" xml:space="preserve">
+    <value>{0} was added to website by {1}.</value>
+  </data>
+  <data name="_AlreadyExists" xml:space="preserve">
+    <value>{0} already exists.</value>
+  </data>
+  <data name="_CountAnd_CountNotEqual" xml:space="preserve">
+    <value>{0} count is not equal to {1} count.</value>
+  </data>
+  <data name="_DoesNotExist" xml:space="preserve">
+    <value>{0} does not exist.</value>
+  </data>
+  <data name="_EmailNotWellFormed" xml:space="preserve">
+    <value>{0} email not valid.</value>
+  </data>
+  <data name="_HasToBeUnique" xml:space="preserve">
+    <value>{0} has to be unique.</value>
+  </data>
+  <data name="_IsAlreadyTaken" xml:space="preserve">
+    <value>{0} is already taken.</value>
+  </data>
+  <data name="_IsBiggerOrEqualTo_" xml:space="preserve">
+    <value>{0} is bigger or equal to {1}.</value>
+  </data>
+  <data name="_IsLaterThan_" xml:space="preserve">
+    <value>{0} is later than {1}.</value>
+  </data>
+  <data name="_IsNotComposedOf_Parts" xml:space="preserve">
+    <value>{0} is not composed of {1} parts.</value>
+  </data>
+  <data name="_IsRequired" xml:space="preserve">
+    <value>{0} is required</value>
+  </data>
+  <data name="_MaxLengthIs_" xml:space="preserve">
+    <value>{0} maxmimum length is {1}.</value>
+  </data>
+  <data name="_MinLengthIs_" xml:space="preserve">
+    <value>{0} minimum length is {1}.</value>
+  </data>
+  <data name="_NotEqual" xml:space="preserve">
+    <value>{0} not equal.</value>
+  </data>
+  <data name="_RangeIsBetween_And_" xml:space="preserve">
+    <value>{0} range is between {1} and {2}.</value>
+  </data>
+  <data name="_RegisteredAndAddedInWebSite" xml:space="preserve">
+    <value>{0} was registered on the website.</value>
+  </data>
+  <data name="_ShouldNotBe0" xml:space="preserve">
+    <value>{0} should not be 0.</value>
+  </data>
+  <data name="_ShouldNotBeNullOrEmpty" xml:space="preserve">
+    <value>[{0}] should not be null or empty.</value>
+  </data>
+  <data name="MikeSourceEndDay" xml:space="preserve">
+    <value>MikeSourceEndDay</value>
+  </data>
+  <data name="MikeSourceEndMonth" xml:space="preserve">
+    <value>MikeSourceEndMonth</value>
+  </data>
+  <data name="MikeSourceEndTime" xml:space="preserve">
+    <value>MikeSourceEndTime</value>
+  </data>
+  <data name="MikeSourceEndYear" xml:space="preserve">
+    <value>MikeSourceEndYear</value>
+  </data>
+  <data name="MikeSourceStartDay" xml:space="preserve">
+    <value>MikeSourceStartDay</value>
+  </data>
+  <data name="MikeSourceStartMonth" xml:space="preserve">
+    <value>MikeSourceStartMonth</value>
+  </data>
+  <data name="MikeSourceStartTime" xml:space="preserve">
+    <value>MikeSourceStartTime</value>
+  </data>
+  <data name="MikeSourceStartYear" xml:space="preserve">
+    <value>MikeSourceStartYear</value>
+  </data>
+  <data name="ShowTVType" xml:space="preserve">
+    <value>ShowTVType</value>
+  </data>
+  <data name="DoesNotExist" xml:space="preserve">
+    <value>does not exist.</value>
+  </data>
+  <data name="GM" xml:space="preserve">
+    <value>GM</value>
+  </data>
+  <data name="LatLngListText" xml:space="preserve">
+    <value>LatLngListText</value>
+  </data>
+  <data name="LessThan10Samples" xml:space="preserve">
+    <value>Less than 10 samples</value>
+  </data>
+  <data name="Max" xml:space="preserve">
+    <value>Max</value>
+  </data>
+  <data name="Mean" xml:space="preserve">
+    <value>Mean</value>
+  </data>
+  <data name="Med" xml:space="preserve">
+    <value>Med</value>
+  </data>
+  <data name="Min" xml:space="preserve">
+    <value>Min</value>
+  </data>
+  <data name="NoData" xml:space="preserve">
+    <value>No data</value>
+  </data>
+  <data name="NumberOfSamples" xml:space="preserve">
+    <value>Number of Samples</value>
+  </data>
+  <data name="P90" xml:space="preserve">
+    <value>P90</value>
+  </data>
+  <data name="StatPeriod" xml:space="preserve">
+    <value>Stats. Period</value>
+  </data>
+  <data name="_ShouldBeMoreThan_" xml:space="preserve">
+    <value>{0} should be more than {1}</value>
+  </data>
+  <data name="LatLngListTextShouldContainTheLetterSToSeparateLatLng" xml:space="preserve">
+    <value>LatLngListText should contain the letter s to separate Lat and Lng</value>
+  </data>
+  <data name="LatLngListTextShouldContainTheLetterSToSeparatePoints" xml:space="preserve">
+    <value>LatLngListText should contain the letter s to separate points</value>
+  </data>
+  <data name="PolygonsShouldContainAtLeast4Points" xml:space="preserve">
+    <value>Polygons should contain at least 4 points</value>
+  </data>
+  <data name="PolylinesShouldContainAtLeast2Points" xml:space="preserve">
+    <value>Polylines should contain at least 2 points</value>
+  </data>
+  <data name="TVType_WithShowTVType_IsNotImplemented" xml:space="preserve">
+    <value>TVType [{0}] with ShowTVType [{1}] is not implemented</value>
+  </data>
+  <data name="MapInfoPointNotADecimalValue" xml:space="preserve">
+    <value>MapInfoPoint not a decimal value</value>
+  </data>
+  <data name="MapInfoPointNotWellFormedShouldHave1Point" xml:space="preserve">
+    <value>MapInfoPoint not well formed. Should have 1 point</value>
+  </data>
+  <data name="MapInfoPointNotWellFormedShouldHave2Values" xml:space="preserve">
+    <value>MapInfoPoint not well formed. Should have 2 values</value>
+  </data>
+  <data name="MapInfoPointNotWellFormedShouldHaveMoreThan1Point" xml:space="preserve">
+    <value>MapInfoPoint not well formed. Should have more than 1 point</value>
+  </data>
+  <data name="MapInfoPointNotWellFormedShouldHaveMoreThan2Points" xml:space="preserve">
+    <value>MapInfoPoint not well formed. Should have more than 2 points</value>
+  </data>
+  <data name="Contact_IsBeingUsed" xml:space="preserve">
+    <value>Contact [{0}] is being used</value>
+  </data>
+  <data name="NotAllowedToChangeContactInformation" xml:space="preserve">
+    <value>NotAllowedToChangeContactInformation</value>
+  </data>
+  <data name="Id" xml:space="preserve">
+    <value>Id</value>
+  </data>
+  <data name="EmailAddress" xml:space="preserve">
+    <value>EmailAddress</value>
+  </data>
+  <data name="TVItemIDMunicipality" xml:space="preserve">
+    <value>TVItemIDMunicipality</value>
+  </data>
+  <data name="IsAdd" xml:space="preserve">
+    <value>IsAdd</value>
+  </data>
+  <data name="_HasChildItems" xml:space="preserve">
+    <value>{0} has child items</value>
+  </data>
+  <data name="LatOutfall" xml:space="preserve">
+    <value>LatOutfall</value>
+  </data>
+  <data name="LngOutfall" xml:space="preserve">
+    <value>LngOutfall</value>
+  </data>
+  <data name="CanOnlyMoveUnderSameTypeOfParent" xml:space="preserve">
+    <value>CanOnlyMoveUnderSameTypeOfParent</value>
+  </data>
+  <data name="TVItemIDToMove" xml:space="preserve">
+    <value>TVItemIDToMove</value>
+  </data>
+  <data name="TVItemIDUnder" xml:space="preserve">
+    <value>TVItemIDUnder</value>
+  </data>
+  <data name="CouldNotMove_Under_" xml:space="preserve">
+    <value>Could not move [{0}] under [{1}]</value>
+  </data>
+  <data name="EffluentFlow_m3_s" xml:space="preserve">
+    <value>EffluentFlow_m3_s</value>
+  </data>
+  <data name="Outfall" xml:space="preserve">
+    <value>Outfall</value>
+  </data>
+  <data name="MWQMRunTVItemID" xml:space="preserve">
+    <value>MWQMRunTVItemID</value>
+  </data>
+  <data name="PolSourceInfo" xml:space="preserve">
+    <value>PolSourceInfo</value>
+  </data>
+  <data name="Salinity_PPT" xml:space="preserve">
+    <value>Salinity_PPT</value>
+  </data>
+  <data name="FCSummaryStat" xml:space="preserve">
+    <value>FC_Summary_Stat</value>
+  </data>
+  <data name="InactiveReason" xml:space="preserve">
+    <value>InactiveReason</value>
+  </data>
+  <data name="DateTimeOfTideDataValue" xml:space="preserve">
+    <value>DateTimeOfTideDataValue</value>
+  </data>
+  <data name="FCDensities" xml:space="preserve">
+    <value>FC_Densities</value>
+  </data>
+  <data name="ConfigFileName" xml:space="preserve">
+    <value>ConfigFileName</value>
+  </data>
+  <data name="CreatorTVItemID" xml:space="preserve">
+    <value>CreatorTVItemID</value>
+  </data>
+  <data name="ErrorMessage" xml:space="preserve">
+    <value>ErrorMessage</value>
+  </data>
+  <data name="FileContent" xml:space="preserve">
+    <value>FileContent</value>
+  </data>
+  <data name="FileLastModifiedDate_Local" xml:space="preserve">
+    <value>FileLastModifiedDate_Local</value>
+  </data>
+  <data name="FileName" xml:space="preserve">
+    <value>FileName</value>
+  </data>
+  <data name="ForGroupName" xml:space="preserve">
+    <value>ForGroupName</value>
+  </data>
+  <data name="SamplingPlan" xml:space="preserve">
+    <value>SamplingPlan</value>
+  </data>
+  <data name="SamplingPlanID" xml:space="preserve">
+    <value>SamplingPlanID</value>
+  </data>
+  <data name="SamplingPlanSubsector" xml:space="preserve">
+    <value>SamplingPlanSubsector</value>
+  </data>
+  <data name="SamplingPlanSubsectorID" xml:space="preserve">
+    <value>SamplingPlanSubsectorID</value>
+  </data>
+  <data name="SamplingPlanSubsectorSite" xml:space="preserve">
+    <value>SamplingPlanSubsectorSite</value>
+  </data>
+  <data name="SamplingPlanSubsectorSiteID" xml:space="preserve">
+    <value>SamplingPlanSubsectorSiteID</value>
+  </data>
+  <data name="LabSheet" xml:space="preserve">
+    <value>LabSheet</value>
+  </data>
+  <data name="LabSheetID" xml:space="preserve">
+    <value>LabSheetID</value>
+  </data>
+  <data name="LabSheetType" xml:space="preserve">
+    <value>LabSheetType</value>
+  </data>
+  <data name="SampleDate_Local" xml:space="preserve">
+    <value>SampleDate_Local</value>
+  </data>
+  <data name="AccessCode" xml:space="preserve">
+    <value>Access Code</value>
+  </data>
+  <data name="ConfigFileTxtTVItemID" xml:space="preserve">
+    <value>ConfigFileTxtTVItemID</value>
+  </data>
+  <data name="ConfigFileKMZTVItemID" xml:space="preserve">
+    <value>ConfigFileKMZTVItemID</value>
+  </data>
+  <data name="CouldNotCreateConfigFile_" xml:space="preserve">
+    <value>Could not create config file [{0}]</value>
+  </data>
+  <data name="ConfigFileExcelTVItemID" xml:space="preserve">
+    <value>ConfigFileExcelTVItemID</value>
+  </data>
+  <data name="ConfigFileWordTVItemID" xml:space="preserve">
+    <value>ConfigFileWordTVItemID</value>
+  </data>
+  <data name="EndDate" xml:space="preserve">
+    <value>EndDate</value>
+  </data>
+  <data name="EndDateDay" xml:space="preserve">
+    <value>EndDateDay</value>
+  </data>
+  <data name="EndDateMonth" xml:space="preserve">
+    <value>EndDateMonth</value>
+  </data>
+  <data name="EndDateYear" xml:space="preserve">
+    <value>EndDateYear</value>
+  </data>
+  <data name="MWQMSiteStartEndDate" xml:space="preserve">
+    <value>MWQMSiteStartEndDate</value>
+  </data>
+  <data name="MWQMSiteStartEndDateID" xml:space="preserve">
+    <value>MWQMSiteStartEndDateID</value>
+  </data>
+  <data name="StartDate" xml:space="preserve">
+    <value>StartDate</value>
+  </data>
+  <data name="StartDateDay" xml:space="preserve">
+    <value>StartDateDay</value>
+  </data>
+  <data name="StartDateMonth" xml:space="preserve">
+    <value>StartDateMonth</value>
+  </data>
+  <data name="StartDateYear" xml:space="preserve">
+    <value>StartDateYear</value>
+  </data>
+  <data name="RainfallEntered_mm" xml:space="preserve">
+    <value>RainfallEntered_mm</value>
+  </data>
+  <data name="EndYear" xml:space="preserve">
+    <value>EndYear</value>
+  </data>
+  <data name="StartYear" xml:space="preserve">
+    <value>StartYear</value>
+  </data>
+  <data name="MWQMSiteDescription" xml:space="preserve">
+    <value>MWQMSiteDescription</value>
+  </data>
+  <data name="DeleteTVType_IsNotImplemented" xml:space="preserve">
+    <value>Delete TVType {0} Is Not Implemented</value>
+  </data>
+  <data name="MWQMSiteNumberHasToBeUniqueForSubsector" xml:space="preserve">
+    <value>MWQM Site Number Has To Be Unique For Subsector</value>
+  </data>
+  <data name="IsActive" xml:space="preserve">
+    <value>IsActive</value>
+  </data>
+  <data name="UpdatingClimateSiteInformation" xml:space="preserve">
+    <value>Updating Climate Site Information</value>
+  </data>
+  <data name="CreatingDocumentFromTemplate_" xml:space="preserve">
+    <value>Creating document from template {0}</value>
+  </data>
+  <data name="UpdatingClimateSiteDailyAndHourlyFrom_To_" xml:space="preserve">
+    <value>Updating Climate Site Daily And Hourly From {0} To {1}</value>
+  </data>
+  <data name="ContourValues" xml:space="preserve">
+    <value>ContourValues</value>
+  </data>
+  <data name="GoogleEarthPath" xml:space="preserve">
+    <value>GoogleEarthPath</value>
+  </data>
+  <data name="VectorLength" xml:space="preserve">
+    <value>VectorLength</value>
+  </data>
+  <data name="BoundaryConditions" xml:space="preserve">
+    <value>BoundaryConditions</value>
+  </data>
+  <data name="ConcentrationAnimation" xml:space="preserve">
+    <value>ConcentrationAnimation</value>
+  </data>
+  <data name="ConcentrationLimits" xml:space="preserve">
+    <value>ConcentrationLimits</value>
+  </data>
+  <data name="CurrentAnimation" xml:space="preserve">
+    <value>CurrentAnimation</value>
+  </data>
+  <data name="CurrentMaximum" xml:space="preserve">
+    <value>CurrentMaximum</value>
+  </data>
+  <data name="Mesh" xml:space="preserve">
+    <value>Mesh</value>
+  </data>
+  <data name="StudyArea" xml:space="preserve">
+    <value>StudyArea</value>
+  </data>
+  <data name="SeeOtherShouldBeReferingToAnotherMunicipality" xml:space="preserve">
+    <value>See other should be refering to another municipality</value>
+  </data>
+  <data name="PollutionSourceFieldSheet" xml:space="preserve">
+    <value>PollutionSourceFieldSheet</value>
+  </data>
+  <data name="LabSheetStatus" xml:space="preserve">
+    <value>LabSheetStatus</value>
+  </data>
+  <data name="ApprovedOrRejectedByContactTVItemID" xml:space="preserve">
+    <value>ApprovedOrRejectedByContactTVItemID</value>
+  </data>
+  <data name="ApprovedOrRejectedDateTime" xml:space="preserve">
+    <value>ApprovedOrRejectedDateTime</value>
+  </data>
+  <data name="Blank35" xml:space="preserve">
+    <value>Blank35</value>
+  </data>
+  <data name="ControlLot" xml:space="preserve">
+    <value>ControlLot</value>
+  </data>
+  <data name="DailyDuplicateAcceptable" xml:space="preserve">
+    <value>DailyDuplicateAcceptable</value>
+  </data>
+  <data name="DuplicateDataEntryDate" xml:space="preserve">
+    <value>DuplicateDataEntryDate</value>
+  </data>
+  <data name="DailyDuplicatePrecisionCriteria" xml:space="preserve">
+    <value>DailyDuplicatePrecisionCriteria</value>
+  </data>
+  <data name="DailyDuplicateRLog" xml:space="preserve">
+    <value>DailyDuplicateRLog</value>
+  </data>
+  <data name="NonTarget35" xml:space="preserve">
+    <value>NonTarget35</value>
+  </data>
+  <data name="NonTarget44_5" xml:space="preserve">
+    <value>NonTarget44_5</value>
+  </data>
+  <data name="Positive35" xml:space="preserve">
+    <value>Positive35</value>
+  </data>
+  <data name="Positive44_5" xml:space="preserve">
+    <value>Positive44_5</value>
+  </data>
+  <data name="IncubationEndTime" xml:space="preserve">
+    <value>IncubationEndTime</value>
+  </data>
+  <data name="IncubationStartTime" xml:space="preserve">
+    <value>IncubationStartTime</value>
+  </data>
+  <data name="IncubationTimeCalculated_minutes" xml:space="preserve">
+    <value>IncubationTimeCalculated_minutes</value>
+  </data>
+  <data name="Lot35" xml:space="preserve">
+    <value>Lot35</value>
+  </data>
+  <data name="Lot44_5" xml:space="preserve">
+    <value>Lot44_5</value>
+  </data>
+  <data name="ResultsRecordedBy" xml:space="preserve">
+    <value>ResultsRecordedBy</value>
+  </data>
+  <data name="ResultsRecordedDate" xml:space="preserve">
+    <value>ResultsRecordedDate</value>
+  </data>
+  <data name="RunComment" xml:space="preserve">
+    <value>RunComment</value>
+  </data>
+  <data name="RunDate" xml:space="preserve">
+    <value>RunDate</value>
+  </data>
+  <data name="RunTVItemID" xml:space="preserve">
+    <value>RunTVItemID</value>
+  </data>
+  <data name="SalinitiesReadBy" xml:space="preserve">
+    <value>SalinitiesReadBy</value>
+  </data>
+  <data name="SalinitiesReadDate" xml:space="preserve">
+    <value>SalinitiesReadDate</value>
+  </data>
+  <data name="SampleBottleLotNumber" xml:space="preserve">
+    <value>SampleBottleLotNumber</value>
+  </data>
+  <data name="SampleCrewInitials" xml:space="preserve">
+    <value>SampleCrewInitials</value>
+  </data>
+  <data name="Negative35" xml:space="preserve">
+    <value>Negative35</value>
+  </data>
+  <data name="Negative44_5" xml:space="preserve">
+    <value>Negative44_5</value>
+  </data>
+  <data name="TCAverage" xml:space="preserve">
+    <value>TCAverage</value>
+  </data>
+  <data name="TCField" xml:space="preserve">
+    <value>TCField</value>
+  </data>
+  <data name="TCFirst" xml:space="preserve">
+    <value>TCFirst</value>
+  </data>
+  <data name="TCLab" xml:space="preserve">
+    <value>TCLab</value>
+  </data>
+  <data name="Tides" xml:space="preserve">
+    <value>Tides</value>
+  </data>
+  <data name="Version" xml:space="preserve">
+    <value>Version</value>
+  </data>
+  <data name="WaterBath" xml:space="preserve">
+    <value>WaterBath</value>
+  </data>
+  <data name="Weather" xml:space="preserve">
+    <value>Weather</value>
+  </data>
+  <data name="_CanOnlyContainPlusOrMinus" xml:space="preserve">
+    <value>{0} can only contain + or -</value>
+  </data>
+  <data name="LabSheetDetail" xml:space="preserve">
+    <value>LabSheetDetail</value>
+  </data>
+  <data name="LabSheetDetailID" xml:space="preserve">
+    <value>LabSheetDetailID</value>
+  </data>
+  <data name="BeaufortScale" xml:space="preserve">
+    <value>Beaufort Scale</value>
+  </data>
+  <data name="EndDateHour" xml:space="preserve">
+    <value>EndDateHour</value>
+  </data>
+  <data name="EndDateMinute" xml:space="preserve">
+    <value>EndDateMinute</value>
+  </data>
+  <data name="LabReceivedDateDay" xml:space="preserve">
+    <value>LabReceivedDateDay</value>
+  </data>
+  <data name="LabReceivedDateHour" xml:space="preserve">
+    <value>LabReceivedDateHour</value>
+  </data>
+  <data name="LabReceivedDateMinute" xml:space="preserve">
+    <value>LabReceivedDateMinute</value>
+  </data>
+  <data name="LabReceivedDateMonth" xml:space="preserve">
+    <value>LabReceivedDateMonth</value>
+  </data>
+  <data name="LabReceivedDateYear" xml:space="preserve">
+    <value>LabReceivedDateYear</value>
+  </data>
+  <data name="RunDateDay" xml:space="preserve">
+    <value>RunDateDay</value>
+  </data>
+  <data name="RunDateMonth" xml:space="preserve">
+    <value>RunDateMonth</value>
+  </data>
+  <data name="RunDateYear" xml:space="preserve">
+    <value>RunDateYear</value>
+  </data>
+  <data name="StartDateHour" xml:space="preserve">
+    <value>StartDateHour</value>
+  </data>
+  <data name="StartDateMinute" xml:space="preserve">
+    <value>StartDateMinute</value>
+  </data>
+  <data name="TemperatureControl" xml:space="preserve">
+    <value>TemperatureControl</value>
+  </data>
+  <data name="LaboratoryReceivedSampleDays" xml:space="preserve">
+    <value>LaboratoryReceivedSampleDays</value>
+  </data>
+  <data name="ProcessBy" xml:space="preserve">
+    <value>Process By</value>
+  </data>
+  <data name="Time" xml:space="preserve">
+    <value>Time</value>
+  </data>
+  <data name="RunEndTime" xml:space="preserve">
+    <value>RunEndTime</value>
+  </data>
+  <data name="RunStartTime" xml:space="preserve">
+    <value>RunStartTime</value>
+  </data>
+  <data name="LabReceivedRunSample" xml:space="preserve">
+    <value>LabReceivedRunSample</value>
+  </data>
+  <data name="LabReceivedTime" xml:space="preserve">
+    <value>LabReceivedTime</value>
+  </data>
+  <data name="LabValidateDateDay" xml:space="preserve">
+    <value>LabValidateDateDay</value>
+  </data>
+  <data name="LabValidateDateMonth" xml:space="preserve">
+    <value>LabValidateDateMonth</value>
+  </data>
+  <data name="LabValidateDateYear" xml:space="preserve">
+    <value>LabValidateDateYear</value>
+  </data>
+  <data name="LabValidator" xml:space="preserve">
+    <value>LabValidator</value>
+  </data>
+  <data name="SameDayNextDay" xml:space="preserve">
+    <value>SameDayNextDay</value>
+  </data>
+  <data name="RunEndTimeHour" xml:space="preserve">
+    <value>RunEndTimeHour</value>
+  </data>
+  <data name="RunStartTimeHour" xml:space="preserve">
+    <value>RunStartTimeHour</value>
+  </data>
+  <data name="SampleTime" xml:space="preserve">
+    <value>SampleTime</value>
+  </data>
+  <data name="ProcessedBy" xml:space="preserve">
+    <value>ProcessedBy</value>
+  </data>
+  <data name="PleaseEnterAValidDateFor_" xml:space="preserve">
+    <value>Please enter a valid date for {0}</value>
+  </data>
+  <data name="GoogleAddressText" xml:space="preserve">
+    <value>GoogleAddressText</value>
+  </data>
+  <data name="LatLng" xml:space="preserve">
+    <value>LatLng</value>
+  </data>
+  <data name="LatLngText" xml:space="preserve">
+    <value>LatLngText</value>
+  </data>
+  <data name="NeedToBeLoggedIn" xml:space="preserve">
+    <value>Need to be logged in</value>
+  </data>
+  <data name="SaveAsFileName" xml:space="preserve">
+    <value>SaveAsFileName</value>
+  </data>
+  <data name="TCField1" xml:space="preserve">
+    <value>TCField1</value>
+  </data>
+  <data name="TCField2" xml:space="preserve">
+    <value>TCField2</value>
+  </data>
+  <data name="TCLab1" xml:space="preserve">
+    <value>TCLab1</value>
+  </data>
+  <data name="TCLab2" xml:space="preserve">
+    <value>TCLab2</value>
+  </data>
+  <data name="TemperatureControl2_C" xml:space="preserve">
+    <value>TemperatureControl2_C</value>
+  </data>
+  <data name="LabSheetTubeMPNDetailID" xml:space="preserve">
+    <value>LabSheetTubeMPNDetailID</value>
+  </data>
+  <data name="MPN" xml:space="preserve">
+    <value>MPN</value>
+  </data>
+  <data name="Salinity" xml:space="preserve">
+    <value>Salinity</value>
+  </data>
+  <data name="SampleDateTime" xml:space="preserve">
+    <value>SampleDateTime</value>
+  </data>
+  <data name="SiteComment" xml:space="preserve">
+    <value>SiteComment</value>
+  </data>
+  <data name="Tube0_1" xml:space="preserve">
+    <value>Tube0_1</value>
+  </data>
+  <data name="Tube10" xml:space="preserve">
+    <value>Tube10</value>
+  </data>
+  <data name="Tube1_0" xml:space="preserve">
+    <value>Tube1_0</value>
+  </data>
+  <data name="Hour" xml:space="preserve">
+    <value>Hour</value>
+  </data>
+  <data name="Minute" xml:space="preserve">
+    <value>Minute</value>
+  </data>
+  <data name="LabSheetTubeMPNDetail" xml:space="preserve">
+    <value>LabSheetTubeMPNDetail</value>
+  </data>
+  <data name="ResultsReadBy" xml:space="preserve">
+    <value>ResultsReadBy</value>
+  </data>
+  <data name="ResultsReadDate" xml:space="preserve">
+    <value>ResultsReadDate</value>
+  </data>
+  <data name="ObservationInfo" xml:space="preserve">
+    <value>ObservationInfo</value>
+  </data>
+  <data name="ContactPreference" xml:space="preserve">
+    <value>ContactPreference</value>
+  </data>
+  <data name="ContactPreferenceID" xml:space="preserve">
+    <value>ContactPreferenceID</value>
+  </data>
+  <data name="ContactShortcut" xml:space="preserve">
+    <value>ContactShortcut</value>
+  </data>
+  <data name="ContactShortcutID" xml:space="preserve">
+    <value>ContactShortcutID</value>
+  </data>
+  <data name="MarkerSize" xml:space="preserve">
+    <value>MarkerSize</value>
+  </data>
+  <data name="PolSourceObservationIssue" xml:space="preserve">
+    <value>PolSourceObservationIssue</value>
+  </data>
+  <data name="PolSourceObservationIssueID" xml:space="preserve">
+    <value>PolSourceObservationIssueID</value>
+  </data>
+  <data name="ShortCutAddress" xml:space="preserve">
+    <value>ShortCutAddress</value>
+  </data>
+  <data name="ShortCutText" xml:space="preserve">
+    <value>ShortCutText</value>
+  </data>
+  <data name="AerationType" xml:space="preserve">
+    <value>AerationType</value>
+  </data>
+  <data name="CanOverflow" xml:space="preserve">
+    <value>CanOverflow</value>
+  </data>
+  <data name="CivicAddressTVItemID" xml:space="preserve">
+    <value>CivicAddressTVItemID</value>
+  </data>
+  <data name="FacilityType" xml:space="preserve">
+    <value>FacilityType</value>
+  </data>
+  <data name="IsMechanicallyAerated" xml:space="preserve">
+    <value>IsMechanicallyAerated</value>
+  </data>
+  <data name="NumberOfAeratedCells" xml:space="preserve">
+    <value>NumberOfAeratedCells</value>
+  </data>
+  <data name="NumberOfCells" xml:space="preserve">
+    <value>NumberOfCells</value>
+  </data>
+  <data name="PreliminaryTreatmentType" xml:space="preserve">
+    <value>PreliminaryTreatmentType</value>
+  </data>
+  <data name="SecondaryTreatmentType" xml:space="preserve">
+    <value>SecondaryTreatmentType</value>
+  </data>
+  <data name="SeeOtherTVItemID" xml:space="preserve">
+    <value>SeeOtherTVItemID</value>
+  </data>
+  <data name="TertiaryTreatmentType" xml:space="preserve">
+    <value>TertiaryTreatmentType</value>
+  </data>
+  <data name="EmptyLine" xml:space="preserve">
+    <value>Empty Line</value>
+  </data>
+  <data name="FullLabSheetTextParameter_IsMissing" xml:space="preserve">
+    <value>FullLabSheetText Parameter [{0}] is missing</value>
+  </data>
+  <data name="UnknownParameter_" xml:space="preserve">
+    <value>Unknown parameter [{0}]</value>
+  </data>
+  <data name="ErrorReadingFileAtLine_Error_" xml:space="preserve">
+    <value>Error reading file at line [{0}]. {1}</value>
+  </data>
+  <data name="VersionHasToBeFirstItemInFile" xml:space="preserve">
+    <value>Version has to be the first item in the file</value>
+  </data>
+  <data name="_HasToBeFollowing_InTheFile" xml:space="preserve">
+    <value>[{0}] has to be following [{1}] in the file</value>
+  </data>
+  <data name="_Requires_Value" xml:space="preserve">
+    <value>[{0}] requires [{1}] values</value>
+  </data>
+  <data name="NoContactFoundToSendTheEmailForProvince_" xml:space="preserve">
+    <value>No contact found to send the email for province [{0}]</value>
+  </data>
+  <data name="CouldNotCreateDirectory_Error_" xml:space="preserve">
+    <value>Could not create directory [{0}]. Error: [{1}]</value>
+  </data>
+  <data name="AllSamplesHasToBeDeletedManuallyBeforeBeingAbleToDeleteTheRun" xml:space="preserve">
+    <value>All samples has to be deleted manually before being able to delete the run</value>
+  </data>
+  <data name="LabRunSampleApprovalDay" xml:space="preserve">
+    <value>LabRunSampleApprovalDay</value>
+  </data>
+  <data name="LabRunSampleApprovalMonth" xml:space="preserve">
+    <value>LabRunSampleApprovalMonth</value>
+  </data>
+  <data name="LabRunSampleApprovalYear" xml:space="preserve">
+    <value>LabRunSampleApprovalYear</value>
+  </data>
+  <data name="_IsNotANumberForField_" xml:space="preserve">
+    <value>[{0}] is not a number for field [{1}]</value>
+  </data>
+  <data name="_OnlyAllowsPositiveValues" xml:space="preserve">
+    <value>[{0}] only allows positive values</value>
+  </data>
+  <data name="OtherServerLabSheetID" xml:space="preserve">
+    <value>OtherServerLabSheetID</value>
+  </data>
+  <data name="SampleTypesText" xml:space="preserve">
+    <value>SampleTypesText</value>
+  </data>
+  <data name="SampleTypes" xml:space="preserve">
+    <value>SampleTypes</value>
+  </data>
+  <data name="OutfallLat" xml:space="preserve">
+    <value>OutfallLat</value>
+  </data>
+  <data name="OutfallLng" xml:space="preserve">
+    <value>OutfallLng</value>
+  </data>
+  <data name="NextIssueOrdinal" xml:space="preserve">
+    <value>NextIssueOrdinal</value>
+  </data>
+  <data name="ShouldNotDeleteTheLastIssue" xml:space="preserve">
+    <value>Should not delete the last issue</value>
+  </data>
+  <data name="ContactTitle" xml:space="preserve">
+    <value>Contact Title</value>
+  </data>
+  <data name="FrOrEn" xml:space="preserve">
+    <value>fr or en</value>
+  </data>
+  <data name="Line_Item_ShouldBeANumber" xml:space="preserve">
+    <value>Line {0} item {1} should be a number</value>
+  </data>
+  <data name="Line_Item_ShouldBeOneOf_" xml:space="preserve">
+    <value>Line {0} item {1} should be one of {2}</value>
+  </data>
+  <data name="Line_ShouldHave_Items" xml:space="preserve">
+    <value>Line {0} should have {1} items</value>
+  </data>
+  <data name="Line_ShouldNotBeEmpty" xml:space="preserve">
+    <value>Line {0} should not be empty</value>
+  </data>
+  <data name="Line_ShouldStartWith_" xml:space="preserve">
+    <value>Line {0} should start with {1}</value>
+  </data>
+  <data name="ReportTreeNodeList" xml:space="preserve">
+    <value>ReportTreeNodeList</value>
+  </data>
+  <data name="StartOrLoop" xml:space="preserve">
+    <value>|||Start or |||Loop</value>
+  </data>
+  <data name="StartText" xml:space="preserve">
+    <value>StartText</value>
+  </data>
+  <data name="TableType" xml:space="preserve">
+    <value>TableType</value>
+  </data>
+  <data name="_HasToEndWith_" xml:space="preserve">
+    <value>{0} has to end with {1}</value>
+  </data>
+  <data name="_HasToStartWith_" xml:space="preserve">
+    <value>{0} has to start with {1}</value>
+  </data>
+  <data name="_IsRequiredForLine_AndItem_" xml:space="preserve">
+    <value>{0} is required for line {1} and item {2}</value>
+  </data>
+  <data name="_OfTableType_DoesNotExistAtLine_" xml:space="preserve">
+    <value>{0} of table type {1} does not exist at line {2}</value>
+  </data>
+  <data name="_ShouldEndWith_" xml:space="preserve">
+    <value>{0} should end with {1}</value>
+  </data>
+  <data name="MWQM_Site" xml:space="preserve">
+    <value>MWQM_Site</value>
+  </data>
+  <data name="Log" xml:space="preserve">
+    <value>Log</value>
+  </data>
+  <data name="LogCommand" xml:space="preserve">
+    <value>LogCommand</value>
+  </data>
+  <data name="LogID" xml:space="preserve">
+    <value>LogID</value>
+  </data>
+  <data name="TableName" xml:space="preserve">
+    <value>TableName</value>
+  </data>
+  <data name="DocTemplate" xml:space="preserve">
+    <value>DocTemplate</value>
+  </data>
+  <data name="DocTemplateID" xml:space="preserve">
+    <value>DocTemplateID</value>
+  </data>
+  <data name="FilePurposeHasToBeATemplate" xml:space="preserve">
+    <value>File purpose has to be a template</value>
+  </data>
+  <data name="WhenUploadingTemplateOnlyFileTypes_AreAllowed" xml:space="preserve">
+    <value>When uploading template only file types [{0}] are allowed</value>
+  </data>
+  <data name="CeatingFile_" xml:space="preserve">
+    <value>Ceating file {0}</value>
+  </data>
+  <data name="CreatingFile_" xml:space="preserve">
+    <value>Creating file {0}</value>
+  </data>
+  <data name="Extension_NotAllowed" xml:space="preserve">
+    <value>Extension [{0}] not allowed</value>
+  </data>
+  <data name="IntertechDuplicatePrecisionCriteria" xml:space="preserve">
+    <value>IntertechDuplicatePrecisionCriteria</value>
+  </data>
+  <data name="IntertechDuplicateAcceptable" xml:space="preserve">
+    <value>IntertechDuplicateAcceptable</value>
+  </data>
+  <data name="IntertechDuplicateRLog" xml:space="preserve">
+    <value>IntertechDuplicateRLog</value>
+  </data>
+  <data name="IntertechReadAcceptable" xml:space="preserve">
+    <value>IntertechReadAcceptable</value>
+  </data>
+  <data name="ConfigType" xml:space="preserve">
+    <value>ConfigType</value>
+  </data>
+  <data name="ShouldOnlyHaveOne_" xml:space="preserve">
+    <value>Should only have one {0}</value>
+  </data>
+  <data name="RunSampleType" xml:space="preserve">
+    <value>RunSampleType</value>
+  </data>
+  <data name="ID_WhichIsOfType_ShouldBeOfType_PleaseSelectTheRightID" xml:space="preserve">
+    <value>ID {0} which is of type {1} should be of type {2}. Please select the right ID.</value>
+  </data>
+  <data name="TVFileLanguage" xml:space="preserve">
+    <value>TVFileLanguage</value>
+  </data>
+  <data name="ParentTagItemShouldBeEmptyForReportRootModel" xml:space="preserve">
+    <value>ParentTagItem should be empty for ReportRootModel</value>
+  </data>
+  <data name="UnderTVItemID_IsNotOfType_" xml:space="preserve">
+    <value>UnderTVItemID {0} is not of type {1}</value>
+  </data>
+  <data name="AllowableParentTagItemFor_Are_" xml:space="preserve">
+    <value>Allowable parent tag item for {0} are {1}</value>
+  </data>
+  <data name="Tag_IsNotAllowedPleaseUse_" xml:space="preserve">
+    <value>Tag {0} is not allowed. Please use {1}</value>
+  </data>
+  <data name="ParentTagItemHasToBe_Its_" xml:space="preserve">
+    <value>ParentTagItem has to be {0}. It's {1}.</value>
+  </data>
+  <data name="ParentTagItemShouldNotBeEmpty" xml:space="preserve">
+    <value>ParentTagItem should not be empty</value>
+  </data>
+  <data name="_IsRequiredWhenUsing_For_Condition" xml:space="preserve">
+    <value>{0} is required when using {1} for {2} condition</value>
+  </data>
+  <data name="Bath1Blank44_5" xml:space="preserve">
+    <value>Bath1Blank44_5</value>
+  </data>
+  <data name="Bath1Negative44_5" xml:space="preserve">
+    <value>Bath1Negative44_5</value>
+  </data>
+  <data name="Bath1NonTarget44_5" xml:space="preserve">
+    <value>Bath1NonTarget44_5</value>
+  </data>
+  <data name="Bath1Positive44_5" xml:space="preserve">
+    <value>Bath1Positive44_5</value>
+  </data>
+  <data name="Bath2Blank44_5" xml:space="preserve">
+    <value>Bath2Blank44_5</value>
+  </data>
+  <data name="Bath2Negative44_5" xml:space="preserve">
+    <value>Bath2Negative44_5</value>
+  </data>
+  <data name="Bath2NonTarget44_5" xml:space="preserve">
+    <value>Bath2NonTarget44_5</value>
+  </data>
+  <data name="Bath2Positive44_5" xml:space="preserve">
+    <value>Bath2Positive44_5</value>
+  </data>
+  <data name="Bath3Blank44_5" xml:space="preserve">
+    <value>Bath3Blank44_5</value>
+  </data>
+  <data name="Bath3Negative44_5" xml:space="preserve">
+    <value>Bath3Negative44_5</value>
+  </data>
+  <data name="Bath3NonTarget44_5" xml:space="preserve">
+    <value>Bath3NonTarget44_5</value>
+  </data>
+  <data name="Bath3Positive44_5" xml:space="preserve">
+    <value>Bath3Positive44_5</value>
+  </data>
+  <data name="IncubationBath1EndTime" xml:space="preserve">
+    <value>IncubationBath1EndTime</value>
+  </data>
+  <data name="IncubationBath1StartTime" xml:space="preserve">
+    <value>IncubationBath1StartTime</value>
+  </data>
+  <data name="IncubationBath1TimeCalculated_minutes" xml:space="preserve">
+    <value>IncubationBath1TimeCalculated_minutes</value>
+  </data>
+  <data name="IncubationBath2EndTime" xml:space="preserve">
+    <value>IncubationBath2EndTime</value>
+  </data>
+  <data name="IncubationBath2StartTime" xml:space="preserve">
+    <value>IncubationBath2StartTime</value>
+  </data>
+  <data name="IncubationBath2TimeCalculated_minutes" xml:space="preserve">
+    <value>IncubationBath2TimeCalculated_minutes</value>
+  </data>
+  <data name="IncubationBath3EndTime" xml:space="preserve">
+    <value>IncubationBath3EndTime</value>
+  </data>
+  <data name="IncubationBath3StartTime" xml:space="preserve">
+    <value>IncubationBath3StartTime</value>
+  </data>
+  <data name="IncubationBath3TimeCalculated_minutes" xml:space="preserve">
+    <value>IncubationBath3TimeCalculated_minutes</value>
+  </data>
+  <data name="SamplingPlanFileTVItemID" xml:space="preserve">
+    <value>SamplingPlanFileTVItemID</value>
+  </data>
+  <data name="SamplingPlanName" xml:space="preserve">
+    <value>SamplingPlanName</value>
+  </data>
+  <data name="SamplingPlanType" xml:space="preserve">
+    <value>SamplingPlanType</value>
+  </data>
+  <data name="WaterBath1" xml:space="preserve">
+    <value>WaterBath1</value>
+  </data>
+  <data name="WaterBath2" xml:space="preserve">
+    <value>WaterBath2</value>
+  </data>
+  <data name="WaterBath3" xml:space="preserve">
+    <value>WaterBath3</value>
+  </data>
+  <data name="WaterBathCount" xml:space="preserve">
+    <value>WaterBathCount</value>
+  </data>
+  <data name="OnlyOne_IsAllowed" xml:space="preserve">
+    <value>Only one {0} is allowed</value>
+  </data>
+  <data name="RainDay5_mm" xml:space="preserve">
+    <value>RainDay5_mm</value>
+  </data>
+  <data name="RainDay4_mm" xml:space="preserve">
+    <value>RainDay4_mm</value>
+  </data>
+  <data name="Only_DatabaseFilteringIsAllowedFor_" xml:space="preserve">
+    <value>Only {0}  database filtering is allowed for  {1}</value>
+  </data>
+  <data name="MWQMSiteLatestClassification" xml:space="preserve">
+    <value>MWQMSiteLatestClassification</value>
+  </data>
+  <data name="WrittenDescription" xml:space="preserve">
+    <value>Written Description</value>
+  </data>
+  <data name="ToUse_YouNeed_NotToBeEmpty" xml:space="preserve">
+    <value>To use {0} you need {1} not to be empty</value>
+  </data>
+  <data name="CalculationType" xml:space="preserve">
+    <value>CalculationType</value>
+  </data>
+  <data name="EndDay" xml:space="preserve">
+    <value>EndDay</value>
+  </data>
+  <data name="EndMonth" xml:space="preserve">
+    <value>EndMonth</value>
+  </data>
+  <data name="RunCount" xml:space="preserve">
+    <value>RunCount</value>
+  </data>
+  <data name="StartDay" xml:space="preserve">
+    <value>StartDay</value>
+  </data>
+  <data name="StartMonth" xml:space="preserve">
+    <value>StartMonth</value>
+  </data>
+  <data name="_ShouldBeOneOf_" xml:space="preserve">
+    <value>{0} should be one of {1}</value>
+  </data>
+  <data name="AllEmptySpaceFrom_ShouldHaveBeenRemoved" xml:space="preserve">
+    <value>All empty space from [{0}] should have been removed</value>
+  </data>
+  <data name="AllYearsOf_ShouldBeAscending" xml:space="preserve">
+    <value>All years of [{0}] should be ascending</value>
+  </data>
+  <data name="GetClimateSitesDataForRunsOfYear" xml:space="preserve">
+    <value>Get climate sites data for runs of year</value>
+  </data>
+  <data name="RainDay0_mm" xml:space="preserve">
+    <value>RainDay0_mm</value>
+  </data>
+  <data name="RainDay10_mm" xml:space="preserve">
+    <value>RainDay10_mm</value>
+  </data>
+  <data name="RainDay6_mm" xml:space="preserve">
+    <value>RainDay6_mm</value>
+  </data>
+  <data name="RainDay7_mm" xml:space="preserve">
+    <value>RainDay7_mm</value>
+  </data>
+  <data name="RainDay8_mm" xml:space="preserve">
+    <value>RainDay8_mm</value>
+  </data>
+  <data name="RainDay9_mm" xml:space="preserve">
+    <value>RainDay9_mm</value>
+  </data>
+  <data name="_NotAllowedIn_" xml:space="preserve">
+    <value>[{0}] not allowed in {1}</value>
+  </data>
+  <data name="_Of_IsNotAYear" xml:space="preserve">
+    <value>[{0}] of {1} is not a year</value>
+  </data>
+  <data name="_ShouldBeANumber" xml:space="preserve">
+    <value>{0} should be a number</value>
+  </data>
+  <data name="AllClimateSiteDataForYear_HaveNotBeenImportedToTheCSSPWebSiteDatabase" xml:space="preserve">
+    <value>All climate site data for year {0} have not been imported to the CSSP Web site database</value>
+  </data>
+  <data name="AverageOrPriorityShouldBeOneOf_" xml:space="preserve">
+    <value>Average or priority should be one of {0}</value>
+  </data>
+  <data name="NoClimateSiteHaveBeenSelected" xml:space="preserve">
+    <value>No climate site have been selected</value>
+  </data>
+  <data name="PleaseSelectClimateSitesAndSetPriorities" xml:space="preserve">
+    <value>Please select climate sites and set priorities</value>
+  </data>
+  <data name="Subsector_AlreadyHasSomeClimateSitesSelected" xml:space="preserve">
+    <value>Subsector {0} already has some climate sites selected</value>
+  </data>
+  <data name="Subsector_DoesNotHaveAnyClimateSitesSelected" xml:space="preserve">
+    <value>Subsector {0} does not have any climate sites selected</value>
+  </data>
+  <data name="IncludeLaboratoryQAQC" xml:space="preserve">
+    <value>IncludeLaboratoryQAQC</value>
+  </data>
+  <data name="Run" xml:space="preserve">
+    <value>Run</value>
+  </data>
+  <data name="RunNumber" xml:space="preserve">
+    <value>RunNumber</value>
+  </data>
+  <data name="RunWeatherComment" xml:space="preserve">
+    <value>RunWeatherComment</value>
+  </data>
+  <data name="ApprovalCode" xml:space="preserve">
+    <value>ApprovalCode</value>
+  </data>
+  <data name="NameOfItemShouldNotContainThe_Character" xml:space="preserve">
+    <value>Name of the item should not contain the {0} character</value>
+  </data>
+  <data name="CreateWebTideDataWLAtFirstNode" xml:space="preserve">
+    <value>Create WebTide data (water level) at first node</value>
+  </data>
+  <data name="MikeBoundaryConditionLevelOrVelocityEnum" xml:space="preserve">
+    <value>MikeBoundaryConditionLevelOrVelocityEnum</value>
+  </data>
+  <data name="MikeBoundaryConditionMesh" xml:space="preserve">
+    <value>MikeBoundaryConditionMesh</value>
+  </data>
+  <data name="MikeBoundaryConditionWebTide" xml:space="preserve">
+    <value>MikeBoundaryConditionWebTide</value>
+  </data>
+  <data name="ParentMikeScenarioID" xml:space="preserve">
+    <value>ParentMikeScenarioID</value>
+  </data>
+  <data name="TVTypeForBoundaryConditionShouldBeOneOf_Or_" xml:space="preserve">
+    <value>TVType for boundary condition should be one of [{0} or {1}]</value>
+  </data>
+  <data name="DaysPriorToStart" xml:space="preserve">
+    <value>DaysPriorToStart</value>
+  </data>
+  <data name="IsInternal" xml:space="preserve">
+    <value>IsInternal</value>
+  </data>
+  <data name="IsStaff" xml:space="preserve">
+    <value>IsStaff</value>
+  </data>
+  <data name="RainExceedance" xml:space="preserve">
+    <value>RainExceedance</value>
+  </data>
+  <data name="RainExceedanceClimateSite" xml:space="preserve">
+    <value>RainExceedanceClimateSite</value>
+  </data>
+  <data name="RainExceedanceClimateSiteID" xml:space="preserve">
+    <value>RainExceedanceClimateSiteID</value>
+  </data>
+  <data name="RainExceedanceEmail" xml:space="preserve">
+    <value>RainExceedanceEmail</value>
+  </data>
+  <data name="RainExceedanceEmailID" xml:space="preserve">
+    <value>RainExceedanceEmailID</value>
+  </data>
+  <data name="RainExceedanceID" xml:space="preserve">
+    <value>RainExceedanceID</value>
+  </data>
+  <data name="RainExtreme" xml:space="preserve">
+    <value>RainExtreme</value>
+  </data>
+  <data name="RainExtremeLevel" xml:space="preserve">
+    <value>RainExtremeLevel</value>
+  </data>
+  <data name="RainMaximum" xml:space="preserve">
+    <value>RainMaximum</value>
+  </data>
+  <data name="RainMaxLevel" xml:space="preserve">
+    <value>RainMaxLevel</value>
+  </data>
+  <data name="Agency" xml:space="preserve">
+    <value>Agency</value>
+  </data>
+  <data name="CMPRainfallSeasonal" xml:space="preserve">
+    <value>CMPRainfallSeasonal</value>
+  </data>
+  <data name="CMPWastewater" xml:space="preserve">
+    <value>CMPWastewater</value>
+  </data>
+  <data name="EmailDistributionList" xml:space="preserve">
+    <value>EmailDistributionList</value>
+  </data>
+  <data name="EmailDistributionListContact" xml:space="preserve">
+    <value>EmailDistributionListContact</value>
+  </data>
+  <data name="EmailDistributionListContactID" xml:space="preserve">
+    <value>EmailDistributionListContactID</value>
+  </data>
+  <data name="EmailDistributionListID" xml:space="preserve">
+    <value>EmailDistributionListID</value>
+  </data>
+  <data name="EmergencyWastewater" xml:space="preserve">
+    <value>EmergencyWastewater</value>
+  </data>
+  <data name="EmergencyWeather" xml:space="preserve">
+    <value>EmergencyWeather</value>
+  </data>
+  <data name="ExportingEmailDistributionLists" xml:space="preserve">
+    <value>Exporting email distribution lists</value>
+  </data>
+  <data name="ProvinceOrSubsectorIsRequired" xml:space="preserve">
+    <value>Province or subsector is required</value>
+  </data>
+  <data name="RainExceedanceEmailDistributionList" xml:space="preserve">
+    <value>RainExceedanceEmailDistributionList</value>
+  </data>
+  <data name="RainExceedanceEmailDistributionListID" xml:space="preserve">
+    <value>RainExceedanceEmailDistributionListID</value>
+  </data>
+  <data name="RegionName" xml:space="preserve">
+    <value>RegionName</value>
+  </data>
+  <data name="ReopeningAllTypes" xml:space="preserve">
+    <value>ReopeningAllTypes</value>
+  </data>
+  <data name="ToOrCC" xml:space="preserve">
+    <value>ToOrCC</value>
+  </data>
+  <data name="CouldNotFindOrReadKeyword_OfPath_InFile_" xml:space="preserve">
+    <value>Could not read or find keyword [{0}] of path [{1}] in file [{2}]</value>
+  </data>
+  <data name="EmailDistributionListContactLanguage" xml:space="preserve">
+    <value>EmailDistributionListContactLanguage</value>
+  </data>
+  <data name="EmailDistributionListLanguage" xml:space="preserve">
+    <value>EmailDistributionListLanguage</value>
+  </data>
+  <data name="EmailDistributionListLanguageID" xml:space="preserve">
+    <value>EmailDistributionListLanguageID</value>
+  </data>
+  <data name="AnalysisCalculationType" xml:space="preserve">
+    <value>AnalysisCalculationType</value>
+  </data>
+  <data name="AnalysisName" xml:space="preserve">
+    <value>AnalysisName</value>
+  </data>
+  <data name="AnalysisReportYear" xml:space="preserve">
+    <value>AnalysisReportYear</value>
+  </data>
+  <data name="DryLimit24h" xml:space="preserve">
+    <value>DryLimit24h</value>
+  </data>
+  <data name="DryLimit48h" xml:space="preserve">
+    <value>DryLimit48h</value>
+  </data>
+  <data name="DryLimit72h" xml:space="preserve">
+    <value>DryLimit72h</value>
+  </data>
+  <data name="DryLimit96h" xml:space="preserve">
+    <value>DryLimit96h</value>
+  </data>
+  <data name="FullYear" xml:space="preserve">
+    <value>FullYear</value>
+  </data>
+  <data name="MidRangeNumberOfDays" xml:space="preserve">
+    <value>MidRangeNumberOfDays</value>
+  </data>
+  <data name="MWQMAnalysisReportParameter" xml:space="preserve">
+    <value>MWQMAnalysisReportParameter</value>
+  </data>
+  <data name="MWQMAnalysisReportParameterID" xml:space="preserve">
+    <value>MWQMAnalysisReportParameterID</value>
+  </data>
+  <data name="NumberOfRuns" xml:space="preserve">
+    <value>NumberOfRuns</value>
+  </data>
+  <data name="RunsToOmit" xml:space="preserve">
+    <value>RunsToOmit</value>
+  </data>
+  <data name="SalinityHighlightDeviationFromAverage" xml:space="preserve">
+    <value>SalinityHighlightDeviationFromAverage</value>
+  </data>
+  <data name="ShortRangeNumberOfDays" xml:space="preserve">
+    <value>ShortRangeNumberOfDays</value>
+  </data>
+  <data name="WetLimit24h" xml:space="preserve">
+    <value>WetLimit24h</value>
+  </data>
+  <data name="WetLimit48h" xml:space="preserve">
+    <value>WetLimit48h</value>
+  </data>
+  <data name="WetLimit72h" xml:space="preserve">
+    <value>WetLimit72h</value>
+  </data>
+  <data name="WetLimit96h" xml:space="preserve">
+    <value>WetLimit96h</value>
+  </data>
+  <data name="_FormatShouldBeSomethingLike_ItIs_" xml:space="preserve">
+    <value>{0} format should be something like [{1}]. It is [{2}].</value>
+  </data>
+  <data name="_ShouldBeAfter_" xml:space="preserve">
+    <value>{0} should be after {1}</value>
+  </data>
+  <data name="ExportAnalysisToExcel" xml:space="preserve">
+    <value>Export analysis to Excel</value>
+  </data>
+  <data name="See" xml:space="preserve">
+    <value>see</value>
+  </data>
+  <data name="ShowDataTypes" xml:space="preserve">
+    <value>ShowDataTypes</value>
+  </data>
+  <data name="ChangeRunSamplingType" xml:space="preserve">
+    <value>ChangeRunSamplingType</value>
+  </data>
+  <data name="EndTide" xml:space="preserve">
+    <value>EndTide</value>
+  </data>
+  <data name="StartTide" xml:space="preserve">
+    <value>StartTide</value>
+  </data>
+  <data name="ReportType" xml:space="preserve">
+    <value>ReportType</value>
+  </data>
+  <data name="ReportTypeID" xml:space="preserve">
+    <value>ReportTypeID</value>
+  </data>
+  <data name="ReportTypeLanguage" xml:space="preserve">
+    <value>ReportTypeLanguage</value>
+  </data>
+  <data name="StartOfFileName" xml:space="preserve">
+    <value>StartOfFileName</value>
+  </data>
+  <data name="UniqueCode" xml:space="preserve">
+    <value>UniqueCode</value>
+  </data>
+  <data name="CreateDocumentFromParameters" xml:space="preserve">
+    <value>Create document from parameters</value>
+  </data>
+  <data name="CreatingPDFFromWordDocument" xml:space="preserve">
+    <value>Creating PDF from Word document</value>
+  </data>
+  <data name="CreatingPDFFromExcelDocument" xml:space="preserve">
+    <value>Creating PDF from Excel document</value>
+  </data>
+  <data name="MapInfoPointListShouldHave_Values" xml:space="preserve">
+    <value>MapInfoPointList should have {0} values</value>
+  </data>
+  <data name="MapInfoPointForPointShouldNeverHaveMoreThan2Points" xml:space="preserve">
+    <value>MapInfoPoint for point should never have more than 2 points</value>
+  </data>
+  <data name="TVTypeNeedsToBeOneOf_" xml:space="preserve">
+    <value>TVType needs to be one of {0}</value>
+  </data>
+  <data name="ReportSectionID" xml:space="preserve">
+    <value>ReportSectionID</value>
+  </data>
+  <data name="ReportSectionName" xml:space="preserve">
+    <value>ReportSectionName</value>
+  </data>
+  <data name="ReportSectionText" xml:space="preserve">
+    <value>ReportSectionText</value>
+  </data>
+  <data name="IsStatic" xml:space="preserve">
+    <value>IsStatic</value>
+  </data>
+  <data name="ParentReportSectionID" xml:space="preserve">
+    <value>ParentReportSectionID</value>
+  </data>
+  <data name="ReportSection" xml:space="preserve">
+    <value>ReportSection</value>
+  </data>
+  <data name="ReportSectionLanguage" xml:space="preserve">
+    <value>ReportSectionLanguage</value>
+  </data>
+  <data name="StaticSectionOfReportCannotHaveACopyForYear" xml:space="preserve">
+    <value>Static section of report cannot have a copy for year</value>
+  </data>
+  <data name="Risk" xml:space="preserve">
+    <value>risk</value>
+  </data>
+  <data name="BackupDirectory" xml:space="preserve">
+    <value>Backup directory</value>
+  </data>
+  <data name="SamplingPlanEmail" xml:space="preserve">
+    <value>SamplingPlanEmail</value>
+  </data>
+  <data name="SamplingPlanEmailID" xml:space="preserve">
+    <value>SamplingPlanEmailID</value>
+  </data>
+  <data name="GeneratingDocument" xml:space="preserve">
+    <value>Generating document</value>
+  </data>
+  <data name="FillRunPrecipByClimateSitePriorityForYear" xml:space="preserve">
+    <value>Fill run precip by climate site priority for year</value>
+  </data>
+  <data name="FindMissingPrecipForProvince" xml:space="preserve">
+    <value>Find missing precip for province</value>
+  </data>
+  <data name="GetAllPrecipitationForYear" xml:space="preserve">
+    <value>Get all precipitation for year</value>
+  </data>
+  <data name="CreatingFileMissingDateTimeDotCSV" xml:space="preserve">
+    <value>Creating file [Missing_Date.csv]</value>
+  </data>
+  <data name="ActiveOrInactive" xml:space="preserve">
+    <value>Active or Inactive</value>
+  </data>
+  <data name="ExportToArcGIS" xml:space="preserve">
+    <value>Export To Arc GIS</value>
+  </data>
+  <data name="ProvinceTVItemIDText" xml:space="preserve">
+    <value>ProvinceTVItemIDText</value>
+  </data>
+  <data name="StartDate_NeedsToBeBiggerThanEndDate_" xml:space="preserve">
+    <value>StartDate {0} need to be bigger than EndDate {1}</value>
+  </data>
+  <data name="HasBeenRead" xml:space="preserve">
+    <value>HasBeenRead</value>
+  </data>
+  <data name="GenerateProvincePollutionSourceSitesForInputTool" xml:space="preserve">
+    <value>Generate Province Pollution Source Sites For Input Tool</value>
+  </data>
+  <data name="_NeedToBeMoreThan_" xml:space="preserve">
+    <value>{0} need to be more than {1}</value>
+  </data>
+  <data name="_ShouldNotBeMoreThan_" xml:space="preserve">
+    <value>{0} should not be more than {1}</value>
+  </data>
+  <data name="DateOfObservationShouldBeBetween1980AndToday" xml:space="preserve">
+    <value>Date of observation should be between 1980 and today</value>
+  </data>
+  <data name="NoUserWithEmail_" xml:space="preserve">
+    <value>No user with email {0}</value>
+  </data>
+  <data name="CouldNotCreateMunicipality_" xml:space="preserve">
+    <value>Could not create municipality {0}</value>
+  </data>
+  <data name="CouldNotFindMunicipality_" xml:space="preserve">
+    <value>Could not find municipality {0}</value>
+  </data>
+  <data name="Classification" xml:space="preserve">
+    <value>Classification</value>
+  </data>
+  <data name="ClassificationID" xml:space="preserve">
+    <value>ClassificationID</value>
+  </data>
+  <data name="ClassificationTVItemID" xml:space="preserve">
+    <value>ClassificationTVItemID</value>
+  </data>
+  <data name="ClassificationTVText" xml:space="preserve">
+    <value>ClassificationTVText</value>
+  </data>
+  <data name="ClassificationType" xml:space="preserve">
+    <value>ClassificationType</value>
+  </data>
+  <data name="GenerateClassificationForCSSPWebToolsVisualization" xml:space="preserve">
+    <value>Generate classification for CSSPWebTools visualization</value>
+  </data>
+  <data name="GenerateKMLFileClassificationForCSSPWebToolsVisualization" xml:space="preserve">
+    <value>Generate KML file classification for CSSPWebTools visualization</value>
+  </data>
+  <data name="GenerateLinksBetweenMWQMSitesAndPolSourceSitesForCSSPWebToolsVisualization" xml:space="preserve">
+    <value>Generate links between MWQM Sites and Pollution Source Sites for CSSPWebTools Visualization</value>
+  </data>
+  <data name="ProvinceToolsCreateClassificationInputsKML" xml:space="preserve">
+    <value>Province Tools Create Classification Inputs KML</value>
+  </data>
+  <data name="ProvinceToolsCreateGroupingInputsKML" xml:space="preserve">
+    <value>Province Tools Create Grouping Inputs KML</value>
+  </data>
+  <data name="ProvinceToolsCreateMWQMSitesAndPolSourceSitesKML" xml:space="preserve">
+    <value>Province Tools Create MWQMSites and PolSourceSites KML</value>
+  </data>
+  <data name="LinkReasons" xml:space="preserve">
+    <value>LinkReasons</value>
+  </data>
+  <data name="MWQMSitePolSourceSite" xml:space="preserve">
+    <value>MWQMSitePolSourceSite</value>
+  </data>
+  <data name="MWQMSitePolSourceSiteID" xml:space="preserve">
+    <value>MWQMSitePolSourceSiteID</value>
+  </data>
+  <data name="ForSimulatingMWQMRunTVItemID" xml:space="preserve">
+    <value>ForSimulatingMWQMRunTVItemID</value>
+  </data>
+  <data name="UpdatingHydrometricSiteDailyAndHourlyFrom_To_" xml:space="preserve">
+    <value>Updating Hydrometric Site Daily And Hourly From {0} To {1}</value>
+  </data>
+  <data name="UpdatingHydrometricSiteInformation" xml:space="preserve">
+    <value>Updating Hydrometric Site Information</value>
+  </data>
+  <data name="AllHydrometricSiteDataForYear_HaveNotBeenImportedToTheCSSPWebSiteDatabase" xml:space="preserve">
+    <value>All hydrometric site data for year {0} have not been imported to the CSSP Web site database</value>
+  </data>
+  <data name="GetHydrometricSitesDataForRunsOfYear" xml:space="preserve">
+    <value>Get hydrometric sites data for runs of year</value>
+  </data>
+  <data name="DischargeDay0_m3_s" xml:space="preserve">
+    <value>DischargeDay0_m3_s</value>
+  </data>
+  <data name="DischargeDay10_m3_s" xml:space="preserve">
+    <value>DischargeDay10_m3_s</value>
+  </data>
+  <data name="DischargeDay1_m3_s" xml:space="preserve">
+    <value>DischargeDay1_m3_s</value>
+  </data>
+  <data name="DischargeDay2_m3_s" xml:space="preserve">
+    <value>DischargeDay2_m3_s</value>
+  </data>
+  <data name="DischargeDay3_m3_s" xml:space="preserve">
+    <value>DischargeDay3_m3_s</value>
+  </data>
+  <data name="DischargeDay4_m3_s" xml:space="preserve">
+    <value>DischargeDay4_m3_s</value>
+  </data>
+  <data name="DischargeDay5_m3_s" xml:space="preserve">
+    <value>DischargeDay5_m3_s</value>
+  </data>
+  <data name="DischargeDay6_m3_s" xml:space="preserve">
+    <value>DischargeDay6_m3_s</value>
+  </data>
+  <data name="DischargeDay7_m3_s" xml:space="preserve">
+    <value>DischargeDay7_m3_s</value>
+  </data>
+  <data name="DischargeDay8_m3_s" xml:space="preserve">
+    <value>DischargeDay8_m3_s</value>
+  </data>
+  <data name="DischargeDay9_m3_s" xml:space="preserve">
+    <value>DischargeDay9_m3_s</value>
+  </data>
+  <data name="NoHydrometricSiteHaveBeenSelected" xml:space="preserve">
+    <value>No hydrometric site have been selected</value>
+  </data>
+  <data name="PleaseSelectHydrometricSitesAndSetPriorities" xml:space="preserve">
+    <value>Please select hydrometric sites and set priorities</value>
+  </data>
+  <data name="Subsector_AlreadyHasSomeHydrometricSitesSelected" xml:space="preserve">
+    <value>Subsector {0} already has some hydrometric sites selected</value>
+  </data>
+  <data name="Subsector_DoesNotHaveAnyHydrometricSitesSelected" xml:space="preserve">
+    <value>Subsector {0} does not have any hydrometric sites selected</value>
+  </data>
+  <data name="DischargeEntered_m3_s" xml:space="preserve">
+    <value>DischargeEntered_m3_s</value>
+  </data>
+  <data name="Discharge_m3_s" xml:space="preserve">
+    <value>Discharge_m3_s</value>
+  </data>
+  <data name="Factor" xml:space="preserve">
+    <value>Factor</value>
+  </data>
+  <data name="HydrometricTVItemID" xml:space="preserve">
+    <value>HydrometricTVItemID</value>
+  </data>
+  <data name="Level_m" xml:space="preserve">
+    <value>Level_m</value>
+  </data>
+  <data name="UseHydrometric" xml:space="preserve">
+    <value>UseHydrometric</value>
+  </data>
+  <data name="CouldNotFindCoordinates" xml:space="preserve">
+    <value>Could not find coordinates</value>
+  </data>
+  <data name="LoadHydrometricDataValue" xml:space="preserve">
+    <value>Load hydrometric data value</value>
+  </data>
+</root>

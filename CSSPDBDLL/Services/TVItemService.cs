@@ -2074,11 +2074,11 @@ namespace CSSPDBDLL.Services
 
             tvItemMoreInfoMWQMSiteModel.MWQMSampleCount = mwqmSampleAll.Count;
 
-            List<MWQMSample> mwqmSample = (from c in mwqmSampleAll
-                                           orderby c.SampleDateTime_Local descending
-                                           select c).Take(NumberOfSample).ToList<MWQMSample>();
+            List<MWQMSample> mwqmSampleList = (from c in mwqmSampleAll
+                                               orderby c.SampleDateTime_Local descending
+                                               select c).Take(NumberOfSample).ToList<MWQMSample>();
 
-            if (mwqmSample.Count == 0)
+            if (mwqmSampleList.Count == 0)
             {
                 tvItemMoreInfoMWQMSiteModel.Coloring = "noData";
                 tvItemMoreInfoMWQMSiteModel.Letter = "0";
@@ -2086,36 +2086,46 @@ namespace CSSPDBDLL.Services
                 return tvItemMoreInfoMWQMSiteModel;
             }
 
-            int MinYear = (from c in mwqmSample
+            int MinYear = (from c in mwqmSampleList
                            orderby c.SampleDateTime_Local descending
                            select c.SampleDateTime_Local.Year).Min();
 
-            int MaxYear = (from c in mwqmSample
+            int MaxYear = (from c in mwqmSampleList
                            orderby c.SampleDateTime_Local descending
                            select c.SampleDateTime_Local.Year).Max();
 
-            mwqmSample = (from c in mwqmSampleAll
-                          where c.SampleDateTime_Local.Year >= MinYear
-                          && c.SampleDateTime_Local.Year <= MaxYear
-                          orderby c.SampleDateTime_Local descending
-                          select c).ToList<MWQMSample>();
+            mwqmSampleList = (from c in mwqmSampleAll
+                              where c.SampleDateTime_Local.Year >= MinYear
+                              && c.SampleDateTime_Local.Year <= MaxYear
+                              orderby c.SampleDateTime_Local descending
+                              select c).ToList<MWQMSample>();
 
-            tvItemMoreInfoMWQMSiteModel.SampCount = mwqmSample.Count();
+            tvItemMoreInfoMWQMSiteModel.SampCount = mwqmSampleList.Count();
             if (mwqmSampleAll.Count() > 0)
             {
+
+                MWQMSample mwqmSample = (from c in mwqmSampleList
+                                         orderby c.SampleDateTime_Local descending
+                                         select c).FirstOrDefault();
+
+                if (mwqmSample != null)
+                {
+                    tvItemMoreInfoMWQMSiteModel.LastSampleDate = mwqmSample.SampleDateTime_Local;
+                }
+
                 tvItemMoreInfoMWQMSiteModel.SampMinYear = mwqmSampleAll.Select(c => c.SampleDateTime_Local).Min().Year;
                 tvItemMoreInfoMWQMSiteModel.SampMaxYear = mwqmSampleAll.Select(c => c.SampleDateTime_Local).Max().Year;
             }
 
             if (tvItemMoreInfoMWQMSiteModel.SampCount > 0)
             {
-                tvItemMoreInfoMWQMSiteModel.MinFC = (float)mwqmSample.Min(c => c.FecCol_MPN_100ml);
-                tvItemMoreInfoMWQMSiteModel.MaxFC = (float)mwqmSample.Max(c => c.FecCol_MPN_100ml);
+                tvItemMoreInfoMWQMSiteModel.MinFC = (float)mwqmSampleList.Min(c => c.FecCol_MPN_100ml);
+                tvItemMoreInfoMWQMSiteModel.MaxFC = (float)mwqmSampleList.Max(c => c.FecCol_MPN_100ml);
             }
 
-            if (mwqmSample.Count >= 10)
+            if (mwqmSampleList.Count >= 10)
             {
-                List<double> GeoMeanList = (from c in mwqmSample
+                List<double> GeoMeanList = (from c in mwqmSampleList
                                             select (c.FecCol_MPN_100ml == 1 ? 1.9D : (double)c.FecCol_MPN_100ml)).ToList<double>();
 
                 tvItemMoreInfoMWQMSiteModel.P90 = (float)GetP90(GeoMeanList);
@@ -2123,8 +2133,8 @@ namespace CSSPDBDLL.Services
                 tvItemMoreInfoMWQMSiteModel.Median = (float)GetMedian(GeoMeanList);
                 tvItemMoreInfoMWQMSiteModel.PercOver43 = (float)((((double)GeoMeanList.Where(c => c > 43).Count()) / (double)GeoMeanList.Count()) * 100.0D);
                 tvItemMoreInfoMWQMSiteModel.PercOver260 = (float)((((double)GeoMeanList.Where(c => c > 260).Count()) / (double)GeoMeanList.Count()) * 100.0D);
-                tvItemMoreInfoMWQMSiteModel.StatMinYear = mwqmSample.Select(c => c.SampleDateTime_Local).Min().Year;
-                tvItemMoreInfoMWQMSiteModel.StatMaxYear = mwqmSample.Select(c => c.SampleDateTime_Local).Max().Year;
+                tvItemMoreInfoMWQMSiteModel.StatMinYear = mwqmSampleList.Select(c => c.SampleDateTime_Local).Min().Year;
+                tvItemMoreInfoMWQMSiteModel.StatMaxYear = mwqmSampleList.Select(c => c.SampleDateTime_Local).Max().Year;
 
                 int P90Int = (int)Math.Round((double)tvItemMoreInfoMWQMSiteModel.P90, 0);
                 int GeoMeanInt = (int)Math.Round((double)tvItemMoreInfoMWQMSiteModel.GeoMean, 0);
@@ -2220,12 +2230,12 @@ namespace CSSPDBDLL.Services
             else if (tvItemMoreInfoMWQMSiteModel.SampCount == 0)
             {
                 tvItemMoreInfoMWQMSiteModel.Coloring = "noData";
-                tvItemMoreInfoMWQMSiteModel.Letter = mwqmSample.Count.ToString();
+                tvItemMoreInfoMWQMSiteModel.Letter = mwqmSampleList.Count.ToString();
             }
             else
             {
                 tvItemMoreInfoMWQMSiteModel.Coloring = "notEnoughData";
-                tvItemMoreInfoMWQMSiteModel.Letter = mwqmSample.Count.ToString();
+                tvItemMoreInfoMWQMSiteModel.Letter = mwqmSampleList.Count.ToString();
             }
 
             return tvItemMoreInfoMWQMSiteModel;

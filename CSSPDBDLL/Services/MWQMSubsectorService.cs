@@ -1612,6 +1612,11 @@ namespace CSSPDBDLL.Services
                         if (!string.IsNullOrWhiteSpace(climateSiteModel.Error))
                             return ReturnError(climateSiteModel.Error);
 
+                        if (climateSiteModel.DailyStartDate_Local == null)
+                        {
+                            continue;
+                        }
+
                         DateTime EndDate = DateTime.Now;
                         if (climateSiteModel.DailyNow != true)
                         {
@@ -1695,6 +1700,11 @@ namespace CSSPDBDLL.Services
                         ClimateSiteModel climateSiteModel = _ClimateSiteService.GetClimateSiteModelWithClimateSiteTVItemIDDB(useOfSiteModel.SiteTVItemID);
                         if (!string.IsNullOrWhiteSpace(climateSiteModel.Error))
                             return ReturnError(climateSiteModel.Error);
+
+                        if (climateSiteModel.DailyStartDate_Local == null)
+                        {
+                            continue;
+                        }
 
                         DateTime EndDate = DateTime.Now;
                         if (climateSiteModel.DailyNow != true)

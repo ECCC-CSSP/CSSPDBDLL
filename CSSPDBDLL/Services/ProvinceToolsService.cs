@@ -642,6 +642,53 @@ namespace CSSPDBDLL.Services
 
             return appTaskModelRet;
         }
+        public AppTaskModel ProvinceToolsGenerateStatsDB(int ProvinceTVItemID)
+        {
+            TVItemModel tvItemModelSubsector = _TVItemService.GetTVItemModelWithTVItemIDDB(ProvinceTVItemID);
+            if (!string.IsNullOrWhiteSpace(tvItemModelSubsector.Error))
+                return new AppTaskModel() { Error = tvItemModelSubsector.Error };
+
+
+            AppTaskModel appTaskModelExist = _AppTaskService.GetAppTaskModelWithTVItemIDTVItemID2AndCommandDB(ProvinceTVItemID, ProvinceTVItemID, AppTaskCommandEnum.ProvinceToolsGenerateStats);
+            if (string.IsNullOrWhiteSpace(appTaskModelExist.Error))
+                return appTaskModelExist;
+
+            List<AppTaskParameter> appTaskParameterList = new List<AppTaskParameter>();
+            appTaskParameterList.Add(new AppTaskParameter() { Name = "ProvinceTVItemID", Value = ProvinceTVItemID.ToString() });
+
+            StringBuilder sbParameters = new StringBuilder();
+            int count = 0;
+            foreach (AppTaskParameter atp in appTaskParameterList)
+            {
+                if (count == 0)
+                {
+                    sbParameters.Append("|||");
+                }
+                sbParameters.Append(atp.Name + "," + atp.Value + "|||");
+                count += 1;
+            }
+
+            AppTaskModel appTaskModelNew = new AppTaskModel()
+            {
+                TVItemID = ProvinceTVItemID,
+                TVItemID2 = ProvinceTVItemID,
+                AppTaskCommand = AppTaskCommandEnum.ProvinceToolsGenerateStats,
+                ErrorText = "",
+                StatusText = ServiceRes.ProvinceToolsGenerateStats,
+                AppTaskStatus = AppTaskStatusEnum.Created,
+                PercentCompleted = 1,
+                Parameters = sbParameters.ToString(),
+                Language = LanguageRequest,
+                StartDateTime_UTC = DateTime.UtcNow,
+                EndDateTime_UTC = null,
+                EstimatedLength_second = null,
+                RemainingTime_second = null,
+            };
+
+            AppTaskModel appTaskModelRet = _AppTaskService.PostAddAppTask(appTaskModelNew);
+
+            return appTaskModelRet;
+        }
         #endregion Functions Classification
         #endregion Functions public
 

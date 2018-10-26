@@ -4053,4 +4053,7 @@
   <data name="LoadHydrometricDataValue" xml:space="preserve">
     <value>Load hydrometric data value</value>
   </data>
+  <data name="ProvinceToolsGenerateStats" xml:space="preserve">
+    <value>Province tools generate stats</value>
+  </data>
 </root>

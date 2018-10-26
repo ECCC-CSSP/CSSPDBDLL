@@ -8125,6 +8125,15 @@ namespace CSSPDBDLL.Services.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Province tools generate stats.
+        /// </summary>
+        public static string ProvinceToolsGenerateStats {
+            get {
+                return ResourceManager.GetString("ProvinceToolsGenerateStats", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ProvinceTVItemID.
         /// </summary>
         public static string ProvinceTVItemID {

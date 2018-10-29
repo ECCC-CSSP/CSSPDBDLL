@@ -885,14 +885,14 @@
   <data name="Flow" xml:space="preserve">
     <value>Flow</value>
   </data>
-  <data name="FlowDuration" xml:space="preserve">
-    <value>Flow duration</value>
+  <data name="DischargeDuration" xml:space="preserve">
+    <value>Discharge duration</value>
   </data>
-  <data name="FlowDurationIN" xml:space="preserve">
-    <value>flow duration</value>
+  <data name="DischargeDurationIN" xml:space="preserve">
+    <value>discharge duration</value>
   </data>
-  <data name="FlowDuration_hour" xml:space="preserve">
-    <value>FlowDuration_hour</value>
+  <data name="DischargeDuration_hour" xml:space="preserve">
+    <value>DischargeDuration_hour</value>
   </data>
   <data name="FlowEnd" xml:space="preserve">
     <value>Flow End</value>
@@ -903,8 +903,8 @@
   <data name="FlowStart" xml:space="preserve">
     <value>Flow Start</value>
   </data>
-  <data name="Flow_m3_day" xml:space="preserve">
-    <value>Flow_m3_day</value>
+  <data name="Discharge_m3_day" xml:space="preserve">
+    <value>Discharge_m3_day</value>
   </data>
   <data name="Flow_m3_s" xml:space="preserve">
     <value>Flow_m3_s</value>

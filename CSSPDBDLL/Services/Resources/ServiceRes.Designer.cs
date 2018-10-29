@@ -2797,6 +2797,15 @@ namespace CSSPDBDLL.Services.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Discharge_m3_day.
+        /// </summary>
+        public static string Discharge_m3_day {
+            get {
+                return ResourceManager.GetString("Discharge_m3_day", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Discharge_m3_s.
         /// </summary>
         public static string Discharge_m3_s {
@@ -2901,6 +2910,33 @@ namespace CSSPDBDLL.Services.Resources {
         public static string DischargeDay9_m3_s {
             get {
                 return ResourceManager.GetString("DischargeDay9_m3_s", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Discharge duration.
+        /// </summary>
+        public static string DischargeDuration {
+            get {
+                return ResourceManager.GetString("DischargeDuration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to DischargeDuration_hour.
+        /// </summary>
+        public static string DischargeDuration_hour {
+            get {
+                return ResourceManager.GetString("DischargeDuration_hour", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to discharge duration.
+        /// </summary>
+        public static string DischargeDurationIN {
+            get {
+                return ResourceManager.GetString("DischargeDurationIN", resourceCulture);
             }
         }
         
@@ -4030,47 +4066,11 @@ namespace CSSPDBDLL.Services.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Flow_m3_day.
-        /// </summary>
-        public static string Flow_m3_day {
-            get {
-                return ResourceManager.GetString("Flow_m3_day", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Flow_m3_s.
         /// </summary>
         public static string Flow_m3_s {
             get {
                 return ResourceManager.GetString("Flow_m3_s", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Flow duration.
-        /// </summary>
-        public static string FlowDuration {
-            get {
-                return ResourceManager.GetString("FlowDuration", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to FlowDuration_hour.
-        /// </summary>
-        public static string FlowDuration_hour {
-            get {
-                return ResourceManager.GetString("FlowDuration_hour", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to flow duration.
-        /// </summary>
-        public static string FlowDurationIN {
-            get {
-                return ResourceManager.GetString("FlowDurationIN", resourceCulture);
             }
         }
         

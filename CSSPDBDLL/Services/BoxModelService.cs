@@ -68,7 +68,7 @@ namespace CSSPDBDLL.Services
                 return retStr;
             }
 
-            retStr = FieldCheckNotNullAndWithinRangeDouble(boxModelModel.Flow_m3_day, ServiceRes.Flow_m3_day, (double)1D, (double)30000000D);
+            retStr = FieldCheckNotNullAndWithinRangeDouble(boxModelModel.Discharge_m3_day, ServiceRes.Discharge_m3_day, (double)1D, (double)30000000D);
             if (!string.IsNullOrWhiteSpace(retStr))
             {
                 return retStr;
@@ -116,7 +116,7 @@ namespace CSSPDBDLL.Services
                 return retStr;
             }
 
-            retStr = FieldCheckNotNullAndWithinRangeDouble(boxModelModel.FlowDuration_hour, ServiceRes.FlowDuration_hour, 1, 24);
+            retStr = FieldCheckNotNullAndWithinRangeDouble(boxModelModel.DischargeDuration_hour, ServiceRes.DischargeDuration_hour, 1, 24);
             if (!string.IsNullOrWhiteSpace(retStr))
             {
                 return retStr;
@@ -142,7 +142,7 @@ namespace CSSPDBDLL.Services
                                                          BoxModelID = c.BoxModelID,
                                                          ScenarioName = scenarioName,
                                                          InfrastructureTVItemID = c.InfrastructureTVItemID,
-                                                         Flow_m3_day = c.Flow_m3_day,
+                                                         Discharge_m3_day = c.Discharge_m3_day,
                                                          Depth_m = c.Depth_m,
                                                          Temperature_C = c.Temperature_C,
                                                          Dilution = c.Dilution,
@@ -150,7 +150,7 @@ namespace CSSPDBDLL.Services
                                                          FCUntreated_MPN_100ml = c.FCUntreated_MPN_100ml,
                                                          FCPreDisinfection_MPN_100ml = c.FCPreDisinfection_MPN_100ml,
                                                          Concentration_MPN_100ml = c.Concentration_MPN_100ml,
-                                                         FlowDuration_hour = c.FlowDuration_hour,
+                                                         DischargeDuration_hour = c.DischargeDuration_hour,
                                                          T90_hour = c.T90_hour,
                                                          LastUpdateDate_UTC = c.LastUpdateDate_UTC,
                                                          LastUpdateContactTVItemID = c.LastUpdateContactTVItemID,
@@ -168,7 +168,7 @@ namespace CSSPDBDLL.Services
         public string FillBoxModel(BoxModel boxModel, BoxModelModel boxModelModel, ContactOK contactOK)
         {
             boxModel.InfrastructureTVItemID = boxModelModel.InfrastructureTVItemID;
-            boxModel.Flow_m3_day = boxModelModel.Flow_m3_day;
+            boxModel.Discharge_m3_day = boxModelModel.Discharge_m3_day;
             boxModel.Depth_m = boxModelModel.Depth_m;
             boxModel.Temperature_C = boxModelModel.Temperature_C;
             boxModel.Dilution = boxModelModel.Dilution;
@@ -176,7 +176,7 @@ namespace CSSPDBDLL.Services
             boxModel.FCUntreated_MPN_100ml = boxModelModel.FCUntreated_MPN_100ml;
             boxModel.FCPreDisinfection_MPN_100ml = boxModelModel.FCPreDisinfection_MPN_100ml;
             boxModel.Concentration_MPN_100ml = boxModelModel.Concentration_MPN_100ml;
-            boxModel.FlowDuration_hour = boxModelModel.FlowDuration_hour;
+            boxModel.DischargeDuration_hour = boxModelModel.DischargeDuration_hour;
             boxModel.T90_hour = boxModelModel.T90_hour;
             boxModel.LastUpdateDate_UTC = DateTime.UtcNow;
             if (contactOK == null)
@@ -211,7 +211,7 @@ namespace CSSPDBDLL.Services
                                                          BoxModelID = c.BoxModelID,
                                                          ScenarioName = scenarioName,
                                                          InfrastructureTVItemID = c.InfrastructureTVItemID,
-                                                         Flow_m3_day = c.Flow_m3_day,
+                                                         Discharge_m3_day = c.Discharge_m3_day,
                                                          Depth_m = c.Depth_m,
                                                          Temperature_C = c.Temperature_C,
                                                          Dilution = c.Dilution,
@@ -219,7 +219,7 @@ namespace CSSPDBDLL.Services
                                                          FCUntreated_MPN_100ml = c.FCUntreated_MPN_100ml,
                                                          FCPreDisinfection_MPN_100ml = c.FCPreDisinfection_MPN_100ml,
                                                          Concentration_MPN_100ml = c.Concentration_MPN_100ml,
-                                                         FlowDuration_hour = c.FlowDuration_hour,
+                                                         DischargeDuration_hour = c.DischargeDuration_hour,
                                                          T90_hour = c.T90_hour,
                                                          LastUpdateDate_UTC = c.LastUpdateDate_UTC,
                                                          LastUpdateContactTVItemID = c.LastUpdateContactTVItemID,
@@ -238,7 +238,7 @@ namespace CSSPDBDLL.Services
                                                BoxModelID = c.BoxModelID,
                                                ScenarioName = scenarioName,
                                                InfrastructureTVItemID = c.InfrastructureTVItemID,
-                                               Flow_m3_day = c.Flow_m3_day,
+                                               Discharge_m3_day = c.Discharge_m3_day,
                                                Depth_m = c.Depth_m,
                                                Temperature_C = c.Temperature_C,
                                                Dilution = c.Dilution,
@@ -246,7 +246,7 @@ namespace CSSPDBDLL.Services
                                                FCUntreated_MPN_100ml = c.FCUntreated_MPN_100ml,
                                                FCPreDisinfection_MPN_100ml = c.FCPreDisinfection_MPN_100ml,
                                                Concentration_MPN_100ml = c.Concentration_MPN_100ml,
-                                               FlowDuration_hour = c.FlowDuration_hour,
+                                               DischargeDuration_hour = c.DischargeDuration_hour,
                                                T90_hour = c.T90_hour,
                                                LastUpdateDate_UTC = c.LastUpdateDate_UTC,
                                                LastUpdateContactTVItemID = c.LastUpdateContactTVItemID,
@@ -271,7 +271,7 @@ namespace CSSPDBDLL.Services
                                                BoxModelID = c.BoxModelID,
                                                ScenarioName = scenarioName,
                                                InfrastructureTVItemID = c.InfrastructureTVItemID,
-                                               Flow_m3_day = c.Flow_m3_day,
+                                               Discharge_m3_day = c.Discharge_m3_day,
                                                Depth_m = c.Depth_m,
                                                Temperature_C = c.Temperature_C,
                                                Dilution = c.Dilution,
@@ -279,7 +279,7 @@ namespace CSSPDBDLL.Services
                                                FCUntreated_MPN_100ml = c.FCUntreated_MPN_100ml,
                                                FCPreDisinfection_MPN_100ml = c.FCPreDisinfection_MPN_100ml,
                                                Concentration_MPN_100ml = c.Concentration_MPN_100ml,
-                                               FlowDuration_hour = c.FlowDuration_hour,
+                                               DischargeDuration_hour = c.DischargeDuration_hour,
                                                T90_hour = c.T90_hour,
                                                LastUpdateDate_UTC = c.LastUpdateDate_UTC,
                                                LastUpdateContactTVItemID = c.LastUpdateContactTVItemID,
@@ -339,27 +339,27 @@ namespace CSSPDBDLL.Services
                 {
                     case (int)BoxModelResultTypeEnum.Dilution:
                         {
-                            boxModelResultModel.Volume_m3 = (boxModelModel.Flow_m3_day * (boxModelModel.FlowDuration_hour / 24) * boxModelModel.Dilution);
+                            boxModelResultModel.Volume_m3 = (boxModelModel.Discharge_m3_day * (boxModelModel.DischargeDuration_hour / 24) * boxModelModel.Dilution);
                         }
                         break;
                     case (int)BoxModelResultTypeEnum.NoDecayUntreated:
                         {
-                            boxModelResultModel.Volume_m3 = (boxModelModel.Flow_m3_day * (boxModelModel.FlowDuration_hour / 24) * boxModelModel.FCUntreated_MPN_100ml) / boxModelModel.Concentration_MPN_100ml;
+                            boxModelResultModel.Volume_m3 = (boxModelModel.Discharge_m3_day * (boxModelModel.DischargeDuration_hour / 24) * boxModelModel.FCUntreated_MPN_100ml) / boxModelModel.Concentration_MPN_100ml;
                         }
                         break;
                     case (int)BoxModelResultTypeEnum.NoDecayPreDisinfection:
                         {
-                            boxModelResultModel.Volume_m3 = (boxModelModel.Flow_m3_day * (boxModelModel.FlowDuration_hour / 24) * boxModelModel.FCPreDisinfection_MPN_100ml) / boxModelModel.Concentration_MPN_100ml;
+                            boxModelResultModel.Volume_m3 = (boxModelModel.Discharge_m3_day * (boxModelModel.DischargeDuration_hour / 24) * boxModelModel.FCPreDisinfection_MPN_100ml) / boxModelModel.Concentration_MPN_100ml;
                         }
                         break;
                     case (int)BoxModelResultTypeEnum.DecayUntreated:
                         {
-                            boxModelResultModel.Volume_m3 = (boxModelModel.Flow_m3_day * (boxModelModel.FlowDuration_hour / 24) * (boxModelModel.FCUntreated_MPN_100ml - boxModelModel.Concentration_MPN_100ml)) / boxModelModel.DecayRate_per_day / boxModelModel.Concentration_MPN_100ml;
+                            boxModelResultModel.Volume_m3 = (boxModelModel.Discharge_m3_day * (boxModelModel.DischargeDuration_hour / 24) * (boxModelModel.FCUntreated_MPN_100ml - boxModelModel.Concentration_MPN_100ml)) / boxModelModel.DecayRate_per_day / boxModelModel.Concentration_MPN_100ml;
                         }
                         break;
                     case (int)BoxModelResultTypeEnum.DecayPreDisinfection:
                         {
-                            boxModelResultModel.Volume_m3 = (boxModelModel.Flow_m3_day * (boxModelModel.FlowDuration_hour / 24) * (boxModelModel.FCPreDisinfection_MPN_100ml - boxModelModel.Concentration_MPN_100ml)) / boxModelModel.DecayRate_per_day / boxModelModel.Concentration_MPN_100ml;
+                            boxModelResultModel.Volume_m3 = (boxModelModel.Discharge_m3_day * (boxModelModel.DischargeDuration_hour / 24) * (boxModelModel.FCPreDisinfection_MPN_100ml - boxModelModel.Concentration_MPN_100ml)) / boxModelModel.DecayRate_per_day / boxModelModel.Concentration_MPN_100ml;
                         }
                         break;
                     default:
@@ -443,8 +443,8 @@ namespace CSSPDBDLL.Services
                 Dilution = boxModelModelToCopy.Dilution,
                 FCPreDisinfection_MPN_100ml = boxModelModelToCopy.FCPreDisinfection_MPN_100ml,
                 FCUntreated_MPN_100ml = boxModelModelToCopy.FCUntreated_MPN_100ml,
-                Flow_m3_day = boxModelModelToCopy.Flow_m3_day,
-                FlowDuration_hour = boxModelModelToCopy.FlowDuration_hour,
+                Discharge_m3_day = boxModelModelToCopy.Discharge_m3_day,
+                DischargeDuration_hour = boxModelModelToCopy.DischargeDuration_hour,
                 T90_hour = boxModelModelToCopy.T90_hour,
                 Temperature_C = boxModelModelToCopy.Temperature_C,
                 InfrastructureTVItemID = boxModelModelToCopy.InfrastructureTVItemID,
@@ -470,8 +470,8 @@ namespace CSSPDBDLL.Services
             if (!string.IsNullOrWhiteSpace(contactOK.Error))
                 return ReturnError(contactOK.Error);
 
-            double Flow_m3_day = 1234f;
-            double FlowDuration_hour = 24f;
+            double Discharge_m3_day = 1234f;
+            double DischargeDuration_hour = 24f;
             int Dilution = 1000;
             double T90_hour = 6f;
             double Temperature_C = 10f;
@@ -489,8 +489,8 @@ namespace CSSPDBDLL.Services
                 Dilution = Dilution,
                 FCPreDisinfection_MPN_100ml = FCPreDisinfection_MPN_100ml,
                 FCUntreated_MPN_100ml = FCUntreated_MPN_100ml,
-                Flow_m3_day = Flow_m3_day,
-                FlowDuration_hour = FlowDuration_hour,
+                Discharge_m3_day = Discharge_m3_day,
+                DischargeDuration_hour = DischargeDuration_hour,
                 T90_hour = T90_hour,
                 Temperature_C = Temperature_C,
                 InfrastructureTVItemID = InfrastructureTVItemID,
@@ -510,8 +510,8 @@ namespace CSSPDBDLL.Services
         public BoxModelModel SaveBoxModelScenarioDB(FormCollection fc)
         {
             int BoxModelID = 0;
-            double Flow_m3_day = 0;
-            double FlowDuration_hour = 0;
+            double Discharge_m3_day = 0;
+            double DischargeDuration_hour = 0;
             int Dilution = 0;
             double T90_hour = 0;
             double Temperature_C = 0;
@@ -561,15 +561,15 @@ namespace CSSPDBDLL.Services
                 return ReturnError(string.Format(ServiceRes._IsRequired, ServiceRes.DecayRate_per_day));
             boxModelModelToChange.DecayRate_per_day = DecayRate_per_day;
 
-            double.TryParse(fc["Flow_m3_day"], out Flow_m3_day);
-            if (Flow_m3_day == 0)
-                return ReturnError(string.Format(ServiceRes._IsRequired, ServiceRes.Flow_m3_day));
-            boxModelModelToChange.Flow_m3_day = Flow_m3_day;
+            double.TryParse(fc["Discharge_m3_day"], out Discharge_m3_day);
+            if (Discharge_m3_day == 0)
+                return ReturnError(string.Format(ServiceRes._IsRequired, ServiceRes.Discharge_m3_day));
+            boxModelModelToChange.Discharge_m3_day = Discharge_m3_day;
 
-            double.TryParse(fc["FlowDuration_hour"], out FlowDuration_hour);
-            if (FlowDuration_hour == 0)
-                return ReturnError(string.Format(ServiceRes._IsRequired, ServiceRes.FlowDuration_hour));
-            boxModelModelToChange.FlowDuration_hour = FlowDuration_hour;
+            double.TryParse(fc["DischargeDuration_hour"], out DischargeDuration_hour);
+            if (DischargeDuration_hour == 0)
+                return ReturnError(string.Format(ServiceRes._IsRequired, ServiceRes.DischargeDuration_hour));
+            boxModelModelToChange.DischargeDuration_hour = DischargeDuration_hour;
 
             int.TryParse(fc["Dilution"], out Dilution);
             if (Dilution == 0)

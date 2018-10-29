@@ -160,7 +160,7 @@
           </Key>
           <Property Name="BoxModelID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="InfrastructureTVItemID" Type="int" Nullable="false" />
-          <Property Name="Flow_m3_day" Type="float" Nullable="false" />
+          <Property Name="Discharge_m3_day" Type="float" Nullable="false" />
           <Property Name="Depth_m" Type="float" Nullable="false" />
           <Property Name="Temperature_C" Type="float" Nullable="false" />
           <Property Name="Dilution" Type="int" Nullable="false" />
@@ -169,7 +169,7 @@
           <Property Name="FCPreDisinfection_MPN_100ml" Type="int" Nullable="false" />
           <Property Name="Concentration_MPN_100ml" Type="int" Nullable="false" />
           <Property Name="T90_hour" Type="float" Nullable="false" />
-          <Property Name="FlowDuration_hour" Type="float" Nullable="false" />
+          <Property Name="DischargeDuration_hour" Type="float" Nullable="false" />
           <Property Name="LastUpdateDate_UTC" Type="datetime" Nullable="false" />
           <Property Name="LastUpdateContactTVItemID" Type="int" Nullable="false" />
         </EntityType>
@@ -1554,7 +1554,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ClimateDataValues_ClimateSites">
-          <End Role="ClimateSites" Type="Self.ClimateSites" Multiplicity="1" />
+          <End Role="ClimateSites" Type="Self.ClimateSites" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="ClimateDataValues" Type="Self.ClimateDataValues" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ClimateSites">
@@ -4000,7 +4002,7 @@
           </Key>
           <Property Name="BoxModelID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="InfrastructureTVItemID" Type="Int32" Nullable="false" />
-          <Property Name="Flow_m3_day" Type="Double" Nullable="false" />
+          <Property Name="Discharge_m3_day" Type="Double" Nullable="false" />
           <Property Name="Depth_m" Type="Double" Nullable="false" />
           <Property Name="Temperature_C" Type="Double" Nullable="false" />
           <Property Name="Dilution" Type="Int32" Nullable="false" />
@@ -4009,7 +4011,7 @@
           <Property Name="FCPreDisinfection_MPN_100ml" Type="Int32" Nullable="false" />
           <Property Name="Concentration_MPN_100ml" Type="Int32" Nullable="false" />
           <Property Name="T90_hour" Type="Double" Nullable="false" />
-          <Property Name="FlowDuration_hour" Type="Double" Nullable="false" />
+          <Property Name="DischargeDuration_hour" Type="Double" Nullable="false" />
           <Property Name="LastUpdateDate_UTC" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="LastUpdateContactTVItemID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="BoxModelLanguages" Relationship="CSSPDBModel.FK_BoxModelLanguages_BoxModels" FromRole="BoxModel" ToRole="BoxModelLanguage" />
@@ -5635,7 +5637,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ClimateDataValues_ClimateSites">
-          <End Type="CSSPDBModel.ClimateSite" Role="ClimateSite" Multiplicity="1" />
+          <End Type="CSSPDBModel.ClimateSite" Role="ClimateSite" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Type="CSSPDBModel.ClimateDataValue" Role="ClimateDataValue" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ClimateSite">
@@ -6970,7 +6974,7 @@
               <MappingFragment StoreEntitySet="BoxModels">
                 <ScalarProperty Name="LastUpdateContactTVItemID" ColumnName="LastUpdateContactTVItemID" />
                 <ScalarProperty Name="LastUpdateDate_UTC" ColumnName="LastUpdateDate_UTC" />
-                <ScalarProperty Name="FlowDuration_hour" ColumnName="FlowDuration_hour" />
+                <ScalarProperty Name="DischargeDuration_hour" ColumnName="DischargeDuration_hour" />
                 <ScalarProperty Name="T90_hour" ColumnName="T90_hour" />
                 <ScalarProperty Name="Concentration_MPN_100ml" ColumnName="Concentration_MPN_100ml" />
                 <ScalarProperty Name="FCPreDisinfection_MPN_100ml" ColumnName="FCPreDisinfection_MPN_100ml" />
@@ -6979,7 +6983,7 @@
                 <ScalarProperty Name="Dilution" ColumnName="Dilution" />
                 <ScalarProperty Name="Temperature_C" ColumnName="Temperature_C" />
                 <ScalarProperty Name="Depth_m" ColumnName="Depth_m" />
-                <ScalarProperty Name="Flow_m3_day" ColumnName="Flow_m3_day" />
+                <ScalarProperty Name="Discharge_m3_day" ColumnName="Discharge_m3_day" />
                 <ScalarProperty Name="InfrastructureTVItemID" ColumnName="InfrastructureTVItemID" />
                 <ScalarProperty Name="BoxModelID" ColumnName="BoxModelID" />
               </MappingFragment>

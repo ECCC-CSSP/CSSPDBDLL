@@ -287,8 +287,8 @@ namespace CSSPDBDLL.Services
             boxModelModel.T90_hour = RandomInt(5, 7);
             boxModelModel.Temperature_C = RandomInt(9, 12);
             boxModelModel.DecayRate_per_day = RandomFloat(4.0f, 6.0f);
-            boxModelModel.Flow_m3_day = RandomFloat(1000.0f, 2000.0f);
-            boxModelModel.FlowDuration_hour = RandomInt(20, 24);
+            boxModelModel.Discharge_m3_day = RandomFloat(1000.0f, 2000.0f);
+            boxModelModel.DischargeDuration_hour = RandomInt(20, 24);
             boxModelModel.Dilution = RandomInt(100, 1000);
             boxModelModel.Depth_m = RandomFloat(2.0f, 4.0f);
             boxModelModel.FCUntreated_MPN_100ml = RandomInt(3000000, 3600000);
@@ -303,8 +303,8 @@ namespace CSSPDBDLL.Services
             //Assert.IsTrue(boxModelModel.T90_hour >= 5 && boxModelModel.T90_hour <= 7);
             //Assert.IsTrue(boxModelModel.Temperature_C >= 9 && boxModelModel.Temperature_C <= 12);
             //Assert.IsTrue(boxModelModel.DecayRate_per_day >= 4.0f && boxModelModel.DecayRate_per_day <= 6.0f);
-            //Assert.IsTrue(boxModelModel.Flow_m3_day >= 1000.0f && boxModelModel.Flow_m3_day <= 2000.0f);
-            //Assert.IsTrue(boxModelModel.FlowDuration_hour >= 20 && boxModelModel.FlowDuration_hour <= 24);
+            //Assert.IsTrue(boxModelModel.Discharge_m3_day >= 1000.0f && boxModelModel.Discharge_m3_day <= 2000.0f);
+            //Assert.IsTrue(boxModelModel.DischargeDuration_hour >= 20 && boxModelModel.DischargeDuration_hour <= 24);
             //Assert.IsTrue(boxModelModel.Dilution >= 1000.0f && boxModelModel.Dilution <= 1001.0f);
             //Assert.IsTrue(boxModelModel.Depth_m >= 2.0f && boxModelModel.Depth_m <= 4.0f);
             //Assert.IsTrue(boxModelModel.FCUntreated_MPN_100ml >= 3000000.0f && boxModelModel.FCUntreated_MPN_100ml <= 3600000.0f);

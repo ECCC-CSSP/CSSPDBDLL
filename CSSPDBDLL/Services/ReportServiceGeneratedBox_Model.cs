@@ -68,12 +68,12 @@ namespace CSSPDBDLL.Services
                                     reportBox_ModelModelQ = reportBox_ModelModelQ.OrderByDescending(c => c.Box_Model_Scenario_Name);
                             }
                             break;
-                        case "Box_Model_Flow_m3_day":
+                        case "Box_Model_Discharge_m3_day":
                             {
                                 if (reportTreeNode.dbSortingField.ReportSorting == ReportSortingEnum.ReportSortingAscending)
-                                    reportBox_ModelModelQ = reportBox_ModelModelQ.OrderBy(c => c.Box_Model_Flow_m3_day);
+                                    reportBox_ModelModelQ = reportBox_ModelModelQ.OrderBy(c => c.Box_Model_Discharge_m3_day);
                                 else
-                                    reportBox_ModelModelQ = reportBox_ModelModelQ.OrderByDescending(c => c.Box_Model_Flow_m3_day);
+                                    reportBox_ModelModelQ = reportBox_ModelModelQ.OrderByDescending(c => c.Box_Model_Discharge_m3_day);
                             }
                             break;
                         case "Box_Model_Depth_m":
@@ -140,12 +140,12 @@ namespace CSSPDBDLL.Services
                                     reportBox_ModelModelQ = reportBox_ModelModelQ.OrderByDescending(c => c.Box_Model_T90_hour);
                             }
                             break;
-                        case "Box_Model_Flow_Duration_hour":
+                        case "Box_Model_Discharge_Duration_hour":
                             {
                                 if (reportTreeNode.dbSortingField.ReportSorting == ReportSortingEnum.ReportSortingAscending)
-                                    reportBox_ModelModelQ = reportBox_ModelModelQ.OrderBy(c => c.Box_Model_Flow_Duration_hour);
+                                    reportBox_ModelModelQ = reportBox_ModelModelQ.OrderBy(c => c.Box_Model_Discharge_Duration_hour);
                                 else
-                                    reportBox_ModelModelQ = reportBox_ModelModelQ.OrderByDescending(c => c.Box_Model_Flow_Duration_hour);
+                                    reportBox_ModelModelQ = reportBox_ModelModelQ.OrderByDescending(c => c.Box_Model_Discharge_Duration_hour);
                             }
                             break;
                         case "Box_Model_Last_Update_Date_UTC":
@@ -251,8 +251,8 @@ namespace CSSPDBDLL.Services
                         case "Box_Model_ID":
                             reportBox_ModelModelQ = ReportServiceGeneratedBox_Model_Box_Model_ID(reportBox_ModelModelQ, reportTreeNode, dbFilteringNumberField);
                             break;
-                        case "Box_Model_Flow_m3_day":
-                            reportBox_ModelModelQ = ReportServiceGeneratedBox_Model_Box_Model_Flow_m3_day(reportBox_ModelModelQ, reportTreeNode, dbFilteringNumberField);
+                        case "Box_Model_Discharge_m3_day":
+                            reportBox_ModelModelQ = ReportServiceGeneratedBox_Model_Box_Model_Discharge_m3_day(reportBox_ModelModelQ, reportTreeNode, dbFilteringNumberField);
                             break;
                         case "Box_Model_Depth_m":
                             reportBox_ModelModelQ = ReportServiceGeneratedBox_Model_Box_Model_Depth_m(reportBox_ModelModelQ, reportTreeNode, dbFilteringNumberField);
@@ -278,8 +278,8 @@ namespace CSSPDBDLL.Services
                         case "Box_Model_T90_hour":
                             reportBox_ModelModelQ = ReportServiceGeneratedBox_Model_Box_Model_T90_hour(reportBox_ModelModelQ, reportTreeNode, dbFilteringNumberField);
                             break;
-                        case "Box_Model_Flow_Duration_hour":
-                            reportBox_ModelModelQ = ReportServiceGeneratedBox_Model_Box_Model_Flow_Duration_hour(reportBox_ModelModelQ, reportTreeNode, dbFilteringNumberField);
+                        case "Box_Model_Discharge_Duration_hour":
+                            reportBox_ModelModelQ = ReportServiceGeneratedBox_Model_Box_Model_Discharge_Duration_hour(reportBox_ModelModelQ, reportTreeNode, dbFilteringNumberField);
                             break;
                         default:
                             break;
@@ -897,18 +897,18 @@ namespace CSSPDBDLL.Services
 
             return reportBox_ModelModelQ;
         }
-        public IQueryable<ReportBox_ModelModel> ReportServiceGeneratedBox_Model_Box_Model_Flow_m3_day(IQueryable<ReportBox_ModelModel> reportBox_ModelModelQ, ReportTreeNode reportTreeNode, ReportConditionNumberField dbFilteringNumberField)
+        public IQueryable<ReportBox_ModelModel> ReportServiceGeneratedBox_Model_Box_Model_Discharge_m3_day(IQueryable<ReportBox_ModelModel> reportBox_ModelModelQ, ReportTreeNode reportTreeNode, ReportConditionNumberField dbFilteringNumberField)
         {
             switch (dbFilteringNumberField.ReportCondition)
             {
                 case ReportConditionEnum.ReportConditionBigger:
-                    reportBox_ModelModelQ = reportBox_ModelModelQ.Where(c => c.Box_Model_Flow_m3_day > dbFilteringNumberField.NumberCondition);
+                    reportBox_ModelModelQ = reportBox_ModelModelQ.Where(c => c.Box_Model_Discharge_m3_day > dbFilteringNumberField.NumberCondition);
                     break;
                 case ReportConditionEnum.ReportConditionSmaller:
-                    reportBox_ModelModelQ = reportBox_ModelModelQ.Where(c => c.Box_Model_Flow_m3_day < dbFilteringNumberField.NumberCondition);
+                    reportBox_ModelModelQ = reportBox_ModelModelQ.Where(c => c.Box_Model_Discharge_m3_day < dbFilteringNumberField.NumberCondition);
                     break;
                 case ReportConditionEnum.ReportConditionEqual:
-                    reportBox_ModelModelQ = reportBox_ModelModelQ.Where(c => c.Box_Model_Flow_m3_day == dbFilteringNumberField.NumberCondition);
+                    reportBox_ModelModelQ = reportBox_ModelModelQ.Where(c => c.Box_Model_Discharge_m3_day == dbFilteringNumberField.NumberCondition);
                     break;
                 default:
                     break;
@@ -1068,18 +1068,18 @@ namespace CSSPDBDLL.Services
 
             return reportBox_ModelModelQ;
         }
-        public IQueryable<ReportBox_ModelModel> ReportServiceGeneratedBox_Model_Box_Model_Flow_Duration_hour(IQueryable<ReportBox_ModelModel> reportBox_ModelModelQ, ReportTreeNode reportTreeNode, ReportConditionNumberField dbFilteringNumberField)
+        public IQueryable<ReportBox_ModelModel> ReportServiceGeneratedBox_Model_Box_Model_Discharge_Duration_hour(IQueryable<ReportBox_ModelModel> reportBox_ModelModelQ, ReportTreeNode reportTreeNode, ReportConditionNumberField dbFilteringNumberField)
         {
             switch (dbFilteringNumberField.ReportCondition)
             {
                 case ReportConditionEnum.ReportConditionBigger:
-                    reportBox_ModelModelQ = reportBox_ModelModelQ.Where(c => c.Box_Model_Flow_Duration_hour > dbFilteringNumberField.NumberCondition);
+                    reportBox_ModelModelQ = reportBox_ModelModelQ.Where(c => c.Box_Model_Discharge_Duration_hour > dbFilteringNumberField.NumberCondition);
                     break;
                 case ReportConditionEnum.ReportConditionSmaller:
-                    reportBox_ModelModelQ = reportBox_ModelModelQ.Where(c => c.Box_Model_Flow_Duration_hour < dbFilteringNumberField.NumberCondition);
+                    reportBox_ModelModelQ = reportBox_ModelModelQ.Where(c => c.Box_Model_Discharge_Duration_hour < dbFilteringNumberField.NumberCondition);
                     break;
                 case ReportConditionEnum.ReportConditionEqual:
-                    reportBox_ModelModelQ = reportBox_ModelModelQ.Where(c => c.Box_Model_Flow_Duration_hour == dbFilteringNumberField.NumberCondition);
+                    reportBox_ModelModelQ = reportBox_ModelModelQ.Where(c => c.Box_Model_Discharge_Duration_hour == dbFilteringNumberField.NumberCondition);
                     break;
                 default:
                     break;

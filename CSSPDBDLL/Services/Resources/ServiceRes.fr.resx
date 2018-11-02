@@ -3914,4 +3914,7 @@
   <data name="ProvinceToolsGenerateStats" xml:space="preserve">
     <value>Province tools generate stats (fr)</value>
   </data>
+  <data name="AskingToRunMIKEScenarioDecoupled" xml:space="preserve">
+    <value>Asking To Run MIKE Scenario Decoupled (fr)</value>
+  </data>
 </root>

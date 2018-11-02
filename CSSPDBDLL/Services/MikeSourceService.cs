@@ -24,6 +24,7 @@ namespace CSSPDBDLL.Services
         public MapInfoService _MapInfoService { get; private set; }
         public MikeSourceStartEndService _MikeSourceStartEndService { get; private set; }
         public TVItemService _TVItemService { get; private set; }
+        public TVFileService _TVFileService { get; private set; }
         public LogService _LogService { get; private set; }
         #endregion Properties
 
@@ -34,6 +35,7 @@ namespace CSSPDBDLL.Services
             _MapInfoService = new MapInfoService(LanguageRequest, User);
             _MikeSourceStartEndService = new MikeSourceStartEndService(LanguageRequest, User);
             _TVItemService = new TVItemService(LanguageRequest, User);
+            _TVFileService = new TVFileService(LanguageRequest, User);
             _LogService = new LogService(LanguageRequest, User);
         }
         #endregion Constructors
@@ -430,6 +432,32 @@ namespace CSSPDBDLL.Services
 
             int MikeScenarioTVItemID = tvItemModelMikeSource.ParentID;
 
+            TVItemModel tvItemModelMikeScenario = _TVItemService.GetTVItemModelWithTVItemIDDB(MikeScenarioTVItemID);
+            if (!string.IsNullOrWhiteSpace(tvItemModelMikeScenario.Error))
+                return ReturnError(tvItemModelMikeScenario.Error);
+
+            string ServerPath = _TVFileService.GetServerFilePath(MikeScenarioTVItemID);
+
+            string ServerFileNameConc = $"{ tvItemModelMikeSource.TVText}_PollutionConcentration.dfs0";
+
+            TVFileModel tvFileModel = _TVFileService.GetTVFileModelWithServerFilePathAndServerFileNameDB(ServerPath, ServerFileNameConc);
+            if (string.IsNullOrWhiteSpace(tvFileModel.Error))
+            {
+                TVFileModel tvFileModelRet = _TVFileService.PostDeleteTVFileDB(tvFileModel.TVFileID);
+                if (!string.IsNullOrWhiteSpace(tvFileModelRet.Error))
+                    return ReturnError(tvFileModelRet.Error);
+            }
+
+            string ServerFileNameDischarge = $"{ tvItemModelMikeSource.TVText}_Discharge.dfs0";
+
+            TVFileModel tvFileModelDischarge = _TVFileService.GetTVFileModelWithServerFilePathAndServerFileNameDB(ServerPath, ServerFileNameDischarge);
+            if (string.IsNullOrWhiteSpace(tvFileModelDischarge.Error))
+            {
+                TVFileModel tvFileModelRet = _TVFileService.PostDeleteTVFileDB(tvFileModelDischarge.TVFileID);
+                if (!string.IsNullOrWhiteSpace(tvFileModelRet.Error))
+                    return ReturnError(tvFileModelRet.Error);
+            }
+
             List<MikeSourceModel> mikeSourceModelList = GetMikeSourceModelListWithMikeScenarioTVItemIDDB(MikeScenarioTVItemID);
 
             using (TransactionScope ts = new TransactionScope())
@@ -483,8 +511,7 @@ namespace CSSPDBDLL.Services
 
             MikeSourceModel mikeSourceModelToDelete = GetMikeSourceModelWithMikeSourceTVItemIDDB(MikeSourceTVItemID);
             if (!string.IsNullOrWhiteSpace(mikeSourceModelToDelete.Error))
-                return ReturnError(mikeSourceModelToDelete.Error);
-
+                return ReturnError(mikeSourceModelToDelete.Error);           
 
             MikeSourceModel mikeSourceModelRet = PostDeleteMikeSourceDB(mikeSourceModelToDelete.MikeSourceID);
             if (!string.IsNullOrWhiteSpace(mikeSourceModelRet.Error))

@@ -948,6 +948,27 @@ namespace CSSPDBDLL.Services
 
             return appTaskModelRet;
         }
+        public MikeScenarioModel PostMikeScenarioReestablishEditingDB(int MikeScenarioTVItemID)
+        {
+            ContactOK contactOK = IsContactOK();
+            if (!string.IsNullOrWhiteSpace(contactOK.Error))
+                return ReturnMikeScenarioError(contactOK.Error);
+
+            if (MikeScenarioTVItemID == 0)
+                return ReturnMikeScenarioError(string.Format(ServiceRes._IsRequired, ServiceRes.MikeScenarioTVItemID));
+
+            MikeScenarioModel mikeScenarioModel = GetMikeScenarioModelWithMikeScenarioTVItemIDDB(MikeScenarioTVItemID);
+            if (!string.IsNullOrWhiteSpace(mikeScenarioModel.Error))
+                return ReturnMikeScenarioError(mikeScenarioModel.Error);
+
+            mikeScenarioModel.ScenarioStatus = ScenarioStatusEnum.Changed;
+
+            MikeScenarioModel mikeScenarioModelRet = PostUpdateMikeScenarioDB(mikeScenarioModel);
+            if (!string.IsNullOrWhiteSpace(mikeScenarioModelRet.Error))
+                return ReturnMikeScenarioError(mikeScenarioModelRet.Error);
+
+            return mikeScenarioModelRet;
+        }
         public AppTaskModel LoadHydrometricDataValueDB(int MikeScenarioTVItemID, int MikeSourceTVItemID)
         {
             ContactOK contactOK = IsContactOK();

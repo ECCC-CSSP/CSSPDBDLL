@@ -880,6 +880,15 @@ namespace CSSPDBDLL.Services.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Asking To Run MIKE Scenario Decoupled.
+        /// </summary>
+        public static string AskingToRunMIKEScenarioDecoupled {
+            get {
+                return ResourceManager.GetString("AskingToRunMIKEScenarioDecoupled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Asked to run.
         /// </summary>
         public static string AskToRun {

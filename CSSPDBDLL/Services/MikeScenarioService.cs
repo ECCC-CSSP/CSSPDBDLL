@@ -1521,15 +1521,27 @@ namespace CSSPDBDLL.Services
 
             if (tvItemModelParents[tvItemModelParents.Count - 2].TVType == TVTypeEnum.Sector)
             {
-                if (fc["GenerateDecouplingFiles"] != null)
+                if (fc["DecouplingAction"] == null)
                 {
-                    GenerateDecouplingFiles = true;
+                    return ReturnMikeScenarioError(string.Format(ServiceRes._ShouldNotBeNullOrEmpty, "DecouplingAction"));
                 }
 
-                if (fc["UseDecouplingFiles"] != null)
+                if (fc["DecouplingAction"] == "GenerateDecouplingFiles")
                 {
+                    GenerateDecouplingFiles = true;
+                    UseDecouplingFiles = false;
+                }
+                else if (fc["DecouplingAction"] == "UseDecouplingFiles")
+                {
+                    GenerateDecouplingFiles = false;
                     UseDecouplingFiles = true;
                 }
+                else
+                {
+                    GenerateDecouplingFiles = false;
+                    UseDecouplingFiles = false;
+                }
+
 
                 if (int.TryParse(fc["UseSalinityAndTemperatureInitialConditionFromTVFileTVItemID"], out int TempIntUseSalAndTemp))
                 {

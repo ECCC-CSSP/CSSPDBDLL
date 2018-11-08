@@ -551,6 +551,11 @@ namespace CSSPDBDLL.Services
             if (polSourceObservationToDelete == null)
                 return ReturnError(string.Format(ServiceRes.CouldNotFind_ToDelete, ServiceRes.PolSourceObservation));
 
+            // should not be able to delete the last observation
+            List<PolSourceObservationModel> polSourceObservationModelList = GetPolSourceObservationModelListWithPolSourceSiteIDDB(polSourceObservationToDelete.PolSourceSiteID);
+            if (polSourceObservationModelList.Count < 2)
+                return ReturnError(ServiceRes.ShouldNotDeleteTheLastObservation);
+
             using (TransactionScope ts = new TransactionScope())
             {
                 db.PolSourceObservations.Remove(polSourceObservationToDelete);

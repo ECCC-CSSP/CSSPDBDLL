@@ -2123,7 +2123,7 @@ namespace CSSPDBDLL.Services
                 tvItemMoreInfoMWQMSiteModel.MaxFC = (float)mwqmSampleList.Max(c => c.FecCol_MPN_100ml);
             }
 
-            if (mwqmSampleList.Count >= 10)
+            if (mwqmSampleList.Count >= 4)
             {
                 List<double> GeoMeanList = (from c in mwqmSampleList
                                             select (c.FecCol_MPN_100ml == 1 ? 1.9D : (double)c.FecCol_MPN_100ml)).ToList<double>();

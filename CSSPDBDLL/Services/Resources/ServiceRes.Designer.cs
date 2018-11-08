@@ -9583,6 +9583,15 @@ namespace CSSPDBDLL.Services.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Should not delete the last observation.
+        /// </summary>
+        public static string ShouldNotDeleteTheLastObservation {
+            get {
+                return ResourceManager.GetString("ShouldNotDeleteTheLastObservation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Should only have one {0}.
         /// </summary>
         public static string ShouldOnlyHaveOne_ {

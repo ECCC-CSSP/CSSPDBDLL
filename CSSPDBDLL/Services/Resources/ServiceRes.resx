@@ -4059,4 +4059,7 @@
   <data name="AskingToRunMIKEScenarioDecoupled" xml:space="preserve">
     <value>Asking To Run MIKE Scenario Decoupled</value>
   </data>
+  <data name="ShouldNotDeleteTheLastObservation" xml:space="preserve">
+    <value>Should not delete the last observation</value>
+  </data>
 </root>

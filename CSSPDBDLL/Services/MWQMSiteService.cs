@@ -138,7 +138,7 @@ namespace CSSPDBDLL.Services
                 MinFC = (int)mwqmSampleList.Min(c => c.FecCol_MPN_100ml);
                 MaxFC = (int)mwqmSampleList.Max(c => c.FecCol_MPN_100ml);
 
-                if (mwqmSampleList.Count >= 10)
+                if (mwqmSampleList.Count >= 4)
                 {
                     CalculateMWQMSiteStat(mwqmSampleList, tvlNew, MinFC, MaxFC, SampCount);
                 }

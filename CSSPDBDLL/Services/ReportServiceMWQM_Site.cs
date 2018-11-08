@@ -244,7 +244,7 @@ namespace CSSPDBDLL.Services
                         reportMWQM_SiteModel.MWQM_Site_Stat_Min_FC_X_Last_Samples = MinFC;
                         reportMWQM_SiteModel.MWQM_Site_Stat_Max_FC_X_Last_Samples = MaxFC;
 
-                        if (mwqmSampleList.Count >= 10)
+                        if (mwqmSampleList.Count >= 4)
                         {
                             List<double> GeoMeanList = (from c in mwqmSampleList
                                                         orderby c.FecCol_MPN_100ml

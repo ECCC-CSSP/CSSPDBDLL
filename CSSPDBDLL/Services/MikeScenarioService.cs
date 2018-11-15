@@ -2283,7 +2283,15 @@ namespace CSSPDBDLL.Services
             mikeSourceStartEndModel.SourcePollutionStart_MPN_100ml = SourcePollutionStart_MPN_100ml;
             mikeSourceStartEndModel.SourceTemperatureStart_C = SourceTemperatureStart_C;
             mikeSourceStartEndModel.SourceSalinityStart_PSU = SourceSalinityStart_PSU;
-            if (!(bool)mikeSourceModel.IsContinuous)
+            if (mikeSourceModel.IsContinuous && !mikeSourceModel.UseHydrometric)
+            {
+                mikeSourceStartEndModel.EndDateAndTime_Local = EndDate;
+                mikeSourceStartEndModel.SourceFlowEnd_m3_day = SourceFlowStart_m3_day;
+                mikeSourceStartEndModel.SourcePollutionEnd_MPN_100ml = SourcePollutionStart_MPN_100ml;
+                mikeSourceStartEndModel.SourceTemperatureEnd_C = SourceTemperatureStart_C;
+                mikeSourceStartEndModel.SourceSalinityEnd_PSU = SourceSalinityStart_PSU;
+            }
+            else
             {
                 mikeSourceStartEndModel.EndDateAndTime_Local = EndDate;
 
@@ -2307,14 +2315,6 @@ namespace CSSPDBDLL.Services
                 mikeSourceStartEndModel.SourcePollutionEnd_MPN_100ml = SourcePollutionEnd_MPN_100ml;
                 mikeSourceStartEndModel.SourceTemperatureEnd_C = SourceTemperatureEnd_C;
                 mikeSourceStartEndModel.SourceSalinityEnd_PSU = SourceSalinityEnd_PSU;
-            }
-            else
-            {
-                mikeSourceStartEndModel.EndDateAndTime_Local = EndDate;
-                mikeSourceStartEndModel.SourceFlowEnd_m3_day = SourceFlowStart_m3_day;
-                mikeSourceStartEndModel.SourcePollutionEnd_MPN_100ml = SourcePollutionStart_MPN_100ml;
-                mikeSourceStartEndModel.SourceTemperatureEnd_C = SourceTemperatureStart_C;
-                mikeSourceStartEndModel.SourceSalinityEnd_PSU = SourceSalinityStart_PSU;
             }
 
             MikeSourceStartEndModel mikeSourceStartEndModelRet = new MikeSourceStartEndModel();

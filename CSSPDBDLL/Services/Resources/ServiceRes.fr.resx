@@ -3920,4 +3920,13 @@
   <data name="ShouldNotDeleteTheLastObservation" xml:space="preserve">
     <value>Should not delete the last observation (fr)</value>
   </data>
+  <data name="MikeScenarioResult" xml:space="preserve">
+    <value>MikeScenarioResult</value>
+  </data>
+  <data name="MikeScenarioResultCreateAndSave" xml:space="preserve">
+    <value>Mike scenario result create and save (fr)</value>
+  </data>
+  <data name="MikeScenarioResultID" xml:space="preserve">
+    <value>MikeScenarioResultID</value>
+  </data>
 </root>

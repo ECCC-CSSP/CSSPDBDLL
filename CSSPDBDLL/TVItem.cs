@@ -41,6 +41,7 @@ namespace CSSPDBDLL
             this.LabSheetTubeMPNDetails = new HashSet<LabSheetTubeMPNDetail>();
             this.MapInfos = new HashSet<MapInfo>();
             this.MikeBoundaryConditions = new HashSet<MikeBoundaryCondition>();
+            this.MikeScenarioResults = new HashSet<MikeScenarioResult>();
             this.MikeScenarios = new HashSet<MikeScenario>();
             this.MikeSources = new HashSet<MikeSource>();
             this.MikeSources1 = new HashSet<MikeSource>();
@@ -141,6 +142,8 @@ namespace CSSPDBDLL
         public virtual ICollection<MapInfo> MapInfos { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MikeBoundaryCondition> MikeBoundaryConditions { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<MikeScenarioResult> MikeScenarioResults { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MikeScenario> MikeScenarios { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

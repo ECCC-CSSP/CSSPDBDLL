@@ -239,6 +239,9 @@
     <Compile Include="MikeScenario.cs">
       <DependentUpon>CSSPDBEDM.tt</DependentUpon>
     </Compile>
+    <Compile Include="MikeScenarioResult.cs">
+      <DependentUpon>CSSPDBEDM.tt</DependentUpon>
+    </Compile>
     <Compile Include="MikeSource.cs">
       <DependentUpon>CSSPDBEDM.tt</DependentUpon>
     </Compile>
@@ -340,6 +343,7 @@
     <Compile Include="Services\ContactPreferenceService.cs" />
     <Compile Include="Services\ContactService.cs" />
     <Compile Include="Services\ContactShortcutService.cs" />
+    <Compile Include="Services\MikeScenarioResultService.cs" />
     <Compile Include="Services\MWQMSitePolSourceSiteService.cs" />
     <Compile Include="Services\PolSourceSiteInputToolService.cs" />
     <Compile Include="Services\ClassificationService.cs" />

@@ -59,6 +59,7 @@ namespace CSSPDBDLL
         public virtual DbSet<MapInfoPoint> MapInfoPoints { get; set; }
         public virtual DbSet<MapInfo> MapInfos { get; set; }
         public virtual DbSet<MikeBoundaryCondition> MikeBoundaryConditions { get; set; }
+        public virtual DbSet<MikeScenarioResult> MikeScenarioResults { get; set; }
         public virtual DbSet<MikeScenario> MikeScenarios { get; set; }
         public virtual DbSet<MikeSource> MikeSources { get; set; }
         public virtual DbSet<MikeSourceStartEnd> MikeSourceStartEnds { get; set; }

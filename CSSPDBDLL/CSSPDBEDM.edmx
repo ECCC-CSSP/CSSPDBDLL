@@ -639,6 +639,16 @@
           <Property Name="LastUpdateDate_UTC" Type="datetime" Nullable="false" />
           <Property Name="LastUpdateContactTVItemID" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="MikeScenarioResults">
+          <Key>
+            <PropertyRef Name="MikeScenarioResultID" />
+          </Key>
+          <Property Name="MikeScenarioResultID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MikeScenarioTVItemID" Type="int" Nullable="false" />
+          <Property Name="MikeResultsJSON" Type="text" />
+          <Property Name="LastUpdateDate_UTC" Type="datetime" Nullable="false" />
+          <Property Name="LastUpdateContactTVItemID" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="MikeScenarios">
           <Key>
             <PropertyRef Name="MikeScenarioID" />
@@ -1987,6 +1997,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_MikeScenarioResults_TVItems">
+          <End Role="TVItems" Type="Self.TVItems" Multiplicity="1" />
+          <End Role="MikeScenarioResults" Type="Self.MikeScenarioResults" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TVItems">
+              <PropertyRef Name="TVItemID" />
+            </Principal>
+            <Dependent Role="MikeScenarioResults">
+              <PropertyRef Name="MikeScenarioTVItemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_MikeScenarios_MikeScenarios">
           <End Role="MikeScenarios" Type="Self.MikeScenarios" Multiplicity="0..1" />
           <End Role="MikeScenarios1" Type="Self.MikeScenarios" Multiplicity="*" />
@@ -2833,6 +2855,7 @@
           <EntitySet Name="MapInfoPoints" EntityType="Self.MapInfoPoints" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MapInfos" EntityType="Self.MapInfos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MikeBoundaryConditions" EntityType="Self.MikeBoundaryConditions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MikeScenarioResults" EntityType="Self.MikeScenarioResults" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MikeScenarios" EntityType="Self.MikeScenarios" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MikeSources" EntityType="Self.MikeSources" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MikeSourceStartEnds" EntityType="Self.MikeSourceStartEnds" Schema="dbo" store:Type="Tables" />
@@ -3060,6 +3083,10 @@
           <AssociationSet Name="FK_MikeBoundaryConditions_TVItems" Association="Self.FK_MikeBoundaryConditions_TVItems">
             <End Role="TVItems" EntitySet="TVItems" />
             <End Role="MikeBoundaryConditions" EntitySet="MikeBoundaryConditions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MikeScenarioResults_TVItems" Association="Self.FK_MikeScenarioResults_TVItems">
+            <End Role="TVItems" EntitySet="TVItems" />
+            <End Role="MikeScenarioResults" EntitySet="MikeScenarioResults" />
           </AssociationSet>
           <AssociationSet Name="FK_MikeScenarios_MikeScenarios" Association="Self.FK_MikeScenarios_MikeScenarios">
             <End Role="MikeScenarios" EntitySet="MikeScenarios" />
@@ -3357,6 +3384,7 @@
           <EntitySet Name="MapInfoPoints" EntityType="CSSPDBModel.MapInfoPoint" />
           <EntitySet Name="MapInfos" EntityType="CSSPDBModel.MapInfo" />
           <EntitySet Name="MikeBoundaryConditions" EntityType="CSSPDBModel.MikeBoundaryCondition" />
+          <EntitySet Name="MikeScenarioResults" EntityType="CSSPDBModel.MikeScenarioResult" />
           <EntitySet Name="MikeScenarios" EntityType="CSSPDBModel.MikeScenario" />
           <EntitySet Name="MikeSources" EntityType="CSSPDBModel.MikeSource" />
           <EntitySet Name="MikeSourceStartEnds" EntityType="CSSPDBModel.MikeSourceStartEnd" />
@@ -3580,6 +3608,10 @@
           <AssociationSet Name="FK_MikeBoundaryConditions_TVItems" Association="CSSPDBModel.FK_MikeBoundaryConditions_TVItems">
             <End Role="TVItem" EntitySet="TVItems" />
             <End Role="MikeBoundaryCondition" EntitySet="MikeBoundaryConditions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MikeScenarioResults_TVItems" Association="CSSPDBModel.FK_MikeScenarioResults_TVItems">
+            <End Role="TVItem" EntitySet="TVItems" />
+            <End Role="MikeScenarioResult" EntitySet="MikeScenarioResults" />
           </AssociationSet>
           <AssociationSet Name="FK_MikeScenarios_MikeScenarios" Association="CSSPDBModel.FK_MikeScenarios_MikeScenarios">
             <End Role="MikeScenario" EntitySet="MikeScenarios" />
@@ -4527,6 +4559,17 @@
           <Property Name="LastUpdateContactTVItemID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="TVItem" Relationship="CSSPDBModel.FK_MikeBoundaryConditions_TVItems" FromRole="MikeBoundaryCondition" ToRole="TVItem" />
         </EntityType>
+        <EntityType Name="MikeScenarioResult">
+          <Key>
+            <PropertyRef Name="MikeScenarioResultID" />
+          </Key>
+          <Property Name="MikeScenarioResultID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MikeScenarioTVItemID" Type="Int32" Nullable="false" />
+          <Property Name="MikeResultsJSON" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="LastUpdateDate_UTC" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastUpdateContactTVItemID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TVItem" Relationship="CSSPDBModel.FK_MikeScenarioResults_TVItems" FromRole="MikeScenarioResult" ToRole="TVItem" />
+        </EntityType>
         <EntityType Name="MikeScenario">
           <Key>
             <PropertyRef Name="MikeScenarioID" />
@@ -5265,6 +5308,7 @@
           <NavigationProperty Name="LabSheetTubeMPNDetails" Relationship="CSSPDBModel.FK_LabSheetTubeMPNDetails_TVItems" FromRole="TVItem" ToRole="LabSheetTubeMPNDetail" />
           <NavigationProperty Name="MapInfos" Relationship="CSSPDBModel.FK_MapInfos_TVItems" FromRole="TVItem" ToRole="MapInfo" />
           <NavigationProperty Name="MikeBoundaryConditions" Relationship="CSSPDBModel.FK_MikeBoundaryConditions_TVItems" FromRole="TVItem" ToRole="MikeBoundaryCondition" />
+          <NavigationProperty Name="MikeScenarioResults" Relationship="CSSPDBModel.FK_MikeScenarioResults_TVItems" FromRole="TVItem" ToRole="MikeScenarioResult" />
           <NavigationProperty Name="MikeScenarios" Relationship="CSSPDBModel.FK_MikeScenarios_TVItems" FromRole="TVItem" ToRole="MikeScenario" />
           <NavigationProperty Name="MikeSources" Relationship="CSSPDBModel.FK_MikeSources_HydrometricTVItemID" FromRole="TVItem" ToRole="MikeSource" />
           <NavigationProperty Name="MikeSources1" Relationship="CSSPDBModel.FK_MikeSources_TVItems" FromRole="TVItem" ToRole="MikeSource" />
@@ -6009,6 +6053,18 @@
             </Principal>
             <Dependent Role="MikeBoundaryCondition">
               <PropertyRef Name="MikeBoundaryConditionTVItemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MikeScenarioResults_TVItems">
+          <End Type="CSSPDBModel.TVItem" Role="TVItem" Multiplicity="1" />
+          <End Type="CSSPDBModel.MikeScenarioResult" Role="MikeScenarioResult" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TVItem">
+              <PropertyRef Name="TVItemID" />
+            </Principal>
+            <Dependent Role="MikeScenarioResult">
+              <PropertyRef Name="MikeScenarioTVItemID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -7475,6 +7531,17 @@
                 <ScalarProperty Name="MikeBoundaryConditionCode" ColumnName="MikeBoundaryConditionCode" />
                 <ScalarProperty Name="MikeBoundaryConditionTVItemID" ColumnName="MikeBoundaryConditionTVItemID" />
                 <ScalarProperty Name="MikeBoundaryConditionID" ColumnName="MikeBoundaryConditionID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MikeScenarioResults">
+            <EntityTypeMapping TypeName="CSSPDBModel.MikeScenarioResult">
+              <MappingFragment StoreEntitySet="MikeScenarioResults">
+                <ScalarProperty Name="LastUpdateContactTVItemID" ColumnName="LastUpdateContactTVItemID" />
+                <ScalarProperty Name="LastUpdateDate_UTC" ColumnName="LastUpdateDate_UTC" />
+                <ScalarProperty Name="MikeResultsJSON" ColumnName="MikeResultsJSON" />
+                <ScalarProperty Name="MikeScenarioTVItemID" ColumnName="MikeScenarioTVItemID" />
+                <ScalarProperty Name="MikeScenarioResultID" ColumnName="MikeScenarioResultID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

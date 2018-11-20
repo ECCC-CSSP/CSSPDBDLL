@@ -1788,6 +1788,57 @@ namespace CSSPDBDLL.Services
 
             return tvFileModelRet;
         }
+        public AppTaskModel MikeScenarioPrepareResultsDB(int MikeScenarioTVItemID)
+        {
+            ContactOK contactOK = IsContactOK();
+            if (!string.IsNullOrWhiteSpace(contactOK.Error))
+                return ReturnAppTaskError(contactOK.Error);
+
+            if (MikeScenarioTVItemID == 0)
+                return ReturnAppTaskError(string.Format(ServiceRes._IsRequired, ServiceRes.MikeScenarioTVItemID));
+
+            MikeScenarioModel mikeScenarioModel = GetMikeScenarioModelWithMikeScenarioTVItemIDDB(MikeScenarioTVItemID);
+            if (!string.IsNullOrWhiteSpace(mikeScenarioModel.Error))
+                return ReturnAppTaskError(mikeScenarioModel.Error);
+
+            List<AppTaskParameter> appTaskParameterList = new List<AppTaskParameter>();
+            appTaskParameterList.Add(new AppTaskParameter() { Name = "MikeScenarioTVItemID", Value = MikeScenarioTVItemID.ToString() });
+
+            StringBuilder sbParameters = new StringBuilder();
+            int count = 0;
+            foreach (AppTaskParameter atp in appTaskParameterList)
+            {
+                if (count == 0)
+                {
+                    sbParameters.Append("|||");
+                }
+                sbParameters.Append(atp.Name + "," + atp.Value + "|||");
+                count += 1;
+            }
+
+            AppTaskModel appTaskModelNew = new AppTaskModel()
+            {
+                TVItemID = MikeScenarioTVItemID,
+                TVItemID2 = MikeScenarioTVItemID,
+                AppTaskCommand = AppTaskCommandEnum.MikeScenarioPrepareResults,
+                ErrorText = "",
+                StatusText = ServiceRes.MikeScenarioPrepareResults,
+                AppTaskStatus = AppTaskStatusEnum.Created,
+                PercentCompleted = 1,
+                Parameters = sbParameters.ToString(),
+                Language = LanguageRequest,
+                StartDateTime_UTC = DateTime.UtcNow,
+                EndDateTime_UTC = null,
+                EstimatedLength_second = null,
+                RemainingTime_second = null,
+            };
+
+            AppTaskModel appTaskModelRet = _AppTaskService.PostAddAppTask(appTaskModelNew);
+            if (!string.IsNullOrWhiteSpace(appTaskModelRet.Error))
+                return ReturnAppTaskError(appTaskModelRet.Error);
+
+            return appTaskModelRet;
+        }
         public MikeSourceModel PostMikeSourceAddOrModifyDB(FormCollection fc)
         {
             int MikeScenarioTVItemID = 0;

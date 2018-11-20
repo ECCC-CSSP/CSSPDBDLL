@@ -209,57 +209,6 @@ namespace CSSPDBDLL.Services
         }
 
         // Post AppTask
-        public AppTaskModel PostMikeScenarioResultCreateAndSaveDB(int MikeScenarioTVItemID)
-        {
-            ContactOK contactOK = IsContactOK();
-            if (!string.IsNullOrWhiteSpace(contactOK.Error))
-                return ReturnAppTaskError(contactOK.Error);
-
-            if (MikeScenarioTVItemID == 0)
-                return ReturnAppTaskError(string.Format(ServiceRes._IsRequired, ServiceRes.MikeScenarioTVItemID));
-
-            MikeScenarioResultModel mikeScenarioResultModel = GetMikeScenarioResultModelWithMikeScenarioTVItemIDDB(MikeScenarioTVItemID);
-            if (!string.IsNullOrWhiteSpace(mikeScenarioResultModel.Error))
-                return ReturnAppTaskError(mikeScenarioResultModel.Error);
-
-            List<AppTaskParameter> appTaskParameterList = new List<AppTaskParameter>();
-            appTaskParameterList.Add(new AppTaskParameter() { Name = "MikeScenarioTVItemID", Value = MikeScenarioTVItemID.ToString() });
-
-            StringBuilder sbParameters = new StringBuilder();
-            int count = 0;
-            foreach (AppTaskParameter atp in appTaskParameterList)
-            {
-                if (count == 0)
-                {
-                    sbParameters.Append("|||");
-                }
-                sbParameters.Append(atp.Name + "," + atp.Value + "|||");
-                count += 1;
-            }
-
-            AppTaskModel appTaskModelNew = new AppTaskModel()
-            {
-                TVItemID = MikeScenarioTVItemID,
-                TVItemID2 = MikeScenarioTVItemID,
-                AppTaskCommand = AppTaskCommandEnum.MikeScenarioResultCreateAndSave,
-                ErrorText = "",
-                StatusText = ServiceRes.MikeScenarioResultCreateAndSave,
-                AppTaskStatus = AppTaskStatusEnum.Created,
-                PercentCompleted = 1,
-                Parameters = sbParameters.ToString(),
-                Language = LanguageRequest,
-                StartDateTime_UTC = DateTime.UtcNow,
-                EndDateTime_UTC = null,
-                EstimatedLength_second = null,
-                RemainingTime_second = null,
-            };
-
-            AppTaskModel appTaskModelRet = _AppTaskService.PostAddAppTask(appTaskModelNew);
-            if (!string.IsNullOrWhiteSpace(appTaskModelRet.Error))
-                return ReturnAppTaskError(appTaskModelRet.Error);
-
-            return appTaskModelRet;
-        }
 
         // Post Normal
         public MikeScenarioResultModel PostAddMikeScenarioResultDB(MikeScenarioResultModel mikeScenarioResultModel)

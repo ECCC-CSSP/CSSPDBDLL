@@ -6271,20 +6271,20 @@ namespace CSSPDBDLL.Services.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Mike scenario result create and save.
+        /// </summary>
+        public static string MikeScenarioPrepareResults {
+            get {
+                return ResourceManager.GetString("MikeScenarioPrepareResults", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to MikeScenarioResult.
         /// </summary>
         public static string MikeScenarioResult {
             get {
                 return ResourceManager.GetString("MikeScenarioResult", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Mike scenario result create and save.
-        /// </summary>
-        public static string MikeScenarioResultCreateAndSave {
-            get {
-                return ResourceManager.GetString("MikeScenarioResultCreateAndSave", resourceCulture);
             }
         }
         

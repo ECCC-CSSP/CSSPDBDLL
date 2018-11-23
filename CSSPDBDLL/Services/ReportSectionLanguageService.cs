@@ -68,7 +68,7 @@ namespace CSSPDBDLL.Services
                 return retStr;
             }
 
-            retStr = FieldCheckNotEmptyAndMaxLengthString(ReportSectionLanguageModel.ReportSectionText, ServiceRes.ReportSectionText, 100000);
+            retStr = FieldCheckIfNotNullMaxLengthString(ReportSectionLanguageModel.ReportSectionText, ServiceRes.ReportSectionText, 100000);
             if (!string.IsNullOrWhiteSpace(retStr))
             {
                 return retStr;

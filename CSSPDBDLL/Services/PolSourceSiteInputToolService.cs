@@ -208,11 +208,17 @@ namespace CSSPDBDLL.Services
             {
                 if (polSourceObservationIssueModel.PolSourceObservationIssueID == IssueID)
                 {
-                    PolSourceObservationIssueModel polSourceObservationIssueModelRet = polSourceObservationIssueService.PostDeletePolSourceObservationIssueDB(polSourceObservationIssueModel.PolSourceObservationIssueID);
-                    if (!string.IsNullOrWhiteSpace(polSourceObservationIssueModelRet.Error))
+                    PolSourceObservationIssueModel polSourceObservationIssueModelRet = polSourceObservationIssueService.GetPolSourceObservationIssueModelWithPolSourceObservationIssueIDDB(IssueID);
+                    if (string.IsNullOrWhiteSpace(polSourceObservationIssueModelRet.Error))
                     {
-                        return ReturnError(polSourceObservationIssueModelRet.Error);
+                        PolSourceObservationIssueModel polSourceObservationIssueModelRetDel = polSourceObservationIssueService.PostDeletePolSourceObservationIssueDB(IssueID);
+                        if (!string.IsNullOrWhiteSpace(polSourceObservationIssueModelRetDel.Error))
+                        {
+                            return ReturnError(polSourceObservationIssueModelRetDel.Error);
+                        }
+
                     }
+
 
                     DidDelete = true;
                 }
@@ -666,11 +672,12 @@ namespace CSSPDBDLL.Services
             return ReturnError($"");
 
         }
-        public TVItemModel SavePSSTVTextDB(int TVItemID, string TVText, string AdminEmail)
+        public TVItemModel SavePSSTVTextAndIsActiveDB(int TVItemID, string TVText, bool IsActive, string AdminEmail)
         {
             IPrincipal user = new GenericPrincipal(new GenericIdentity(AdminEmail, "Forms"), null);
 
             ContactService contactService = new ContactService(LanguageRequest, user);
+            TVItemService tvItemService = new TVItemService(LanguageRequest, user);
             TVItemLanguageService tvItemLanguageService = new TVItemLanguageService(LanguageRequest, user);
 
             ContactModel contactModel = contactService.GetContactModelWithLoginEmailDB(AdminEmail);
@@ -705,6 +712,21 @@ namespace CSSPDBDLL.Services
                 {
                     return ReturnError(tvItemLanguageModelRet.Error);
                 }
+
+                TVItemModel tvItemModel = tvItemService.GetTVItemModelWithTVItemIDDB(TVItemID);
+                if (!string.IsNullOrWhiteSpace(tvItemModel.Error))
+                {
+                    return ReturnError(tvItemModel.Error);
+                }
+
+                tvItemModel.IsActive = IsActive;
+
+                TVItemModel tvItemModelRet = tvItemService.PostUpdateTVItemDB(tvItemModel);
+                if (!string.IsNullOrWhiteSpace(tvItemModelRet.Error))
+                {
+                    return ReturnError(tvItemModelRet.Error);
+                }
+
             }
 
             return ReturnError("");

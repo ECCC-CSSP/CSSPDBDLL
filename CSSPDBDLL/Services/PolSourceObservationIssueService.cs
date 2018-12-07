@@ -647,6 +647,8 @@ namespace CSSPDBDLL.Services
             if (PolSourceObservationIssueModelList.Count == 1)
                 return ReturnError(ServiceRes.ShouldNotDeleteTheLastIssue);
 
+            int PolSourceObservationID = polSourceObservationIssueToDelete.PolSourceObservationID;
+
             using (TransactionScope ts = new TransactionScope())
             {
                 db.PolSourceObservationIssues.Remove(polSourceObservationIssueToDelete);
@@ -662,82 +664,85 @@ namespace CSSPDBDLL.Services
             }
 
             PolSourceObservationIssue polSourceObservationIssueFirst = (from c in db.PolSourceObservationIssues
-                                                                        where c.PolSourceObservationID == PolSourceObservationIssueID
+                                                                        where c.PolSourceObservationID == PolSourceObservationID
                                                                         orderby c.Ordinal
                                                                         select c).FirstOrDefault();
 
-            PolSourceSite polSourceSite = (from pso in db.PolSourceObservations
-                                           from pss in db.PolSourceSites
-                                           where pso.PolSourceSiteID == pss.PolSourceSiteID
-                                           && pso.PolSourceObservationID == polSourceObservationIssueFirst.PolSourceObservationID
-                                           select pss).FirstOrDefault();
-
-            if (polSourceSite == null)
-                return ReturnError(string.Format(ServiceRes.CouldNotFind_, ServiceRes.PolSourceSite));
-
-            List<string> polSourceObsInfoList = polSourceObservationIssueFirst.ObservationInfo.Split(",".ToCharArray(), StringSplitOptions.RemoveEmptyEntries).ToList();
-            List<int> polSourceObsInfoIntList = polSourceObsInfoList.Select(c => int.Parse(c)).ToList();
-
-            // doing the other language
-            foreach (LanguageEnum lang in LanguageListAllowable)
+            if (polSourceObservationIssueFirst != null)
             {
-                TVItemService tvItemService = new TVItemService(lang, User);
-                Thread.CurrentThread.CurrentCulture = new CultureInfo(lang + "-CA");
-                Thread.CurrentThread.CurrentUICulture = new CultureInfo(lang + "-CA");
+                PolSourceSite polSourceSite = (from pso in db.PolSourceObservations
+                                               from pss in db.PolSourceSites
+                                               where pso.PolSourceSiteID == pss.PolSourceSiteID
+                                               && pso.PolSourceObservationID == polSourceObservationIssueFirst.PolSourceObservationID
+                                               select pss).FirstOrDefault();
 
-                string TVText = "";
-                for (int i = 0, count = polSourceObsInfoList.Count; i < count; i++)
+                if (polSourceSite == null)
+                    return ReturnError(string.Format(ServiceRes.CouldNotFind_, ServiceRes.PolSourceSite));
+
+                List<string> polSourceObsInfoList = polSourceObservationIssueFirst.ObservationInfo.Split(",".ToCharArray(), StringSplitOptions.RemoveEmptyEntries).ToList();
+                List<int> polSourceObsInfoIntList = polSourceObsInfoList.Select(c => int.Parse(c)).ToList();
+
+                // doing the other language
+                foreach (LanguageEnum lang in LanguageListAllowable)
                 {
-                    string StartTxt = polSourceObsInfoList[i].Substring(0, 3);
+                    TVItemService tvItemService = new TVItemService(lang, User);
+                    Thread.CurrentThread.CurrentCulture = new CultureInfo(lang + "-CA");
+                    Thread.CurrentThread.CurrentUICulture = new CultureInfo(lang + "-CA");
 
-                    if (startWithList.Where(c => c.StartsWith(StartTxt)).Any())
+                    string TVText = "";
+                    for (int i = 0, count = polSourceObsInfoList.Count; i < count; i++)
                     {
-                        TVText = TVText.Trim();
-                        string TempText = _BaseEnumService.GetEnumText_PolSourceObsInfoEnum((PolSourceObsInfoEnum)int.Parse(polSourceObsInfoList[i]));
-                        if (TempText.IndexOf("|") > 0)
+                        string StartTxt = polSourceObsInfoList[i].Substring(0, 3);
+
+                        if (startWithList.Where(c => c.StartsWith(StartTxt)).Any())
                         {
-                            TempText = TempText.Substring(0, TempText.IndexOf("|")).Trim();
+                            TVText = TVText.Trim();
+                            string TempText = _BaseEnumService.GetEnumText_PolSourceObsInfoEnum((PolSourceObsInfoEnum)int.Parse(polSourceObsInfoList[i]));
+                            if (TempText.IndexOf("|") > 0)
+                            {
+                                TempText = TempText.Substring(0, TempText.IndexOf("|")).Trim();
+                            }
+                            TVText = TVText + (TVText.Length == 0 ? "" : ", ") + TempText;
                         }
-                        TVText = TVText + (TVText.Length == 0 ? "" : ", ") + TempText;
                     }
-                }
 
-                bool WellFormed = IssueWellFormed(polSourceObsInfoIntList, polSourceObsInfoChildList);
-                bool Completed = IssueCompleted(polSourceObsInfoIntList, polSourceObsInfoChildList);
+                    bool WellFormed = IssueWellFormed(polSourceObsInfoIntList, polSourceObsInfoChildList);
+                    bool Completed = IssueCompleted(polSourceObsInfoIntList, polSourceObsInfoChildList);
 
-                string NC = (WellFormed == false || Completed == false ? " (NC) - " : "");
-                if (lang == LanguageEnum.fr)
-                {
-                    NC = NC.Replace("NC", "PC");
-                }
-
-                TVText = "P00000".Substring(0, "P00000".Length - polSourceSite.Site.ToString().Length) + polSourceSite.Site.ToString() + " - " + NC + TVText;
-
-                TVItemLanguageModel tvItemLanguageModel = new TVItemLanguageModel();
-                tvItemLanguageModel.Language = lang;
-
-                bool Found = true;
-                while (Found)
-                {
-                    if (TVText.Contains("  "))
+                    string NC = (WellFormed == false || Completed == false ? " (NC) - " : "");
+                    if (lang == LanguageEnum.fr)
                     {
-                        TVText = TVText.Replace("  ", " ");
+                        NC = NC.Replace("NC", "PC");
                     }
-                    else
+
+                    TVText = "P00000".Substring(0, "P00000".Length - polSourceSite.Site.ToString().Length) + polSourceSite.Site.ToString() + " - " + NC + TVText;
+
+                    TVItemLanguageModel tvItemLanguageModel = new TVItemLanguageModel();
+                    tvItemLanguageModel.Language = lang;
+
+                    bool Found = true;
+                    while (Found)
                     {
-                        Found = false;
+                        if (TVText.Contains("  "))
+                        {
+                            TVText = TVText.Replace("  ", " ");
+                        }
+                        else
+                        {
+                            Found = false;
+                        }
                     }
+
+                    tvItemLanguageModel.TVText = TVText;
+                    tvItemLanguageModel.TVItemID = polSourceSite.PolSourceSiteTVItemID;
+
+                    TVItemLanguageModel tvItemLanguageModelRet = tvItemService._TVItemLanguageService.PostUpdateTVItemLanguageDB(tvItemLanguageModel);
+                    if (!string.IsNullOrWhiteSpace(tvItemLanguageModelRet.Error))
+                        return ReturnError(tvItemLanguageModelRet.Error);
+
+                    Thread.CurrentThread.CurrentCulture = new CultureInfo(LanguageRequest + "-CA");
+                    Thread.CurrentThread.CurrentUICulture = new CultureInfo(LanguageRequest + "-CA");
                 }
-
-                tvItemLanguageModel.TVText = TVText;
-                tvItemLanguageModel.TVItemID = polSourceSite.PolSourceSiteTVItemID;
-
-                TVItemLanguageModel tvItemLanguageModelRet = tvItemService._TVItemLanguageService.PostUpdateTVItemLanguageDB(tvItemLanguageModel);
-                if (!string.IsNullOrWhiteSpace(tvItemLanguageModelRet.Error))
-                    return ReturnError(tvItemLanguageModelRet.Error);
-
-                Thread.CurrentThread.CurrentCulture = new CultureInfo(LanguageRequest + "-CA");
-                Thread.CurrentThread.CurrentUICulture = new CultureInfo(LanguageRequest + "-CA");
             }
 
             return ReturnError("");

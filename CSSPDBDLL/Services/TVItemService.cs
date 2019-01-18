@@ -1461,7 +1461,7 @@ namespace CSSPDBDLL.Services
                         while (!Done)
                         {
                             TVItemLink currentLink = (from c in db.TVItemLinks
-                                                      where c.ToTVItemID == CurrentTVItemID
+                                                      where c.FromTVItemID == CurrentTVItemID
                                                       select c).FirstOrDefault<TVItemLink>();
 
                             if (currentLink == null)
@@ -1470,7 +1470,7 @@ namespace CSSPDBDLL.Services
                             }
                             else
                             {
-                                CurrentTVItemID = currentLink.FromTVItemID;
+                                CurrentTVItemID = currentLink.ToTVItemID;
 
                                 Infrastructure inf2 = (from c in db.Infrastructures
                                                        where c.InfrastructureTVItemID == CurrentTVItemID
@@ -1505,7 +1505,7 @@ namespace CSSPDBDLL.Services
                         while (!Done)
                         {
                             TVItemLink currentLink = (from c in db.TVItemLinks
-                                                      where c.ToTVItemID == CurrentTVItemID
+                                                      where c.FromTVItemID == CurrentTVItemID
                                                       select c).FirstOrDefault<TVItemLink>();
 
                             if (currentLink == null)
@@ -1514,7 +1514,7 @@ namespace CSSPDBDLL.Services
                             }
                             else
                             {
-                                CurrentTVItemID = currentLink.FromTVItemID;
+                                CurrentTVItemID = currentLink.ToTVItemID;
 
                                 Infrastructure inf2 = (from c in db.Infrastructures
                                                        where c.InfrastructureTVItemID == CurrentTVItemID

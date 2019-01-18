@@ -28,6 +28,7 @@ namespace CSSPDBDLL
             this.ClimateSites = new HashSet<ClimateSite>();
             this.Contacts = new HashSet<Contact>();
             this.DocTemplates = new HashSet<DocTemplate>();
+            this.DrogueRuns = new HashSet<DrogueRun>();
             this.EmailDistributionLists = new HashSet<EmailDistributionList>();
             this.Emails = new HashSet<Email>();
             this.HydrometricSites = new HashSet<HydrometricSite>();
@@ -116,6 +117,8 @@ namespace CSSPDBDLL
         public virtual ICollection<Contact> Contacts { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DocTemplate> DocTemplates { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DrogueRun> DrogueRuns { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EmailDistributionList> EmailDistributionLists { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

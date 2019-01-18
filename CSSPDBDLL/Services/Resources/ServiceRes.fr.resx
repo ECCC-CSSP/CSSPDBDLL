@@ -3929,4 +3929,40 @@
   <data name="MikeScenarioResultID" xml:space="preserve">
     <value>MikeScenarioResultID</value>
   </data>
+  <data name="CalculatedDirection_deg" xml:space="preserve">
+    <value>CalculatedDirection_deg</value>
+  </data>
+  <data name="CalculatedSpeed_m_s" xml:space="preserve">
+    <value>CalculatedSpeed_m_s</value>
+  </data>
+  <data name="DrogueNumber" xml:space="preserve">
+    <value>Drogue number (fr)</value>
+  </data>
+  <data name="DroguePosition" xml:space="preserve">
+    <value>DroguePosition</value>
+  </data>
+  <data name="DroguePositionID" xml:space="preserve">
+    <value>DroguePositionID</value>
+  </data>
+  <data name="DrogueRun" xml:space="preserve">
+    <value>DrogueRun</value>
+  </data>
+  <data name="DrogueRunID" xml:space="preserve">
+    <value>DrogueRunID</value>
+  </data>
+  <data name="DrogueType" xml:space="preserve">
+    <value>Drogue type (fr)</value>
+  </data>
+  <data name="RunStartDateTime" xml:space="preserve">
+    <value>Run start date and time (fr)</value>
+  </data>
+  <data name="StepDateTime_Local" xml:space="preserve">
+    <value>StepDateTime_Local</value>
+  </data>
+  <data name="StepLat" xml:space="preserve">
+    <value>StepLat</value>
+  </data>
+  <data name="StepLng" xml:space="preserve">
+    <value>StepLng</value>
+  </data>
 </root>

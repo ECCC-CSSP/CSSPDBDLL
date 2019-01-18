@@ -1231,6 +1231,24 @@ namespace CSSPDBDLL.Services.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to CalculatedDirection_deg.
+        /// </summary>
+        public static string CalculatedDirection_deg {
+            get {
+                return ResourceManager.GetString("CalculatedDirection_deg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CalculatedSpeed_m_s.
+        /// </summary>
+        public static string CalculatedSpeed_m_s {
+            get {
+                return ResourceManager.GetString("CalculatedSpeed_m_s", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to CalculationType.
         /// </summary>
         public static string CalculationType {
@@ -3108,6 +3126,60 @@ namespace CSSPDBDLL.Services.Resources {
         public static string DrainageArea_km2 {
             get {
                 return ResourceManager.GetString("DrainageArea_km2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Drogue number.
+        /// </summary>
+        public static string DrogueNumber {
+            get {
+                return ResourceManager.GetString("DrogueNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to DroguePosition.
+        /// </summary>
+        public static string DroguePosition {
+            get {
+                return ResourceManager.GetString("DroguePosition", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to DroguePositionID.
+        /// </summary>
+        public static string DroguePositionID {
+            get {
+                return ResourceManager.GetString("DroguePositionID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to DrogueRun.
+        /// </summary>
+        public static string DrogueRun {
+            get {
+                return ResourceManager.GetString("DrogueRun", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to DrogueRunID.
+        /// </summary>
+        public static string DrogueRunID {
+            get {
+                return ResourceManager.GetString("DrogueRunID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Drogue type.
+        /// </summary>
+        public static string DrogueType {
+            get {
+                return ResourceManager.GetString("DrogueType", resourceCulture);
             }
         }
         
@@ -8944,6 +9016,15 @@ namespace CSSPDBDLL.Services.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Run start date and time.
+        /// </summary>
+        public static string RunStartDateTime {
+            get {
+                return ResourceManager.GetString("RunStartDateTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to RunStartTime.
         /// </summary>
         public static string RunStartTime {
@@ -10110,6 +10191,33 @@ namespace CSSPDBDLL.Services.Resources {
         public static string StatusTVItemID {
             get {
                 return ResourceManager.GetString("StatusTVItemID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to StepDateTime_Local.
+        /// </summary>
+        public static string StepDateTime_Local {
+            get {
+                return ResourceManager.GetString("StepDateTime_Local", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to StepLat.
+        /// </summary>
+        public static string StepLat {
+            get {
+                return ResourceManager.GetString("StepLat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to StepLng.
+        /// </summary>
+        public static string StepLng {
+            get {
+                return ResourceManager.GetString("StepLng", resourceCulture);
             }
         }
         

@@ -505,13 +505,10 @@ namespace CSSPDBDLL.Services
             mwqmSubsectorWithLatLngModel.Lng = (float)mapInfoPointModelList[0].Lng;
             mwqmSubsectorClimateSites.MWQMSubsectorWithLatLngModel = mwqmSubsectorWithLatLngModel;
 
-            // Getting ClimateSites within distance and the ones used for the subsector
-            List<ClimateSiteWithLatLngAndOrdinalModel> climateSiteWithLatLngAndOrdinalModelList = new List<ClimateSiteWithLatLngAndOrdinalModel>();
-
             List<int> useClimateSiteTVItemIDList = (from c in db.ClimateSites
                                                     from u in db.UseOfSites
                                                     where c.ClimateSiteTVItemID == u.SiteTVItemID
-                                                    && u.SiteType == (int)SiteTypeEnum.Climate
+                                                    && u.TVType == (int)TVTypeEnum.ClimateSite
                                                     && u.SubsectorTVItemID == MWQMSubsectorTVItemID
                                                     select c.ClimateSiteTVItemID).Distinct().ToList();
 
@@ -574,7 +571,7 @@ namespace CSSPDBDLL.Services
 
             List<UseOfSite> useOfSiteList = (from c in db.UseOfSites
                                              where c.SubsectorTVItemID == MWQMSubsectorTVItemID
-                                             && c.SiteType == (int)SiteTypeEnum.Climate
+                                             && c.TVType == (int)TVTypeEnum.ClimateSite
                                              orderby c.SiteTVItemID, c.StartYear
                                              select c).ToList();
 
@@ -633,7 +630,7 @@ namespace CSSPDBDLL.Services
                                                                                                   && cl.Language == (int)LanguageRequest
                                                                                                   select cl.TVText).FirstOrDefault()
                                                                          where c.ClimateSiteTVItemID == u.SiteTVItemID
-                                                                         && u.SiteType == (int)SiteTypeEnum.Climate
+                                                                         && u.TVType == (int)TVTypeEnum.ClimateSite
                                                                          && u.SubsectorTVItemID == MWQMSubsectorTVItemID
                                                                          orderby u.Ordinal
                                                                          select new ClimateSiteModel
@@ -762,7 +759,7 @@ namespace CSSPDBDLL.Services
                                                        from u in db.UseOfSites
                                                        where c.TVItemID == cl.TVItemID
                                                        && c.TVItemID == u.SiteTVItemID
-                                                       && u.SiteType == (int)SiteTypeEnum.Climate
+                                                       && u.TVType == (int)TVTypeEnum.ClimateSite
                                                        && u.SubsectorTVItemID == SubsectorTVItemID
                                                        && cl.Language == (int)LanguageRequest
                                                        orderby cl.TVText
@@ -777,7 +774,7 @@ namespace CSSPDBDLL.Services
                                                                 let siteTVText = (from cl in db.TVItemLanguages where cl.Language == (int)LanguageRequest && cl.TVItemID == c.SiteTVItemID select cl.TVText).FirstOrDefault<string>()
                                                                 let subsectorTVText = (from cl in db.TVItemLanguages where cl.Language == (int)LanguageRequest && cl.TVItemID == c.SubsectorTVItemID select cl.TVText).FirstOrDefault<string>()
                                                                 where c.SubsectorTVItemID == SubsectorTVItemID
-                                                                && c.SiteType == (int)SiteTypeEnum.Climate
+                                                                && c.TVType == (int)TVTypeEnum.ClimateSite
                                                                 && c.SiteTVItemID == tvItemLanguage.TVItemID
                                                                 orderby c.StartYear
                                                                 select new UseOfSiteModel
@@ -788,7 +785,7 @@ namespace CSSPDBDLL.Services
                                                                     SiteTVText = siteTVText,
                                                                     SubsectorTVItemID = c.SubsectorTVItemID,
                                                                     SubsectorTVText = subsectorTVText,
-                                                                    SiteType = (SiteTypeEnum)c.SiteType,
+                                                                    TVType = (TVTypeEnum)c.TVType,
                                                                     Ordinal = c.Ordinal,
                                                                     StartYear = c.StartYear,
                                                                     EndYear = c.EndYear,
@@ -847,13 +844,10 @@ namespace CSSPDBDLL.Services
             mwqmSubsectorWithLatLngModel.Lng = (float)mapInfoPointModelList[0].Lng;
             mwqmSubsectorhydrometricSites.MWQMSubsectorWithLatLngModel = mwqmSubsectorWithLatLngModel;
 
-            // Getting HydrometricSites within distance and the ones used for the subsector
-            List<HydrometricSiteWithLatLngAndOrdinalModel> hydrometricSiteWithLatLngAndOrdinalModelList = new List<HydrometricSiteWithLatLngAndOrdinalModel>();
-
             List<int> useHydrometricSiteTVItemIDList = (from c in db.HydrometricSites
                                                         from u in db.UseOfSites
                                                         where c.HydrometricSiteTVItemID == u.SiteTVItemID
-                                                        && u.SiteType == (int)SiteTypeEnum.Hydrometric
+                                                        && u.TVType == (int)TVTypeEnum.HydrometricSite
                                                         && u.SubsectorTVItemID == MWQMSubsectorTVItemID
                                                         select c.HydrometricSiteTVItemID).Distinct().ToList();
 
@@ -914,7 +908,7 @@ namespace CSSPDBDLL.Services
 
             List<UseOfSite> useOfSiteList = (from c in db.UseOfSites
                                              where c.SubsectorTVItemID == MWQMSubsectorTVItemID
-                                             && c.SiteType == (int)SiteTypeEnum.Hydrometric
+                                             && c.TVType == (int)TVTypeEnum.HydrometricSite
                                              orderby c.SiteTVItemID, c.StartYear
                                              select c).ToList();
 
@@ -946,6 +940,222 @@ namespace CSSPDBDLL.Services
 
             return mwqmSubsectorhydrometricSites;
         }
+        public MWQMSubsectorTideSites GetMWQMSubsectorTideSitesDB(int MWQMSubsectorTVItemID, float Radius_m)
+        {
+            MWQMSubsectorTideSites mwqmSubsectorTideSites = new MWQMSubsectorTideSites();
+
+            List<MapInfoPointModel> mapInfoPointModelList = _MapInfoService._MapInfoPointService.GetMapInfoPointModelListWithTVItemIDAndTVTypeAndMapInfoDrawTypeDB(MWQMSubsectorTVItemID, TVTypeEnum.Subsector, MapInfoDrawTypeEnum.Point);
+            if (mapInfoPointModelList.Count == 0)
+            {
+                mwqmSubsectorTideSites.Error = string.Format(ServiceRes._ShouldNotBeNullOrEmpty, "MapInfoPointModelList with MWQMSubsectorTVItemID = [" + MWQMSubsectorTVItemID + "]");
+                return mwqmSubsectorTideSites;
+            }
+
+            // Getting MWQMSubsectorModel
+            MWQMSubsectorWithLatLngModel mwqmSubsectorWithLatLngModel = (from c in db.MWQMSubsectors
+                                                                         let mwqmsubsectorName = (from cl in db.TVItemLanguages where cl.Language == (int)LanguageRequest && cl.TVItemID == c.MWQMSubsectorTVItemID select cl.TVText).FirstOrDefault<string>()
+                                                                         let subsectorDesc = (from cl in db.MWQMSubsectorLanguages where cl.Language == (int)LanguageRequest && cl.MWQMSubsectorID == c.MWQMSubsectorID select cl.SubsectorDesc).FirstOrDefault<string>()
+                                                                         where c.MWQMSubsectorTVItemID == MWQMSubsectorTVItemID
+                                                                         select new MWQMSubsectorWithLatLngModel
+                                                                         {
+                                                                             Error = "",
+                                                                             MWQMSubsectorID = c.MWQMSubsectorID,
+                                                                             MWQMSubsectorTVItemID = c.MWQMSubsectorTVItemID,
+                                                                             MWQMSubsectorTVText = mwqmsubsectorName,
+                                                                             SubsectorHistoricKey = c.SubsectorHistoricKey,
+                                                                             SubsectorDesc = subsectorDesc,
+                                                                             TideLocationSIDText = c.TideLocationSIDText,
+                                                                             LastUpdateDate_UTC = c.LastUpdateDate_UTC,
+                                                                             LastUpdateContactTVItemID = c.LastUpdateContactTVItemID,
+                                                                         }).FirstOrDefault<MWQMSubsectorWithLatLngModel>();
+
+            if (!string.IsNullOrWhiteSpace(mwqmSubsectorWithLatLngModel.Error))
+            {
+                mwqmSubsectorTideSites.Error = string.Format(ServiceRes.CouldNotFind_With_Equal_, ServiceRes.MWQMSubsector, ServiceRes.MWQMSubsectorTVItemID, MWQMSubsectorTVItemID);
+                return mwqmSubsectorTideSites;
+            }
+            mwqmSubsectorWithLatLngModel.Lat = (float)mapInfoPointModelList[0].Lat;
+            mwqmSubsectorWithLatLngModel.Lng = (float)mapInfoPointModelList[0].Lng;
+            mwqmSubsectorTideSites.MWQMSubsectorWithLatLngModel = mwqmSubsectorWithLatLngModel;
+
+            List<int> useTideSiteTVItemIDList = (from c in db.TVItems
+                                                 from u in db.UseOfSites
+                                                 where c.TVItemID == u.SiteTVItemID
+                                                 && u.TVType == (int)TVTypeEnum.TideSite
+                                                 && u.SubsectorTVItemID == MWQMSubsectorTVItemID
+                                                 select c.TVItemID).Distinct().ToList();
+
+            List<int> distTideSiteTVItemIDList = _MapInfoService.GetMapInfoModelWithinCircleWithTVTypeAndMapInfoDrawTypeDB((float)mwqmSubsectorWithLatLngModel.Lat, (float)mwqmSubsectorWithLatLngModel.Lng,
+                (float)Radius_m, TVTypeEnum.TideSite, MapInfoDrawTypeEnum.Point).Select(c => c.TVItemID).Distinct().ToList();
+
+            List<int> TideSiteTVItemIDList = useTideSiteTVItemIDList.Concat(distTideSiteTVItemIDList).Distinct().ToList();
+
+            List<TideSiteWithLatLngAndOrdinalModel> TideSiteWithLatLngAndOrdinalModelList = (from c in db.TideSites
+                                                                                             from id in TideSiteTVItemIDList
+                                                                                             let coord = (from mi in db.MapInfos
+                                                                                                          from mip in db.MapInfoPoints
+                                                                                                          where mi.MapInfoID == mip.MapInfoID
+                                                                                                          && mi.TVItemID == c.TideSiteTVItemID
+                                                                                                          && mi.MapInfoDrawType == (int)MapInfoDrawTypeEnum.Point
+                                                                                                          && mi.TVType == (int)TVTypeEnum.TideSite
+                                                                                                          select new { mip.Lat, mip.Lng, mip.MapInfoID }).FirstOrDefault()
+                                                                                             let tideSiteName = (from cl in db.TVItemLanguages
+                                                                                                                 where cl.TVItemID == c.TideSiteTVItemID
+                                                                                                                 && cl.Language == (int)LanguageRequest
+                                                                                                                 select cl.TVText).FirstOrDefault()
+                                                                                             where c.TideSiteTVItemID == id
+                                                                                             orderby tideSiteName
+                                                                                             select new TideSiteWithLatLngAndOrdinalModel
+                                                                                             {
+                                                                                                 Error = "",
+                                                                                                 Province = c.Province,
+                                                                                                 sid = c.sid,
+                                                                                                 Zone = c.Zone,
+                                                                                                 TideSiteID = c.TideSiteID,
+                                                                                                 TideSiteName = tideSiteName,
+                                                                                                 TideSiteTVItemID = c.TideSiteTVItemID,
+                                                                                                 Lat = (float)coord.Lat,
+                                                                                                 Lng = (float)coord.Lng,
+                                                                                                 Ordinal = 0,
+                                                                                                 Distance_km = 0,
+                                                                                                 MapInfoID = coord.MapInfoID,
+                                                                                                 IsUsed = false,
+                                                                                                 LastUpdateDate_UTC = c.LastUpdateDate_UTC,
+                                                                                                 LastUpdateContactTVItemID = c.LastUpdateContactTVItemID,
+                                                                                             }).ToList();
+
+
+            List<UseOfSite> useOfSiteList = (from c in db.UseOfSites
+                                             where c.SubsectorTVItemID == MWQMSubsectorTVItemID
+                                             && c.TVType == (int)TVTypeEnum.TideSite
+                                             orderby c.SiteTVItemID, c.StartYear
+                                             select c).ToList();
+
+            foreach (TideSiteWithLatLngAndOrdinalModel TideSiteWithLatLngAndOrdinalModel in TideSiteWithLatLngAndOrdinalModelList)
+            {
+                TideSiteWithLatLngAndOrdinalModel.Distance_km = (float)(_MapInfoService.CalculateDistance((double)mwqmSubsectorWithLatLngModel.Lat * d2r, (double)mwqmSubsectorWithLatLngModel.Lng * d2r, (double)TideSiteWithLatLngAndOrdinalModel.Lat * d2r, (double)TideSiteWithLatLngAndOrdinalModel.Lng * d2r, (double)R) / 1000);
+                foreach (UseOfSite useOfSite in useOfSiteList)
+                {
+                    if (TideSiteWithLatLngAndOrdinalModel.TideSiteTVItemID == useOfSite.SiteTVItemID)
+                    {
+                        TideSiteWithLatLngAndOrdinalModel.IsUsed = true;
+                    }
+                }
+            }
+
+
+            mwqmSubsectorTideSites.TideSiteModelUsedAndWithinDistanceModelList = TideSiteWithLatLngAndOrdinalModelList;
+
+            return mwqmSubsectorTideSites;
+        }
+        public MWQMSubsectorMunicipalities GetMWQMSubsectorMunicipalitiesDB(int MWQMSubsectorTVItemID, float Radius_m)
+        {
+            MWQMSubsectorMunicipalities mwqmSubsectorMunicipalities = new MWQMSubsectorMunicipalities();
+
+            List<MapInfoPointModel> mapInfoPointModelList = _MapInfoService._MapInfoPointService.GetMapInfoPointModelListWithTVItemIDAndTVTypeAndMapInfoDrawTypeDB(MWQMSubsectorTVItemID, TVTypeEnum.Subsector, MapInfoDrawTypeEnum.Point);
+            if (mapInfoPointModelList.Count == 0)
+            {
+                mwqmSubsectorMunicipalities.Error = string.Format(ServiceRes._ShouldNotBeNullOrEmpty, "MapInfoPointModelList with MWQMSubsectorTVItemID = [" + MWQMSubsectorTVItemID + "]");
+                return mwqmSubsectorMunicipalities;
+            }
+
+            // Getting MWQMSubsectorModel
+            MWQMSubsectorWithLatLngModel mwqmSubsectorWithLatLngModel = (from c in db.MWQMSubsectors
+                                                                         let mwqmsubsectorName = (from cl in db.TVItemLanguages where cl.Language == (int)LanguageRequest && cl.TVItemID == c.MWQMSubsectorTVItemID select cl.TVText).FirstOrDefault<string>()
+                                                                         let subsectorDesc = (from cl in db.MWQMSubsectorLanguages where cl.Language == (int)LanguageRequest && cl.MWQMSubsectorID == c.MWQMSubsectorID select cl.SubsectorDesc).FirstOrDefault<string>()
+                                                                         where c.MWQMSubsectorTVItemID == MWQMSubsectorTVItemID
+                                                                         select new MWQMSubsectorWithLatLngModel
+                                                                         {
+                                                                             Error = "",
+                                                                             MWQMSubsectorID = c.MWQMSubsectorID,
+                                                                             MWQMSubsectorTVItemID = c.MWQMSubsectorTVItemID,
+                                                                             MWQMSubsectorTVText = mwqmsubsectorName,
+                                                                             SubsectorHistoricKey = c.SubsectorHistoricKey,
+                                                                             SubsectorDesc = subsectorDesc,
+                                                                             TideLocationSIDText = c.TideLocationSIDText,
+                                                                             LastUpdateDate_UTC = c.LastUpdateDate_UTC,
+                                                                             LastUpdateContactTVItemID = c.LastUpdateContactTVItemID,
+                                                                         }).FirstOrDefault<MWQMSubsectorWithLatLngModel>();
+
+            if (!string.IsNullOrWhiteSpace(mwqmSubsectorWithLatLngModel.Error))
+            {
+                mwqmSubsectorMunicipalities.Error = string.Format(ServiceRes.CouldNotFind_With_Equal_, ServiceRes.MWQMSubsector, ServiceRes.MWQMSubsectorTVItemID, MWQMSubsectorTVItemID);
+                return mwqmSubsectorMunicipalities;
+            }
+            mwqmSubsectorWithLatLngModel.Lat = (float)mapInfoPointModelList[0].Lat;
+            mwqmSubsectorWithLatLngModel.Lng = (float)mapInfoPointModelList[0].Lng;
+            mwqmSubsectorMunicipalities.MWQMSubsectorWithLatLngModel = mwqmSubsectorWithLatLngModel;
+
+            List<int> useMunicipalityTVItemIDList = (from c in db.TVItems
+                                                     from u in db.UseOfSites
+                                                     where c.TVItemID == u.SiteTVItemID
+                                                     && u.TVType == (int)TVTypeEnum.Municipality
+                                                     && u.SubsectorTVItemID == MWQMSubsectorTVItemID
+                                                     select c.TVItemID).Distinct().ToList();
+
+            List<int> distMunicipalityTVItemIDList = _MapInfoService.GetMapInfoModelWithinCircleWithTVTypeAndMapInfoDrawTypeDB((float)mwqmSubsectorWithLatLngModel.Lat, (float)mwqmSubsectorWithLatLngModel.Lng,
+                (float)Radius_m, TVTypeEnum.Municipality, MapInfoDrawTypeEnum.Point).Select(c => c.TVItemID).Distinct().ToList();
+
+            List<int> MunicipalityTVItemIDList = useMunicipalityTVItemIDList.Concat(distMunicipalityTVItemIDList).Distinct().ToList();
+
+            List<MunicipalityWithLatLngAndOrdinalModel> MunicipalityWithLatLngAndOrdinalModelList = (from c in db.TVItems
+                                                                                                     from id in MunicipalityTVItemIDList
+                                                                                                     let coord = (from mi in db.MapInfos
+                                                                                                                  from mip in db.MapInfoPoints
+                                                                                                                  where mi.MapInfoID == mip.MapInfoID
+                                                                                                                  && mi.TVItemID == c.TVItemID
+                                                                                                                  && mi.MapInfoDrawType == (int)MapInfoDrawTypeEnum.Point
+                                                                                                                  && mi.TVType == (int)TVTypeEnum.Municipality
+                                                                                                                  select new { mip.Lat, mip.Lng, mip.MapInfoID }).FirstOrDefault()
+                                                                                                     let municipalityTVText = (from cl in db.TVItemLanguages
+                                                                                                                               where cl.TVItemID == c.TVItemID
+                                                                                                                               && cl.Language == (int)LanguageRequest
+                                                                                                                               select cl.TVText).FirstOrDefault()
+                                                                                                     where c.TVItemID == id
+                                                                                                     orderby municipalityTVText
+                                                                                                     select new MunicipalityWithLatLngAndOrdinalModel
+                                                                                                     {
+                                                                                                         Error = "",
+                                                                                                         IsActive = c.IsActive,
+                                                                                                         TVItemID = c.TVItemID,
+                                                                                                         TVLevel = c.TVLevel,
+                                                                                                         TVPath = c.TVPath,
+                                                                                                         TVText = municipalityTVText,
+                                                                                                         TVType = (TVTypeEnum)c.TVType,
+                                                                                                         Lat = (float)coord.Lat,
+                                                                                                         Lng = (float)coord.Lng,
+                                                                                                         Ordinal = 0,
+                                                                                                         Distance_km = 0,
+                                                                                                         MapInfoID = coord.MapInfoID,
+                                                                                                         IsUsed = false,
+                                                                                                         LastUpdateDate_UTC = c.LastUpdateDate_UTC,
+                                                                                                         LastUpdateContactTVItemID = c.LastUpdateContactTVItemID,
+                                                                                                     }).ToList();
+
+
+            List<UseOfSite> useOfSiteList = (from c in db.UseOfSites
+                                             where c.SubsectorTVItemID == MWQMSubsectorTVItemID
+                                             && c.TVType == (int)TVTypeEnum.Municipality
+                                             orderby c.SiteTVItemID, c.StartYear
+                                             select c).ToList();
+
+            foreach (MunicipalityWithLatLngAndOrdinalModel municipalityWithLatLngAndOrdinalModel in MunicipalityWithLatLngAndOrdinalModelList)
+            {
+                municipalityWithLatLngAndOrdinalModel.Distance_km = (float)(_MapInfoService.CalculateDistance((double)mwqmSubsectorWithLatLngModel.Lat * d2r, (double)mwqmSubsectorWithLatLngModel.Lng * d2r, (double)municipalityWithLatLngAndOrdinalModel.Lat * d2r, (double)municipalityWithLatLngAndOrdinalModel.Lng * d2r, (double)R) / 1000);
+                foreach (UseOfSite useOfSite in useOfSiteList)
+                {
+                    if (municipalityWithLatLngAndOrdinalModel.TVItemID == useOfSite.SiteTVItemID)
+                    {
+                        municipalityWithLatLngAndOrdinalModel.IsUsed = true;
+                    }
+                }
+            }
+
+
+            mwqmSubsectorMunicipalities.MunicipalityModelUsedAndWithinDistanceModelList = MunicipalityWithLatLngAndOrdinalModelList;
+
+            return mwqmSubsectorMunicipalities;
+        }
         public List<HydrometricSitesAndDischarges> GetMWQMSubsectorHydrometricSitesAndValuesForAParicularRunsDB(int MWQMSubsectorTVItemID, int MWQMRunTVItemID)
         {
             List<HydrometricSitesAndDischarges> hydrometricSitesAndDischargesList = new List<HydrometricSitesAndDischarges>();
@@ -973,7 +1183,7 @@ namespace CSSPDBDLL.Services
                                                                                                               && cl.Language == (int)LanguageRequest
                                                                                                               select cl.TVText).FirstOrDefault()
                                                                                  where c.HydrometricSiteTVItemID == u.SiteTVItemID
-                                                                                 && u.SiteType == (int)SiteTypeEnum.Hydrometric
+                                                                                 && u.TVType == (int)TVTypeEnum.HydrometricSite
                                                                                  && u.SubsectorTVItemID == MWQMSubsectorTVItemID
                                                                                  orderby u.Ordinal
                                                                                  select new HydrometricSiteModel
@@ -1084,7 +1294,7 @@ namespace CSSPDBDLL.Services
                                                        from u in db.UseOfSites
                                                        where c.TVItemID == cl.TVItemID
                                                        && c.TVItemID == u.SiteTVItemID
-                                                       && u.SiteType == (int)SiteTypeEnum.Hydrometric
+                                                       && u.TVType == (int)TVTypeEnum.HydrometricSite
                                                        && u.SubsectorTVItemID == SubsectorTVItemID
                                                        && cl.Language == (int)LanguageRequest
                                                        orderby cl.TVText
@@ -1099,7 +1309,7 @@ namespace CSSPDBDLL.Services
                                                                     let siteTVText = (from cl in db.TVItemLanguages where cl.Language == (int)LanguageRequest && cl.TVItemID == c.SiteTVItemID select cl.TVText).FirstOrDefault<string>()
                                                                     let subsectorTVText = (from cl in db.TVItemLanguages where cl.Language == (int)LanguageRequest && cl.TVItemID == c.SubsectorTVItemID select cl.TVText).FirstOrDefault<string>()
                                                                     where c.SubsectorTVItemID == SubsectorTVItemID
-                                                                    && c.SiteType == (int)SiteTypeEnum.Hydrometric
+                                                                    && c.TVType == (int)TVTypeEnum.HydrometricSite
                                                                     && c.SiteTVItemID == tvItemLanguage.TVItemID
                                                                     orderby c.StartYear
                                                                     select new UseOfSiteModel
@@ -1110,7 +1320,7 @@ namespace CSSPDBDLL.Services
                                                                         SiteTVText = siteTVText,
                                                                         SubsectorTVItemID = c.SubsectorTVItemID,
                                                                         SubsectorTVText = subsectorTVText,
-                                                                        SiteType = (SiteTypeEnum)c.SiteType,
+                                                                        TVType = (TVTypeEnum)c.TVType,
                                                                         Ordinal = c.Ordinal,
                                                                         StartYear = c.StartYear,
                                                                         EndYear = c.EndYear,
@@ -1577,7 +1787,7 @@ namespace CSSPDBDLL.Services
             if (!string.IsNullOrWhiteSpace(tvItemModelSubsector.Error))
                 return ReturnError(tvItemModelSubsector.Error);
 
-            List<UseOfSiteModel> useOfSiteModelList = _UseOfSiteService.GetUseOfSiteModelListWithSiteTypeAndSubsectorTVItemIDDB(SiteTypeEnum.Climate, SubsectorTVItemID).OrderBy(c => c.Ordinal).ToList();
+            List<UseOfSiteModel> useOfSiteModelList = _UseOfSiteService.GetUseOfSiteModelListWithTVTypeAndSubsectorTVItemIDDB(TVTypeEnum.ClimateSite, SubsectorTVItemID).OrderBy(c => c.Ordinal).ToList();
             if (useOfSiteModelList.Count == 0)
             {
                 return ReturnError(ServiceRes.NoClimateSiteHaveBeenSelected + "." + ServiceRes.PleaseSelectClimateSitesAndSetPriorities);
@@ -2139,47 +2349,42 @@ namespace CSSPDBDLL.Services
                 return new MWQMSubsectorModel() { Error = mwqwmSubsectorModel.Error };
             }
 
-            using (TransactionScope ts = new TransactionScope())
+            // do remove
+            List<UseOfSiteModel> useOfSiteModelList = _UseOfSiteService.GetUseOfSiteModelListWithTVTypeAndSubsectorTVItemIDDB(TVTypeEnum.ClimateSite, SubsectorTVItemID);
+            foreach (UseOfSiteModel useOfSiteToDelete in useOfSiteModelList)
             {
-                // do remove
-                List<UseOfSiteModel> useOfSiteModelList = _UseOfSiteService.GetUseOfSiteModelListWithSiteTypeAndSubsectorTVItemIDDB(SiteTypeEnum.Climate, SubsectorTVItemID);
-                foreach (UseOfSiteModel useOfSiteToDelete in useOfSiteModelList)
+                UseOfSiteModel useOfSiteModelRet = _UseOfSiteService.PostDeleteUseOfSiteDB(useOfSiteToDelete.UseOfSiteID);
+                if (!string.IsNullOrWhiteSpace(useOfSiteModelRet.Error))
                 {
-                    UseOfSiteModel useOfSiteModelRet = _UseOfSiteService.PostDeleteUseOfSiteDB(useOfSiteToDelete.UseOfSiteID);
+                    return ReturnError(useOfSiteModelRet.Error);
+                }
+            }
+
+            // do add
+            foreach (ClimateSiteTVItemIDYearsText climateSiteTVItemIDYearsText in climateSiteTVItemIDYearsTextList)
+            {
+                List<UseOfSiteModel> useOfSiteModelListAlreadyInDB = useOfSiteModelList.Where(c => c.SiteTVItemID == climateSiteTVItemIDYearsText.ClimateSiteTVItemID && c.TVType == TVTypeEnum.ClimateSite).OrderBy(c => c.StartYear).ToList();
+
+                for (int i = 0, count = climateSiteTVItemIDYearsText.ClimateSiteUseStartEndYearList.Count(); i < count; i++)
+                {
+                    int StartYear = climateSiteTVItemIDYearsText.ClimateSiteUseStartEndYearList[i].StartYear;
+                    int? EndYear = climateSiteTVItemIDYearsText.ClimateSiteUseStartEndYearList[i].EndYear;
+
+                    UseOfSiteModel useOfSiteModelNew = new UseOfSiteModel()
+                    {
+                        Ordinal = 0,
+                        SiteTVItemID = climateSiteTVItemIDYearsText.ClimateSiteTVItemID,
+                        TVType = TVTypeEnum.ClimateSite,
+                        SubsectorTVItemID = SubsectorTVItemID,
+                        StartYear = StartYear,
+                        EndYear = EndYear,
+                    };
+                    UseOfSiteModel useOfSiteModelRet = _UseOfSiteService.PostAddUseOfSiteDB(useOfSiteModelNew);
                     if (!string.IsNullOrWhiteSpace(useOfSiteModelRet.Error))
                     {
                         return ReturnError(useOfSiteModelRet.Error);
                     }
                 }
-
-                // do add
-                foreach (ClimateSiteTVItemIDYearsText climateSiteTVItemIDYearsText in climateSiteTVItemIDYearsTextList)
-                {
-                    List<UseOfSiteModel> useOfSiteModelListAlreadyInDB = useOfSiteModelList.Where(c => c.SiteTVItemID == climateSiteTVItemIDYearsText.ClimateSiteTVItemID && c.SiteType == SiteTypeEnum.Climate).OrderBy(c => c.StartYear).ToList();
-
-                    for (int i = 0, count = climateSiteTVItemIDYearsText.ClimateSiteUseStartEndYearList.Count(); i < count; i++)
-                    {
-                        int StartYear = climateSiteTVItemIDYearsText.ClimateSiteUseStartEndYearList[i].StartYear;
-                        int? EndYear = climateSiteTVItemIDYearsText.ClimateSiteUseStartEndYearList[i].EndYear;
-
-                        UseOfSiteModel useOfSiteModelNew = new UseOfSiteModel()
-                        {
-                            Ordinal = 0,
-                            SiteTVItemID = climateSiteTVItemIDYearsText.ClimateSiteTVItemID,
-                            SiteType = SiteTypeEnum.Climate,
-                            SubsectorTVItemID = SubsectorTVItemID,
-                            StartYear = StartYear,
-                            EndYear = EndYear,
-                        };
-                        UseOfSiteModel useOfSiteModelRet = _UseOfSiteService.PostAddUseOfSiteDB(useOfSiteModelNew);
-                        if (!string.IsNullOrWhiteSpace(useOfSiteModelRet.Error))
-                        {
-                            return ReturnError(useOfSiteModelRet.Error);
-                        }
-                    }
-                }
-
-                ts.Complete();
             }
 
             return ReturnError("");
@@ -2198,13 +2403,13 @@ namespace CSSPDBDLL.Services
                 return ReturnError(tvItemModelUseSubsector.Error);
             }
 
-            List<UseOfSiteModel> useOfSiteModelList = _UseOfSiteService.GetUseOfSiteModelListWithSiteTypeAndSubsectorTVItemIDDB(SiteTypeEnum.Climate, SubsectorTVItemID);
+            List<UseOfSiteModel> useOfSiteModelList = _UseOfSiteService.GetUseOfSiteModelListWithTVTypeAndSubsectorTVItemIDDB(TVTypeEnum.ClimateSite, SubsectorTVItemID);
             if (useOfSiteModelList.Count > 0)
             {
                 return ReturnError(string.Format(ServiceRes.Subsector_AlreadyHasSomeClimateSitesSelected, tvItemModelCurrentSubsector.TVText));
             }
 
-            List<UseOfSiteModel> useOfSiteModelList2 = _UseOfSiteService.GetUseOfSiteModelListWithSiteTypeAndSubsectorTVItemIDDB(SiteTypeEnum.Climate, UseSubsectorTVItemID);
+            List<UseOfSiteModel> useOfSiteModelList2 = _UseOfSiteService.GetUseOfSiteModelListWithTVTypeAndSubsectorTVItemIDDB(TVTypeEnum.ClimateSite, UseSubsectorTVItemID);
             if (useOfSiteModelList2.Count == 0)
             {
                 return ReturnError(string.Format(ServiceRes.Subsector_DoesNotHaveAnyClimateSitesSelected, tvItemModelUseSubsector.TVText));
@@ -2223,7 +2428,7 @@ namespace CSSPDBDLL.Services
                         Param3 = useOfSiteModel.Param3,
                         Param4 = useOfSiteModel.Param4,
                         SiteTVItemID = useOfSiteModel.SiteTVItemID,
-                        SiteType = useOfSiteModel.SiteType,
+                        TVType = useOfSiteModel.TVType,
                         StartYear = useOfSiteModel.StartYear,
                         SubsectorTVItemID = SubsectorTVItemID,
                         UseEquation = useOfSiteModel.UseEquation,
@@ -2300,7 +2505,7 @@ namespace CSSPDBDLL.Services
             if (SubsectorTVItemID == 0)
                 return ReturnError(string.Format(ServiceRes._IsRequired, ServiceRes.SubsectorTVItemID));
 
-            bool Exist = true; 
+            bool Exist = true;
             int CountHydrometricSite = 0;
             while (Exist)
             {
@@ -2335,47 +2540,154 @@ namespace CSSPDBDLL.Services
                 return new MWQMSubsectorModel() { Error = mwqwmSubsectorModel.Error };
             }
 
-            using (TransactionScope ts = new TransactionScope())
+            // do remove
+            List<UseOfSiteModel> useOfSiteModelList = _UseOfSiteService.GetUseOfSiteModelListWithTVTypeAndSubsectorTVItemIDDB(TVTypeEnum.HydrometricSite, SubsectorTVItemID);
+            foreach (UseOfSiteModel useOfSiteToDelete in useOfSiteModelList)
             {
-                // do remove
-                List<UseOfSiteModel> useOfSiteModelList = _UseOfSiteService.GetUseOfSiteModelListWithSiteTypeAndSubsectorTVItemIDDB(SiteTypeEnum.Hydrometric, SubsectorTVItemID);
-                foreach (UseOfSiteModel useOfSiteToDelete in useOfSiteModelList)
+                UseOfSiteModel useOfSiteModelRet = _UseOfSiteService.PostDeleteUseOfSiteDB(useOfSiteToDelete.UseOfSiteID);
+                if (!string.IsNullOrWhiteSpace(useOfSiteModelRet.Error))
                 {
-                    UseOfSiteModel useOfSiteModelRet = _UseOfSiteService.PostDeleteUseOfSiteDB(useOfSiteToDelete.UseOfSiteID);
+                    return ReturnError(useOfSiteModelRet.Error);
+                }
+            }
+
+            // do add
+            foreach (HydrometricSiteTVItemIDYearsText hydrometricSiteTVItemIDYearsText in hydrometricSiteTVItemIDYearsTextList)
+            {
+                List<UseOfSiteModel> useOfSiteModelListAlreadyInDB = useOfSiteModelList.Where(c => c.SiteTVItemID == hydrometricSiteTVItemIDYearsText.HydrometricSiteTVItemID && c.TVType == TVTypeEnum.HydrometricSite).OrderBy(c => c.StartYear).ToList();
+
+                for (int i = 0, count = hydrometricSiteTVItemIDYearsText.HydrometricSiteUseStartEndYearList.Count(); i < count; i++)
+                {
+                    int StartYear = hydrometricSiteTVItemIDYearsText.HydrometricSiteUseStartEndYearList[i].StartYear;
+                    int? EndYear = hydrometricSiteTVItemIDYearsText.HydrometricSiteUseStartEndYearList[i].EndYear;
+
+                    UseOfSiteModel useOfSiteModelNew = new UseOfSiteModel()
+                    {
+                        Ordinal = 0,
+                        SiteTVItemID = hydrometricSiteTVItemIDYearsText.HydrometricSiteTVItemID,
+                        TVType = TVTypeEnum.HydrometricSite,
+                        SubsectorTVItemID = SubsectorTVItemID,
+                        StartYear = StartYear,
+                        EndYear = EndYear,
+                    };
+                    UseOfSiteModel useOfSiteModelRet = _UseOfSiteService.PostAddUseOfSiteDB(useOfSiteModelNew);
                     if (!string.IsNullOrWhiteSpace(useOfSiteModelRet.Error))
                     {
                         return ReturnError(useOfSiteModelRet.Error);
                     }
                 }
+            }
 
-                // do add
-                foreach (HydrometricSiteTVItemIDYearsText hydrometricSiteTVItemIDYearsText in hydrometricSiteTVItemIDYearsTextList)
+            return ReturnError("");
+        }
+        public MWQMSubsectorModel MunicipalitiesToUseForSubsectorVerifyAndSaveDB(FormCollection fc)
+        {
+            int SubsectorTVItemID = 0;
+            List<int> municipalityTVItemIDList = new List<int>();
+
+            int.TryParse(fc["SubsectorTVItemID"], out SubsectorTVItemID);
+            if (SubsectorTVItemID == 0)
+                return ReturnError(string.Format(ServiceRes._IsRequired, ServiceRes.SubsectorTVItemID));
+
+            string MunicipalityTVItemIDListText = fc["MunicipalityTVItemIDList"];
+
+            List<string> idArr = MunicipalityTVItemIDListText.Split(",".ToCharArray(), StringSplitOptions.RemoveEmptyEntries).ToList();
+            foreach (string s in idArr)
+            {
+                municipalityTVItemIDList.Add(int.Parse(s));
+            }
+
+            MWQMSubsectorModel mwqwmSubsectorModel = GetMWQMSubsectorModelWithMWQMSubsectorTVItemIDDB(SubsectorTVItemID);
+            if (!string.IsNullOrWhiteSpace(mwqwmSubsectorModel.Error))
+            {
+                return new MWQMSubsectorModel() { Error = mwqwmSubsectorModel.Error };
+            }
+
+            // do remove
+            List<UseOfSiteModel> useOfSiteModelList = _UseOfSiteService.GetUseOfSiteModelListWithTVTypeAndSubsectorTVItemIDDB(TVTypeEnum.Municipality, SubsectorTVItemID);
+            foreach (UseOfSiteModel useOfSiteToDelete in useOfSiteModelList)
+            {
+                UseOfSiteModel useOfSiteModelRet = _UseOfSiteService.PostDeleteUseOfSiteDB(useOfSiteToDelete.UseOfSiteID);
+                if (!string.IsNullOrWhiteSpace(useOfSiteModelRet.Error))
                 {
-                    List<UseOfSiteModel> useOfSiteModelListAlreadyInDB = useOfSiteModelList.Where(c => c.SiteTVItemID == hydrometricSiteTVItemIDYearsText.HydrometricSiteTVItemID && c.SiteType == SiteTypeEnum.Hydrometric).OrderBy(c => c.StartYear).ToList();
-
-                    for (int i = 0, count = hydrometricSiteTVItemIDYearsText.HydrometricSiteUseStartEndYearList.Count(); i < count; i++)
-                    {
-                        int StartYear = hydrometricSiteTVItemIDYearsText.HydrometricSiteUseStartEndYearList[i].StartYear;
-                        int? EndYear = hydrometricSiteTVItemIDYearsText.HydrometricSiteUseStartEndYearList[i].EndYear;
-
-                        UseOfSiteModel useOfSiteModelNew = new UseOfSiteModel()
-                        {
-                            Ordinal = 0,
-                            SiteTVItemID = hydrometricSiteTVItemIDYearsText.HydrometricSiteTVItemID,
-                            SiteType = SiteTypeEnum.Hydrometric,
-                            SubsectorTVItemID = SubsectorTVItemID,
-                            StartYear = StartYear,
-                            EndYear = EndYear,
-                        };
-                        UseOfSiteModel useOfSiteModelRet = _UseOfSiteService.PostAddUseOfSiteDB(useOfSiteModelNew);
-                        if (!string.IsNullOrWhiteSpace(useOfSiteModelRet.Error))
-                        {
-                            return ReturnError(useOfSiteModelRet.Error);
-                        }
-                    }
+                    return ReturnError(useOfSiteModelRet.Error);
                 }
+            }
 
-                ts.Complete();
+            // do add
+            foreach (int municipalityTVItemID in municipalityTVItemIDList)
+            {
+                UseOfSiteModel useOfSiteModelNew = new UseOfSiteModel()
+                {
+                    Ordinal = 0,
+                    SiteTVItemID = municipalityTVItemID,
+                    TVType = TVTypeEnum.Municipality,
+                    SubsectorTVItemID = SubsectorTVItemID,
+                    StartYear = 1980,
+                    EndYear = 1980,
+                };
+
+                UseOfSiteModel useOfSiteModelRet = _UseOfSiteService.PostAddUseOfSiteDB(useOfSiteModelNew);
+                if (!string.IsNullOrWhiteSpace(useOfSiteModelRet.Error))
+                {
+                    return ReturnError(useOfSiteModelRet.Error);
+                }
+            }
+
+            return ReturnError("");
+        }
+        public MWQMSubsectorModel TideSitesToUseForSubsectorVerifyAndSaveDB(FormCollection fc)
+        {
+            int SubsectorTVItemID = 0;
+            List<int> tideSiteTVItemIDList = new List<int>();
+
+            int.TryParse(fc["SubsectorTVItemID"], out SubsectorTVItemID);
+            if (SubsectorTVItemID == 0)
+                return ReturnError(string.Format(ServiceRes._IsRequired, ServiceRes.SubsectorTVItemID));
+
+            string TideSiteTVItemIDListText = fc["TideSiteTVItemIDList"];
+
+            List<string> idArr = TideSiteTVItemIDListText.Split(",".ToCharArray(), StringSplitOptions.RemoveEmptyEntries).ToList();
+            foreach (string s in idArr)
+            {
+                tideSiteTVItemIDList.Add(int.Parse(s));
+            }
+
+            MWQMSubsectorModel mwqwmSubsectorModel = GetMWQMSubsectorModelWithMWQMSubsectorTVItemIDDB(SubsectorTVItemID);
+            if (!string.IsNullOrWhiteSpace(mwqwmSubsectorModel.Error))
+            {
+                return new MWQMSubsectorModel() { Error = mwqwmSubsectorModel.Error };
+            }
+
+            // do remove
+            List<UseOfSiteModel> useOfSiteModelList = _UseOfSiteService.GetUseOfSiteModelListWithTVTypeAndSubsectorTVItemIDDB(TVTypeEnum.TideSite, SubsectorTVItemID);
+            foreach (UseOfSiteModel useOfSiteToDelete in useOfSiteModelList)
+            {
+                UseOfSiteModel useOfSiteModelRet = _UseOfSiteService.PostDeleteUseOfSiteDB(useOfSiteToDelete.UseOfSiteID);
+                if (!string.IsNullOrWhiteSpace(useOfSiteModelRet.Error))
+                {
+                    return ReturnError(useOfSiteModelRet.Error);
+                }
+            }
+
+            // do add
+            foreach (int tideSiteTVItemID in tideSiteTVItemIDList)
+            {
+                UseOfSiteModel useOfSiteModelNew = new UseOfSiteModel()
+                {
+                    Ordinal = 0,
+                    SiteTVItemID = tideSiteTVItemID,
+                    TVType = TVTypeEnum.TideSite,
+                    SubsectorTVItemID = SubsectorTVItemID,
+                    StartYear = 1980,
+                    EndYear = 1980,
+                };
+
+                UseOfSiteModel useOfSiteModelRet = _UseOfSiteService.PostAddUseOfSiteDB(useOfSiteModelNew);
+                if (!string.IsNullOrWhiteSpace(useOfSiteModelRet.Error))
+                {
+                    return ReturnError(useOfSiteModelRet.Error);
+                }
             }
 
             return ReturnError("");

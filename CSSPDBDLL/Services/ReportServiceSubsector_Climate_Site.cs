@@ -98,7 +98,7 @@ namespace CSSPDBDLL.Services
                   where c.TVItemID == u.SiteTVItemID
                   && u.SiteTVItemID == cs.ClimateSiteTVItemID
                   && c.TVItemID == cl.TVItemID
-                  && u.SiteType == (int)SiteTypeEnum.Climate
+                  && u.TVType == (int)TVTypeEnum.ClimateSite
                   && cl.Language == (int)Language
                   && u.SubsectorTVItemID == UnderTVItemID
                   select new ReportSubsector_Climate_SiteModel
@@ -156,7 +156,7 @@ namespace CSSPDBDLL.Services
                  && u.SiteTVItemID == cs.ClimateSiteTVItemID
                  && cu.TVItemID == u.SubsectorTVItemID
                  && c.TVItemID == cl.TVItemID
-                 && u.SiteType == (int)SiteTypeEnum.Climate
+                 && u.TVType == (int)TVTypeEnum.ClimateSite
                  && cl.Language == (int)Language
                  && cu.TVPath.StartsWith(tvItem.TVPath + "p")
                  select new ReportSubsector_Climate_SiteModel

@@ -67,7 +67,7 @@ namespace CSSPDBDLL.Services
                 return retStr;
             }
 
-            retStr = _BaseEnumService.SiteTypeOK(useOfSiteModel.SiteType);
+            retStr = _BaseEnumService.TVTypeOK(useOfSiteModel.TVType);
             if (!string.IsNullOrWhiteSpace(retStr))
             {
                 return retStr;
@@ -152,7 +152,7 @@ namespace CSSPDBDLL.Services
         {
             useOfSite.SiteTVItemID = useOfSiteModel.SiteTVItemID;
             useOfSite.SubsectorTVItemID = useOfSiteModel.SubsectorTVItemID;
-            useOfSite.SiteType = (int)useOfSiteModel.SiteType;
+            useOfSite.TVType = (int)useOfSiteModel.TVType;
             useOfSite.Ordinal = useOfSiteModel.Ordinal;
             useOfSite.StartYear = useOfSiteModel.StartYear;
             useOfSite.EndYear = useOfSiteModel.EndYear;
@@ -198,7 +198,7 @@ namespace CSSPDBDLL.Services
                                                  SiteTVText = siteTVText,
                                                  SubsectorTVItemID = c.SubsectorTVItemID,
                                                  SubsectorTVText = subsectorTVText,
-                                                 SiteType = (SiteTypeEnum)c.SiteType,
+                                                 TVType = (TVTypeEnum)c.TVType,
                                                  Ordinal = c.Ordinal,
                                                  StartYear = c.StartYear,
                                                  EndYear = c.EndYear,
@@ -233,7 +233,7 @@ namespace CSSPDBDLL.Services
                                                            SiteTVText = siteTVText,
                                                            SubsectorTVItemID = c.SubsectorTVItemID,
                                                            SubsectorTVText = subsectorTVText,
-                                                           SiteType = (SiteTypeEnum)c.SiteType,
+                                                           TVType = (TVTypeEnum)c.TVType,
                                                            Ordinal = c.Ordinal,
                                                            StartYear = c.StartYear,
                                                            EndYear = c.EndYear,
@@ -250,12 +250,12 @@ namespace CSSPDBDLL.Services
 
             return UseOfSiteModelList;
         }
-        public List<UseOfSiteModel> GetUseOfSiteModelListWithSiteTypeAndSubsectorTVItemIDDB(SiteTypeEnum SiteType, int SubsectorTVItemID)
+        public List<UseOfSiteModel> GetUseOfSiteModelListWithTVTypeAndSubsectorTVItemIDDB(TVTypeEnum TVType, int SubsectorTVItemID)
         {
             List<UseOfSiteModel> UseOfSiteModelList = (from c in db.UseOfSites
                                                        let siteTVText = (from cl in db.TVItemLanguages where cl.Language == (int)LanguageRequest && cl.TVItemID == c.SiteTVItemID select cl.TVText).FirstOrDefault<string>()
                                                        let subsectorTVText = (from cl in db.TVItemLanguages where cl.Language == (int)LanguageRequest && cl.TVItemID == c.SubsectorTVItemID select cl.TVText).FirstOrDefault<string>()
-                                                       where c.SiteType == (int)SiteType
+                                                       where c.TVType == (int)TVType
                                                        && c.SubsectorTVItemID == SubsectorTVItemID
                                                        orderby c.Ordinal descending
                                                        select new UseOfSiteModel
@@ -266,7 +266,7 @@ namespace CSSPDBDLL.Services
                                                            SiteTVText = siteTVText,
                                                            SubsectorTVItemID = c.SubsectorTVItemID,
                                                            SubsectorTVText = subsectorTVText,
-                                                           SiteType = (SiteTypeEnum)c.SiteType,
+                                                           TVType = (TVTypeEnum)c.TVType,
                                                            Ordinal = c.Ordinal,
                                                            StartYear = c.StartYear,
                                                            EndYear = c.EndYear,
@@ -299,7 +299,7 @@ namespace CSSPDBDLL.Services
                                                  SiteTVText = siteTVText,
                                                  SubsectorTVItemID = c.SubsectorTVItemID,
                                                  SubsectorTVText = subsectorTVText,
-                                                 SiteType = (SiteTypeEnum)c.SiteType,
+                                                 TVType = (TVTypeEnum)c.TVType,
                                                  Ordinal = c.Ordinal,
                                                  StartYear = c.StartYear,
                                                  EndYear = c.EndYear,
@@ -334,7 +334,7 @@ namespace CSSPDBDLL.Services
                                                            SiteTVText = siteTVText,
                                                            SubsectorTVItemID = c.SubsectorTVItemID,
                                                            SubsectorTVText = subsectorTVText,
-                                                           SiteType = (SiteTypeEnum)c.SiteType,
+                                                           TVType = (TVTypeEnum)c.TVType,
                                                            Ordinal = c.Ordinal,
                                                            StartYear = c.StartYear,
                                                            EndYear = c.EndYear,
@@ -357,7 +357,7 @@ namespace CSSPDBDLL.Services
                                                 let siteTVText = (from cl in db.TVItemLanguages where cl.Language == (int)LanguageRequest && cl.TVItemID == c.SiteTVItemID select cl.TVText).FirstOrDefault<string>()
                                                 let subsectorTVText = (from cl in db.TVItemLanguages where cl.Language == (int)LanguageRequest && cl.TVItemID == c.SubsectorTVItemID select cl.TVText).FirstOrDefault<string>()
                                                 where c.SubsectorTVItemID == useOfSiteModel.SubsectorTVItemID
-                                                && c.SiteType == (int)useOfSiteModel.SiteType
+                                                && c.TVType == (int)useOfSiteModel.TVType
                                                 && c.SiteTVItemID == useOfSiteModel.SiteTVItemID
                                                 && c.StartYear >= useOfSiteModel.StartYear
                                                 && c.EndYear <= useOfSiteModel.EndYear
@@ -370,7 +370,7 @@ namespace CSSPDBDLL.Services
                                                     SiteTVText = siteTVText,
                                                     SubsectorTVItemID = c.SubsectorTVItemID,
                                                     SubsectorTVText = subsectorTVText,
-                                                    SiteType = (SiteTypeEnum)c.SiteType,
+                                                    TVType = (TVTypeEnum)c.TVType,
                                                     Ordinal = c.Ordinal,
                                                     StartYear = c.StartYear,
                                                     EndYear = c.EndYear,
@@ -389,12 +389,12 @@ namespace CSSPDBDLL.Services
                 return ReturnError(string.Format(ServiceRes.CouldNotFind_With_Equal_, 
                     ServiceRes.UseOfSite,
                     ServiceRes.SubsectorTVItemID + "," +
-                    ServiceRes.SiteType + "," +
+                    ServiceRes.TVType + "," +
                     ServiceRes.SiteTVItemID + "," +
                     ServiceRes.StartYear + "," +
                     ServiceRes.EndYear,
                     useOfSiteModel.SubsectorTVItemID.ToString() + "," +
-                    useOfSiteModel.SiteType.ToString() + "," +
+                    useOfSiteModel.TVType.ToString() + "," +
                     useOfSiteModel.SiteTVItemID.ToString() + "," +
                     useOfSiteModel.StartYear + "," +
                     useOfSiteModel.EndYear

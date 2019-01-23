@@ -17,7 +17,7 @@ namespace CSSPDBDLL
         public int UseOfSiteID { get; set; }
         public int SiteTVItemID { get; set; }
         public int SubsectorTVItemID { get; set; }
-        public int SiteType { get; set; }
+        public int TVType { get; set; }
         public int Ordinal { get; set; }
         public int StartYear { get; set; }
         public Nullable<int> EndYear { get; set; }

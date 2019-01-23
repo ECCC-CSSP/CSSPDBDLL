@@ -1953,8 +1953,8 @@
   <data name="SiteTVItemID" xml:space="preserve">
     <value>SiteTVItemID</value>
   </data>
-  <data name="SiteType" xml:space="preserve">
-    <value>SiteType</value>
+  <data name="TVType" xml:space="preserve">
+    <value>TVType</value>
   </data>
   <data name="SnowfallEnteredManually_cm" xml:space="preserve">
     <value>SnowfallEnteredManually_cm</value>
@@ -4106,5 +4106,14 @@
   </data>
   <data name="StepLng" xml:space="preserve">
     <value>StepLng</value>
+  </data>
+  <data name="sid" xml:space="preserve">
+    <value>sid</value>
+  </data>
+  <data name="Zone" xml:space="preserve">
+    <value>Zone</value>
+  </data>
+  <data name="TideSiteName" xml:space="preserve">
+    <value>TideSiteName</value>
   </data>
 </root>

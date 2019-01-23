@@ -1234,8 +1234,10 @@
           </Key>
           <Property Name="TideSiteID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="TideSiteTVItemID" Type="int" Nullable="false" />
-          <Property Name="WebTideModel" Type="nvarchar" MaxLength="100" Nullable="false" />
-          <Property Name="WebTideDatum_m" Type="float" Nullable="false" />
+          <Property Name="TideSiteName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Province" Type="nvarchar" MaxLength="2" Nullable="false" />
+          <Property Name="sid" Type="int" Nullable="false" />
+          <Property Name="Zone" Type="int" Nullable="false" />
           <Property Name="LastUpdateDate_UTC" Type="datetime" Nullable="false" />
           <Property Name="LastUpdateContactTVItemID" Type="int" Nullable="false" />
         </EntityType>
@@ -1360,7 +1362,7 @@
           <Property Name="UseOfSiteID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="SiteTVItemID" Type="int" Nullable="false" />
           <Property Name="SubsectorTVItemID" Type="int" Nullable="false" />
-          <Property Name="SiteType" Type="int" Nullable="false" />
+          <Property Name="TVType" Type="int" Nullable="false" />
           <Property Name="Ordinal" Type="int" Nullable="false" />
           <Property Name="StartYear" Type="int" Nullable="false" />
           <Property Name="EndYear" Type="int" />
@@ -5294,8 +5296,10 @@
           </Key>
           <Property Name="TideSiteID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="TideSiteTVItemID" Type="Int32" Nullable="false" />
-          <Property Name="WebTideModel" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="WebTideDatum_m" Type="Double" Nullable="false" />
+          <Property Name="TideSiteName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Province" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Name="sid" Type="Int32" Nullable="false" />
+          <Property Name="Zone" Type="Int32" Nullable="false" />
           <Property Name="LastUpdateDate_UTC" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="LastUpdateContactTVItemID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="TVItem" Relationship="CSSPDBModel.FK_TideSites_TVItems" FromRole="TideSite" ToRole="TVItem" />
@@ -5501,7 +5505,7 @@
           <Property Name="UseOfSiteID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="SiteTVItemID" Type="Int32" Nullable="false" />
           <Property Name="SubsectorTVItemID" Type="Int32" Nullable="false" />
-          <Property Name="SiteType" Type="Int32" Nullable="false" />
+          <Property Name="TVType" Type="Int32" Nullable="false" />
           <Property Name="Ordinal" Type="Int32" Nullable="false" />
           <Property Name="StartYear" Type="Int32" Nullable="false" />
           <Property Name="EndYear" Type="Int32" />
@@ -8291,8 +8295,10 @@
               <MappingFragment StoreEntitySet="TideSites">
                 <ScalarProperty Name="LastUpdateContactTVItemID" ColumnName="LastUpdateContactTVItemID" />
                 <ScalarProperty Name="LastUpdateDate_UTC" ColumnName="LastUpdateDate_UTC" />
-                <ScalarProperty Name="WebTideDatum_m" ColumnName="WebTideDatum_m" />
-                <ScalarProperty Name="WebTideModel" ColumnName="WebTideModel" />
+                <ScalarProperty Name="Zone" ColumnName="Zone" />
+                <ScalarProperty Name="sid" ColumnName="sid" />
+                <ScalarProperty Name="Province" ColumnName="Province" />
+                <ScalarProperty Name="TideSiteName" ColumnName="TideSiteName" />
                 <ScalarProperty Name="TideSiteTVItemID" ColumnName="TideSiteTVItemID" />
                 <ScalarProperty Name="TideSiteID" ColumnName="TideSiteID" />
               </MappingFragment>
@@ -8435,7 +8441,7 @@
                 <ScalarProperty Name="EndYear" ColumnName="EndYear" />
                 <ScalarProperty Name="StartYear" ColumnName="StartYear" />
                 <ScalarProperty Name="Ordinal" ColumnName="Ordinal" />
-                <ScalarProperty Name="SiteType" ColumnName="SiteType" />
+                <ScalarProperty Name="TVType" ColumnName="TVType" />
                 <ScalarProperty Name="SubsectorTVItemID" ColumnName="SubsectorTVItemID" />
                 <ScalarProperty Name="SiteTVItemID" ColumnName="SiteTVItemID" />
                 <ScalarProperty Name="UseOfSiteID" ColumnName="UseOfSiteID" />

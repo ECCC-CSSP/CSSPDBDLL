@@ -204,7 +204,7 @@ namespace CSSPDBDLL.Services
                                           where c.TVItemID == cu.SubsectorTVItemID
                                           && c.TVPath.StartsWith(tvItemModel.TVPath + "p")
                                           && c.TVType == (int)TVTypeEnum.Subsector
-                                          && cu.SiteType == (int)SiteTypeEnum.Climate
+                                          && cu.TVType == (int)TVTypeEnum.ClimateSite
                                           select c).Count();
                         }
                         else if (tvItemModel.TVType == TVTypeEnum.Subsector)
@@ -214,7 +214,7 @@ namespace CSSPDBDLL.Services
                                           where c.TVItemID == cu.SubsectorTVItemID
                                           && c.TVItemID == tvItemModel.TVItemID
                                           && c.TVType == (int)TVTypeEnum.Subsector
-                                          && cu.SiteType == (int)SiteTypeEnum.Climate
+                                          && cu.TVType == (int)TVTypeEnum.ClimateSite
                                           select c).Count();
                         }
                     }
@@ -318,7 +318,7 @@ namespace CSSPDBDLL.Services
                                           where c.TVItemID == cu.SubsectorTVItemID
                                           && c.TVPath.StartsWith(tvItemModel.TVPath + "p")
                                           && c.TVType == (int)TVTypeEnum.Subsector
-                                          && cu.SiteType == (int)SiteTypeEnum.Hydrometric
+                                          && cu.TVType == (int)TVTypeEnum.HydrometricSite
                                           select c).Count();
                         }
                         else if (tvItemModel.TVType == TVTypeEnum.Subsector)
@@ -328,7 +328,7 @@ namespace CSSPDBDLL.Services
                                           where c.TVItemID == cu.SubsectorTVItemID
                                           && c.TVItemID == tvItemModel.TVItemID
                                           && c.TVType == (int)TVTypeEnum.Subsector
-                                          && cu.SiteType == (int)SiteTypeEnum.Hydrometric
+                                          && cu.TVType == (int)TVTypeEnum.HydrometricSite
                                           select c).Count();
                         }
                     }
@@ -542,7 +542,7 @@ namespace CSSPDBDLL.Services
                                           where c.TVItemID == cu.SubsectorTVItemID
                                           && c.TVPath.StartsWith(tvItemModel.TVPath + "p")
                                           && c.TVType == (int)TVTypeEnum.Subsector
-                                          && cu.SiteType == (int)SiteTypeEnum.Tide
+                                          && cu.TVType == (int)TVTypeEnum.TideSite
                                           select c).Count();
                         }
                         else if (tvItemModel.TVType == TVTypeEnum.Subsector)
@@ -552,7 +552,7 @@ namespace CSSPDBDLL.Services
                                           where c.TVItemID == cu.SubsectorTVItemID
                                           && c.TVItemID == tvItemModel.TVItemID
                                           && c.TVType == (int)TVTypeEnum.Subsector
-                                          && cu.SiteType == (int)SiteTypeEnum.Tide
+                                          && cu.TVType == (int)TVTypeEnum.TideSite
                                           select c).Count();
                         }
                     }
@@ -716,7 +716,7 @@ namespace CSSPDBDLL.Services
                                           where c.TVItemID == cu.SubsectorTVItemID
                                           && c.TVPath.StartsWith(tvItem.TVPath + "p")
                                           && c.TVType == (int)TVTypeEnum.Subsector
-                                          && cu.SiteType == (int)SiteTypeEnum.Climate
+                                          && cu.TVType == (int)TVTypeEnum.ClimateSite
                                           select c).Count();
                         }
                         else if (tvItem.TVType == (int)TVTypeEnum.Subsector)
@@ -726,7 +726,7 @@ namespace CSSPDBDLL.Services
                                           where c.TVItemID == cu.SubsectorTVItemID
                                           && c.TVItemID == tvItem.TVItemID
                                           && c.TVType == (int)TVTypeEnum.Subsector
-                                          && cu.SiteType == (int)SiteTypeEnum.Climate
+                                          && cu.TVType == (int)TVTypeEnum.ClimateSite
                                           select c).Count();
                         }
                     }
@@ -830,7 +830,7 @@ namespace CSSPDBDLL.Services
                                           where c.TVItemID == cu.SubsectorTVItemID
                                           && c.TVPath.StartsWith(tvItem.TVPath + "p")
                                           && c.TVType == (int)TVTypeEnum.Subsector
-                                          && cu.SiteType == (int)SiteTypeEnum.Hydrometric
+                                          && cu.TVType == (int)TVTypeEnum.HydrometricSite
                                           select c).Count();
                         }
                         else if (tvItem.TVType == (int)TVTypeEnum.Subsector)
@@ -840,7 +840,7 @@ namespace CSSPDBDLL.Services
                                           where c.TVItemID == cu.SubsectorTVItemID
                                           && c.TVItemID == tvItem.TVItemID
                                           && c.TVType == (int)TVTypeEnum.Subsector
-                                          && cu.SiteType == (int)SiteTypeEnum.Hydrometric
+                                          && cu.TVType == (int)TVTypeEnum.HydrometricSite
                                           select c).Count();
                         }
                     }
@@ -1054,7 +1054,7 @@ namespace CSSPDBDLL.Services
                                           where c.TVItemID == cu.SubsectorTVItemID
                                           && c.TVPath.StartsWith(tvItem.TVPath + "p")
                                           && c.TVType == (int)TVTypeEnum.Subsector
-                                          && cu.SiteType == (int)SiteTypeEnum.Tide
+                                          && cu.TVType == (int)TVTypeEnum.TideSite
                                           select c).Count();
                         }
                         else if (tvItem.TVType == (int)TVTypeEnum.Subsector)
@@ -1064,7 +1064,7 @@ namespace CSSPDBDLL.Services
                                           where c.TVItemID == cu.SubsectorTVItemID
                                           && c.TVItemID == tvItem.TVItemID
                                           && c.TVType == (int)TVTypeEnum.Subsector
-                                          && cu.SiteType == (int)SiteTypeEnum.Tide
+                                          && cu.TVType == (int)TVTypeEnum.TideSite
                                           select c).Count();
                         }
                     }

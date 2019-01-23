@@ -245,7 +245,7 @@ namespace CSSPDBDLL.Services
                                                                    && c.ClimateSiteID == cs.ClimateSiteID
                                                                    && c.DateTime_Local <= SampleDate24
                                                                    && c.DateTime_Local >= SampleDate72
-                                                                   && u.SiteType == (int)SiteTypeEnum.Climate
+                                                                   && u.TVType == (int)TVTypeEnum.ClimateSite
                                                                    && (c.RainfallEntered_mm != null || c.TotalPrecip_mm_cm != null)
                                                                    && s.MWQMSampleID == reportMWQM_Run_SampleModel.MWQM_Run_Sample_ID
                                                                    orderby c.DateTime_Local descending
@@ -305,7 +305,7 @@ namespace CSSPDBDLL.Services
                                                    && cs.TideSiteTVItemID == u.SiteTVItemID
                                                    && t.TideSiteTVItemID == cs.TideSiteTVItemID
                                                    && t.DateTime_Local == SampleDate
-                                                   && u.SiteType == (int)SiteTypeEnum.Tide
+                                                   && u.TVType == (int)TVTypeEnum.TideSite
                                                    && s.MWQMSampleID == reportMWQM_Run_SampleModel.MWQM_Run_Sample_ID
                                                    && t.TideStart != (int)TideTextEnum.Error
                                                    && t.TideEnd != (int)TideTextEnum.Error

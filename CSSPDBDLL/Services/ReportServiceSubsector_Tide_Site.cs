@@ -98,7 +98,7 @@ namespace CSSPDBDLL.Services
                   where c.TVItemID == u.SiteTVItemID
                   && u.SiteTVItemID == cs.TideSiteTVItemID
                   && c.TVItemID == cl.TVItemID
-                  && u.SiteType == (int)SiteTypeEnum.Tide
+                  && u.TVType == (int)TVTypeEnum.TideSite
                   && cl.Language == (int)Language
                   && u.SubsectorTVItemID == UnderTVItemID
                   select new ReportSubsector_Tide_SiteModel
@@ -109,8 +109,9 @@ namespace CSSPDBDLL.Services
                       Subsector_Tide_Site_Name_Translation_Status = (TranslationStatusEnum?)cl.TranslationStatus,
                       Subsector_Tide_Site_Name = cl.TVText,
                       Subsector_Tide_Site_Is_Active = c.IsActive,
-                      Subsector_Tide_Site_Web_Tide_Model = cs.WebTideModel,
-                      Subsector_Tide_Site_Web_Tide_Datum_m = (float?)cs.WebTideDatum_m,
+                      Subsector_Tide_Site_Province = cs.Province,
+                      Subsector_Tide_Site_sid = cs.sid,
+                      Subsector_Tide_Site_Zone = cs.Zone,
                       Subsector_Tide_Site_Last_Update_Date_And_Time_UTC = cs.LastUpdateDate_UTC,
                       Subsector_Tide_Site_Last_Update_Contact_Name = contact.contactName,
                       Subsector_Tide_Site_Last_Update_Contact_Initial = contact.contactInitial,
@@ -140,7 +141,7 @@ namespace CSSPDBDLL.Services
                  where c.TVItemID == u.SiteTVItemID
                  && u.SiteTVItemID == cs.TideSiteTVItemID
                  && c.TVItemID == cl.TVItemID
-                 && u.SiteType == (int)SiteTypeEnum.Tide
+                 && u.TVType == (int)TVTypeEnum.TideSite
                  && cl.Language == (int)Language
                  && cu.TVPath.StartsWith(tvItem.TVPath + "p")
                  select new ReportSubsector_Tide_SiteModel
@@ -151,8 +152,9 @@ namespace CSSPDBDLL.Services
                      Subsector_Tide_Site_Name_Translation_Status = (TranslationStatusEnum?)cl.TranslationStatus,
                      Subsector_Tide_Site_Name = cl.TVText,
                      Subsector_Tide_Site_Is_Active = c.IsActive,
-                     Subsector_Tide_Site_Web_Tide_Model = cs.WebTideModel,
-                     Subsector_Tide_Site_Web_Tide_Datum_m = (float?)cs.WebTideDatum_m,
+                     Subsector_Tide_Site_Province = cs.Province,
+                     Subsector_Tide_Site_sid = cs.sid,
+                     Subsector_Tide_Site_Zone = cs.Zone,
                      Subsector_Tide_Site_Last_Update_Date_And_Time_UTC = cs.LastUpdateDate_UTC,
                      Subsector_Tide_Site_Last_Update_Contact_Name = contact.contactName,
                      Subsector_Tide_Site_Last_Update_Contact_Initial = contact.contactInitial,

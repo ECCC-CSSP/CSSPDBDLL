@@ -9727,6 +9727,15 @@ namespace CSSPDBDLL.Services.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to sid.
+        /// </summary>
+        public static string sid {
+            get {
+                return ResourceManager.GetString("sid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Site.
         /// </summary>
         public static string Site {
@@ -9759,15 +9768,6 @@ namespace CSSPDBDLL.Services.Resources {
         public static string SiteTVItemID {
             get {
                 return ResourceManager.GetString("SiteTVItemID", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to SiteType.
-        /// </summary>
-        public static string SiteType {
-            get {
-                return ResourceManager.GetString("SiteType", resourceCulture);
             }
         }
         
@@ -10767,6 +10767,15 @@ namespace CSSPDBDLL.Services.Resources {
         public static string TideSiteID {
             get {
                 return ResourceManager.GetString("TideSiteID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to TideSiteName.
+        /// </summary>
+        public static string TideSiteName {
+            get {
+                return ResourceManager.GetString("TideSiteName", resourceCulture);
             }
         }
         
@@ -12027,6 +12036,15 @@ namespace CSSPDBDLL.Services.Resources {
         public static string YourEmailIs {
             get {
                 return ResourceManager.GetString("YourEmailIs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Zone.
+        /// </summary>
+        public static string Zone {
+            get {
+                return ResourceManager.GetString("Zone", resourceCulture);
             }
         }
     }

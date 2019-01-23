@@ -1792,12 +1792,12 @@ namespace CSSPDBDLL.Services
                             case TVTypeEnum.ClimateSite:
                                 {
                                     //TVTypeEnum tvType = TVTypeEnum.ClimateSite;
-                                    //List<SiteTypeEnum> siteTypeEnumList = new List<SiteTypeEnum>() { SiteTypeEnum.Climate };
+                                    //List<TVTypeEnum> tvTypeEnumList = new List<TVTypeEnum>() { TVTypeEnum.ClimateSite };
 
-                                    //foreach (SiteTypeEnum siteType in siteTypeEnumList)
+                                    //foreach (TVTypeEnum type in tvTypeEnumList)
                                     //{
                                     //    // doing ClimateSite
-                                    //    List<UseOfSiteModel> useOfSiteModelList = _UseOfSiteService.GetUseOfSiteModelListWithSiteTypeAndSubsectorTVItemIDDB(siteType, tvItemModelCurrent.TVItemID);
+                                    //    List<UseOfSiteModel> useOfSiteModelList = _UseOfSiteService.GetUseOfSiteModelListWithTVTypeAndSubsectorTVItemIDDB(type, tvItemModelCurrent.TVItemID);
 
                                     //    if (useOfSiteModelList.Count > 0)
                                     //    {
@@ -1808,10 +1808,10 @@ namespace CSSPDBDLL.Services
                                     //            tvlNew.TVItemID = useOfSiteModelList.Where(c => c.SiteTVText == siteName).First().SiteTVItemID;
                                     //            tvlNew.TVText = useOfSiteModelList.Where(c => c.SiteTVText == siteName).First().SiteTVText;
 
-                                    //            if (siteType == SiteTypeEnum.Hydrometric)
+                                    //            if (type == TVTypeEnum.HydrometricSite)
                                     //                tvType = TVTypeEnum.HydrometricSite;
 
-                                    //            if (siteType == SiteTypeEnum.Tide)
+                                    //            if (type == TVTypeEnum.TideSite)
                                     //                tvType = TVTypeEnum.TideSite;
 
                                     //            tvlNew.TVType = tvType;
@@ -1856,12 +1856,12 @@ namespace CSSPDBDLL.Services
                             case TVTypeEnum.HydrometricSite:
                                 {
                                     //TVTypeEnum tvType = TVTypeEnum.HydrometricSite;
-                                    //List<SiteTypeEnum> siteTypeEnumList = new List<SiteTypeEnum>() { SiteTypeEnum.Hydrometric };
+                                    //List<TVTypeEnum> tvTypeEnumList = new List<TVTypeEnum>() { TVTypeEnum.HydrometricSite };
 
-                                    //foreach (SiteTypeEnum siteType in siteTypeEnumList)
+                                    //foreach (TVTypeEnum type in tvTypeEnumList)
                                     //{
                                     //    // doing ClimateSite
-                                    //    List<UseOfSiteModel> useOfSiteModelList = _UseOfSiteService.GetUseOfSiteModelListWithSiteTypeAndSubsectorTVItemIDDB(siteType, tvItemModelCurrent.TVItemID);
+                                    //    List<UseOfSiteModel> useOfSiteModelList = _UseOfSiteService.GetUseOfSiteModelListWithTVTypeAndSubsectorTVItemIDDB(type, tvItemModelCurrent.TVItemID);
 
                                     //    if (useOfSiteModelList.Count > 0)
                                     //    {
@@ -1872,10 +1872,10 @@ namespace CSSPDBDLL.Services
                                     //            tvlNew.TVItemID = useOfSiteModelList.Where(c => c.SiteTVText == siteName).First().SiteTVItemID;
                                     //            tvlNew.TVText = useOfSiteModelList.Where(c => c.SiteTVText == siteName).First().SiteTVText;
 
-                                    //            if (siteType == SiteTypeEnum.Hydrometric)
+                                    //            if (type == TVTypeEnum.HydrometricSite)
                                     //                tvType = TVTypeEnum.HydrometricSite;
 
-                                    //            if (siteType == SiteTypeEnum.Tide)
+                                    //            if (type == TVTypeEnum.TideSite)
                                     //                tvType = TVTypeEnum.TideSite;
 
                                     //            tvlNew.TVType = tvType;
@@ -1919,66 +1919,66 @@ namespace CSSPDBDLL.Services
                                 break;
                             case TVTypeEnum.TideSite:
                                 {
-                                    TVTypeEnum tvType = TVTypeEnum.TideSite;
-                                    List<SiteTypeEnum> siteTypeEnumList = new List<SiteTypeEnum>() { SiteTypeEnum.Tide };
+                                    //TVTypeEnum tvType = TVTypeEnum.TideSite;
+                                    //List<TVTypeEnum> tvTypeEnumList = new List<TVTypeEnum>() { TVTypeEnum.TideSite };
 
-                                    foreach (SiteTypeEnum siteType in siteTypeEnumList)
-                                    {
-                                        // doing ClimateSite
-                                        List<UseOfSiteModel> useOfSiteModelList = _UseOfSiteService.GetUseOfSiteModelListWithSiteTypeAndSubsectorTVItemIDDB(siteType, tvItemModelCurrent.TVItemID);
+                                    //foreach (TVTypeEnum type in tvTypeEnumList)
+                                    //{
+                                    //    // doing ClimateSite
+                                    //    List<UseOfSiteModel> useOfSiteModelList = _UseOfSiteService.GetUseOfSiteModelListWithTVTypeAndSubsectorTVItemIDDB(type, tvItemModelCurrent.TVItemID);
 
-                                        if (useOfSiteModelList.Count > 0)
-                                        {
-                                            List<string> SiteNameList = useOfSiteModelList.Select(c => c.SiteTVText).Distinct().ToList();
-                                            foreach (string siteName in SiteNameList)
-                                            {
-                                                TVLocation tvlNew = new TVLocation();
-                                                tvlNew.TVItemID = useOfSiteModelList.Where(c => c.SiteTVText == siteName).First().SiteTVItemID;
-                                                tvlNew.TVText = useOfSiteModelList.Where(c => c.SiteTVText == siteName).First().SiteTVText;
+                                    //    if (useOfSiteModelList.Count > 0)
+                                    //    {
+                                    //        List<string> SiteNameList = useOfSiteModelList.Select(c => c.SiteTVText).Distinct().ToList();
+                                    //        foreach (string siteName in SiteNameList)
+                                    //        {
+                                    //            TVLocation tvlNew = new TVLocation();
+                                    //            tvlNew.TVItemID = useOfSiteModelList.Where(c => c.SiteTVText == siteName).First().SiteTVItemID;
+                                    //            tvlNew.TVText = useOfSiteModelList.Where(c => c.SiteTVText == siteName).First().SiteTVText;
 
-                                                if (siteType == SiteTypeEnum.Hydrometric)
-                                                    tvType = TVTypeEnum.HydrometricSite;
+                                    //            if (type == TVTypeEnum.HydrometricSite)
+                                    //                tvType = TVTypeEnum.HydrometricSite;
 
-                                                if (siteType == SiteTypeEnum.Tide)
-                                                    tvType = TVTypeEnum.TideSite;
+                                    //            if (type == TVTypeEnum.TideSite)
+                                    //                tvType = TVTypeEnum.TideSite;
 
-                                                tvlNew.TVType = tvType;
-                                                tvlNew.SubTVType = tvType;
+                                    //            tvlNew.TVType = tvType;
+                                    //            tvlNew.SubTVType = tvType;
 
-                                                foreach (UseOfSiteModel useOfSiteModel in useOfSiteModelList.Where(c => c.SiteTVText == siteName))
-                                                {
-                                                    if (useOfSiteModel.StartYear == useOfSiteModel.EndYear)
-                                                    {
-                                                        tvlNew.TVText += " [" + useOfSiteModel.StartYear + "]";
-                                                    }
-                                                    else
-                                                    {
-                                                        tvlNew.TVText += " [" + useOfSiteModel.StartYear + "," + useOfSiteModel.EndYear + "]";
-                                                    }
-                                                }
+                                    //            foreach (UseOfSiteModel useOfSiteModel in useOfSiteModelList.Where(c => c.SiteTVText == siteName))
+                                    //            {
+                                    //                if (useOfSiteModel.StartYear == useOfSiteModel.EndYear)
+                                    //                {
+                                    //                    tvlNew.TVText += " [" + useOfSiteModel.StartYear + "]";
+                                    //                }
+                                    //                else
+                                    //                {
+                                    //                    tvlNew.TVText += " [" + useOfSiteModel.StartYear + "," + useOfSiteModel.EndYear + "]";
+                                    //                }
+                                    //            }
 
-                                                List<MapInfoPointModel> mapInfoPointModelList = _MapInfoPointService.GetMapInfoPointModelListWithTVItemIDAndTVTypeAndMapInfoDrawTypeDB(tvlNew.TVItemID, tvType, MapInfoDrawTypeEnum.Point);
-                                                if (mapInfoPointModelList.Count > 0)
-                                                {
-                                                    MapObj mapObj = new MapObj();
-                                                    mapObj.MapInfoID = mapInfoPointModelList[0].MapInfoID;
-                                                    mapObj.MapInfoDrawType = MapInfoDrawTypeEnum.Point;
+                                    //            List<MapInfoPointModel> mapInfoPointModelList = _MapInfoPointService.GetMapInfoPointModelListWithTVItemIDAndTVTypeAndMapInfoDrawTypeDB(tvlNew.TVItemID, tvType, MapInfoDrawTypeEnum.Point);
+                                    //            if (mapInfoPointModelList.Count > 0)
+                                    //            {
+                                    //                MapObj mapObj = new MapObj();
+                                    //                mapObj.MapInfoID = mapInfoPointModelList[0].MapInfoID;
+                                    //                mapObj.MapInfoDrawType = MapInfoDrawTypeEnum.Point;
 
-                                                    List<Coord> coordList = new List<Coord>();
+                                    //                List<Coord> coordList = new List<Coord>();
 
-                                                    foreach (MapInfoPointModel mapInfoPointModel in mapInfoPointModelList)
-                                                    {
-                                                        coordList.Add(new Coord() { Lat = (float)mapInfoPointModel.Lat, Lng = (float)mapInfoPointModel.Lng, Ordinal = mapInfoPointModel.Ordinal });
-                                                    }
+                                    //                foreach (MapInfoPointModel mapInfoPointModel in mapInfoPointModelList)
+                                    //                {
+                                    //                    coordList.Add(new Coord() { Lat = (float)mapInfoPointModel.Lat, Lng = (float)mapInfoPointModel.Lng, Ordinal = mapInfoPointModel.Ordinal });
+                                    //                }
 
-                                                    mapObj.CoordList = coordList;
-                                                    tvlNew.MapObjList.Add(mapObj);
-                                                }
+                                    //                mapObj.CoordList = coordList;
+                                    //                tvlNew.MapObjList.Add(mapObj);
+                                    //            }
 
-                                                tvLocationList.Add(tvlNew);
-                                            }
-                                        }
-                                    }
+                                    //            tvLocationList.Add(tvlNew);
+                                    //        }
+                                    //    }
+                                    //}
                                 }
                                 break;
                             default:

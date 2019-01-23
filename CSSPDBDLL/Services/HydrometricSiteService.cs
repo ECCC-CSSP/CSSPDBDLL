@@ -379,7 +379,7 @@ namespace CSSPDBDLL.Services
                                                select c).FirstOrDefault<HydrometricSite>();
             return HydrometricSite;
         }
-        public List<HydrometricSiteModel> GetHydrometricSiteModelListWithSectorTVItemIDAndSiteType(int SectorTVItemID, SiteTypeEnum SiteType)
+        public List<HydrometricSiteModel> GetHydrometricSiteModelListWithSectorTVItemIDAndTVType(int SectorTVItemID, TVTypeEnum TVType)
         {
             TVItem tvItemSector = (from c in db.TVItems
                                    where c.TVItemID == SectorTVItemID
@@ -404,7 +404,7 @@ namespace CSSPDBDLL.Services
             List<UseOfSite> useOfSiteList = (from c in db.UseOfSites
                                              from h in TVItemIDSSList
                                              where c.SubsectorTVItemID == h
-                                             && c.SiteType == (int)SiteType
+                                             && c.TVType == (int)TVType
                                              select c).ToList();
 
             if (useOfSiteList.Count == 0)

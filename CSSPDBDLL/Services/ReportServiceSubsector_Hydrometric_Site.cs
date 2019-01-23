@@ -98,7 +98,7 @@ namespace CSSPDBDLL.Services
                   where c.TVItemID == u.SiteTVItemID
                   && u.SiteTVItemID == cs.HydrometricSiteTVItemID
                   && c.TVItemID == cl.TVItemID
-                  && u.SiteType == (int)SiteTypeEnum.Hydrometric
+                  && u.TVType == (int)TVTypeEnum.HydrometricSite
                   && cl.Language == (int)Language
                   && u.SubsectorTVItemID == UnderTVItemID
                   select new ReportSubsector_Hydrometric_SiteModel
@@ -152,7 +152,7 @@ namespace CSSPDBDLL.Services
                  && u.SiteTVItemID == cs.HydrometricSiteTVItemID
                  && cu.TVItemID == u.SubsectorTVItemID
                  && c.TVItemID == cl.TVItemID
-                 && u.SiteType == (int)SiteTypeEnum.Hydrometric
+                 && u.TVType == (int)TVTypeEnum.HydrometricSite
                  && cl.Language == (int)Language
                  && cu.TVPath.StartsWith(tvItem.TVPath + "p")
                  select new ReportSubsector_Hydrometric_SiteModel

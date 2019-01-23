@@ -1402,9 +1402,10 @@ namespace CSSPDBDLL.Services
             TideSiteModel tideSiteModel = new TideSiteModel();
 
             tideSiteModel.TideSiteTVItemID = tvItemModelTideSite.TVItemID;
-            tideSiteModel.TideSiteTVText = RandomString("TideSite", 30);
-            tideSiteModel.WebTideModel = RandomString("WTM", 10);
-            tideSiteModel.WebTideDatum_m = RandomDouble(-10, 10);
+            tideSiteModel.TideSiteName = RandomString("TideSite", 30);
+            tideSiteModel.Province = "QC"; // RandomString("QC", 2);
+            tideSiteModel.sid = 3345; // RandomInt(3345, 3345);
+            tideSiteModel.Zone = 1; // RandomInt(1, 1);
             //Assert.IsTrue(tideSiteModel.TideSiteTVItemID > 0);
             //Assert.IsTrue(tideSiteModel.TideSiteTVText.Length == 30);
             //Assert.IsTrue(tideSiteModel.WebTideModel.Length == 10);
@@ -1637,13 +1638,13 @@ namespace CSSPDBDLL.Services
 
             return TVTypeUserAuthorizationModel;
         }
-        public UseOfSiteModel RandomUseOfSiteModel(TVItemModel tvItemModelSite, TVItemModel tvItemModelSubsector, SiteTypeEnum siteType, bool Add)
+        public UseOfSiteModel RandomUseOfSiteModel(TVItemModel tvItemModelSite, TVItemModel tvItemModelSubsector, TVTypeEnum tvType, bool Add)
         {
             UseOfSiteModel useOfSiteModel = new UseOfSiteModel();
 
             useOfSiteModel.SiteTVItemID = tvItemModelSite.TVItemID;
             useOfSiteModel.SubsectorTVItemID = tvItemModelSubsector.TVItemID;
-            useOfSiteModel.SiteType = siteType;
+            useOfSiteModel.TVType = tvType;
             useOfSiteModel.Ordinal = 1;
             useOfSiteModel.StartYear = RandomInt(1999, 2003);
             useOfSiteModel.EndYear = useOfSiteModel.StartYear + 1;
@@ -1656,7 +1657,7 @@ namespace CSSPDBDLL.Services
             useOfSiteModel.Param4 = RandomDouble(0, 100);
             //Assert.IsTrue(useOfSiteModel.SiteTVItemID != 0);
             //Assert.IsTrue(useOfSiteModel.SubsectorTVItemID != 0);
-            //Assert.IsTrue(useOfSiteModel.SiteType == siteType);
+            //Assert.IsTrue(useOfSiteModel.TVType == tvType);
             //Assert.IsTrue(useOfSiteModel.Ordinal == 1);
             //Assert.IsTrue(useOfSiteModel.StartYear > 1998);
             //Assert.IsTrue(useOfSiteModel.EndYear > 1999);

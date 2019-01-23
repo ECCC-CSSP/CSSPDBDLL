@@ -16,8 +16,10 @@ namespace CSSPDBDLL
     {
         public int TideSiteID { get; set; }
         public int TideSiteTVItemID { get; set; }
-        public string WebTideModel { get; set; }
-        public double WebTideDatum_m { get; set; }
+        public string TideSiteName { get; set; }
+        public string Province { get; set; }
+        public int sid { get; set; }
+        public int Zone { get; set; }
         public System.DateTime LastUpdateDate_UTC { get; set; }
         public int LastUpdateContactTVItemID { get; set; }
     

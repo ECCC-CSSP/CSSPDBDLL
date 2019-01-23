@@ -62,19 +62,25 @@ namespace CSSPDBDLL.Services
                 return retStr;
             }
 
-            retStr = FieldCheckNotNullAndMinMaxLengthString(tideSiteModel.TideSiteTVText, ServiceRes.TideSiteTVText, 3, 100);
+            retStr = FieldCheckNotNullAndMinMaxLengthString(tideSiteModel.TideSiteName, ServiceRes.TideSiteName, 3, 100);
             if (!string.IsNullOrWhiteSpace(retStr))
             {
                 return retStr;
             }
 
-            retStr = FieldCheckNotNullAndMinMaxLengthString(tideSiteModel.WebTideModel, ServiceRes.WebTideModel, 3, 100);
+            retStr = FieldCheckNotNullAndMinMaxLengthString(tideSiteModel.Province, ServiceRes.Province, 2, 2);
             if (!string.IsNullOrWhiteSpace(retStr))
             {
                 return retStr;
             }
 
-            retStr = FieldCheckNotNullAndWithinRangeDouble(tideSiteModel.WebTideDatum_m, ServiceRes.WebTideDatum_m, -10, 10);
+            retStr = FieldCheckNotNullAndWithinRangeDouble(tideSiteModel.sid, ServiceRes.sid, 0, 1000000);
+            if (!string.IsNullOrWhiteSpace(retStr))
+            {
+                return retStr;
+            }
+
+            retStr = FieldCheckNotNullAndWithinRangeDouble(tideSiteModel.Zone, ServiceRes.Zone, 0, 1000000);
             if (!string.IsNullOrWhiteSpace(retStr))
             {
                 return retStr;
@@ -88,8 +94,10 @@ namespace CSSPDBDLL.Services
         public string FillTideSite(TideSite tideSiteNew, TideSiteModel tideSiteModel, ContactOK contactOK)
         {
             tideSiteNew.TideSiteTVItemID = tideSiteModel.TideSiteTVItemID;
-            tideSiteNew.WebTideModel = tideSiteModel.WebTideModel;
-            tideSiteNew.WebTideDatum_m = tideSiteModel.WebTideDatum_m;
+            tideSiteNew.TideSiteName = tideSiteModel.TideSiteName;
+            tideSiteNew.Province = tideSiteModel.Province;
+            tideSiteNew.sid = tideSiteModel.sid;
+            tideSiteNew.Zone = tideSiteModel.Zone;
             tideSiteNew.LastUpdateDate_UTC = DateTime.UtcNow;
             if (contactOK == null)
             {
@@ -121,9 +129,10 @@ namespace CSSPDBDLL.Services
                                                Error = "",
                                                TideSiteID = c.TideSiteID,
                                                TideSiteTVItemID = c.TideSiteTVItemID,
-                                               TideSiteTVText = tideSiteName,
-                                               WebTideModel = c.WebTideModel,
-                                               WebTideDatum_m = c.WebTideDatum_m,
+                                               TideSiteName = tideSiteName,
+                                               Province = c.Province,
+                                               sid = c.sid,
+                                               Zone = c.Zone,
                                                LastUpdateDate_UTC = c.LastUpdateDate_UTC,
                                                LastUpdateContactTVItemID = c.LastUpdateContactTVItemID,
                                            }).FirstOrDefault<TideSiteModel>();
@@ -132,6 +141,40 @@ namespace CSSPDBDLL.Services
                 return ReturnTideSiteError(string.Format(ServiceRes.CouldNotFind_With_Equal_, ServiceRes.TideSite, ServiceRes.TideSiteID, TideSiteID));
 
             return tideSiteModel;
+        }
+        public TideSiteModel GetTideSiteModelExistDB(TideSiteModel tideSiteModel)
+        {
+            TideSiteModel tideSiteModelExist = (from c in db.TideSites
+                                           let tideSiteName = (from cl in db.TVItemLanguages where cl.Language == (int)LanguageRequest && cl.TVItemID == c.TideSiteTVItemID select cl.TVText).FirstOrDefault<string>()
+                                           where c.Province == tideSiteModel.Province
+                                           && c.sid == tideSiteModel.sid
+                                           && c.Zone == tideSiteModel.Zone
+                                           && c.TideSiteName == tideSiteModel.TideSiteName
+                                           select new TideSiteModel
+                                           {
+                                               Error = "",
+                                               TideSiteID = c.TideSiteID,
+                                               TideSiteTVItemID = c.TideSiteTVItemID,
+                                               TideSiteName = tideSiteName,
+                                               Province = c.Province,
+                                               sid = c.sid,
+                                               Zone = c.Zone,
+                                               LastUpdateDate_UTC = c.LastUpdateDate_UTC,
+                                               LastUpdateContactTVItemID = c.LastUpdateContactTVItemID,
+                                           }).FirstOrDefault<TideSiteModel>();
+
+            if (tideSiteModelExist == null)
+                return ReturnTideSiteError(string.Format(ServiceRes.CouldNotFind_With_Equal_, ServiceRes.TideSite, 
+                    ServiceRes.Province + "," +
+                    ServiceRes.sid + "," +
+                    ServiceRes.Zone + "," +
+                    ServiceRes.TideSiteName,
+                    tideSiteModel.Province + "," +
+                    tideSiteModel.sid + "," +
+                    tideSiteModel.Zone + "," +
+                    tideSiteModel.TideSiteName));
+
+            return tideSiteModelExist;
         }
         public TideSiteModel GetTideSiteModelWithTideSiteTVItemIDDB(int TideSiteTVItemID)
         {
@@ -145,9 +188,10 @@ namespace CSSPDBDLL.Services
 
                                                TideSiteID = c.TideSiteID,
                                                TideSiteTVItemID = c.TideSiteTVItemID,
-                                               TideSiteTVText = tideSiteName,
-                                               WebTideModel = c.WebTideModel,
-                                               WebTideDatum_m = c.WebTideDatum_m,
+                                               TideSiteName = tideSiteName,
+                                               Province = c.Province,
+                                               sid = c.sid,
+                                               Zone = c.Zone,
                                                LastUpdateDate_UTC = c.LastUpdateDate_UTC,
                                                LastUpdateContactTVItemID = c.LastUpdateContactTVItemID,
                                            }).FirstOrDefault<TideSiteModel>();
@@ -241,7 +285,7 @@ namespace CSSPDBDLL.Services
         // Helper
         public string CreateTVText(TideSiteModel tideSiteModel)
         {
-            return tideSiteModel.TideSiteTVText;
+            return tideSiteModel.TideSiteName;
         }
         public TideSiteModel ReturnTideSiteError(string Error)
         {

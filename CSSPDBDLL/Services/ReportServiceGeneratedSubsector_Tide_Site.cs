@@ -76,20 +76,28 @@ namespace CSSPDBDLL.Services
                                     reportSubsector_Tide_SiteModelQ = reportSubsector_Tide_SiteModelQ.OrderByDescending(c => c.Subsector_Tide_Site_Is_Active);
                             }
                             break;
-                        case "Subsector_Tide_Site_Web_Tide_Model":
+                        case "Subsector_Tide_Site_Province":
                             {
                                 if (reportTreeNode.dbSortingField.ReportSorting == ReportSortingEnum.ReportSortingAscending)
-                                    reportSubsector_Tide_SiteModelQ = reportSubsector_Tide_SiteModelQ.OrderBy(c => c.Subsector_Tide_Site_Web_Tide_Model);
+                                    reportSubsector_Tide_SiteModelQ = reportSubsector_Tide_SiteModelQ.OrderBy(c => c.Subsector_Tide_Site_Province);
                                 else
-                                    reportSubsector_Tide_SiteModelQ = reportSubsector_Tide_SiteModelQ.OrderByDescending(c => c.Subsector_Tide_Site_Web_Tide_Model);
+                                    reportSubsector_Tide_SiteModelQ = reportSubsector_Tide_SiteModelQ.OrderByDescending(c => c.Subsector_Tide_Site_Province);
                             }
                             break;
-                        case "Subsector_Tide_Site_Web_Tide_Datum_m":
+                        case "Subsector_Tide_Site_sid":
                             {
                                 if (reportTreeNode.dbSortingField.ReportSorting == ReportSortingEnum.ReportSortingAscending)
-                                    reportSubsector_Tide_SiteModelQ = reportSubsector_Tide_SiteModelQ.OrderBy(c => c.Subsector_Tide_Site_Web_Tide_Datum_m);
+                                    reportSubsector_Tide_SiteModelQ = reportSubsector_Tide_SiteModelQ.OrderBy(c => c.Subsector_Tide_Site_sid);
                                 else
-                                    reportSubsector_Tide_SiteModelQ = reportSubsector_Tide_SiteModelQ.OrderByDescending(c => c.Subsector_Tide_Site_Web_Tide_Datum_m);
+                                    reportSubsector_Tide_SiteModelQ = reportSubsector_Tide_SiteModelQ.OrderByDescending(c => c.Subsector_Tide_Site_sid);
+                            }
+                            break;
+                        case "Subsector_Tide_Site_Zone":
+                            {
+                                if (reportTreeNode.dbSortingField.ReportSorting == ReportSortingEnum.ReportSortingAscending)
+                                    reportSubsector_Tide_SiteModelQ = reportSubsector_Tide_SiteModelQ.OrderBy(c => c.Subsector_Tide_Site_Zone);
+                                else
+                                    reportSubsector_Tide_SiteModelQ = reportSubsector_Tide_SiteModelQ.OrderByDescending(c => c.Subsector_Tide_Site_Zone);
                             }
                             break;
                         case "Subsector_Tide_Site_Last_Update_Date_And_Time_UTC":
@@ -186,8 +194,8 @@ namespace CSSPDBDLL.Services
                         case "Subsector_Tide_Site_Name":
                             reportSubsector_Tide_SiteModelQ = ReportServiceGeneratedSubsector_Tide_Site_Subsector_Tide_Site_Name(reportSubsector_Tide_SiteModelQ, reportTreeNode, dbFilteringTextField);
                             break;
-                        case "Subsector_Tide_Site_Web_Tide_Model":
-                            reportSubsector_Tide_SiteModelQ = ReportServiceGeneratedSubsector_Tide_Site_Subsector_Tide_Site_Web_Tide_Model(reportSubsector_Tide_SiteModelQ, reportTreeNode, dbFilteringTextField);
+                        case "Subsector_Tide_Site_Province":
+                            reportSubsector_Tide_SiteModelQ = ReportServiceGeneratedSubsector_Tide_Site_Subsector_Tide_Site_Province(reportSubsector_Tide_SiteModelQ, reportTreeNode, dbFilteringTextField);
                             break;
                         case "Subsector_Tide_Site_Last_Update_Contact_Name":
                             reportSubsector_Tide_SiteModelQ = ReportServiceGeneratedSubsector_Tide_Site_Subsector_Tide_Site_Last_Update_Contact_Name(reportSubsector_Tide_SiteModelQ, reportTreeNode, dbFilteringTextField);
@@ -214,8 +222,11 @@ namespace CSSPDBDLL.Services
                         case "Subsector_Tide_Site_ID":
                             reportSubsector_Tide_SiteModelQ = ReportServiceGeneratedSubsector_Tide_Site_Subsector_Tide_Site_ID(reportSubsector_Tide_SiteModelQ, reportTreeNode, dbFilteringNumberField);
                             break;
-                        case "Subsector_Tide_Site_Web_Tide_Datum_m":
-                            reportSubsector_Tide_SiteModelQ = ReportServiceGeneratedSubsector_Tide_Site_Subsector_Tide_Site_Web_Tide_Datum_m(reportSubsector_Tide_SiteModelQ, reportTreeNode, dbFilteringNumberField);
+                        case "Subsector_Tide_Site_sid":
+                            reportSubsector_Tide_SiteModelQ = ReportServiceGeneratedSubsector_Tide_Site_Subsector_Tide_Site_sid(reportSubsector_Tide_SiteModelQ, reportTreeNode, dbFilteringNumberField);
+                            break;
+                        case "Subsector_Tide_Site_Zone":
+                            reportSubsector_Tide_SiteModelQ = ReportServiceGeneratedSubsector_Tide_Site_Subsector_Tide_Site_Zone(reportSubsector_Tide_SiteModelQ, reportTreeNode, dbFilteringNumberField);
                             break;
                         case "Subsector_Tide_Site_Lat":
                             reportSubsector_Tide_SiteModelQ = ReportServiceGeneratedSubsector_Tide_Site_Subsector_Tide_Site_Lat(reportSubsector_Tide_SiteModelQ, reportTreeNode, dbFilteringNumberField);
@@ -749,27 +760,27 @@ namespace CSSPDBDLL.Services
 
             return reportSubsector_Tide_SiteModelQ;
         }
-        public IQueryable<ReportSubsector_Tide_SiteModel> ReportServiceGeneratedSubsector_Tide_Site_Subsector_Tide_Site_Web_Tide_Model(IQueryable<ReportSubsector_Tide_SiteModel> reportSubsector_Tide_SiteModelQ, ReportTreeNode reportTreeNode, ReportConditionTextField dbFilteringTextField)
+        public IQueryable<ReportSubsector_Tide_SiteModel> ReportServiceGeneratedSubsector_Tide_Site_Subsector_Tide_Site_Province(IQueryable<ReportSubsector_Tide_SiteModel> reportSubsector_Tide_SiteModelQ, ReportTreeNode reportTreeNode, ReportConditionTextField dbFilteringTextField)
         {
             switch (dbFilteringTextField.ReportCondition)
             {
                 case ReportConditionEnum.ReportConditionContain:
-                    reportSubsector_Tide_SiteModelQ = reportSubsector_Tide_SiteModelQ.Where(c => c.Subsector_Tide_Site_Web_Tide_Model.ToLower().Contains(dbFilteringTextField.TextCondition.ToLower().Replace("*", " ")));
+                    reportSubsector_Tide_SiteModelQ = reportSubsector_Tide_SiteModelQ.Where(c => c.Subsector_Tide_Site_Province.ToLower().Contains(dbFilteringTextField.TextCondition.ToLower().Replace("*", " ")));
                     break;
                 case ReportConditionEnum.ReportConditionStart:
-                    reportSubsector_Tide_SiteModelQ = reportSubsector_Tide_SiteModelQ.Where(c => c.Subsector_Tide_Site_Web_Tide_Model.ToLower().StartsWith(dbFilteringTextField.TextCondition.ToLower().Replace("*", " ")));
+                    reportSubsector_Tide_SiteModelQ = reportSubsector_Tide_SiteModelQ.Where(c => c.Subsector_Tide_Site_Province.ToLower().StartsWith(dbFilteringTextField.TextCondition.ToLower().Replace("*", " ")));
                     break;
                 case ReportConditionEnum.ReportConditionEnd:
-                    reportSubsector_Tide_SiteModelQ = reportSubsector_Tide_SiteModelQ.Where(c => c.Subsector_Tide_Site_Web_Tide_Model.ToLower().EndsWith(dbFilteringTextField.TextCondition.ToLower().Replace("*", " ")));
+                    reportSubsector_Tide_SiteModelQ = reportSubsector_Tide_SiteModelQ.Where(c => c.Subsector_Tide_Site_Province.ToLower().EndsWith(dbFilteringTextField.TextCondition.ToLower().Replace("*", " ")));
                     break;
                 case ReportConditionEnum.ReportConditionEqual:
-                    reportSubsector_Tide_SiteModelQ = reportSubsector_Tide_SiteModelQ.Where(c => c.Subsector_Tide_Site_Web_Tide_Model.ToLower() == dbFilteringTextField.TextCondition.ToLower().Replace("*", " "));
+                    reportSubsector_Tide_SiteModelQ = reportSubsector_Tide_SiteModelQ.Where(c => c.Subsector_Tide_Site_Province.ToLower() == dbFilteringTextField.TextCondition.ToLower().Replace("*", " "));
                     break;
                 case ReportConditionEnum.ReportConditionBigger:
-                    reportSubsector_Tide_SiteModelQ = reportSubsector_Tide_SiteModelQ.Where(c => String.Compare(c.Subsector_Tide_Site_Web_Tide_Model.ToLower(), dbFilteringTextField.TextCondition.ToLower().Replace("*", " ")) > 0 );
+                    reportSubsector_Tide_SiteModelQ = reportSubsector_Tide_SiteModelQ.Where(c => String.Compare(c.Subsector_Tide_Site_Province.ToLower(), dbFilteringTextField.TextCondition.ToLower().Replace("*", " ")) > 0 );
                     break;
                 case ReportConditionEnum.ReportConditionSmaller:
-                    reportSubsector_Tide_SiteModelQ = reportSubsector_Tide_SiteModelQ.Where(c => String.Compare(c.Subsector_Tide_Site_Web_Tide_Model.ToLower(), dbFilteringTextField.TextCondition.ToLower().Replace("*", " ")) < 0 );
+                    reportSubsector_Tide_SiteModelQ = reportSubsector_Tide_SiteModelQ.Where(c => String.Compare(c.Subsector_Tide_Site_Province.ToLower(), dbFilteringTextField.TextCondition.ToLower().Replace("*", " ")) < 0 );
                     break;
                 default:
                     break;
@@ -873,18 +884,37 @@ namespace CSSPDBDLL.Services
 
             return reportSubsector_Tide_SiteModelQ;
         }
-        public IQueryable<ReportSubsector_Tide_SiteModel> ReportServiceGeneratedSubsector_Tide_Site_Subsector_Tide_Site_Web_Tide_Datum_m(IQueryable<ReportSubsector_Tide_SiteModel> reportSubsector_Tide_SiteModelQ, ReportTreeNode reportTreeNode, ReportConditionNumberField dbFilteringNumberField)
+        public IQueryable<ReportSubsector_Tide_SiteModel> ReportServiceGeneratedSubsector_Tide_Site_Subsector_Tide_Site_sid(IQueryable<ReportSubsector_Tide_SiteModel> reportSubsector_Tide_SiteModelQ, ReportTreeNode reportTreeNode, ReportConditionNumberField dbFilteringNumberField)
         {
             switch (dbFilteringNumberField.ReportCondition)
             {
                 case ReportConditionEnum.ReportConditionBigger:
-                    reportSubsector_Tide_SiteModelQ = reportSubsector_Tide_SiteModelQ.Where(c => c.Subsector_Tide_Site_Web_Tide_Datum_m > dbFilteringNumberField.NumberCondition);
+                    reportSubsector_Tide_SiteModelQ = reportSubsector_Tide_SiteModelQ.Where(c => c.Subsector_Tide_Site_sid > dbFilteringNumberField.NumberCondition);
                     break;
                 case ReportConditionEnum.ReportConditionSmaller:
-                    reportSubsector_Tide_SiteModelQ = reportSubsector_Tide_SiteModelQ.Where(c => c.Subsector_Tide_Site_Web_Tide_Datum_m < dbFilteringNumberField.NumberCondition);
+                    reportSubsector_Tide_SiteModelQ = reportSubsector_Tide_SiteModelQ.Where(c => c.Subsector_Tide_Site_sid < dbFilteringNumberField.NumberCondition);
                     break;
                 case ReportConditionEnum.ReportConditionEqual:
-                    reportSubsector_Tide_SiteModelQ = reportSubsector_Tide_SiteModelQ.Where(c => c.Subsector_Tide_Site_Web_Tide_Datum_m == dbFilteringNumberField.NumberCondition);
+                    reportSubsector_Tide_SiteModelQ = reportSubsector_Tide_SiteModelQ.Where(c => c.Subsector_Tide_Site_sid == dbFilteringNumberField.NumberCondition);
+                    break;
+                default:
+                    break;
+            }
+
+            return reportSubsector_Tide_SiteModelQ;
+        }
+        public IQueryable<ReportSubsector_Tide_SiteModel> ReportServiceGeneratedSubsector_Tide_Site_Subsector_Tide_Site_Zone(IQueryable<ReportSubsector_Tide_SiteModel> reportSubsector_Tide_SiteModelQ, ReportTreeNode reportTreeNode, ReportConditionNumberField dbFilteringNumberField)
+        {
+            switch (dbFilteringNumberField.ReportCondition)
+            {
+                case ReportConditionEnum.ReportConditionBigger:
+                    reportSubsector_Tide_SiteModelQ = reportSubsector_Tide_SiteModelQ.Where(c => c.Subsector_Tide_Site_Zone > dbFilteringNumberField.NumberCondition);
+                    break;
+                case ReportConditionEnum.ReportConditionSmaller:
+                    reportSubsector_Tide_SiteModelQ = reportSubsector_Tide_SiteModelQ.Where(c => c.Subsector_Tide_Site_Zone < dbFilteringNumberField.NumberCondition);
+                    break;
+                case ReportConditionEnum.ReportConditionEqual:
+                    reportSubsector_Tide_SiteModelQ = reportSubsector_Tide_SiteModelQ.Where(c => c.Subsector_Tide_Site_Zone == dbFilteringNumberField.NumberCondition);
                     break;
                 default:
                     break;

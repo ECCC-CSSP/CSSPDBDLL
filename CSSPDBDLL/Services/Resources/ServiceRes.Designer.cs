@@ -3085,6 +3085,24 @@ namespace CSSPDBDLL.Services.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to DocHTMLText.
+        /// </summary>
+        public static string DocHTMLText {
+            get {
+                return ResourceManager.GetString("DocHTMLText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to DocKey.
+        /// </summary>
+        public static string DocKey {
+            get {
+                return ResourceManager.GetString("DocKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to DocTemplate.
         /// </summary>
         public static string DocTemplate {
@@ -4413,6 +4431,24 @@ namespace CSSPDBDLL.Services.Resources {
         public static string HeatDegDays_C {
             get {
                 return ResourceManager.GetString("HeatDegDays_C", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to HelpDoc.
+        /// </summary>
+        public static string HelpDoc {
+            get {
+                return ResourceManager.GetString("HelpDoc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to HelpDocID.
+        /// </summary>
+        public static string HelpDocID {
+            get {
+                return ResourceManager.GetString("HelpDocID", resourceCulture);
             }
         }
         

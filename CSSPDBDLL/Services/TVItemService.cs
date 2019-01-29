@@ -134,6 +134,25 @@ namespace CSSPDBDLL.Services
 
             return tvItemModelList;
         }
+        public List<int> GetMunicipalityTVItemIDListWithInfrastructureUnder(int TVItemID)
+        {
+            TVItemModel currentTVItemModel = GetTVItemModelWithTVItemIDDB(TVItemID);
+            if (!string.IsNullOrWhiteSpace(currentTVItemModel.Error))
+                return new List<int>();
+
+            List<int> intList = (from c in db.TVItems
+                                 let exist = (from cc in db.TVItems
+                                              where cc.ParentID == c.TVItemID
+                                              && cc.TVType == (int)TVTypeEnum.Infrastructure
+                                              && cc.TVPath.StartsWith(c.TVPath + "p")
+                                              select cc).Any()
+                                 where c.TVPath.StartsWith(currentTVItemModel.TVPath + "p")
+                                 && c.TVType == (int)TVTypeEnum.Municipality
+                                 && exist == true
+                                 select c.TVItemID).ToList<int>();
+
+            return intList;
+        }
         public List<TVItemModelAndChildCount> GetChildrenTVItemModelAndChildCountListWithTVItemIDAndTVTypeDB(int TVItemID, TVTypeEnum TVType)
         {
             TVItemModel currentTVItemModel = GetTVItemModelWithTVItemIDDB(TVItemID);

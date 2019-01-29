@@ -1590,9 +1590,6 @@
   <data name="TVText" xml:space="preserve">
     <value>TVText</value>
   </data>
-  <data name="TVType" xml:space="preserve">
-    <value>TVType</value>
-  </data>
   <data name="UseAsBestEstimate" xml:space="preserve">
     <value>UseAsBestEstimate</value>
   </data>
@@ -3973,5 +3970,17 @@
   </data>
   <data name="TideSiteName" xml:space="preserve">
     <value>TideSiteName</value>
+  </data>
+  <data name="DocHTMLText" xml:space="preserve">
+    <value>DocHTMLText</value>
+  </data>
+  <data name="DocKey" xml:space="preserve">
+    <value>DocKey</value>
+  </data>
+  <data name="HelpDoc" xml:space="preserve">
+    <value>HelpDoc</value>
+  </data>
+  <data name="HelpDocID" xml:space="preserve">
+    <value>HelpDocID</value>
   </data>
 </root>

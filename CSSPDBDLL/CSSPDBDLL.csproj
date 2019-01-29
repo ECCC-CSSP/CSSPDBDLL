@@ -209,6 +209,9 @@
     <Compile Include="EmailDistributionListLanguage.cs">
       <DependentUpon>CSSPDBEDM.tt</DependentUpon>
     </Compile>
+    <Compile Include="HelpDoc.cs">
+      <DependentUpon>CSSPDBEDM.tt</DependentUpon>
+    </Compile>
     <Compile Include="HydrometricDataValue.cs">
       <DependentUpon>CSSPDBEDM.tt</DependentUpon>
     </Compile>
@@ -336,6 +339,7 @@
     </Compile>
     <Compile Include="Services\DroguePositionService.cs" />
     <Compile Include="Services\DrogueRunService.cs" />
+    <Compile Include="Services\HelpDocService.cs" />
     <Compile Include="Services\KMZService.cs" />
     <Compile Include="Services\AddressService.cs" />
     <Compile Include="Services\AppErrLogService.cs" />

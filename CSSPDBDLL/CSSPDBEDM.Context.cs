@@ -50,6 +50,7 @@ namespace CSSPDBDLL
         public virtual DbSet<EmailDistributionListLanguage> EmailDistributionListLanguages { get; set; }
         public virtual DbSet<EmailDistributionList> EmailDistributionLists { get; set; }
         public virtual DbSet<Email> Emails { get; set; }
+        public virtual DbSet<HelpDoc> HelpDocs { get; set; }
         public virtual DbSet<HydrometricDataValue> HydrometricDataValues { get; set; }
         public virtual DbSet<HydrometricSite> HydrometricSites { get; set; }
         public virtual DbSet<InfrastructureLanguage> InfrastructureLanguages { get; set; }

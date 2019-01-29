@@ -166,34 +166,34 @@ namespace CSSPDBDLL.Services
                     return retStr;
                 }
 
-                retStr = FieldCheckNotNullAndWithinRangeDouble(SamplingPlanModel.DailyDuplicatePrecisionCriteria, ServiceRes.DailyDuplicatePrecisionCriteria, 0.0f, 5.0f);
-                if (!string.IsNullOrWhiteSpace(retStr))
-                {
-                    return retStr;
-                }
+                //retStr = FieldCheckNotNullAndWithinRangeDouble(SamplingPlanModel.DailyDuplicatePrecisionCriteria, ServiceRes.DailyDuplicatePrecisionCriteria, 0.0f, 5.0f);
+                //if (!string.IsNullOrWhiteSpace(retStr))
+                //{
+                //    return retStr;
+                //}
 
-                retStr = FieldCheckNotNullAndWithinRangeDouble(SamplingPlanModel.IntertechDuplicatePrecisionCriteria, ServiceRes.IntertechDuplicatePrecisionCriteria, 0.0f, 5.0f);
-                if (!string.IsNullOrWhiteSpace(retStr))
-                {
-                    return retStr;
-                }
+                //retStr = FieldCheckNotNullAndWithinRangeDouble(SamplingPlanModel.IntertechDuplicatePrecisionCriteria, ServiceRes.IntertechDuplicatePrecisionCriteria, 0.0f, 5.0f);
+                //if (!string.IsNullOrWhiteSpace(retStr))
+                //{
+                //    return retStr;
+                //}
             }
             else
             {
-                if (SamplingPlanModel.Year >= 2019)
-                {
-                    retStr = FieldCheckNotNullAndWithinRangeDouble(SamplingPlanModel.DailyDuplicatePrecisionCriteria, ServiceRes.DailyDuplicatePrecisionCriteria, 0.0f, 5.0f);
-                    if (!string.IsNullOrWhiteSpace(retStr))
-                    {
-                        return retStr;
-                    }
+                //if (SamplingPlanModel.Year >= 2019)
+                //{
+                //    retStr = FieldCheckNotNullAndWithinRangeDouble(SamplingPlanModel.DailyDuplicatePrecisionCriteria, ServiceRes.DailyDuplicatePrecisionCriteria, 0.0f, 5.0f);
+                //    if (!string.IsNullOrWhiteSpace(retStr))
+                //    {
+                //        return retStr;
+                //    }
 
-                    retStr = FieldCheckNotNullAndWithinRangeDouble(SamplingPlanModel.IntertechDuplicatePrecisionCriteria, ServiceRes.IntertechDuplicatePrecisionCriteria, 0.0f, 5.0f);
-                    if (!string.IsNullOrWhiteSpace(retStr))
-                    {
-                        return retStr;
-                    }
-                }
+                //    retStr = FieldCheckNotNullAndWithinRangeDouble(SamplingPlanModel.IntertechDuplicatePrecisionCriteria, ServiceRes.IntertechDuplicatePrecisionCriteria, 0.0f, 5.0f);
+                //    if (!string.IsNullOrWhiteSpace(retStr))
+                //    {
+                //        return retStr;
+                //    }
+                //}
             }
 
             retStr = FieldCheckIfNotNullNotZeroInt(SamplingPlanModel.SamplingPlanFileTVItemID, ServiceRes.SamplingPlanFileTVItemID);
@@ -594,37 +594,37 @@ namespace CSSPDBDLL.Services
 
             if (IncludeLaboratoryQAQC)
             {
-                if (string.IsNullOrWhiteSpace(fc["DailyDuplicatePrecisionCriteria"]))
-                    return ReturnError(string.Format(ServiceRes._IsRequired, ServiceRes.DailyDuplicatePrecisionCriteria));
+                //if (string.IsNullOrWhiteSpace(fc["DailyDuplicatePrecisionCriteria"]))
+                //    return ReturnError(string.Format(ServiceRes._IsRequired, ServiceRes.DailyDuplicatePrecisionCriteria));
 
                 DailyDuplicatePrecisionCriteria = float.Parse(fc["DailyDuplicatePrecisionCriteria"]);
-                if (DailyDuplicatePrecisionCriteria < 0.0001)
-                    return ReturnError(string.Format(ServiceRes._IsRequired, ServiceRes.DailyDuplicatePrecisionCriteria));
+                //if (DailyDuplicatePrecisionCriteria < 0.0001)
+                //    return ReturnError(string.Format(ServiceRes._IsRequired, ServiceRes.DailyDuplicatePrecisionCriteria));
 
-                if (string.IsNullOrWhiteSpace(fc["IntertechDuplicatePrecisionCriteria"]))
-                    return ReturnError(string.Format(ServiceRes._IsRequired, ServiceRes.IntertechDuplicatePrecisionCriteria));
+                //if (string.IsNullOrWhiteSpace(fc["IntertechDuplicatePrecisionCriteria"]))
+                //    return ReturnError(string.Format(ServiceRes._IsRequired, ServiceRes.IntertechDuplicatePrecisionCriteria));
 
                 IntertechDuplicatePrecisionCriteria = float.Parse(fc["IntertechDuplicatePrecisionCriteria"]);
-                if (IntertechDuplicatePrecisionCriteria < 0.0001)
-                    return ReturnError(string.Format(ServiceRes._IsRequired, ServiceRes.IntertechDuplicatePrecisionCriteria));
+                //if (IntertechDuplicatePrecisionCriteria < 0.0001)
+                //    return ReturnError(string.Format(ServiceRes._IsRequired, ServiceRes.IntertechDuplicatePrecisionCriteria));
             }
             else
             {
                 if (Year >= 2019)
                 {
-                    if (string.IsNullOrWhiteSpace(fc["DailyDuplicatePrecisionCriteria"]))
-                        return ReturnError(string.Format(ServiceRes._IsRequired, ServiceRes.DailyDuplicatePrecisionCriteria));
+                    //if (string.IsNullOrWhiteSpace(fc["DailyDuplicatePrecisionCriteria"]))
+                    //    return ReturnError(string.Format(ServiceRes._IsRequired, ServiceRes.DailyDuplicatePrecisionCriteria));
 
                     DailyDuplicatePrecisionCriteria = float.Parse(fc["DailyDuplicatePrecisionCriteria"]);
-                    if (DailyDuplicatePrecisionCriteria < 0.0001)
-                        return ReturnError(string.Format(ServiceRes._IsRequired, ServiceRes.DailyDuplicatePrecisionCriteria));
+                    //if (DailyDuplicatePrecisionCriteria < 0.0001)
+                    //    return ReturnError(string.Format(ServiceRes._IsRequired, ServiceRes.DailyDuplicatePrecisionCriteria));
 
-                    if (string.IsNullOrWhiteSpace(fc["IntertechDuplicatePrecisionCriteria"]))
-                        return ReturnError(string.Format(ServiceRes._IsRequired, ServiceRes.IntertechDuplicatePrecisionCriteria));
+                    //if (string.IsNullOrWhiteSpace(fc["IntertechDuplicatePrecisionCriteria"]))
+                    //    return ReturnError(string.Format(ServiceRes._IsRequired, ServiceRes.IntertechDuplicatePrecisionCriteria));
 
                     IntertechDuplicatePrecisionCriteria = float.Parse(fc["IntertechDuplicatePrecisionCriteria"]);
-                    if (IntertechDuplicatePrecisionCriteria < 0.0001)
-                        return ReturnError(string.Format(ServiceRes._IsRequired, ServiceRes.IntertechDuplicatePrecisionCriteria));
+                    //if (IntertechDuplicatePrecisionCriteria < 0.0001)
+                    //    return ReturnError(string.Format(ServiceRes._IsRequired, ServiceRes.IntertechDuplicatePrecisionCriteria));
                 }
             }
 

@@ -382,6 +382,17 @@
           <Property Name="LastUpdateDate_UTC" Type="datetime" Nullable="false" />
           <Property Name="LastUpdateContactTVItemID" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="HelpDocs">
+          <Key>
+            <PropertyRef Name="HelpDocID" />
+          </Key>
+          <Property Name="HelpDocID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DocKey" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Language" Type="int" Nullable="false" />
+          <Property Name="DocHTMLText" Type="text" Nullable="false" />
+          <Property Name="LastUpdateDate_UTC" Type="datetime" Nullable="false" />
+          <Property Name="LastUpdateContactTVItemID" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="HydrometricDataValues">
           <Key>
             <PropertyRef Name="HydrometricDataValueID" />
@@ -2899,6 +2910,7 @@
           <EntitySet Name="EmailDistributionListLanguages" EntityType="Self.EmailDistributionListLanguages" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EmailDistributionLists" EntityType="Self.EmailDistributionLists" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Emails" EntityType="Self.Emails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HelpDocs" EntityType="Self.HelpDocs" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HydrometricDataValues" EntityType="Self.HydrometricDataValues" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HydrometricSites" EntityType="Self.HydrometricSites" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="InfrastructureLanguages" EntityType="Self.InfrastructureLanguages" Schema="dbo" store:Type="Tables" />
@@ -3438,6 +3450,7 @@
           <EntitySet Name="EmailDistributionListLanguages" EntityType="CSSPDBModel.EmailDistributionListLanguage" />
           <EntitySet Name="EmailDistributionLists" EntityType="CSSPDBModel.EmailDistributionList" />
           <EntitySet Name="Emails" EntityType="CSSPDBModel.Email" />
+          <EntitySet Name="HelpDocs" EntityType="CSSPDBModel.HelpDoc" />
           <EntitySet Name="HydrometricDataValues" EntityType="CSSPDBModel.HydrometricDataValue" />
           <EntitySet Name="HydrometricSites" EntityType="CSSPDBModel.HydrometricSite" />
           <EntitySet Name="InfrastructureLanguages" EntityType="CSSPDBModel.InfrastructureLanguage" />
@@ -4353,6 +4366,17 @@
           <Property Name="LastUpdateDate_UTC" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="LastUpdateContactTVItemID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="TVItem" Relationship="CSSPDBModel.FK_EmailTVItemID_TVItems" FromRole="Email" ToRole="TVItem" />
+        </EntityType>
+        <EntityType Name="HelpDoc">
+          <Key>
+            <PropertyRef Name="HelpDocID" />
+          </Key>
+          <Property Name="HelpDocID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DocKey" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Language" Type="Int32" Nullable="false" />
+          <Property Name="DocHTMLText" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="LastUpdateDate_UTC" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastUpdateContactTVItemID" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="HydrometricDataValue">
           <Key>
@@ -7395,6 +7419,18 @@
                 <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
                 <ScalarProperty Name="EmailTVItemID" ColumnName="EmailTVItemID" />
                 <ScalarProperty Name="EmailID" ColumnName="EmailID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HelpDocs">
+            <EntityTypeMapping TypeName="CSSPDBModel.HelpDoc">
+              <MappingFragment StoreEntitySet="HelpDocs">
+                <ScalarProperty Name="LastUpdateContactTVItemID" ColumnName="LastUpdateContactTVItemID" />
+                <ScalarProperty Name="LastUpdateDate_UTC" ColumnName="LastUpdateDate_UTC" />
+                <ScalarProperty Name="DocHTMLText" ColumnName="DocHTMLText" />
+                <ScalarProperty Name="Language" ColumnName="Language" />
+                <ScalarProperty Name="DocKey" ColumnName="DocKey" />
+                <ScalarProperty Name="HelpDocID" ColumnName="HelpDocID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

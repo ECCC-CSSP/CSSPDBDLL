@@ -12,7 +12,7 @@ using CSSPEnumsDLL.Enums;
 
 namespace CSSPDBDLL.Services
 {
-    public class DroguePositionService : BaseService
+    public class DrogueRunPositionService : BaseService
     {
         #region Variables
         #endregion Variables
@@ -26,7 +26,7 @@ namespace CSSPDBDLL.Services
         #endregion Properties
 
         #region Constructors
-        public DroguePositionService(LanguageEnum LanguageRequest, IPrincipal User)
+        public DrogueRunPositionService(LanguageEnum LanguageRequest, IPrincipal User)
             : base(LanguageRequest, User)
         {
             _TVItemService = new TVItemService(LanguageRequest, User);
@@ -55,45 +55,45 @@ namespace CSSPDBDLL.Services
         }
 
         // Check
-        public string DroguePositionModelOK(DroguePositionModel droguePositionModel)
+        public string DrogueRunPositionModelOK(DrogueRunPositionModel drogueRunPositionModel)
         {
-            string retStr = FieldCheckNotZeroInt(droguePositionModel.DrogueRunID, ServiceRes.DrogueRunID);
+            string retStr = FieldCheckNotZeroInt(drogueRunPositionModel.DrogueRunID, ServiceRes.DrogueRunID);
             if (!string.IsNullOrWhiteSpace(retStr))
             {
                 return retStr;
             }
 
-            retStr = FieldCheckNotNullAndWithinRangeInt(droguePositionModel.Ordinal, ServiceRes.Ordinal, 0, 20000);
+            retStr = FieldCheckNotNullAndWithinRangeInt(drogueRunPositionModel.Ordinal, ServiceRes.Ordinal, 0, 20000);
             if (!string.IsNullOrWhiteSpace(retStr))
             {
                 return retStr;
             }
 
-            retStr = FieldCheckNotNullAndWithinRangeDouble(droguePositionModel.StepLat, ServiceRes.StepLat, -90.0D, 90.0D);
+            retStr = FieldCheckNotNullAndWithinRangeDouble(drogueRunPositionModel.StepLat, ServiceRes.StepLat, -90.0D, 90.0D);
             if (!string.IsNullOrWhiteSpace(retStr))
             {
                 return retStr;
             }
 
-            retStr = FieldCheckNotNullAndWithinRangeDouble(droguePositionModel.StepLng, ServiceRes.StepLng, -180.0D, 180.0D);
+            retStr = FieldCheckNotNullAndWithinRangeDouble(drogueRunPositionModel.StepLng, ServiceRes.StepLng, -180.0D, 180.0D);
             if (!string.IsNullOrWhiteSpace(retStr))
             {
                 return retStr;
             }
 
-            retStr = FieldCheckNotNullDateTime(droguePositionModel.StepDateTime_Local, ServiceRes.StepDateTime_Local);
+            retStr = FieldCheckNotNullDateTime(drogueRunPositionModel.StepDateTime_Local, ServiceRes.StepDateTime_Local);
             if (!string.IsNullOrWhiteSpace(retStr))
             {
                 return retStr;
             }
 
-            retStr = FieldCheckNotNullAndWithinRangeDouble(droguePositionModel.CalculatedSpeed_m_s, ServiceRes.CalculatedSpeed_m_s, 0.0D, 20.0D);
+            retStr = FieldCheckNotNullAndWithinRangeDouble(drogueRunPositionModel.CalculatedSpeed_m_s, ServiceRes.CalculatedSpeed_m_s, 0.0D, 20.0D);
             if (!string.IsNullOrWhiteSpace(retStr))
             {
                 return retStr;
             }
 
-            retStr = FieldCheckNotNullAndWithinRangeDouble(droguePositionModel.CalculatedDirection_deg, ServiceRes.CalculatedDirection_deg, 0.0D, 20.0D);
+            retStr = FieldCheckNotNullAndWithinRangeDouble(drogueRunPositionModel.CalculatedDirection_deg, ServiceRes.CalculatedDirection_deg, 0.0D, 20.0D);
             if (!string.IsNullOrWhiteSpace(retStr))
             {
                 return retStr;
@@ -103,44 +103,44 @@ namespace CSSPDBDLL.Services
         }
 
         // Fill
-        public string FillDroguePosition(DroguePosition droguePositionNew, DroguePositionModel droguePositionModel, ContactOK contactOK)
+        public string FillDrogueRunPosition(DrogueRunPosition drogueRunPositionNew, DrogueRunPositionModel drogueRunPositionModel, ContactOK contactOK)
         {
-            droguePositionNew.DrogueRunID = droguePositionModel.DrogueRunID;
-            droguePositionNew.Ordinal = droguePositionModel.Ordinal;
-            droguePositionNew.StepLat = (int)droguePositionModel.StepLat;
-            droguePositionNew.StepLng = droguePositionModel.StepLng;
-            droguePositionNew.StepDateTime_Local = droguePositionModel.StepDateTime_Local;
-            droguePositionNew.CalculatedSpeed_m_s = droguePositionModel.CalculatedSpeed_m_s;
-            droguePositionNew.CalculatedDirection_deg = droguePositionModel.CalculatedDirection_deg;
-            droguePositionNew.LastUpdateDate_UTC = DateTime.UtcNow;
+            drogueRunPositionNew.DrogueRunID = drogueRunPositionModel.DrogueRunID;
+            drogueRunPositionNew.Ordinal = drogueRunPositionModel.Ordinal;
+            drogueRunPositionNew.StepLat = (int)drogueRunPositionModel.StepLat;
+            drogueRunPositionNew.StepLng = drogueRunPositionModel.StepLng;
+            drogueRunPositionNew.StepDateTime_Local = drogueRunPositionModel.StepDateTime_Local;
+            drogueRunPositionNew.CalculatedSpeed_m_s = drogueRunPositionModel.CalculatedSpeed_m_s;
+            drogueRunPositionNew.CalculatedDirection_deg = drogueRunPositionModel.CalculatedDirection_deg;
+            drogueRunPositionNew.LastUpdateDate_UTC = DateTime.UtcNow;
             if (contactOK == null)
             {
-                droguePositionNew.LastUpdateContactTVItemID = 2;
+                drogueRunPositionNew.LastUpdateContactTVItemID = 2;
             }
             else
             {
-                droguePositionNew.LastUpdateContactTVItemID = contactOK.ContactTVItemID;
+                drogueRunPositionNew.LastUpdateContactTVItemID = contactOK.ContactTVItemID;
             }
 
             return "";
         }
 
         // Get
-        public int GetDroguePositionModelCountDB()
+        public int GetDrogueRunPositionModelCountDB()
         {
-            int DroguePositionModelCount = (from c in db.DroguePositions
+            int DrogueRunPositionModelCount = (from c in db.DrogueRunPositions
                                             select c).Count();
 
-            return DroguePositionModelCount;
+            return DrogueRunPositionModelCount;
         }
-        public DroguePositionModel GetDroguePositionModelWithDroguePositionIDDB(int DroguePositionID)
+        public DrogueRunPositionModel GetDrogueRunPositionModelWithDrogueRunPositionIDDB(int DrogueRunPositionID)
         {
-            DroguePositionModel DroguePositionModel = (from c in db.DroguePositions
-                                                       where c.DroguePositionID == DroguePositionID
-                                                       select new DroguePositionModel
+            DrogueRunPositionModel DrogueRunPositionModel = (from c in db.DrogueRunPositions
+                                                       where c.DrogueRunPositionID == DrogueRunPositionID
+                                                       select new DrogueRunPositionModel
                                                        {
                                                            Error = "",
-                                                           DroguePositionID = c.DroguePositionID,
+                                                           DrogueRunPositionID = c.DrogueRunPositionID,
                                                            DrogueRunID = c.DrogueRunID,
                                                            Ordinal = c.Ordinal,
                                                            StepLat = c.StepLat,
@@ -150,22 +150,22 @@ namespace CSSPDBDLL.Services
                                                            CalculatedDirection_deg = c.CalculatedDirection_deg,
                                                            LastUpdateDate_UTC = c.LastUpdateDate_UTC,
                                                            LastUpdateContactTVItemID = c.LastUpdateContactTVItemID,
-                                                       }).FirstOrDefault<DroguePositionModel>();
+                                                       }).FirstOrDefault<DrogueRunPositionModel>();
 
-            if (DroguePositionModel == null)
-                return ReturnError(string.Format(ServiceRes.CouldNotFind_With_Equal_, ServiceRes.DroguePosition, ServiceRes.DroguePositionID, DroguePositionID));
+            if (DrogueRunPositionModel == null)
+                return ReturnError(string.Format(ServiceRes.CouldNotFind_With_Equal_, ServiceRes.DrogueRunPosition, ServiceRes.DrogueRunPositionID, DrogueRunPositionID));
 
-            return DroguePositionModel;
+            return DrogueRunPositionModel;
         }
-        public List<DroguePositionModel> GetDroguePositionModelListWithDrogueRunIDDB(int DrogueRunID)
+        public List<DrogueRunPositionModel> GetDrogueRunPositionModelListWithDrogueRunIDDB(int DrogueRunID)
         {
-            List<DroguePositionModel> DroguePositionModelList = (from c in db.DroguePositions
+            List<DrogueRunPositionModel> DrogueRunPositionModelList = (from c in db.DrogueRunPositions
                                                                  where c.DrogueRunID == DrogueRunID
-                                                                 orderby c.DroguePositionID descending
-                                                                 select new DroguePositionModel
+                                                                 orderby c.DrogueRunPositionID descending
+                                                                 select new DrogueRunPositionModel
                                                                  {
                                                                      Error = "",
-                                                                     DroguePositionID = c.DroguePositionID,
+                                                                     DrogueRunPositionID = c.DrogueRunPositionID,
                                                                      DrogueRunID = c.DrogueRunID,
                                                                      Ordinal = c.Ordinal,
                                                                      StepLat = c.StepLat,
@@ -175,20 +175,20 @@ namespace CSSPDBDLL.Services
                                                                      CalculatedDirection_deg = c.CalculatedDirection_deg,
                                                                      LastUpdateDate_UTC = c.LastUpdateDate_UTC,
                                                                      LastUpdateContactTVItemID = c.LastUpdateContactTVItemID,
-                                                                 }).ToList<DroguePositionModel>();
+                                                                 }).ToList<DrogueRunPositionModel>();
 
-            return DroguePositionModelList;
+            return DrogueRunPositionModelList;
         }
-        public DroguePositionModel GetDroguePositionModelExistDB(DroguePositionModel droguePositionModel)
+        public DrogueRunPositionModel GetDrogueRunPositionModelExistDB(DrogueRunPositionModel droguePositionModel)
         {
-            DroguePositionModel DroguePositionModel = (from c in db.DroguePositions
+            DrogueRunPositionModel DrogueRunPositionModel = (from c in db.DrogueRunPositions
                                                        where c.DrogueRunID == droguePositionModel.DrogueRunID
                                                        && c.Ordinal == droguePositionModel.Ordinal
                                                        && c.StepDateTime_Local == droguePositionModel.StepDateTime_Local
-                                                       select new DroguePositionModel
+                                                       select new DrogueRunPositionModel
                                                        {
                                                            Error = "",
-                                                           DroguePositionID = c.DroguePositionID,
+                                                           DrogueRunPositionID = c.DrogueRunPositionID,
                                                            DrogueRunID = c.DrogueRunID,
                                                            Ordinal = c.Ordinal,
                                                            StepLat = c.StepLat,
@@ -198,10 +198,10 @@ namespace CSSPDBDLL.Services
                                                            CalculatedDirection_deg = c.CalculatedDirection_deg,
                                                            LastUpdateDate_UTC = c.LastUpdateDate_UTC,
                                                            LastUpdateContactTVItemID = c.LastUpdateContactTVItemID,
-                                                       }).FirstOrDefault<DroguePositionModel>();
+                                                       }).FirstOrDefault<DrogueRunPositionModel>();
 
-            if (DroguePositionModel == null)
-                return ReturnError(string.Format(ServiceRes.CouldNotFind_With_Equal_, ServiceRes.DroguePosition,
+            if (DrogueRunPositionModel == null)
+                return ReturnError(string.Format(ServiceRes.CouldNotFind_With_Equal_, ServiceRes.DrogueRunPosition,
                     ServiceRes.DrogueRunID + "," +
                     ServiceRes.Ordinal + "," +
                     ServiceRes.StepDateTime_Local,
@@ -209,25 +209,25 @@ namespace CSSPDBDLL.Services
                     droguePositionModel.Ordinal + "," +
                     droguePositionModel.StepDateTime_Local));
 
-            return DroguePositionModel;
+            return DrogueRunPositionModel;
         }
-        public DroguePosition GetDroguePositionWithDroguePositionIDDB(int DroguePositionID)
+        public DrogueRunPosition GetDrogueRunPositionWithDrogueRunPositionIDDB(int DrogueRunPositionID)
         {
-            DroguePosition DroguePosition = (from c in db.DroguePositions
-                                             where c.DroguePositionID == DroguePositionID
-                                             orderby c.DroguePositionID descending
-                                             select c).FirstOrDefault<DroguePosition>();
-            return DroguePosition;
+            DrogueRunPosition DrogueRunPosition = (from c in db.DrogueRunPositions
+                                             where c.DrogueRunPositionID == DrogueRunPositionID
+                                             orderby c.DrogueRunPositionID descending
+                                             select c).FirstOrDefault<DrogueRunPosition>();
+            return DrogueRunPosition;
         }
-        public DroguePositionModel ReturnError(string Error)
+        public DrogueRunPositionModel ReturnError(string Error)
         {
-            return new DroguePositionModel() { Error = Error };
+            return new DrogueRunPositionModel() { Error = Error };
         }
 
         // Post
-        public DroguePositionModel PostAddDroguePositionDB(DroguePositionModel droguePositionModel)
+        public DrogueRunPositionModel PostAddDrogueRunPositionDB(DrogueRunPositionModel droguePositionModel)
         {
-            string retStr = DroguePositionModelOK(droguePositionModel);
+            string retStr = DrogueRunPositionModelOK(droguePositionModel);
             if (!string.IsNullOrWhiteSpace(retStr))
                 return ReturnError(retStr);
 
@@ -239,48 +239,48 @@ namespace CSSPDBDLL.Services
             if (!string.IsNullOrWhiteSpace(drogueRunModelExist.Error))
                 return ReturnError(drogueRunModelExist.Error);
 
-            DroguePositionModel DroguePositionModelExist = GetDroguePositionModelExistDB(droguePositionModel);
-            if (string.IsNullOrWhiteSpace(DroguePositionModelExist.Error))
-                return ReturnError(string.Format(ServiceRes._AlreadyExists, ServiceRes.DroguePosition));
+            DrogueRunPositionModel DrogueRunPositionModelExist = GetDrogueRunPositionModelExistDB(droguePositionModel);
+            if (string.IsNullOrWhiteSpace(DrogueRunPositionModelExist.Error))
+                return ReturnError(string.Format(ServiceRes._AlreadyExists, ServiceRes.DrogueRunPosition));
 
-            DroguePosition droguePositionNew = new DroguePosition();
-            retStr = FillDroguePosition(droguePositionNew, droguePositionModel, contactOK);
+            DrogueRunPosition droguePositionNew = new DrogueRunPosition();
+            retStr = FillDrogueRunPosition(droguePositionNew, droguePositionModel, contactOK);
             if (!string.IsNullOrWhiteSpace(retStr))
                 return ReturnError(retStr);
 
             using (TransactionScope ts = new TransactionScope())
             {
-                db.DroguePositions.Add(droguePositionNew);
+                db.DrogueRunPositions.Add(droguePositionNew);
                 retStr = DoAddChanges();
                 if (!string.IsNullOrWhiteSpace(retStr))
                     return ReturnError(retStr);
 
-                LogModel logModel = _LogService.PostAddLogForObj("DroguePositions", droguePositionNew.DroguePositionID, LogCommandEnum.Add, droguePositionNew);
+                LogModel logModel = _LogService.PostAddLogForObj("DrogueRunPositions", droguePositionNew.DrogueRunPositionID, LogCommandEnum.Add, droguePositionNew);
                 if (!string.IsNullOrWhiteSpace(logModel.Error))
                     return ReturnError(logModel.Error);
 
                 ts.Complete();
             }
-            return GetDroguePositionModelWithDroguePositionIDDB(droguePositionNew.DroguePositionID);
+            return GetDrogueRunPositionModelWithDrogueRunPositionIDDB(droguePositionNew.DrogueRunPositionID);
         }
-        public DroguePositionModel PostDeleteDroguePositionDB(int DroguePositionID)
+        public DrogueRunPositionModel PostDeleteDrogueRunPositionDB(int DrogueRunPositionID)
         {
             ContactOK contactOK = IsContactOK();
             if (!string.IsNullOrEmpty(contactOK.Error))
                 return ReturnError(contactOK.Error);
 
-            DroguePosition droguePositionToDelete = GetDroguePositionWithDroguePositionIDDB(DroguePositionID);
+            DrogueRunPosition droguePositionToDelete = GetDrogueRunPositionWithDrogueRunPositionIDDB(DrogueRunPositionID);
             if (droguePositionToDelete == null)
-                return ReturnError(string.Format(ServiceRes.CouldNotFind_ToDelete, ServiceRes.DroguePosition));
+                return ReturnError(string.Format(ServiceRes.CouldNotFind_ToDelete, ServiceRes.DrogueRunPosition));
 
             using (TransactionScope ts = new TransactionScope())
             {
-                db.DroguePositions.Remove(droguePositionToDelete);
+                db.DrogueRunPositions.Remove(droguePositionToDelete);
                 string retStr = DoDeleteChanges();
                 if (!string.IsNullOrWhiteSpace(retStr))
                     return ReturnError(retStr);
 
-                LogModel logModel = _LogService.PostAddLogForObj("DroguePositions", droguePositionToDelete.DroguePositionID, LogCommandEnum.Delete, droguePositionToDelete);
+                LogModel logModel = _LogService.PostAddLogForObj("DrogueRunPositions", droguePositionToDelete.DrogueRunPositionID, LogCommandEnum.Delete, droguePositionToDelete);
                 if (!string.IsNullOrWhiteSpace(logModel.Error))
                     return ReturnError(logModel.Error);
 
@@ -289,9 +289,9 @@ namespace CSSPDBDLL.Services
 
             return ReturnError("");
         }
-        public DroguePositionModel PostUpdateDroguePositionDB(DroguePositionModel droguePositionModel)
+        public DrogueRunPositionModel PostUpdateDrogueRunPositionDB(DrogueRunPositionModel droguePositionModel)
         {
-            string retStr = DroguePositionModelOK(droguePositionModel);
+            string retStr = DrogueRunPositionModelOK(droguePositionModel);
             if (!string.IsNullOrEmpty(retStr))
                 return ReturnError(retStr);
 
@@ -299,11 +299,11 @@ namespace CSSPDBDLL.Services
             if (!string.IsNullOrEmpty(contactOK.Error))
                 return ReturnError(contactOK.Error);
 
-            DroguePosition droguePositionToUpdate = GetDroguePositionWithDroguePositionIDDB(droguePositionModel.DroguePositionID);
+            DrogueRunPosition droguePositionToUpdate = GetDrogueRunPositionWithDrogueRunPositionIDDB(droguePositionModel.DrogueRunPositionID);
             if (droguePositionToUpdate == null)
-                return ReturnError(string.Format(ServiceRes.CouldNotFind_ToUpdate, ServiceRes.DroguePosition));
+                return ReturnError(string.Format(ServiceRes.CouldNotFind_ToUpdate, ServiceRes.DrogueRunPosition));
 
-            retStr = FillDroguePosition(droguePositionToUpdate, droguePositionModel, contactOK);
+            retStr = FillDrogueRunPosition(droguePositionToUpdate, droguePositionModel, contactOK);
             if (!string.IsNullOrWhiteSpace(retStr))
                 return ReturnError(retStr);
 
@@ -313,13 +313,13 @@ namespace CSSPDBDLL.Services
                 if (!string.IsNullOrWhiteSpace(retStr))
                     return ReturnError(retStr);
 
-                LogModel logModel = _LogService.PostAddLogForObj("DroguePositions", droguePositionToUpdate.DroguePositionID, LogCommandEnum.Change, droguePositionToUpdate);
+                LogModel logModel = _LogService.PostAddLogForObj("DrogueRunPositions", droguePositionToUpdate.DrogueRunPositionID, LogCommandEnum.Change, droguePositionToUpdate);
                 if (!string.IsNullOrWhiteSpace(logModel.Error))
                     return ReturnError(logModel.Error);
 
                 ts.Complete();
             }
-            return GetDroguePositionModelWithDroguePositionIDDB(droguePositionToUpdate.DroguePositionID);
+            return GetDrogueRunPositionModelWithDrogueRunPositionIDDB(droguePositionToUpdate.DrogueRunPositionID);
         }
         #endregion Functions public
 

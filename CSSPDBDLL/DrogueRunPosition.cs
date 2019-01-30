@@ -12,9 +12,9 @@ namespace CSSPDBDLL
     using System;
     using System.Collections.Generic;
     
-    public partial class DroguePosition
+    public partial class DrogueRunPosition
     {
-        public int DroguePositionID { get; set; }
+        public int DrogueRunPositionID { get; set; }
         public int DrogueRunID { get; set; }
         public int Ordinal { get; set; }
         public double StepLat { get; set; }

@@ -2284,6 +2284,15 @@ namespace CSSPDBDLL.Services.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Could Not Parse {0}.
+        /// </summary>
+        public static string CouldNotParse_ {
+            get {
+                return ResourceManager.GetString("CouldNotParse_", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Could not parse result file. .
         /// </summary>
         public static string CouldNotParseResultFile {
@@ -3157,20 +3166,11 @@ namespace CSSPDBDLL.Services.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to DroguePosition.
+        ///   Looks up a localized string similar to Drogue Points Not Well Formed.
         /// </summary>
-        public static string DroguePosition {
+        public static string DroguePointsNotWellFormed {
             get {
-                return ResourceManager.GetString("DroguePosition", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to DroguePositionID.
-        /// </summary>
-        public static string DroguePositionID {
-            get {
-                return ResourceManager.GetString("DroguePositionID", resourceCulture);
+                return ResourceManager.GetString("DroguePointsNotWellFormed", resourceCulture);
             }
         }
         
@@ -3184,11 +3184,74 @@ namespace CSSPDBDLL.Services.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to DrogueRunDateDay.
+        /// </summary>
+        public static string DrogueRunDateDay {
+            get {
+                return ResourceManager.GetString("DrogueRunDateDay", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to DrogueRunDateHour.
+        /// </summary>
+        public static string DrogueRunDateHour {
+            get {
+                return ResourceManager.GetString("DrogueRunDateHour", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to DrogueRunDateMinute.
+        /// </summary>
+        public static string DrogueRunDateMinute {
+            get {
+                return ResourceManager.GetString("DrogueRunDateMinute", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to DrogueRunDateMonth.
+        /// </summary>
+        public static string DrogueRunDateMonth {
+            get {
+                return ResourceManager.GetString("DrogueRunDateMonth", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to DrogueRunDateYear.
+        /// </summary>
+        public static string DrogueRunDateYear {
+            get {
+                return ResourceManager.GetString("DrogueRunDateYear", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to DrogueRunID.
         /// </summary>
         public static string DrogueRunID {
             get {
                 return ResourceManager.GetString("DrogueRunID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to DrogueRunPosition.
+        /// </summary>
+        public static string DrogueRunPosition {
+            get {
+                return ResourceManager.GetString("DrogueRunPosition", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to DrogueRunPositionID.
+        /// </summary>
+        public static string DrogueRunPositionID {
+            get {
+                return ResourceManager.GetString("DrogueRunPositionID", resourceCulture);
             }
         }
         
@@ -9543,6 +9606,15 @@ namespace CSSPDBDLL.Services.Resources {
         public static string SeaStateAtStart_BeaufortScale {
             get {
                 return ResourceManager.GetString("SeaStateAtStart_BeaufortScale", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Second.
+        /// </summary>
+        public static string Second {
+            get {
+                return ResourceManager.GetString("Second", resourceCulture);
             }
         }
         

@@ -4077,11 +4077,11 @@
   <data name="DrogueNumber" xml:space="preserve">
     <value>Drogue number</value>
   </data>
-  <data name="DroguePosition" xml:space="preserve">
-    <value>DroguePosition</value>
+  <data name="DrogueRunPosition" xml:space="preserve">
+    <value>DrogueRunPosition</value>
   </data>
-  <data name="DroguePositionID" xml:space="preserve">
-    <value>DroguePositionID</value>
+  <data name="DrogueRunPositionID" xml:space="preserve">
+    <value>DrogueRunPositionID</value>
   </data>
   <data name="DrogueRun" xml:space="preserve">
     <value>DrogueRun</value>
@@ -4124,5 +4124,29 @@
   </data>
   <data name="HelpDocID" xml:space="preserve">
     <value>HelpDocID</value>
+  </data>
+  <data name="CouldNotParse_" xml:space="preserve">
+    <value>Could Not Parse {0}</value>
+  </data>
+  <data name="DroguePointsNotWellFormed" xml:space="preserve">
+    <value>Drogue Points Not Well Formed</value>
+  </data>
+  <data name="DrogueRunDateDay" xml:space="preserve">
+    <value>DrogueRunDateDay</value>
+  </data>
+  <data name="DrogueRunDateHour" xml:space="preserve">
+    <value>DrogueRunDateHour</value>
+  </data>
+  <data name="DrogueRunDateMinute" xml:space="preserve">
+    <value>DrogueRunDateMinute</value>
+  </data>
+  <data name="DrogueRunDateMonth" xml:space="preserve">
+    <value>DrogueRunDateMonth</value>
+  </data>
+  <data name="DrogueRunDateYear" xml:space="preserve">
+    <value>DrogueRunDateYear</value>
+  </data>
+  <data name="Second" xml:space="preserve">
+    <value>Second</value>
   </data>
 </root>

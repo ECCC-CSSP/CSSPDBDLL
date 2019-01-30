@@ -188,10 +188,10 @@
     <Compile Include="DocTemplate.cs">
       <DependentUpon>CSSPDBEDM.tt</DependentUpon>
     </Compile>
-    <Compile Include="DroguePosition.cs">
+    <Compile Include="DrogueRun.cs">
       <DependentUpon>CSSPDBEDM.tt</DependentUpon>
     </Compile>
-    <Compile Include="DrogueRun.cs">
+    <Compile Include="DrogueRunPosition.cs">
       <DependentUpon>CSSPDBEDM.tt</DependentUpon>
     </Compile>
     <Compile Include="Email.cs">
@@ -337,7 +337,7 @@
     <Compile Include="SamplingPlanSubsectorSite.cs">
       <DependentUpon>CSSPDBEDM.tt</DependentUpon>
     </Compile>
-    <Compile Include="Services\DroguePositionService.cs" />
+    <Compile Include="Services\DrogueRunPositionService.cs" />
     <Compile Include="Services\DrogueRunService.cs" />
     <Compile Include="Services\HelpDocService.cs" />
     <Compile Include="Services\KMZService.cs" />

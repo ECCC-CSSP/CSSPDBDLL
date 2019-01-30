@@ -17,7 +17,7 @@ namespace CSSPDBDLL
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public DrogueRun()
         {
-            this.DroguePositions = new HashSet<DroguePosition>();
+            this.DrogueRunPositions = new HashSet<DrogueRunPosition>();
         }
     
         public int DrogueRunID { get; set; }
@@ -29,7 +29,7 @@ namespace CSSPDBDLL
         public int LastUpdateContactTVItemID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DroguePosition> DroguePositions { get; set; }
+        public virtual ICollection<DrogueRunPosition> DrogueRunPositions { get; set; }
         public virtual TVItem TVItem { get; set; }
     }
 }

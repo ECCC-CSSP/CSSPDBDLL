@@ -9,6 +9,7 @@ using CSSPDBDLL.Services.Resources;
 using System.Transactions;
 using CSSPModelsDLL.Models;
 using CSSPEnumsDLL.Enums;
+using System.Web.Mvc;
 
 namespace CSSPDBDLL.Services
 {
@@ -21,6 +22,7 @@ namespace CSSPDBDLL.Services
         public TVItemService _TVItemService { get; private set; }
         public AppTaskService _AppTaskService { get; private set; }
         public MapInfoService _MapInfoService { get; private set; }
+        public DrogueRunPositionService _DrogueRunPositionService { get; private set; }
         public LogService _LogService { get; private set; }
         #endregion Properties
 
@@ -31,6 +33,7 @@ namespace CSSPDBDLL.Services
             _TVItemService = new TVItemService(LanguageRequest, User);
             _AppTaskService = new AppTaskService(LanguageRequest, User);
             _MapInfoService = new MapInfoService(LanguageRequest, User);
+            _DrogueRunPositionService = new DrogueRunPositionService(LanguageRequest, User);
             _LogService = new LogService(LanguageRequest, User);
         }
         #endregion Constructors
@@ -62,7 +65,7 @@ namespace CSSPDBDLL.Services
                 return retStr;
             }
 
-            retStr = FieldCheckNotNullAndWithinRangeInt(drogueRunModel.DrogueNumber, ServiceRes.DrogueNumber, 0, 20);
+            retStr = FieldCheckNotNullAndWithinRangeInt(drogueRunModel.DrogueNumber, ServiceRes.DrogueNumber, 1, 200);
             if (!string.IsNullOrWhiteSpace(retStr))
             {
                 return retStr;
@@ -136,7 +139,7 @@ namespace CSSPDBDLL.Services
         {
             List<DrogueRunModel> DrogueRunModelList = (from c in db.DrogueRuns
                                                        where c.SubsectorTVItemID == SubsectorTVItemID
-                                                       orderby c.DrogueRunID descending
+                                                       orderby c.DrogueNumber descending
                                                        select new DrogueRunModel
                                                        {
                                                            Error = "",
@@ -197,105 +200,373 @@ namespace CSSPDBDLL.Services
         }
 
         // Post
-        public DrogueRunModel PostAddDrogueRunDB(DrogueRunModel drogueRunModel)
+        public DrogueRunModel PostAddOrModifyDB(FormCollection fc)
         {
-            string retStr = DrogueRunModelOK(drogueRunModel);
-            if (!string.IsNullOrWhiteSpace(retStr))
-                return ReturnError(retStr);
+            int tempInt = 0;
+            int DrogueRunID = 0;
+            int SubsectorTVItemID = 0;
+            int DrogueNumber = 0;
+
+            DrogueTypeEnum DrogueType = DrogueTypeEnum.Error;
+            DateTime RunStartDateTime = new DateTime();
+            string DroguePoints = "";
 
             ContactOK contactOK = IsContactOK();
-            if (!string.IsNullOrEmpty(contactOK.Error))
+            if (!string.IsNullOrWhiteSpace(contactOK.Error))
                 return ReturnError(contactOK.Error);
 
-            TVItemModel tvItemModelExist = _TVItemService.GetTVItemModelWithTVItemIDDB(drogueRunModel.SubsectorTVItemID);
-            if (!string.IsNullOrWhiteSpace(tvItemModelExist.Error))
-                return ReturnError(tvItemModelExist.Error);
 
-            DrogueRunModel DrogueRunModelExist = GetDrogueRunModelExistDB(drogueRunModel);
-            if (string.IsNullOrWhiteSpace(DrogueRunModelExist.Error))
-                return ReturnError(string.Format(ServiceRes._AlreadyExists, ServiceRes.DrogueRun));
+            int.TryParse(fc["DrogueRunID"], out DrogueRunID);
+            // could be 0 if 0 then we need to add the new DrogueRun 
 
-            DrogueRun drogueRunNew = new DrogueRun();
-            retStr = FillDrogueRun(drogueRunNew, drogueRunModel, contactOK);
-            if (!string.IsNullOrWhiteSpace(retStr))
-                return ReturnError(retStr);
+            DrogueRunModel drogueRunModelToChange = new DrogueRunModel();
+            if (DrogueRunID != 0)
+            {
+                drogueRunModelToChange = GetDrogueRunModelWithDrogueRunIDDB(DrogueRunID);
+                if (!string.IsNullOrWhiteSpace(drogueRunModelToChange.Error))
+                {
+                    return drogueRunModelToChange;
+                }
+            }
 
+            int.TryParse(fc["SubsectorTVItemID"], out SubsectorTVItemID);
+            if (SubsectorTVItemID == 0)
+                return ReturnError(string.Format(ServiceRes._IsRequired, ServiceRes.SubsectorTVItemID));
+
+            int.TryParse(fc["DrogueNumber"], out DrogueNumber);
+            if (DrogueNumber == 0)
+                return ReturnError(string.Format(ServiceRes._IsRequired, ServiceRes.DrogueNumber));
+
+            if (string.IsNullOrWhiteSpace(fc["DrogueType"]))
+                return ReturnError(string.Format(ServiceRes._IsRequired, ServiceRes.DrogueType));
+            else
+            {
+                int.TryParse(fc["DrogueType"], out tempInt);
+                DrogueType = (DrogueTypeEnum)tempInt;
+            }
+
+            int.TryParse(fc["DrogueRunDateYear"], out int DrogueRunDateYear);
+            if (DrogueRunDateYear == 0)
+                return ReturnError(string.Format(ServiceRes._IsRequired, ServiceRes.DrogueRunDateYear));
+
+            int.TryParse(fc["DrogueRunDateMonth"], out int DrogueRunDateMonth);
+            if (DrogueRunDateMonth == 0)
+                return ReturnError(string.Format(ServiceRes._IsRequired, ServiceRes.DrogueRunDateMonth));
+
+            int.TryParse(fc["DrogueRunDateDay"], out int DrogueRunDateDay);
+            if (DrogueRunDateDay == 0)
+                return ReturnError(string.Format(ServiceRes._IsRequired, ServiceRes.DrogueRunDateDay));
+
+            int.TryParse(fc["DrogueRunDateHour"], out int DrogueRunDateHour);
+            //if (DrogueRunDateHour == 0)
+            //    return ReturnError(string.Format(ServiceRes._IsRequired, ServiceRes.DrogueRunDateHour));
+
+            int.TryParse(fc["DrogueRunDateMinute"], out int DrogueRunDateMinute);
+            //if (DrogueRunDateMinute == 0)
+            //    return ReturnError(string.Format(ServiceRes._IsRequired, ServiceRes.DrogueRunDateMinute));
+
+            RunStartDateTime = new DateTime(DrogueRunDateYear, DrogueRunDateMonth, DrogueRunDateDay, DrogueRunDateHour, DrogueRunDateMinute, 0);
+
+            DroguePoints = fc["DroguePoints"];
+
+            DrogueRunModel drogueRunModelRet = new DrogueRunModel();
             using (TransactionScope ts = new TransactionScope())
             {
-                db.DrogueRuns.Add(drogueRunNew);
-                retStr = DoAddChanges();
+                if (DrogueRunID == 0)
+                {
+                    DrogueRunModel drogueRunModelNew = new DrogueRunModel()
+                    {
+                        DrogueNumber = DrogueNumber,
+                        DrogueType = DrogueType,
+                        RunStartDateTime = RunStartDateTime,
+                        SubsectorTVItemID = SubsectorTVItemID
+                    };
+
+                    drogueRunModelRet = PostAddDrogueRunDB(drogueRunModelNew);
+                }
+                else
+                {
+                    drogueRunModelToChange.DrogueNumber = DrogueNumber;
+                    drogueRunModelToChange.DrogueType = DrogueType;
+                    drogueRunModelToChange.RunStartDateTime = RunStartDateTime;
+
+                    drogueRunModelRet = PostUpdateDrogueRunDB(drogueRunModelToChange);
+                }
+
+                //    ts.Complete();
+                //}
+
+                if (string.IsNullOrWhiteSpace(drogueRunModelRet.Error))
+                {
+                    int Ordinal = 0;
+                    List<DrogueRunPositionModel> drogueRunPositionModelList = new List<DrogueRunPositionModel>();
+                    List<string> lineList = DroguePoints.Split("\r\n".ToCharArray(), StringSplitOptions.None).ToList();
+                    foreach (string s in lineList)
+                    {
+                        if (s.Trim().Length == 0)
+                        {
+                            break;
+                        }
+
+                        List<string> lineValList = s.Split(" ".ToCharArray(), StringSplitOptions.None).ToList();
+                        if (lineValList.Count != 4)
+                        {
+                            return ReturnError(ServiceRes.DroguePointsNotWellFormed);
+                        }
+
+                        if (!float.TryParse(lineValList[0], out float Lat))
+                        {
+                            return ReturnError(string.Format(ServiceRes.CouldNotParse_, ServiceRes.Lat));
+                        }
+
+                        if (!float.TryParse(lineValList[1], out float Lng))
+                        {
+                            return ReturnError(string.Format(ServiceRes.CouldNotParse_, ServiceRes.Lng));
+                        }
+
+                        if (!int.TryParse(lineValList[2].Substring(0, 4), out int Year))
+                        {
+                            return ReturnError(string.Format(ServiceRes.CouldNotParse_, ServiceRes.Year));
+                        }
+
+                        string MonthText = lineValList[2].Substring(5, 2);
+                        if (MonthText.StartsWith("0"))
+                        {
+                            MonthText = MonthText.Substring(1);
+                        }
+                        if (!int.TryParse(MonthText, out int Month))
+                        {
+                            return ReturnError(string.Format(ServiceRes.CouldNotParse_, ServiceRes.Month));
+                        }
+
+                        string DayText = lineValList[2].Substring(8, 2);
+                        if (DayText.StartsWith("0"))
+                        {
+                            DayText = DayText.Substring(1);
+                        }
+                        if (!int.TryParse(DayText, out int Day))
+                        {
+                            return ReturnError(string.Format(ServiceRes.CouldNotParse_, ServiceRes.Day));
+                        }
+
+                        string HourText = lineValList[3].Substring(0, 2);
+                        if (HourText.StartsWith("0"))
+                        {
+                            HourText = HourText.Substring(1);
+                        }
+                        if (!int.TryParse(HourText, out int Hour))
+                        {
+                            return ReturnError(string.Format(ServiceRes.CouldNotParse_, ServiceRes.Hour));
+                        }
+
+                        string MinuteText = lineValList[3].Substring(3, 2);
+                        if (MinuteText.StartsWith("0"))
+                        {
+                            MinuteText = MinuteText.Substring(1);
+                        }
+                        if (!int.TryParse(MinuteText, out int Minute))
+                        {
+                            return ReturnError(string.Format(ServiceRes.CouldNotParse_, ServiceRes.Minute));
+                        }
+
+                        if (!int.TryParse(lineValList[3].Substring(6, 2), out int Second))
+                        {
+                            return ReturnError(string.Format(ServiceRes.CouldNotParse_, ServiceRes.Second));
+                        }
+
+                        DateTime StepDate = new DateTime(Year, Month, Day, Hour, Minute, Second);
+
+
+                        DrogueRunPositionModel drogueRunPositionModel = new DrogueRunPositionModel()
+                        {
+                            StepLat = Lat,
+                            StepLng = Lng,
+                            StepDateTime_Local = StepDate,
+                            Ordinal = Ordinal,
+                            DrogueRunID = drogueRunModelRet.DrogueRunID,
+                            CalculatedSpeed_m_s = 0.0f,
+                            CalculatedDirection_deg = 0.0f,
+                        };
+
+                        drogueRunPositionModelList.Add(drogueRunPositionModel);
+
+                        Ordinal += 1;
+                    }
+
+                    for (int i = 0, count = drogueRunPositionModelList.Count - 1; i < count; i++)
+                    {
+                        double dist = _MapInfoService.CalculateDistance((double)drogueRunPositionModelList[i].StepLat * d2r, (double)drogueRunPositionModelList[i].StepLng * d2r, (double)drogueRunPositionModelList[i + 1].StepLat * d2r, (double)drogueRunPositionModelList[i + 1].StepLng * d2r, base.R);
+                        TimeSpan timeSpan = new TimeSpan(drogueRunPositionModelList[i + 1].StepDateTime_Local.Ticks - drogueRunPositionModelList[i].StepDateTime_Local.Ticks);
+                        float Speed = (float)(dist / timeSpan.TotalSeconds);
+                        drogueRunPositionModelList[i].CalculatedSpeed_m_s = Speed;
+
+                        double angle = Math.Atan2(drogueRunPositionModelList[i + 1].StepLat - drogueRunPositionModelList[i].StepLat, drogueRunPositionModelList[i + 1].StepLng - drogueRunPositionModelList[i].StepLng) * 180 / Math.PI;
+
+                        drogueRunPositionModelList[i].CalculatedSpeed_m_s = (float)angle;
+                    }
+
+                    //using (TransactionScope ts = new TransactionScope())
+                    //{
+                        List<DrogueRunPositionModel> drogueRunPositionModelListInDB = _DrogueRunPositionService.GetDrogueRunPositionModelListWithDrogueRunIDDB(drogueRunModelRet.DrogueRunID).OrderBy(c => c.Ordinal).ToList();
+
+                        if (drogueRunPositionModelList.Count == drogueRunPositionModelListInDB.Count)
+                        {
+                            for (int i = 0, count = drogueRunPositionModelList.Count; i < count; i++)
+                            {
+                                drogueRunPositionModelList[i].DrogueRunID = drogueRunPositionModelListInDB[i].DrogueRunID;
+                                DrogueRunPositionModel drogueRunPositionModel = _DrogueRunPositionService.PostUpdateDrogueRunPositionDB(drogueRunPositionModelList[i]);
+                                if (!string.IsNullOrWhiteSpace(drogueRunPositionModel.Error))
+                                {
+                                    return ReturnError(drogueRunPositionModel.Error);
+                                }
+                            }
+                        }
+                        else if (drogueRunPositionModelList.Count > drogueRunPositionModelListInDB.Count)
+                        {
+                            for (int i = 0, count = drogueRunPositionModelListInDB.Count; i < count; i++)
+                            {
+                                drogueRunPositionModelList[i].DrogueRunID = drogueRunPositionModelListInDB[i].DrogueRunID;
+                                DrogueRunPositionModel drogueRunPositionModel = _DrogueRunPositionService.PostUpdateDrogueRunPositionDB(drogueRunPositionModelList[i]);
+                                if (!string.IsNullOrWhiteSpace(drogueRunPositionModel.Error))
+                                {
+                                    return ReturnError(drogueRunPositionModel.Error);
+                                }
+                            }
+                            for (int i = drogueRunPositionModelListInDB.Count, count = drogueRunPositionModelList.Count; i < count; i++)
+                            {
+                                DrogueRunPositionModel drogueRunPositionModel = _DrogueRunPositionService.PostAddDrogueRunPositionDB(drogueRunPositionModelList[i]);
+                                if (!string.IsNullOrWhiteSpace(drogueRunPositionModel.Error))
+                                {
+                                    return ReturnError(drogueRunPositionModel.Error);
+                                }
+                            }
+                        }
+                        else
+                        {
+                            for (int i = 0, count = drogueRunPositionModelList.Count; i < count; i++)
+                            {
+                                drogueRunPositionModelList[i].DrogueRunID = drogueRunPositionModelListInDB[i].DrogueRunID;
+                                DrogueRunPositionModel drogueRunPositionModel = _DrogueRunPositionService.PostUpdateDrogueRunPositionDB(drogueRunPositionModelList[i]);
+                                if (!string.IsNullOrWhiteSpace(drogueRunPositionModel.Error))
+                                {
+                                    return ReturnError(drogueRunPositionModel.Error);
+                                }
+                            }
+                            for (int i = drogueRunPositionModelList.Count, count = drogueRunPositionModelListInDB.Count; i < count; i++)
+                            {
+                                DrogueRunPositionModel drogueRunPositionModel = _DrogueRunPositionService.PostDeleteDrogueRunPositionDB(drogueRunPositionModelListInDB[i].DrogueRunPositionID);
+                                if (!string.IsNullOrWhiteSpace(drogueRunPositionModel.Error))
+                                {
+                                    return ReturnError(drogueRunPositionModel.Error);
+                                }
+                            }
+                        }
+
+                        ts.Complete();
+                    }
+                }
+
+                return drogueRunModelRet;
+            }
+            public DrogueRunModel PostAddDrogueRunDB(DrogueRunModel drogueRunModel)
+            {
+                string retStr = DrogueRunModelOK(drogueRunModel);
                 if (!string.IsNullOrWhiteSpace(retStr))
                     return ReturnError(retStr);
 
-                LogModel logModel = _LogService.PostAddLogForObj("DrogueRuns", drogueRunNew.DrogueRunID, LogCommandEnum.Add, drogueRunNew);
-                if (!string.IsNullOrWhiteSpace(logModel.Error))
-                    return ReturnError(logModel.Error);
+                ContactOK contactOK = IsContactOK();
+                if (!string.IsNullOrEmpty(contactOK.Error))
+                    return ReturnError(contactOK.Error);
 
-                ts.Complete();
-            }
-            return GetDrogueRunModelWithDrogueRunIDDB(drogueRunNew.DrogueRunID);
-        }
-        public DrogueRunModel PostDeleteDrogueRunDB(int DrogueRunID)
-        {
-            ContactOK contactOK = IsContactOK();
-            if (!string.IsNullOrEmpty(contactOK.Error))
-                return ReturnError(contactOK.Error);
+                TVItemModel tvItemModelExist = _TVItemService.GetTVItemModelWithTVItemIDDB(drogueRunModel.SubsectorTVItemID);
+                if (!string.IsNullOrWhiteSpace(tvItemModelExist.Error))
+                    return ReturnError(tvItemModelExist.Error);
 
-            DrogueRun drogueRunToDelete = GetDrogueRunWithDrogueRunIDDB(DrogueRunID);
-            if (drogueRunToDelete == null)
-                return ReturnError(string.Format(ServiceRes.CouldNotFind_ToDelete, ServiceRes.DrogueRun));
+                DrogueRunModel DrogueRunModelExist = GetDrogueRunModelExistDB(drogueRunModel);
+                if (string.IsNullOrWhiteSpace(DrogueRunModelExist.Error))
+                    return ReturnError(string.Format(ServiceRes._AlreadyExists, ServiceRes.DrogueRun));
 
-            using (TransactionScope ts = new TransactionScope())
-            {
-                db.DrogueRuns.Remove(drogueRunToDelete);
-                string retStr = DoDeleteChanges();
+                DrogueRun drogueRunNew = new DrogueRun();
+                retStr = FillDrogueRun(drogueRunNew, drogueRunModel, contactOK);
                 if (!string.IsNullOrWhiteSpace(retStr))
                     return ReturnError(retStr);
 
-                LogModel logModel = _LogService.PostAddLogForObj("DrogueRuns", drogueRunToDelete.DrogueRunID, LogCommandEnum.Delete, drogueRunToDelete);
-                if (!string.IsNullOrWhiteSpace(logModel.Error))
-                    return ReturnError(logModel.Error);
+                using (TransactionScope ts = new TransactionScope())
+                {
+                    db.DrogueRuns.Add(drogueRunNew);
+                    retStr = DoAddChanges();
+                    if (!string.IsNullOrWhiteSpace(retStr))
+                        return ReturnError(retStr);
 
-                ts.Complete();
+                    LogModel logModel = _LogService.PostAddLogForObj("DrogueRuns", drogueRunNew.DrogueRunID, LogCommandEnum.Add, drogueRunNew);
+                    if (!string.IsNullOrWhiteSpace(logModel.Error))
+                        return ReturnError(logModel.Error);
+
+                    ts.Complete();
+                }
+                return GetDrogueRunModelWithDrogueRunIDDB(drogueRunNew.DrogueRunID);
             }
-
-            return ReturnError("");
-        }
-        public DrogueRunModel PostUpdateDrogueRunDB(DrogueRunModel drogueRunModel)
-        {
-            string retStr = DrogueRunModelOK(drogueRunModel);
-            if (!string.IsNullOrEmpty(retStr))
-                return ReturnError(retStr);
-
-            ContactOK contactOK = IsContactOK();
-            if (!string.IsNullOrEmpty(contactOK.Error))
-                return ReturnError(contactOK.Error);
-
-            DrogueRun drogueRunToUpdate = GetDrogueRunWithDrogueRunIDDB(drogueRunModel.DrogueRunID);
-            if (drogueRunToUpdate == null)
-                return ReturnError(string.Format(ServiceRes.CouldNotFind_ToUpdate, ServiceRes.DrogueRun));
-
-            retStr = FillDrogueRun(drogueRunToUpdate, drogueRunModel, contactOK);
-            if (!string.IsNullOrWhiteSpace(retStr))
-                return ReturnError(retStr);
-
-            using (TransactionScope ts = new TransactionScope())
+            public DrogueRunModel PostDeleteDrogueRunDB(int DrogueRunID)
             {
-                retStr = DoUpdateChanges();
+                ContactOK contactOK = IsContactOK();
+                if (!string.IsNullOrEmpty(contactOK.Error))
+                    return ReturnError(contactOK.Error);
+
+                DrogueRun drogueRunToDelete = GetDrogueRunWithDrogueRunIDDB(DrogueRunID);
+                if (drogueRunToDelete == null)
+                    return ReturnError(string.Format(ServiceRes.CouldNotFind_ToDelete, ServiceRes.DrogueRun));
+
+                using (TransactionScope ts = new TransactionScope())
+                {
+                    db.DrogueRuns.Remove(drogueRunToDelete);
+                    string retStr = DoDeleteChanges();
+                    if (!string.IsNullOrWhiteSpace(retStr))
+                        return ReturnError(retStr);
+
+                    LogModel logModel = _LogService.PostAddLogForObj("DrogueRuns", drogueRunToDelete.DrogueRunID, LogCommandEnum.Delete, drogueRunToDelete);
+                    if (!string.IsNullOrWhiteSpace(logModel.Error))
+                        return ReturnError(logModel.Error);
+
+                    ts.Complete();
+                }
+
+                return ReturnError("");
+            }
+            public DrogueRunModel PostUpdateDrogueRunDB(DrogueRunModel drogueRunModel)
+            {
+                string retStr = DrogueRunModelOK(drogueRunModel);
+                if (!string.IsNullOrEmpty(retStr))
+                    return ReturnError(retStr);
+
+                ContactOK contactOK = IsContactOK();
+                if (!string.IsNullOrEmpty(contactOK.Error))
+                    return ReturnError(contactOK.Error);
+
+                DrogueRun drogueRunToUpdate = GetDrogueRunWithDrogueRunIDDB(drogueRunModel.DrogueRunID);
+                if (drogueRunToUpdate == null)
+                    return ReturnError(string.Format(ServiceRes.CouldNotFind_ToUpdate, ServiceRes.DrogueRun));
+
+                retStr = FillDrogueRun(drogueRunToUpdate, drogueRunModel, contactOK);
                 if (!string.IsNullOrWhiteSpace(retStr))
                     return ReturnError(retStr);
 
-                LogModel logModel = _LogService.PostAddLogForObj("DrogueRuns", drogueRunToUpdate.DrogueRunID, LogCommandEnum.Change, drogueRunToUpdate);
-                if (!string.IsNullOrWhiteSpace(logModel.Error))
-                    return ReturnError(logModel.Error);
+                using (TransactionScope ts = new TransactionScope())
+                {
+                    retStr = DoUpdateChanges();
+                    if (!string.IsNullOrWhiteSpace(retStr))
+                        return ReturnError(retStr);
 
-                ts.Complete();
+                    LogModel logModel = _LogService.PostAddLogForObj("DrogueRuns", drogueRunToUpdate.DrogueRunID, LogCommandEnum.Change, drogueRunToUpdate);
+                    if (!string.IsNullOrWhiteSpace(logModel.Error))
+                        return ReturnError(logModel.Error);
+
+                    ts.Complete();
+                }
+                return GetDrogueRunModelWithDrogueRunIDDB(drogueRunToUpdate.DrogueRunID);
             }
-            return GetDrogueRunModelWithDrogueRunIDDB(drogueRunToUpdate.DrogueRunID);
-        }
-        #endregion Functions public
+            #endregion Functions public
 
-        #region Functions private
-        #endregion Functions private
+            #region Functions private
+            #endregion Functions private
+        }
     }
-}

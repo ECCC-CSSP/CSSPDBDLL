@@ -43,7 +43,7 @@ namespace CSSPDBDLL
         public virtual DbSet<Contact> Contacts { get; set; }
         public virtual DbSet<ContactShortcut> ContactShortcuts { get; set; }
         public virtual DbSet<DocTemplate> DocTemplates { get; set; }
-        public virtual DbSet<DroguePosition> DroguePositions { get; set; }
+        public virtual DbSet<DrogueRunPosition> DrogueRunPositions { get; set; }
         public virtual DbSet<DrogueRun> DrogueRuns { get; set; }
         public virtual DbSet<EmailDistributionListContactLanguage> EmailDistributionListContactLanguages { get; set; }
         public virtual DbSet<EmailDistributionListContact> EmailDistributionListContacts { get; set; }

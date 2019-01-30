@@ -293,11 +293,11 @@
           <Property Name="LastUpdateDate_UTC" Type="datetime" Nullable="false" />
           <Property Name="LastUpdateContactTVItemID" Type="int" Nullable="false" />
         </EntityType>
-        <EntityType Name="DroguePositions">
+        <EntityType Name="DrogueRunPositions">
           <Key>
-            <PropertyRef Name="DroguePositionID" />
+            <PropertyRef Name="DrogueRunPositionID" />
           </Key>
-          <Property Name="DroguePositionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DrogueRunPositionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="DrogueRunID" Type="int" Nullable="false" />
           <Property Name="Ordinal" Type="int" Nullable="false" />
           <Property Name="StepLat" Type="float" Nullable="false" />
@@ -1749,14 +1749,16 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_DroguePositions_DrogueRuns">
-          <End Role="DrogueRuns" Type="Self.DrogueRuns" Multiplicity="1" />
-          <End Role="DroguePositions" Type="Self.DroguePositions" Multiplicity="*" />
+        <Association Name="FK_DrogueRunPositions_DrogueRuns">
+          <End Role="DrogueRuns" Type="Self.DrogueRuns" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="DrogueRunPositions" Type="Self.DrogueRunPositions" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="DrogueRuns">
               <PropertyRef Name="DrogueRunID" />
             </Principal>
-            <Dependent Role="DroguePositions">
+            <Dependent Role="DrogueRunPositions">
               <PropertyRef Name="DrogueRunID" />
             </Dependent>
           </ReferentialConstraint>
@@ -2903,7 +2905,7 @@
           <EntitySet Name="Contacts" EntityType="Self.Contacts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ContactShortcuts" EntityType="Self.ContactShortcuts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DocTemplates" EntityType="Self.DocTemplates" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="DroguePositions" EntityType="Self.DroguePositions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DrogueRunPositions" EntityType="Self.DrogueRunPositions" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DrogueRuns" EntityType="Self.DrogueRuns" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EmailDistributionListContactLanguages" EntityType="Self.EmailDistributionListContactLanguages" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EmailDistributionListContacts" EntityType="Self.EmailDistributionListContacts" Schema="dbo" store:Type="Tables" />
@@ -3059,9 +3061,9 @@
             <End Role="TVItems" EntitySet="TVItems" />
             <End Role="DocTemplates" EntitySet="DocTemplates" />
           </AssociationSet>
-          <AssociationSet Name="FK_DroguePositions_DrogueRuns" Association="Self.FK_DroguePositions_DrogueRuns">
+          <AssociationSet Name="FK_DrogueRunPositions_DrogueRuns" Association="Self.FK_DrogueRunPositions_DrogueRuns">
             <End Role="DrogueRuns" EntitySet="DrogueRuns" />
-            <End Role="DroguePositions" EntitySet="DroguePositions" />
+            <End Role="DrogueRunPositions" EntitySet="DrogueRunPositions" />
           </AssociationSet>
           <AssociationSet Name="FK_DrogueRuns_TVItems" Association="Self.FK_DrogueRuns_TVItems">
             <End Role="TVItems" EntitySet="TVItems" />
@@ -3443,7 +3445,7 @@
           <EntitySet Name="Contacts" EntityType="CSSPDBModel.Contact" />
           <EntitySet Name="ContactShortcuts" EntityType="CSSPDBModel.ContactShortcut" />
           <EntitySet Name="DocTemplates" EntityType="CSSPDBModel.DocTemplate" />
-          <EntitySet Name="DroguePositions" EntityType="CSSPDBModel.DroguePosition" />
+          <EntitySet Name="DrogueRunPositions" EntityType="CSSPDBModel.DrogueRunPosition" />
           <EntitySet Name="DrogueRuns" EntityType="CSSPDBModel.DrogueRun" />
           <EntitySet Name="EmailDistributionListContactLanguages" EntityType="CSSPDBModel.EmailDistributionListContactLanguage" />
           <EntitySet Name="EmailDistributionListContacts" EntityType="CSSPDBModel.EmailDistributionListContact" />
@@ -3591,9 +3593,9 @@
             <End Role="TVItem" EntitySet="TVItems" />
             <End Role="DocTemplate" EntitySet="DocTemplates" />
           </AssociationSet>
-          <AssociationSet Name="FK_DroguePositions_DrogueRuns" Association="CSSPDBModel.FK_DroguePositions_DrogueRuns">
+          <AssociationSet Name="FK_DrogueRunPositions_DrogueRuns" Association="CSSPDBModel.FK_DrogueRunPositions_DrogueRuns">
             <End Role="DrogueRun" EntitySet="DrogueRuns" />
-            <End Role="DroguePosition" EntitySet="DroguePositions" />
+            <End Role="DrogueRunPosition" EntitySet="DrogueRunPositions" />
           </AssociationSet>
           <AssociationSet Name="FK_DrogueRuns_TVItems" Association="CSSPDBModel.FK_DrogueRuns_TVItems">
             <End Role="TVItem" EntitySet="TVItems" />
@@ -4267,11 +4269,11 @@
           <Property Name="LastUpdateContactTVItemID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="TVItem" Relationship="CSSPDBModel.FK_DocTemplates_TVItems" FromRole="DocTemplate" ToRole="TVItem" />
         </EntityType>
-        <EntityType Name="DroguePosition">
+        <EntityType Name="DrogueRunPosition">
           <Key>
-            <PropertyRef Name="DroguePositionID" />
+            <PropertyRef Name="DrogueRunPositionID" />
           </Key>
-          <Property Name="DroguePositionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DrogueRunPositionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="DrogueRunID" Type="Int32" Nullable="false" />
           <Property Name="Ordinal" Type="Int32" Nullable="false" />
           <Property Name="StepLat" Type="Double" Nullable="false" />
@@ -4281,7 +4283,7 @@
           <Property Name="CalculatedDirection_deg" Type="Double" Nullable="false" />
           <Property Name="LastUpdateDate_UTC" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="LastUpdateContactTVItemID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="DrogueRun" Relationship="CSSPDBModel.FK_DroguePositions_DrogueRuns" FromRole="DroguePosition" ToRole="DrogueRun" />
+          <NavigationProperty Name="DrogueRun" Relationship="CSSPDBModel.FK_DrogueRunPositions_DrogueRuns" FromRole="DrogueRunPosition" ToRole="DrogueRun" />
         </EntityType>
         <EntityType Name="DrogueRun">
           <Key>
@@ -4294,7 +4296,7 @@
           <Property Name="RunStartDateTime" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="LastUpdateDate_UTC" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="LastUpdateContactTVItemID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="DroguePositions" Relationship="CSSPDBModel.FK_DroguePositions_DrogueRuns" FromRole="DrogueRun" ToRole="DroguePosition" />
+          <NavigationProperty Name="DrogueRunPositions" Relationship="CSSPDBModel.FK_DrogueRunPositions_DrogueRuns" FromRole="DrogueRun" ToRole="DrogueRunPosition" />
           <NavigationProperty Name="TVItem" Relationship="CSSPDBModel.FK_DrogueRuns_TVItems" FromRole="DrogueRun" ToRole="TVItem" />
         </EntityType>
         <EntityType Name="EmailDistributionListContactLanguage">
@@ -5886,14 +5888,16 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_DroguePositions_DrogueRuns">
-          <End Type="CSSPDBModel.DrogueRun" Role="DrogueRun" Multiplicity="1" />
-          <End Type="CSSPDBModel.DroguePosition" Role="DroguePosition" Multiplicity="*" />
+        <Association Name="FK_DrogueRunPositions_DrogueRuns">
+          <End Type="CSSPDBModel.DrogueRun" Role="DrogueRun" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="CSSPDBModel.DrogueRunPosition" Role="DrogueRunPosition" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="DrogueRun">
               <PropertyRef Name="DrogueRunID" />
             </Principal>
-            <Dependent Role="DroguePosition">
+            <Dependent Role="DrogueRunPosition">
               <PropertyRef Name="DrogueRunID" />
             </Dependent>
           </ReferentialConstraint>
@@ -7326,9 +7330,9 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="DroguePositions">
-            <EntityTypeMapping TypeName="CSSPDBModel.DroguePosition">
-              <MappingFragment StoreEntitySet="DroguePositions">
+          <EntitySetMapping Name="DrogueRunPositions">
+            <EntityTypeMapping TypeName="CSSPDBModel.DrogueRunPosition">
+              <MappingFragment StoreEntitySet="DrogueRunPositions">
                 <ScalarProperty Name="LastUpdateContactTVItemID" ColumnName="LastUpdateContactTVItemID" />
                 <ScalarProperty Name="LastUpdateDate_UTC" ColumnName="LastUpdateDate_UTC" />
                 <ScalarProperty Name="CalculatedDirection_deg" ColumnName="CalculatedDirection_deg" />
@@ -7338,7 +7342,7 @@
                 <ScalarProperty Name="StepLat" ColumnName="StepLat" />
                 <ScalarProperty Name="Ordinal" ColumnName="Ordinal" />
                 <ScalarProperty Name="DrogueRunID" ColumnName="DrogueRunID" />
-                <ScalarProperty Name="DroguePositionID" ColumnName="DroguePositionID" />
+                <ScalarProperty Name="DrogueRunPositionID" ColumnName="DrogueRunPositionID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

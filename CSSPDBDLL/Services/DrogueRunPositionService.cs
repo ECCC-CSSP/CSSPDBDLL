@@ -22,7 +22,6 @@ namespace CSSPDBDLL.Services
         public AppTaskService _AppTaskService { get; private set; }
         public MapInfoService _MapInfoService { get; private set; }
         public LogService _LogService { get; private set; }
-        public DrogueRunService _DrogueRunService { get; private set; }
         #endregion Properties
 
         #region Constructors
@@ -87,13 +86,13 @@ namespace CSSPDBDLL.Services
                 return retStr;
             }
 
-            retStr = FieldCheckNotNullAndWithinRangeDouble(drogueRunPositionModel.CalculatedSpeed_m_s, ServiceRes.CalculatedSpeed_m_s, 0.0D, 20.0D);
+            retStr = FieldCheckNotNullAndWithinRangeDouble(drogueRunPositionModel.CalculatedSpeed_m_s, ServiceRes.CalculatedSpeed_m_s, 0.0D, 100.0D);
             if (!string.IsNullOrWhiteSpace(retStr))
             {
                 return retStr;
             }
 
-            retStr = FieldCheckNotNullAndWithinRangeDouble(drogueRunPositionModel.CalculatedDirection_deg, ServiceRes.CalculatedDirection_deg, 0.0D, 20.0D);
+            retStr = FieldCheckNotNullAndWithinRangeDouble(drogueRunPositionModel.CalculatedDirection_deg, ServiceRes.CalculatedDirection_deg, 0.0D, 360.0D);
             if (!string.IsNullOrWhiteSpace(retStr))
             {
                 return retStr;
@@ -107,7 +106,7 @@ namespace CSSPDBDLL.Services
         {
             drogueRunPositionNew.DrogueRunID = drogueRunPositionModel.DrogueRunID;
             drogueRunPositionNew.Ordinal = drogueRunPositionModel.Ordinal;
-            drogueRunPositionNew.StepLat = (int)drogueRunPositionModel.StepLat;
+            drogueRunPositionNew.StepLat = drogueRunPositionModel.StepLat;
             drogueRunPositionNew.StepLng = drogueRunPositionModel.StepLng;
             drogueRunPositionNew.StepDateTime_Local = drogueRunPositionModel.StepDateTime_Local;
             drogueRunPositionNew.CalculatedSpeed_m_s = drogueRunPositionModel.CalculatedSpeed_m_s;
@@ -129,28 +128,28 @@ namespace CSSPDBDLL.Services
         public int GetDrogueRunPositionModelCountDB()
         {
             int DrogueRunPositionModelCount = (from c in db.DrogueRunPositions
-                                            select c).Count();
+                                               select c).Count();
 
             return DrogueRunPositionModelCount;
         }
         public DrogueRunPositionModel GetDrogueRunPositionModelWithDrogueRunPositionIDDB(int DrogueRunPositionID)
         {
             DrogueRunPositionModel DrogueRunPositionModel = (from c in db.DrogueRunPositions
-                                                       where c.DrogueRunPositionID == DrogueRunPositionID
-                                                       select new DrogueRunPositionModel
-                                                       {
-                                                           Error = "",
-                                                           DrogueRunPositionID = c.DrogueRunPositionID,
-                                                           DrogueRunID = c.DrogueRunID,
-                                                           Ordinal = c.Ordinal,
-                                                           StepLat = c.StepLat,
-                                                           StepLng = c.StepLng,
-                                                           StepDateTime_Local = c.StepDateTime_Local,
-                                                           CalculatedSpeed_m_s = c.CalculatedSpeed_m_s,
-                                                           CalculatedDirection_deg = c.CalculatedDirection_deg,
-                                                           LastUpdateDate_UTC = c.LastUpdateDate_UTC,
-                                                           LastUpdateContactTVItemID = c.LastUpdateContactTVItemID,
-                                                       }).FirstOrDefault<DrogueRunPositionModel>();
+                                                             where c.DrogueRunPositionID == DrogueRunPositionID
+                                                             select new DrogueRunPositionModel
+                                                             {
+                                                                 Error = "",
+                                                                 DrogueRunPositionID = c.DrogueRunPositionID,
+                                                                 DrogueRunID = c.DrogueRunID,
+                                                                 Ordinal = c.Ordinal,
+                                                                 StepLat = c.StepLat,
+                                                                 StepLng = c.StepLng,
+                                                                 StepDateTime_Local = c.StepDateTime_Local,
+                                                                 CalculatedSpeed_m_s = c.CalculatedSpeed_m_s,
+                                                                 CalculatedDirection_deg = c.CalculatedDirection_deg,
+                                                                 LastUpdateDate_UTC = c.LastUpdateDate_UTC,
+                                                                 LastUpdateContactTVItemID = c.LastUpdateContactTVItemID,
+                                                             }).FirstOrDefault<DrogueRunPositionModel>();
 
             if (DrogueRunPositionModel == null)
                 return ReturnError(string.Format(ServiceRes.CouldNotFind_With_Equal_, ServiceRes.DrogueRunPosition, ServiceRes.DrogueRunPositionID, DrogueRunPositionID));
@@ -160,45 +159,45 @@ namespace CSSPDBDLL.Services
         public List<DrogueRunPositionModel> GetDrogueRunPositionModelListWithDrogueRunIDDB(int DrogueRunID)
         {
             List<DrogueRunPositionModel> DrogueRunPositionModelList = (from c in db.DrogueRunPositions
-                                                                 where c.DrogueRunID == DrogueRunID
-                                                                 orderby c.DrogueRunPositionID descending
-                                                                 select new DrogueRunPositionModel
-                                                                 {
-                                                                     Error = "",
-                                                                     DrogueRunPositionID = c.DrogueRunPositionID,
-                                                                     DrogueRunID = c.DrogueRunID,
-                                                                     Ordinal = c.Ordinal,
-                                                                     StepLat = c.StepLat,
-                                                                     StepLng = c.StepLng,
-                                                                     StepDateTime_Local = c.StepDateTime_Local,
-                                                                     CalculatedSpeed_m_s = c.CalculatedSpeed_m_s,
-                                                                     CalculatedDirection_deg = c.CalculatedDirection_deg,
-                                                                     LastUpdateDate_UTC = c.LastUpdateDate_UTC,
-                                                                     LastUpdateContactTVItemID = c.LastUpdateContactTVItemID,
-                                                                 }).ToList<DrogueRunPositionModel>();
+                                                                       where c.DrogueRunID == DrogueRunID
+                                                                       orderby c.DrogueRunPositionID descending
+                                                                       select new DrogueRunPositionModel
+                                                                       {
+                                                                           Error = "",
+                                                                           DrogueRunPositionID = c.DrogueRunPositionID,
+                                                                           DrogueRunID = c.DrogueRunID,
+                                                                           Ordinal = c.Ordinal,
+                                                                           StepLat = c.StepLat,
+                                                                           StepLng = c.StepLng,
+                                                                           StepDateTime_Local = c.StepDateTime_Local,
+                                                                           CalculatedSpeed_m_s = c.CalculatedSpeed_m_s,
+                                                                           CalculatedDirection_deg = c.CalculatedDirection_deg,
+                                                                           LastUpdateDate_UTC = c.LastUpdateDate_UTC,
+                                                                           LastUpdateContactTVItemID = c.LastUpdateContactTVItemID,
+                                                                       }).ToList<DrogueRunPositionModel>();
 
             return DrogueRunPositionModelList;
         }
         public DrogueRunPositionModel GetDrogueRunPositionModelExistDB(DrogueRunPositionModel droguePositionModel)
         {
             DrogueRunPositionModel DrogueRunPositionModel = (from c in db.DrogueRunPositions
-                                                       where c.DrogueRunID == droguePositionModel.DrogueRunID
-                                                       && c.Ordinal == droguePositionModel.Ordinal
-                                                       && c.StepDateTime_Local == droguePositionModel.StepDateTime_Local
-                                                       select new DrogueRunPositionModel
-                                                       {
-                                                           Error = "",
-                                                           DrogueRunPositionID = c.DrogueRunPositionID,
-                                                           DrogueRunID = c.DrogueRunID,
-                                                           Ordinal = c.Ordinal,
-                                                           StepLat = c.StepLat,
-                                                           StepLng = c.StepLng,
-                                                           StepDateTime_Local = c.StepDateTime_Local,
-                                                           CalculatedSpeed_m_s = c.CalculatedSpeed_m_s,
-                                                           CalculatedDirection_deg = c.CalculatedDirection_deg,
-                                                           LastUpdateDate_UTC = c.LastUpdateDate_UTC,
-                                                           LastUpdateContactTVItemID = c.LastUpdateContactTVItemID,
-                                                       }).FirstOrDefault<DrogueRunPositionModel>();
+                                                             where c.DrogueRunID == droguePositionModel.DrogueRunID
+                                                             && c.Ordinal == droguePositionModel.Ordinal
+                                                             && c.StepDateTime_Local == droguePositionModel.StepDateTime_Local
+                                                             select new DrogueRunPositionModel
+                                                             {
+                                                                 Error = "",
+                                                                 DrogueRunPositionID = c.DrogueRunPositionID,
+                                                                 DrogueRunID = c.DrogueRunID,
+                                                                 Ordinal = c.Ordinal,
+                                                                 StepLat = c.StepLat,
+                                                                 StepLng = c.StepLng,
+                                                                 StepDateTime_Local = c.StepDateTime_Local,
+                                                                 CalculatedSpeed_m_s = c.CalculatedSpeed_m_s,
+                                                                 CalculatedDirection_deg = c.CalculatedDirection_deg,
+                                                                 LastUpdateDate_UTC = c.LastUpdateDate_UTC,
+                                                                 LastUpdateContactTVItemID = c.LastUpdateContactTVItemID,
+                                                             }).FirstOrDefault<DrogueRunPositionModel>();
 
             if (DrogueRunPositionModel == null)
                 return ReturnError(string.Format(ServiceRes.CouldNotFind_With_Equal_, ServiceRes.DrogueRunPosition,
@@ -211,12 +210,20 @@ namespace CSSPDBDLL.Services
 
             return DrogueRunPositionModel;
         }
+        public bool DrogueRunExistWithDrogueRunIDDB(int DrogueRunID)
+        {
+            return (from c in db.DrogueRuns
+                    where c.DrogueRunID == DrogueRunID
+                    orderby c.DrogueRunID descending
+                    select c).Any();
+        }
+
         public DrogueRunPosition GetDrogueRunPositionWithDrogueRunPositionIDDB(int DrogueRunPositionID)
         {
             DrogueRunPosition DrogueRunPosition = (from c in db.DrogueRunPositions
-                                             where c.DrogueRunPositionID == DrogueRunPositionID
-                                             orderby c.DrogueRunPositionID descending
-                                             select c).FirstOrDefault<DrogueRunPosition>();
+                                                   where c.DrogueRunPositionID == DrogueRunPositionID
+                                                   orderby c.DrogueRunPositionID descending
+                                                   select c).FirstOrDefault<DrogueRunPosition>();
             return DrogueRunPosition;
         }
         public DrogueRunPositionModel ReturnError(string Error)
@@ -235,9 +242,9 @@ namespace CSSPDBDLL.Services
             if (!string.IsNullOrEmpty(contactOK.Error))
                 return ReturnError(contactOK.Error);
 
-            DrogueRunModel drogueRunModelExist = _DrogueRunService.GetDrogueRunModelWithDrogueRunIDDB(droguePositionModel.DrogueRunID);
-            if (!string.IsNullOrWhiteSpace(drogueRunModelExist.Error))
-                return ReturnError(drogueRunModelExist.Error);
+            bool DrogueRunExist = DrogueRunExistWithDrogueRunIDDB(droguePositionModel.DrogueRunID);
+            if (!DrogueRunExist)
+                return ReturnError(string.Format(ServiceRes._DoesNotExist, ServiceRes.DrogueRun + "[" + droguePositionModel.DrogueRunID + "]"));
 
             DrogueRunPositionModel DrogueRunPositionModelExist = GetDrogueRunPositionModelExistDB(droguePositionModel);
             if (string.IsNullOrWhiteSpace(DrogueRunPositionModelExist.Error))

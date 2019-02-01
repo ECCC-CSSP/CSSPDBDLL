@@ -4007,4 +4007,7 @@
   <data name="Second" xml:space="preserve">
     <value>Second</value>
   </data>
+  <data name="TakeValueEveryXMinutes" xml:space="preserve">
+    <value>TakeValueEveryXMinutes</value>
+  </data>
 </root>

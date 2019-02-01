@@ -10546,6 +10546,15 @@ namespace CSSPDBDLL.Services.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to TakeValueEveryXMinutes.
+        /// </summary>
+        public static string TakeValueEveryXMinutes {
+            get {
+                return ResourceManager.GetString("TakeValueEveryXMinutes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Task of [{0}] already running.
         /// </summary>
         public static string TaskOf_AlreadyRunning {

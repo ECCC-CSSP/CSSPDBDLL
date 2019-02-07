@@ -2870,7 +2870,7 @@
   <data name="StudyArea" xml:space="preserve">
     <value>RegionEtude</value>
   </data>
-  <data name="SeeOtherShouldBeReferingToAnotherMunicipality" xml:space="preserve">
+  <data name="SeeOtherMunicipalityShouldBeReferingToAnotherMunicipality" xml:space="preserve">
     <value>Voir autre devrait faire référence à une autre municipalité</value>
   </data>
   <data name="PollutionSourceFieldSheet" xml:space="preserve">
@@ -3059,8 +3059,8 @@
   <data name="SecondaryTreatmentType" xml:space="preserve">
     <value>SecondaryTreatmentType</value>
   </data>
-  <data name="SeeOtherTVItemID" xml:space="preserve">
-    <value>SeeOtherTVItemID</value>
+  <data name="SeeOtherMunicipalityTVItemID" xml:space="preserve">
+    <value>SeeOtherMunicipalityTVItemID</value>
   </data>
   <data name="TertiaryTreatmentType" xml:space="preserve">
     <value>TertiaryTreatmentType</value>
@@ -4009,5 +4009,8 @@
   </data>
   <data name="TakeValueEveryXMinutes" xml:space="preserve">
     <value>TakeValueEveryXMinutes</value>
+  </data>
+  <data name="DatesAreNotAllInChronologicalOrder_And_" xml:space="preserve">
+    <value>Dates are not all in chronological order [{0}] -- [{1}] (fr)</value>
   </data>
 </root>

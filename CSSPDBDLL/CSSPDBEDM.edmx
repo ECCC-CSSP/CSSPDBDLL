@@ -497,7 +497,7 @@
           <Property Name="ReceivingWaterTemperature_C" Type="float" />
           <Property Name="ReceivingWater_MPN_per_100ml" Type="int" />
           <Property Name="DistanceFromShore_m" Type="float" />
-          <Property Name="SeeOtherTVItemID" Type="int" />
+          <Property Name="SeeOtherMunicipalityTVItemID" Type="int" />
           <Property Name="CivicAddressTVItemID" Type="int" />
           <Property Name="LastUpdateDate_UTC" Type="datetime" Nullable="false" />
           <Property Name="LastUpdateContactTVItemID" Type="int" Nullable="false" />
@@ -1897,7 +1897,7 @@
               <PropertyRef Name="TVItemID" />
             </Principal>
             <Dependent Role="Infrastructures">
-              <PropertyRef Name="SeeOtherTVItemID" />
+              <PropertyRef Name="SeeOtherMunicipalityTVItemID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -4489,7 +4489,7 @@
           <Property Name="ReceivingWaterTemperature_C" Type="Double" />
           <Property Name="ReceivingWater_MPN_per_100ml" Type="Int32" />
           <Property Name="DistanceFromShore_m" Type="Double" />
-          <Property Name="SeeOtherTVItemID" Type="Int32" />
+          <Property Name="SeeOtherMunicipalityTVItemID" Type="Int32" />
           <Property Name="CivicAddressTVItemID" Type="Int32" />
           <Property Name="LastUpdateDate_UTC" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="LastUpdateContactTVItemID" Type="Int32" Nullable="false" />
@@ -6048,7 +6048,7 @@
               <PropertyRef Name="TVItemID" />
             </Principal>
             <Dependent Role="Infrastructure">
-              <PropertyRef Name="SeeOtherTVItemID" />
+              <PropertyRef Name="SeeOtherMunicipalityTVItemID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -7503,7 +7503,7 @@
                 <ScalarProperty Name="LastUpdateContactTVItemID" ColumnName="LastUpdateContactTVItemID" />
                 <ScalarProperty Name="LastUpdateDate_UTC" ColumnName="LastUpdateDate_UTC" />
                 <ScalarProperty Name="CivicAddressTVItemID" ColumnName="CivicAddressTVItemID" />
-                <ScalarProperty Name="SeeOtherTVItemID" ColumnName="SeeOtherTVItemID" />
+                <ScalarProperty Name="SeeOtherMunicipalityTVItemID" ColumnName="SeeOtherMunicipalityTVItemID" />
                 <ScalarProperty Name="DistanceFromShore_m" ColumnName="DistanceFromShore_m" />
                 <ScalarProperty Name="ReceivingWater_MPN_per_100ml" ColumnName="ReceivingWater_MPN_per_100ml" />
                 <ScalarProperty Name="ReceivingWaterTemperature_C" ColumnName="ReceivingWaterTemperature_C" />

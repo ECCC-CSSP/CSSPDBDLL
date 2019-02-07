@@ -1170,7 +1170,7 @@ namespace CSSPDBDLL.Services
             {
                 InfrastructureModel infrastructureModel = _InfrastructureService.GetInfrastructureModelWithInfrastructureTVItemIDDB(tvItemModelInfrastructure.TVItemID);
 
-                if (infrastructureModel == null || infrastructureModel.InfrastructureType == null || infrastructureModel.InfrastructureType == InfrastructureTypeEnum.Other || infrastructureModel.InfrastructureType == InfrastructureTypeEnum.SeeOther)
+                if (infrastructureModel == null || infrastructureModel.InfrastructureType == null || infrastructureModel.InfrastructureType == InfrastructureTypeEnum.Other || infrastructureModel.InfrastructureType == InfrastructureTypeEnum.SeeOtherMunicipality)
                 {
                     continue;
                 }
@@ -1332,8 +1332,8 @@ namespace CSSPDBDLL.Services
                 sb.AppendLine($"RECEIVINGWATER_MPN_PER_100ML\t{RECEIVINGWATER_MPN_PER_100ML}\t");
                 string DISTANCEFROMSHORE_M = infrastructureModel.DistanceFromShore_m != null ? ((float)infrastructureModel.DistanceFromShore_m).ToString("F3") : "";
                 sb.AppendLine($"DISTANCEFROMSHORE_M\t{DISTANCEFROMSHORE_M}\t");
-                string SEEOTHERTVITEMID = infrastructureModel.SeeOtherTVItemID != null ? ((int)infrastructureModel.SeeOtherTVItemID).ToString() : "";
-                sb.AppendLine($"SEEOTHERTVITEMID\t{SEEOTHERTVITEMID}\t");
+                string SeeOtherMunicipalityTVITEMID = infrastructureModel.SeeOtherMunicipalityTVItemID != null ? ((int)infrastructureModel.SeeOtherMunicipalityTVItemID).ToString() : "";
+                sb.AppendLine($"SeeOtherMunicipalityTVITEMID\t{SeeOtherMunicipalityTVITEMID}\t");
 
                 List<TVItemLinkModel> tvItemLinkModelList = _TVItemLinkService.GetTVItemLinkModelListWithFromTVItemIDDB(tvItemModelInfrastructure.TVItemID);
                 foreach (TVItemLinkModel tvItemLinkModel in tvItemLinkModelList)

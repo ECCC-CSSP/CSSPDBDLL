@@ -2635,7 +2635,7 @@ namespace CSSPDBDLL.Services
                             //tvItemModelRet.Error = string.Format(ServiceRes.DeleteTVType_IsNotImplemented, tvItemModelRet.TVType.ToString());
                         }
                         break;
-                    case TVTypeEnum.SeeOther:
+                    case TVTypeEnum.SeeOtherMunicipality:
                         {
                             //tvItemModelRet.Error = string.Format(ServiceRes.DeleteTVType_IsNotImplemented, tvItemModelRet.TVType.ToString());
                         }

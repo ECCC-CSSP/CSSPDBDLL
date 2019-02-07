@@ -64,7 +64,7 @@ namespace CSSPDBDLL
         public Nullable<double> ReceivingWaterTemperature_C { get; set; }
         public Nullable<int> ReceivingWater_MPN_per_100ml { get; set; }
         public Nullable<double> DistanceFromShore_m { get; set; }
-        public Nullable<int> SeeOtherTVItemID { get; set; }
+        public Nullable<int> SeeOtherMunicipalityTVItemID { get; set; }
         public Nullable<int> CivicAddressTVItemID { get; set; }
         public System.DateTime LastUpdateDate_UTC { get; set; }
         public int LastUpdateContactTVItemID { get; set; }

@@ -89,7 +89,7 @@ namespace CSSPDBDLL.Services
             AppTaskModel appTaskModelNew = new AppTaskModel()
             {
                 TVItemID = ProvinceTVItemID,
-                TVItemID2 = Year,
+                TVItemID2 = ProvinceTVItemID,
                 AppTaskCommand = AppTaskCommandEnum.GetAllPrecipitationForYear,
                 ErrorText = "",
                 StatusText = ServiceRes.GetAllPrecipitationForYear,
@@ -137,7 +137,7 @@ namespace CSSPDBDLL.Services
             AppTaskModel appTaskModelNew = new AppTaskModel()
             {
                 TVItemID = ProvinceTVItemID,
-                TVItemID2 = Year,
+                TVItemID2 = ProvinceTVItemID,
                 AppTaskCommand = AppTaskCommandEnum.FillRunPrecipByClimateSitePriorityForYear,
                 ErrorText = "",
                 StatusText = ServiceRes.FillRunPrecipByClimateSitePriorityForYear,

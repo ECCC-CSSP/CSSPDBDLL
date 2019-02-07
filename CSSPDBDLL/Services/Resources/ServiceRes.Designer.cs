@@ -2590,6 +2590,15 @@ namespace CSSPDBDLL.Services.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Dates are not all in chronological order [{0}] -- [{1}].
+        /// </summary>
+        public static string DatesAreNotAllInChronologicalOrder_And_ {
+            get {
+                return ResourceManager.GetString("DatesAreNotAllInChronologicalOrder_And_", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to DateTime_Local.
         /// </summary>
         public static string DateTime_Local {
@@ -9675,18 +9684,18 @@ namespace CSSPDBDLL.Services.Resources {
         /// <summary>
         ///   Looks up a localized string similar to See other should be refering to another municipality.
         /// </summary>
-        public static string SeeOtherShouldBeReferingToAnotherMunicipality {
+        public static string SeeOtherMunicipalityShouldBeReferingToAnotherMunicipality {
             get {
-                return ResourceManager.GetString("SeeOtherShouldBeReferingToAnotherMunicipality", resourceCulture);
+                return ResourceManager.GetString("SeeOtherMunicipalityShouldBeReferingToAnotherMunicipality", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to SeeOtherTVItemID.
+        ///   Looks up a localized string similar to SeeOtherMunicipalityTVItemID.
         /// </summary>
-        public static string SeeOtherTVItemID {
+        public static string SeeOtherMunicipalityTVItemID {
             get {
-                return ResourceManager.GetString("SeeOtherTVItemID", resourceCulture);
+                return ResourceManager.GetString("SeeOtherMunicipalityTVItemID", resourceCulture);
             }
         }
         

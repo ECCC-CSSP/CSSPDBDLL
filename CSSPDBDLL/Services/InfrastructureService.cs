@@ -352,7 +352,7 @@ namespace CSSPDBDLL.Services
                 return retStr;
             }
 
-            retStr = FieldCheckIfNotNullNotZeroInt(infrastructureModel.SeeOtherTVItemID, ServiceRes.SeeOtherTVItemID);
+            retStr = FieldCheckIfNotNullNotZeroInt(infrastructureModel.SeeOtherMunicipalityTVItemID, ServiceRes.SeeOtherMunicipalityTVItemID);
             if (!string.IsNullOrWhiteSpace(retStr))
             {
                 return retStr;
@@ -448,7 +448,7 @@ namespace CSSPDBDLL.Services
             infrastructure.ReceivingWaterTemperature_C = infrastructureModel.ReceivingWaterTemperature_C;
             infrastructure.ReceivingWater_MPN_per_100ml = infrastructureModel.ReceivingWater_MPN_per_100ml;
             infrastructure.DistanceFromShore_m = infrastructureModel.DistanceFromShore_m;
-            infrastructure.SeeOtherTVItemID = infrastructureModel.SeeOtherTVItemID;
+            infrastructure.SeeOtherMunicipalityTVItemID = infrastructureModel.SeeOtherMunicipalityTVItemID;
             infrastructure.CivicAddressTVItemID = infrastructureModel.CivicAddressTVItemID;
             infrastructure.LastUpdateDate_UTC = DateTime.UtcNow;
             if (contactOK == null)
@@ -527,7 +527,7 @@ namespace CSSPDBDLL.Services
                                                            ReceivingWater_MPN_per_100ml = c.ReceivingWater_MPN_per_100ml,
                                                            DistanceFromShore_m = c.DistanceFromShore_m,
                                                            Comment = comment,
-                                                           SeeOtherTVItemID = c.SeeOtherTVItemID,
+                                                           SeeOtherMunicipalityTVItemID = c.SeeOtherMunicipalityTVItemID,
                                                            CivicAddressTVItemID = c.CivicAddressTVItemID,
                                                            LastUpdateDate_UTC = c.LastUpdateDate_UTC,
                                                            LastUpdateContactTVItemID = c.LastUpdateContactTVItemID,
@@ -596,7 +596,7 @@ namespace CSSPDBDLL.Services
                                                            ReceivingWater_MPN_per_100ml = c.ReceivingWater_MPN_per_100ml,
                                                            DistanceFromShore_m = c.DistanceFromShore_m,
                                                            Comment = comment,
-                                                           SeeOtherTVItemID = c.SeeOtherTVItemID,
+                                                           SeeOtherMunicipalityTVItemID = c.SeeOtherMunicipalityTVItemID,
                                                            CivicAddressTVItemID = c.CivicAddressTVItemID,
                                                            LastUpdateDate_UTC = c.LastUpdateDate_UTC,
                                                            LastUpdateContactTVItemID = c.LastUpdateContactTVItemID,
@@ -642,7 +642,7 @@ namespace CSSPDBDLL.Services
                     TVItemModel = tvItemModel,
                     InfrastructureType = infrastructureType,
                     TVItemModelLinkList = tvItemLinkModelList,
-                    SeeOtherTVItemID = infrastructureModel.SeeOtherTVItemID,
+                    SeeOtherMunicipalityTVItemID = infrastructureModel.SeeOtherMunicipalityTVItemID,
                 };
 
                 tvItemModelInfrastructureTypeTVItemLinkModelList.Add(tvItemModelInfrastructureTypeTVItemLinkModel);
@@ -704,7 +704,7 @@ namespace CSSPDBDLL.Services
             double Lng = 0.0D;
             double? LatOutfall = null;
             double? LngOutfall = null;
-            int SeeOtherTVItemID = 0;
+            int SeeOtherMunicipalityTVItemID = 0;
 
             ContactOK contactOK = IsContactOK();
             if (!string.IsNullOrWhiteSpace(contactOK.Error))
@@ -751,21 +751,21 @@ namespace CSSPDBDLL.Services
 
             infrastructureNewOrToChange.InfrastructureTVText = InfrastructureTVText;
 
-            infrastructureNewOrToChange.SeeOtherTVItemID = null;
+            infrastructureNewOrToChange.SeeOtherMunicipalityTVItemID = null;
 
-            if (infrastructureNewOrToChange.InfrastructureType == InfrastructureTypeEnum.SeeOther)
+            if (infrastructureNewOrToChange.InfrastructureType == InfrastructureTypeEnum.SeeOtherMunicipality)
             {
-                int.TryParse(fc["SeeOtherTVItemID"], out SeeOtherTVItemID);
-                if (SeeOtherTVItemID > 0)
-                    infrastructureNewOrToChange.SeeOtherTVItemID = SeeOtherTVItemID;
+                int.TryParse(fc["SeeOtherMunicipalityTVItemID"], out SeeOtherMunicipalityTVItemID);
+                if (SeeOtherMunicipalityTVItemID > 0)
+                    infrastructureNewOrToChange.SeeOtherMunicipalityTVItemID = SeeOtherMunicipalityTVItemID;
 
-                TVItemModel tvItemModelMunicipality = _TVItemService.GetTVItemModelWithTVItemIDDB(SeeOtherTVItemID);
+                TVItemModel tvItemModelMunicipality = _TVItemService.GetTVItemModelWithTVItemIDDB(SeeOtherMunicipalityTVItemID);
 
-                if (tvItemModelMuni.TVItemID == SeeOtherTVItemID)
-                    return ReturnError(ServiceRes.SeeOtherShouldBeReferingToAnotherMunicipality);
+                if (tvItemModelMuni.TVItemID == SeeOtherMunicipalityTVItemID)
+                    return ReturnError(ServiceRes.SeeOtherMunicipalityShouldBeReferingToAnotherMunicipality);
 
                 if (tvItemModelMunicipality.TVType != TVTypeEnum.Municipality)
-                    return ReturnError(ServiceRes.SeeOtherShouldBeReferingToAnotherMunicipality);
+                    return ReturnError(ServiceRes.SeeOtherMunicipalityShouldBeReferingToAnotherMunicipality);
 
                 List<MapInfoPointModel> mapInfoPointModelList = _MapInfoService._MapInfoPointService.GetMapInfoPointModelListWithTVItemIDAndTVTypeAndMapInfoDrawTypeDB(tvItemModelMunicipality.TVItemID, TVTypeEnum.Municipality, MapInfoDrawTypeEnum.Point);
                 if (mapInfoPointModelList.Count > 0)
@@ -832,9 +832,9 @@ namespace CSSPDBDLL.Services
                 {
                     tvType = TVTypeEnum.OtherInfrastructure;
                 }
-                else if (infrastructureModelRet.InfrastructureType == InfrastructureTypeEnum.SeeOther)
+                else if (infrastructureModelRet.InfrastructureType == InfrastructureTypeEnum.SeeOtherMunicipality)
                 {
-                    tvType = TVTypeEnum.SeeOther;
+                    tvType = TVTypeEnum.SeeOtherMunicipality;
                 }
                 else if (infrastructureModelRet.InfrastructureType == InfrastructureTypeEnum.LineOverflow)
                 {
@@ -901,9 +901,9 @@ namespace CSSPDBDLL.Services
                             tvTypeTo = TVTypeEnum.OtherInfrastructure;
                         }
                         break;
-                    case InfrastructureTypeEnum.SeeOther:
+                    case InfrastructureTypeEnum.SeeOtherMunicipality:
                         {
-                            tvTypeTo = TVTypeEnum.SeeOther;
+                            tvTypeTo = TVTypeEnum.SeeOtherMunicipality;
                         }
                         break;
                     default:
@@ -995,9 +995,9 @@ namespace CSSPDBDLL.Services
                                 tvType = TVTypeEnum.OtherInfrastructure;
                             }
                             break;
-                        case InfrastructureTypeEnum.SeeOther:
+                        case InfrastructureTypeEnum.SeeOtherMunicipality:
                             {
-                                tvType = TVTypeEnum.SeeOther;
+                                tvType = TVTypeEnum.SeeOtherMunicipality;
                             }
                             break;
                         default:
@@ -1030,9 +1030,9 @@ namespace CSSPDBDLL.Services
                                 tvTypeTo = TVTypeEnum.OtherInfrastructure;
                             }
                             break;
-                        case InfrastructureTypeEnum.SeeOther:
+                        case InfrastructureTypeEnum.SeeOtherMunicipality:
                             {
-                                tvTypeTo = TVTypeEnum.SeeOther;
+                                tvTypeTo = TVTypeEnum.SeeOtherMunicipality;
                             }
                             break;
                         default:
@@ -1478,9 +1478,9 @@ namespace CSSPDBDLL.Services
             {
                 tvType = TVTypeEnum.OtherInfrastructure;
             }
-            else if (infrastructureModelToChange.InfrastructureType == InfrastructureTypeEnum.SeeOther)
+            else if (infrastructureModelToChange.InfrastructureType == InfrastructureTypeEnum.SeeOtherMunicipality)
             {
-                tvType = TVTypeEnum.SeeOther;
+                tvType = TVTypeEnum.SeeOtherMunicipality;
             }
             else if (infrastructureModelToChange.InfrastructureType == InfrastructureTypeEnum.LineOverflow)
             {
@@ -1772,9 +1772,9 @@ namespace CSSPDBDLL.Services
                             tvType = TVTypeEnum.OtherInfrastructure;
                         }
                         break;
-                    case InfrastructureTypeEnum.SeeOther:
+                    case InfrastructureTypeEnum.SeeOtherMunicipality:
                         {
-                            tvType = TVTypeEnum.SeeOther;
+                            tvType = TVTypeEnum.SeeOtherMunicipality;
                         }
                         break;
                     case InfrastructureTypeEnum.WWTP:

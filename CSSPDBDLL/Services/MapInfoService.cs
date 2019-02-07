@@ -713,9 +713,9 @@ namespace CSSPDBDLL.Services
                                                         tvlNew.SubTVType = TVTypeEnum.OtherInfrastructure;
                                                     }
                                                     break;
-                                                case InfrastructureTypeEnum.SeeOther:
+                                                case InfrastructureTypeEnum.SeeOtherMunicipality:
                                                     {
-                                                        tvlNew.SubTVType = TVTypeEnum.SeeOther;
+                                                        tvlNew.SubTVType = TVTypeEnum.SeeOtherMunicipality;
                                                     }
                                                     break;
                                                 case InfrastructureTypeEnum.WWTP:
@@ -938,9 +938,9 @@ namespace CSSPDBDLL.Services
                                                         tvlNew.SubTVType = TVTypeEnum.OtherInfrastructure;
                                                     }
                                                     break;
-                                                case InfrastructureTypeEnum.SeeOther:
+                                                case InfrastructureTypeEnum.SeeOtherMunicipality:
                                                     {
-                                                        tvlNew.SubTVType = TVTypeEnum.SeeOther;
+                                                        tvlNew.SubTVType = TVTypeEnum.SeeOtherMunicipality;
                                                     }
                                                     break;
                                                 case InfrastructureTypeEnum.WWTP:
@@ -1384,9 +1384,9 @@ namespace CSSPDBDLL.Services
                                                             tvlNew.SubTVType = TVTypeEnum.OtherInfrastructure;
                                                         }
                                                         break;
-                                                    case InfrastructureTypeEnum.SeeOther:
+                                                    case InfrastructureTypeEnum.SeeOtherMunicipality:
                                                         {
-                                                            tvlNew.SubTVType = TVTypeEnum.SeeOther;
+                                                            tvlNew.SubTVType = TVTypeEnum.SeeOtherMunicipality;
                                                         }
                                                         break;
                                                     case InfrastructureTypeEnum.WWTP:
@@ -2565,7 +2565,7 @@ namespace CSSPDBDLL.Services
                 || mapInfoModel.TVType == TVTypeEnum.WasteWaterTreatmentPlant
                 || mapInfoModel.TVType == TVTypeEnum.LiftStation
                 || mapInfoModel.TVType == TVTypeEnum.OtherInfrastructure
-                || mapInfoModel.TVType == TVTypeEnum.SeeOther
+                || mapInfoModel.TVType == TVTypeEnum.SeeOtherMunicipality
                 || mapInfoModel.TVType == TVTypeEnum.LineOverflow
                 )
             {
@@ -2594,9 +2594,9 @@ namespace CSSPDBDLL.Services
                             tvType = TVTypeEnum.OtherInfrastructure;
                         }
                         break;
-                    case InfrastructureTypeEnum.SeeOther:
+                    case InfrastructureTypeEnum.SeeOtherMunicipality:
                         {
-                            tvType = TVTypeEnum.SeeOther;
+                            tvType = TVTypeEnum.SeeOtherMunicipality;
                         }
                         break;
                     default:
@@ -2716,7 +2716,7 @@ namespace CSSPDBDLL.Services
                 || mapInfoModel.TVType == TVTypeEnum.WasteWaterTreatmentPlant
                 || mapInfoModel.TVType == TVTypeEnum.LiftStation
                 || mapInfoModel.TVType == TVTypeEnum.OtherInfrastructure
-                || mapInfoModel.TVType == TVTypeEnum.SeeOther
+                || mapInfoModel.TVType == TVTypeEnum.SeeOtherMunicipality
                 || mapInfoModel.TVType == TVTypeEnum.LineOverflow
                 )
             {
@@ -2745,9 +2745,9 @@ namespace CSSPDBDLL.Services
                             tvType = TVTypeEnum.OtherInfrastructure;
                         }
                         break;
-                    case InfrastructureTypeEnum.SeeOther:
+                    case InfrastructureTypeEnum.SeeOtherMunicipality:
                         {
-                            tvType = TVTypeEnum.SeeOther;
+                            tvType = TVTypeEnum.SeeOtherMunicipality;
                         }
                         break;
                     default:
@@ -2851,7 +2851,7 @@ namespace CSSPDBDLL.Services
                 || mapInfoModel.TVType == TVTypeEnum.WasteWaterTreatmentPlant
                 || mapInfoModel.TVType == TVTypeEnum.LiftStation
                 || mapInfoModel.TVType == TVTypeEnum.OtherInfrastructure
-                || mapInfoModel.TVType == TVTypeEnum.SeeOther
+                || mapInfoModel.TVType == TVTypeEnum.SeeOtherMunicipality
                 || mapInfoModel.TVType == TVTypeEnum.LineOverflow
                 )
             {
@@ -2880,9 +2880,9 @@ namespace CSSPDBDLL.Services
                             tvType = TVTypeEnum.OtherInfrastructure;
                         }
                         break;
-                    case InfrastructureTypeEnum.SeeOther:
+                    case InfrastructureTypeEnum.SeeOtherMunicipality:
                         {
-                            tvType = TVTypeEnum.SeeOther;
+                            tvType = TVTypeEnum.SeeOtherMunicipality;
                         }
                         break;
                     default:

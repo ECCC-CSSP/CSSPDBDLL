@@ -362,6 +362,11 @@ namespace CSSPDBDLL.Services
 
                         DateTime StepDate = new DateTime(Year, Month, Day, Hour, Minute, Second);
 
+                        if (StepDate <= OldStepDate)
+                        {
+                            return ReturnError(string.Format(ServiceRes.DatesAreNotAllInChronologicalOrder_And_, StepDate, OldStepDate));
+                        }
+
                         TimeSpan timeSpan = new TimeSpan(StepDate.Ticks - OldStepDate.Ticks);
 
                         if (timeSpan.TotalSeconds > TakeValueEveryXSeconds || TakeValueEveryXMinutes == 0)

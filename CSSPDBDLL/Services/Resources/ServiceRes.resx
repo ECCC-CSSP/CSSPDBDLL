@@ -4155,4 +4155,7 @@
   <data name="DatesAreNotAllInChronologicalOrder_And_" xml:space="preserve">
     <value>Dates are not all in chronological order [{0}] -- [{1}]</value>
   </data>
+  <data name="IsRisingTide" xml:space="preserve">
+    <value>IsRisingTide</value>
+  </data>
 </root>

@@ -5191,6 +5191,15 @@ namespace CSSPDBDLL.Services.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to IsRisingTide.
+        /// </summary>
+        public static string IsRisingTide {
+            get {
+                return ResourceManager.GetString("IsRisingTide", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to IsRiver.
         /// </summary>
         public static string IsRiver {

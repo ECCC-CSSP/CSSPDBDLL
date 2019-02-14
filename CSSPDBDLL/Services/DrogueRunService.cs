@@ -93,6 +93,7 @@ namespace CSSPDBDLL.Services
             drogueRunNew.DrogueNumber = drogueRunModel.DrogueNumber;
             drogueRunNew.DrogueType = (int)drogueRunModel.DrogueType;
             drogueRunNew.RunStartDateTime = drogueRunModel.RunStartDateTime;
+            drogueRunNew.IsRisingTide = drogueRunModel.IsRisingTide;
             drogueRunNew.LastUpdateDate_UTC = DateTime.UtcNow;
             if (contactOK == null)
             {
@@ -126,6 +127,7 @@ namespace CSSPDBDLL.Services
                                                  DrogueNumber = c.DrogueNumber,
                                                  DrogueType = (DrogueTypeEnum)c.DrogueType,
                                                  RunStartDateTime = c.RunStartDateTime,
+                                                 IsRisingTide = c.IsRisingTide,
                                                  LastUpdateDate_UTC = c.LastUpdateDate_UTC,
                                                  LastUpdateContactTVItemID = c.LastUpdateContactTVItemID,
                                              }).FirstOrDefault<DrogueRunModel>();
@@ -148,6 +150,7 @@ namespace CSSPDBDLL.Services
                                                            DrogueNumber = c.DrogueNumber,
                                                            DrogueType = (DrogueTypeEnum)c.DrogueType,
                                                            RunStartDateTime = c.RunStartDateTime,
+                                                           IsRisingTide = c.IsRisingTide,
                                                            LastUpdateDate_UTC = c.LastUpdateDate_UTC,
                                                            LastUpdateContactTVItemID = c.LastUpdateContactTVItemID,
                                                        }).ToList<DrogueRunModel>();
@@ -169,6 +172,7 @@ namespace CSSPDBDLL.Services
                                                  DrogueNumber = c.DrogueNumber,
                                                  DrogueType = (DrogueTypeEnum)c.DrogueType,
                                                  RunStartDateTime = c.RunStartDateTime,
+                                                 IsRisingTide = c.IsRisingTide,
                                                  LastUpdateDate_UTC = c.LastUpdateDate_UTC,
                                                  LastUpdateContactTVItemID = c.LastUpdateContactTVItemID,
                                              }).FirstOrDefault<DrogueRunModel>();
@@ -208,6 +212,7 @@ namespace CSSPDBDLL.Services
             int DrogueNumber = 0;
             int TakeValueEveryXMinutes = 0;
             int TakeValueEveryXSeconds = 0;
+            bool IsRisingTide = true;
 
             DrogueTypeEnum DrogueType = DrogueTypeEnum.Error;
             DateTime RunStartDateTime = DateTime.Now;
@@ -251,6 +256,11 @@ namespace CSSPDBDLL.Services
                 DrogueType = (DrogueTypeEnum)tempInt;
             }
 
+            if (string.IsNullOrWhiteSpace(fc["IsRisingTide"]))
+            {
+                IsRisingTide = false;
+            }
+
             DroguePoints = fc["DroguePoints"];
 
             DrogueRunModel drogueRunModelRet = new DrogueRunModel();
@@ -263,7 +273,8 @@ namespace CSSPDBDLL.Services
                         DrogueNumber = DrogueNumber,
                         DrogueType = DrogueType,
                         RunStartDateTime = RunStartDateTime,
-                        SubsectorTVItemID = SubsectorTVItemID
+                        SubsectorTVItemID = SubsectorTVItemID,
+                        IsRisingTide = IsRisingTide,
                     };
 
                     drogueRunModelRet = PostAddDrogueRunDB(drogueRunModelNew);
@@ -273,6 +284,7 @@ namespace CSSPDBDLL.Services
                     drogueRunModelToChange.DrogueNumber = DrogueNumber;
                     drogueRunModelToChange.DrogueType = DrogueType;
                     drogueRunModelToChange.RunStartDateTime = RunStartDateTime;
+                    drogueRunModelToChange.IsRisingTide = IsRisingTide;
 
                     drogueRunModelRet = PostUpdateDrogueRunDB(drogueRunModelToChange);
                 }
@@ -397,11 +409,30 @@ namespace CSSPDBDLL.Services
                         float Speed = Math.Abs((float)(dist / timeSpan.TotalSeconds));
                         drogueRunPositionModelList[i].CalculatedSpeed_m_s = Speed;
 
-                        double angle = Math.Atan2(drogueRunPositionModelList[i + 1].StepLat - drogueRunPositionModelList[i].StepLat, drogueRunPositionModelList[i + 1].StepLng - drogueRunPositionModelList[i].StepLng) * 180 / Math.PI;
+                        double StepLat = drogueRunPositionModelList[i + 1].StepLat - drogueRunPositionModelList[i].StepLat;
+                        double StepLng = drogueRunPositionModelList[i + 1].StepLng - drogueRunPositionModelList[i].StepLng;
 
-                        if (angle < 0.0f)
+                        double angle = Math.Atan2(StepLat, StepLng) * 180 / Math.PI;
+
+                        if (StepLat >= 0.0D && StepLng >= 0.0D)
                         {
-                            angle = 360 + angle;
+                            angle = 90 - angle;
+                        }
+                        else if (StepLat <= 0.0D && StepLng >= 0.0D)
+                        {
+                            angle = 90 + Math.Abs(angle);
+                        }
+                        else if (StepLat <= 0.0D && StepLng <= 0.0D)
+                        {
+                            angle = 90 + Math.Abs(angle);
+                        }
+                        else if (StepLat >= 0.0D && StepLng <= 0.0D)
+                        {
+                            angle = 360 - Math.Abs(angle) + 90;
+                        }
+                        else
+                        {
+                            angle = 0.0f;
                         }
 
                         if (drogueRunPositionModelList[i].StepLat == drogueRunPositionModelList[i + 1].StepLat && drogueRunPositionModelList[i].StepLng == drogueRunPositionModelList[i + 1].StepLng)

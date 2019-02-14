@@ -25,6 +25,7 @@ namespace CSSPDBDLL
         public int DrogueNumber { get; set; }
         public int DrogueType { get; set; }
         public System.DateTime RunStartDateTime { get; set; }
+        public bool IsRisingTide { get; set; }
         public System.DateTime LastUpdateDate_UTC { get; set; }
         public int LastUpdateContactTVItemID { get; set; }
     

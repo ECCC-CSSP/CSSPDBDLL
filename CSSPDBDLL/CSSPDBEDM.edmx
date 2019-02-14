@@ -317,6 +317,7 @@
           <Property Name="DrogueNumber" Type="int" Nullable="false" />
           <Property Name="DrogueType" Type="int" Nullable="false" />
           <Property Name="RunStartDateTime" Type="datetime" Nullable="false" />
+          <Property Name="IsRisingTide" Type="bit" Nullable="false" />
           <Property Name="LastUpdateDate_UTC" Type="datetime" Nullable="false" />
           <Property Name="LastUpdateContactTVItemID" Type="int" Nullable="false" />
         </EntityType>
@@ -4294,6 +4295,7 @@
           <Property Name="DrogueNumber" Type="Int32" Nullable="false" />
           <Property Name="DrogueType" Type="Int32" Nullable="false" />
           <Property Name="RunStartDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsRisingTide" Type="Boolean" Nullable="false" />
           <Property Name="LastUpdateDate_UTC" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="LastUpdateContactTVItemID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="DrogueRunPositions" Relationship="CSSPDBModel.FK_DrogueRunPositions_DrogueRuns" FromRole="DrogueRun" ToRole="DrogueRunPosition" />
@@ -7351,6 +7353,7 @@
               <MappingFragment StoreEntitySet="DrogueRuns">
                 <ScalarProperty Name="LastUpdateContactTVItemID" ColumnName="LastUpdateContactTVItemID" />
                 <ScalarProperty Name="LastUpdateDate_UTC" ColumnName="LastUpdateDate_UTC" />
+                <ScalarProperty Name="IsRisingTide" ColumnName="IsRisingTide" />
                 <ScalarProperty Name="RunStartDateTime" ColumnName="RunStartDateTime" />
                 <ScalarProperty Name="DrogueType" ColumnName="DrogueType" />
                 <ScalarProperty Name="DrogueNumber" ColumnName="DrogueNumber" />

@@ -137,13 +137,13 @@ namespace CSSPDBDLL.Services
                 }
             }
 
-            retStr = FieldCheckIfNotNullWithinRangeInt(infrastructureModel.NumberOfCells, ServiceRes.NumberOfCells, 0, 6);
+            retStr = FieldCheckIfNotNullWithinRangeInt(infrastructureModel.NumberOfCells, ServiceRes.NumberOfCells, 0, 7);
             if (!string.IsNullOrWhiteSpace(retStr))
             {
                 return retStr;
             }
 
-            retStr = FieldCheckIfNotNullWithinRangeInt(infrastructureModel.NumberOfAeratedCells, ServiceRes.NumberOfAeratedCells, 0, 6);
+            retStr = FieldCheckIfNotNullWithinRangeInt(infrastructureModel.NumberOfAeratedCells, ServiceRes.NumberOfAeratedCells, 0, 7);
             if (!string.IsNullOrWhiteSpace(retStr))
             {
                 return retStr;

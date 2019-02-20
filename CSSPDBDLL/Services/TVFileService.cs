@@ -1437,6 +1437,35 @@ namespace CSSPDBDLL.Services
             sb.AppendLine("VERSION\t1\t");
             DateTime CurrentTime = DateTime.UtcNow;
             sb.AppendLine($"DOCDATE\t{CurrentTime.Year}|{CurrentTime.Month.ToString("0#")}|{CurrentTime.Day.ToString("0#")}|{CurrentTime.Hour.ToString("0#")}|{CurrentTime.Minute.ToString("0#")}|{CurrentTime.Second.ToString("0#")}\t");
+
+            TVItemModel tvItemModelProvince = null;
+            List<TVItemModel> tvItemModelParentList = _TVItemService.GetParentsTVItemModelList(tvItemModelSS.TVPath);
+
+            foreach (TVItemModel tvItemModel in tvItemModelParentList)
+            {
+                if (tvItemModel.TVType == TVTypeEnum.Province)
+                {
+                    tvItemModelProvince = tvItemModel;
+                    break;
+                }
+            }
+
+            if (tvItemModelProvince == null)
+            {
+                return string.Format(ServiceRes.CouldNotFindParent_WithChild_Equal_, ServiceRes.Province, ServiceRes.Subsector, tvItemModelSS.TVPath);
+            }
+
+            List<TVItemModel> tvItemModelMunicipalityList = _TVItemService.GetChildrenTVItemModelListWithTVItemIDAndTVTypeDB(tvItemModelProvince.TVItemID, TVTypeEnum.Municipality);
+
+            string MunicipalityListText = "";
+            foreach (TVItemModel tvItemModel in tvItemModelMunicipalityList)
+            {
+                MunicipalityListText = MunicipalityListText + tvItemModel.TVText.Replace("\t", "_").Replace("|", "_").Replace("[", "_").Replace("]", "_") + "[" + tvItemModel.TVItemID + "]" + "|";
+            }
+
+            sb.AppendLine($"PROVINCETVITEMID\t{ tvItemModelProvince.TVItemID }");
+            sb.AppendLine($"PROVINCEMUNICIPALITIES\t{ MunicipalityListText }");
+
             sb.AppendLine($"SUBSECTOR\t{tvItemModelSS.TVItemID}\t{tvItemModelSS.TVText}\t");
 
             List<TVItemModel> tvItemModelPSSList = _TVItemService.GetChildrenTVItemModelListWithTVItemIDAndTVTypeDB(tvItemModelSS.TVItemID, TVTypeEnum.PolSourceSite);

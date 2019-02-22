@@ -1333,7 +1333,7 @@ namespace CSSPDBDLL.Services
                 string DISTANCEFROMSHORE_M = infrastructureModel.DistanceFromShore_m != null ? ((float)infrastructureModel.DistanceFromShore_m).ToString("F3") : "";
                 sb.AppendLine($"DISTANCEFROMSHORE_M\t{DISTANCEFROMSHORE_M}\t");
                 string SeeOtherMunicipalityTVITEMID = infrastructureModel.SeeOtherMunicipalityTVItemID != null ? ((int)infrastructureModel.SeeOtherMunicipalityTVItemID).ToString() : "";
-                sb.AppendLine($"SeeOtherMunicipalityTVITEMID\t{SeeOtherMunicipalityTVITEMID}\t");
+                sb.AppendLine($"SEEOTHERMUNICIPALITYTVITEMID\t{SeeOtherMunicipalityTVITEMID}\t");
 
                 List<TVItemLinkModel> tvItemLinkModelList = _TVItemLinkService.GetTVItemLinkModelListWithFromTVItemIDDB(tvItemModelInfrastructure.TVItemID);
                 foreach (TVItemLinkModel tvItemLinkModel in tvItemLinkModelList)

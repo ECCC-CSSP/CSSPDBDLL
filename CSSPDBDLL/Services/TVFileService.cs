@@ -1162,6 +1162,7 @@ namespace CSSPDBDLL.Services
             sb.AppendLine("VERSION\t1\t");
             DateTime CurrentTime = DateTime.UtcNow;
             sb.AppendLine($"DOCDATE\t{CurrentTime.Year}|{CurrentTime.Month.ToString("0#")}|{CurrentTime.Day.ToString("0#")}|{CurrentTime.Hour.ToString("0#")}|{CurrentTime.Minute.ToString("0#")}|{CurrentTime.Second.ToString("0#")}\t");
+            sb.AppendLine($"PROVINCETVITEMID\t{tvItemModelMunicipality.ParentID}\t");
             sb.AppendLine($"MUNICIPALITY\t{tvItemModelMunicipality.TVItemID}\t{tvItemModelMunicipality.TVText}\t");
 
             List<TVItemModel> tvItemModelInfrastructureList = _TVItemService.GetChildrenTVItemModelListWithTVItemIDAndTVTypeDB(tvItemModelMunicipality.TVItemID, TVTypeEnum.Infrastructure);

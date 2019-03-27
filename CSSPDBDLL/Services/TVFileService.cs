@@ -1162,7 +1162,35 @@ namespace CSSPDBDLL.Services
             sb.AppendLine("VERSION\t1\t");
             DateTime CurrentTime = DateTime.UtcNow;
             sb.AppendLine($"DOCDATE\t{CurrentTime.Year}|{CurrentTime.Month.ToString("0#")}|{CurrentTime.Day.ToString("0#")}|{CurrentTime.Hour.ToString("0#")}|{CurrentTime.Minute.ToString("0#")}|{CurrentTime.Second.ToString("0#")}\t");
-            sb.AppendLine($"PROVINCETVITEMID\t{tvItemModelMunicipality.ParentID}\t");
+
+            TVItemModel tvItemModelProvince = null;
+            List<TVItemModel> tvItemModelParentList = _TVItemService.GetParentsTVItemModelList(tvItemModelMunicipality.TVPath);
+
+            foreach (TVItemModel tvItemModel in tvItemModelParentList)
+            {
+                if (tvItemModel.TVType == TVTypeEnum.Province)
+                {
+                    tvItemModelProvince = tvItemModel;
+                    break;
+                }
+            }
+
+            if (tvItemModelProvince == null)
+            {
+                return string.Format(ServiceRes.CouldNotFindParent_WithChild_Equal_, ServiceRes.Province, ServiceRes.Municipality, tvItemModelMunicipality.TVPath);
+            }
+
+            List<TVItemModel> tvItemModelMunicipalityList = _TVItemService.GetChildrenTVItemModelListWithTVItemIDAndTVTypeDB(tvItemModelProvince.TVItemID, TVTypeEnum.Municipality);
+
+            string MunicipalityListText = "";
+            foreach (TVItemModel tvItemModel in tvItemModelMunicipalityList)
+            {
+                MunicipalityListText = MunicipalityListText + tvItemModel.TVText.Replace("\t", "_").Replace("|", "_").Replace("[", "_").Replace("]", "_") + "[" + tvItemModel.TVItemID + "]" + "|";
+            }
+
+            sb.AppendLine($"PROVINCETVITEMID\t{ tvItemModelProvince.TVItemID }");
+            sb.AppendLine($"PROVINCEMUNICIPALITIES\t{ MunicipalityListText }");
+
             sb.AppendLine($"MUNICIPALITY\t{tvItemModelMunicipality.TVItemID}\t{tvItemModelMunicipality.TVText}\t");
 
             List<TVItemModel> tvItemModelInfrastructureList = _TVItemService.GetChildrenTVItemModelListWithTVItemIDAndTVTypeDB(tvItemModelMunicipality.TVItemID, TVTypeEnum.Infrastructure);
@@ -1171,7 +1199,7 @@ namespace CSSPDBDLL.Services
             {
                 InfrastructureModel infrastructureModel = _InfrastructureService.GetInfrastructureModelWithInfrastructureTVItemIDDB(tvItemModelInfrastructure.TVItemID);
 
-                if (infrastructureModel == null || infrastructureModel.InfrastructureType == null || infrastructureModel.InfrastructureType == InfrastructureTypeEnum.Other || infrastructureModel.InfrastructureType == InfrastructureTypeEnum.SeeOtherMunicipality)
+                if (infrastructureModel == null || infrastructureModel.InfrastructureType == null)
                 {
                     continue;
                 }
@@ -1199,6 +1227,10 @@ namespace CSSPDBDLL.Services
                 else if (infrastructureModel.InfrastructureType == InfrastructureTypeEnum.Other)
                 {
                     tvTypeInfrastructure = TVTypeEnum.OtherInfrastructure;
+                }
+                else if (infrastructureModel.InfrastructureType == InfrastructureTypeEnum.SeeOtherMunicipality)
+                {
+                    tvTypeInfrastructure = TVTypeEnum.SeeOtherMunicipality;
                 }
                 else
                 {
@@ -1333,8 +1365,16 @@ namespace CSSPDBDLL.Services
                 sb.AppendLine($"RECEIVINGWATER_MPN_PER_100ML\t{RECEIVINGWATER_MPN_PER_100ML}\t");
                 string DISTANCEFROMSHORE_M = infrastructureModel.DistanceFromShore_m != null ? ((float)infrastructureModel.DistanceFromShore_m).ToString("F3") : "";
                 sb.AppendLine($"DISTANCEFROMSHORE_M\t{DISTANCEFROMSHORE_M}\t");
-                string SeeOtherMunicipalityTVITEMID = infrastructureModel.SeeOtherMunicipalityTVItemID != null ? ((int)infrastructureModel.SeeOtherMunicipalityTVItemID).ToString() : "";
-                sb.AppendLine($"SEEOTHERMUNICIPALITYTVITEMID\t{SeeOtherMunicipalityTVITEMID}\t");
+                string SeeOtherMunicipalityTVItemID = infrastructureModel.SeeOtherMunicipalityTVItemID != null ? ((int)infrastructureModel.SeeOtherMunicipalityTVItemID).ToString() : "";
+                string SeeOtherMunicipalityText = "";
+                foreach (TVItemModel tvItemModel in tvItemModelMunicipalityList)
+                {
+                    if (tvItemModel.TVItemID == infrastructureModel.SeeOtherMunicipalityTVItemID)
+                    {
+                        SeeOtherMunicipalityText = tvItemModel.TVText;
+                    }
+                }
+                sb.AppendLine($"SEEOTHERMUNICIPALITY\t{ SeeOtherMunicipalityTVItemID }\t{ SeeOtherMunicipalityText.Replace(",", "_").Replace("\t", "_").Replace("\r", "_").Replace("\n", "_") }\t");
 
                 List<TVItemLinkModel> tvItemLinkModelList = _TVItemLinkService.GetTVItemLinkModelListWithFromTVItemIDDB(tvItemModelInfrastructure.TVItemID);
                 foreach (TVItemLinkModel tvItemLinkModel in tvItemLinkModelList)
@@ -1350,21 +1390,21 @@ namespace CSSPDBDLL.Services
                     }
                 }
 
-                List<MapInfoPoint> mapInfoPointListPath = (from mi in _TVItemService.db.MapInfos
-                                                           from mip in _TVItemService.db.MapInfoPoints
-                                                           where mi.MapInfoID == mip.MapInfoID
-                                                           && mi.TVType == (int)tvTypeInfrastructure
-                                                           && mi.MapInfoDrawType == (int)MapInfoDrawTypeEnum.Polyline
-                                                           && mi.TVItemID == tvItemModelInfrastructure.TVItemID
-                                                           select mip).ToList();
+                //List<MapInfoPoint> mapInfoPointListPath = (from mi in _TVItemService.db.MapInfos
+                //                                           from mip in _TVItemService.db.MapInfoPoints
+                //                                           where mi.MapInfoID == mip.MapInfoID
+                //                                           && mi.TVType == (int)tvTypeInfrastructure
+                //                                           && mi.MapInfoDrawType == (int)MapInfoDrawTypeEnum.Polyline
+                //                                           && mi.TVItemID == tvItemModelInfrastructure.TVItemID
+                //                                           select mip).ToList();
 
-                string PATHCOORDLIST = "";
-                foreach (MapInfoPoint mip in mapInfoPointListPath.OrderBy(c => c.Ordinal))
-                {
-                    PATHCOORDLIST = PATHCOORDLIST + mip.Lat.ToString("F5") + "|" + mip.Lng.ToString("F5") + " ";
-                }
+                //string PATHCOORDLIST = "";
+                //foreach (MapInfoPoint mip in mapInfoPointListPath.OrderBy(c => c.Ordinal))
+                //{
+                //    PATHCOORDLIST = PATHCOORDLIST + mip.Lat.ToString("F5") + "|" + mip.Lng.ToString("F5") + " ";
+                //}
 
-                sb.AppendLine($"PATHCOORDLIST\t{PATHCOORDLIST}\t");
+                //sb.AppendLine($"PATHCOORDLIST\t{PATHCOORDLIST}\t");
 
 
                 if (infrastructureModel.CivicAddressTVItemID != null)

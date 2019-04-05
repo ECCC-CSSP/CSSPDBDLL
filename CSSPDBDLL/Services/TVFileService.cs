@@ -1262,15 +1262,18 @@ namespace CSSPDBDLL.Services
                 string IsActiveTxt = (tvItemModelInfrastructure.IsActive ? "true" : "false");
 
                 sb.AppendLine($"-----\t-------------------------------------------------\t");
+                sb.AppendLine($"INFRASTRUCTURE\t{tvItemModelInfrastructure.TVItemID}\t{infrastructureModel.LastUpdateDate_UTC.Year}|" +
+                    $"{infrastructureModel.LastUpdateDate_UTC.Month.ToString("0#")}|{infrastructureModel.LastUpdateDate_UTC.Day.ToString("0#")}|" + 
+                    $"{infrastructureModel.LastUpdateDate_UTC.Hour.ToString("0#")}|{infrastructureModel.LastUpdateDate_UTC.Minute.ToString("0#")}|" + 
+                    $"{infrastructureModel.LastUpdateDate_UTC.Second.ToString("0#")}\t{IsActiveTxt}\t");
+
                 string LatText = mapInfoPoint != null ? mapInfoPoint.Lat.ToString("F5") : "";
                 string LngText = mapInfoPoint != null ? mapInfoPoint.Lng.ToString("F5") : "";
+                sb.AppendLine($"LATLNG\t{LatText}\t{LngText}\t");
+
                 string LatOutfallText = mapInfoPointOutfall != null ? mapInfoPointOutfall.Lat.ToString("F5") : "";
                 string LngOutfallText = mapInfoPointOutfall != null ? mapInfoPointOutfall.Lng.ToString("F5") : "";
-                sb.AppendLine($"INFRASTRUCTURE\t{tvItemModelInfrastructure.TVItemID}\t{infrastructureModel.LastUpdateDate_UTC.Year}|" +
-                    $"{infrastructureModel.LastUpdateDate_UTC.Month.ToString("0#")}|" +
-                    $"{infrastructureModel.LastUpdateDate_UTC.Day.ToString("0#")}|{infrastructureModel.LastUpdateDate_UTC.Hour.ToString("0#")}|" +
-                    $"{infrastructureModel.LastUpdateDate_UTC.Minute.ToString("0#")}|{infrastructureModel.LastUpdateDate_UTC.Second.ToString("0#")}\t" +
-                    $"{LatText}\t{LngText}\t{LatOutfallText}\t{LngOutfallText}\t{IsActiveTxt}\t");
+                sb.AppendLine($"LATLNGOUTFALL\t{LatOutfallText}\t{LngOutfallText}\t");
 
                 while (tvItemModelInfrastructure.TVText.Contains("  "))
                 {
@@ -1278,21 +1281,27 @@ namespace CSSPDBDLL.Services
                 }
                 sb.AppendLine($"TVTEXT\t{tvItemModelInfrastructure.TVText.Replace(",", "_").Replace("\t", "_").Replace("\r", "_").Replace("\n", "_")}\t");
 
-                string Comment = string.IsNullOrWhiteSpace(infrastructureModel.Comment) ? "" : infrastructureModel.Comment.Replace("\r\n", "|||").Replace("\t", "_");
-                sb.AppendLine($"COMMENT\t{Comment}\t");
+                string CommentEN = "";
+                string CommentFR = "";
 
-                string PRISMID = infrastructureModel.PrismID != null ? infrastructureModel.PrismID.ToString() : "";
-                sb.AppendLine($"PRISMID\t{PRISMID}\t");
-                string TPID = infrastructureModel.TPID != null ? infrastructureModel.TPID.ToString() : "";
-                sb.AppendLine($"TPID\t{TPID}\t");
-                string LSID = infrastructureModel.LSID != null ? infrastructureModel.LSID.ToString() : "";
-                sb.AppendLine($"LSID\t{LSID}\t");
-                string SITEID = infrastructureModel.SiteID != null ? infrastructureModel.SiteID.ToString() : "";
-                sb.AppendLine($"SITEID\t{SITEID}\t");
-                string SITE = infrastructureModel.Site != null ? infrastructureModel.Site.ToString() : "";
-                sb.AppendLine($"SITE\t{SITE}\t");
-                string INFRASTRUCTURECATEGORY = infrastructureModel.InfrastructureCategory != null ? infrastructureModel.InfrastructureCategory.ToString() : "";
-                sb.AppendLine($"INFRASTRUCTURECATEGORY\t{INFRASTRUCTURECATEGORY}\t");
+                InfrastructureLanguageModel infrastructureLanguageModelEN = _InfrastructureService._InfrastructureLanguageService.GetInfrastructureLanguageModelWithInfrastructureIDAndLanguageDB(infrastructureModel.InfrastructureID, LanguageEnum.en);
+                if (!string.IsNullOrWhiteSpace(infrastructureLanguageModelEN.Error))
+                {
+                    return infrastructureLanguageModelEN.Error;
+                }
+
+                CommentEN = string.IsNullOrWhiteSpace(infrastructureLanguageModelEN.Comment) ? "" : infrastructureLanguageModelEN.Comment.Replace("\r\n", "|||").Replace("\t", "_");
+                sb.AppendLine($"COMMENTEN\t{CommentEN}\t");
+
+                InfrastructureLanguageModel infrastructureLanguageModelFR = _InfrastructureService._InfrastructureLanguageService.GetInfrastructureLanguageModelWithInfrastructureIDAndLanguageDB(infrastructureModel.InfrastructureID, LanguageEnum.fr);
+                if (!string.IsNullOrWhiteSpace(infrastructureLanguageModelFR.Error))
+                {
+                    return infrastructureLanguageModelFR.Error;
+                }
+
+                CommentFR = string.IsNullOrWhiteSpace(infrastructureLanguageModelFR.Comment) ? "" : infrastructureLanguageModelFR.Comment.Replace("\r\n", "|||").Replace("\t", "_");
+                sb.AppendLine($"COMMENTFR\t{CommentFR}\t");
+
                 string INFRASTRUCTURETYPE = infrastructureModel.InfrastructureType != null ? ((int)infrastructureModel.InfrastructureType).ToString() : "";
                 sb.AppendLine($"INFRASTRUCTURETYPE\t{INFRASTRUCTURETYPE}\t");
                 string FACILITYTYPE = infrastructureModel.FacilityType != null ? ((int)infrastructureModel.FacilityType).ToString() : "";
@@ -1313,8 +1322,6 @@ namespace CSSPDBDLL.Services
                 sb.AppendLine($"SECONDARYTREATMENTTYPE\t{SECONDARYTREATMENTTYPE}\t");
                 string TERTIARYTREATMENTTYPE = infrastructureModel.TertiaryTreatmentType != null ? ((int)infrastructureModel.TertiaryTreatmentType).ToString() : "";
                 sb.AppendLine($"TERTIARYTREATMENTTYPE\t{TERTIARYTREATMENTTYPE}\t");
-                string TREATMENTTYPE = infrastructureModel.TreatmentType != null ? ((int)infrastructureModel.TreatmentType).ToString() : "";
-                sb.AppendLine($"TREATMENTTYPE\t{TREATMENTTYPE}\t");
                 string DISINFECTIONTYPE = infrastructureModel.DisinfectionType != null ? ((int)infrastructureModel.DisinfectionType).ToString() : "";
                 sb.AppendLine($"DISINFECTIONTYPE\t{DISINFECTIONTYPE}\t");
                 string COLLECTIONSYSTEMTYPE = infrastructureModel.CollectionSystemType != null ? ((int)infrastructureModel.CollectionSystemType).ToString() : "";
@@ -1333,10 +1340,6 @@ namespace CSSPDBDLL.Services
                 sb.AppendLine($"CANOVERFLOW\t{CANOVERFLOW}\t");
                 string PERCFLOWOFTOTAL = infrastructureModel.PercFlowOfTotal != null ? ((float)infrastructureModel.PercFlowOfTotal).ToString("F3") : "";
                 sb.AppendLine($"PERCFLOWOFTOTAL\t{PERCFLOWOFTOTAL}\t");
-                string TIMEOFFSET_HOUR = infrastructureModel.TimeOffset_hour != null ? ((float)infrastructureModel.TimeOffset_hour).ToString("F3") : "";
-                sb.AppendLine($"TIMEOFFSET_HOUR\t{TIMEOFFSET_HOUR}\t");
-                string TempCatchAllRemoveLater = string.IsNullOrWhiteSpace(infrastructureModel.TempCatchAllRemoveLater) ? "" : infrastructureModel.TempCatchAllRemoveLater.Replace("\r\n", "|||").Replace("\t", "_");
-                sb.AppendLine($"TEMPCATCHALLREMOVELATER\t{TempCatchAllRemoveLater}\t");
                 string AVERAGEDEPTH_M = infrastructureModel.AverageDepth_m != null ? ((float)infrastructureModel.AverageDepth_m).ToString("F3") : "";
                 sb.AppendLine($"AVERAGEDEPTH_M\t{AVERAGEDEPTH_M}\t");
                 string NUMBEROFPORTS = infrastructureModel.NumberOfPorts != null ? ((int)infrastructureModel.NumberOfPorts).ToString() : "";

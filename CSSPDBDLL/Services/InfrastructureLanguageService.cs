@@ -107,6 +107,7 @@ namespace CSSPDBDLL.Services
                                                                        select new InfrastructureLanguageModel
                                                                        {
                                                                            Error = "",
+                                                                           InfrastructureLanguageID = c.InfrastructureLanguageID,
                                                                            InfrastructureID = c.InfrastructureID,
                                                                            Language = (LanguageEnum)c.Language,
                                                                            Comment = c.Comment,

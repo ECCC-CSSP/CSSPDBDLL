@@ -935,7 +935,31 @@ namespace CSSPDBDLL.Services
                     {
                         coordList.Add(new Coord() { Lat = (float)mapInfoPointModelListFrom[0].Lat + 0.0001f, Lng = (float)mapInfoPointModelListFrom[0].Lng + 0.0001f, Ordinal = 1 });
                     }
-                    MapInfoModel mapInfoModelRet = _MapInfoService.CreateMapInfoObjectDB(coordList, MapInfoDrawTypeEnum.Polyline, tvType, TVItemIDFrom);
+
+                    bool OneOfDifferentTypeExist = false;
+                    foreach (TVTypeEnum tvTypeItem in new List<TVTypeEnum>() { TVTypeEnum.WasteWaterTreatmentPlant, TVTypeEnum.LiftStation, TVTypeEnum.LineOverflow, TVTypeEnum.OtherInfrastructure, TVTypeEnum.SeeOtherMunicipality })
+                    {
+                        List<MapInfoPointModel> mapInfoPointModelListExist = _MapInfoService._MapInfoPointService.GetMapInfoPointModelListWithTVItemIDAndTVTypeAndMapInfoDrawTypeDB(TVItemIDFrom, tvTypeItem, MapInfoDrawTypeEnum.Polyline);
+                        if (mapInfoPointModelListExist.Count > 0)
+                        {
+                            MapInfoModel mapInfoModel = _MapInfoService.GetMapInfoModelWithMapInfoIDDB(mapInfoPointModelListExist[0].MapInfoID);
+                            mapInfoModel.TVType = tvType;
+                            MapInfoModel mapInfoModelRet = _MapInfoService.PostUpdateMapInfoDB(mapInfoModel);
+                            if (!string.IsNullOrWhiteSpace(mapInfoModelRet.Error))
+                            {
+                                return ReturnError(mapInfoModelRet.Error);
+                            }
+                            OneOfDifferentTypeExist = true;
+                            break;
+                        }
+                    }
+
+                    if (!OneOfDifferentTypeExist)
+                    {
+                        MapInfoModel mapInfoModelRet = _MapInfoService.CreateMapInfoObjectDB(coordList, MapInfoDrawTypeEnum.Polyline, tvType, TVItemIDFrom);
+                        if (!string.IsNullOrWhiteSpace(mapInfoModelRet.Error))
+                            return ReturnError(mapInfoModelRet.Error);
+                    }
                 }
                 else
                 {
@@ -1053,7 +1077,31 @@ namespace CSSPDBDLL.Services
                         coordList = new List<Coord>();
                         coordList.Add(new Coord() { Lat = (float)mapInfoPointModelListFrom[0].Lat, Lng = (float)mapInfoPointModelListFrom[0].Lng, Ordinal = 0 });
                         coordList.Add(new Coord() { Lat = (float)mapInfoPointModelListTo[0].Lat, Lng = (float)mapInfoPointModelListTo[0].Lng, Ordinal = 1 });
-                        MapInfoModel mapInfoModelRet = _MapInfoService.CreateMapInfoObjectDB(coordList, MapInfoDrawTypeEnum.Polyline, tvType, TVItemIDFrom);
+
+                        bool OneOfDifferentTypeExist = false;
+                        foreach (TVTypeEnum tvTypeItem in new List<TVTypeEnum>() { TVTypeEnum.WasteWaterTreatmentPlant, TVTypeEnum.LiftStation, TVTypeEnum.LineOverflow, TVTypeEnum.OtherInfrastructure, TVTypeEnum.SeeOtherMunicipality })
+                        {
+                            List<MapInfoPointModel> mapInfoPointModelListExist = _MapInfoService._MapInfoPointService.GetMapInfoPointModelListWithTVItemIDAndTVTypeAndMapInfoDrawTypeDB(TVItemIDFrom, tvTypeItem, MapInfoDrawTypeEnum.Polyline);
+                            if (mapInfoPointModelListExist.Count > 0)
+                            {
+                                MapInfoModel mapInfoModel = _MapInfoService.GetMapInfoModelWithMapInfoIDDB(mapInfoPointModelListExist[0].MapInfoID);
+                                mapInfoModel.TVType = tvType;
+                                MapInfoModel mapInfoModelRet = _MapInfoService.PostUpdateMapInfoDB(mapInfoModel);
+                                if (!string.IsNullOrWhiteSpace(mapInfoModelRet.Error))
+                                {
+                                    return ReturnError(mapInfoModelRet.Error);
+                                }
+                                OneOfDifferentTypeExist = true;
+                                break;
+                            }
+                        }
+
+                        if (!OneOfDifferentTypeExist)
+                        {
+                            MapInfoModel mapInfoModelRet = _MapInfoService.CreateMapInfoObjectDB(coordList, MapInfoDrawTypeEnum.Polyline, tvType, TVItemIDFrom);
+                            if (!string.IsNullOrWhiteSpace(mapInfoModelRet.Error))
+                                return ReturnError(mapInfoModelRet.Error);
+                        }
                     }
                     else
                     {
@@ -1079,9 +1127,31 @@ namespace CSSPDBDLL.Services
             {
                 coordList = new List<Coord>();
                 coordList.Add(new Coord() { Lat = Lat, Lng = Lng, Ordinal = 0 });
-                MapInfoModel mapInfoModelRet = _MapInfoService.CreateMapInfoObjectDB(coordList, MapInfoDrawTypeEnum.Point, tvType, infrastructureModelRet.InfrastructureTVItemID);
-                if (!string.IsNullOrWhiteSpace(mapInfoModelRet.Error))
-                    return ReturnError(mapInfoModelRet.Error);
+
+                bool OneOfDifferentTypeExist = false;
+                foreach(TVTypeEnum tvTypeItem in new List<TVTypeEnum>() { TVTypeEnum.WasteWaterTreatmentPlant, TVTypeEnum.LiftStation, TVTypeEnum.LineOverflow, TVTypeEnum.OtherInfrastructure, TVTypeEnum.SeeOtherMunicipality })
+                {
+                    List<MapInfoPointModel> mapInfoPointModelListExist = _MapInfoService._MapInfoPointService.GetMapInfoPointModelListWithTVItemIDAndTVTypeAndMapInfoDrawTypeDB(infrastructureModelRet.InfrastructureTVItemID, tvTypeItem, MapInfoDrawTypeEnum.Point);
+                    if (mapInfoPointModelListExist.Count > 0)
+                    {
+                        MapInfoModel mapInfoModel = _MapInfoService.GetMapInfoModelWithMapInfoIDDB(mapInfoPointModelListExist[0].MapInfoID);
+                        mapInfoModel.TVType = tvType;
+                        MapInfoModel mapInfoModelRet = _MapInfoService.PostUpdateMapInfoDB(mapInfoModel);
+                        if (!string.IsNullOrWhiteSpace(mapInfoModelRet.Error))
+                        {
+                            return ReturnError(mapInfoModelRet.Error);
+                        }
+                        OneOfDifferentTypeExist = true;
+                        break;
+                    }
+                }
+
+                if (!OneOfDifferentTypeExist)
+                {
+                    MapInfoModel mapInfoModelRet = _MapInfoService.CreateMapInfoObjectDB(coordList, MapInfoDrawTypeEnum.Point, tvType, infrastructureModelRet.InfrastructureTVItemID);
+                    if (!string.IsNullOrWhiteSpace(mapInfoModelRet.Error))
+                        return ReturnError(mapInfoModelRet.Error);
+                }
             }
             else
             {
@@ -1128,6 +1198,7 @@ namespace CSSPDBDLL.Services
                     coordList = new List<Coord>();
                     coordList.Add(new Coord() { Lat = Lat, Lng = Lng, Ordinal = 0 });
                     coordList.Add(new Coord() { Lat = (float)LatOutfall, Lng = (float)LngOutfall, Ordinal = 0 });
+
                     MapInfoModel mapInfoModelRet = _MapInfoService.CreateMapInfoObjectDB(coordList, MapInfoDrawTypeEnum.Polyline, TVTypeEnum.Outfall, infrastructureModelRet.InfrastructureTVItemID);
                     if (!string.IsNullOrWhiteSpace(mapInfoModelRet.Error))
                         return ReturnError(mapInfoModelRet.Error);

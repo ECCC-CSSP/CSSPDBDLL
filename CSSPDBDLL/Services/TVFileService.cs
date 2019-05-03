@@ -1257,7 +1257,7 @@ namespace CSSPDBDLL.Services
                                           select new { mi, mip }).ToList();
 
                 mapInfoOutfall = mapInfoListOutfall.Where(c => c.mi.TVItemID == tvItemModelInfrastructure.TVItemID).Select(c => c.mi).FirstOrDefault();
-                mapInfoPointOutfall = mapInfoListOutfall.Where(c => c.mip.MapInfoID == mapInfo.MapInfoID).Select(c => c.mip).FirstOrDefault();
+                mapInfoPointOutfall = mapInfoListOutfall.Where(c => c.mip.MapInfoID == mapInfoOutfall.MapInfoID).Select(c => c.mip).FirstOrDefault();
 
                 string IsActiveTxt = (tvItemModelInfrastructure.IsActive ? "true" : "false");
 

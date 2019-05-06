@@ -1290,7 +1290,7 @@ namespace CSSPDBDLL.Services
                     return infrastructureLanguageModelEN.Error;
                 }
 
-                CommentEN = string.IsNullOrWhiteSpace(infrastructureLanguageModelEN.Comment) ? "" : infrastructureLanguageModelEN.Comment.Replace("\r\n", "|||").Replace("\t", "_");
+                CommentEN = string.IsNullOrWhiteSpace(infrastructureLanguageModelEN.Comment) ? "" : infrastructureLanguageModelEN.Comment.Replace("\r\n", "|||").Replace("\n", "|||").Replace("\r", "|||").Replace("\t", "_");
                 sb.AppendLine($"COMMENTEN\t{CommentEN}\t");
 
                 InfrastructureLanguageModel infrastructureLanguageModelFR = _InfrastructureService._InfrastructureLanguageService.GetInfrastructureLanguageModelWithInfrastructureIDAndLanguageDB(infrastructureModel.InfrastructureID, LanguageEnum.fr);
@@ -1299,7 +1299,7 @@ namespace CSSPDBDLL.Services
                     return infrastructureLanguageModelFR.Error;
                 }
 
-                CommentFR = string.IsNullOrWhiteSpace(infrastructureLanguageModelFR.Comment) ? "" : infrastructureLanguageModelFR.Comment.Replace("\r\n", "|||").Replace("\t", "_");
+                CommentFR = string.IsNullOrWhiteSpace(infrastructureLanguageModelFR.Comment) ? "" : infrastructureLanguageModelFR.Comment.Replace("\r\n", "|||").Replace("\n", "|||").Replace("\r", "|||").Replace("\t", "_");
                 sb.AppendLine($"COMMENTFR\t{CommentFR}\t");
 
                 string INFRASTRUCTURETYPE = infrastructureModel.InfrastructureType != null ? ((int)infrastructureModel.InfrastructureType).ToString() : "";
@@ -1668,7 +1668,7 @@ namespace CSSPDBDLL.Services
                     }
                     else
                     {
-                        sb.AppendLine($"EXTRACOMMENT\t{polSourceObservationIssueModel.ExtraComment.Replace("\r\n", "|||").Replace("\t", "     ")}\t");
+                        sb.AppendLine($"EXTRACOMMENT\t{polSourceObservationIssueModel.ExtraComment.Replace("\r\n", "|||").Replace("\n", "|||").Replace("\r", "|||").Replace("\t", "     ")}\t");
                     }
                 }
             }

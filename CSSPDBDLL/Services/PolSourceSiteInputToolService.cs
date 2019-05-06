@@ -345,6 +345,37 @@ namespace CSSPDBDLL.Services
                     infrastructureModelRet.ReceivingWater_MPN_per_100ml = ReceivingWater_MPN_per_100ml;
                     infrastructureModelRet.DistanceFromShore_m = DistanceFromShore_m;
                 }
+                else if (InfrastructureType == InfrastructureTypeEnum.LiftStation || InfrastructureType == InfrastructureTypeEnum.LineOverflow)
+                {
+                    infrastructureModelRet.FacilityType = null;
+                    infrastructureModelRet.PreliminaryTreatmentType = null;
+                    infrastructureModelRet.PrimaryTreatmentType = null;
+                    infrastructureModelRet.SecondaryTreatmentType = null;
+                    infrastructureModelRet.TertiaryTreatmentType = null;
+                    infrastructureModelRet.DisinfectionType = null;
+                    infrastructureModelRet.CollectionSystemType = null;
+                    infrastructureModelRet.NumberOfAeratedCells = null;
+                    infrastructureModelRet.IsMechanicallyAerated = null;
+                    infrastructureModelRet.AerationType = null;
+                    infrastructureModelRet.DesignFlow_m3_day = null;
+                    infrastructureModelRet.AverageFlow_m3_day = null;
+                    infrastructureModelRet.PeakFlow_m3_day = null;
+                    infrastructureModelRet.PopServed = null;
+                    infrastructureModelRet.AverageDepth_m = AverageDepth_m;
+                    infrastructureModelRet.NumberOfPorts = NumberOfPorts;
+                    infrastructureModelRet.PortDiameter_m = PortDiameter_m;
+                    infrastructureModelRet.PortSpacing_m = PortSpacing_m;
+                    infrastructureModelRet.PortElevation_m = PortElevation_m;
+                    infrastructureModelRet.VerticalAngle_deg = VerticalAngle_deg;
+                    infrastructureModelRet.HorizontalAngle_deg = HorizontalAngle_deg;
+                    infrastructureModelRet.DecayRate_per_day = DecayRate_per_day;
+                    infrastructureModelRet.NearFieldVelocity_m_s = NearFieldVelocity_m_s;
+                    infrastructureModelRet.FarFieldVelocity_m_s = FarFieldVelocity_m_s;
+                    infrastructureModelRet.ReceivingWaterSalinity_PSU = ReceivingWaterSalinity_PSU;
+                    infrastructureModelRet.ReceivingWaterTemperature_C = ReceivingWaterTemperature_C;
+                    infrastructureModelRet.ReceivingWater_MPN_per_100ml = ReceivingWater_MPN_per_100ml;
+                    infrastructureModelRet.DistanceFromShore_m = DistanceFromShore_m;
+                }
                 else
                 {
                     infrastructureModelRet.FacilityType = null;

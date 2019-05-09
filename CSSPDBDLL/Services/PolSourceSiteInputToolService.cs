@@ -41,7 +41,7 @@ namespace CSSPDBDLL.Services
         #endregion Helper
 
         #region Functions public
-        public TVItemModel CreateOrModifyInfrastructureDB(int MunicipalityTVItemID, int TVItemID, string TVText,
+        public TVItemModel CreateOrModifyInfrastructureDB(int MunicipalityTVItemID, int TVItemID, string TVText, bool IsActive,
             float? Lat, float? Lng, float? LatOutfall, float? LngOutfall, string CommentEN, string CommentFR, InfrastructureTypeEnum? InfrastructureType,
             FacilityTypeEnum? FacilityType, bool? IsMechanicallyAerated, int? NumberOfCells, int? NumberOfAeratedCells, AerationTypeEnum? AerationType,
             PreliminaryTreatmentTypeEnum? PreliminaryTreatmentType, PrimaryTreatmentTypeEnum? PrimaryTreatmentType,
@@ -127,7 +127,6 @@ namespace CSSPDBDLL.Services
                 return ReturnError($"ERROR: {string.Format(ServiceRes._IsRequired, ServiceRes.TVText)}");
             }
 
-
             InfrastructureModel infrastructureModelRet = infrastructureService.GetInfrastructureModelWithInfrastructureTVItemIDDB(TVItemID);
             if (TVItemID >= 10000000 || !string.IsNullOrWhiteSpace(infrastructureModelRet.Error))
             {
@@ -180,7 +179,7 @@ namespace CSSPDBDLL.Services
                 List<Coord> coordList = new List<Coord>()
                 {
                     new Coord() { Lat = Lat == null ? 0.0f : (float)Lat, Lng = Lng == null ? 0.0f : (float)Lng, Ordinal = 0 },
-                };            
+                };
 
                 List<MapInfoModel> mapInfoModelList = mapInfoService.GetMapInfoModelListWithTVItemIDDB(infrastructureModelRet.InfrastructureTVItemID);
                 foreach (MapInfoModel mapInfoModel in mapInfoModelList)
@@ -220,16 +219,13 @@ namespace CSSPDBDLL.Services
                     return ReturnError($"ERROR: {tvItemModelInfrastructure.Error}");
                 }
 
-                if (tvItemModelInfrastructure.TVText != TVText)
+                tvItemModelInfrastructure.TVText = TVText;
+                tvItemModelInfrastructure.IsActive = IsActive;
+
+                TVItemModel tvItemModelInfrastructureRet = tvItemService.PostUpdateTVItemDB(tvItemModelInfrastructure);
+                if (!string.IsNullOrWhiteSpace(tvItemModelInfrastructureRet.Error))
                 {
-                    tvItemModelInfrastructure.TVText = TVText;
-
-                    TVItemModel tvItemModelInfrastructureRet = tvItemService.PostUpdateTVItemDB(tvItemModelInfrastructure);
-                    if (!string.IsNullOrWhiteSpace(tvItemModelInfrastructureRet.Error))
-                    {
-                        return ReturnError($"ERROR: {tvItemModelInfrastructureRet.Error}");
-                    }
-
+                    return ReturnError($"ERROR: {tvItemModelInfrastructureRet.Error}");
                 }
 
                 List<MapInfoModel> mapInfoModelList = mapInfoService.GetMapInfoModelListWithTVItemIDDB(infrastructureModelRet.InfrastructureTVItemID);
@@ -1195,18 +1191,42 @@ namespace CSSPDBDLL.Services
             return ReturnError($"");
 
         }
-        public TVItemModel SavePSSTVTextAndIsActiveDB(int TVItemID, string TVText, bool IsActive, string AdminEmail)
+        public TVItemModel SavePSSTVTextAndIsActiveDB(int TVItemID, string TVText, bool IsActive, bool IsPointSource, string AdminEmail)
         {
             IPrincipal user = new GenericPrincipal(new GenericIdentity(AdminEmail, "Forms"), null);
 
             ContactService contactService = new ContactService(LanguageRequest, user);
             TVItemService tvItemService = new TVItemService(LanguageRequest, user);
             TVItemLanguageService tvItemLanguageService = new TVItemLanguageService(LanguageRequest, user);
+            PolSourceSiteService polSourceSiteService = new PolSourceSiteService(LanguageRequest, user);
 
             ContactModel contactModel = contactService.GetContactModelWithLoginEmailDB(AdminEmail);
             if (!string.IsNullOrWhiteSpace(contactModel.Error))
             {
                 return ReturnError($"ERROR: {string.Format(ServiceRes.NoUserWithEmail_, AdminEmail)}");
+            }
+
+            TVItemModel tvItemModel = tvItemService.GetTVItemModelWithTVItemIDDB(TVItemID);
+            if (!string.IsNullOrWhiteSpace(tvItemModel.Error))
+            {
+                return ReturnError(tvItemModel.Error);
+            }
+
+            tvItemModel.IsActive = IsActive;
+
+            TVItemModel tvItemModelRet = tvItemService.PostUpdateTVItemDB(tvItemModel);
+            if (!string.IsNullOrWhiteSpace(tvItemModelRet.Error))
+            {
+                return ReturnError(tvItemModelRet.Error);
+            }
+
+            PolSourceSiteModel polSourceSiteModel = polSourceSiteService.GetPolSourceSiteModelWithPolSourceSiteTVItemIDDB(TVItemID);
+            polSourceSiteModel.IsPointSource = IsPointSource;
+
+            PolSourceSiteModel polSourceSiteModelRet = polSourceSiteService.PostUpdatePolSourceSiteDB(polSourceSiteModel);
+            if (!string.IsNullOrWhiteSpace(polSourceSiteModelRet.Error))
+            {
+                return ReturnError(polSourceSiteModelRet.Error);
             }
 
             MapInfoService mapInfoService = new MapInfoService(LanguageRequest, user);
@@ -1236,19 +1256,6 @@ namespace CSSPDBDLL.Services
                     return ReturnError(tvItemLanguageModelRet.Error);
                 }
 
-                TVItemModel tvItemModel = tvItemService.GetTVItemModelWithTVItemIDDB(TVItemID);
-                if (!string.IsNullOrWhiteSpace(tvItemModel.Error))
-                {
-                    return ReturnError(tvItemModel.Error);
-                }
-
-                tvItemModel.IsActive = IsActive;
-
-                TVItemModel tvItemModelRet = tvItemService.PostUpdateTVItemDB(tvItemModel);
-                if (!string.IsNullOrWhiteSpace(tvItemModelRet.Error))
-                {
-                    return ReturnError(tvItemModelRet.Error);
-                }
 
             }
 

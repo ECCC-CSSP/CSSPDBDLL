@@ -829,9 +829,8 @@ namespace CSSPDBDLL.Services
                 return ReturnError($"ERROR: {tvItemModelRoot.Error}");
             }
 
-            AddressModel addressModelRet = new AddressModel();
-            AddressModel addressModelRet2 = addressService.GetAddressModelExistDB(addressModelNew);
-            if (!string.IsNullOrWhiteSpace(addressModelRet2.Error))
+            AddressModel addressModelRet = addressService.GetAddressModelExistDB(addressModelNew);
+            if (!string.IsNullOrWhiteSpace(addressModelRet.Error))
             {
                 TVItemModel tvItemModelAddress = tvItemService.PostAddChildTVItemDB(tvItemModelRoot.TVItemID, TVTextAddress, TVTypeEnum.Address);
                 if (!string.IsNullOrWhiteSpace(tvItemModelAddress.Error))

@@ -651,6 +651,7 @@ namespace CSSPDBDLL.Services
             polSourceObservationModelNew.PolSourceSiteTVItemID = PSSTVItemID;
             polSourceObservationModelNew.PolSourceSiteID = polSourceSiteModel.PolSourceSiteID;
             polSourceObservationModelNew.ContactTVItemID = contactModel.ContactTVItemID;
+            polSourceObservationModelNew.DesktopReviewed = false;
             polSourceObservationModelNew.ObservationDate_Local = NewObsDate;
             polSourceObservationModelNew.Observation_ToBeDeleted = "-";
 

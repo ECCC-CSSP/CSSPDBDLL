@@ -499,6 +499,60 @@ namespace CSSPDBDLL.Services
 
             return mikeScenarioModel;
         }
+        public List<MikeScenarioModel> GetMikeScenarioModelListWithParentTVItemIDDB(int ParentTVItemID)
+        {
+            TVItemModel tvItemModelParent = _TVItemService.GetTVItemModelWithTVItemIDDB(ParentTVItemID);
+            if (!string.IsNullOrWhiteSpace(tvItemModelParent.Error))
+            {
+                return new List<MikeScenarioModel>() { new MikeScenarioModel() { Error = tvItemModelParent.Error } };
+            }
+
+            List<MikeScenarioModel> mikeScenarioModelList = (from c in db.MikeScenarios
+                                                             from t in db.TVItems
+                                                             let scenarioName = (from bl in db.TVItemLanguages where bl.Language == (int)LanguageRequest && bl.TVItemID == c.MikeScenarioTVItemID select bl.TVText).FirstOrDefault<string>()
+                                                             where c.MikeScenarioTVItemID == t.TVItemID
+                                                             && t.TVPath.StartsWith(tvItemModelParent.TVPath + "p")
+                                                             && t.TVType == (int)TVTypeEnum.MikeScenario
+                                                             select new MikeScenarioModel
+                                                             {
+                                                                 Error = "",
+                                                                 MikeScenarioID = c.MikeScenarioID,
+                                                                 AmbientSalinity_PSU = c.AmbientSalinity_PSU,
+                                                                 AmbientTemperature_C = c.AmbientTemperature_C,
+                                                                 DecayFactor_per_day = c.DecayFactor_per_day,
+                                                                 DecayFactorAmplitude = c.DecayFactorAmplitude,
+                                                                 DecayIsConstant = c.DecayIsConstant,
+                                                                 ErrorInfo = c.ErrorInfo,
+                                                                 EstimatedHydroFileSize = c.EstimatedHydroFileSize,
+                                                                 EstimatedTransFileSize = c.EstimatedTransFileSize,
+                                                                 ForSimulatingMWQMRunTVItemID = c.ForSimulatingMWQMRunTVItemID,
+                                                                 GenerateDecouplingFiles = c.GenerateDecouplingFiles,
+                                                                 ManningNumber = c.ManningNumber,
+                                                                 MikeScenarioEndDateTime_Local = c.MikeScenarioEndDateTime_Local,
+                                                                 MikeScenarioExecutionTime_min = c.MikeScenarioExecutionTime_min,
+                                                                 MikeScenarioStartDateTime_Local = c.MikeScenarioStartDateTime_Local,
+                                                                 MikeScenarioStartExecutionDateTime_Local = c.MikeScenarioStartExecutionDateTime_Local,
+                                                                 MikeScenarioTVItemID = c.MikeScenarioTVItemID,
+                                                                 MikeScenarioTVText = scenarioName,
+                                                                 NumberOfElements = c.NumberOfElements,
+                                                                 NumberOfHydroOutputParameters = c.NumberOfHydroOutputParameters,
+                                                                 NumberOfSigmaLayers = c.NumberOfSigmaLayers,
+                                                                 NumberOfTimeSteps = c.NumberOfTimeSteps,
+                                                                 NumberOfTransOutputParameters = c.NumberOfTransOutputParameters,
+                                                                 NumberOfZLayers = c.NumberOfZLayers,
+                                                                 ResultFrequency_min = c.ResultFrequency_min,
+                                                                 ParentMikeScenarioID = c.ParentMikeScenarioID,
+                                                                 ScenarioStatus = (ScenarioStatusEnum)c.ScenarioStatus,
+                                                                 UseDecouplingFiles = c.UseDecouplingFiles,
+                                                                 UseSalinityAndTemperatureInitialConditionFromTVFileTVItemID = c.UseSalinityAndTemperatureInitialConditionFromTVFileTVItemID,
+                                                                 WindDirection_deg = c.WindDirection_deg,
+                                                                 WindSpeed_km_h = c.WindSpeed_km_h,
+                                                                 LastUpdateDate_UTC = c.LastUpdateDate_UTC,
+                                                                 LastUpdateContactTVItemID = c.LastUpdateContactTVItemID,
+                                                             }).ToList<MikeScenarioModel>();
+
+            return mikeScenarioModelList;
+        }
         public MikeScenario GetMikeScenarioWithMikeScenarioIDDB(int MikeScenarioID)
         {
             MikeScenario mikeScenario = (from c in db.MikeScenarios

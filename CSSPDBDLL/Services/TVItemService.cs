@@ -1791,6 +1791,7 @@ namespace CSSPDBDLL.Services
                 }
 
                 tvItemMoreInfoPolSourceSiteModel.ObsDateTime_Local = polSourceObservation.ObservationDate_Local;
+                tvItemMoreInfoPolSourceSiteModel.DesktopReviewed = polSourceObservation.DesktopReviewed;
             }
 
             return tvItemMoreInfoPolSourceSiteModel;

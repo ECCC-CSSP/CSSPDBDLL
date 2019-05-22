@@ -91,6 +91,7 @@ namespace CSSPDBDLL.Services
             polSourceObservation.ObservationDate_Local = polSourceObservationModel.ObservationDate_Local;
             polSourceObservation.Observation_ToBeDeleted = polSourceObservationModel.Observation_ToBeDeleted;
             polSourceObservation.ContactTVItemID = polSourceObservationModel.ContactTVItemID;
+            polSourceObservation.DesktopReviewed = polSourceObservationModel.DesktopReviewed;
             polSourceObservation.LastUpdateDate_UTC = DateTime.UtcNow;
             if (contactOK == null)
             {
@@ -130,6 +131,7 @@ namespace CSSPDBDLL.Services
                                                                                  PolSourceSiteTVText = "",
                                                                                  ObservationDate_Local = pso.ObservationDate_Local,
                                                                                  ContactTVItemID = pso.ContactTVItemID,
+                                                                                 DesktopReviewed = pso.DesktopReviewed,
                                                                                  ContactTVText = "",
                                                                                  Observation_ToBeDeleted = pso.Observation_ToBeDeleted,
                                                                                  LastUpdateDate_UTC = pso.LastUpdateDate_UTC,
@@ -155,6 +157,7 @@ namespace CSSPDBDLL.Services
                                                                                  PolSourceSiteTVText = tvText,
                                                                                  ObservationDate_Local = c.ObservationDate_Local,
                                                                                  ContactTVItemID = c.ContactTVItemID,
+                                                                                 DesktopReviewed = c.DesktopReviewed,
                                                                                  ContactTVText = contactTVText,
                                                                                  Observation_ToBeDeleted = c.Observation_ToBeDeleted,
                                                                                  LastUpdateDate_UTC = c.LastUpdateDate_UTC,
@@ -180,6 +183,7 @@ namespace CSSPDBDLL.Services
                                                                        PolSourceSiteTVText = tvText,
                                                                        ObservationDate_Local = c.ObservationDate_Local,
                                                                        ContactTVItemID = c.ContactTVItemID,
+                                                                       DesktopReviewed = c.DesktopReviewed,
                                                                        ContactTVText = contactTVText,
                                                                        Observation_ToBeDeleted = c.Observation_ToBeDeleted,
                                                                        LastUpdateDate_UTC = c.LastUpdateDate_UTC,
@@ -207,6 +211,7 @@ namespace CSSPDBDLL.Services
                                                                        PolSourceSiteTVText = tvText,
                                                                        ObservationDate_Local = c.ObservationDate_Local,
                                                                        ContactTVItemID = c.ContactTVItemID,
+                                                                       DesktopReviewed = c.DesktopReviewed,
                                                                        ContactTVText = contactTVText,
                                                                        Observation_ToBeDeleted = c.Observation_ToBeDeleted,
                                                                        LastUpdateDate_UTC = c.LastUpdateDate_UTC,
@@ -234,6 +239,7 @@ namespace CSSPDBDLL.Services
                                                                             PolSourceSiteTVText = tvText,
                                                                             ObservationDate_Local = c.ObservationDate_Local,
                                                                             ContactTVItemID = c.ContactTVItemID,
+                                                                            DesktopReviewed = c.DesktopReviewed,
                                                                             ContactTVText = contactTVText,
                                                                             Observation_ToBeDeleted = c.Observation_ToBeDeleted,
                                                                             LastUpdateDate_UTC = c.LastUpdateDate_UTC,
@@ -261,6 +267,7 @@ namespace CSSPDBDLL.Services
                                                                                  PolSourceSiteTVText = tvText,
                                                                                  ObservationDate_Local = c.ObservationDate_Local,
                                                                                  ContactTVItemID = c.ContactTVItemID,
+                                                                                 DesktopReviewed = c.DesktopReviewed,
                                                                                  ContactTVText = contactTVText,
                                                                                  Observation_ToBeDeleted = c.Observation_ToBeDeleted,
                                                                                  LastUpdateDate_UTC = c.LastUpdateDate_UTC,
@@ -294,6 +301,7 @@ namespace CSSPDBDLL.Services
                                                                           PolSourceSiteTVText = tvText,
                                                                           ObservationDate_Local = c.ObservationDate_Local,
                                                                           ContactTVItemID = c.ContactTVItemID,
+                                                                          DesktopReviewed = c.DesktopReviewed,
                                                                           ContactTVText = contactTVText,
                                                                           Observation_ToBeDeleted = c.Observation_ToBeDeleted,
                                                                           LastUpdateDate_UTC = c.LastUpdateDate_UTC,
@@ -340,6 +348,8 @@ namespace CSSPDBDLL.Services
             int Year = 0;
             int Month = 0;
             int Day = 0;
+            bool DesktopReviewed = false;
+
             DateTime ObsDate = new DateTime(1900, 1, 1);
 
             ContactOK contactOK = IsContactOK();
@@ -394,6 +404,11 @@ namespace CSSPDBDLL.Services
 
             ObsDate = new DateTime(Year, Month, Day);
 
+            if (fc["DesktopReviewed"] != null)
+            {
+                DesktopReviewed = true;
+            }
+
             //PolSourceObservationModel polSourceObservationModelRet = new PolSourceObservationModel();
             using (TransactionScope ts = new TransactionScope())
             {
@@ -402,6 +417,7 @@ namespace CSSPDBDLL.Services
                     PolSourceSiteID = PolSourceSiteID,
                     ObservationDate_Local = ObsDate,
                     ContactTVItemID = contactOK.ContactTVItemID,
+                    DesktopReviewed = DesktopReviewed,
                     Observation_ToBeDeleted = "",
                 };
 

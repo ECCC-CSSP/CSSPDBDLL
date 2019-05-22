@@ -24,6 +24,7 @@ namespace CSSPDBDLL
         public int PolSourceSiteID { get; set; }
         public System.DateTime ObservationDate_Local { get; set; }
         public int ContactTVItemID { get; set; }
+        public bool DesktopReviewed { get; set; }
         public string Observation_ToBeDeleted { get; set; }
         public System.DateTime LastUpdateDate_UTC { get; set; }
         public int LastUpdateContactTVItemID { get; set; }

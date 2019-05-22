@@ -981,6 +981,7 @@
           <Property Name="PolSourceSiteID" Type="int" Nullable="false" />
           <Property Name="ObservationDate_Local" Type="datetime" Nullable="false" />
           <Property Name="ContactTVItemID" Type="int" Nullable="false" />
+          <Property Name="DesktopReviewed" Type="bit" Nullable="false" />
           <Property Name="Observation_ToBeDeleted" Type="text" Nullable="false" />
           <Property Name="LastUpdateDate_UTC" Type="datetime" Nullable="false" />
           <Property Name="LastUpdateContactTVItemID" Type="int" Nullable="false" />
@@ -5020,6 +5021,7 @@
           <Property Name="PolSourceSiteID" Type="Int32" Nullable="false" />
           <Property Name="ObservationDate_Local" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="ContactTVItemID" Type="Int32" Nullable="false" />
+          <Property Name="DesktopReviewed" Type="Boolean" Nullable="false" />
           <Property Name="Observation_ToBeDeleted" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="LastUpdateDate_UTC" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="LastUpdateContactTVItemID" Type="Int32" Nullable="false" />
@@ -8053,6 +8055,7 @@
                 <ScalarProperty Name="LastUpdateContactTVItemID" ColumnName="LastUpdateContactTVItemID" />
                 <ScalarProperty Name="LastUpdateDate_UTC" ColumnName="LastUpdateDate_UTC" />
                 <ScalarProperty Name="Observation_ToBeDeleted" ColumnName="Observation_ToBeDeleted" />
+                <ScalarProperty Name="DesktopReviewed" ColumnName="DesktopReviewed" />
                 <ScalarProperty Name="ContactTVItemID" ColumnName="ContactTVItemID" />
                 <ScalarProperty Name="ObservationDate_Local" ColumnName="ObservationDate_Local" />
                 <ScalarProperty Name="PolSourceSiteID" ColumnName="PolSourceSiteID" />

@@ -1434,6 +1434,7 @@ namespace CSSPDBDLL.Services
                         if (fiExt.Extension.ToLower() == ".jpg")
                         {
                             sb.AppendLine($"PICTURE\t{tvItemModelPicture.TVItemID}\t{tvFileModel.ServerFileName.Replace("\r", "_").Replace("\n", "_").Replace("\t", "_")}\t{fiExt.Extension}\t{tvFileModel.FileDescription.Replace("\r", "_").Replace("\n", "_").Replace("\t", "_")}\t");
+                            sb.AppendLine($"FROMWATER\t{tvFileModel.FromWater}\t");
                         }
                     }
                 }
@@ -1570,6 +1571,7 @@ namespace CSSPDBDLL.Services
                         if (fiExt.Extension.ToLower() == ".jpg")
                         {
                             sb.AppendLine($"PICTURE\t{tvItemModelPicture.TVItemID}\t{tvFileModel.ServerFileName.Replace("\r", "_").Replace("\n", "_").Replace("\t", "_")}\t{fiExt.Extension}\t{tvFileModel.FileDescription.Replace("\r", "_").Replace("\n", "_").Replace("\t", "_")}\t");
+                            sb.AppendLine($"FROMWATER\t{tvFileModel.FromWater}\t");
                         }
                     }
                 }

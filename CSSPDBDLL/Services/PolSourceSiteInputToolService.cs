@@ -941,7 +941,7 @@ namespace CSSPDBDLL.Services
 
             return ReturnError("");
         }
-        public TVItemModel SavePictureInfoDB(int TVItemID, int PictureTVItemID, string FileName, string Description, string Extension, string AdminEmail)
+        public TVItemModel SavePictureInfoDB(int TVItemID, int PictureTVItemID, string FileName, string Description, string Extension, bool FromWater, string AdminEmail)
         {
             IPrincipal user = new GenericPrincipal(new GenericIdentity(AdminEmail, "Forms"), null);
 
@@ -995,6 +995,7 @@ namespace CSSPDBDLL.Services
 
             tvFileModelPicture.ServerFileName = FileName + Extension;
             tvFileModelPicture.FileDescription = Description;
+            tvFileModelPicture.FromWater = FromWater;
 
             TVFileModel tvFileModelPictureRet = tvFileService.PostUpdateTVFileDB(tvFileModelPicture);
             if (!string.IsNullOrWhiteSpace(tvFileModelPictureRet.Error))

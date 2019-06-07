@@ -105,7 +105,7 @@ namespace CSSPDBDLL.Services
                 return retStr;
             }
 
-            retStr = FieldCheckNotNullAndMinMaxLengthString(appTaskModel.Parameters, ServiceRes.Parameters, 2, 1000);
+            retStr = FieldCheckNotNullAndMinMaxLengthString(appTaskModel.Parameters, ServiceRes.Parameters, 2, 100000);
             if (!string.IsNullOrWhiteSpace(retStr))
             {
                 return retStr;

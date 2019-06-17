@@ -61,6 +61,15 @@ namespace CSSPDBDLL.Services.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ___CopyOf.
+        /// </summary>
+        public static string ___CopyOf {
+            get {
+                return ResourceManager.GetString("___CopyOf", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {0} was added to website by {1}..
         /// </summary>
         public static string _AddedInWebSiteBy_ {
@@ -7774,7 +7783,7 @@ namespace CSSPDBDLL.Services.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &quot;Please add the time under the &apos;Special Setting&apos; under selected variables.\r\nIt needs to be the last variable.\r\n&quot;.
+        ///   Looks up a localized string similar to Please add the time under the &apos;Special Setting&apos; under selected variables.\r\nIt needs to be the last variable.\r\n.
         /// </summary>
         public static string PleaseAddTimeUnderSpecialSetting {
             get {
@@ -8908,7 +8917,7 @@ namespace CSSPDBDLL.Services.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &quot;Result file is empty&quot;.
+        ///   Looks up a localized string similar to Result file is empty.
         /// </summary>
         public static string ResultFileIsEmpty {
             get {
@@ -10762,6 +10771,15 @@ namespace CSSPDBDLL.Services.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to TemperatureControl_C.
+        /// </summary>
+        public static string TemperatureControl_C {
+            get {
+                return ResourceManager.GetString("TemperatureControl_C", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to TemperatureControl1_C.
         /// </summary>
         public static string TemperatureControl1_C {
@@ -12108,6 +12126,15 @@ namespace CSSPDBDLL.Services.Resources {
         public static string WindSpeed_km_h {
             get {
                 return ResourceManager.GetString("WindSpeed_km_h", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to WindSpeed_m_s.
+        /// </summary>
+        public static string WindSpeed_m_s {
+            get {
+                return ResourceManager.GetString("WindSpeed_m_s", resourceCulture);
             }
         }
         

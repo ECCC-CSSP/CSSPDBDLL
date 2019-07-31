@@ -432,6 +432,40 @@ namespace CSSPDBDLL.Services
 
             return LabSheetModelList;
         }
+        public List<LabSheetSiteMonitoredCounts> GetLabSheetIDListAndCountSamplesWithSamplingPlanIDDB(int SamplingPlanID)
+        {
+            List<LabSheetSiteMonitoredCounts> LabSheetSiteMonitoredCountsList = (from c in db.LabSheets
+                                                                                 let SamplingPlanSubsectorSiteCount = (from sps in db.SamplingPlanSubsectors
+                                                                                                                       from spss in db.SamplingPlanSubsectorSites
+                                                                                                                       where sps.SamplingPlanID == SamplingPlanID
+                                                                                                                       && sps.SubsectorTVItemID == c.SubsectorTVItemID
+                                                                                                                       && sps.SamplingPlanSubsectorID == spss.SamplingPlanSubsectorID
+                                                                                                                       select spss).Count()
+                                                                                 let LabSheetSiteRoutineCount = (from lsd in db.LabSheetDetails
+                                                                                                                 from lst in db.LabSheetTubeMPNDetails
+                                                                                                                 where lsd.LabSheetID == c.LabSheetID
+                                                                                                                 && lsd.LabSheetDetailID == lst.LabSheetDetailID
+                                                                                                                 && lst.SampleType == (int)SampleTypeEnum.Routine
+                                                                                                                 select lst).Count()
+                                                                                 let LabSheetHasDuplicate = (from lsd in db.LabSheetDetails
+                                                                                                             from lst in db.LabSheetTubeMPNDetails
+                                                                                                             where lsd.LabSheetID == c.LabSheetID
+                                                                                                             && lsd.LabSheetDetailID == lst.LabSheetDetailID
+                                                                                                             && lst.SampleType == (int)SampleTypeEnum.DailyDuplicate
+                                                                                                             select lst).Any()
+                                                                                 where c.SamplingPlanID == SamplingPlanID
+                                                                                 select new LabSheetSiteMonitoredCounts
+                                                                                 {
+                                                                                     Error = "",
+                                                                                     SamplingPlanID = SamplingPlanID,
+                                                                                     LabSheetID = c.LabSheetID,
+                                                                                     SamplingPlanSubsectorSiteCount = SamplingPlanSubsectorSiteCount,
+                                                                                     LabSheetSiteRoutineCount = LabSheetSiteRoutineCount,
+                                                                                     LabSheetHasDuplicate = LabSheetHasDuplicate
+                                                                                 }).ToList<LabSheetSiteMonitoredCounts>();
+
+            return LabSheetSiteMonitoredCountsList;
+        }
         public List<LabSheetModel> GetLabSheetModelListWithSamplingPlanIDAndLabSheetStatusDB(int SamplingPlanID, LabSheetStatusEnum labSheetSatus)
         {
             List<LabSheetModel> LabSheetModelList = (from c in db.LabSheets

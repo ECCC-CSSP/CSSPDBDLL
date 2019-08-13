@@ -69,11 +69,13 @@ namespace CSSPDBDLL.Services
                 return retStr;
             }
 
-            retStr = FieldCheckNotZeroInt(climateSiteModel.ECDBID, ServiceRes.ECDBID);
-            if (!string.IsNullOrWhiteSpace(retStr))
-            {
-                return retStr;
-            }
+            // Commented out because the CoCoRaHS site do not have ECDBID 
+            //
+            //retStr = FieldCheckNotZeroInt(climateSiteModel.ECDBID, ServiceRes.ECDBID);
+            //if (!string.IsNullOrWhiteSpace(retStr))
+            //{
+            //    return retStr;
+            //}
 
             retStr = FieldCheckNotNullAndMinMaxLengthString(climateSiteModel.Province, ServiceRes.Province, 2, 4);
             if (!string.IsNullOrWhiteSpace(retStr))
@@ -171,6 +173,7 @@ namespace CSSPDBDLL.Services
             climateSiteNew.HourlyNow = climateSiteModel.HourlyNow;
             climateSiteNew.HourlyStartDate_Local = climateSiteModel.HourlyStartDate_Local;
             climateSiteNew.IsProvincial = climateSiteModel.IsProvincial;
+            climateSiteNew.IsCoCoRaHS = climateSiteModel.IsCoCoRaHS;
             climateSiteNew.MonthlyEndDate_Local = climateSiteModel.MonthlyEndDate_Local;
             climateSiteNew.MonthlyNow = climateSiteModel.MonthlyNow;
             climateSiteNew.MonthlyStartDate_Local = climateSiteModel.MonthlyStartDate_Local;
@@ -221,6 +224,7 @@ namespace CSSPDBDLL.Services
                                                      HourlyNow = c.HourlyNow,
                                                      HourlyStartDate_Local = c.HourlyStartDate_Local,
                                                      IsProvincial = c.IsProvincial,
+                                                     IsCoCoRaHS = c.IsCoCoRaHS,
                                                      MonthlyEndDate_Local = c.MonthlyEndDate_Local,
                                                      MonthlyNow = c.MonthlyNow,
                                                      MonthlyStartDate_Local = c.MonthlyStartDate_Local,
@@ -259,6 +263,7 @@ namespace CSSPDBDLL.Services
                                                      HourlyNow = c.HourlyNow,
                                                      HourlyStartDate_Local = c.HourlyStartDate_Local,
                                                      IsProvincial = c.IsProvincial,
+                                                     IsCoCoRaHS = c.IsCoCoRaHS,
                                                      MonthlyEndDate_Local = c.MonthlyEndDate_Local,
                                                      MonthlyNow = c.MonthlyNow,
                                                      MonthlyStartDate_Local = c.MonthlyStartDate_Local,
@@ -297,6 +302,7 @@ namespace CSSPDBDLL.Services
                                                      HourlyNow = c.HourlyNow,
                                                      HourlyStartDate_Local = c.HourlyStartDate_Local,
                                                      IsProvincial = c.IsProvincial,
+                                                     IsCoCoRaHS = c.IsCoCoRaHS,
                                                      MonthlyEndDate_Local = c.MonthlyEndDate_Local,
                                                      MonthlyNow = c.MonthlyNow,
                                                      MonthlyStartDate_Local = c.MonthlyStartDate_Local,
@@ -336,6 +342,7 @@ namespace CSSPDBDLL.Services
                                                      HourlyNow = c.HourlyNow,
                                                      HourlyStartDate_Local = c.HourlyStartDate_Local,
                                                      IsProvincial = c.IsProvincial,
+                                                     IsCoCoRaHS = c.IsCoCoRaHS,
                                                      MonthlyEndDate_Local = c.MonthlyEndDate_Local,
                                                      MonthlyNow = c.MonthlyNow,
                                                      MonthlyStartDate_Local = c.MonthlyStartDate_Local,
@@ -376,6 +383,7 @@ namespace CSSPDBDLL.Services
                                                         HourlyNow = c.HourlyNow,
                                                         HourlyStartDate_Local = c.HourlyStartDate_Local,
                                                         IsProvincial = c.IsProvincial,
+                                                        IsCoCoRaHS = c.IsCoCoRaHS,
                                                         MonthlyEndDate_Local = c.MonthlyEndDate_Local,
                                                         MonthlyNow = c.MonthlyNow,
                                                         MonthlyStartDate_Local = c.MonthlyStartDate_Local,

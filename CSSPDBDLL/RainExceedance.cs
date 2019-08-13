@@ -15,18 +15,19 @@ namespace CSSPDBDLL
     public partial class RainExceedance
     {
         public int RainExceedanceID { get; set; }
-        public bool YearRound { get; set; }
-        public Nullable<System.DateTime> StartDate_Local { get; set; }
-        public Nullable<System.DateTime> EndDate_Local { get; set; }
+        public int RainExceedanceTVItemID { get; set; }
+        public Nullable<int> StartMonth { get; set; }
+        public Nullable<int> StartDay { get; set; }
+        public Nullable<int> EndMonth { get; set; }
+        public Nullable<int> EndDay { get; set; }
         public Nullable<double> RainMaximum_mm { get; set; }
-        public Nullable<double> RainExtreme_mm { get; set; }
-        public int DaysPriorToStart { get; set; }
-        public bool RepeatEveryYear { get; set; }
-        public string ProvinceTVItemIDs { get; set; }
-        public string SubsectorTVItemIDs { get; set; }
-        public string ClimateSiteTVItemIDs { get; set; }
-        public string EmailDistributionListIDs { get; set; }
+        public Nullable<int> StakeholdersEmailDistributionListID { get; set; }
+        public Nullable<int> OnlyStaffEmailDistributionListID { get; set; }
         public System.DateTime LastUpdateDate_UTC { get; set; }
         public int LastUpdateContactTVItemID { get; set; }
+    
+        public virtual EmailDistributionList EmailDistributionList { get; set; }
+        public virtual EmailDistributionList EmailDistributionList1 { get; set; }
+        public virtual TVItem TVItem { get; set; }
     }
 }

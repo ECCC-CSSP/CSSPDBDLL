@@ -2583,6 +2583,9 @@
   <data name="PleaseEnterValidEmail" xml:space="preserve">
     <value>Veuillez entrer un courriel valide.</value>
   </data>
+  <data name="PleaseEnterValidFor_" xml:space="preserve">
+    <value>SVP entrer une valeur valide pour {0}</value>
+  </data>
   <data name="PleaseLoadFile_" xml:space="preserve">
     <value>Veuillez charger le fichier [{0}]</value>
   </data>
@@ -2843,6 +2846,9 @@
   </data>
   <data name="RainExceedanceID" xml:space="preserve">
     <value>RainExceedanceID</value>
+  </data>
+  <data name="RainExceedanceTVItemID" xml:space="preserve">
+    <value>RainExceedanceTVItemID</value>
   </data>
   <data name="RainExtreme" xml:space="preserve">
     <value>RainExtreme</value>

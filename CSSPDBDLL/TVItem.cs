@@ -61,6 +61,7 @@ namespace CSSPDBDLL
             this.PolSourceObservations = new HashSet<PolSourceObservation>();
             this.PolSourceSites = new HashSet<PolSourceSite>();
             this.PolSourceSites1 = new HashSet<PolSourceSite>();
+            this.RainExceedances = new HashSet<RainExceedance>();
             this.ReportSections = new HashSet<ReportSection>();
             this.SamplingPlans = new HashSet<SamplingPlan>();
             this.SamplingPlans1 = new HashSet<SamplingPlan>();
@@ -183,6 +184,8 @@ namespace CSSPDBDLL
         public virtual ICollection<PolSourceSite> PolSourceSites { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PolSourceSite> PolSourceSites1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<RainExceedance> RainExceedances { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ReportSection> ReportSections { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

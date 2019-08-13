@@ -215,7 +215,7 @@
           </Key>
           <Property Name="ClimateSiteID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ClimateSiteTVItemID" Type="int" Nullable="false" />
-          <Property Name="ECDBID" Type="int" Nullable="false" />
+          <Property Name="ECDBID" Type="int" />
           <Property Name="ClimateSiteName" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="Province" Type="nvarchar" MaxLength="4" Nullable="false" />
           <Property Name="Elevation_m" Type="float" />
@@ -223,6 +223,7 @@
           <Property Name="WMOID" Type="int" />
           <Property Name="TCID" Type="nvarchar" MaxLength="3" />
           <Property Name="IsProvincial" Type="bit" />
+          <Property Name="IsCoCoRaHS" Type="bit" />
           <Property Name="ProvSiteID" Type="nvarchar" MaxLength="50" />
           <Property Name="TimeOffset_hour" Type="float" />
           <Property Name="File_desc" Type="nvarchar" MaxLength="50" />
@@ -885,6 +886,7 @@
           <Property Name="MWQMSiteTVItemID" Type="int" Nullable="false" />
           <Property Name="MWQMRunTVItemID" Type="int" Nullable="false" />
           <Property Name="SampleDateTime_Local" Type="datetime" Nullable="false" />
+          <Property Name="TimeText" Type="nvarchar" MaxLength="6" />
           <Property Name="Depth_m" Type="float" />
           <Property Name="FecCol_MPN_100ml" Type="int" Nullable="false" />
           <Property Name="Salinity_PPT" Type="float" />
@@ -1007,17 +1009,14 @@
             <PropertyRef Name="RainExceedanceID" />
           </Key>
           <Property Name="RainExceedanceID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="YearRound" Type="bit" Nullable="false" />
-          <Property Name="StartDate_Local" Type="datetime" />
-          <Property Name="EndDate_Local" Type="datetime" />
+          <Property Name="RainExceedanceTVItemID" Type="int" Nullable="false" />
+          <Property Name="StartMonth" Type="int" />
+          <Property Name="StartDay" Type="int" />
+          <Property Name="EndMonth" Type="int" />
+          <Property Name="EndDay" Type="int" />
           <Property Name="RainMaximum_mm" Type="float" />
-          <Property Name="RainExtreme_mm" Type="float" />
-          <Property Name="DaysPriorToStart" Type="int" Nullable="false" />
-          <Property Name="RepeatEveryYear" Type="bit" Nullable="false" />
-          <Property Name="ProvinceTVItemIDs" Type="nvarchar" MaxLength="250" Nullable="false" />
-          <Property Name="SubsectorTVItemIDs" Type="nvarchar" MaxLength="250" Nullable="false" />
-          <Property Name="ClimateSiteTVItemIDs" Type="nvarchar" MaxLength="250" Nullable="false" />
-          <Property Name="EmailDistributionListIDs" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="StakeholdersEmailDistributionListID" Type="int" />
+          <Property Name="OnlyStaffEmailDistributionListID" Type="int" />
           <Property Name="LastUpdateDate_UTC" Type="datetime" Nullable="false" />
           <Property Name="LastUpdateContactTVItemID" Type="int" Nullable="false" />
         </EntityType>
@@ -2391,6 +2390,42 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_RainExceedances_OnlyStaffEmailDistributionLists1">
+          <End Role="EmailDistributionLists" Type="Self.EmailDistributionLists" Multiplicity="0..1" />
+          <End Role="RainExceedances" Type="Self.RainExceedances" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EmailDistributionLists">
+              <PropertyRef Name="EmailDistributionListID" />
+            </Principal>
+            <Dependent Role="RainExceedances">
+              <PropertyRef Name="OnlyStaffEmailDistributionListID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RainExceedances_RainExceedanceTVItemID">
+          <End Role="TVItems" Type="Self.TVItems" Multiplicity="1" />
+          <End Role="RainExceedances" Type="Self.RainExceedances" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TVItems">
+              <PropertyRef Name="TVItemID" />
+            </Principal>
+            <Dependent Role="RainExceedances">
+              <PropertyRef Name="RainExceedanceTVItemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RainExceedances_StakeholdersEmailDistributionLists">
+          <End Role="EmailDistributionLists" Type="Self.EmailDistributionLists" Multiplicity="0..1" />
+          <End Role="RainExceedances" Type="Self.RainExceedances" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EmailDistributionLists">
+              <PropertyRef Name="EmailDistributionListID" />
+            </Principal>
+            <Dependent Role="RainExceedances">
+              <PropertyRef Name="StakeholdersEmailDistributionListID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_RatingCurves_HydrometricSites">
           <End Role="HydrometricSites" Type="Self.HydrometricSites" Multiplicity="1" />
           <End Role="RatingCurves" Type="Self.RatingCurves" Multiplicity="*" />
@@ -3267,6 +3302,18 @@
             <End Role="TVItems" EntitySet="TVItems" />
             <End Role="PolSourceSites" EntitySet="PolSourceSites" />
           </AssociationSet>
+          <AssociationSet Name="FK_RainExceedances_OnlyStaffEmailDistributionLists1" Association="Self.FK_RainExceedances_OnlyStaffEmailDistributionLists1">
+            <End Role="EmailDistributionLists" EntitySet="EmailDistributionLists" />
+            <End Role="RainExceedances" EntitySet="RainExceedances" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RainExceedances_RainExceedanceTVItemID" Association="Self.FK_RainExceedances_RainExceedanceTVItemID">
+            <End Role="TVItems" EntitySet="TVItems" />
+            <End Role="RainExceedances" EntitySet="RainExceedances" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RainExceedances_StakeholdersEmailDistributionLists" Association="Self.FK_RainExceedances_StakeholdersEmailDistributionLists">
+            <End Role="EmailDistributionLists" EntitySet="EmailDistributionLists" />
+            <End Role="RainExceedances" EntitySet="RainExceedances" />
+          </AssociationSet>
           <AssociationSet Name="FK_RatingCurves_HydrometricSites" Association="Self.FK_RatingCurves_HydrometricSites">
             <End Role="HydrometricSites" EntitySet="HydrometricSites" />
             <End Role="RatingCurves" EntitySet="RatingCurves" />
@@ -3619,6 +3666,14 @@
             <End Role="TVItem" EntitySet="TVItems" />
             <End Role="EmailDistributionList" EntitySet="EmailDistributionLists" />
           </AssociationSet>
+          <AssociationSet Name="FK_RainExceedances_OnlyStaffEmailDistributionLists1" Association="CSSPDBModel.FK_RainExceedances_OnlyStaffEmailDistributionLists1">
+            <End Role="EmailDistributionList" EntitySet="EmailDistributionLists" />
+            <End Role="RainExceedance" EntitySet="RainExceedances" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RainExceedances_StakeholdersEmailDistributionLists" Association="CSSPDBModel.FK_RainExceedances_StakeholdersEmailDistributionLists">
+            <End Role="EmailDistributionList" EntitySet="EmailDistributionLists" />
+            <End Role="RainExceedance" EntitySet="RainExceedances" />
+          </AssociationSet>
           <AssociationSet Name="FK_EmailTVItemID_TVItems" Association="CSSPDBModel.FK_EmailTVItemID_TVItems">
             <End Role="TVItem" EntitySet="TVItems" />
             <End Role="Email" EntitySet="Emails" />
@@ -3802,6 +3857,10 @@
           <AssociationSet Name="FK_PolSourceSites_TVItems1" Association="CSSPDBModel.FK_PolSourceSites_TVItems1">
             <End Role="TVItem" EntitySet="TVItems" />
             <End Role="PolSourceSite" EntitySet="PolSourceSites" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RainExceedances_RainExceedanceTVItemID" Association="CSSPDBModel.FK_RainExceedances_RainExceedanceTVItemID">
+            <End Role="TVItem" EntitySet="TVItems" />
+            <End Role="RainExceedance" EntitySet="RainExceedances" />
           </AssociationSet>
           <AssociationSet Name="FK_RatingCurveValues_RatingCurves" Association="CSSPDBModel.FK_RatingCurveValues_RatingCurves">
             <End Role="RatingCurve" EntitySet="RatingCurves" />
@@ -4184,7 +4243,7 @@
           </Key>
           <Property Name="ClimateSiteID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ClimateSiteTVItemID" Type="Int32" Nullable="false" />
-          <Property Name="ECDBID" Type="Int32" Nullable="false" />
+          <Property Name="ECDBID" Type="Int32" />
           <Property Name="ClimateSiteName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Province" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="true" />
           <Property Name="Elevation_m" Type="Double" />
@@ -4192,6 +4251,7 @@
           <Property Name="WMOID" Type="Int32" />
           <Property Name="TCID" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
           <Property Name="IsProvincial" Type="Boolean" />
+          <Property Name="IsCoCoRaHS" Type="Boolean" />
           <Property Name="ProvSiteID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="TimeOffset_hour" Type="Double" />
           <Property Name="File_desc" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -4359,6 +4419,8 @@
           <NavigationProperty Name="EmailDistributionListContacts" Relationship="CSSPDBModel.FK_EmailDistributionListContacts_EmailDistributionLists" FromRole="EmailDistributionList" ToRole="EmailDistributionListContact" />
           <NavigationProperty Name="EmailDistributionListLanguages" Relationship="CSSPDBModel.FK_EmailDistributionListLanguages_EmailDistributionLists" FromRole="EmailDistributionList" ToRole="EmailDistributionListLanguage" />
           <NavigationProperty Name="TVItem" Relationship="CSSPDBModel.FK_EmailDistributionLists_TVItems" FromRole="EmailDistributionList" ToRole="TVItem" />
+          <NavigationProperty Name="RainExceedances" Relationship="CSSPDBModel.FK_RainExceedances_OnlyStaffEmailDistributionLists1" FromRole="EmailDistributionList" ToRole="RainExceedance" />
+          <NavigationProperty Name="RainExceedances1" Relationship="CSSPDBModel.FK_RainExceedances_StakeholdersEmailDistributionLists" FromRole="EmailDistributionList" ToRole="RainExceedance" />
         </EntityType>
         <EntityType Name="Email">
           <Key>
@@ -4914,6 +4976,7 @@
           <Property Name="MWQMSiteTVItemID" Type="Int32" Nullable="false" />
           <Property Name="MWQMRunTVItemID" Type="Int32" Nullable="false" />
           <Property Name="SampleDateTime_Local" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="TimeText" Type="String" MaxLength="6" FixedLength="false" Unicode="true" />
           <Property Name="Depth_m" Type="Double" />
           <Property Name="FecCol_MPN_100ml" Type="Int32" Nullable="false" />
           <Property Name="Salinity_PPT" Type="Double" />
@@ -5053,19 +5116,19 @@
             <PropertyRef Name="RainExceedanceID" />
           </Key>
           <Property Name="RainExceedanceID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="YearRound" Type="Boolean" Nullable="false" />
-          <Property Name="StartDate_Local" Type="DateTime" Precision="3" />
-          <Property Name="EndDate_Local" Type="DateTime" Precision="3" />
+          <Property Name="RainExceedanceTVItemID" Type="Int32" Nullable="false" />
+          <Property Name="StartMonth" Type="Int32" />
+          <Property Name="StartDay" Type="Int32" />
+          <Property Name="EndMonth" Type="Int32" />
+          <Property Name="EndDay" Type="Int32" />
           <Property Name="RainMaximum_mm" Type="Double" />
-          <Property Name="RainExtreme_mm" Type="Double" />
-          <Property Name="DaysPriorToStart" Type="Int32" Nullable="false" />
-          <Property Name="RepeatEveryYear" Type="Boolean" Nullable="false" />
-          <Property Name="ProvinceTVItemIDs" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="SubsectorTVItemIDs" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="ClimateSiteTVItemIDs" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="EmailDistributionListIDs" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="StakeholdersEmailDistributionListID" Type="Int32" />
+          <Property Name="OnlyStaffEmailDistributionListID" Type="Int32" />
           <Property Name="LastUpdateDate_UTC" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="LastUpdateContactTVItemID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="EmailDistributionList" Relationship="CSSPDBModel.FK_RainExceedances_OnlyStaffEmailDistributionLists1" FromRole="RainExceedance" ToRole="EmailDistributionList" />
+          <NavigationProperty Name="EmailDistributionList1" Relationship="CSSPDBModel.FK_RainExceedances_StakeholdersEmailDistributionLists" FromRole="RainExceedance" ToRole="EmailDistributionList" />
+          <NavigationProperty Name="TVItem" Relationship="CSSPDBModel.FK_RainExceedances_RainExceedanceTVItemID" FromRole="RainExceedance" ToRole="TVItem" />
         </EntityType>
         <EntityType Name="RatingCurve">
           <Key>
@@ -5463,6 +5526,7 @@
           <NavigationProperty Name="PolSourceObservations" Relationship="CSSPDBModel.FK_PolSourceObservations_TVItemContact" FromRole="TVItem" ToRole="PolSourceObservation" />
           <NavigationProperty Name="PolSourceSites" Relationship="CSSPDBModel.FK_PolSourceSites_TVItems" FromRole="TVItem" ToRole="PolSourceSite" />
           <NavigationProperty Name="PolSourceSites1" Relationship="CSSPDBModel.FK_PolSourceSites_TVItems1" FromRole="TVItem" ToRole="PolSourceSite" />
+          <NavigationProperty Name="RainExceedances" Relationship="CSSPDBModel.FK_RainExceedances_RainExceedanceTVItemID" FromRole="TVItem" ToRole="RainExceedance" />
           <NavigationProperty Name="ReportSections" Relationship="CSSPDBModel.FK_ReportSections_TVItems" FromRole="TVItem" ToRole="ReportSection" />
           <NavigationProperty Name="SamplingPlans" Relationship="CSSPDBModel.FK_SamplingPlans_CreatorTVItemID" FromRole="TVItem" ToRole="SamplingPlan" />
           <NavigationProperty Name="SamplingPlans1" Relationship="CSSPDBModel.FK_SamplingPlans_ProvinceTVItemID" FromRole="TVItem" ToRole="SamplingPlan" />
@@ -5967,6 +6031,30 @@
             </Principal>
             <Dependent Role="EmailDistributionList">
               <PropertyRef Name="CountryTVItemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RainExceedances_OnlyStaffEmailDistributionLists1">
+          <End Type="CSSPDBModel.EmailDistributionList" Role="EmailDistributionList" Multiplicity="0..1" />
+          <End Type="CSSPDBModel.RainExceedance" Role="RainExceedance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EmailDistributionList">
+              <PropertyRef Name="EmailDistributionListID" />
+            </Principal>
+            <Dependent Role="RainExceedance">
+              <PropertyRef Name="OnlyStaffEmailDistributionListID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RainExceedances_StakeholdersEmailDistributionLists">
+          <End Type="CSSPDBModel.EmailDistributionList" Role="EmailDistributionList" Multiplicity="0..1" />
+          <End Type="CSSPDBModel.RainExceedance" Role="RainExceedance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EmailDistributionList">
+              <PropertyRef Name="EmailDistributionListID" />
+            </Principal>
+            <Dependent Role="RainExceedance">
+              <PropertyRef Name="StakeholdersEmailDistributionListID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -6541,6 +6629,18 @@
             </Principal>
             <Dependent Role="PolSourceSite">
               <PropertyRef Name="CivicAddressTVItemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RainExceedances_RainExceedanceTVItemID">
+          <End Type="CSSPDBModel.TVItem" Role="TVItem" Multiplicity="1" />
+          <End Type="CSSPDBModel.RainExceedance" Role="RainExceedance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TVItem">
+              <PropertyRef Name="TVItemID" />
+            </Principal>
+            <Dependent Role="RainExceedance">
+              <PropertyRef Name="RainExceedanceTVItemID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -7262,6 +7362,7 @@
                 <ScalarProperty Name="File_desc" ColumnName="File_desc" />
                 <ScalarProperty Name="TimeOffset_hour" ColumnName="TimeOffset_hour" />
                 <ScalarProperty Name="ProvSiteID" ColumnName="ProvSiteID" />
+                <ScalarProperty Name="IsCoCoRaHS" ColumnName="IsCoCoRaHS" />
                 <ScalarProperty Name="IsProvincial" ColumnName="IsProvincial" />
                 <ScalarProperty Name="TCID" ColumnName="TCID" />
                 <ScalarProperty Name="WMOID" ColumnName="WMOID" />
@@ -7963,6 +8064,7 @@
                 <ScalarProperty Name="Salinity_PPT" ColumnName="Salinity_PPT" />
                 <ScalarProperty Name="FecCol_MPN_100ml" ColumnName="FecCol_MPN_100ml" />
                 <ScalarProperty Name="Depth_m" ColumnName="Depth_m" />
+                <ScalarProperty Name="TimeText" ColumnName="TimeText" />
                 <ScalarProperty Name="SampleDateTime_Local" ColumnName="SampleDateTime_Local" />
                 <ScalarProperty Name="MWQMRunTVItemID" ColumnName="MWQMRunTVItemID" />
                 <ScalarProperty Name="MWQMSiteTVItemID" ColumnName="MWQMSiteTVItemID" />
@@ -8085,17 +8187,14 @@
               <MappingFragment StoreEntitySet="RainExceedances">
                 <ScalarProperty Name="LastUpdateContactTVItemID" ColumnName="LastUpdateContactTVItemID" />
                 <ScalarProperty Name="LastUpdateDate_UTC" ColumnName="LastUpdateDate_UTC" />
-                <ScalarProperty Name="EmailDistributionListIDs" ColumnName="EmailDistributionListIDs" />
-                <ScalarProperty Name="ClimateSiteTVItemIDs" ColumnName="ClimateSiteTVItemIDs" />
-                <ScalarProperty Name="SubsectorTVItemIDs" ColumnName="SubsectorTVItemIDs" />
-                <ScalarProperty Name="ProvinceTVItemIDs" ColumnName="ProvinceTVItemIDs" />
-                <ScalarProperty Name="RepeatEveryYear" ColumnName="RepeatEveryYear" />
-                <ScalarProperty Name="DaysPriorToStart" ColumnName="DaysPriorToStart" />
-                <ScalarProperty Name="RainExtreme_mm" ColumnName="RainExtreme_mm" />
+                <ScalarProperty Name="OnlyStaffEmailDistributionListID" ColumnName="OnlyStaffEmailDistributionListID" />
+                <ScalarProperty Name="StakeholdersEmailDistributionListID" ColumnName="StakeholdersEmailDistributionListID" />
                 <ScalarProperty Name="RainMaximum_mm" ColumnName="RainMaximum_mm" />
-                <ScalarProperty Name="EndDate_Local" ColumnName="EndDate_Local" />
-                <ScalarProperty Name="StartDate_Local" ColumnName="StartDate_Local" />
-                <ScalarProperty Name="YearRound" ColumnName="YearRound" />
+                <ScalarProperty Name="EndDay" ColumnName="EndDay" />
+                <ScalarProperty Name="EndMonth" ColumnName="EndMonth" />
+                <ScalarProperty Name="StartDay" ColumnName="StartDay" />
+                <ScalarProperty Name="StartMonth" ColumnName="StartMonth" />
+                <ScalarProperty Name="RainExceedanceTVItemID" ColumnName="RainExceedanceTVItemID" />
                 <ScalarProperty Name="RainExceedanceID" ColumnName="RainExceedanceID" />
               </MappingFragment>
             </EntityTypeMapping>

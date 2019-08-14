@@ -14,13 +14,19 @@ namespace CSSPDBDLL
     
     public partial class RainExceedance
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public RainExceedance()
+        {
+            this.RainExceedanceClimateSites = new HashSet<RainExceedanceClimateSite>();
+        }
+    
         public int RainExceedanceID { get; set; }
         public int RainExceedanceTVItemID { get; set; }
-        public Nullable<int> StartMonth { get; set; }
-        public Nullable<int> StartDay { get; set; }
-        public Nullable<int> EndMonth { get; set; }
-        public Nullable<int> EndDay { get; set; }
-        public Nullable<double> RainMaximum_mm { get; set; }
+        public int StartMonth { get; set; }
+        public int StartDay { get; set; }
+        public int EndMonth { get; set; }
+        public int EndDay { get; set; }
+        public double RainMaximum_mm { get; set; }
         public Nullable<int> StakeholdersEmailDistributionListID { get; set; }
         public Nullable<int> OnlyStaffEmailDistributionListID { get; set; }
         public System.DateTime LastUpdateDate_UTC { get; set; }
@@ -28,6 +34,8 @@ namespace CSSPDBDLL
     
         public virtual EmailDistributionList EmailDistributionList { get; set; }
         public virtual EmailDistributionList EmailDistributionList1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<RainExceedanceClimateSite> RainExceedanceClimateSites { get; set; }
         public virtual TVItem TVItem { get; set; }
     }
 }

@@ -24,7 +24,7 @@ namespace CSSPDBDLL
         }
     
         public int EmailDistributionListID { get; set; }
-        public int CountryTVItemID { get; set; }
+        public int ParentTVItemID { get; set; }
         public int Ordinal { get; set; }
         public System.DateTime LastUpdateDate_UTC { get; set; }
         public int LastUpdateContactTVItemID { get; set; }

@@ -80,6 +80,7 @@ namespace CSSPDBDLL
         public virtual DbSet<PolSourceObservationIssue> PolSourceObservationIssues { get; set; }
         public virtual DbSet<PolSourceObservation> PolSourceObservations { get; set; }
         public virtual DbSet<PolSourceSite> PolSourceSites { get; set; }
+        public virtual DbSet<RainExceedanceClimateSite> RainExceedanceClimateSites { get; set; }
         public virtual DbSet<RainExceedance> RainExceedances { get; set; }
         public virtual DbSet<RatingCurve> RatingCurves { get; set; }
         public virtual DbSet<RatingCurveValue> RatingCurveValues { get; set; }

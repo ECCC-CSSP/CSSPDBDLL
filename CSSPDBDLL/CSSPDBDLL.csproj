@@ -304,6 +304,9 @@
     <Compile Include="RainExceedance.cs">
       <DependentUpon>CSSPDBEDM.tt</DependentUpon>
     </Compile>
+    <Compile Include="RainExceedanceClimateSite.cs">
+      <DependentUpon>CSSPDBEDM.tt</DependentUpon>
+    </Compile>
     <Compile Include="RatingCurve.cs">
       <DependentUpon>CSSPDBEDM.tt</DependentUpon>
     </Compile>
@@ -361,6 +364,7 @@
     <Compile Include="Services\ClassificationService.cs" />
     <Compile Include="Services\ProvinceToolsService.cs" />
     <Compile Include="Services\OpenDataService.cs" />
+    <Compile Include="Services\RainExceedanceClimateSiteService.cs" />
     <Compile Include="Services\ReportSectionLanguageService.cs" />
     <Compile Include="Services\ReportTypeLanguageService.cs" />
     <Compile Include="Services\ReportSectionService.cs" />
@@ -386,7 +390,7 @@
     <Compile Include="Services\MikeSourceStartEndService.cs" />
     <Compile Include="Services\MWQMAnalysisReportParameterService.cs" />
     <Compile Include="Services\MWQMLookupMPNService.cs" />
-    <Compile Include="Services\RainExceedance.cs" />
+    <Compile Include="Services\RainExceedanceService.cs" />
     <Compile Include="Services\ReportServiceGeneratedSampling_Plan.cs" />
     <Compile Include="Services\ReportServiceGeneratedSampling_Plan_Lab_Sheet.cs" />
     <Compile Include="Services\ReportServiceGeneratedSampling_Plan_Lab_Sheet_Detail.cs" />

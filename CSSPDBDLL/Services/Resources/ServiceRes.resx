@@ -693,6 +693,9 @@
   <data name="CouldNotFindBMScenario_ToDelete" xml:space="preserve">
     <value>Could not find Box Model scenario [{0}] to delete</value>
   </data>
+  <data name="CouldNotFindClimateSiteToRemoveFromRainExceedance" xml:space="preserve">
+    <value>Could not find climate site to remove from rain exceedance</value>
+  </data>
   <data name="CouldNotFindCoordinates" xml:space="preserve">
     <value>Could not find coordinates</value>
   </data>
@@ -1154,6 +1157,9 @@
   </data>
   <data name="EmailIN" xml:space="preserve">
     <value>email</value>
+  </data>
+  <data name="EmailListName" xml:space="preserve">
+    <value>EmailListName</value>
   </data>
   <data name="EmailOrPasswordIncorrect" xml:space="preserve">
     <value>The email or password provided is incorrect.</value>
@@ -2379,6 +2385,9 @@
   <data name="NeedToBeLoggedIn" xml:space="preserve">
     <value>Need to be logged in</value>
   </data>
+  <data name="NeedToSelectAtLeastOneClimateSite" xml:space="preserve">
+    <value>Need to select at least one climate site</value>
+  </data>
   <data name="Negative35" xml:space="preserve">
     <value>Negative35</value>
   </data>
@@ -2847,6 +2856,9 @@
   <data name="RainExceedanceID" xml:space="preserve">
     <value>RainExceedanceID</value>
   </data>
+  <data name="RainExceedanceName" xml:space="preserve">
+    <value>RainExceedanceName</value>
+  </data>
   <data name="RainExceedanceTVItemID" xml:space="preserve">
     <value>RainExceedanceTVItemID</value>
   </data>
@@ -2867,6 +2879,9 @@
   </data>
   <data name="RainMaximum" xml:space="preserve">
     <value>RainMaximum</value>
+  </data>
+  <data name="RainMaximum_mm" xml:space="preserve">
+    <value>RainMaximum_mm</value>
   </data>
   <data name="RainMaxLevel" xml:space="preserve">
     <value>RainMaxLevel</value>
@@ -2900,9 +2915,6 @@
   </data>
   <data name="RectWidth_m" xml:space="preserve">
     <value>RectWidth_m</value>
-  </data>
-  <data name="RegionName" xml:space="preserve">
-    <value>RegionName</value>
   </data>
   <data name="RelativeHumidity_Perc" xml:space="preserve">
     <value>RelativeHumidity_Perc</value>

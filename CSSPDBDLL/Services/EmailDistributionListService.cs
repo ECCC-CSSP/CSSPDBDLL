@@ -62,13 +62,13 @@ namespace CSSPDBDLL.Services
         // Check
         public string EmailDistributionListModelOK(EmailDistributionListModel emailDistributionListModel)
         {
-            string retStr = FieldCheckNotZeroInt(emailDistributionListModel.CountryTVItemID, ServiceRes.CountryTVItemID);
+            string retStr = FieldCheckNotZeroInt(emailDistributionListModel.ParentTVItemID, ServiceRes.ParentTVItemID);
             if (!string.IsNullOrWhiteSpace(retStr))
             {
                 return retStr;
             }
 
-            retStr = FieldCheckNotEmptyAndMaxLengthString(emailDistributionListModel.RegionName, ServiceRes.RegionName, 100);
+            retStr = FieldCheckNotEmptyAndMaxLengthString(emailDistributionListModel.EmailListName, ServiceRes.Name, 100);
             if (!string.IsNullOrWhiteSpace(retStr))
             {
                 return retStr;
@@ -87,8 +87,7 @@ namespace CSSPDBDLL.Services
         public string FillEmailDistributionList(EmailDistributionList emailDistributionListNew, EmailDistributionListModel emailDistributionListModel, ContactOK contactOK)
         {
             emailDistributionListNew.EmailDistributionListID = emailDistributionListModel.EmailDistributionListID;
-            emailDistributionListNew.CountryTVItemID = emailDistributionListModel.CountryTVItemID;
-            //emailDistributionListNew.RegionName = emailDistributionListModel.RegionName;
+            emailDistributionListNew.ParentTVItemID = emailDistributionListModel.ParentTVItemID;
             emailDistributionListNew.Ordinal = emailDistributionListModel.Ordinal;
             emailDistributionListNew.LastUpdateDate_UTC = DateTime.UtcNow;
             if (contactOK == null)
@@ -124,8 +123,8 @@ namespace CSSPDBDLL.Services
                                                                                {
                                                                                    Error = "",
                                                                                    EmailDistributionListID = c.EmailDistributionListID,
-                                                                                   CountryTVItemID = c.CountryTVItemID,
-                                                                                   RegionName = cl.RegionName,
+                                                                                   ParentTVItemID = c.ParentTVItemID,
+                                                                                   EmailListName = cl.EmailListName,
                                                                                    Ordinal = c.Ordinal,
                                                                                    LastUpdateDate_UTC = c.LastUpdateDate_UTC,
                                                                                    LastUpdateContactTVItemID = c.LastUpdateContactTVItemID,
@@ -144,8 +143,8 @@ namespace CSSPDBDLL.Services
                                                                      {
                                                                          Error = "",
                                                                          EmailDistributionListID = c.EmailDistributionListID,
-                                                                         CountryTVItemID = c.CountryTVItemID,
-                                                                         RegionName = cl.RegionName,
+                                                                         ParentTVItemID = c.ParentTVItemID,
+                                                                         EmailListName = cl.EmailListName,
                                                                          Ordinal = c.Ordinal,
                                                                          LastUpdateDate_UTC = c.LastUpdateDate_UTC,
                                                                          LastUpdateContactTVItemID = c.LastUpdateContactTVItemID,
@@ -158,7 +157,7 @@ namespace CSSPDBDLL.Services
 
             return emailDistributionListModel;
         }
-        public List<EmailDistributionListModel> GetEmailDistributionListModelWithCountryTVItemIDDB(int CountryTVItemID)
+        public List<EmailDistributionListModel> GetEmailDistributionListModelWithParentTVItemIDDB(int ParentTVItemID)
         {
             List<EmailDistributionListModel> emailDistributionListModelList = (from c in db.EmailDistributionLists
                                                                                from cl in db.EmailDistributionListLanguages
@@ -172,15 +171,15 @@ namespace CSSPDBDLL.Services
                                                                                                      && cc.EmailDistributionListID == c.EmailDistributionListID
                                                                                                      select t.TVText).FirstOrDefault()
                                                                                where c.EmailDistributionListID == cl.EmailDistributionListID
-                                                                               && c.CountryTVItemID == CountryTVItemID
+                                                                               && c.ParentTVItemID == ParentTVItemID
                                                                                && cl.Language == (int)LanguageRequest
                                                                                orderby c.Ordinal
                                                                                select new EmailDistributionListModel
                                                                                {
                                                                                    Error = "",
                                                                                    EmailDistributionListID = c.EmailDistributionListID,
-                                                                                   CountryTVItemID = c.CountryTVItemID,
-                                                                                   RegionName = cl.RegionName,
+                                                                                   ParentTVItemID = c.ParentTVItemID,
+                                                                                   EmailListName = cl.EmailListName,
                                                                                    Ordinal = c.Ordinal,
                                                                                    LastModifiedBy = lastModifiedBy,
                                                                                    LastUpdateDate_UTC = ContactLastUpdate,
@@ -209,18 +208,18 @@ namespace CSSPDBDLL.Services
         }
 
         // Post
-        public AppTaskModel EmailDistributionListGenerateExcelFileDB(int CountryTVItemID)
+        public AppTaskModel EmailDistributionListGenerateExcelFileDB(int ParentTVItemID)
         {
             ContactOK contactOK = IsContactOK();
             if (!string.IsNullOrWhiteSpace(contactOK.Error))
                 return ReturnAppTaskError(contactOK.Error);
 
-            TVItemModel tvItemModel = _TVItemService.GetTVItemModelWithTVItemIDDB(CountryTVItemID);
+            TVItemModel tvItemModel = _TVItemService.GetTVItemModelWithTVItemIDDB(ParentTVItemID);
             if (!string.IsNullOrWhiteSpace(tvItemModel.Error))
                 return ReturnAppTaskError(tvItemModel.Error);
 
             List<AppTaskParameter> appTaskParameterList = new List<AppTaskParameter>();
-            appTaskParameterList.Add(new AppTaskParameter() { Name = "CountryTVItemID", Value = CountryTVItemID.ToString() });
+            appTaskParameterList.Add(new AppTaskParameter() { Name = "ParentTVItemID", Value = ParentTVItemID.ToString() });
 
             StringBuilder sbParameters = new StringBuilder();
             int count = 0;
@@ -236,8 +235,8 @@ namespace CSSPDBDLL.Services
 
             AppTaskModel appTaskModelNew = new AppTaskModel()
             {
-                TVItemID = CountryTVItemID,
-                TVItemID2 = CountryTVItemID,
+                TVItemID = ParentTVItemID,
+                TVItemID2 = ParentTVItemID,
                 AppTaskCommand = AppTaskCommandEnum.ExportEmailDistributionLists,
                 ErrorText = "",
                 StatusText = ServiceRes.ExportingEmailDistributionLists,
@@ -257,13 +256,13 @@ namespace CSSPDBDLL.Services
 
             return appTaskModelRet;
         }
-        public EmailDistributionListModel PostEmailDistributionListMoveDownDB(int CountryTVItemID, int EmailDistributionListID)
+        public EmailDistributionListModel PostEmailDistributionListMoveDownDB(int ParentTVItemID, int EmailDistributionListID)
         {
             ContactOK contactOK = IsContactOK();
             if (!string.IsNullOrWhiteSpace(contactOK.Error))
                 return ReturnError(contactOK.Error);
 
-            List<EmailDistributionListModel> emailDistributionListModelList = GetEmailDistributionListModelWithCountryTVItemIDDB(CountryTVItemID);
+            List<EmailDistributionListModel> emailDistributionListModelList = GetEmailDistributionListModelWithParentTVItemIDDB(ParentTVItemID);
 
             EmailDistributionListModel emailDistributionListModelRet = new EmailDistributionListModel();
             using (TransactionScope ts = new TransactionScope())
@@ -292,13 +291,13 @@ namespace CSSPDBDLL.Services
             }
             return GetEmailDistributionListModelWithEmailDistributionListIDDB(emailDistributionListModelRet.EmailDistributionListID);
         }
-        public EmailDistributionListModel PostEmailDistributionListMoveUpDB(int CountryTVItemID, int EmailDistributionListID)
+        public EmailDistributionListModel PostEmailDistributionListMoveUpDB(int ParentTVItemID, int EmailDistributionListID)
         {
             ContactOK contactOK = IsContactOK();
             if (!string.IsNullOrWhiteSpace(contactOK.Error))
                 return ReturnError(contactOK.Error);
 
-            List<EmailDistributionListModel> emailDistributionListModelList = GetEmailDistributionListModelWithCountryTVItemIDDB(CountryTVItemID);
+            List<EmailDistributionListModel> emailDistributionListModelList = GetEmailDistributionListModelWithParentTVItemIDDB(ParentTVItemID);
 
             EmailDistributionListModel emailDistributionListModelRet = new EmailDistributionListModel();
             using (TransactionScope ts = new TransactionScope())
@@ -330,8 +329,8 @@ namespace CSSPDBDLL.Services
         public EmailDistributionListModel PostEmailDistributionListSaveDB(FormCollection fc)
         {
             int EmailDistributionListID = 0;
-            int CountryTVItemID = 0;
-            string RegionName = "";
+            int ParentTVItemID = 0;
+            string EmailListName = "";
             int Ordinal = 0;
 
             ContactOK contactOK = IsContactOK();
@@ -341,16 +340,16 @@ namespace CSSPDBDLL.Services
             int.TryParse(fc["EmailDistributionListID"], out EmailDistributionListID);
             // can be 0, if 0 then we want to add a new one
 
-            int.TryParse(fc["CountryTVItemID"], out CountryTVItemID);
-            if (CountryTVItemID == 0)
-                return ReturnError(string.Format(ServiceRes._IsRequired, ServiceRes.CountryTVItemID));
+            int.TryParse(fc["ParentTVItemID"], out ParentTVItemID);
+            if (ParentTVItemID == 0)
+                return ReturnError(string.Format(ServiceRes._IsRequired, ServiceRes.ParentTVItemID));
 
-            RegionName = fc["RegionName"];
-            if (string.IsNullOrWhiteSpace(RegionName))
-                return ReturnError(string.Format(ServiceRes._IsRequired, ServiceRes.RegionName));
+            EmailListName = fc["EmailListName"];
+            if (string.IsNullOrWhiteSpace(EmailListName))
+                return ReturnError(string.Format(ServiceRes._IsRequired, ServiceRes.EmailListName));
 
 
-            List<EmailDistributionListModel> emailDistributionListModelList = GetEmailDistributionListModelWithCountryTVItemIDDB(CountryTVItemID);
+            List<EmailDistributionListModel> emailDistributionListModelList = GetEmailDistributionListModelWithParentTVItemIDDB(ParentTVItemID);
 
             if (emailDistributionListModelList.Count > 0)
             {
@@ -366,8 +365,8 @@ namespace CSSPDBDLL.Services
 
             }
 
-            emailDistributionListModel.CountryTVItemID = CountryTVItemID;
-            emailDistributionListModel.RegionName = RegionName;
+            emailDistributionListModel.ParentTVItemID = ParentTVItemID;
+            emailDistributionListModel.EmailListName = EmailListName;
             emailDistributionListModel.Ordinal = Ordinal + 1;
 
             EmailDistributionListModel emailDistributionListModelRet = new EmailDistributionListModel();
@@ -424,7 +423,7 @@ namespace CSSPDBDLL.Services
                     {
                         EmailDistributionListID = emailDistributionListNew.EmailDistributionListID,
                         Language = Lang,
-                        RegionName = emailDistributionListModel.RegionName,
+                        EmailListName = emailDistributionListModel.EmailListName,
                         TranslationStatus = (Lang == LanguageRequest ? TranslationStatusEnum.Translated : TranslationStatusEnum.NotTranslated),
                     };
 
@@ -498,7 +497,7 @@ namespace CSSPDBDLL.Services
                         {
                             EmailDistributionListID = emailDistributionListToUpdate.EmailDistributionListID,
                             Language = Lang,
-                            RegionName = emailDistributionListModel.RegionName,
+                            EmailListName = emailDistributionListModel.EmailListName,
                             TranslationStatus = TranslationStatusEnum.Translated,
                         };
 

@@ -18,6 +18,7 @@ namespace CSSPDBDLL
         public ClimateSite()
         {
             this.ClimateDataValues = new HashSet<ClimateDataValue>();
+            this.RainExceedanceClimateSites = new HashSet<RainExceedanceClimateSite>();
         }
     
         public int ClimateSiteID { get; set; }
@@ -49,5 +50,7 @@ namespace CSSPDBDLL
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ClimateDataValue> ClimateDataValues { get; set; }
         public virtual TVItem TVItem { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<RainExceedanceClimateSite> RainExceedanceClimateSites { get; set; }
     }
 }

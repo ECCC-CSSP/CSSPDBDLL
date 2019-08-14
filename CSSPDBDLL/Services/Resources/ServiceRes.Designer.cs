@@ -2203,6 +2203,15 @@ namespace CSSPDBDLL.Services.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Could not find climate site to remove from rain exceedance.
+        /// </summary>
+        public static string CouldNotFindClimateSiteToRemoveFromRainExceedance {
+            get {
+                return ResourceManager.GetString("CouldNotFindClimateSiteToRemoveFromRainExceedance", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Could not find coordinates.
         /// </summary>
         public static string CouldNotFindCoordinates {
@@ -3531,6 +3540,15 @@ namespace CSSPDBDLL.Services.Resources {
         public static string EmailIN {
             get {
                 return ResourceManager.GetString("EmailIN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to EmailListName.
+        /// </summary>
+        public static string EmailListName {
+            get {
+                return ResourceManager.GetString("EmailListName", resourceCulture);
             }
         }
         
@@ -7207,6 +7225,15 @@ namespace CSSPDBDLL.Services.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Need to select at least one climate site.
+        /// </summary>
+        public static string NeedToSelectAtLeastOneClimateSite {
+            get {
+                return ResourceManager.GetString("NeedToSelectAtLeastOneClimateSite", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Negative35.
         /// </summary>
         public static string Negative35 {
@@ -8611,6 +8638,15 @@ namespace CSSPDBDLL.Services.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to RainExceedanceName.
+        /// </summary>
+        public static string RainExceedanceName {
+            get {
+                return ResourceManager.GetString("RainExceedanceName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to RainExceedanceTVItemID.
         /// </summary>
         public static string RainExceedanceTVItemID {
@@ -8670,6 +8706,15 @@ namespace CSSPDBDLL.Services.Resources {
         public static string RainMaximum {
             get {
                 return ResourceManager.GetString("RainMaximum", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to RainMaximum_mm.
+        /// </summary>
+        public static string RainMaximum_mm {
+            get {
+                return ResourceManager.GetString("RainMaximum_mm", resourceCulture);
             }
         }
         
@@ -8769,15 +8814,6 @@ namespace CSSPDBDLL.Services.Resources {
         public static string RectWidth_m {
             get {
                 return ResourceManager.GetString("RectWidth_m", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to RegionName.
-        /// </summary>
-        public static string RegionName {
-            get {
-                return ResourceManager.GetString("RegionName", resourceCulture);
             }
         }
         

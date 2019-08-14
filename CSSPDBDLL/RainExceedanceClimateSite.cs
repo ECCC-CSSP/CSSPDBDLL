@@ -12,16 +12,15 @@ namespace CSSPDBDLL
     using System;
     using System.Collections.Generic;
     
-    public partial class EmailDistributionListLanguage
+    public partial class RainExceedanceClimateSite
     {
-        public int EmailDistributionListLanguageID { get; set; }
-        public int EmailDistributionListID { get; set; }
-        public int Language { get; set; }
-        public string EmailListName { get; set; }
-        public int TranslationStatus { get; set; }
+        public int RainExceedanceClimateSiteID { get; set; }
+        public int RainExceedanceID { get; set; }
+        public int ClimateSiteID { get; set; }
         public System.DateTime LastUpdateDate_UTC { get; set; }
         public int LastUpdateContactTVItemID { get; set; }
     
-        public virtual EmailDistributionList EmailDistributionList { get; set; }
+        public virtual ClimateSite ClimateSite { get; set; }
+        public virtual RainExceedance RainExceedance { get; set; }
     }
 }

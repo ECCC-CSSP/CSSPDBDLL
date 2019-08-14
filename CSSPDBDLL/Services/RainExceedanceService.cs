@@ -21,7 +21,7 @@ namespace CSSPDBDLL.Services
         #region Properties
         public TVItemService _TVItemService { get; private set; }
         public LogService _LogService { get; private set; }
-        public HydrometricSiteService _HydrometricSiteService { get; private set; }
+        public MapInfoService _MapInfoService { get; private set; }
         #endregion Properties
 
         #region Constructors
@@ -30,7 +30,7 @@ namespace CSSPDBDLL.Services
         {
             _TVItemService = new TVItemService(LanguageRequest, User);
             _LogService = new LogService(LanguageRequest, User);
-            _HydrometricSiteService = new HydrometricSiteService(LanguageRequest, User);
+            _MapInfoService = new MapInfoService(LanguageRequest, User);
         }
         #endregion Constructors
 
@@ -61,41 +61,24 @@ namespace CSSPDBDLL.Services
                 return retStr;
             }
 
-            if (rainExceedanceModel.StartMonth != null)
+            if (rainExceedanceModel.StartMonth < 1 || rainExceedanceModel.StartMonth > 12)
             {
-                if (rainExceedanceModel.StartMonth < 1 || rainExceedanceModel.StartMonth > 12)
-                {
-                    return string.Format(ServiceRes.PleaseEnterValidFor_, ServiceRes.StartMonth);
-                }
+                return string.Format(ServiceRes.PleaseEnterValidFor_, ServiceRes.StartMonth);
             }
 
-            if (rainExceedanceModel.StartDay != null)
+            if (rainExceedanceModel.StartDay < 1 || rainExceedanceModel.StartDay > 31)
             {
-                if (rainExceedanceModel.StartDay < 1 || rainExceedanceModel.StartDay > 31)
-                {
-                    return string.Format(ServiceRes.PleaseEnterValidFor_, ServiceRes.StartDay);
-                }
+                return string.Format(ServiceRes.PleaseEnterValidFor_, ServiceRes.StartDay);
             }
 
-            if (rainExceedanceModel.EndMonth != null)
+            if (rainExceedanceModel.EndMonth < 1 || rainExceedanceModel.EndMonth > 12)
             {
-                if (rainExceedanceModel.EndMonth < 1 || rainExceedanceModel.EndMonth > 12)
-                {
-                    return string.Format(ServiceRes.PleaseEnterValidFor_, ServiceRes.EndMonth);
-                }
+                return string.Format(ServiceRes.PleaseEnterValidFor_, ServiceRes.EndMonth);
             }
 
-            if (rainExceedanceModel.EndDay != null)
+            if (rainExceedanceModel.EndDay < 1 || rainExceedanceModel.EndDay > 31)
             {
-                if (rainExceedanceModel.EndDay < 1 || rainExceedanceModel.EndDay > 31)
-                {
-                    return string.Format(ServiceRes.PleaseEnterValidFor_, ServiceRes.EndDay);
-                }
-            }
-
-            if (rainExceedanceModel.StartMonth != null || rainExceedanceModel.StartDay != null || rainExceedanceModel.EndMonth != null || rainExceedanceModel.EndDay != null)
-            {
-                return string.Format(ServiceRes.PleaseEnterValidFor_, ServiceRes.StartMonth + ",", ServiceRes.StartDay + ",", ServiceRes.EndDay + ",", ServiceRes.EndDay);
+                return string.Format(ServiceRes.PleaseEnterValidFor_, ServiceRes.EndDay);
             }
 
             retStr = FieldCheckIfNotNullWithinRangeDouble(rainExceedanceModel.RainMaximum_mm, ServiceRes.RainMaximum, 0.0f, 500.0f);
@@ -160,6 +143,13 @@ namespace CSSPDBDLL.Services
                                                                                                            && tl.Language == (int)LanguageRequest
                                                                                                            && t.TVItemID == c.OnlyStaffEmailDistributionListID
                                                                                                            select tl.TVText).FirstOrDefault()
+                                                                 let mapInfoPoint = (from mi in db.MapInfos
+                                                                                     from mip in db.MapInfoPoints
+                                                                                     where mi.MapInfoID == mip.MapInfoID
+                                                                                     && mi.TVItemID == c.RainExceedanceTVItemID
+                                                                                     && mi.MapInfoDrawType == (int)MapInfoDrawTypeEnum.Point
+                                                                                     && mi.TVType == (int)TVTypeEnum.RainExceedance
+                                                                                     select mip).FirstOrDefault()
                                                                  select new RainExceedanceModel
                                                                  {
                                                                      Error = "",
@@ -175,6 +165,8 @@ namespace CSSPDBDLL.Services
                                                                      StakeholdersEmailDistributionListName = stakeholdersEmailDistributionListName,
                                                                      OnlyStaffEmailDistributionListID = c.OnlyStaffEmailDistributionListID,
                                                                      OnlyStaffEmailDistributionListName = onlyStaffEmailDistributionListName,
+                                                                     Lat = mapInfoPoint.Lat,
+                                                                     Lng = mapInfoPoint.Lng,
                                                                      LastUpdateDate_UTC = c.LastUpdateDate_UTC,
                                                                      LastUpdateContactTVItemID = c.LastUpdateContactTVItemID,
                                                                  }).ToList<RainExceedanceModel>();
@@ -202,6 +194,13 @@ namespace CSSPDBDLL.Services
                                                                                                  && tl.Language == (int)LanguageRequest
                                                                                                  && t.TVItemID == c.OnlyStaffEmailDistributionListID
                                                                                                  select tl.TVText).FirstOrDefault()
+                                                       let mapInfoPoint = (from mi in db.MapInfos
+                                                                           from mip in db.MapInfoPoints
+                                                                           where mi.MapInfoID == mip.MapInfoID
+                                                                           && mi.TVItemID == c.RainExceedanceTVItemID
+                                                                           && mi.MapInfoDrawType == (int)MapInfoDrawTypeEnum.Point
+                                                                           && mi.TVType == (int)TVTypeEnum.RainExceedance
+                                                                           select mip).FirstOrDefault()
                                                        where c.RainExceedanceID == RainExceedanceID
                                                        select new RainExceedanceModel
                                                        {
@@ -218,6 +217,8 @@ namespace CSSPDBDLL.Services
                                                            StakeholdersEmailDistributionListName = stakeholdersEmailDistributionListName,
                                                            OnlyStaffEmailDistributionListID = c.OnlyStaffEmailDistributionListID,
                                                            OnlyStaffEmailDistributionListName = onlyStaffEmailDistributionListName,
+                                                           Lat = mapInfoPoint.Lat,
+                                                           Lng = mapInfoPoint.Lng,
                                                            LastUpdateDate_UTC = c.LastUpdateDate_UTC,
                                                            LastUpdateContactTVItemID = c.LastUpdateContactTVItemID,
                                                        }).FirstOrDefault<RainExceedanceModel>();
@@ -258,53 +259,62 @@ namespace CSSPDBDLL.Services
                 return ReturnError(contactOK.Error);
 
             int TempInt = 0;
-            float TempFloat = 0.0f;
+            int ParentTVItemID = 0;
             int RainExceedanceID = 0;
-            int RainExceedanceTVItemID = 0;
-            int? StartMonth = null;
-            int? StartDay = null;
-            int? EndMonth = null;
-            int? EndDay = null;
-            float? RainMaximum_mm = 0.0f;
+            string RainExceedanceName = "";
+            int StartMonth = 0;
+            int StartDay = 0;
+            int EndMonth = 0;
+            int EndDay = 0;
+            float RainMaximum_mm = 0.0f;
             int? StakeholdersEmailDistributionListID = null;
             int? OnlyStaffEmailDistributionListID = null;
+            double Lat = 0.0D;
+            double Lng = 0.0D;
+
+            int.TryParse(fc["ParentTVItemID"], out ParentTVItemID);
+            if (ParentTVItemID == 0)
+            {
+                return ReturnError(string.Format(ServiceRes._IsRequired, ServiceRes.ParentTVItemID));
+            }
 
             int.TryParse(fc["RainExceedanceID"], out RainExceedanceID);
-            // if 0 then want to add new SamplingPlan else want to modify
+            // if 0 then want to add new RainExceedance else want to modify
 
-            int.TryParse(fc["RainExceedanceTVItemID"], out RainExceedanceTVItemID);
-            if (RainExceedanceTVItemID == 0)
-                return ReturnError(string.Format(ServiceRes._IsRequired, ServiceRes.RainExceedanceTVItemID));
-
-            int.TryParse(fc["StartMonth"], out TempInt);
-            if (TempInt != 0)
+            RainExceedanceName = fc["RainExceedanceName"];
+            if (string.IsNullOrWhiteSpace(RainExceedanceName))
             {
-                StartMonth = TempInt;
+                return ReturnError(string.Format(ServiceRes._IsRequired, ServiceRes.RainExceedanceName));
             }
 
-            int.TryParse(fc["StartDay"], out TempInt);
-            if (TempInt != 0)
+            int.TryParse(fc["StartMonth"], out StartMonth);
+            if (StartMonth == 0)
             {
-                StartDay = TempInt;
+                return ReturnError(string.Format(ServiceRes._IsRequired, ServiceRes.StartMonth));
             }
 
-            int.TryParse(fc["EndMonth"], out TempInt);
-            if (TempInt != 0)
+            int.TryParse(fc["StartDay"], out StartDay);
+            if (StartDay == 0)
             {
-                EndMonth = TempInt;
+                return ReturnError(string.Format(ServiceRes._IsRequired, ServiceRes.StartDay));
             }
 
-            int.TryParse(fc["EndDay"], out TempInt);
-            if (TempInt != 0)
+            int.TryParse(fc["EndMonth"], out EndMonth);
+            if (EndMonth == 0)
             {
-                EndDay = TempInt;
+                return ReturnError(string.Format(ServiceRes._IsRequired, ServiceRes.EndMonth));
             }
 
-            float.TryParse(fc["RainMaximum_mm"], out TempFloat);
-            RainMaximum_mm = TempFloat;
+            int.TryParse(fc["EndDay"], out EndDay);
+            if (EndDay == 0)
+            {
+                return ReturnError(string.Format(ServiceRes._IsRequired, ServiceRes.EndDay));
+            }
+
+            float.TryParse(fc["RainMaximum_mm"], out RainMaximum_mm);
             if (RainMaximum_mm == 0.0f)
             {
-                RainMaximum_mm = null;
+                return ReturnError(string.Format(ServiceRes._IsRequired, ServiceRes.RainMaximum_mm));
             }
 
             int.TryParse(fc["StakeholdersEmailDistributionListID"], out TempInt);
@@ -319,14 +329,61 @@ namespace CSSPDBDLL.Services
                 OnlyStaffEmailDistributionListID = TempInt;
             }
 
+            double.TryParse(fc["Lat"], out Lat);
+            if (Lat == 0.0D)
+            {
+                return ReturnError(string.Format(ServiceRes._IsRequired, ServiceRes.Lat));
+            }
+
+            double.TryParse(fc["Lng"], out Lng);
+            if (Lng == 0.0D)
+            {
+                return ReturnError(string.Format(ServiceRes._IsRequired, ServiceRes.Lng));
+            }
+
             RainExceedanceModel RainExceedanceModelRet = new RainExceedanceModel();
             using (TransactionScope ts = new TransactionScope())
             {
                 if (RainExceedanceID == 0)
                 {
+                    TVItemModel tvItemModelRainExceedance = _TVItemService.GetChildTVItemModelWithParentIDAndTVTextAndTVTypeDB(ParentTVItemID, RainExceedanceName, TVTypeEnum.RainExceedance);
+                    if (!string.IsNullOrWhiteSpace(tvItemModelRainExceedance.Error))
+                    {
+                        tvItemModelRainExceedance = _TVItemService.PostAddChildTVItemDB(ParentTVItemID, RainExceedanceName, TVTypeEnum.RainExceedance);
+                        if (!string.IsNullOrWhiteSpace(tvItemModelRainExceedance.Error))
+                        {
+                            return ReturnError(tvItemModelRainExceedance.Error);
+                        }
+                    }
+
+                    List<MapInfoPointModel> mapInfoPointModelList = _MapInfoService._MapInfoPointService.GetMapInfoPointModelListWithTVItemIDAndTVTypeAndMapInfoDrawTypeDB(tvItemModelRainExceedance.TVItemID, TVTypeEnum.RainExceedance, MapInfoDrawTypeEnum.Point);
+                    if (mapInfoPointModelList.Count == 0)
+                    {
+                        List<Coord> coordList = new List<Coord>()
+                        {
+                            new Coord() { Lat = (float)Lat, Lng = (float)Lng, Ordinal = 0 }
+                        };
+                        MapInfoModel mapInfoModel = _MapInfoService.CreateMapInfoObjectDB(coordList, MapInfoDrawTypeEnum.Point, TVTypeEnum.RainExceedance, tvItemModelRainExceedance.TVItemID);
+                        if (!string.IsNullOrWhiteSpace(mapInfoModel.Error))
+                        {
+                            return ReturnError(mapInfoModel.Error);
+                        }
+                    }
+                    else
+                    {
+                        mapInfoPointModelList[0].Lat = Lat;
+                        mapInfoPointModelList[0].Lng = Lng;
+
+                        MapInfoPointModel mapInfoPointModelRet = _MapInfoService._MapInfoPointService.PostUpdateMapInfoPointDB(mapInfoPointModelList[0]);
+                        if (!string.IsNullOrWhiteSpace(mapInfoPointModelRet.Error))
+                        {
+                            return ReturnError(mapInfoPointModelRet.Error);
+                        }
+                    }
+
                     RainExceedanceModel RainExceedanceModelNew = new RainExceedanceModel()
                     {
-                        RainExceedanceTVItemID = RainExceedanceTVItemID,
+                        RainExceedanceTVItemID = tvItemModelRainExceedance.TVItemID,
                         StartMonth = StartMonth,
                         StartDay = StartDay,
                         EndMonth = EndMonth,
@@ -343,17 +400,66 @@ namespace CSSPDBDLL.Services
                 }
                 else
                 {
-                    RainExceedanceModel RainExceedanceModelToUpdate = GetRainExceedanceModelWithRainExceedanceIDDB(RainExceedanceID);
-                    RainExceedanceModelToUpdate.RainExceedanceTVItemID = RainExceedanceTVItemID;
-                    RainExceedanceModelToUpdate.StartMonth = StartMonth;
-                    RainExceedanceModelToUpdate.StartDay = StartDay;
-                    RainExceedanceModelToUpdate.EndMonth = EndMonth;
-                    RainExceedanceModelToUpdate.EndDay = EndDay;
-                    RainExceedanceModelToUpdate.RainMaximum_mm = RainMaximum_mm;
-                    RainExceedanceModelToUpdate.StakeholdersEmailDistributionListID = StakeholdersEmailDistributionListID;
-                    RainExceedanceModelToUpdate.OnlyStaffEmailDistributionListID = OnlyStaffEmailDistributionListID;
+                    RainExceedanceModel rainExceedanceModelToUpdate = GetRainExceedanceModelWithRainExceedanceIDDB(RainExceedanceID);
+                    if (!string.IsNullOrWhiteSpace(rainExceedanceModelToUpdate.Error))
+                    {
+                        return ReturnError(rainExceedanceModelToUpdate.Error);
+                    }
 
-                    RainExceedanceModelRet = PostUpdateRainExceedanceDB(RainExceedanceModelToUpdate);
+                    TVItemModel tvItemModelRainExceedance = _TVItemService.GetTVItemModelWithTVItemIDDB(rainExceedanceModelToUpdate.RainExceedanceTVItemID);
+                    if (!string.IsNullOrWhiteSpace(tvItemModelRainExceedance.Error))
+                    {
+                        return ReturnError(tvItemModelRainExceedance.Error);
+                    }
+
+                    if (tvItemModelRainExceedance.TVText != RainExceedanceName)
+                    {
+                        tvItemModelRainExceedance.TVText = RainExceedanceName;
+
+                        TVItemModel tvItemModelRainExceedanceRet = _TVItemService.PostUpdateTVItemDB(tvItemModelRainExceedance);
+                        if (!string.IsNullOrWhiteSpace(tvItemModelRainExceedanceRet.Error))
+                        {
+                            return ReturnError(tvItemModelRainExceedanceRet.Error);
+                        }
+                    }
+
+                    List<MapInfoPointModel> mapInfoPointModelList = _MapInfoService._MapInfoPointService.GetMapInfoPointModelListWithTVItemIDAndTVTypeAndMapInfoDrawTypeDB(tvItemModelRainExceedance.TVItemID, TVTypeEnum.RainExceedance, MapInfoDrawTypeEnum.Point);
+                    if (mapInfoPointModelList.Count == 0)
+                    {
+                        List<Coord> coordList = new List<Coord>()
+                        {
+                            new Coord() { Lat = (float)Lat, Lng = (float)Lng, Ordinal = 0 }
+                        };
+                        MapInfoModel mapInfoModel = _MapInfoService.CreateMapInfoObjectDB(coordList, MapInfoDrawTypeEnum.Point, TVTypeEnum.RainExceedance, tvItemModelRainExceedance.TVItemID);
+                        if (!string.IsNullOrWhiteSpace(mapInfoModel.Error))
+                        {
+                            return ReturnError(mapInfoModel.Error);
+                        }
+                    }
+                    else
+                    {
+                        if (!(mapInfoPointModelList[0].Lat == Lat && mapInfoPointModelList[0].Lng == Lng))
+                        {
+                            mapInfoPointModelList[0].Lat = Lat;
+                            mapInfoPointModelList[0].Lng = Lng;
+
+                            MapInfoPointModel mapInfoPointModelRet = _MapInfoService._MapInfoPointService.PostUpdateMapInfoPointDB(mapInfoPointModelList[0]);
+                            if (!string.IsNullOrWhiteSpace(mapInfoPointModelRet.Error))
+                            {
+                                return ReturnError(mapInfoPointModelRet.Error);
+                            }
+                        }
+                    }
+
+                    rainExceedanceModelToUpdate.StartMonth = StartMonth;
+                    rainExceedanceModelToUpdate.StartDay = StartDay;
+                    rainExceedanceModelToUpdate.EndMonth = EndMonth;
+                    rainExceedanceModelToUpdate.EndDay = EndDay;
+                    rainExceedanceModelToUpdate.RainMaximum_mm = RainMaximum_mm;
+                    rainExceedanceModelToUpdate.StakeholdersEmailDistributionListID = StakeholdersEmailDistributionListID;
+                    rainExceedanceModelToUpdate.OnlyStaffEmailDistributionListID = OnlyStaffEmailDistributionListID;
+
+                    RainExceedanceModelRet = PostUpdateRainExceedanceDB(rainExceedanceModelToUpdate);
                     if (!string.IsNullOrWhiteSpace(RainExceedanceModelRet.Error))
                         ReturnError(RainExceedanceModelRet.Error);
                 }

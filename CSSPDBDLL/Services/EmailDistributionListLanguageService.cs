@@ -64,7 +64,7 @@ namespace CSSPDBDLL.Services
                 return retStr;
             }
 
-            retStr = FieldCheckNotNullAndMinMaxLengthString(emailDistributionListLanguageModel.RegionName, ServiceRes.RegionName, 2, 250);
+            retStr = FieldCheckNotNullAndMinMaxLengthString(emailDistributionListLanguageModel.EmailListName, ServiceRes.EmailListName, 2, 250);
             if (!string.IsNullOrWhiteSpace(retStr))
             {
                 return retStr;
@@ -80,7 +80,7 @@ namespace CSSPDBDLL.Services
             {
                 emailDistributionListLanguage.EmailDistributionListID = emailDistributionListLanguageModel.EmailDistributionListID;
                 emailDistributionListLanguage.Language = (int)emailDistributionListLanguageModel.Language;
-                emailDistributionListLanguage.RegionName = emailDistributionListLanguageModel.RegionName;
+                emailDistributionListLanguage.EmailListName = emailDistributionListLanguageModel.EmailListName;
                 emailDistributionListLanguage.TranslationStatus = (int)emailDistributionListLanguageModel.TranslationStatus;
                 emailDistributionListLanguage.LastUpdateDate_UTC = DateTime.UtcNow;
                 if (contactOK == null)
@@ -120,7 +120,7 @@ namespace CSSPDBDLL.Services
                                                                EmailDistributionListLanguageID = c.EmailDistributionListLanguageID,
                                                                EmailDistributionListID = c.EmailDistributionListID,
                                                                Language = (LanguageEnum)c.Language,
-                                                               RegionName = c.RegionName,
+                                                               EmailListName = c.EmailListName,
                                                                TranslationStatus = (TranslationStatusEnum)c.TranslationStatus,
                                                                LastUpdateDate_UTC = c.LastUpdateDate_UTC,
                                                                LastUpdateContactTVItemID = c.LastUpdateContactTVItemID,

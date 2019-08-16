@@ -53,13 +53,13 @@ namespace CSSPDBDLL.Services
         // Check
         public string RainExceedanceClimateSiteModelOK(RainExceedanceClimateSiteModel rainExceedanceClimateSiteModel)
         {
-            string retStr = FieldCheckNotZeroInt(rainExceedanceClimateSiteModel.RainExceedanceID, ServiceRes.RainExceedanceID);
+            string retStr = FieldCheckNotZeroInt(rainExceedanceClimateSiteModel.RainExceedanceTVItemID, ServiceRes.RainExceedanceTVItemID);
             if (!string.IsNullOrWhiteSpace(retStr))
             {
                 return retStr;
             }
 
-            retStr = FieldCheckNotZeroInt(rainExceedanceClimateSiteModel.ClimateSiteID, ServiceRes.ClimateSiteID);
+            retStr = FieldCheckNotZeroInt(rainExceedanceClimateSiteModel.ClimateSiteTVItemID, ServiceRes.ClimateSiteTVItemID);
             if (!string.IsNullOrWhiteSpace(retStr))
             {
                 return retStr;
@@ -71,8 +71,8 @@ namespace CSSPDBDLL.Services
         // Fill
         public string FillRainExceedanceClimateSite(RainExceedanceClimateSite rainExceedanceClimateSiteNew, RainExceedanceClimateSiteModel rainExceedanceClimateSiteModel, ContactOK contactOK)
         {
-            rainExceedanceClimateSiteNew.RainExceedanceID = rainExceedanceClimateSiteModel.RainExceedanceID;
-            rainExceedanceClimateSiteNew.ClimateSiteID = rainExceedanceClimateSiteModel.ClimateSiteID;
+            rainExceedanceClimateSiteNew.RainExceedanceTVItemID = rainExceedanceClimateSiteModel.RainExceedanceTVItemID;
+            rainExceedanceClimateSiteNew.ClimateSiteTVItemID = rainExceedanceClimateSiteModel.ClimateSiteTVItemID;
             rainExceedanceClimateSiteNew.LastUpdateDate_UTC = DateTime.UtcNow;
             if (contactOK == null)
             {
@@ -86,7 +86,6 @@ namespace CSSPDBDLL.Services
             return "";
         }
 
-        // Get
         public int GetRainExceedanceClimateSiteModelCountDB()
         {
             int RainExceedanceClimateSiteModelCount = (from c in db.RainExceedanceClimateSites
@@ -94,15 +93,32 @@ namespace CSSPDBDLL.Services
 
             return RainExceedanceClimateSiteModelCount;
         }
-        public List<RainExceedanceClimateSiteModel> GetRainExceedanceClimateSiteModelListWithRainExceedanceIDDB(int RainExceedanceID)
+        public List<RainExceedanceClimateSiteModel> GetRainExceedanceClimateSiteModelListWithRainExceedanceTVItemIDDB(int RainExceedanceTVItemID)
         {
             List<RainExceedanceClimateSiteModel> RainExceedanceClimateSiteModelList = (from c in db.RainExceedanceClimateSites
+                                                                                       where c.RainExceedanceTVItemID == RainExceedanceTVItemID
                                                                                        select new RainExceedanceClimateSiteModel
                                                                                        {
                                                                                            Error = "",
                                                                                            RainExceedanceClimateSiteID = c.RainExceedanceClimateSiteID,
-                                                                                           RainExceedanceID = c.RainExceedanceID,
-                                                                                           ClimateSiteID = c.ClimateSiteID,
+                                                                                           RainExceedanceTVItemID = c.RainExceedanceTVItemID,
+                                                                                           ClimateSiteTVItemID = c.ClimateSiteTVItemID,
+                                                                                           LastUpdateDate_UTC = c.LastUpdateDate_UTC,
+                                                                                           LastUpdateContactTVItemID = c.LastUpdateContactTVItemID,
+                                                                                       }).ToList<RainExceedanceClimateSiteModel>();
+
+            return RainExceedanceClimateSiteModelList;
+        }
+        public List<RainExceedanceClimateSiteModel> GetRainExceedanceClimateSiteModelListWithClimateSiteTVItemIDDB(int ClimateSiteTVItemID)
+        {
+            List<RainExceedanceClimateSiteModel> RainExceedanceClimateSiteModelList = (from c in db.RainExceedanceClimateSites
+                                                                                       where c.ClimateSiteTVItemID == ClimateSiteTVItemID
+                                                                                       select new RainExceedanceClimateSiteModel
+                                                                                       {
+                                                                                           Error = "",
+                                                                                           RainExceedanceClimateSiteID = c.RainExceedanceClimateSiteID,
+                                                                                           RainExceedanceTVItemID = c.RainExceedanceTVItemID,
+                                                                                           ClimateSiteTVItemID = c.ClimateSiteTVItemID,
                                                                                            LastUpdateDate_UTC = c.LastUpdateDate_UTC,
                                                                                            LastUpdateContactTVItemID = c.LastUpdateContactTVItemID,
                                                                                        }).ToList<RainExceedanceClimateSiteModel>();
@@ -117,8 +133,8 @@ namespace CSSPDBDLL.Services
                                                                              {
                                                                                  Error = "",
                                                                                  RainExceedanceClimateSiteID = c.RainExceedanceClimateSiteID,
-                                                                                 RainExceedanceID = c.RainExceedanceID,
-                                                                                 ClimateSiteID = c.ClimateSiteID,
+                                                                                 RainExceedanceTVItemID = c.RainExceedanceTVItemID,
+                                                                                 ClimateSiteTVItemID = c.ClimateSiteTVItemID,
                                                                                  LastUpdateDate_UTC = c.LastUpdateDate_UTC,
                                                                                  LastUpdateContactTVItemID = c.LastUpdateContactTVItemID,
                                                                              }).FirstOrDefault<RainExceedanceClimateSiteModel>();
@@ -139,8 +155,8 @@ namespace CSSPDBDLL.Services
         public RainExceedanceClimateSite GetRainExceedanceClimateSiteExistDB(RainExceedanceClimateSiteModel rainExceedanceClimateSiteModel)
         {
             RainExceedanceClimateSite rainExceedanceClimateSite = (from c in db.RainExceedanceClimateSites
-                                                                   where c.RainExceedanceID == rainExceedanceClimateSiteModel.RainExceedanceID
-                                                                   && c.ClimateSiteID == rainExceedanceClimateSiteModel.ClimateSiteID
+                                                                   where c.RainExceedanceTVItemID == rainExceedanceClimateSiteModel.RainExceedanceTVItemID
+                                                                   && c.ClimateSiteTVItemID == rainExceedanceClimateSiteModel.ClimateSiteTVItemID
                                                                    select c).FirstOrDefault<RainExceedanceClimateSite>();
 
             return rainExceedanceClimateSite;
@@ -153,7 +169,7 @@ namespace CSSPDBDLL.Services
         }
 
         // Post
-        public RainExceedanceClimateSiteModel PostRainExceedanceClimateSiteSaveDB(int RainExceedanceID, int ClimateSiteID, bool Use)
+        public RainExceedanceClimateSiteModel PostRainExceedanceClimateSiteSaveDB(int RainExceedanceTVItemID, int ClimateSiteTVItemID, bool Use)
         {
             ContactOK contactOK = IsContactOK();
             if (!string.IsNullOrWhiteSpace(contactOK.Error))
@@ -168,8 +184,8 @@ namespace CSSPDBDLL.Services
                 {
                     RainExceedanceClimateSiteModel rainExceedanceClimateSiteModelNew = new RainExceedanceClimateSiteModel()
                     {
-                        RainExceedanceID = RainExceedanceID,
-                        ClimateSiteID = ClimateSiteID,
+                        RainExceedanceTVItemID = RainExceedanceTVItemID,
+                        ClimateSiteTVItemID = ClimateSiteTVItemID,
                     };
 
                     RainExceedanceClimateSite rainExceedanceClimateSite = GetRainExceedanceClimateSiteExistDB(rainExceedanceClimateSiteModelNew);
@@ -187,8 +203,8 @@ namespace CSSPDBDLL.Services
                 {
                     RainExceedanceClimateSiteModel rainExceedanceClimateSiteModelNew = new RainExceedanceClimateSiteModel()
                     {
-                        RainExceedanceID = RainExceedanceID,
-                        ClimateSiteID = ClimateSiteID,
+                        RainExceedanceTVItemID = RainExceedanceTVItemID,
+                        ClimateSiteTVItemID = ClimateSiteTVItemID,
                     };
 
                     RainExceedanceClimateSite rainExceedanceClimateSite = GetRainExceedanceClimateSiteExistDB(rainExceedanceClimateSiteModelNew);

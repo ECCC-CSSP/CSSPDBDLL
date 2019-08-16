@@ -1009,8 +1009,8 @@
             <PropertyRef Name="RainExceedanceClimateSiteID" />
           </Key>
           <Property Name="RainExceedanceClimateSiteID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="RainExceedanceID" Type="int" Nullable="false" />
-          <Property Name="ClimateSiteID" Type="int" Nullable="false" />
+          <Property Name="RainExceedanceTVItemID" Type="int" Nullable="false" />
+          <Property Name="ClimateSiteTVItemID" Type="int" Nullable="false" />
           <Property Name="LastUpdateDate_UTC" Type="datetime" Nullable="false" />
           <Property Name="LastUpdateContactTVItemID" Type="int" Nullable="false" />
         </EntityType>
@@ -1027,6 +1027,7 @@
           <Property Name="RainMaximum_mm" Type="float" Nullable="false" />
           <Property Name="StakeholdersEmailDistributionListID" Type="int" />
           <Property Name="OnlyStaffEmailDistributionListID" Type="int" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
           <Property Name="LastUpdateDate_UTC" Type="datetime" Nullable="false" />
           <Property Name="LastUpdateContactTVItemID" Type="int" Nullable="false" />
         </EntityType>
@@ -2400,27 +2401,27 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_RainExceedanceClimateSites_ClimateSites">
-          <End Role="ClimateSites" Type="Self.ClimateSites" Multiplicity="1" />
+        <Association Name="FK_RainExceedance_ClimateSiteTVItemID">
+          <End Role="TVItems" Type="Self.TVItems" Multiplicity="1" />
           <End Role="RainExceedanceClimateSites" Type="Self.RainExceedanceClimateSites" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="ClimateSites">
-              <PropertyRef Name="ClimateSiteID" />
+            <Principal Role="TVItems">
+              <PropertyRef Name="TVItemID" />
             </Principal>
             <Dependent Role="RainExceedanceClimateSites">
-              <PropertyRef Name="ClimateSiteID" />
+              <PropertyRef Name="ClimateSiteTVItemID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_RainExceedanceClimateSites_RainExceedances">
-          <End Role="RainExceedances" Type="Self.RainExceedances" Multiplicity="1" />
+        <Association Name="FK_RainExceedance_RainExceedanceTVItemID">
+          <End Role="TVItems" Type="Self.TVItems" Multiplicity="1" />
           <End Role="RainExceedanceClimateSites" Type="Self.RainExceedanceClimateSites" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="RainExceedances">
-              <PropertyRef Name="RainExceedanceID" />
+            <Principal Role="TVItems">
+              <PropertyRef Name="TVItemID" />
             </Principal>
             <Dependent Role="RainExceedanceClimateSites">
-              <PropertyRef Name="RainExceedanceID" />
+              <PropertyRef Name="RainExceedanceTVItemID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -3337,12 +3338,12 @@
             <End Role="TVItems" EntitySet="TVItems" />
             <End Role="PolSourceSites" EntitySet="PolSourceSites" />
           </AssociationSet>
-          <AssociationSet Name="FK_RainExceedanceClimateSites_ClimateSites" Association="Self.FK_RainExceedanceClimateSites_ClimateSites">
-            <End Role="ClimateSites" EntitySet="ClimateSites" />
+          <AssociationSet Name="FK_RainExceedance_ClimateSiteTVItemID" Association="Self.FK_RainExceedance_ClimateSiteTVItemID">
+            <End Role="TVItems" EntitySet="TVItems" />
             <End Role="RainExceedanceClimateSites" EntitySet="RainExceedanceClimateSites" />
           </AssociationSet>
-          <AssociationSet Name="FK_RainExceedanceClimateSites_RainExceedances" Association="Self.FK_RainExceedanceClimateSites_RainExceedances">
-            <End Role="RainExceedances" EntitySet="RainExceedances" />
+          <AssociationSet Name="FK_RainExceedance_RainExceedanceTVItemID" Association="Self.FK_RainExceedance_RainExceedanceTVItemID">
+            <End Role="TVItems" EntitySet="TVItems" />
             <End Role="RainExceedanceClimateSites" EntitySet="RainExceedanceClimateSites" />
           </AssociationSet>
           <AssociationSet Name="FK_RainExceedances_OnlyStaffEmailDistributionLists1" Association="Self.FK_RainExceedances_OnlyStaffEmailDistributionLists1">
@@ -3670,10 +3671,6 @@
             <End Role="TVItem" EntitySet="TVItems" />
             <End Role="ClimateSite" EntitySet="ClimateSites" />
           </AssociationSet>
-          <AssociationSet Name="FK_RainExceedanceClimateSites_ClimateSites" Association="CSSPDBModel.FK_RainExceedanceClimateSites_ClimateSites">
-            <End Role="ClimateSite" EntitySet="ClimateSites" />
-            <End Role="RainExceedanceClimateSite" EntitySet="RainExceedanceClimateSites" />
-          </AssociationSet>
           <AssociationSet Name="FK_ContactPreferences_Contacts" Association="CSSPDBModel.FK_ContactPreferences_Contacts">
             <End Role="Contact" EntitySet="Contacts" />
             <End Role="ContactPreference" EntitySet="ContactPreferences" />
@@ -3906,8 +3903,12 @@
             <End Role="TVItem" EntitySet="TVItems" />
             <End Role="PolSourceSite" EntitySet="PolSourceSites" />
           </AssociationSet>
-          <AssociationSet Name="FK_RainExceedanceClimateSites_RainExceedances" Association="CSSPDBModel.FK_RainExceedanceClimateSites_RainExceedances">
-            <End Role="RainExceedance" EntitySet="RainExceedances" />
+          <AssociationSet Name="FK_RainExceedance_ClimateSiteTVItemID" Association="CSSPDBModel.FK_RainExceedance_ClimateSiteTVItemID">
+            <End Role="TVItem" EntitySet="TVItems" />
+            <End Role="RainExceedanceClimateSite" EntitySet="RainExceedanceClimateSites" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RainExceedance_RainExceedanceTVItemID" Association="CSSPDBModel.FK_RainExceedance_RainExceedanceTVItemID">
+            <End Role="TVItem" EntitySet="TVItems" />
             <End Role="RainExceedanceClimateSite" EntitySet="RainExceedanceClimateSites" />
           </AssociationSet>
           <AssociationSet Name="FK_RainExceedances_RainExceedanceTVItemID" Association="CSSPDBModel.FK_RainExceedances_RainExceedanceTVItemID">
@@ -4320,7 +4321,6 @@
           <Property Name="LastUpdateContactTVItemID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="ClimateDataValues" Relationship="CSSPDBModel.FK_ClimateDataValues_ClimateSites" FromRole="ClimateSite" ToRole="ClimateDataValue" />
           <NavigationProperty Name="TVItem" Relationship="CSSPDBModel.FK_ClimateSites_TVItems" FromRole="ClimateSite" ToRole="TVItem" />
-          <NavigationProperty Name="RainExceedanceClimateSites" Relationship="CSSPDBModel.FK_RainExceedanceClimateSites_ClimateSites" FromRole="ClimateSite" ToRole="RainExceedanceClimateSite" />
         </EntityType>
         <EntityType Name="ContactPreference">
           <Key>
@@ -5169,12 +5169,12 @@
             <PropertyRef Name="RainExceedanceClimateSiteID" />
           </Key>
           <Property Name="RainExceedanceClimateSiteID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="RainExceedanceID" Type="Int32" Nullable="false" />
-          <Property Name="ClimateSiteID" Type="Int32" Nullable="false" />
+          <Property Name="RainExceedanceTVItemID" Type="Int32" Nullable="false" />
+          <Property Name="ClimateSiteTVItemID" Type="Int32" Nullable="false" />
           <Property Name="LastUpdateDate_UTC" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="LastUpdateContactTVItemID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="ClimateSite" Relationship="CSSPDBModel.FK_RainExceedanceClimateSites_ClimateSites" FromRole="RainExceedanceClimateSite" ToRole="ClimateSite" />
-          <NavigationProperty Name="RainExceedance" Relationship="CSSPDBModel.FK_RainExceedanceClimateSites_RainExceedances" FromRole="RainExceedanceClimateSite" ToRole="RainExceedance" />
+          <NavigationProperty Name="TVItem" Relationship="CSSPDBModel.FK_RainExceedance_ClimateSiteTVItemID" FromRole="RainExceedanceClimateSite" ToRole="TVItem" />
+          <NavigationProperty Name="TVItem1" Relationship="CSSPDBModel.FK_RainExceedance_RainExceedanceTVItemID" FromRole="RainExceedanceClimateSite" ToRole="TVItem" />
         </EntityType>
         <EntityType Name="RainExceedance">
           <Key>
@@ -5189,11 +5189,11 @@
           <Property Name="RainMaximum_mm" Type="Double" Nullable="false" />
           <Property Name="StakeholdersEmailDistributionListID" Type="Int32" />
           <Property Name="OnlyStaffEmailDistributionListID" Type="Int32" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
           <Property Name="LastUpdateDate_UTC" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="LastUpdateContactTVItemID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="EmailDistributionList" Relationship="CSSPDBModel.FK_RainExceedances_OnlyStaffEmailDistributionLists1" FromRole="RainExceedance" ToRole="EmailDistributionList" />
           <NavigationProperty Name="EmailDistributionList1" Relationship="CSSPDBModel.FK_RainExceedances_StakeholdersEmailDistributionLists" FromRole="RainExceedance" ToRole="EmailDistributionList" />
-          <NavigationProperty Name="RainExceedanceClimateSites" Relationship="CSSPDBModel.FK_RainExceedanceClimateSites_RainExceedances" FromRole="RainExceedance" ToRole="RainExceedanceClimateSite" />
           <NavigationProperty Name="TVItem" Relationship="CSSPDBModel.FK_RainExceedances_RainExceedanceTVItemID" FromRole="RainExceedance" ToRole="TVItem" />
         </EntityType>
         <EntityType Name="RatingCurve">
@@ -5592,6 +5592,8 @@
           <NavigationProperty Name="PolSourceObservations" Relationship="CSSPDBModel.FK_PolSourceObservations_TVItemContact" FromRole="TVItem" ToRole="PolSourceObservation" />
           <NavigationProperty Name="PolSourceSites" Relationship="CSSPDBModel.FK_PolSourceSites_TVItems" FromRole="TVItem" ToRole="PolSourceSite" />
           <NavigationProperty Name="PolSourceSites1" Relationship="CSSPDBModel.FK_PolSourceSites_TVItems1" FromRole="TVItem" ToRole="PolSourceSite" />
+          <NavigationProperty Name="RainExceedanceClimateSites" Relationship="CSSPDBModel.FK_RainExceedance_ClimateSiteTVItemID" FromRole="TVItem" ToRole="RainExceedanceClimateSite" />
+          <NavigationProperty Name="RainExceedanceClimateSites1" Relationship="CSSPDBModel.FK_RainExceedance_RainExceedanceTVItemID" FromRole="TVItem" ToRole="RainExceedanceClimateSite" />
           <NavigationProperty Name="RainExceedances" Relationship="CSSPDBModel.FK_RainExceedances_RainExceedanceTVItemID" FromRole="TVItem" ToRole="RainExceedance" />
           <NavigationProperty Name="ReportSections" Relationship="CSSPDBModel.FK_ReportSections_TVItems" FromRole="TVItem" ToRole="ReportSection" />
           <NavigationProperty Name="SamplingPlans" Relationship="CSSPDBModel.FK_SamplingPlans_CreatorTVItemID" FromRole="TVItem" ToRole="SamplingPlan" />
@@ -5969,18 +5971,6 @@
             </Principal>
             <Dependent Role="ClimateSite">
               <PropertyRef Name="ClimateSiteTVItemID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_RainExceedanceClimateSites_ClimateSites">
-          <End Type="CSSPDBModel.ClimateSite" Role="ClimateSite" Multiplicity="1" />
-          <End Type="CSSPDBModel.RainExceedanceClimateSite" Role="RainExceedanceClimateSite" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ClimateSite">
-              <PropertyRef Name="ClimateSiteID" />
-            </Principal>
-            <Dependent Role="RainExceedanceClimateSite">
-              <PropertyRef Name="ClimateSiteID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -6710,15 +6700,27 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_RainExceedanceClimateSites_RainExceedances">
-          <End Type="CSSPDBModel.RainExceedance" Role="RainExceedance" Multiplicity="1" />
+        <Association Name="FK_RainExceedance_ClimateSiteTVItemID">
+          <End Type="CSSPDBModel.TVItem" Role="TVItem" Multiplicity="1" />
           <End Type="CSSPDBModel.RainExceedanceClimateSite" Role="RainExceedanceClimateSite" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="RainExceedance">
-              <PropertyRef Name="RainExceedanceID" />
+            <Principal Role="TVItem">
+              <PropertyRef Name="TVItemID" />
             </Principal>
             <Dependent Role="RainExceedanceClimateSite">
-              <PropertyRef Name="RainExceedanceID" />
+              <PropertyRef Name="ClimateSiteTVItemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RainExceedance_RainExceedanceTVItemID">
+          <End Type="CSSPDBModel.TVItem" Role="TVItem" Multiplicity="1" />
+          <End Type="CSSPDBModel.RainExceedanceClimateSite" Role="RainExceedanceClimateSite" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TVItem">
+              <PropertyRef Name="TVItemID" />
+            </Principal>
+            <Dependent Role="RainExceedanceClimateSite">
+              <PropertyRef Name="RainExceedanceTVItemID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -8277,8 +8279,8 @@
               <MappingFragment StoreEntitySet="RainExceedanceClimateSites">
                 <ScalarProperty Name="LastUpdateContactTVItemID" ColumnName="LastUpdateContactTVItemID" />
                 <ScalarProperty Name="LastUpdateDate_UTC" ColumnName="LastUpdateDate_UTC" />
-                <ScalarProperty Name="ClimateSiteID" ColumnName="ClimateSiteID" />
-                <ScalarProperty Name="RainExceedanceID" ColumnName="RainExceedanceID" />
+                <ScalarProperty Name="ClimateSiteTVItemID" ColumnName="ClimateSiteTVItemID" />
+                <ScalarProperty Name="RainExceedanceTVItemID" ColumnName="RainExceedanceTVItemID" />
                 <ScalarProperty Name="RainExceedanceClimateSiteID" ColumnName="RainExceedanceClimateSiteID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -8288,6 +8290,7 @@
               <MappingFragment StoreEntitySet="RainExceedances">
                 <ScalarProperty Name="LastUpdateContactTVItemID" ColumnName="LastUpdateContactTVItemID" />
                 <ScalarProperty Name="LastUpdateDate_UTC" ColumnName="LastUpdateDate_UTC" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
                 <ScalarProperty Name="OnlyStaffEmailDistributionListID" ColumnName="OnlyStaffEmailDistributionListID" />
                 <ScalarProperty Name="StakeholdersEmailDistributionListID" ColumnName="StakeholdersEmailDistributionListID" />
                 <ScalarProperty Name="RainMaximum_mm" ColumnName="RainMaximum_mm" />

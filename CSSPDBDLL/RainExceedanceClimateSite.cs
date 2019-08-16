@@ -15,12 +15,12 @@ namespace CSSPDBDLL
     public partial class RainExceedanceClimateSite
     {
         public int RainExceedanceClimateSiteID { get; set; }
-        public int RainExceedanceID { get; set; }
-        public int ClimateSiteID { get; set; }
+        public int RainExceedanceTVItemID { get; set; }
+        public int ClimateSiteTVItemID { get; set; }
         public System.DateTime LastUpdateDate_UTC { get; set; }
         public int LastUpdateContactTVItemID { get; set; }
     
-        public virtual ClimateSite ClimateSite { get; set; }
-        public virtual RainExceedance RainExceedance { get; set; }
+        public virtual TVItem TVItem { get; set; }
+        public virtual TVItem TVItem1 { get; set; }
     }
 }

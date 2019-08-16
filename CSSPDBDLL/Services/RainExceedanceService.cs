@@ -22,6 +22,7 @@ namespace CSSPDBDLL.Services
         public TVItemService _TVItemService { get; private set; }
         public LogService _LogService { get; private set; }
         public MapInfoService _MapInfoService { get; private set; }
+        public RainExceedanceClimateSiteService _RainExceedanceClimateSiteService { get; private set; }
         #endregion Properties
 
         #region Constructors
@@ -31,6 +32,7 @@ namespace CSSPDBDLL.Services
             _TVItemService = new TVItemService(LanguageRequest, User);
             _LogService = new LogService(LanguageRequest, User);
             _MapInfoService = new MapInfoService(LanguageRequest, User);
+            _RainExceedanceClimateSiteService = new RainExceedanceClimateSiteService(LanguageRequest, User);
         }
         #endregion Constructors
 
@@ -101,6 +103,7 @@ namespace CSSPDBDLL.Services
             rainExceedanceNew.RainMaximum_mm = rainExceedanceModel.RainMaximum_mm;
             rainExceedanceNew.StakeholdersEmailDistributionListID = rainExceedanceModel.StakeholdersEmailDistributionListID;
             rainExceedanceNew.OnlyStaffEmailDistributionListID = rainExceedanceModel.OnlyStaffEmailDistributionListID;
+            rainExceedanceNew.IsActive = rainExceedanceModel.IsActive;
             rainExceedanceNew.LastUpdateDate_UTC = DateTime.UtcNow;
             if (contactOK == null)
             {
@@ -115,6 +118,97 @@ namespace CSSPDBDLL.Services
         }
 
         // Get
+        public RainExceedanceFullClimateSites GetRainExceedanceFullClimateSitesDB(int RainExceedanceTVItemID, float Radius_km)
+        {
+            RainExceedanceFullClimateSites rainExceedanceFullClimateSites = new RainExceedanceFullClimateSites();
+
+            List<MapInfoPointModel> mapInfoPointModelList = _MapInfoService._MapInfoPointService.GetMapInfoPointModelListWithTVItemIDAndTVTypeAndMapInfoDrawTypeDB(RainExceedanceTVItemID, TVTypeEnum.RainExceedance, MapInfoDrawTypeEnum.Point);
+            if (mapInfoPointModelList.Count == 0)
+            {
+                rainExceedanceFullClimateSites.Error = string.Format(ServiceRes._ShouldNotBeNullOrEmpty, "MapInfoPointModelList with RainExceedanceTVItemID = [" + RainExceedanceTVItemID + "]");
+                return rainExceedanceFullClimateSites;
+            }
+
+            // Getting RainExceedance
+            RainExceedanceModel rainExceedanceModel = GetRainExceedanceModelWithRainExceedanceTVItemIDDB(RainExceedanceTVItemID);
+            if (!string.IsNullOrWhiteSpace(rainExceedanceModel.Error))
+            {
+                rainExceedanceFullClimateSites.Error = string.Format(ServiceRes.CouldNotFind_With_Equal_, ServiceRes.RainExceedance, ServiceRes.RainExceedanceTVItemID, RainExceedanceTVItemID);
+                return rainExceedanceFullClimateSites;
+            }
+
+
+            List<int> currentlyUsedClimateSiteTVItemIDList = _RainExceedanceClimateSiteService.GetRainExceedanceClimateSiteModelListWithRainExceedanceTVItemIDDB(RainExceedanceTVItemID).Select(c => c.ClimateSiteTVItemID).ToList();
+
+            rainExceedanceFullClimateSites.CurrentlyUsedClimateSiteTVItemIDList = currentlyUsedClimateSiteTVItemIDList;
+
+            List<int> distClimateSiteTVItemIDList = _MapInfoService.GetMapInfoModelWithinCircleWithTVTypeAndMapInfoDrawTypeDB((float)rainExceedanceModel.Lat, (float)rainExceedanceModel.Lng,
+                (float)Radius_km, TVTypeEnum.ClimateSite, MapInfoDrawTypeEnum.Point).Select(c => c.TVItemID).Distinct().ToList();
+
+            List<int> ClimateSiteTVItemIDList = currentlyUsedClimateSiteTVItemIDList.Concat(distClimateSiteTVItemIDList).Distinct().ToList();
+
+            List<ClimateSiteWithLatLngAndOrdinalModel> ClimateSiteWithLatLngAndOrdinalModelList = (from c in db.ClimateSites
+                                                                                                   from id in ClimateSiteTVItemIDList
+                                                                                                   let coord = (from mi in db.MapInfos
+                                                                                                                from mip in db.MapInfoPoints
+                                                                                                                where mi.MapInfoID == mip.MapInfoID
+                                                                                                                && mi.TVItemID == c.ClimateSiteTVItemID
+                                                                                                                && mi.MapInfoDrawType == (int)MapInfoDrawTypeEnum.Point
+                                                                                                                && mi.TVType == (int)TVTypeEnum.ClimateSite
+                                                                                                                select new { mip.Lat, mip.Lng, mip.MapInfoID }).FirstOrDefault()
+                                                                                                   let climateSiteTVText = (from cl in db.TVItemLanguages
+                                                                                                                            where cl.TVItemID == c.ClimateSiteTVItemID
+                                                                                                                            && cl.Language == (int)LanguageRequest
+                                                                                                                            select cl.TVText).FirstOrDefault()
+                                                                                                   where c.ClimateSiteTVItemID == id
+                                                                                                   orderby climateSiteTVText
+                                                                                                   select new ClimateSiteWithLatLngAndOrdinalModel
+                                                                                                   {
+                                                                                                       Error = "",
+                                                                                                       ClimateSiteID = c.ClimateSiteID,
+                                                                                                       ClimateSiteTVItemID = c.ClimateSiteTVItemID,
+                                                                                                       ClimateID = c.ClimateID,
+                                                                                                       ClimateSiteName = c.ClimateSiteName,
+                                                                                                       DailyEndDate_Local = c.DailyEndDate_Local,
+                                                                                                       DailyNow = c.DailyNow,
+                                                                                                       DailyStartDate_Local = c.DailyStartDate_Local,
+                                                                                                       ECDBID = c.ECDBID,
+                                                                                                       Elevation_m = c.Elevation_m,
+                                                                                                       File_desc = c.File_desc,
+                                                                                                       HourlyEndDate_Local = c.HourlyEndDate_Local,
+                                                                                                       HourlyNow = c.HourlyNow,
+                                                                                                       HourlyStartDate_Local = c.HourlyStartDate_Local,
+                                                                                                       IsProvincial = c.IsProvincial,
+                                                                                                       MonthlyEndDate_Local = c.MonthlyEndDate_Local,
+                                                                                                       MonthlyNow = c.MonthlyNow,
+                                                                                                       MonthlyStartDate_Local = c.MonthlyStartDate_Local,
+                                                                                                       Province = c.Province,
+                                                                                                       ProvSiteID = c.ProvSiteID,
+                                                                                                       TCID = c.TCID,
+                                                                                                       TimeOffset_hour = c.TimeOffset_hour,
+                                                                                                       WMOID = c.WMOID,
+                                                                                                       Lat = (float)coord.Lat,
+                                                                                                       Lng = (float)coord.Lng,
+                                                                                                       ClimateSiteTVText = climateSiteTVText,
+                                                                                                       Ordinal = 0,
+                                                                                                       Distance_km = 0,
+                                                                                                       MapInfoID = coord.MapInfoID,
+                                                                                                       YearsOfUseText = "",
+                                                                                                       LastUpdateDate_UTC = c.LastUpdateDate_UTC,
+                                                                                                       LastUpdateContactTVItemID = c.LastUpdateContactTVItemID,
+                                                                                                   }).ToList();
+
+
+            foreach (ClimateSiteWithLatLngAndOrdinalModel climateSiteWithLatLngAndOrdinalModel in ClimateSiteWithLatLngAndOrdinalModelList)
+            {
+                climateSiteWithLatLngAndOrdinalModel.Distance_km = (float)(_MapInfoService.CalculateDistance((double)rainExceedanceModel.Lat * d2r, (double)rainExceedanceModel.Lng * d2r, (double)climateSiteWithLatLngAndOrdinalModel.Lat * d2r, (double)climateSiteWithLatLngAndOrdinalModel.Lng * d2r, (double)R) / 1000);
+            }
+
+
+            rainExceedanceFullClimateSites.ClimateSiteModelUsedAndWithinDistanceModelList = ClimateSiteWithLatLngAndOrdinalModelList;
+
+            return rainExceedanceFullClimateSites;
+        }
         public int GetRainExceedanceModelCountDB()
         {
             int RainExceedanceModelCount = (from c in db.RainExceedances
@@ -131,18 +225,18 @@ namespace CSSPDBDLL.Services
                                                                                            && tl.Language == (int)LanguageRequest
                                                                                            && t.TVItemID == c.RainExceedanceTVItemID
                                                                                            select tl.TVText).FirstOrDefault()
-                                                                 let stakeholdersEmailDistributionListName = (from t in db.TVItems
-                                                                                                              from tl in db.TVItemLanguages
-                                                                                                              where t.TVItemID == tl.TVItemID
-                                                                                                              && tl.Language == (int)LanguageRequest
-                                                                                                              && t.TVItemID == c.StakeholdersEmailDistributionListID
-                                                                                                              select tl.TVText).FirstOrDefault()
-                                                                 let onlyStaffEmailDistributionListName = (from t in db.TVItems
-                                                                                                           from tl in db.TVItemLanguages
-                                                                                                           where t.TVItemID == tl.TVItemID
-                                                                                                           && tl.Language == (int)LanguageRequest
-                                                                                                           && t.TVItemID == c.OnlyStaffEmailDistributionListID
-                                                                                                           select tl.TVText).FirstOrDefault()
+                                                                 let stakeholdersEmailDistributionListName = (from e in db.EmailDistributionLists
+                                                                                                              from el in db.EmailDistributionListLanguages
+                                                                                                              where e.EmailDistributionListID == el.EmailDistributionListID
+                                                                                                              && el.Language == (int)LanguageRequest
+                                                                                                              && e.EmailDistributionListID == c.StakeholdersEmailDistributionListID
+                                                                                                              select el.EmailListName).FirstOrDefault()
+                                                                 let onlyStaffEmailDistributionListName = (from e in db.EmailDistributionLists
+                                                                                                           from el in db.EmailDistributionListLanguages
+                                                                                                           where e.EmailDistributionListID == el.EmailDistributionListID
+                                                                                                           && el.Language == (int)LanguageRequest
+                                                                                                           && e.EmailDistributionListID == c.OnlyStaffEmailDistributionListID
+                                                                                                           select el.EmailListName).FirstOrDefault()
                                                                  let mapInfoPoint = (from mi in db.MapInfos
                                                                                      from mip in db.MapInfoPoints
                                                                                      where mi.MapInfoID == mip.MapInfoID
@@ -165,6 +259,7 @@ namespace CSSPDBDLL.Services
                                                                      StakeholdersEmailDistributionListName = stakeholdersEmailDistributionListName,
                                                                      OnlyStaffEmailDistributionListID = c.OnlyStaffEmailDistributionListID,
                                                                      OnlyStaffEmailDistributionListName = onlyStaffEmailDistributionListName,
+                                                                     IsActive = c.IsActive,
                                                                      Lat = mapInfoPoint.Lat,
                                                                      Lng = mapInfoPoint.Lng,
                                                                      LastUpdateDate_UTC = c.LastUpdateDate_UTC,
@@ -182,18 +277,18 @@ namespace CSSPDBDLL.Services
                                                                                  && tl.Language == (int)LanguageRequest
                                                                                  && t.TVItemID == c.RainExceedanceTVItemID
                                                                                  select tl.TVText).FirstOrDefault()
-                                                       let stakeholdersEmailDistributionListName = (from t in db.TVItems
-                                                                                                    from tl in db.TVItemLanguages
-                                                                                                    where t.TVItemID == tl.TVItemID
-                                                                                                    && tl.Language == (int)LanguageRequest
-                                                                                                    && t.TVItemID == c.StakeholdersEmailDistributionListID
-                                                                                                    select tl.TVText).FirstOrDefault()
-                                                       let onlyStaffEmailDistributionListName = (from t in db.TVItems
-                                                                                                 from tl in db.TVItemLanguages
-                                                                                                 where t.TVItemID == tl.TVItemID
-                                                                                                 && tl.Language == (int)LanguageRequest
-                                                                                                 && t.TVItemID == c.OnlyStaffEmailDistributionListID
-                                                                                                 select tl.TVText).FirstOrDefault()
+                                                       let stakeholdersEmailDistributionListName = (from e in db.EmailDistributionLists
+                                                                                                    from el in db.EmailDistributionListLanguages
+                                                                                                    where e.EmailDistributionListID == el.EmailDistributionListID
+                                                                                                    && el.Language == (int)LanguageRequest
+                                                                                                    && e.EmailDistributionListID == c.StakeholdersEmailDistributionListID
+                                                                                                    select el.EmailListName).FirstOrDefault()
+                                                       let onlyStaffEmailDistributionListName = (from e in db.EmailDistributionLists
+                                                                                                 from el in db.EmailDistributionListLanguages
+                                                                                                 where e.EmailDistributionListID == el.EmailDistributionListID
+                                                                                                 && el.Language == (int)LanguageRequest
+                                                                                                 && e.EmailDistributionListID == c.OnlyStaffEmailDistributionListID
+                                                                                                 select el.EmailListName).FirstOrDefault()
                                                        let mapInfoPoint = (from mi in db.MapInfos
                                                                            from mip in db.MapInfoPoints
                                                                            where mi.MapInfoID == mip.MapInfoID
@@ -217,6 +312,7 @@ namespace CSSPDBDLL.Services
                                                            StakeholdersEmailDistributionListName = stakeholdersEmailDistributionListName,
                                                            OnlyStaffEmailDistributionListID = c.OnlyStaffEmailDistributionListID,
                                                            OnlyStaffEmailDistributionListName = onlyStaffEmailDistributionListName,
+                                                           IsActive = c.IsActive,
                                                            Lat = mapInfoPoint.Lat,
                                                            Lng = mapInfoPoint.Lng,
                                                            LastUpdateDate_UTC = c.LastUpdateDate_UTC,
@@ -225,6 +321,62 @@ namespace CSSPDBDLL.Services
 
             if (rainExceedanceModel == null)
                 return ReturnError(string.Format(ServiceRes.CouldNotFind_With_Equal_, ServiceRes.RainExceedance, ServiceRes.RainExceedanceID, RainExceedanceID));
+
+            return rainExceedanceModel;
+        }
+        public RainExceedanceModel GetRainExceedanceModelWithRainExceedanceTVItemIDDB(int RainExceedanceTVItemID)
+        {
+            RainExceedanceModel rainExceedanceModel = (from c in db.RainExceedances
+                                                       let rainExceedanceName = (from t in db.TVItems
+                                                                                 from tl in db.TVItemLanguages
+                                                                                 where t.TVItemID == tl.TVItemID
+                                                                                 && tl.Language == (int)LanguageRequest
+                                                                                 && t.TVItemID == c.RainExceedanceTVItemID
+                                                                                 select tl.TVText).FirstOrDefault()
+                                                       let stakeholdersEmailDistributionListName = (from e in db.EmailDistributionLists
+                                                                                                    from el in db.EmailDistributionListLanguages
+                                                                                                    where e.EmailDistributionListID == el.EmailDistributionListID
+                                                                                                    && el.Language == (int)LanguageRequest
+                                                                                                    && e.EmailDistributionListID == c.StakeholdersEmailDistributionListID
+                                                                                                    select el.EmailListName).FirstOrDefault()
+                                                       let onlyStaffEmailDistributionListName = (from e in db.EmailDistributionLists
+                                                                                                 from el in db.EmailDistributionListLanguages
+                                                                                                 where e.EmailDistributionListID == el.EmailDistributionListID
+                                                                                                 && el.Language == (int)LanguageRequest
+                                                                                                 && e.EmailDistributionListID == c.OnlyStaffEmailDistributionListID
+                                                                                                 select el.EmailListName).FirstOrDefault()
+                                                       let mapInfoPoint = (from mi in db.MapInfos
+                                                                           from mip in db.MapInfoPoints
+                                                                           where mi.MapInfoID == mip.MapInfoID
+                                                                           && mi.TVItemID == c.RainExceedanceTVItemID
+                                                                           && mi.MapInfoDrawType == (int)MapInfoDrawTypeEnum.Point
+                                                                           && mi.TVType == (int)TVTypeEnum.RainExceedance
+                                                                           select mip).FirstOrDefault()
+                                                       where c.RainExceedanceTVItemID == RainExceedanceTVItemID
+                                                       select new RainExceedanceModel
+                                                       {
+                                                           Error = "",
+                                                           RainExceedanceID = c.RainExceedanceID,
+                                                           RainExceedanceTVItemID = c.RainExceedanceTVItemID,
+                                                           RainExceedanceName = rainExceedanceName ?? "",
+                                                           StartMonth = c.StartMonth,
+                                                           StartDay = c.StartDay,
+                                                           EndMonth = c.EndMonth,
+                                                           EndDay = c.EndDay,
+                                                           RainMaximum_mm = (float)c.RainMaximum_mm,
+                                                           StakeholdersEmailDistributionListID = c.StakeholdersEmailDistributionListID,
+                                                           StakeholdersEmailDistributionListName = stakeholdersEmailDistributionListName,
+                                                           OnlyStaffEmailDistributionListID = c.OnlyStaffEmailDistributionListID,
+                                                           OnlyStaffEmailDistributionListName = onlyStaffEmailDistributionListName,
+                                                           IsActive = c.IsActive,
+                                                           Lat = mapInfoPoint.Lat,
+                                                           Lng = mapInfoPoint.Lng,
+                                                           LastUpdateDate_UTC = c.LastUpdateDate_UTC,
+                                                           LastUpdateContactTVItemID = c.LastUpdateContactTVItemID,
+                                                       }).FirstOrDefault<RainExceedanceModel>();
+
+            if (rainExceedanceModel == null)
+                return ReturnError(string.Format(ServiceRes.CouldNotFind_With_Equal_, ServiceRes.RainExceedance, ServiceRes.RainExceedanceTVItemID, RainExceedanceTVItemID));
 
             return rainExceedanceModel;
         }
@@ -269,6 +421,7 @@ namespace CSSPDBDLL.Services
             float RainMaximum_mm = 0.0f;
             int? StakeholdersEmailDistributionListID = null;
             int? OnlyStaffEmailDistributionListID = null;
+            bool IsActive = false;
             double Lat = 0.0D;
             double Lng = 0.0D;
 
@@ -327,6 +480,11 @@ namespace CSSPDBDLL.Services
             if (TempInt != 0)
             {
                 OnlyStaffEmailDistributionListID = TempInt;
+            }
+
+            if (!string.IsNullOrWhiteSpace(fc["IsActive"]))
+            {
+                IsActive = true;
             }
 
             double.TryParse(fc["Lat"], out Lat);
@@ -391,6 +549,7 @@ namespace CSSPDBDLL.Services
                         RainMaximum_mm = RainMaximum_mm,
                         StakeholdersEmailDistributionListID = StakeholdersEmailDistributionListID,
                         OnlyStaffEmailDistributionListID = OnlyStaffEmailDistributionListID,
+                        IsActive = IsActive,
                     };
 
                     RainExceedanceModelRet = PostAddRainExceedanceDB(RainExceedanceModelNew);
@@ -458,6 +617,7 @@ namespace CSSPDBDLL.Services
                     rainExceedanceModelToUpdate.RainMaximum_mm = RainMaximum_mm;
                     rainExceedanceModelToUpdate.StakeholdersEmailDistributionListID = StakeholdersEmailDistributionListID;
                     rainExceedanceModelToUpdate.OnlyStaffEmailDistributionListID = OnlyStaffEmailDistributionListID;
+                    rainExceedanceModelToUpdate.IsActive = IsActive;
 
                     RainExceedanceModelRet = PostUpdateRainExceedanceDB(rainExceedanceModelToUpdate);
                     if (!string.IsNullOrWhiteSpace(RainExceedanceModelRet.Error))
@@ -525,6 +685,38 @@ namespace CSSPDBDLL.Services
                     return ReturnError(logModel.Error);
 
                 ts.Complete();
+            }
+
+            return ReturnError("");
+        }
+        public RainExceedanceModel PostDeleteRainExceedanceWithRainExceedanceTVItemIDDB(int RainExceedanceTVItemID)
+        {
+            ContactOK contactOK = IsContactOK();
+            if (!string.IsNullOrEmpty(contactOK.Error))
+                return ReturnError(contactOK.Error);
+
+            RainExceedanceModel rainExceedanceModelToDelete = GetRainExceedanceModelWithRainExceedanceTVItemIDDB(RainExceedanceTVItemID);
+            if (!string.IsNullOrWhiteSpace(rainExceedanceModelToDelete.Error))
+            {
+                return ReturnError(rainExceedanceModelToDelete.Error);
+            }
+
+            RainExceedanceModel rainExceedanceModelRet = PostDeleteRainExceedanceDB(rainExceedanceModelToDelete.RainExceedanceID);
+            if (!string.IsNullOrWhiteSpace(rainExceedanceModelRet.Error))
+            {
+                return ReturnError(rainExceedanceModelRet.Error);
+            }
+
+            MapInfoModel mapInfoModelRet = _MapInfoService.PostDeleteMapInfoWithTVItemIDDB(rainExceedanceModelToDelete.RainExceedanceTVItemID);
+            if (!string.IsNullOrWhiteSpace(mapInfoModelRet.Error))
+            {
+                return ReturnError(mapInfoModelRet.Error);
+            }
+
+            TVItemModel tvItemModelRet = _TVItemService.PostDeleteTVItemWithTVItemIDDB(rainExceedanceModelToDelete.RainExceedanceTVItemID);
+            if (!string.IsNullOrWhiteSpace(tvItemModelRet.Error))
+            {
+                return ReturnError(tvItemModelRet.Error);
             }
 
             return ReturnError("");

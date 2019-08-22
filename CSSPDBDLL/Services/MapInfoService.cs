@@ -368,6 +368,13 @@ namespace CSSPDBDLL.Services
         {
             return Math.Abs(EarthRadius * Math.Acos(Math.Sin(lat1) * Math.Sin(lat2) + Math.Cos(lat1) * Math.Cos(lat2) * Math.Cos(long2 - long1)));
         }
+
+        public Coord CalculateDestination(double Lat, double Lng, double distance, double bearing)
+        {
+            double Lat2 = Math.Asin(Math.Sin(Lat) * Math.Cos(distance / R) + Math.Cos(Lat) * Math.Sin(distance / R) * Math.Cos(bearing));
+            double Lng2 = Lng + Math.Atan2(Math.Sin(bearing) * Math.Sin(distance / R) * Math.Cos(Lat), Math.Cos(distance / R) - Math.Sin(Lat) * Math.Sin(Lat2));
+            return new Coord() { Lat = (float)(Lat2 * r2d), Lng = (float)(Lng2 * r2d), Ordinal = 0 };
+        }
         public void CalculateMWQMSiteStat(List<MWQMSample> mwqmSampleList, TVLocation tvlNew, int MinFC, int MaxFC, int SampCount)
         {
             MWQMSiteService mwqmSiteService = new MWQMSiteService(LanguageRequest, User);

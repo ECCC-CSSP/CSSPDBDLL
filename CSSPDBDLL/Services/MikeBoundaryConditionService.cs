@@ -321,9 +321,9 @@ namespace CSSPDBDLL.Services
             if (!string.IsNullOrEmpty(contactOK.Error))
                 return ReturnError(contactOK.Error);
 
-            TVItemModel tvItemModelExit = _TVItemService.GetTVItemModelWithTVItemIDDB(mikeBoundaryConditionModel.MikeBoundaryConditionTVItemID);
-            if (!string.IsNullOrWhiteSpace(tvItemModelExit.Error))
-                return ReturnError(tvItemModelExit.Error);
+            TVItemModel tvItemModelExist = _TVItemService.GetTVItemModelWithTVItemIDDB(mikeBoundaryConditionModel.MikeBoundaryConditionTVItemID);
+            if (!string.IsNullOrWhiteSpace(tvItemModelExist.Error))
+                return ReturnError(tvItemModelExist.Error);
 
             MikeBoundaryCondition mikeBoundaryConditionNew = new MikeBoundaryCondition();
 

@@ -388,9 +388,9 @@ namespace CSSPDBDLL.Services
             if (!string.IsNullOrEmpty(contactOK.Error))
                 return ReturnError(contactOK.Error);
 
-            TVItemModel tvItemModelExit = _TVItemService.GetTVItemModelWithTVItemIDDB(mikeSourceModel.MikeSourceTVItemID);
-            if (!string.IsNullOrWhiteSpace(tvItemModelExit.Error))
-                return ReturnError(tvItemModelExit.Error);
+            TVItemModel tvItemModelExist = _TVItemService.GetTVItemModelWithTVItemIDDB(mikeSourceModel.MikeSourceTVItemID);
+            if (!string.IsNullOrWhiteSpace(tvItemModelExist.Error))
+                return ReturnError(tvItemModelExist.Error);
 
             MikeSource mikeSourceNew = new MikeSource();
             retStr = FillMikeSource(mikeSourceNew, mikeSourceModel, contactOK);

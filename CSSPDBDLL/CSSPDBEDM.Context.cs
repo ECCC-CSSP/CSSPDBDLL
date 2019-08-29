@@ -79,6 +79,8 @@ namespace CSSPDBDLL
         public virtual DbSet<MWQMSubsector> MWQMSubsectors { get; set; }
         public virtual DbSet<PolSourceObservationIssue> PolSourceObservationIssues { get; set; }
         public virtual DbSet<PolSourceObservation> PolSourceObservations { get; set; }
+        public virtual DbSet<PolSourceSiteEffect> PolSourceSiteEffects { get; set; }
+        public virtual DbSet<PolSourceSiteEffectTerm> PolSourceSiteEffectTerms { get; set; }
         public virtual DbSet<PolSourceSite> PolSourceSites { get; set; }
         public virtual DbSet<RainExceedanceClimateSite> RainExceedanceClimateSites { get; set; }
         public virtual DbSet<RainExceedance> RainExceedances { get; set; }

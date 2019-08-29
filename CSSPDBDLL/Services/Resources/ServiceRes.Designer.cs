@@ -673,6 +673,15 @@ namespace CSSPDBDLL.Services.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to AnalysisDocumentTVItemID.
+        /// </summary>
+        public static string AnalysisDocumentTVItemID {
+            get {
+                return ResourceManager.GetString("AnalysisDocumentTVItemID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to AnalysisName.
         /// </summary>
         public static string AnalysisName {
@@ -3355,6 +3364,42 @@ namespace CSSPDBDLL.Services.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to EffectTermEN.
+        /// </summary>
+        public static string EffectTermEN {
+            get {
+                return ResourceManager.GetString("EffectTermEN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to EffectTermFR.
+        /// </summary>
+        public static string EffectTermFR {
+            get {
+                return ResourceManager.GetString("EffectTermFR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Effect term is already a group.
+        /// </summary>
+        public static string EffectTermIsAlreadyAGroup {
+            get {
+                return ResourceManager.GetString("EffectTermIsAlreadyAGroup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Effect term to send to group is not a group.
+        /// </summary>
+        public static string EffectTermToSendToGroupIsNotAGroup {
+            get {
+                return ResourceManager.GetString("EffectTermToSendToGroupIsNotAGroup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to EffluentConcentration_MPN_100ml.
         /// </summary>
         public static string EffluentConcentration_MPN_100ml {
@@ -5142,6 +5187,15 @@ namespace CSSPDBDLL.Services.Resources {
         public static string IsForcastData {
             get {
                 return ResourceManager.GetString("IsForcastData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to IsGroup.
+        /// </summary>
+        public static string IsGroup {
+            get {
+                return ResourceManager.GetString("IsGroup", resourceCulture);
             }
         }
         
@@ -8067,6 +8121,51 @@ namespace CSSPDBDLL.Services.Resources {
         public static string PolSourceSiteDoc {
             get {
                 return ResourceManager.GetString("PolSourceSiteDoc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to PolSourceSiteEffect.
+        /// </summary>
+        public static string PolSourceSiteEffect {
+            get {
+                return ResourceManager.GetString("PolSourceSiteEffect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to PolSourceSiteEffectID.
+        /// </summary>
+        public static string PolSourceSiteEffectID {
+            get {
+                return ResourceManager.GetString("PolSourceSiteEffectID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to PolSourceSiteEffectModel.
+        /// </summary>
+        public static string PolSourceSiteEffectModel {
+            get {
+                return ResourceManager.GetString("PolSourceSiteEffectModel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to PolSourceSiteEffectTerm.
+        /// </summary>
+        public static string PolSourceSiteEffectTerm {
+            get {
+                return ResourceManager.GetString("PolSourceSiteEffectTerm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to PolSourceSiteEffectTermID.
+        /// </summary>
+        public static string PolSourceSiteEffectTermID {
+            get {
+                return ResourceManager.GetString("PolSourceSiteEffectTermID", resourceCulture);
             }
         }
         
@@ -11622,6 +11721,15 @@ namespace CSSPDBDLL.Services.Resources {
         public static string TVTypeNeedsToBeOneOf_ {
             get {
                 return ResourceManager.GetString("TVTypeNeedsToBeOneOf_", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to UnderGroupID.
+        /// </summary>
+        public static string UnderGroupID {
+            get {
+                return ResourceManager.GetString("UnderGroupID", resourceCulture);
             }
         }
         

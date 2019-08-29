@@ -300,6 +300,12 @@
     <Compile Include="PolSourceSite.cs">
       <DependentUpon>CSSPDBEDM.tt</DependentUpon>
     </Compile>
+    <Compile Include="PolSourceSiteEffect.cs">
+      <DependentUpon>CSSPDBEDM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PolSourceSiteEffectTerm.cs">
+      <DependentUpon>CSSPDBEDM.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RainExceedance.cs">
       <DependentUpon>CSSPDBEDM.tt</DependentUpon>
@@ -362,6 +368,8 @@
     <Compile Include="Services\MWQMSitePolSourceSiteService.cs" />
     <Compile Include="Services\PolSourceSiteInputToolService.cs" />
     <Compile Include="Services\ClassificationService.cs" />
+    <Compile Include="Services\PolSourceSiteEffectTermService.cs" />
+    <Compile Include="Services\PolSourceSiteEffectService.cs" />
     <Compile Include="Services\ProvinceToolsService.cs" />
     <Compile Include="Services\OpenDataService.cs" />
     <Compile Include="Services\RainExceedanceClimateSiteService.cs" />

@@ -232,13 +232,13 @@ namespace CSSPDBDLL.Services
             if (!string.IsNullOrEmpty(contactOK.Error))
                 return ReturnError(contactOK.Error);
 
-            TVItemModel TVItemModelExit = _TVItemService.GetTVItemModelWithTVItemIDDB(MWQMSitePolSourceSiteModel.MWQMSiteTVItemID);
-            if (!string.IsNullOrWhiteSpace(TVItemModelExit.Error))
-                return ReturnError(TVItemModelExit.Error);
+            TVItemModel tvItemModelExist = _TVItemService.GetTVItemModelWithTVItemIDDB(MWQMSitePolSourceSiteModel.MWQMSiteTVItemID);
+            if (!string.IsNullOrWhiteSpace(tvItemModelExist.Error))
+                return ReturnError(tvItemModelExist.Error);
 
-            TVItemModel TVItemModelExit2 = _TVItemService.GetTVItemModelWithTVItemIDDB(MWQMSitePolSourceSiteModel.PolSourceSiteTVItemID);
-            if (!string.IsNullOrWhiteSpace(TVItemModelExit2.Error))
-                return ReturnError(TVItemModelExit2.Error);
+            TVItemModel tvItemModelExist2 = _TVItemService.GetTVItemModelWithTVItemIDDB(MWQMSitePolSourceSiteModel.PolSourceSiteTVItemID);
+            if (!string.IsNullOrWhiteSpace(tvItemModelExist2.Error))
+                return ReturnError(tvItemModelExist2.Error);
 
             MWQMSitePolSourceSite MWQMSitePolSourceSiteNew = new MWQMSitePolSourceSite();
             retStr = FillMWQMSitePolSourceSite(MWQMSitePolSourceSiteNew, MWQMSitePolSourceSiteModel, contactOK);

@@ -502,9 +502,9 @@ namespace CSSPDBDLL.Services
             if (!string.IsNullOrEmpty(contactOK.Error))
                 return ReturnError(contactOK.Error);
 
-            TVItemModel tvItemModelExit = _TVItemService.GetTVItemModelWithTVItemIDDB(polSourceSiteModel.PolSourceSiteTVItemID);
-            if (!string.IsNullOrWhiteSpace(tvItemModelExit.Error))
-                return ReturnError(tvItemModelExit.Error);
+            TVItemModel tvItemModelExist = _TVItemService.GetTVItemModelWithTVItemIDDB(polSourceSiteModel.PolSourceSiteTVItemID);
+            if (!string.IsNullOrWhiteSpace(tvItemModelExist.Error))
+                return ReturnError(tvItemModelExist.Error);
 
             PolSourceSite polSourceSiteNew = new PolSourceSite();
             retStr = FillPolSourceSite(polSourceSiteNew, polSourceSiteModel, contactOK);

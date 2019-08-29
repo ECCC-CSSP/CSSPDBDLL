@@ -453,9 +453,9 @@ namespace CSSPDBDLL.Services
             if (!string.IsNullOrEmpty(contactOK.Error))
                 return ReturnError(contactOK.Error);
 
-            TVItemModel tvItemModelExit = _TVItemService.GetTVItemModelWithTVItemIDDB(ClassificationModel.ClassificationTVItemID);
-            if (!string.IsNullOrWhiteSpace(tvItemModelExit.Error))
-                return ReturnError(tvItemModelExit.Error);
+            TVItemModel tvItemModelExist = _TVItemService.GetTVItemModelWithTVItemIDDB(ClassificationModel.ClassificationTVItemID);
+            if (!string.IsNullOrWhiteSpace(tvItemModelExist.Error))
+                return ReturnError(tvItemModelExist.Error);
 
             Classification ClassificationNew = new Classification();
             retStr = FillClassification(ClassificationNew, ClassificationModel, contactOK);

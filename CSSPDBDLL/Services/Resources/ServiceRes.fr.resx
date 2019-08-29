@@ -201,6 +201,9 @@
   <data name="AnalysisCalculationType" xml:space="preserve">
     <value>Type de calcul d'analyse</value>
   </data>
+  <data name="AnalysisDocumentTVItemID" xml:space="preserve">
+    <value>AnalysisDocumentTVItemID</value>
+  </data>
   <data name="AnalysisName" xml:space="preserve">
     <value>Nom de l'analyse</value>
   </data>
@@ -1095,6 +1098,18 @@
   <data name="Edit" xml:space="preserve">
     <value>Éditer</value>
   </data>
+  <data name="EffectTermEN" xml:space="preserve">
+    <value>EffectTermEN</value>
+  </data>
+  <data name="EffectTermFR" xml:space="preserve">
+    <value>EffectTermFR</value>
+  </data>
+  <data name="EffectTermIsAlreadyAGroup" xml:space="preserve">
+    <value>Terme d'effet est déjà un groupe</value>
+  </data>
+  <data name="EffectTermToSendToGroupIsNotAGroup" xml:space="preserve">
+    <value>Le terme d'effet à envoyer au groupe n'est pas un groupe</value>
+  </data>
   <data name="EffluentConcentration_MPN_100ml" xml:space="preserve">
     <value>EffluentConcentration_MPN_100ml</value>
   </data>
@@ -1691,6 +1706,9 @@
   </data>
   <data name="IsForcastData" xml:space="preserve">
     <value>IsForcastData</value>
+  </data>
+  <data name="IsGroup" xml:space="preserve">
+    <value>IsGroup</value>
   </data>
   <data name="IsIncluded" xml:space="preserve">
     <value>Inclus</value>
@@ -2666,6 +2684,21 @@
   </data>
   <data name="PolSourceSiteDoc" xml:space="preserve">
     <value>Document du site de source de pollution</value>
+  </data>
+  <data name="PolSourceSiteEffect" xml:space="preserve">
+    <value>PolSourceSiteEffect</value>
+  </data>
+  <data name="PolSourceSiteEffectID" xml:space="preserve">
+    <value>PolSourceSiteEffectID</value>
+  </data>
+  <data name="PolSourceSiteEffectModel" xml:space="preserve">
+    <value>PolSourceSiteEffectModel</value>
+  </data>
+  <data name="PolSourceSiteEffectTerm" xml:space="preserve">
+    <value>PolSourceSiteEffectTerm</value>
+  </data>
+  <data name="PolSourceSiteEffectTermID" xml:space="preserve">
+    <value>PolSourceSiteEffectTermID</value>
   </data>
   <data name="PolSourceSiteID" xml:space="preserve">
     <value>PolSourceSiteID</value>
@@ -3851,6 +3884,9 @@
   </data>
   <data name="TVType_WithShowTVType_IsNotImplemented" xml:space="preserve">
     <value>TVType [{0}] avec ShowTVType [{1}] n'est pas implémenté</value>
+  </data>
+  <data name="UnderGroupID" xml:space="preserve">
+    <value>UnderGroupID</value>
   </data>
   <data name="UnderTVItemID_IsNotOfType_" xml:space="preserve">
     <value>UnderTVItemID {0} n'est pas du type {1}</value>

@@ -290,9 +290,9 @@ namespace CSSPDBDLL.Services
             if (!string.IsNullOrEmpty(contactOK.Error))
                 return ReturnError(contactOK.Error);
 
-            TVItemModel tvItemModelExit = _TVItemService.GetTVItemModelWithTVItemIDDB(mwqmSiteStartEndDateModel.MWQMSiteTVItemID);
-            if (!string.IsNullOrWhiteSpace(tvItemModelExit.Error))
-                return ReturnError(tvItemModelExit.Error);
+            TVItemModel tvItemModelExist = _TVItemService.GetTVItemModelWithTVItemIDDB(mwqmSiteStartEndDateModel.MWQMSiteTVItemID);
+            if (!string.IsNullOrWhiteSpace(tvItemModelExist.Error))
+                return ReturnError(tvItemModelExist.Error);
 
             MWQMSiteStartEndDateModel MWQMSiteStartEndDateModelExist = GetMWQMSiteStartEndDateExistDB(mwqmSiteStartEndDateModel);
             if (string.IsNullOrWhiteSpace(MWQMSiteStartEndDateModelExist.Error))

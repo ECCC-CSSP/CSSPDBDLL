@@ -59,6 +59,9 @@ namespace CSSPDBDLL
             this.MWQMSiteStartEndDates = new HashSet<MWQMSiteStartEndDate>();
             this.MWQMSubsectors = new HashSet<MWQMSubsector>();
             this.PolSourceObservations = new HashSet<PolSourceObservation>();
+            this.PolSourceSiteEffects = new HashSet<PolSourceSiteEffect>();
+            this.PolSourceSiteEffects1 = new HashSet<PolSourceSiteEffect>();
+            this.PolSourceSiteEffects2 = new HashSet<PolSourceSiteEffect>();
             this.PolSourceSites = new HashSet<PolSourceSite>();
             this.PolSourceSites1 = new HashSet<PolSourceSite>();
             this.RainExceedanceClimateSites = new HashSet<RainExceedanceClimateSite>();
@@ -182,6 +185,12 @@ namespace CSSPDBDLL
         public virtual ICollection<MWQMSubsector> MWQMSubsectors { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PolSourceObservation> PolSourceObservations { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PolSourceSiteEffect> PolSourceSiteEffects { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PolSourceSiteEffect> PolSourceSiteEffects1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PolSourceSiteEffect> PolSourceSiteEffects2 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PolSourceSite> PolSourceSites { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

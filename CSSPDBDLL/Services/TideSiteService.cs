@@ -466,9 +466,9 @@ namespace CSSPDBDLL.Services
             if (!string.IsNullOrEmpty(contactOK.Error))
                 return ReturnTideSiteError(contactOK.Error);
 
-            TVItemModel tvItemModelExit = _TVItemService.GetTVItemModelWithTVItemIDDB(tideSiteModel.TideSiteTVItemID);
-            if (!string.IsNullOrWhiteSpace(tvItemModelExit.Error))
-                return ReturnTideSiteError(tvItemModelExit.Error);
+            TVItemModel tvItemModelExist = _TVItemService.GetTVItemModelWithTVItemIDDB(tideSiteModel.TideSiteTVItemID);
+            if (!string.IsNullOrWhiteSpace(tvItemModelExist.Error))
+                return ReturnTideSiteError(tvItemModelExist.Error);
 
             TideSite tideSiteNew = new TideSite();
             retStr = FillTideSite(tideSiteNew, tideSiteModel, contactOK);

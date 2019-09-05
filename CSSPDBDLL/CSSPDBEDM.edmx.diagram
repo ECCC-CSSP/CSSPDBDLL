@@ -5,95 +5,94 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="5f554b57f82d4cbc88d078d66e16d527" Name="Diagram1">
-        <EntityTypeShape EntityType="CSSPDBModel.Address" Width="1.5" PointX="3" PointY="229.625" />
+        <EntityTypeShape EntityType="CSSPDBModel.Address" Width="1.5" PointX="3" PointY="75.25" />
         <EntityTypeShape EntityType="CSSPDBModel.AppErrLog" Width="1.5" PointX="2.75" PointY="0.75" />
-        <EntityTypeShape EntityType="CSSPDBModel.AppTaskLanguage" Width="1.5" PointX="5.25" PointY="42.625" />
-        <EntityTypeShape EntityType="CSSPDBModel.AppTask" Width="1.5" PointX="3" PointY="41.875" />
-        <EntityTypeShape EntityType="CSSPDBModel.AspNetRole" Width="1.5" PointX="1.5" PointY="124.625" />
-        <EntityTypeShape EntityType="CSSPDBModel.AspNetUserClaim" Width="1.5" PointX="3" PointY="176.625" />
-        <EntityTypeShape EntityType="CSSPDBModel.AspNetUserLogin" Width="1.5" PointX="3" PointY="145.125" />
-        <EntityTypeShape EntityType="CSSPDBModel.AspNetUser" Width="1.5" PointX="0.75" PointY="145.375" />
-        <EntityTypeShape EntityType="CSSPDBModel.BoxModelLanguage" Width="1.5" PointX="5.25" PointY="77.25" />
-        <EntityTypeShape EntityType="CSSPDBModel.BoxModelResult" Width="1.5" PointX="5.25" PointY="71.875" />
-        <EntityTypeShape EntityType="CSSPDBModel.BoxModel" Width="1.5" PointX="3" PointY="73.75" />
-        <EntityTypeShape EntityType="CSSPDBModel.Classification" Width="1.5" PointX="3" PointY="86.25" />
-        <EntityTypeShape EntityType="CSSPDBModel.ClimateDataValue" Width="1.5" PointX="5.25" PointY="268.375" />
-        <EntityTypeShape EntityType="CSSPDBModel.ClimateSite" Width="1.5" PointX="3" PointY="267.875" />
-        <EntityTypeShape EntityType="CSSPDBModel.ContactPreference" Width="1.5" PointX="5.25" PointY="141.625" />
-        <EntityTypeShape EntityType="CSSPDBModel.Contact" Width="1.5" PointX="3" PointY="135" />
-        <EntityTypeShape EntityType="CSSPDBModel.ContactShortcut" Width="1.5" PointX="5.25" PointY="144.75" />
-        <EntityTypeShape EntityType="CSSPDBModel.DocTemplate" Width="1.5" PointX="3" PointY="118.375" />
-        <EntityTypeShape EntityType="CSSPDBModel.DrogueRunPosition" Width="1.5" PointX="5.25" PointY="237.75" />
-        <EntityTypeShape EntityType="CSSPDBModel.DrogueRun" Width="1.5" PointX="3" PointY="237.875" />
-        <EntityTypeShape EntityType="CSSPDBModel.EmailDistributionListContactLanguage" Width="1.5" PointX="7.5" PointY="34.625" />
-        <EntityTypeShape EntityType="CSSPDBModel.EmailDistributionListContact" Width="1.5" PointX="5.25" PointY="34" />
-        <EntityTypeShape EntityType="CSSPDBModel.EmailDistributionListLanguage" Width="1.5" PointX="5.25" PointY="38.5" />
-        <EntityTypeShape EntityType="CSSPDBModel.EmailDistributionList" Width="1.5" PointX="3" PointY="36.125" />
-        <EntityTypeShape EntityType="CSSPDBModel.Email" Width="1.5" PointX="3" PointY="52.125" />
+        <EntityTypeShape EntityType="CSSPDBModel.AppTaskLanguage" Width="1.5" PointX="5.25" PointY="91.375" />
+        <EntityTypeShape EntityType="CSSPDBModel.AppTask" Width="1.5" PointX="3" PointY="90.625" />
+        <EntityTypeShape EntityType="CSSPDBModel.AspNetRole" Width="1.5" PointX="1.5" PointY="144.625" />
+        <EntityTypeShape EntityType="CSSPDBModel.AspNetUserClaim" Width="1.5" PointX="6" PointY="144.25" />
+        <EntityTypeShape EntityType="CSSPDBModel.AspNetUserLogin" Width="1.5" PointX="6" PointY="146.875" />
+        <EntityTypeShape EntityType="CSSPDBModel.AspNetUser" Width="1.5" PointX="3.75" PointY="143.375" />
+        <EntityTypeShape EntityType="CSSPDBModel.BoxModelLanguage" Width="1.5" PointX="5.25" PointY="62.625" />
+        <EntityTypeShape EntityType="CSSPDBModel.BoxModelResult" Width="1.5" PointX="5.25" PointY="65.875" />
+        <EntityTypeShape EntityType="CSSPDBModel.BoxModel" Width="1.5" PointX="3" PointY="64.5" />
+        <EntityTypeShape EntityType="CSSPDBModel.Classification" Width="1.5" PointX="3" PointY="174.25" />
+        <EntityTypeShape EntityType="CSSPDBModel.ClimateDataValue" Width="1.5" PointX="5.25" PointY="56.25" />
+        <EntityTypeShape EntityType="CSSPDBModel.ClimateSite" Width="1.5" PointX="3" PointY="55.625" />
+        <EntityTypeShape EntityType="CSSPDBModel.ContactPreference" Width="1.5" PointX="8.25" PointY="129.875" />
+        <EntityTypeShape EntityType="CSSPDBModel.Contact" Width="1.5" PointX="6" PointY="127" />
+        <EntityTypeShape EntityType="CSSPDBModel.ContactShortcut" Width="1.5" PointX="8.25" PointY="126.75" />
+        <EntityTypeShape EntityType="CSSPDBModel.DocTemplate" Width="1.5" PointX="3" PointY="84.125" />
+        <EntityTypeShape EntityType="CSSPDBModel.DrogueRunPosition" Width="1.5" PointX="5.25" PointY="80.25" />
+        <EntityTypeShape EntityType="CSSPDBModel.DrogueRun" Width="1.5" PointX="3" PointY="80.375" />
+        <EntityTypeShape EntityType="CSSPDBModel.EmailDistributionListContactLanguage" Width="1.5" PointX="7.5" PointY="47.875" />
+        <EntityTypeShape EntityType="CSSPDBModel.EmailDistributionListContact" Width="1.5" PointX="5.25" PointY="47.25" />
+        <EntityTypeShape EntityType="CSSPDBModel.EmailDistributionListLanguage" Width="1.5" PointX="5.25" PointY="44" />
+        <EntityTypeShape EntityType="CSSPDBModel.EmailDistributionList" Width="1.5" PointX="3" PointY="46" />
+        <EntityTypeShape EntityType="CSSPDBModel.Email" Width="1.5" PointX="3" PointY="87.5" />
         <EntityTypeShape EntityType="CSSPDBModel.HelpDoc" Width="1.5" PointX="4.75" PointY="0.75" />
-        <EntityTypeShape EntityType="CSSPDBModel.HydrometricDataValue" Width="1.5" PointX="5.25" PointY="127.875" />
-        <EntityTypeShape EntityType="CSSPDBModel.HydrometricSite" Width="1.5" PointX="3" PointY="128.375" />
-        <EntityTypeShape EntityType="CSSPDBModel.InfrastructureLanguage" Width="1.5" PointX="5.25" PointY="218.375" />
-        <EntityTypeShape EntityType="CSSPDBModel.Infrastructure" Width="1.5" PointX="3" PointY="214.25" />
-        <EntityTypeShape EntityType="CSSPDBModel.LabSheetDetail" Width="1.5" PointX="5.25" PointY="180.5" />
-        <EntityTypeShape EntityType="CSSPDBModel.LabSheet" Width="1.5" PointX="8.25" PointY="186.5" />
-        <EntityTypeShape EntityType="CSSPDBModel.LabSheetTubeMPNDetail" Width="1.5" PointX="7.5" PointY="158.625" />
+        <EntityTypeShape EntityType="CSSPDBModel.HydrometricDataValue" Width="1.5" PointX="5.25" PointY="263.75" />
+        <EntityTypeShape EntityType="CSSPDBModel.HydrometricSite" Width="1.5" PointX="3" PointY="264.125" />
+        <EntityTypeShape EntityType="CSSPDBModel.InfrastructureLanguage" Width="1.5" PointX="5.25" PointY="133.375" />
+        <EntityTypeShape EntityType="CSSPDBModel.Infrastructure" Width="1.5" PointX="3" PointY="129.125" />
+        <EntityTypeShape EntityType="CSSPDBModel.LabSheetDetail" Width="1.5" PointX="7.5" PointY="174.875" />
+        <EntityTypeShape EntityType="CSSPDBModel.LabSheet" Width="1.5" PointX="5.25" PointY="178.875" />
+        <EntityTypeShape EntityType="CSSPDBModel.LabSheetTubeMPNDetail" Width="1.5" PointX="9.75" PointY="155" />
         <EntityTypeShape EntityType="CSSPDBModel.Log" Width="1.5" PointX="0.75" PointY="4.75" />
-        <EntityTypeShape EntityType="CSSPDBModel.MapInfoPoint" Width="1.5" PointX="5.25" PointY="257" />
-        <EntityTypeShape EntityType="CSSPDBModel.MapInfo" Width="1.5" PointX="3" PointY="256.625" />
-        <EntityTypeShape EntityType="CSSPDBModel.MikeBoundaryCondition" Width="1.5" PointX="3" PointY="148.25" />
-        <EntityTypeShape EntityType="CSSPDBModel.MikeScenarioResult" Width="1.5" PointX="3" PointY="68.875" />
-        <EntityTypeShape EntityType="CSSPDBModel.MikeScenario" Width="1.5" PointX="3" PointY="95.375" />
-        <EntityTypeShape EntityType="CSSPDBModel.MikeSource" Width="1.5" PointX="3" PointY="110.375" />
-        <EntityTypeShape EntityType="CSSPDBModel.MikeSourceStartEnd" Width="1.5" PointX="5.25" PointY="110.375" />
-        <EntityTypeShape EntityType="CSSPDBModel.MWQMAnalysisReportParameter" Width="1.5" PointX="3" PointY="260.625" />
+        <EntityTypeShape EntityType="CSSPDBModel.MapInfoPoint" Width="1.5" PointX="5.25" PointY="110.125" />
+        <EntityTypeShape EntityType="CSSPDBModel.MapInfo" Width="1.5" PointX="3" PointY="109.75" />
+        <EntityTypeShape EntityType="CSSPDBModel.MikeBoundaryCondition" Width="1.5" PointX="3" PointY="118.5" />
+        <EntityTypeShape EntityType="CSSPDBModel.MikeScenarioResult" Width="1.5" PointX="3" PointY="239.5" />
+        <EntityTypeShape EntityType="CSSPDBModel.MikeScenario" Width="1.5" PointX="3" PointY="157.625" />
+        <EntityTypeShape EntityType="CSSPDBModel.MikeSource" Width="1.5" PointX="3" PointY="113.875" />
+        <EntityTypeShape EntityType="CSSPDBModel.MikeSourceStartEnd" Width="1.5" PointX="5.25" PointY="113.875" />
+        <EntityTypeShape EntityType="CSSPDBModel.MWQMAnalysisReportParameter" Width="1.5" PointX="3" PointY="221.875" />
         <EntityTypeShape EntityType="CSSPDBModel.MWQMLookupMPN" Width="1.5" PointX="2.75" PointY="4.75" />
-        <EntityTypeShape EntityType="CSSPDBModel.MWQMRunLanguage" Width="1.5" PointX="5.25" PointY="58.625" />
-        <EntityTypeShape EntityType="CSSPDBModel.MWQMRun" Width="1.5" PointX="3" PointY="55.25" />
-        <EntityTypeShape EntityType="CSSPDBModel.MWQMSampleLanguage" Width="1.5" PointX="5.25" PointY="90.625" />
-        <EntityTypeShape EntityType="CSSPDBModel.MWQMSample" Width="1.5" PointX="3" PointY="89.375" />
-        <EntityTypeShape EntityType="CSSPDBModel.MWQMSitePolSourceSite" Width="1.5" PointX="3" PointY="106.875" />
-        <EntityTypeShape EntityType="CSSPDBModel.MWQMSite" Width="1.5" PointX="3" PointY="198.625" />
-        <EntityTypeShape EntityType="CSSPDBModel.MWQMSiteStartEndDate" Width="1.5" PointX="3" PointY="103.875" />
-        <EntityTypeShape EntityType="CSSPDBModel.MWQMSubsectorLanguage" Width="1.5" PointX="5.25" PointY="226" />
-        <EntityTypeShape EntityType="CSSPDBModel.MWQMSubsector" Width="1.5" PointX="3" PointY="226.125" />
-        <EntityTypeShape EntityType="CSSPDBModel.PolSourceObservationIssue" Width="1.5" PointX="7.5" PointY="150.125" />
-        <EntityTypeShape EntityType="CSSPDBModel.PolSourceObservation" Width="1.5" PointX="5.25" PointY="149.875" />
-        <EntityTypeShape EntityType="CSSPDBModel.PolSourceSiteEffect" Width="1.5" PointX="3" PointY="140.5" />
+        <EntityTypeShape EntityType="CSSPDBModel.MWQMRunLanguage" Width="1.5" PointX="5.25" PointY="252.875" />
+        <EntityTypeShape EntityType="CSSPDBModel.MWQMRun" Width="1.5" PointX="3" PointY="249.375" />
+        <EntityTypeShape EntityType="CSSPDBModel.MWQMSampleLanguage" Width="1.5" PointX="5.25" PointY="217.25" />
+        <EntityTypeShape EntityType="CSSPDBModel.MWQMSample" Width="1.5" PointX="3" PointY="215.875" />
+        <EntityTypeShape EntityType="CSSPDBModel.MWQMSite" Width="1.5" PointX="3" PointY="33.875" />
+        <EntityTypeShape EntityType="CSSPDBModel.MWQMSiteStartEndDate" Width="1.5" PointX="3" PointY="229" />
+        <EntityTypeShape EntityType="CSSPDBModel.MWQMSubsectorLanguage" Width="1.5" PointX="5.25" PointY="260" />
+        <EntityTypeShape EntityType="CSSPDBModel.MWQMSubsector" Width="1.5" PointX="3" PointY="260.25" />
+        <EntityTypeShape EntityType="CSSPDBModel.PolSourceObservationIssue" Width="1.5" PointX="7.5" PointY="139.75" />
+        <EntityTypeShape EntityType="CSSPDBModel.PolSourceObservation" Width="1.5" PointX="5.25" PointY="139.5" />
+        <EntityTypeShape EntityType="CSSPDBModel.PolSourceSiteEffect" Width="1.5" PointX="3" PointY="71.375" />
         <EntityTypeShape EntityType="CSSPDBModel.PolSourceSiteEffectTerm" Width="1.5" PointX="0.75" PointY="0.75" />
-        <EntityTypeShape EntityType="CSSPDBModel.PolSourceSite" Width="1.5" PointX="3" PointY="172.25" />
-        <EntityTypeShape EntityType="CSSPDBModel.RainExceedanceClimateSite" Width="1.5" PointX="3" PointY="211.125" />
-        <EntityTypeShape EntityType="CSSPDBModel.RainExceedance" Width="1.5" PointX="5.25" PointY="86" />
-        <EntityTypeShape EntityType="CSSPDBModel.RatingCurve" Width="1.5" PointX="5.25" PointY="132.25" />
-        <EntityTypeShape EntityType="CSSPDBModel.RatingCurveValue" Width="1.5" PointX="7.5" PointY="132.25" />
-        <EntityTypeShape EntityType="CSSPDBModel.ReportSectionLanguage" Width="1.5" PointX="8.25" PointY="136.875" />
-        <EntityTypeShape EntityType="CSSPDBModel.ReportSection" Width="1.5" PointX="6" PointY="136.125" />
-        <EntityTypeShape EntityType="CSSPDBModel.ReportTypeLanguage" Width="1.5" PointX="6" PointY="123.75" />
-        <EntityTypeShape EntityType="CSSPDBModel.ReportType" Width="1.5" PointX="3.75" PointY="124.125" />
+        <EntityTypeShape EntityType="CSSPDBModel.PolSourceSite" Width="1.5" PointX="3" PointY="153.125" />
+        <EntityTypeShape EntityType="CSSPDBModel.RainExceedanceClimateSite" Width="1.5" PointX="3" PointY="246.375" />
+        <EntityTypeShape EntityType="CSSPDBModel.RainExceedance" Width="1.5" PointX="8.25" PointY="88.875" />
+        <EntityTypeShape EntityType="CSSPDBModel.RatingCurve" Width="1.5" PointX="5.25" PointY="268" />
+        <EntityTypeShape EntityType="CSSPDBModel.RatingCurveValue" Width="1.5" PointX="7.5" PointY="268" />
+        <EntityTypeShape EntityType="CSSPDBModel.ReportSectionLanguage" Width="1.5" PointX="10.25" PointY="134" />
+        <EntityTypeShape EntityType="CSSPDBModel.ReportSection" Width="1.5" PointX="8" PointY="133.25" />
+        <EntityTypeShape EntityType="CSSPDBModel.ReportTypeLanguage" Width="1.5" PointX="8" PointY="121.75" />
+        <EntityTypeShape EntityType="CSSPDBModel.ReportType" Width="1.5" PointX="5.75" PointY="123.125" />
         <EntityTypeShape EntityType="CSSPDBModel.ResetPassword" Width="1.5" PointX="4.75" PointY="3.75" />
-        <EntityTypeShape EntityType="CSSPDBModel.SamplingPlanEmail" Width="1.5" PointX="5.25" PointY="246.75" />
-        <EntityTypeShape EntityType="CSSPDBModel.SamplingPlan" Width="1.5" PointX="3" PointY="241.625" />
-        <EntityTypeShape EntityType="CSSPDBModel.SamplingPlanSubsector" Width="1.5" PointX="8.25" PointY="182.375" />
-        <EntityTypeShape EntityType="CSSPDBModel.SamplingPlanSubsectorSite" Width="1.5" PointX="10.5" PointY="154.625" />
-        <EntityTypeShape EntityType="CSSPDBModel.SpillLanguage" Width="1.5" PointX="5.25" PointY="168.625" />
-        <EntityTypeShape EntityType="CSSPDBModel.Spill" Width="1.5" PointX="3" PointY="168.25" />
-        <EntityTypeShape EntityType="CSSPDBModel.Tel" Width="1.5" PointX="3" PointY="65.875" />
-        <EntityTypeShape EntityType="CSSPDBModel.TideDataValue" Width="1.5" PointX="3" PointY="252.125" />
-        <EntityTypeShape EntityType="CSSPDBModel.TideLocation" Width="1.5" PointX="6.75" PointY="3.75" />
-        <EntityTypeShape EntityType="CSSPDBModel.TideSite" Width="1.5" PointX="3" PointY="152.75" />
-        <EntityTypeShape EntityType="CSSPDBModel.TVFileLanguage" Width="1.5" PointX="5.25" PointY="81.75" />
-        <EntityTypeShape EntityType="CSSPDBModel.TVFile" Width="1.5" PointX="3" PointY="80.625" />
-        <EntityTypeShape EntityType="CSSPDBModel.TVItemLanguage" Width="1.5" PointX="3" PointY="115.125" />
-        <EntityTypeShape EntityType="CSSPDBModel.TVItemLink" Width="1.5" PointX="3" PointY="202.125" />
-        <EntityTypeShape EntityType="CSSPDBModel.TVItem" Width="1.5" PointX="0.75" PointY="127" />
-        <EntityTypeShape EntityType="CSSPDBModel.TVItemStat" Width="1.5" PointX="3" PointY="234.625" />
-        <EntityTypeShape EntityType="CSSPDBModel.TVItemUserAuthorization" Width="1.5" PointX="3" PointY="207.25" />
-        <EntityTypeShape EntityType="CSSPDBModel.TVTypeUserAuthorization" Width="1.5" PointX="3" PointY="249" />
-        <EntityTypeShape EntityType="CSSPDBModel.UseOfSite" Width="1.5" PointX="3" PointY="46.875" />
-        <EntityTypeShape EntityType="CSSPDBModel.VPAmbient" Width="1.5" PointX="5.25" PointY="156.25" />
-        <EntityTypeShape EntityType="CSSPDBModel.VPResult" Width="1.5" PointX="5.25" PointY="161.125" />
-        <EntityTypeShape EntityType="CSSPDBModel.VPScenarioLanguage" Width="1.5" PointX="5.25" PointY="165" />
-        <EntityTypeShape EntityType="CSSPDBModel.VPScenario" Width="1.5" PointX="3" PointY="158.875" />
+        <EntityTypeShape EntityType="CSSPDBModel.SamplingPlanEmail" Width="1.5" PointX="5.25" PointY="237.25" />
+        <EntityTypeShape EntityType="CSSPDBModel.SamplingPlan" Width="1.5" PointX="3" PointY="232.125" />
+        <EntityTypeShape EntityType="CSSPDBModel.SamplingPlanSubsector" Width="1.5" PointX="10.25" PointY="182.75" />
+        <EntityTypeShape EntityType="CSSPDBModel.SamplingPlanSubsectorSite" Width="1.5" PointX="12.5" PointY="154" />
+        <EntityTypeShape EntityType="CSSPDBModel.SpillLanguage" Width="1.5" PointX="5.25" PointY="52" />
+        <EntityTypeShape EntityType="CSSPDBModel.Spill" Width="1.5" PointX="3" PointY="51.75" />
+        <EntityTypeShape EntityType="CSSPDBModel.Tel" Width="1.5" PointX="3" PointY="171.125" />
+        <EntityTypeShape EntityType="CSSPDBModel.TideDataValue" Width="1.5" PointX="3" PointY="177.375" />
+        <EntityTypeShape EntityType="CSSPDBModel.TideLocation" Width="1.5" PointX="6.75" PointY="0.75" />
+        <EntityTypeShape EntityType="CSSPDBModel.TideSite" Width="1.5" PointX="3" PointY="40.5" />
+        <EntityTypeShape EntityType="CSSPDBModel.TVFileLanguage" Width="1.5" PointX="5.25" PointY="105.25" />
+        <EntityTypeShape EntityType="CSSPDBModel.TVFile" Width="1.5" PointX="3" PointY="104.125" />
+        <EntityTypeShape EntityType="CSSPDBModel.TVItemLanguage" Width="1.5" PointX="3" PointY="100.875" />
+        <EntityTypeShape EntityType="CSSPDBModel.TVItemLink" Width="1.5" PointX="3" PointY="166.125" />
+        <EntityTypeShape EntityType="CSSPDBModel.TVItem" Width="1.5" PointX="0.75" PointY="125.25" />
+        <EntityTypeShape EntityType="CSSPDBModel.TVItemStat" Width="1.5" PointX="3" PointY="150" />
+        <EntityTypeShape EntityType="CSSPDBModel.TVItemUserAuthorization" Width="1.5" PointX="3" PointY="242.375" />
+        <EntityTypeShape EntityType="CSSPDBModel.TVTypeUserAuthorization" Width="1.5" PointX="3" PointY="37.375" />
+        <EntityTypeShape EntityType="CSSPDBModel.UseOfSite" Width="1.5" PointX="3" PointY="95.625" />
+        <EntityTypeShape EntityType="CSSPDBModel.VPAmbient" Width="1.5" PointX="5.25" PointY="207.75" />
+        <EntityTypeShape EntityType="CSSPDBModel.VPResult" Width="1.5" PointX="5.25" PointY="203.875" />
+        <EntityTypeShape EntityType="CSSPDBModel.VPScenarioLanguage" Width="1.5" PointX="5.25" PointY="212.625" />
+        <EntityTypeShape EntityType="CSSPDBModel.VPScenario" Width="1.5" PointX="3" PointY="206.5" />
         <AssociationConnector Association="CSSPDBModel.FK_Addresses_AddressTVItemID" />
         <AssociationConnector Association="CSSPDBModel.FK_Addresses_CountryTVItemID" />
         <AssociationConnector Association="CSSPDBModel.FK_Addresses_MunicipalityTVItemID" />
@@ -157,8 +156,6 @@
         <AssociationConnector Association="CSSPDBModel.FK_MWQMSampleLanguages_MWQMSamples" />
         <AssociationConnector Association="CSSPDBModel.FK_MWQMSamples_MWQMRunTVItemID" />
         <AssociationConnector Association="CSSPDBModel.FK_MWQMSamples_MWQMSites" />
-        <AssociationConnector Association="CSSPDBModel.FK_MWQMSitePolSourceSites_TVItems" />
-        <AssociationConnector Association="CSSPDBModel.FK_MWQMSitePolSourceSites_TVItems1" />
         <AssociationConnector Association="CSSPDBModel.FK_MWQMSites_TVItems" />
         <AssociationConnector Association="CSSPDBModel.FK_MWQMSiteStartEndDates_TVItems" />
         <AssociationConnector Association="CSSPDBModel.FK_MWQMSubsectorLanguages_MWQMSubsectors" />
@@ -166,9 +163,9 @@
         <AssociationConnector Association="CSSPDBModel.FK_PolSourceObservationIssues_PolSourceObservations" />
         <AssociationConnector Association="CSSPDBModel.FK_PolSourceObservations_PolSourceSites" />
         <AssociationConnector Association="CSSPDBModel.FK_PolSourceObservations_TVItemContact" />
-        <AssociationConnector Association="CSSPDBModel.FK_PolSourceSiteEffects_TVItems" />
-        <AssociationConnector Association="CSSPDBModel.FK_PolSourceSiteEffects_TVItems1" />
-        <AssociationConnector Association="CSSPDBModel.FK_PolSourceSiteEffects_TVItems2" />
+        <AssociationConnector Association="CSSPDBModel.FK_PolSourceSiteEffects_AnalysisDocumentTVItemID" />
+        <AssociationConnector Association="CSSPDBModel.FK_PolSourceSiteEffects_MWQMSiteOrInfrastructureTVItemID" />
+        <AssociationConnector Association="CSSPDBModel.FK_PolSourceSiteEffects_PolSourceSiteTVItemID" />
         <AssociationConnector Association="CSSPDBModel.FK_PolSourceSiteEffectTerms_PolSourceSiteEffectTerms" />
         <AssociationConnector Association="CSSPDBModel.FK_PolSourceSites_TVItems" />
         <AssociationConnector Association="CSSPDBModel.FK_PolSourceSites_TVItems1" />

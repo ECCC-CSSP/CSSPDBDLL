@@ -7144,6 +7144,15 @@ namespace CSSPDBDLL.Services.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to MWQMSiteOrInfrastructureTVItemID.
+        /// </summary>
+        public static string MWQMSiteOrInfrastructureTVItemID {
+            get {
+                return ResourceManager.GetString("MWQMSiteOrInfrastructureTVItemID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to MWQMSitePolSourceSite.
         /// </summary>
         public static string MWQMSitePolSourceSite {

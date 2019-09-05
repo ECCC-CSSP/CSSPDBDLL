@@ -72,7 +72,6 @@ namespace CSSPDBDLL
         public virtual DbSet<MWQMRun> MWQMRuns { get; set; }
         public virtual DbSet<MWQMSampleLanguage> MWQMSampleLanguages { get; set; }
         public virtual DbSet<MWQMSample> MWQMSamples { get; set; }
-        public virtual DbSet<MWQMSitePolSourceSite> MWQMSitePolSourceSites { get; set; }
         public virtual DbSet<MWQMSite> MWQMSites { get; set; }
         public virtual DbSet<MWQMSiteStartEndDate> MWQMSiteStartEndDates { get; set; }
         public virtual DbSet<MWQMSubsectorLanguage> MWQMSubsectorLanguages { get; set; }

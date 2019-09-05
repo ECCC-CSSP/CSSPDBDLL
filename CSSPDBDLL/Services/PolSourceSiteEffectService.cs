@@ -69,7 +69,7 @@ namespace CSSPDBDLL.Services
                 return retStr;
             }
 
-            retStr = FieldCheckNotZeroInt(polSourceSiteEffectModel.MWQMSiteTVItemID, ServiceRes.MWQMSiteTVItemID);
+            retStr = FieldCheckNotZeroInt(polSourceSiteEffectModel.MWQMSiteOrInfrastructureTVItemID, ServiceRes.MWQMSiteOrInfrastructureTVItemID);
             if (!string.IsNullOrWhiteSpace(retStr))
             {
                 return retStr;
@@ -88,7 +88,7 @@ namespace CSSPDBDLL.Services
         public string FillPolSourceSiteEffect(PolSourceSiteEffect polSourceSiteEffect, PolSourceSiteEffectModel polSourceSiteEffectModel, ContactOK contactOK)
         {
             polSourceSiteEffect.PolSourceSiteTVItemID = polSourceSiteEffectModel.PolSourceSiteTVItemID;
-            polSourceSiteEffect.MWQMSiteTVItemID = polSourceSiteEffectModel.MWQMSiteTVItemID;
+            polSourceSiteEffect.MWQMSiteOrInfrastructureTVItemID = polSourceSiteEffectModel.MWQMSiteOrInfrastructureTVItemID;
             polSourceSiteEffect.PolSourceSiteEffectTermIDs = polSourceSiteEffectModel.PolSourceSiteEffectTermIDs;
             polSourceSiteEffect.Comments = polSourceSiteEffectModel.Comments;
             polSourceSiteEffect.AnalysisDocumentTVItemID = polSourceSiteEffectModel.AnalysisDocumentTVItemID;
@@ -121,7 +121,7 @@ namespace CSSPDBDLL.Services
                                                                  {
                                                                      Error = "",
                                                                      PolSourceSiteEffectID = c.PolSourceSiteEffectID,
-                                                                     MWQMSiteTVItemID = c.MWQMSiteTVItemID,
+                                                                     MWQMSiteOrInfrastructureTVItemID = c.MWQMSiteOrInfrastructureTVItemID,
                                                                      PolSourceSiteEffectTermIDs = c.PolSourceSiteEffectTermIDs,
                                                                      Comments = c.Comments,
                                                                      AnalysisDocumentTVItemID = c.AnalysisDocumentTVItemID,
@@ -150,6 +150,36 @@ namespace CSSPDBDLL.Services
 
             return polSourceSiteEffect;
         }
+        public PolSourceSiteEffectModel GetPolSourceSiteEffectModelWithPolSourceSiteEffectIDAndMWQMSiteOrInfrastructureTVItemIDDB(int PolSourceSiteEffectID, int MWQMSiteOrInfrastructureTVItemID)
+        {
+            PolSourceSiteEffectModel polSourceSiteEffectModel = (from c in db.PolSourceSiteEffects
+                                                                 where c.PolSourceSiteEffectID == PolSourceSiteEffectID
+                                                                 && c.MWQMSiteOrInfrastructureTVItemID == MWQMSiteOrInfrastructureTVItemID
+                                                                 select new PolSourceSiteEffectModel
+                                                                 {
+                                                                     Error = "",
+                                                                     PolSourceSiteEffectID = c.PolSourceSiteEffectID,
+                                                                     MWQMSiteOrInfrastructureTVItemID = c.MWQMSiteOrInfrastructureTVItemID,
+                                                                     PolSourceSiteEffectTermIDs = c.PolSourceSiteEffectTermIDs,
+                                                                     Comments = c.Comments,
+                                                                     AnalysisDocumentTVItemID = c.AnalysisDocumentTVItemID,
+                                                                     LastUpdateDate_UTC = c.LastUpdateDate_UTC,
+                                                                     LastUpdateContactTVItemID = c.LastUpdateContactTVItemID,
+                                                                 }).FirstOrDefault<PolSourceSiteEffectModel>();
+
+            if (polSourceSiteEffectModel == null)
+            {
+                return ReturnError(string.Format(ServiceRes.CouldNotFind_With_Equal_, ServiceRes.PolSourceSiteEffectModel, ServiceRes.PolSourceSiteEffectID, PolSourceSiteEffectID));
+            }
+            else
+            {
+                List<PolSourceSiteEffectTermModel> polSourceSiteEffectTermModelList = _PolSourceSiteEffectTermService.GetAllPolSourceSiteEffectTerm();
+
+                polSourceSiteEffectModel.PolSourceSiteEffectTermModelList = FillPolSourceSiteEffectTermModelList(polSourceSiteEffectModel, polSourceSiteEffectTermModelList);
+            }
+
+            return polSourceSiteEffectModel;
+        }
         public List<PolSourceSiteEffectModel> GetPolSourceSiteEffectModelListWithPolSourceSiteTVItemIDDB(int PolSourceSiteTVItemID)
         {
             List<PolSourceSiteEffectModel> polSourceSiteEffectModelList = (from c in db.PolSourceSiteEffects
@@ -158,7 +188,7 @@ namespace CSSPDBDLL.Services
                                                                            {
                                                                                Error = "",
                                                                                PolSourceSiteEffectID = c.PolSourceSiteEffectID,
-                                                                               MWQMSiteTVItemID = c.MWQMSiteTVItemID,
+                                                                               MWQMSiteOrInfrastructureTVItemID = c.MWQMSiteOrInfrastructureTVItemID,
                                                                                PolSourceSiteEffectTermIDs = c.PolSourceSiteEffectTermIDs,
                                                                                Comments = c.Comments,
                                                                                AnalysisDocumentTVItemID = c.AnalysisDocumentTVItemID,
@@ -179,15 +209,15 @@ namespace CSSPDBDLL.Services
 
             return polSourceSiteEffectModelList;
         }
-        public List<PolSourceSiteEffectModel> GetPolSourceSiteEffectModelListWithMWQMSiteTVItemIDDB(int MWQMSiteTVItemID)
+        public List<PolSourceSiteEffectModel> GetPolSourceSiteEffectModelListWithMWQMSiteOrInfrastructureTVItemIDDB(int MWQMSiteOrInfrastructureTVItemID)
         {
             List<PolSourceSiteEffectModel> polSourceSiteEffectModelList = (from c in db.PolSourceSiteEffects
-                                                                           where c.MWQMSiteTVItemID == MWQMSiteTVItemID
+                                                                           where c.MWQMSiteOrInfrastructureTVItemID == MWQMSiteOrInfrastructureTVItemID
                                                                            select new PolSourceSiteEffectModel
                                                                            {
                                                                                Error = "",
                                                                                PolSourceSiteEffectID = c.PolSourceSiteEffectID,
-                                                                               MWQMSiteTVItemID = c.MWQMSiteTVItemID,
+                                                                               MWQMSiteOrInfrastructureTVItemID = c.MWQMSiteOrInfrastructureTVItemID,
                                                                                PolSourceSiteEffectTermIDs = c.PolSourceSiteEffectTermIDs,
                                                                                Comments = c.Comments,
                                                                                AnalysisDocumentTVItemID = c.AnalysisDocumentTVItemID,
@@ -221,7 +251,7 @@ namespace CSSPDBDLL.Services
             int tempInt = 0;
             int PolSourceSiteEffectID = 0;
             int PolSourceSiteTVItemID = 0;
-            int MWQMSiteTVItemID = 0;
+            int MWQMSiteOrInfrastructureTVItemID = 0;
             string PolSourceSiteEffectTermIDs = "";
             string Comments = "";
             int? AnalysisDocumentTVItemID = null;
@@ -266,18 +296,18 @@ namespace CSSPDBDLL.Services
                     return ReturnError(tvItemModelPolSourceSite.Error);
             }
 
-            if (string.IsNullOrWhiteSpace(fc["MWQMSiteTVItemID"]))
-                return ReturnError(string.Format(ServiceRes._IsRequired, ServiceRes.MWQMSiteTVItemID));
+            if (string.IsNullOrWhiteSpace(fc["MWQMSiteOrInfrastructureTVItemID"]))
+                return ReturnError(string.Format(ServiceRes._IsRequired, ServiceRes.MWQMSiteOrInfrastructureTVItemID));
 
-            if (!int.TryParse(fc["MWQMSiteTVItemID"], out MWQMSiteTVItemID))
+            if (!int.TryParse(fc["MWQMSiteOrInfrastructureTVItemID"], out MWQMSiteOrInfrastructureTVItemID))
             {
-                return ReturnError(string.Format(ServiceRes._IsRequired, ServiceRes.MWQMSiteTVItemID));
+                return ReturnError(string.Format(ServiceRes._IsRequired, ServiceRes.MWQMSiteOrInfrastructureTVItemID));
             }
 
             TVItemModel tvItemModelMWQMSite = null;
-            if (MWQMSiteTVItemID != 0)
+            if (MWQMSiteOrInfrastructureTVItemID != 0)
             {
-                tvItemModelMWQMSite = _TVItemService.GetTVItemModelWithTVItemIDDB(MWQMSiteTVItemID);
+                tvItemModelMWQMSite = _TVItemService.GetTVItemModelWithTVItemIDDB(MWQMSiteOrInfrastructureTVItemID);
                 if (!string.IsNullOrWhiteSpace(tvItemModelMWQMSite.Error))
                     return ReturnError(tvItemModelMWQMSite.Error);
             }
@@ -309,7 +339,7 @@ namespace CSSPDBDLL.Services
                     PolSourceSiteEffectModel polSourceSiteEffectModelNew = new PolSourceSiteEffectModel()
                     {
                         PolSourceSiteTVItemID = PolSourceSiteTVItemID,
-                        MWQMSiteTVItemID = MWQMSiteTVItemID,
+                        MWQMSiteOrInfrastructureTVItemID = MWQMSiteOrInfrastructureTVItemID,
                         PolSourceSiteEffectTermIDs = PolSourceSiteEffectTermIDs,
                         Comments = Comments,
                         AnalysisDocumentTVItemID = AnalysisDocumentTVItemID,
@@ -322,7 +352,7 @@ namespace CSSPDBDLL.Services
                 else
                 {
                     polSourceSiteEffectNewOrToChange.PolSourceSiteTVItemID = PolSourceSiteTVItemID;
-                    polSourceSiteEffectNewOrToChange.MWQMSiteTVItemID = MWQMSiteTVItemID;
+                    polSourceSiteEffectNewOrToChange.MWQMSiteOrInfrastructureTVItemID = MWQMSiteOrInfrastructureTVItemID;
                     polSourceSiteEffectNewOrToChange.PolSourceSiteEffectTermIDs = PolSourceSiteEffectTermIDs;
                     polSourceSiteEffectNewOrToChange.Comments = Comments;
                     polSourceSiteEffectNewOrToChange.AnalysisDocumentTVItemID = AnalysisDocumentTVItemID;
@@ -351,7 +381,7 @@ namespace CSSPDBDLL.Services
             if (!string.IsNullOrWhiteSpace(tvItemModelExist.Error))
                 return ReturnError(tvItemModelExist.Error);
 
-            TVItemModel tvItemModelExist2 = _TVItemService.GetTVItemModelWithTVItemIDDB(polSourceSiteEffectModel.MWQMSiteTVItemID);
+            TVItemModel tvItemModelExist2 = _TVItemService.GetTVItemModelWithTVItemIDDB(polSourceSiteEffectModel.MWQMSiteOrInfrastructureTVItemID);
             if (!string.IsNullOrWhiteSpace(tvItemModelExist2.Error))
                 return ReturnError(tvItemModelExist2.Error);
 

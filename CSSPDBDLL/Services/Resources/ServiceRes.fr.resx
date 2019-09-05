@@ -2355,6 +2355,9 @@
   <data name="MWQMSiteNumberHasToBeUniqueForSubsector" xml:space="preserve">
     <value>Le numéro du site PSQEM doit être unique pour le sous-secteur</value>
   </data>
+  <data name="MWQMSiteOrInfrastructureTVItemID" xml:space="preserve">
+    <value>MWQMSiteOrInfrastructureTVItemID</value>
+  </data>
   <data name="MWQMSitePolSourceSite" xml:space="preserve">
     <value>MWQMSitePolSourceSite</value>
   </data>

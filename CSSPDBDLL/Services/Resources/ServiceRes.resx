@@ -2355,6 +2355,9 @@
   <data name="MWQMSiteNumberHasToBeUniqueForSubsector" xml:space="preserve">
     <value>MWQM Site Number Has To Be Unique For Subsector</value>
   </data>
+  <data name="MWQMSiteOrInfrastructureTVItemID" xml:space="preserve">
+    <value>MWQMSiteOrInfrastructureTVItemID</value>
+  </data>
   <data name="MWQMSitePolSourceSite" xml:space="preserve">
     <value>MWQMSitePolSourceSite</value>
   </data>

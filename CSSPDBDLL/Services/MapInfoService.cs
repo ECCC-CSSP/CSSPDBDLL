@@ -25,7 +25,7 @@ namespace CSSPDBDLL.Services
         public UseOfSiteService _UseOfSiteService { get; private set; }
         public MWQMSampleService _MWQMSampleService { get; private set; }
         public LogService _LogService { get; private set; }
-        public MWQMSitePolSourceSiteService _MWQMSitePolSourceSiteService { get; private set; }
+        public PolSourceSiteEffectService _PolSourceSiteEffectService { get; private set; }
         #endregion Properties
 
         #region Constructors
@@ -37,7 +37,7 @@ namespace CSSPDBDLL.Services
             _UseOfSiteService = new UseOfSiteService(LanguageRequest, User);
             _MWQMSampleService = new MWQMSampleService(LanguageRequest, User);
             _LogService = new LogService(LanguageRequest, User);
-            _MWQMSitePolSourceSiteService = new MWQMSitePolSourceSiteService(LanguageRequest, User);
+            _PolSourceSiteEffectService = new PolSourceSiteEffectService(LanguageRequest, User);
         }
         #endregion Constructors
 
@@ -808,8 +808,8 @@ namespace CSSPDBDLL.Services
                                         }
                                     }
 
-                                    List<int> MWQMSiteTVItemIDList = _MWQMSitePolSourceSiteService.GetMWQMSitePolSourceSiteModelListWithPolSourceSiteTVItemIDDB(tvItemModelCurrent.TVItemID)
-                                               .Select(c => c.MWQMSiteTVItemID).ToList();
+                                    List<int> MWQMSiteTVItemIDList = _PolSourceSiteEffectService.GetPolSourceSiteEffectModelListWithPolSourceSiteTVItemIDDB(tvItemModelCurrent.TVItemID)
+                                               .Select(c => c.MWQMSiteOrInfrastructureTVItemID).ToList();
 
                                     using (CSSPDBEntities db2 = new CSSPDBEntities())
                                     {
@@ -1121,8 +1121,8 @@ namespace CSSPDBDLL.Services
                                         tvLocationList.Add(tvlNew);
                                     }
 
-                                    List<int> MWQMSiteTVItemIDList = _MWQMSitePolSourceSiteService.GetMWQMSitePolSourceSiteModelListWithPolSourceSiteTVItemIDDB(tvItemModelCurrent.TVItemID)
-                                                .Select(c => c.MWQMSiteTVItemID).ToList();
+                                    List<int> MWQMSiteTVItemIDList = _PolSourceSiteEffectService.GetPolSourceSiteEffectModelListWithPolSourceSiteTVItemIDDB(tvItemModelCurrent.TVItemID)
+                                                .Select(c => c.MWQMSiteOrInfrastructureTVItemID).ToList();
 
                                     using (CSSPDBEntities db2 = new CSSPDBEntities())
                                     {
@@ -2090,7 +2090,7 @@ namespace CSSPDBDLL.Services
                                         tvLocationList.Add(tvlNew);
                                     }
 
-                                    List<int> PolSourceSiteTVItemIDList = _MWQMSitePolSourceSiteService.GetMWQMSitePolSourceSiteModelListWithMWQMSiteTVItemIDDB(tvItemModelCurrent.TVItemID, TVTypeEnum.PolSourceSite)
+                                    List<int> PolSourceSiteTVItemIDList = _PolSourceSiteEffectService.GetPolSourceSiteEffectModelListWithMWQMSiteOrInfrastructureTVItemIDDB(tvItemModelCurrent.TVItemID)
                                         .Select(c => c.PolSourceSiteTVItemID).ToList();
 
                                     using (CSSPDBEntities db2 = new CSSPDBEntities())
@@ -2136,15 +2136,15 @@ namespace CSSPDBDLL.Services
                                         }
                                     }
 
-                                    List<int> PolSourceSiteTVItemIDList2 = _MWQMSitePolSourceSiteService.GetMWQMSitePolSourceSiteModelListWithMWQMSiteTVItemIDDB(tvItemModelCurrent.TVItemID, TVTypeEnum.Infrastructure)
-                                        .Select(c => c.PolSourceSiteTVItemID).ToList();
+                                    //List<int> InfrastructureTVItemIDList = _PolSourceSiteEffectService.GetPolSourceSiteEffectModelListWithMWQMSiteOrInfrastructureTVItemIDDB(tvItemModelCurrent.TVItemID)
+                                    //    .Select(c => c.PolSourceSiteTVItemID).ToList();
 
                                     using (CSSPDBEntities db2 = new CSSPDBEntities())
                                     {
                                         var tvItemInfraList = (from c in db2.TVItems
                                                                from cl in db2.TVItemLanguages
                                                                from inf in db2.Infrastructures
-                                                               from l in PolSourceSiteTVItemIDList2
+                                                               from l in PolSourceSiteTVItemIDList
                                                                where c.TVItemID == cl.TVItemID
                                                                && cl.TVItemID == inf.InfrastructureTVItemID
                                                                && c.TVItemID == l

@@ -53,8 +53,6 @@ namespace CSSPDBDLL
             this.MWQMRuns2 = new HashSet<MWQMRun>();
             this.MWQMSamples = new HashSet<MWQMSample>();
             this.MWQMSamples1 = new HashSet<MWQMSample>();
-            this.MWQMSitePolSourceSites = new HashSet<MWQMSitePolSourceSite>();
-            this.MWQMSitePolSourceSites1 = new HashSet<MWQMSitePolSourceSite>();
             this.MWQMSites = new HashSet<MWQMSite>();
             this.MWQMSiteStartEndDates = new HashSet<MWQMSiteStartEndDate>();
             this.MWQMSubsectors = new HashSet<MWQMSubsector>();
@@ -173,10 +171,6 @@ namespace CSSPDBDLL
         public virtual ICollection<MWQMSample> MWQMSamples { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MWQMSample> MWQMSamples1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<MWQMSitePolSourceSite> MWQMSitePolSourceSites { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<MWQMSitePolSourceSite> MWQMSitePolSourceSites1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MWQMSite> MWQMSites { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

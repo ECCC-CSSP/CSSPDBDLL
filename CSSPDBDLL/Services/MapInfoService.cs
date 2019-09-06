@@ -808,8 +808,8 @@ namespace CSSPDBDLL.Services
                                         }
                                     }
 
-                                    List<int> MWQMSiteTVItemIDList = _PolSourceSiteEffectService.GetPolSourceSiteEffectModelListWithPolSourceSiteTVItemIDDB(tvItemModelCurrent.TVItemID)
-                                               .Select(c => c.MWQMSiteOrInfrastructureTVItemID).ToList();
+                                    List<int> MWQMSiteTVItemIDList = _PolSourceSiteEffectService.GetPolSourceSiteEffectModelListWithPolSourceSiteOrInfrastructureTVItemIDDB(tvItemModelCurrent.TVItemID)
+                                               .Select(c => c.MWQMSiteTVItemID).ToList();
 
                                     using (CSSPDBEntities db2 = new CSSPDBEntities())
                                     {
@@ -1121,8 +1121,8 @@ namespace CSSPDBDLL.Services
                                         tvLocationList.Add(tvlNew);
                                     }
 
-                                    List<int> MWQMSiteTVItemIDList = _PolSourceSiteEffectService.GetPolSourceSiteEffectModelListWithPolSourceSiteTVItemIDDB(tvItemModelCurrent.TVItemID)
-                                                .Select(c => c.MWQMSiteOrInfrastructureTVItemID).ToList();
+                                    List<int> MWQMSiteTVItemIDList = _PolSourceSiteEffectService.GetPolSourceSiteEffectModelListWithPolSourceSiteOrInfrastructureTVItemIDDB(tvItemModelCurrent.TVItemID)
+                                                .Select(c => c.MWQMSiteTVItemID).ToList();
 
                                     using (CSSPDBEntities db2 = new CSSPDBEntities())
                                     {
@@ -2090,8 +2090,8 @@ namespace CSSPDBDLL.Services
                                         tvLocationList.Add(tvlNew);
                                     }
 
-                                    List<int> PolSourceSiteTVItemIDList = _PolSourceSiteEffectService.GetPolSourceSiteEffectModelListWithMWQMSiteOrInfrastructureTVItemIDDB(tvItemModelCurrent.TVItemID)
-                                        .Select(c => c.PolSourceSiteTVItemID).ToList();
+                                    List<int> PolSourceSiteTVItemIDList = _PolSourceSiteEffectService.GetPolSourceSiteEffectModelListWithMWQMSiteTVItemIDDB(tvItemModelCurrent.TVItemID)
+                                        .Select(c => c.PolSourceSiteOrInfrastructureTVItemID).ToList();
 
                                     using (CSSPDBEntities db2 = new CSSPDBEntities())
                                     {

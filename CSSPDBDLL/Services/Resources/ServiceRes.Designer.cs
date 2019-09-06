@@ -8188,6 +8188,15 @@ namespace CSSPDBDLL.Services.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to PolSourceSiteOrInfrastructureTVItemID.
+        /// </summary>
+        public static string PolSourceSiteOrInfrastructureTVItemID {
+            get {
+                return ResourceManager.GetString("PolSourceSiteOrInfrastructureTVItemID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Pollution Source Sites.
         /// </summary>
         public static string PolSourceSites {

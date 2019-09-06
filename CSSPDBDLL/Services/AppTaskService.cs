@@ -205,14 +205,14 @@ namespace CSSPDBDLL.Services
                                                  StatusText = cl.StatusText,
                                              }).FirstOrDefault<AppTaskModel>();
 
-                if (appTaskModel == null)
-                    return ReturnError(ServiceRes.NoNewTaskToRun);
-
             }
             catch (Exception)
             {
                 return ReturnError(ServiceRes.NoNewTaskToRun);
             }
+
+            if (appTaskModel == null)
+                return ReturnError(ServiceRes.NoNewTaskToRun);
 
             return appTaskModel;
         }

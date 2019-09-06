@@ -981,8 +981,8 @@
             <PropertyRef Name="PolSourceSiteEffectID" />
           </Key>
           <Property Name="PolSourceSiteEffectID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="PolSourceSiteTVItemID" Type="int" Nullable="false" />
-          <Property Name="MWQMSiteOrInfrastructureTVItemID" Type="int" Nullable="false" />
+          <Property Name="PolSourceSiteOrInfrastructureTVItemID" Type="int" Nullable="false" />
+          <Property Name="MWQMSiteTVItemID" Type="int" Nullable="false" />
           <Property Name="PolSourceSiteEffectTermIDs" Type="nvarchar" MaxLength="250" />
           <Property Name="Comments" Type="text" />
           <Property Name="AnalysisDocumentTVItemID" Type="int" />
@@ -2378,7 +2378,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_PolSourceSiteEffects_MWQMSiteOrInfrastructureTVItemID">
+        <Association Name="FK_PolSourceSiteEffects_MWQMSiteTVItemID">
           <End Role="TVItems" Type="Self.TVItems" Multiplicity="1" />
           <End Role="PolSourceSiteEffects" Type="Self.PolSourceSiteEffects" Multiplicity="*" />
           <ReferentialConstraint>
@@ -2386,11 +2386,11 @@
               <PropertyRef Name="TVItemID" />
             </Principal>
             <Dependent Role="PolSourceSiteEffects">
-              <PropertyRef Name="MWQMSiteOrInfrastructureTVItemID" />
+              <PropertyRef Name="MWQMSiteTVItemID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_PolSourceSiteEffects_PolSourceSiteTVItemID">
+        <Association Name="FK_PolSourceSiteEffects_PolSourceSiteOrInfrastructureTVItemID">
           <End Role="TVItems" Type="Self.TVItems" Multiplicity="1" />
           <End Role="PolSourceSiteEffects" Type="Self.PolSourceSiteEffects" Multiplicity="*" />
           <ReferentialConstraint>
@@ -2398,7 +2398,7 @@
               <PropertyRef Name="TVItemID" />
             </Principal>
             <Dependent Role="PolSourceSiteEffects">
-              <PropertyRef Name="PolSourceSiteTVItemID" />
+              <PropertyRef Name="PolSourceSiteOrInfrastructureTVItemID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -3366,11 +3366,11 @@
             <End Role="TVItems" EntitySet="TVItems" />
             <End Role="PolSourceSiteEffects" EntitySet="PolSourceSiteEffects" />
           </AssociationSet>
-          <AssociationSet Name="FK_PolSourceSiteEffects_MWQMSiteOrInfrastructureTVItemID" Association="Self.FK_PolSourceSiteEffects_MWQMSiteOrInfrastructureTVItemID">
+          <AssociationSet Name="FK_PolSourceSiteEffects_MWQMSiteTVItemID" Association="Self.FK_PolSourceSiteEffects_MWQMSiteTVItemID">
             <End Role="TVItems" EntitySet="TVItems" />
             <End Role="PolSourceSiteEffects" EntitySet="PolSourceSiteEffects" />
           </AssociationSet>
-          <AssociationSet Name="FK_PolSourceSiteEffects_PolSourceSiteTVItemID" Association="Self.FK_PolSourceSiteEffects_PolSourceSiteTVItemID">
+          <AssociationSet Name="FK_PolSourceSiteEffects_PolSourceSiteOrInfrastructureTVItemID" Association="Self.FK_PolSourceSiteEffects_PolSourceSiteOrInfrastructureTVItemID">
             <End Role="TVItems" EntitySet="TVItems" />
             <End Role="PolSourceSiteEffects" EntitySet="PolSourceSiteEffects" />
           </AssociationSet>
@@ -3940,11 +3940,11 @@
             <End Role="TVItem" EntitySet="TVItems" />
             <End Role="PolSourceSiteEffect" EntitySet="PolSourceSiteEffects" />
           </AssociationSet>
-          <AssociationSet Name="FK_PolSourceSiteEffects_MWQMSiteOrInfrastructureTVItemID" Association="CSSPDBModel.FK_PolSourceSiteEffects_MWQMSiteOrInfrastructureTVItemID">
+          <AssociationSet Name="FK_PolSourceSiteEffects_MWQMSiteTVItemID" Association="CSSPDBModel.FK_PolSourceSiteEffects_MWQMSiteTVItemID">
             <End Role="TVItem" EntitySet="TVItems" />
             <End Role="PolSourceSiteEffect" EntitySet="PolSourceSiteEffects" />
           </AssociationSet>
-          <AssociationSet Name="FK_PolSourceSiteEffects_PolSourceSiteTVItemID" Association="CSSPDBModel.FK_PolSourceSiteEffects_PolSourceSiteTVItemID">
+          <AssociationSet Name="FK_PolSourceSiteEffects_PolSourceSiteOrInfrastructureTVItemID" Association="CSSPDBModel.FK_PolSourceSiteEffects_PolSourceSiteOrInfrastructureTVItemID">
             <End Role="TVItem" EntitySet="TVItems" />
             <End Role="PolSourceSiteEffect" EntitySet="PolSourceSiteEffects" />
           </AssociationSet>
@@ -5193,16 +5193,16 @@
             <PropertyRef Name="PolSourceSiteEffectID" />
           </Key>
           <Property Name="PolSourceSiteEffectID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="PolSourceSiteTVItemID" Type="Int32" Nullable="false" />
-          <Property Name="MWQMSiteOrInfrastructureTVItemID" Type="Int32" Nullable="false" />
+          <Property Name="PolSourceSiteOrInfrastructureTVItemID" Type="Int32" Nullable="false" />
+          <Property Name="MWQMSiteTVItemID" Type="Int32" Nullable="false" />
           <Property Name="PolSourceSiteEffectTermIDs" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="Comments" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="AnalysisDocumentTVItemID" Type="Int32" />
           <Property Name="LastUpdateDate_UTC" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="LastUpdateContactTVItemID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="TVItem" Relationship="CSSPDBModel.FK_PolSourceSiteEffects_AnalysisDocumentTVItemID" FromRole="PolSourceSiteEffect" ToRole="TVItem" />
-          <NavigationProperty Name="TVItem1" Relationship="CSSPDBModel.FK_PolSourceSiteEffects_MWQMSiteOrInfrastructureTVItemID" FromRole="PolSourceSiteEffect" ToRole="TVItem" />
-          <NavigationProperty Name="TVItem2" Relationship="CSSPDBModel.FK_PolSourceSiteEffects_PolSourceSiteTVItemID" FromRole="PolSourceSiteEffect" ToRole="TVItem" />
+          <NavigationProperty Name="TVItem1" Relationship="CSSPDBModel.FK_PolSourceSiteEffects_MWQMSiteTVItemID" FromRole="PolSourceSiteEffect" ToRole="TVItem" />
+          <NavigationProperty Name="TVItem2" Relationship="CSSPDBModel.FK_PolSourceSiteEffects_PolSourceSiteOrInfrastructureTVItemID" FromRole="PolSourceSiteEffect" ToRole="TVItem" />
         </EntityType>
         <EntityType Name="PolSourceSiteEffectTerm">
           <Key>
@@ -5662,8 +5662,8 @@
           <NavigationProperty Name="MWQMSubsectors" Relationship="CSSPDBModel.FK_MWQMSubsectors_TVItems" FromRole="TVItem" ToRole="MWQMSubsector" />
           <NavigationProperty Name="PolSourceObservations" Relationship="CSSPDBModel.FK_PolSourceObservations_TVItemContact" FromRole="TVItem" ToRole="PolSourceObservation" />
           <NavigationProperty Name="PolSourceSiteEffects" Relationship="CSSPDBModel.FK_PolSourceSiteEffects_AnalysisDocumentTVItemID" FromRole="TVItem" ToRole="PolSourceSiteEffect" />
-          <NavigationProperty Name="PolSourceSiteEffects1" Relationship="CSSPDBModel.FK_PolSourceSiteEffects_MWQMSiteOrInfrastructureTVItemID" FromRole="TVItem" ToRole="PolSourceSiteEffect" />
-          <NavigationProperty Name="PolSourceSiteEffects2" Relationship="CSSPDBModel.FK_PolSourceSiteEffects_PolSourceSiteTVItemID" FromRole="TVItem" ToRole="PolSourceSiteEffect" />
+          <NavigationProperty Name="PolSourceSiteEffects1" Relationship="CSSPDBModel.FK_PolSourceSiteEffects_MWQMSiteTVItemID" FromRole="TVItem" ToRole="PolSourceSiteEffect" />
+          <NavigationProperty Name="PolSourceSiteEffects2" Relationship="CSSPDBModel.FK_PolSourceSiteEffects_PolSourceSiteOrInfrastructureTVItemID" FromRole="TVItem" ToRole="PolSourceSiteEffect" />
           <NavigationProperty Name="PolSourceSites" Relationship="CSSPDBModel.FK_PolSourceSites_TVItems" FromRole="TVItem" ToRole="PolSourceSite" />
           <NavigationProperty Name="PolSourceSites1" Relationship="CSSPDBModel.FK_PolSourceSites_TVItems1" FromRole="TVItem" ToRole="PolSourceSite" />
           <NavigationProperty Name="RainExceedanceClimateSites" Relationship="CSSPDBModel.FK_RainExceedance_ClimateSiteTVItemID" FromRole="TVItem" ToRole="RainExceedanceClimateSite" />
@@ -6738,7 +6738,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_PolSourceSiteEffects_MWQMSiteOrInfrastructureTVItemID">
+        <Association Name="FK_PolSourceSiteEffects_MWQMSiteTVItemID">
           <End Type="CSSPDBModel.TVItem" Role="TVItem" Multiplicity="1" />
           <End Type="CSSPDBModel.PolSourceSiteEffect" Role="PolSourceSiteEffect" Multiplicity="*" />
           <ReferentialConstraint>
@@ -6746,11 +6746,11 @@
               <PropertyRef Name="TVItemID" />
             </Principal>
             <Dependent Role="PolSourceSiteEffect">
-              <PropertyRef Name="MWQMSiteOrInfrastructureTVItemID" />
+              <PropertyRef Name="MWQMSiteTVItemID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_PolSourceSiteEffects_PolSourceSiteTVItemID">
+        <Association Name="FK_PolSourceSiteEffects_PolSourceSiteOrInfrastructureTVItemID">
           <End Type="CSSPDBModel.TVItem" Role="TVItem" Multiplicity="1" />
           <End Type="CSSPDBModel.PolSourceSiteEffect" Role="PolSourceSiteEffect" Multiplicity="*" />
           <ReferentialConstraint>
@@ -6758,7 +6758,7 @@
               <PropertyRef Name="TVItemID" />
             </Principal>
             <Dependent Role="PolSourceSiteEffect">
-              <PropertyRef Name="PolSourceSiteTVItemID" />
+              <PropertyRef Name="PolSourceSiteOrInfrastructureTVItemID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -8352,8 +8352,8 @@
                 <ScalarProperty Name="AnalysisDocumentTVItemID" ColumnName="AnalysisDocumentTVItemID" />
                 <ScalarProperty Name="Comments" ColumnName="Comments" />
                 <ScalarProperty Name="PolSourceSiteEffectTermIDs" ColumnName="PolSourceSiteEffectTermIDs" />
-                <ScalarProperty Name="MWQMSiteOrInfrastructureTVItemID" ColumnName="MWQMSiteOrInfrastructureTVItemID" />
-                <ScalarProperty Name="PolSourceSiteTVItemID" ColumnName="PolSourceSiteTVItemID" />
+                <ScalarProperty Name="MWQMSiteTVItemID" ColumnName="MWQMSiteTVItemID" />
+                <ScalarProperty Name="PolSourceSiteOrInfrastructureTVItemID" ColumnName="PolSourceSiteOrInfrastructureTVItemID" />
                 <ScalarProperty Name="PolSourceSiteEffectID" ColumnName="PolSourceSiteEffectID" />
               </MappingFragment>
             </EntityTypeMapping>

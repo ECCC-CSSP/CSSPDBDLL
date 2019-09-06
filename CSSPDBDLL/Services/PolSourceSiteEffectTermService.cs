@@ -24,8 +24,6 @@ namespace CSSPDBDLL.Services
 
         #region Properties
         public TVItemService _TVItemService { get; private set; }
-        public MapInfoService _MapInfoService { get; private set; }
-        public PolSourceObservationService _PolSourceObservationService { get; private set; }
         public LogService _LogService { get; private set; }
         #endregion Properties
 
@@ -34,8 +32,6 @@ namespace CSSPDBDLL.Services
             : base(LanguageRequest, User)
         {
             _TVItemService = new TVItemService(LanguageRequest, User);
-            _MapInfoService = new MapInfoService(LanguageRequest, User);
-            _PolSourceObservationService = new PolSourceObservationService(LanguageRequest, User);
             _LogService = new LogService(LanguageRequest, User);
         }
         #endregion Constructors

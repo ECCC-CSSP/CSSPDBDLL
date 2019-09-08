@@ -69,9 +69,20 @@ namespace CSSPDBDLL.Services
                 return retStr;
             }
 
-            if (GetPolSourceSiteEffectTermWithEffectTermENDB(polSourceSiteEffectTermModel.EffectTermEN))
+            PolSourceSiteEffectTermModel polSourceSiteEffectTermModelInDB = GetPolSourceSiteEffectTermWithEffectTermENDB(polSourceSiteEffectTermModel.EffectTermEN);
+            if (string.IsNullOrWhiteSpace(polSourceSiteEffectTermModelInDB.Error))
             {
-                return string.Format(ServiceRes._AlreadyExists, ServiceRes.EffectTermEN);
+                if (polSourceSiteEffectTermModel.PolSourceSiteEffectTermID != 0)
+                {
+                    if (polSourceSiteEffectTermModel.PolSourceSiteEffectTermID != polSourceSiteEffectTermModelInDB.PolSourceSiteEffectTermID)
+                    {
+                        return string.Format(ServiceRes._AlreadyExists, ServiceRes.EffectTermEN);
+                    }
+                }
+                else
+                {
+                    return string.Format(ServiceRes._AlreadyExists, ServiceRes.EffectTermEN);
+                }
             }
 
             retStr = FieldCheckIfNotNullMaxLengthString(polSourceSiteEffectTermModel.EffectTermEN, ServiceRes.EffectTermEN, 100);
@@ -80,9 +91,20 @@ namespace CSSPDBDLL.Services
                 return retStr;
             }
 
-            if (GetPolSourceSiteEffectTermWithEffectTermFRDB(polSourceSiteEffectTermModel.EffectTermFR))
+            polSourceSiteEffectTermModelInDB = GetPolSourceSiteEffectTermWithEffectTermFRDB(polSourceSiteEffectTermModel.EffectTermFR);
+            if (string.IsNullOrWhiteSpace(polSourceSiteEffectTermModelInDB.Error))
             {
-                return string.Format(ServiceRes._AlreadyExists, ServiceRes.EffectTermFR);
+                if (polSourceSiteEffectTermModel.PolSourceSiteEffectTermID != 0)
+                {
+                    if (polSourceSiteEffectTermModel.PolSourceSiteEffectTermID != polSourceSiteEffectTermModelInDB.PolSourceSiteEffectTermID)
+                    {
+                        return string.Format(ServiceRes._AlreadyExists, ServiceRes.EffectTermFR);
+                    }
+                }
+                else
+                {
+                    return string.Format(ServiceRes._AlreadyExists, ServiceRes.EffectTermFR);
+                }
             }
 
             retStr = FieldCheckIfNotNullMaxLengthString(polSourceSiteEffectTermModel.EffectTermFR, ServiceRes.EffectTermFR, 100);
@@ -137,7 +159,12 @@ namespace CSSPDBDLL.Services
                                                                                        LastUpdateContactTVItemID = c.LastUpdateContactTVItemID,
                                                                                    }).ToList<PolSourceSiteEffectTermModel>();
 
-            return polSourceSiteEffectTermModelList;
+            if (LanguageRequest == LanguageEnum.fr)
+            {
+                return polSourceSiteEffectTermModelList.OrderBy(c => c.EffectTermFR).ToList();
+            }
+
+            return polSourceSiteEffectTermModelList.OrderBy(c => c.EffectTermEN).ToList();
         }
         public PolSourceSiteEffectTermModel GetPolSourceSiteEffectTermModelWithPolSourceSiteEffectTermIDDB(int PolSourceSiteEffectTermID)
         {
@@ -171,17 +198,51 @@ namespace CSSPDBDLL.Services
             return polSourceSiteEffectTerm;
         }
 
-        public bool GetPolSourceSiteEffectTermWithEffectTermENDB(string EffectTermEN)
+        public PolSourceSiteEffectTermModel GetPolSourceSiteEffectTermWithEffectTermENDB(string EffectTermEN)
         {
-            return (from c in db.PolSourceSiteEffectTerms
-                    where c.EffectTermEN == EffectTermEN
-                    select c).Any();
+            PolSourceSiteEffectTermModel polSourceSiteEffectTermModel = (from c in db.PolSourceSiteEffectTerms
+                                                                         where c.EffectTermEN == EffectTermEN
+                                                                         select new PolSourceSiteEffectTermModel
+                                                                         {
+                                                                             Error = "",
+                                                                             PolSourceSiteEffectTermID = c.PolSourceSiteEffectTermID,
+                                                                             IsGroup = c.IsGroup,
+                                                                             UnderGroupID = c.UnderGroupID,
+                                                                             EffectTermEN = c.EffectTermEN,
+                                                                             EffectTermFR = c.EffectTermFR,
+                                                                             LastUpdateDate_UTC = c.LastUpdateDate_UTC,
+                                                                             LastUpdateContactTVItemID = c.LastUpdateContactTVItemID,
+                                                                         }).FirstOrDefault<PolSourceSiteEffectTermModel>();
+
+            if (polSourceSiteEffectTermModel == null)
+            {
+                return ReturnError(string.Format(ServiceRes.CouldNotFind_With_Equal_, ServiceRes.PolSourceSiteEffectTerm, ServiceRes.EffectTermEN, EffectTermEN));
+            }
+
+            return polSourceSiteEffectTermModel;
         }
-        public bool GetPolSourceSiteEffectTermWithEffectTermFRDB(string EffectTermFR)
+        public PolSourceSiteEffectTermModel GetPolSourceSiteEffectTermWithEffectTermFRDB(string EffectTermFR)
         {
-            return (from c in db.PolSourceSiteEffectTerms
-                    where c.EffectTermFR == EffectTermFR
-                    select c).Any();
+            PolSourceSiteEffectTermModel polSourceSiteEffectTermModel = (from c in db.PolSourceSiteEffectTerms
+                                                                         where c.EffectTermFR == EffectTermFR
+                                                                         select new PolSourceSiteEffectTermModel
+                                                                         {
+                                                                             Error = "",
+                                                                             PolSourceSiteEffectTermID = c.PolSourceSiteEffectTermID,
+                                                                             IsGroup = c.IsGroup,
+                                                                             UnderGroupID = c.UnderGroupID,
+                                                                             EffectTermEN = c.EffectTermEN,
+                                                                             EffectTermFR = c.EffectTermFR,
+                                                                             LastUpdateDate_UTC = c.LastUpdateDate_UTC,
+                                                                             LastUpdateContactTVItemID = c.LastUpdateContactTVItemID,
+                                                                         }).FirstOrDefault<PolSourceSiteEffectTermModel>();
+
+            if (polSourceSiteEffectTermModel == null)
+            {
+                return ReturnError(string.Format(ServiceRes.CouldNotFind_With_Equal_, ServiceRes.PolSourceSiteEffectTerm, ServiceRes.EffectTermFR, EffectTermFR));
+            }
+
+            return polSourceSiteEffectTermModel;
         }
 
         // Helper
@@ -222,14 +283,7 @@ namespace CSSPDBDLL.Services
                     return ReturnError(polSourceSiteEffectTermNewOrToChange.Error);
             }
 
-            if (string.IsNullOrWhiteSpace(fc["IsGroup"]))
-            {
-                IsGroup = false;
-            }
-            else
-            {
-                IsGroup = true;
-            }
+            IsGroup = bool.Parse(fc["IsGroup"]);
 
             if (!int.TryParse(fc["UnderGroupID"], out tempInt))
             {
@@ -250,9 +304,20 @@ namespace CSSPDBDLL.Services
 
             EffectTermEN = fc["EffectTermEN"];
 
-            if (GetPolSourceSiteEffectTermWithEffectTermENDB(EffectTermEN))
+            PolSourceSiteEffectTermModel polSourceSiteEffectTermModelInDB = GetPolSourceSiteEffectTermWithEffectTermENDB(EffectTermEN);
+            if (string.IsNullOrWhiteSpace(polSourceSiteEffectTermModelInDB.Error))
             {
-                return ReturnError(string.Format(ServiceRes._AlreadyExists, ServiceRes.EffectTermEN));
+                if (PolSourceSiteEffectTermID != 0)
+                {
+                    if (polSourceSiteEffectTermNewOrToChange.PolSourceSiteEffectTermID != polSourceSiteEffectTermModelInDB.PolSourceSiteEffectTermID)
+                    {
+                        return ReturnError(string.Format(ServiceRes._AlreadyExists, ServiceRes.EffectTermEN));
+                    }
+                }
+                else
+                {
+                    return ReturnError(string.Format(ServiceRes._AlreadyExists, ServiceRes.EffectTermEN));
+                }
             }
 
             if (string.IsNullOrWhiteSpace(fc["EffectTermFR"]))
@@ -260,10 +325,23 @@ namespace CSSPDBDLL.Services
 
             EffectTermFR = fc["EffectTermFR"];
 
-            if (GetPolSourceSiteEffectTermWithEffectTermFRDB(EffectTermFR))
+            polSourceSiteEffectTermModelInDB = GetPolSourceSiteEffectTermWithEffectTermFRDB(EffectTermFR);
+            if (string.IsNullOrWhiteSpace(polSourceSiteEffectTermModelInDB.Error))
             {
-                return ReturnError(string.Format(ServiceRes._AlreadyExists, ServiceRes.EffectTermFR));
+                if (PolSourceSiteEffectTermID != 0)
+                {
+                    if (polSourceSiteEffectTermNewOrToChange.PolSourceSiteEffectTermID != polSourceSiteEffectTermModelInDB.PolSourceSiteEffectTermID)
+                    {
+                        return ReturnError(string.Format(ServiceRes._AlreadyExists, ServiceRes.EffectTermFR));
+                    }
+                }
+                else
+                {
+                    return ReturnError(string.Format(ServiceRes._AlreadyExists, ServiceRes.EffectTermFR));
+                }
             }
+
+            PolSourceSiteEffectTermModel polSourceSiteEffectTermModelRet = new PolSourceSiteEffectTermModel();
 
             using (TransactionScope ts = new TransactionScope())
             {
@@ -277,7 +355,7 @@ namespace CSSPDBDLL.Services
                         EffectTermFR = EffectTermFR,
                     };
 
-                    PolSourceSiteEffectTermModel polSourceSiteEffectTermModelRet = PostAddPolSourceSiteEffectTermDB(polSourceSiteEffectTermModelNew);
+                    polSourceSiteEffectTermModelRet = PostAddPolSourceSiteEffectTermDB(polSourceSiteEffectTermModelNew);
                     if (!string.IsNullOrWhiteSpace(polSourceSiteEffectTermModelRet.Error))
                         return ReturnError(polSourceSiteEffectTermModelRet.Error);
                 }
@@ -288,15 +366,15 @@ namespace CSSPDBDLL.Services
                     polSourceSiteEffectTermNewOrToChange.EffectTermEN = EffectTermEN;
                     polSourceSiteEffectTermNewOrToChange.EffectTermFR = EffectTermFR;
 
-                    polSourceSiteEffectTermNewOrToChange = PostUpdatePolSourceSiteEffectTermDB(polSourceSiteEffectTermNewOrToChange);
-                    if (!string.IsNullOrWhiteSpace(polSourceSiteEffectTermNewOrToChange.Error))
-                        return ReturnError(polSourceSiteEffectTermNewOrToChange.Error);
+                    polSourceSiteEffectTermModelRet = PostUpdatePolSourceSiteEffectTermDB(polSourceSiteEffectTermNewOrToChange);
+                    if (!string.IsNullOrWhiteSpace(polSourceSiteEffectTermModelRet.Error))
+                        return ReturnError(polSourceSiteEffectTermModelRet.Error);
 
                 }
 
                 ts.Complete();
             }
-            return polSourceSiteEffectTermNewOrToChange;
+            return polSourceSiteEffectTermModelRet;
         }
         public PolSourceSiteEffectTermModel PolSourceSiteEffectTermSetIsGroupDB(int PolSourceSiteEffectTermID, bool IsGroup)
         {
@@ -327,14 +405,15 @@ namespace CSSPDBDLL.Services
             else
             {
                 polSourceSiteEffectTermToChange.UnderGroupID = null;
-                polSourceSiteEffectTermToChange.IsGroup = IsGroup;
             }
+
+            polSourceSiteEffectTermToChange.IsGroup = IsGroup;
 
             PolSourceSiteEffectTermModel polSourceSiteEffectTermToChangeRet = PostUpdatePolSourceSiteEffectTermDB(polSourceSiteEffectTermToChange);
 
             return polSourceSiteEffectTermToChangeRet;
         }
-        public PolSourceSiteEffectTermModel PolSourceSiteEffectTermSendToGroupDB(int PolSourceSiteEffectTermID, int PolSourceSiteEffectTermIDGroup)
+        public PolSourceSiteEffectTermModel PolSourceSiteEffectTermSendToGroupDB(int PolSourceSiteEffectTermID, int UnderGroupID)
         {
             ContactOK contactOK = IsContactOK();
             if (!string.IsNullOrWhiteSpace(contactOK.Error))
@@ -344,24 +423,25 @@ namespace CSSPDBDLL.Services
             if (!string.IsNullOrWhiteSpace(polSourceSiteEffectTermToChange.Error))
                 return ReturnError(polSourceSiteEffectTermToChange.Error);
 
-            PolSourceSiteEffectTermModel polSourceSiteEffectTermGroup = GetPolSourceSiteEffectTermModelWithPolSourceSiteEffectTermIDDB(PolSourceSiteEffectTermIDGroup);
-            if (!string.IsNullOrWhiteSpace(polSourceSiteEffectTermGroup.Error))
-                return ReturnError(polSourceSiteEffectTermGroup.Error);
-
-
-            if (polSourceSiteEffectTermGroup.IsGroup == false)
+            PolSourceSiteEffectTermModel polSourceSiteEffectTermGroup = GetPolSourceSiteEffectTermModelWithPolSourceSiteEffectTermIDDB(UnderGroupID);
+            if (string.IsNullOrWhiteSpace(polSourceSiteEffectTermGroup.Error)) // found
             {
-                return ReturnError(ServiceRes.EffectTermToSendToGroupIsNotAGroup);
+                if (polSourceSiteEffectTermGroup.IsGroup == false)
+                {
+                    return ReturnError(ServiceRes.EffectTermToSendToGroupIsNotAGroup);
+                }
+
+                polSourceSiteEffectTermToChange.IsGroup = false;
+                polSourceSiteEffectTermToChange.UnderGroupID = UnderGroupID;
+            }
+            else
+            {
+                polSourceSiteEffectTermToChange.IsGroup = false;
+                polSourceSiteEffectTermToChange.UnderGroupID = null;
             }
 
-            if (polSourceSiteEffectTermToChange.IsGroup == true)
-            {
-                return ReturnError(ServiceRes.EffectTermIsAlreadyAGroup);
-            }
-
-            polSourceSiteEffectTermToChange.IsGroup = false;
-            polSourceSiteEffectTermToChange.UnderGroupID = polSourceSiteEffectTermGroup.UnderGroupID;
             PolSourceSiteEffectTermModel polSourceSiteEffectTermGroupRet = PostUpdatePolSourceSiteEffectTermDB(polSourceSiteEffectTermToChange);
+
 
             return polSourceSiteEffectTermGroupRet;
         }

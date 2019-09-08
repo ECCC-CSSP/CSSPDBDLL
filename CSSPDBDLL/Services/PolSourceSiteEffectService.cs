@@ -246,6 +246,22 @@ namespace CSSPDBDLL.Services
         }
 
         // Post
+        public PolSourceSiteEffectModel PolSourceSiteEffectTermsSaveAllDB(int PolSourceSiteEffectID, string PolSourceSiteEffectTermIDs)
+        {
+            ContactOK contactOK = IsContactOK();
+            if (!string.IsNullOrWhiteSpace(contactOK.Error))
+                return ReturnError(contactOK.Error);
+
+            PolSourceSiteEffectModel polSourceSiteEffectToChange = GetPolSourceSiteEffectModelWithPolSourceSiteEffectIDDB(PolSourceSiteEffectID);
+            if (!string.IsNullOrWhiteSpace(polSourceSiteEffectToChange.Error))
+                return ReturnError(polSourceSiteEffectToChange.Error);
+
+            polSourceSiteEffectToChange.PolSourceSiteEffectTermIDs = PolSourceSiteEffectTermIDs;
+
+            PolSourceSiteEffectModel polSourceSiteEffectToChangeRet = PostUpdatePolSourceSiteEffectDB(polSourceSiteEffectToChange);
+
+            return polSourceSiteEffectToChangeRet;
+        }
         public PolSourceSiteEffectModel PolSourceSiteEffectAddOrModifyDB(FormCollection fc)
         {
             int tempInt = 0;

@@ -446,6 +446,7 @@ namespace CSSPDBDLL.Services
                                                                                                                  where lsd.LabSheetID == c.LabSheetID
                                                                                                                  && lsd.LabSheetDetailID == lst.LabSheetDetailID
                                                                                                                  && lst.SampleType == (int)SampleTypeEnum.Routine
+                                                                                                                 && lst.MPN != null
                                                                                                                  select lst).Count()
                                                                                  let LabSheetHasDuplicate = (from lsd in db.LabSheetDetails
                                                                                                              from lst in db.LabSheetTubeMPNDetails

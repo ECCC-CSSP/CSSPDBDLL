@@ -256,9 +256,11 @@ namespace CSSPDBDLL.Services
             if (!string.IsNullOrWhiteSpace(polSourceSiteEffectToChange.Error))
                 return ReturnError(polSourceSiteEffectToChange.Error);
 
-            polSourceSiteEffectToChange.PolSourceSiteEffectTermIDs = PolSourceSiteEffectTermIDs;
+            polSourceSiteEffectToChange.PolSourceSiteEffectTermIDs = PolSourceSiteEffectTermIDs.Replace("|", ",");
 
             PolSourceSiteEffectModel polSourceSiteEffectToChangeRet = PostUpdatePolSourceSiteEffectDB(polSourceSiteEffectToChange);
+            if (!string.IsNullOrWhiteSpace(polSourceSiteEffectToChangeRet.Error))
+                return ReturnError(polSourceSiteEffectToChangeRet.Error);
 
             return polSourceSiteEffectToChangeRet;
         }

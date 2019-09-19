@@ -144,6 +144,7 @@ namespace CSSPDBDLL.Services
             mwqmSample.PH = mwqmSampleModel.PH;
             mwqmSample.Salinity_PPT = mwqmSampleModel.Salinity_PPT;
             mwqmSample.SampleDateTime_Local = mwqmSampleModel.SampleDateTime_Local;
+            mwqmSample.TimeText = mwqmSampleModel.TimeText;
             mwqmSample.WaterTemp_C = mwqmSampleModel.WaterTemp_C;
             mwqmSample.SampleTypesText = mwqmSampleModel.SampleTypesText;
             mwqmSample.Tube_10 = mwqmSampleModel.Tube_10;
@@ -196,6 +197,7 @@ namespace CSSPDBDLL.Services
                                                              PH = c.PH,
                                                              Salinity_PPT = c.Salinity_PPT,
                                                              SampleDateTime_Local = c.SampleDateTime_Local,
+                                                             TimeText = c.TimeText,
                                                              WaterTemp_C = c.WaterTemp_C,
                                                              SampleTypesText = c.SampleTypesText,
                                                              Tube_10 = c.Tube_10,
@@ -236,6 +238,7 @@ namespace CSSPDBDLL.Services
                                                              PH = c.PH,
                                                              Salinity_PPT = c.Salinity_PPT,
                                                              SampleDateTime_Local = c.SampleDateTime_Local,
+                                                             TimeText = c.TimeText,
                                                              WaterTemp_C = c.WaterTemp_C,
                                                              SampleTypesText = c.SampleTypesText,
                                                              Tube_10 = c.Tube_10,
@@ -276,6 +279,7 @@ namespace CSSPDBDLL.Services
                                                              PH = c.PH,
                                                              Salinity_PPT = c.Salinity_PPT,
                                                              SampleDateTime_Local = c.SampleDateTime_Local,
+                                                             TimeText = c.TimeText,
                                                              WaterTemp_C = c.WaterTemp_C,
                                                              SampleTypesText = c.SampleTypesText,
                                                              Tube_10 = c.Tube_10,
@@ -315,6 +319,7 @@ namespace CSSPDBDLL.Services
                                                    PH = c.PH,
                                                    Salinity_PPT = c.Salinity_PPT,
                                                    SampleDateTime_Local = c.SampleDateTime_Local,
+                                                   TimeText = c.TimeText,
                                                    WaterTemp_C = c.WaterTemp_C,
                                                    SampleTypesText = c.SampleTypesText,
                                                    Tube_10 = c.Tube_10,
@@ -361,6 +366,7 @@ namespace CSSPDBDLL.Services
                                                       PH = c.PH,
                                                       Salinity_PPT = c.Salinity_PPT,
                                                       SampleDateTime_Local = c.SampleDateTime_Local,
+                                                      TimeText = c.TimeText,
                                                       WaterTemp_C = c.WaterTemp_C,
                                                       SampleTypesText = c.SampleTypesText,
                                                       Tube_10 = c.Tube_10,
@@ -418,6 +424,7 @@ namespace CSSPDBDLL.Services
                                                              PH = c.PH,
                                                              Salinity_PPT = c.Salinity_PPT,
                                                              SampleDateTime_Local = c.SampleDateTime_Local,
+                                                             TimeText = c.TimeText,
                                                              WaterTemp_C = c.WaterTemp_C,
                                                              SampleTypesText = c.SampleTypesText,
                                                              Tube_10 = c.Tube_10,

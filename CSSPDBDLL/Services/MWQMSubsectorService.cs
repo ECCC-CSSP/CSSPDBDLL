@@ -1763,7 +1763,7 @@ namespace CSSPDBDLL.Services
             AppTaskModel appTaskModelNew = new AppTaskModel()
             {
                 TVItemID = SubsectorTVItemID,
-                TVItemID2 = Year,
+                TVItemID2 = SubsectorTVItemID,
                 AppTaskCommand = AppTaskCommandEnum.GetClimateSitesDataForRunsOfYear,
                 ErrorText = "",
                 StatusText = ServiceRes.GetClimateSitesDataForRunsOfYear + " " + Year.ToString(),
@@ -2477,7 +2477,7 @@ namespace CSSPDBDLL.Services
             AppTaskModel appTaskModelNew = new AppTaskModel()
             {
                 TVItemID = SubsectorTVItemID,
-                TVItemID2 = Year,
+                TVItemID2 = SubsectorTVItemID,
                 AppTaskCommand = AppTaskCommandEnum.GetHydrometricSitesDataForRunsOfYear,
                 ErrorText = "",
                 StatusText = ServiceRes.GetHydrometricSitesDataForRunsOfYear + " " + Year.ToString(),

@@ -95,6 +95,7 @@ namespace CSSPDBDLL.Services
         {
             mwqmSubsector.MWQMSubsectorTVItemID = mwqmSubsectorModel.MWQMSubsectorTVItemID;
             mwqmSubsector.SubsectorHistoricKey = mwqmSubsectorModel.SubsectorHistoricKey;
+            mwqmSubsector.TideLocationSIDText = mwqmSubsectorModel.TideLocationSIDText;
             mwqmSubsector.LastUpdateDate_UTC = DateTime.UtcNow;
             if (contactOK == null)
             {

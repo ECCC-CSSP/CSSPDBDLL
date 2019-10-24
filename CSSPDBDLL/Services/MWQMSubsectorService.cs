@@ -1958,19 +1958,6 @@ namespace CSSPDBDLL.Services
 
                     if (AverageOrPriority == "Priority")
                     {
-                        mwqmRunModel.RainDay0_mm = null;
-                        mwqmRunModel.RainDay1_mm = null;
-                        mwqmRunModel.RainDay2_mm = null;
-                        mwqmRunModel.RainDay3_mm = null;
-                        mwqmRunModel.RainDay4_mm = null;
-                        mwqmRunModel.RainDay5_mm = null;
-                        mwqmRunModel.RainDay6_mm = null;
-                        mwqmRunModel.RainDay7_mm = null;
-                        mwqmRunModel.RainDay8_mm = null;
-                        mwqmRunModel.RainDay9_mm = null;
-                        mwqmRunModel.RainDay10_mm = null;
-
-
                         for (int j = 0; j < 11; j++)
                         {
                             float? DataValue = null;
@@ -1982,65 +1969,68 @@ namespace CSSPDBDLL.Services
                                     break;
                                 }
                             }
-                            switch (j)
+                            if (DataValue != null)
                             {
-                                case 0:
-                                    {
-                                        mwqmRunModel.RainDay0_mm = DataValue;
-                                    }
-                                    break;
-                                case 1:
-                                    {
-                                        mwqmRunModel.RainDay1_mm = DataValue;
-                                    }
-                                    break;
-                                case 2:
-                                    {
-                                        mwqmRunModel.RainDay2_mm = DataValue;
-                                    }
-                                    break;
-                                case 3:
-                                    {
-                                        mwqmRunModel.RainDay3_mm = DataValue;
-                                    }
-                                    break;
-                                case 4:
-                                    {
-                                        mwqmRunModel.RainDay4_mm = DataValue;
-                                    }
-                                    break;
-                                case 5:
-                                    {
-                                        mwqmRunModel.RainDay5_mm = DataValue;
-                                    }
-                                    break;
-                                case 6:
-                                    {
-                                        mwqmRunModel.RainDay6_mm = DataValue;
-                                    }
-                                    break;
-                                case 7:
-                                    {
-                                        mwqmRunModel.RainDay7_mm = DataValue;
-                                    }
-                                    break;
-                                case 8:
-                                    {
-                                        mwqmRunModel.RainDay8_mm = DataValue;
-                                    }
-                                    break;
-                                case 9:
-                                    {
-                                        mwqmRunModel.RainDay9_mm = DataValue;
-                                    }
-                                    break;
-                                case 10:
-                                    {
-                                        mwqmRunModel.RainDay10_mm = DataValue;
-                                    }
-                                    break;
-                                default:
-                                    break;
+                                switch (j)
+                                {
+                                    case 0:
+                                        {
+                                            mwqmRunModel.RainDay0_mm = DataValue;
+                                        }
+                                        break;
+                                    case 1:
+                                        {
+                                            mwqmRunModel.RainDay1_mm = DataValue;
+                                        }
+                                        break;
+                                    case 2:
+                                        {
+                                            mwqmRunModel.RainDay2_mm = DataValue;
+                                        }
+                                        break;
+                                    case 3:
+                                        {
+                                            mwqmRunModel.RainDay3_mm = DataValue;
+                                        }
+                                        break;
+                                    case 4:
+                                        {
+                                            mwqmRunModel.RainDay4_mm = DataValue;
+                                        }
+                                        break;
+                                    case 5:
+                                        {
+                                            mwqmRunModel.RainDay5_mm = DataValue;
+                                        }
+                                        break;
+                                    case 6:
+                                        {
+                                            mwqmRunModel.RainDay6_mm = DataValue;
+                                        }
+                                        break;
+                                    case 7:
+                                        {
+                                            mwqmRunModel.RainDay7_mm = DataValue;
+                                        }
+                                        break;
+                                    case 8:
+                                        {
+                                            mwqmRunModel.RainDay8_mm = DataValue;
+                                        }
+                                        break;
+                                    case 9:
+                                        {
+                                            mwqmRunModel.RainDay9_mm = DataValue;
+                                        }
+                                        break;
+                                    case 10:
+                                        {
+                                            mwqmRunModel.RainDay10_mm = DataValue;
+                                        }
+                                        break;
+                                    default:
+                                        break;
+                                }
                             }
                         }
                     }
@@ -2059,109 +2049,68 @@ namespace CSSPDBDLL.Services
                                 }
                             }
 
-                            switch (j)
+                            if (CountValue > 0)
                             {
-                                case 0:
-                                    {
-                                        mwqmRunModel.RainDay0_mm = null;
-                                        if (CountValue > 0)
+                                switch (j)
+                                {
+                                    case 0:
                                         {
                                             mwqmRunModel.RainDay0_mm = Total / CountValue;
                                         }
-                                    }
-                                    break;
-                                case 1:
-                                    {
-                                        mwqmRunModel.RainDay1_mm = null;
-                                        if (CountValue > 0)
+                                        break;
+                                    case 1:
                                         {
                                             mwqmRunModel.RainDay1_mm = Total / CountValue;
                                         }
-                                    }
-                                    break;
-                                case 2:
-                                    {
-                                        mwqmRunModel.RainDay2_mm = null;
-                                        if (CountValue > 0)
+                                        break;
+                                    case 2:
                                         {
                                             mwqmRunModel.RainDay2_mm = Total / CountValue;
                                         }
-                                    }
-                                    break;
-                                case 3:
-                                    {
-                                        mwqmRunModel.RainDay3_mm = null;
-                                        if (CountValue > 0)
+                                        break;
+                                    case 3:
                                         {
                                             mwqmRunModel.RainDay3_mm = Total / CountValue;
                                         }
-                                    }
-                                    break;
-                                case 4:
-                                    {
-                                        mwqmRunModel.RainDay4_mm = null;
-                                        if (CountValue > 0)
+                                        break;
+                                    case 4:
                                         {
                                             mwqmRunModel.RainDay4_mm = Total / CountValue;
                                         }
-                                    }
-                                    break;
-                                case 5:
-                                    {
-                                        mwqmRunModel.RainDay5_mm = null;
-                                        if (CountValue > 0)
+                                        break;
+                                    case 5:
                                         {
                                             mwqmRunModel.RainDay5_mm = Total / CountValue;
                                         }
-                                    }
-                                    break;
-                                case 6:
-                                    {
-                                        mwqmRunModel.RainDay6_mm = null;
-                                        if (CountValue > 0)
+                                        break;
+                                    case 6:
                                         {
                                             mwqmRunModel.RainDay6_mm = Total / CountValue;
                                         }
-                                    }
-                                    break;
-                                case 7:
-                                    {
-                                        mwqmRunModel.RainDay7_mm = null;
-                                        if (CountValue > 0)
+                                        break;
+                                    case 7:
                                         {
                                             mwqmRunModel.RainDay7_mm = Total / CountValue;
                                         }
-                                    }
-                                    break;
-                                case 8:
-                                    {
-                                        mwqmRunModel.RainDay8_mm = null;
-                                        if (CountValue > 0)
+                                        break;
+                                    case 8:
                                         {
                                             mwqmRunModel.RainDay8_mm = Total / CountValue;
                                         }
-                                    }
-                                    break;
-                                case 9:
-                                    {
-                                        mwqmRunModel.RainDay9_mm = null;
-                                        if (CountValue > 0)
+                                        break;
+                                    case 9:
                                         {
                                             mwqmRunModel.RainDay9_mm = Total / CountValue;
                                         }
-                                    }
-                                    break;
-                                case 10:
-                                    {
-                                        mwqmRunModel.RainDay10_mm = null;
-                                        if (CountValue > 0)
+                                        break;
+                                    case 10:
                                         {
                                             mwqmRunModel.RainDay10_mm = Total / CountValue;
                                         }
-                                    }
-                                    break;
-                                default:
-                                    break;
+                                        break;
+                                    default:
+                                        break;
+                                }
                             }
                         }
                     }
@@ -2169,11 +2118,6 @@ namespace CSSPDBDLL.Services
                     {
                         return ReturnError(string.Format(ServiceRes.AverageOrPriorityShouldBeOneOf_, "[Average, Priority]"));
                     }
-                }
-
-                if (SubsectorTVItemID == 635)
-                {
-                    int seilfj = 34;
                 }
 
                 MWQMRunModel mwqmRunModelRet = _MWQMRunService.PostUpdateMWQMRunDB(mwqmRunModel);

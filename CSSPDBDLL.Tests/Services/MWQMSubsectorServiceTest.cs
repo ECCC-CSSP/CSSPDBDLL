@@ -2,20 +2,21 @@
 using System.Text;
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using CSSPWebToolsDBDLL.Tests.SetupInfo;
-using CSSPWebToolsDBDLL.Models;
+using CSSPDBDLL.Tests.SetupInfo;
+using CSSPDBDLL.Models;
 using System.Security.Principal;
-using CSSPWebToolsDBDLL.Services;
-using CSSPWebToolsDBDLL.Services.Resources;
+using CSSPDBDLL.Services;
+using CSSPDBDLL.Services.Resources;
 using System.Linq;
 using System.Transactions;
-using CSSPWebToolsDBDLL.Services.Fakes;
+using CSSPDBDLL.Services.Fakes;
 using Microsoft.QualityTools.Testing.Fakes;
 using System.Globalization;
 using System.Threading;
 using CSSPEnumsDLL.Enums;
 using CSSPModelsDLL.Models;
 using System.Web.Mvc;
+using CSSPDBDLL;
 
 namespace CSSPWebToolsDBDLL.Tests.Services
 {
@@ -427,10 +428,10 @@ namespace CSSPWebToolsDBDLL.Tests.Services
 
                 using (TransactionScope ts = new TransactionScope())
                 {
-                    int SubsectorTVItemID = 635; // Bouctouche harbor subsector
+                    int SubsectorTVItemID = 717; // Bouctouche harbor subsector
 
                     // todo 
-                    AppTaskModel appTaskModelRet = mwqmSubsectorService.ClimateSiteGetDataForRunsOfYearDB(SubsectorTVItemID, 2012);
+                    AppTaskModel appTaskModelRet = mwqmSubsectorService.ClimateSiteGetDataForRunsOfYearDB(SubsectorTVItemID, 2019);
                     Assert.AreEqual("", appTaskModelRet.Error);
                 }
                 break;
@@ -445,10 +446,10 @@ namespace CSSPWebToolsDBDLL.Tests.Services
 
                 using (TransactionScope ts = new TransactionScope())
                 {
-                    int SubsectorTVItemID = 635; // Bouctouche harbor subsector
+                    int SubsectorTVItemID = 717; // Deer Island
 
                     // todo 
-                    MWQMSubsectorModel mwqmSubsectorModel = mwqmSubsectorService.ClimateSiteSetDataToUseByAverageOrPriorityDB(SubsectorTVItemID, 2012, "Average");
+                    MWQMSubsectorModel mwqmSubsectorModel = mwqmSubsectorService.ClimateSiteSetDataToUseByAverageOrPriorityDB(SubsectorTVItemID, 2019, "Priority");
                     Assert.AreEqual("", mwqmSubsectorModel.Error);
                 }
                 break;
@@ -587,7 +588,7 @@ namespace CSSPWebToolsDBDLL.Tests.Services
                     List<UseOfSite> useOfSiteList = (from c in mwqmSubsectorService.db.UseOfSites
                                                      where c.SubsectorTVItemID == SubsectorTVItemID
                                                      && c.SiteTVItemID == ClimateSiteTVItemID
-                                                     && c.SiteType == (int)SiteTypeEnum.Climate
+                                                     && c.TVType == (int)TVTypeEnum.ClimateSite
                                                      orderby c.StartYear
                                                      select c).ToList();
 
@@ -614,7 +615,7 @@ namespace CSSPWebToolsDBDLL.Tests.Services
                     List<UseOfSite> useOfSiteList2 = (from c in mwqmSubsectorService.db.UseOfSites
                                                       where c.SubsectorTVItemID == SubsectorTVItemID
                                                       && c.SiteTVItemID == ClimateSiteTVItemID2
-                                                      && c.SiteType == (int)SiteTypeEnum.Climate
+                                                     && c.TVType == (int)TVTypeEnum.ClimateSite
                                                       orderby c.StartYear
                                                       select c).ToList();
 

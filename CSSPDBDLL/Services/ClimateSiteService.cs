@@ -83,7 +83,7 @@ namespace CSSPDBDLL.Services
                 return retStr;
             }
 
-            List<string> ProvinceList = new List<string>() { "BC", "NB", "NL", "NS", "PE", "QC" };
+            List<string> ProvinceList = new List<string>() { "BC", "NB", "NL", "NS", "PE", "QC", "WA", "ME" };
             string ProvinceListTxt = "";
             foreach (string s in ProvinceList)
             {
@@ -112,11 +112,6 @@ namespace CSSPDBDLL.Services
                 return retStr;
             }
             retStr = FieldCheckIfNotNullMaxLengthString(climateSiteModel.TCID, ServiceRes.TCID, 3);
-            if (!string.IsNullOrWhiteSpace(retStr))
-            {
-                return retStr;
-            }
-            retStr = FieldCheckIfNotNullMaxLengthString(climateSiteModel.ProvSiteID, ServiceRes.ProvSiteID, 50);
             if (!string.IsNullOrWhiteSpace(retStr))
             {
                 return retStr;
@@ -172,13 +167,12 @@ namespace CSSPDBDLL.Services
             climateSiteNew.HourlyEndDate_Local = climateSiteModel.HourlyEndDate_Local;
             climateSiteNew.HourlyNow = climateSiteModel.HourlyNow;
             climateSiteNew.HourlyStartDate_Local = climateSiteModel.HourlyStartDate_Local;
-            climateSiteNew.IsProvincial = climateSiteModel.IsProvincial;
+            climateSiteNew.IsQuebecSite = climateSiteModel.IsQuebecSite;
             climateSiteNew.IsCoCoRaHS = climateSiteModel.IsCoCoRaHS;
             climateSiteNew.MonthlyEndDate_Local = climateSiteModel.MonthlyEndDate_Local;
             climateSiteNew.MonthlyNow = climateSiteModel.MonthlyNow;
             climateSiteNew.MonthlyStartDate_Local = climateSiteModel.MonthlyStartDate_Local;
             climateSiteNew.Province = climateSiteModel.Province;
-            climateSiteNew.ProvSiteID = climateSiteModel.ProvSiteID;
             climateSiteNew.TCID = climateSiteModel.TCID;
             climateSiteNew.TimeOffset_hour = climateSiteModel.TimeOffset_hour;
             climateSiteNew.WMOID = climateSiteModel.WMOID;
@@ -223,13 +217,12 @@ namespace CSSPDBDLL.Services
                                                      HourlyEndDate_Local = c.HourlyEndDate_Local,
                                                      HourlyNow = c.HourlyNow,
                                                      HourlyStartDate_Local = c.HourlyStartDate_Local,
-                                                     IsProvincial = c.IsProvincial,
+                                                     IsQuebecSite = c.IsQuebecSite,
                                                      IsCoCoRaHS = c.IsCoCoRaHS,
                                                      MonthlyEndDate_Local = c.MonthlyEndDate_Local,
                                                      MonthlyNow = c.MonthlyNow,
                                                      MonthlyStartDate_Local = c.MonthlyStartDate_Local,
                                                      Province = c.Province,
-                                                     ProvSiteID = c.ProvSiteID,
                                                      TCID = c.TCID,
                                                      TimeOffset_hour = c.TimeOffset_hour,
                                                      WMOID = c.WMOID,
@@ -262,13 +255,12 @@ namespace CSSPDBDLL.Services
                                                      HourlyEndDate_Local = c.HourlyEndDate_Local,
                                                      HourlyNow = c.HourlyNow,
                                                      HourlyStartDate_Local = c.HourlyStartDate_Local,
-                                                     IsProvincial = c.IsProvincial,
+                                                     IsQuebecSite = c.IsQuebecSite,
                                                      IsCoCoRaHS = c.IsCoCoRaHS,
                                                      MonthlyEndDate_Local = c.MonthlyEndDate_Local,
                                                      MonthlyNow = c.MonthlyNow,
                                                      MonthlyStartDate_Local = c.MonthlyStartDate_Local,
                                                      Province = c.Province,
-                                                     ProvSiteID = c.ProvSiteID,
                                                      TCID = c.TCID,
                                                      TimeOffset_hour = c.TimeOffset_hour,
                                                      WMOID = c.WMOID,
@@ -301,13 +293,12 @@ namespace CSSPDBDLL.Services
                                                      HourlyEndDate_Local = c.HourlyEndDate_Local,
                                                      HourlyNow = c.HourlyNow,
                                                      HourlyStartDate_Local = c.HourlyStartDate_Local,
-                                                     IsProvincial = c.IsProvincial,
+                                                     IsQuebecSite = c.IsQuebecSite,
                                                      IsCoCoRaHS = c.IsCoCoRaHS,
                                                      MonthlyEndDate_Local = c.MonthlyEndDate_Local,
                                                      MonthlyNow = c.MonthlyNow,
                                                      MonthlyStartDate_Local = c.MonthlyStartDate_Local,
                                                      Province = c.Province,
-                                                     ProvSiteID = c.ProvSiteID,
                                                      TCID = c.TCID,
                                                      TimeOffset_hour = c.TimeOffset_hour,
                                                      WMOID = c.WMOID,
@@ -341,13 +332,12 @@ namespace CSSPDBDLL.Services
                                                      HourlyEndDate_Local = c.HourlyEndDate_Local,
                                                      HourlyNow = c.HourlyNow,
                                                      HourlyStartDate_Local = c.HourlyStartDate_Local,
-                                                     IsProvincial = c.IsProvincial,
+                                                     IsQuebecSite = c.IsQuebecSite,
                                                      IsCoCoRaHS = c.IsCoCoRaHS,
                                                      MonthlyEndDate_Local = c.MonthlyEndDate_Local,
                                                      MonthlyNow = c.MonthlyNow,
                                                      MonthlyStartDate_Local = c.MonthlyStartDate_Local,
                                                      Province = c.Province,
-                                                     ProvSiteID = c.ProvSiteID,
                                                      TCID = c.TCID,
                                                      TimeOffset_hour = c.TimeOffset_hour,
                                                      WMOID = c.WMOID,
@@ -382,13 +372,12 @@ namespace CSSPDBDLL.Services
                                                         HourlyEndDate_Local = c.HourlyEndDate_Local,
                                                         HourlyNow = c.HourlyNow,
                                                         HourlyStartDate_Local = c.HourlyStartDate_Local,
-                                                        IsProvincial = c.IsProvincial,
+                                                        IsQuebecSite = c.IsQuebecSite,
                                                         IsCoCoRaHS = c.IsCoCoRaHS,
                                                         MonthlyEndDate_Local = c.MonthlyEndDate_Local,
                                                         MonthlyNow = c.MonthlyNow,
                                                         MonthlyStartDate_Local = c.MonthlyStartDate_Local,
                                                         Province = c.Province,
-                                                        ProvSiteID = c.ProvSiteID,
                                                         TCID = c.TCID,
                                                         TimeOffset_hour = c.TimeOffset_hour,
                                                         WMOID = c.WMOID,
@@ -418,7 +407,7 @@ namespace CSSPDBDLL.Services
         // Helper
         public string CreateTVText(ClimateSiteModel climateSiteModel)
         {
-            string retStr = climateSiteModel.ClimateSiteName + (climateSiteModel.ClimateID == null ? (climateSiteModel.ProvSiteID == null ? "" : ("(" + climateSiteModel.ProvSiteID + ")")) : ("(" + climateSiteModel.ClimateID + ")"));
+            string retStr = climateSiteModel.ClimateSiteName + (climateSiteModel.ClimateID == null ? "" : ("(" + climateSiteModel.ClimateID + ")"));
             return retStr;
         }
         public string GetProvinceTVText(string ProvinceTxt)

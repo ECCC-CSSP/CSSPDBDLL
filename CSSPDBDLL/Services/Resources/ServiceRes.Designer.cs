@@ -1636,6 +1636,42 @@ namespace CSSPDBDLL.Services.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to CoCoRaHSSite.
+        /// </summary>
+        public static string CoCoRaHSSite {
+            get {
+                return ResourceManager.GetString("CoCoRaHSSite", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CoCoRaHSSiteID.
+        /// </summary>
+        public static string CoCoRaHSSiteID {
+            get {
+                return ResourceManager.GetString("CoCoRaHSSiteID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CoCoRaHSValue.
+        /// </summary>
+        public static string CoCoRaHSValue {
+            get {
+                return ResourceManager.GetString("CoCoRaHSValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CoCoRaHSValueID.
+        /// </summary>
+        public static string CoCoRaHSValueID {
+            get {
+                return ResourceManager.GetString("CoCoRaHSValueID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Code.
         /// </summary>
         public static string Code {
@@ -7333,6 +7369,24 @@ namespace CSSPDBDLL.Services.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to NewSnowDepth.
+        /// </summary>
+        public static string NewSnowDepth {
+            get {
+                return ResourceManager.GetString("NewSnowDepth", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to NewSnowSWE.
+        /// </summary>
+        public static string NewSnowSWE {
+            get {
+                return ResourceManager.GetString("NewSnowSWE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to NextIssueOrdinal.
         /// </summary>
         public static string NextIssueOrdinal {
@@ -7545,6 +7599,15 @@ namespace CSSPDBDLL.Services.Resources {
         public static string ObservationDate_Local {
             get {
                 return ResourceManager.GetString("ObservationDate_Local", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ObservationDateAndTime.
+        /// </summary>
+        public static string ObservationDateAndTime {
+            get {
+                return ResourceManager.GetString("ObservationDateAndTime", resourceCulture);
             }
         }
         
@@ -10465,6 +10528,24 @@ namespace CSSPDBDLL.Services.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to StationName.
+        /// </summary>
+        public static string StationName {
+            get {
+                return ResourceManager.GetString("StationName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to StationNumber.
+        /// </summary>
+        public static string StationNumber {
+            get {
+                return ResourceManager.GetString("StationNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Stats. Period.
         /// </summary>
         public static string StatPeriod {
@@ -11226,6 +11307,33 @@ namespace CSSPDBDLL.Services.Resources {
         public static string TotalPrecip_mm_cm {
             get {
                 return ResourceManager.GetString("TotalPrecip_mm_cm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to TotalPrecipAmt.
+        /// </summary>
+        public static string TotalPrecipAmt {
+            get {
+                return ResourceManager.GetString("TotalPrecipAmt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to TotalSnowDepth.
+        /// </summary>
+        public static string TotalSnowDepth {
+            get {
+                return ResourceManager.GetString("TotalSnowDepth", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to TotalSnowSWE.
+        /// </summary>
+        public static string TotalSnowSWE {
+            get {
+                return ResourceManager.GetString("TotalSnowSWE", resourceCulture);
             }
         }
         

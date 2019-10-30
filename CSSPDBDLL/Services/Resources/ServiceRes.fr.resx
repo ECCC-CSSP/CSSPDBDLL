@@ -522,6 +522,18 @@
   <data name="CMPWastewater" xml:space="preserve">
     <value>CMPWastewater</value>
   </data>
+  <data name="CoCoRaHSSite" xml:space="preserve">
+    <value>CoCoRaHSSite</value>
+  </data>
+  <data name="CoCoRaHSSiteID" xml:space="preserve">
+    <value>CoCoRaHSSiteID</value>
+  </data>
+  <data name="CoCoRaHSValue" xml:space="preserve">
+    <value>CoCoRaHSValue</value>
+  </data>
+  <data name="CoCoRaHSValueID" xml:space="preserve">
+    <value>CoCoRaHSValueID</value>
+  </data>
   <data name="Code" xml:space="preserve">
     <value>Code</value>
   </data>
@@ -2421,6 +2433,12 @@
   <data name="NewScenario" xml:space="preserve">
     <value>Nouveau scénario</value>
   </data>
+  <data name="NewSnowDepth" xml:space="preserve">
+    <value>NewSnowDepth</value>
+  </data>
+  <data name="NewSnowSWE" xml:space="preserve">
+    <value>NewSnowSWE</value>
+  </data>
   <data name="NextIssueOrdinal" xml:space="preserve">
     <value>NextIssueOrdinal</value>
   </data>
@@ -2489,6 +2507,9 @@
   </data>
   <data name="Observation" xml:space="preserve">
     <value>Observation</value>
+  </data>
+  <data name="ObservationDateAndTime" xml:space="preserve">
+    <value>ObservationDateAndTime</value>
   </data>
   <data name="ObservationDate_Local" xml:space="preserve">
     <value>ObservationDate_Local</value>
@@ -3465,6 +3486,12 @@
   <data name="StaticSectionOfReportCannotHaveACopyForYear" xml:space="preserve">
     <value>Une section statique du rapport ne peut pas avoir une copy pour une année</value>
   </data>
+  <data name="StationName" xml:space="preserve">
+    <value>StationName</value>
+  </data>
+  <data name="StationNumber" xml:space="preserve">
+    <value>StationNumber</value>
+  </data>
   <data name="StatPeriod" xml:space="preserve">
     <value>Période de statistiques</value>
   </data>
@@ -3717,8 +3744,17 @@
   <data name="ToReset" xml:space="preserve">
     <value>à réinitialiser</value>
   </data>
+  <data name="TotalPrecipAmt" xml:space="preserve">
+    <value>TotalPrecipAmt</value>
+  </data>
   <data name="TotalPrecip_mm_cm" xml:space="preserve">
     <value>TotalPrecip_mm_cm</value>
+  </data>
+  <data name="TotalSnowDepth" xml:space="preserve">
+    <value>TotalSnowDepth</value>
+  </data>
+  <data name="TotalSnowSWE" xml:space="preserve">
+    <value>TotalSnowSWE</value>
   </data>
   <data name="ToTVItemID" xml:space="preserve">
     <value>ToTVItemID</value>

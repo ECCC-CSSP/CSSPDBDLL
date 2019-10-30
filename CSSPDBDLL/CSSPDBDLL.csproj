@@ -161,6 +161,12 @@
     <Compile Include="ClimateSite.cs">
       <DependentUpon>CSSPDBEDM.tt</DependentUpon>
     </Compile>
+    <Compile Include="CoCoRaHSSite.cs">
+      <DependentUpon>CSSPCoCoRaHSEDM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CoCoRaHSValue.cs">
+      <DependentUpon>CSSPCoCoRaHSEDM.tt</DependentUpon>
+    </Compile>
     <Compile Include="Contact.cs">
       <DependentUpon>CSSPDBEDM.tt</DependentUpon>
     </Compile>
@@ -169,6 +175,21 @@
     </Compile>
     <Compile Include="ContactShortcut.cs">
       <DependentUpon>CSSPDBEDM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CSSPCoCoRaHSEDM.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CSSPCoCoRaHSEDM.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CSSPCoCoRaHSEDM.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CSSPCoCoRaHSEDM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CSSPCoCoRaHSEDM.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CSSPCoCoRaHSEDM.edmx</DependentUpon>
     </Compile>
     <Compile Include="CSSPDBEDM.Context.cs">
       <AutoGen>True</AutoGen>
@@ -343,6 +364,8 @@
     <Compile Include="SamplingPlanSubsectorSite.cs">
       <DependentUpon>CSSPDBEDM.tt</DependentUpon>
     </Compile>
+    <Compile Include="Services\CoCoRaHSValueService.cs" />
+    <Compile Include="Services\CoCoRaHSSiteService.cs" />
     <Compile Include="Services\DrogueRunPositionService.cs" />
     <Compile Include="Services\DrogueRunService.cs" />
     <Compile Include="Services\HelpDocService.cs" />
@@ -664,6 +687,13 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>CSSPDBEDM.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <EntityDeploy Include="CSSPCoCoRaHSEDM.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>CSSPCoCoRaHSEDM.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="CSSPCoCoRaHSEDM.edmx.diagram">
+      <DependentUpon>CSSPCoCoRaHSEDM.edmx</DependentUpon>
+    </None>
     <None Include="CSSPDBEDM.edmx.diagram">
       <DependentUpon>CSSPDBEDM.edmx</DependentUpon>
     </None>
@@ -673,6 +703,16 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="CSSPCoCoRaHSEDM.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>CSSPCoCoRaHSEDM.edmx</DependentUpon>
+      <LastGenOutput>CSSPCoCoRaHSEDM.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="CSSPCoCoRaHSEDM.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>CSSPCoCoRaHSEDM.edmx</DependentUpon>
+      <LastGenOutput>CSSPCoCoRaHSEDM.cs</LastGenOutput>
+    </Content>
     <Content Include="CSSPDBEDM.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>CSSPDBEDM.edmx</DependentUpon>

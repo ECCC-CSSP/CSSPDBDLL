@@ -390,12 +390,11 @@ namespace CSSPDBDLL.Services
             climateSiteModel.HourlyStartDate_Local = RandomDateTime();
             climateSiteModel.HourlyEndDate_Local = climateSiteModel.HourlyStartDate_Local.Value.AddHours(1);
             climateSiteModel.HourlyNow = true;
-            climateSiteModel.IsProvincial = true;
+            climateSiteModel.IsQuebecSite = null;
             climateSiteModel.MonthlyStartDate_Local = RandomDateTime();
             climateSiteModel.MonthlyEndDate_Local = climateSiteModel.MonthlyStartDate_Local.Value.AddHours(1);
             climateSiteModel.MonthlyNow = false;
             climateSiteModel.Province = RandomString("NB", 2);
-            climateSiteModel.ProvSiteID = RandomString("NB", 5);
             climateSiteModel.TCID = RandomString("WX", 3);
             climateSiteModel.TimeOffset_hour = RandomInt(-8, -3);
             climateSiteModel.WMOID = RandomInt(10000, 99999);

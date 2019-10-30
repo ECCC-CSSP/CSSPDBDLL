@@ -29,9 +29,8 @@ namespace CSSPDBDLL
         public string ClimateID { get; set; }
         public Nullable<int> WMOID { get; set; }
         public string TCID { get; set; }
-        public Nullable<bool> IsProvincial { get; set; }
+        public Nullable<bool> IsQuebecSite { get; set; }
         public Nullable<bool> IsCoCoRaHS { get; set; }
-        public string ProvSiteID { get; set; }
         public Nullable<double> TimeOffset_hour { get; set; }
         public string File_desc { get; set; }
         public Nullable<System.DateTime> HourlyStartDate_Local { get; set; }

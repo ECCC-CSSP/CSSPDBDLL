@@ -26,6 +26,7 @@ namespace CSSPDBDLL.Services
         #region Variables public
         public List<LanguageEnum> LanguageListAllowable = new List<LanguageEnum>() { LanguageEnum.en, LanguageEnum.fr };
         public CSSPDBEntities db;
+        public CoCoRaHSEntities CoCoRaHSdb;
         public LanguageEnum LanguageRequest;
         public IPrincipal User;
         public int TakeMax = 1000000;
@@ -74,6 +75,7 @@ namespace CSSPDBDLL.Services
 
             this.User = User;
             db = new CSSPDBEntities();
+            CoCoRaHSdb = new CoCoRaHSEntities();
             FillTVTypeNamesAndPathList();
             _BaseModelService.FillPolSourceObsInfoChild(polSourceObsInfoChildList);
 

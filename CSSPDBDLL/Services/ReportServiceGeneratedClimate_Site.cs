@@ -108,20 +108,12 @@ namespace CSSPDBDLL.Services
                                     reportClimate_SiteModelQ = reportClimate_SiteModelQ.OrderByDescending(c => c.Climate_Site_TCID);
                             }
                             break;
-                        case "Climate_Site_Is_Provincial":
+                        case "Climate_Site_Is_Quebec_Site":
                             {
                                 if (reportTreeNode.dbSortingField.ReportSorting == ReportSortingEnum.ReportSortingAscending)
-                                    reportClimate_SiteModelQ = reportClimate_SiteModelQ.OrderBy(c => c.Climate_Site_Is_Provincial);
+                                    reportClimate_SiteModelQ = reportClimate_SiteModelQ.OrderBy(c => c.Climate_Site_Is_Quebec_Site);
                                 else
-                                    reportClimate_SiteModelQ = reportClimate_SiteModelQ.OrderByDescending(c => c.Climate_Site_Is_Provincial);
-                            }
-                            break;
-                        case "Climate_Site_Prov_Site_ID":
-                            {
-                                if (reportTreeNode.dbSortingField.ReportSorting == ReportSortingEnum.ReportSortingAscending)
-                                    reportClimate_SiteModelQ = reportClimate_SiteModelQ.OrderBy(c => c.Climate_Site_Prov_Site_ID);
-                                else
-                                    reportClimate_SiteModelQ = reportClimate_SiteModelQ.OrderByDescending(c => c.Climate_Site_Prov_Site_ID);
+                                    reportClimate_SiteModelQ = reportClimate_SiteModelQ.OrderByDescending(c => c.Climate_Site_Is_Quebec_Site);
                             }
                             break;
                         case "Climate_Site_Time_Offset_hour":
@@ -447,9 +439,6 @@ namespace CSSPDBDLL.Services
                         case "Climate_Site_TCID":
                             reportClimate_SiteModelQ = ReportServiceGeneratedClimate_Site_Climate_Site_TCID(reportClimate_SiteModelQ, reportTreeNode, dbFilteringTextField);
                             break;
-                        case "Climate_Site_Prov_Site_ID":
-                            reportClimate_SiteModelQ = ReportServiceGeneratedClimate_Site_Climate_Site_Prov_Site_ID(reportClimate_SiteModelQ, reportTreeNode, dbFilteringTextField);
-                            break;
                         case "Climate_Site_File_desc":
                             reportClimate_SiteModelQ = ReportServiceGeneratedClimate_Site_Climate_Site_File_desc(reportClimate_SiteModelQ, reportTreeNode, dbFilteringTextField);
                             break;
@@ -511,9 +500,9 @@ namespace CSSPDBDLL.Services
                     {
                         case "Climate_Site_Is_Provincial":
                             if (reportTrueFalseField.ReportCondition == ReportConditionEnum.ReportConditionTrue)
-                               reportClimate_SiteModelQ = reportClimate_SiteModelQ.Where(c => c.Climate_Site_Is_Provincial == true);
+                               reportClimate_SiteModelQ = reportClimate_SiteModelQ.Where(c => c.Climate_Site_Is_Quebec_Site == true);
                             else
-                                reportClimate_SiteModelQ = reportClimate_SiteModelQ.Where(c => c.Climate_Site_Is_Provincial == false);
+                                reportClimate_SiteModelQ = reportClimate_SiteModelQ.Where(c => c.Climate_Site_Is_Quebec_Site == false);
                             break;
                         case "Climate_Site_Hourly_Now":
                             if (reportTrueFalseField.ReportCondition == ReportConditionEnum.ReportConditionTrue)
@@ -3513,34 +3502,6 @@ namespace CSSPDBDLL.Services
                     break;
                 case ReportConditionEnum.ReportConditionSmaller:
                     reportClimate_SiteModelQ = reportClimate_SiteModelQ.Where(c => String.Compare(c.Climate_Site_TCID.ToLower(), dbFilteringTextField.TextCondition.ToLower().Replace("*", " ")) < 0 );
-                    break;
-                default:
-                    break;
-            }
-
-            return reportClimate_SiteModelQ;
-        }
-        public IQueryable<ReportClimate_SiteModel> ReportServiceGeneratedClimate_Site_Climate_Site_Prov_Site_ID(IQueryable<ReportClimate_SiteModel> reportClimate_SiteModelQ, ReportTreeNode reportTreeNode, ReportConditionTextField dbFilteringTextField)
-        {
-            switch (dbFilteringTextField.ReportCondition)
-            {
-                case ReportConditionEnum.ReportConditionContain:
-                    reportClimate_SiteModelQ = reportClimate_SiteModelQ.Where(c => c.Climate_Site_Prov_Site_ID.ToLower().Contains(dbFilteringTextField.TextCondition.ToLower().Replace("*", " ")));
-                    break;
-                case ReportConditionEnum.ReportConditionStart:
-                    reportClimate_SiteModelQ = reportClimate_SiteModelQ.Where(c => c.Climate_Site_Prov_Site_ID.ToLower().StartsWith(dbFilteringTextField.TextCondition.ToLower().Replace("*", " ")));
-                    break;
-                case ReportConditionEnum.ReportConditionEnd:
-                    reportClimate_SiteModelQ = reportClimate_SiteModelQ.Where(c => c.Climate_Site_Prov_Site_ID.ToLower().EndsWith(dbFilteringTextField.TextCondition.ToLower().Replace("*", " ")));
-                    break;
-                case ReportConditionEnum.ReportConditionEqual:
-                    reportClimate_SiteModelQ = reportClimate_SiteModelQ.Where(c => c.Climate_Site_Prov_Site_ID.ToLower() == dbFilteringTextField.TextCondition.ToLower().Replace("*", " "));
-                    break;
-                case ReportConditionEnum.ReportConditionBigger:
-                    reportClimate_SiteModelQ = reportClimate_SiteModelQ.Where(c => String.Compare(c.Climate_Site_Prov_Site_ID.ToLower(), dbFilteringTextField.TextCondition.ToLower().Replace("*", " ")) > 0 );
-                    break;
-                case ReportConditionEnum.ReportConditionSmaller:
-                    reportClimate_SiteModelQ = reportClimate_SiteModelQ.Where(c => String.Compare(c.Climate_Site_Prov_Site_ID.ToLower(), dbFilteringTextField.TextCondition.ToLower().Replace("*", " ")) < 0 );
                     break;
                 default:
                     break;

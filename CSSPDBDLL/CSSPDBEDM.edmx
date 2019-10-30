@@ -222,9 +222,8 @@
           <Property Name="ClimateID" Type="nvarchar" MaxLength="10" />
           <Property Name="WMOID" Type="int" />
           <Property Name="TCID" Type="nvarchar" MaxLength="3" />
-          <Property Name="IsProvincial" Type="bit" />
+          <Property Name="IsQuebecSite" Type="bit" />
           <Property Name="IsCoCoRaHS" Type="bit" />
-          <Property Name="ProvSiteID" Type="nvarchar" MaxLength="50" />
           <Property Name="TimeOffset_hour" Type="float" />
           <Property Name="File_desc" Type="nvarchar" MaxLength="50" />
           <Property Name="HourlyStartDate_Local" Type="datetime" />
@@ -4360,9 +4359,8 @@
           <Property Name="ClimateID" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="WMOID" Type="Int32" />
           <Property Name="TCID" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
-          <Property Name="IsProvincial" Type="Boolean" />
+          <Property Name="IsQuebecSite" Type="Boolean" />
           <Property Name="IsCoCoRaHS" Type="Boolean" />
-          <Property Name="ProvSiteID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="TimeOffset_hour" Type="Double" />
           <Property Name="File_desc" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="HourlyStartDate_Local" Type="DateTime" Precision="3" />
@@ -7553,9 +7551,8 @@
                 <ScalarProperty Name="HourlyStartDate_Local" ColumnName="HourlyStartDate_Local" />
                 <ScalarProperty Name="File_desc" ColumnName="File_desc" />
                 <ScalarProperty Name="TimeOffset_hour" ColumnName="TimeOffset_hour" />
-                <ScalarProperty Name="ProvSiteID" ColumnName="ProvSiteID" />
                 <ScalarProperty Name="IsCoCoRaHS" ColumnName="IsCoCoRaHS" />
-                <ScalarProperty Name="IsProvincial" ColumnName="IsProvincial" />
+                <ScalarProperty Name="IsQuebecSite" ColumnName="IsQuebecSite" />
                 <ScalarProperty Name="TCID" ColumnName="TCID" />
                 <ScalarProperty Name="WMOID" ColumnName="WMOID" />
                 <ScalarProperty Name="ClimateID" ColumnName="ClimateID" />

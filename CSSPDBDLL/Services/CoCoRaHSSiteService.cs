@@ -33,17 +33,17 @@ namespace CSSPDBDLL.Services
         {
             return base.IsContactOK();
         }
-        public override string DoAddChanges()
+        public override string CoCoRaHSDoAddChanges()
         {
-            return base.DoAddChanges();
+            return base.CoCoRaHSDoAddChanges();
         }
-        public override string DoDeleteChanges()
+        public override string CoCoRaHSDoDeleteChanges()
         {
-            return base.DoDeleteChanges();
+            return base.CoCoRaHSDoDeleteChanges();
         }
-        public override string DoUpdateChanges()
+        public override string CoCoRaHSDoUpdateChanges()
         {
-            return base.DoUpdateChanges();
+            return base.CoCoRaHSDoUpdateChanges();
         }
 
         // Check
@@ -212,7 +212,7 @@ namespace CSSPDBDLL.Services
             using (TransactionScope ts = new TransactionScope())
             {
                 CoCoRaHSdb.CoCoRaHSSites.Add(coCoRaHSSiteNew);
-                retStr = DoAddChanges();
+                retStr = CoCoRaHSDoAddChanges();
                 if (!string.IsNullOrWhiteSpace(retStr))
                     return ReturnError(retStr);
 
@@ -233,7 +233,7 @@ namespace CSSPDBDLL.Services
             using (TransactionScope ts = new TransactionScope())
             {
                 CoCoRaHSdb.CoCoRaHSSites.Remove(coCoRaHSSiteToDelete);
-                string retStr = DoDeleteChanges();
+                string retStr = CoCoRaHSDoDeleteChanges();
                 if (!string.IsNullOrWhiteSpace(retStr))
                     return ReturnError(retStr);
 
@@ -262,7 +262,7 @@ namespace CSSPDBDLL.Services
 
             using (TransactionScope ts = new TransactionScope())
             {
-                retStr = DoUpdateChanges();
+                retStr = CoCoRaHSDoUpdateChanges();
                 if (!string.IsNullOrWhiteSpace(retStr))
                     return ReturnError(retStr);
 

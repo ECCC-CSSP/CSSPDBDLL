@@ -89,6 +89,42 @@ namespace CSSPDBDLL.Services
 
         #region Functions public
         #region Functions Checks
+        public virtual string CoCoRaHSDoAddChanges()
+        {
+            try
+            {
+                CoCoRaHSdb.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                return string.Format(ServiceRes.CouldNotAddError_, ex.Message);
+            }
+            return "";
+        }
+        public virtual string CoCoRaHSDoDeleteChanges()
+        {
+            try
+            {
+                CoCoRaHSdb.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                return string.Format(ServiceRes.CouldNotDeleteError_, ex.Message);
+            }
+            return "";
+        }
+        public virtual string CoCoRaHSDoUpdateChanges()
+        {
+            try
+            {
+                CoCoRaHSdb.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                return string.Format(ServiceRes.CouldNotUpdateError_, ex.Message);
+            }
+            return "";
+        }
         public virtual string DoAddChanges()
         {
             try

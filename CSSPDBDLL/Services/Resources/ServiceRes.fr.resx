@@ -510,6 +510,9 @@
   <data name="ClimateSiteID" xml:space="preserve">
     <value>ClimateSiteID</value>
   </data>
+  <data name="ClimateSiteLoadCoCoRaHSData" xml:space="preserve">
+    <value>Télécharger les données de CoCoRaHS des site de climat</value>
+  </data>
   <data name="ClimateSiteName" xml:space="preserve">
     <value>ClimateSiteName</value>
   </data>

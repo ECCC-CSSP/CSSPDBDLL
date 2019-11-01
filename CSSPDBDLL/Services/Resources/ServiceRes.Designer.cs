@@ -1600,6 +1600,15 @@ namespace CSSPDBDLL.Services.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Climate site load CoCoRaHS data.
+        /// </summary>
+        public static string ClimateSiteLoadCoCoRaHSData {
+            get {
+                return ResourceManager.GetString("ClimateSiteLoadCoCoRaHSData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ClimateSiteName.
         /// </summary>
         public static string ClimateSiteName {

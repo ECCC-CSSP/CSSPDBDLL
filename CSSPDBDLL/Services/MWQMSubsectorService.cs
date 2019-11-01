@@ -1780,6 +1780,53 @@ namespace CSSPDBDLL.Services
 
             return appTaskModelRet;
         }
+        public AppTaskModel ClimateSiteLoadCoCoRaHSDataDB()
+        {
+            TVItemModel tvItemModelRoot = _TVItemService.GetRootTVItemModelDB();
+            if (!string.IsNullOrWhiteSpace(tvItemModelRoot.Error))
+                return new AppTaskModel() { Error = tvItemModelRoot.Error };
+
+
+            AppTaskModel appTaskModelExist = _AppTaskService.GetAppTaskModelWithTVItemIDTVItemID2AndCommandDB(tvItemModelRoot.TVItemID, tvItemModelRoot.TVItemID, AppTaskCommandEnum.ClimateSiteLoadCoCoRaHSData);
+            if (string.IsNullOrWhiteSpace(appTaskModelExist.Error))
+                return appTaskModelExist;
+
+            List<AppTaskParameter> appTaskParameterList = new List<AppTaskParameter>();
+            appTaskParameterList.Add(new AppTaskParameter() { Name = "TVItemID", Value = tvItemModelRoot.TVItemID.ToString() });
+
+            StringBuilder sbParameters = new StringBuilder();
+            int count = 0;
+            foreach (AppTaskParameter atp in appTaskParameterList)
+            {
+                if (count == 0)
+                {
+                    sbParameters.Append("|||");
+                }
+                sbParameters.Append(atp.Name + "," + atp.Value + "|||");
+                count += 1;
+            }
+
+            AppTaskModel appTaskModelNew = new AppTaskModel()
+            {
+                TVItemID = tvItemModelRoot.TVItemID,
+                TVItemID2 = tvItemModelRoot.TVItemID,
+                AppTaskCommand = AppTaskCommandEnum.ClimateSiteLoadCoCoRaHSData,
+                ErrorText = "",
+                StatusText = ServiceRes.ClimateSiteLoadCoCoRaHSData,
+                AppTaskStatus = AppTaskStatusEnum.Created,
+                PercentCompleted = 1,
+                Parameters = sbParameters.ToString(),
+                Language = LanguageRequest,
+                StartDateTime_UTC = DateTime.UtcNow,
+                EndDateTime_UTC = null,
+                EstimatedLength_second = null,
+                RemainingTime_second = null,
+            };
+
+            AppTaskModel appTaskModelRet = _AppTaskService.PostAddAppTask(appTaskModelNew);
+
+            return appTaskModelRet;
+        }
         public MWQMSubsectorModel ClimateSiteSetDataToUseByAverageOrPriorityDB(int SubsectorTVItemID, int Year, string AverageOrPriority)
         {
             TVItemModel tvItemModelSubsector = _TVItemService.GetTVItemModelWithTVItemIDDB(SubsectorTVItemID);

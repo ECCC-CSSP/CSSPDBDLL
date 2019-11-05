@@ -1874,7 +1874,7 @@ namespace CSSPDBDLL.Services
                         }
 
                         DateTime EndDate = DateTime.Now;
-                        if (climateSiteModel.DailyNow != true)
+                        if (climateSiteModel.DailyEndDate_Local != null)
                         {
                             EndDate = (DateTime)climateSiteModel.DailyEndDate_Local;
                         }
@@ -1963,7 +1963,7 @@ namespace CSSPDBDLL.Services
                         }
 
                         DateTime EndDate = DateTime.Now;
-                        if (climateSiteModel.DailyNow != true)
+                        if (climateSiteModel.DailyEndDate_Local != null)
                         {
                             EndDate = (DateTime)climateSiteModel.DailyEndDate_Local;
                         }

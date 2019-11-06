@@ -1589,12 +1589,18 @@ namespace CSSPDBDLL.Services
                                             tvLocationList.Add(tvlNew);
                                         }
                                     }
-
                                 }
                                 break;
-                            case TVTypeEnum.Subsector:
+                            case TVTypeEnum.SubsectorTools:
                                 {
-                                    // Nothing already loaded
+                                    tvItemModelList = new List<TVItemModel>() { _TVItemService.GetTVItemModelWithTVItemIDDB(tvItemModelCurrent.TVItemID) };
+
+                                    if (OnlyActive)
+                                    {
+                                        tvItemModelList = tvItemModelList.Where(c => c.IsActive == true).ToList();
+                                    }
+
+                                    FillTVLocationList(tvLocationList, tvItemModelList, TVTypeEnum.Subsector, TVTypeEnum.Subsector);
                                 }
                                 break;
                             case TVTypeEnum.SamplingPlan:

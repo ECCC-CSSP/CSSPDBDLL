@@ -550,6 +550,7 @@ namespace CSSPDBDLL.Services
                                                                                                        HourlyNow = c.HourlyNow,
                                                                                                        HourlyStartDate_Local = c.HourlyStartDate_Local,
                                                                                                        IsQuebecSite = c.IsQuebecSite,
+                                                                                                       IsCoCoRaHS = c.IsCoCoRaHS,
                                                                                                        MonthlyEndDate_Local = c.MonthlyEndDate_Local,
                                                                                                        MonthlyNow = c.MonthlyNow,
                                                                                                        MonthlyStartDate_Local = c.MonthlyStartDate_Local,
@@ -575,6 +576,7 @@ namespace CSSPDBDLL.Services
                                              orderby c.SiteTVItemID, c.StartYear
                                              select c).ToList();
 
+
             foreach (ClimateSiteWithLatLngAndOrdinalModel climateSiteWithLatLngAndOrdinalModel in ClimateSiteWithLatLngAndOrdinalModelList)
             {
                 climateSiteWithLatLngAndOrdinalModel.Distance_km = (float)(_MapInfoService.CalculateDistance((double)mwqmSubsectorWithLatLngModel.Lat * d2r, (double)mwqmSubsectorWithLatLngModel.Lng * d2r, (double)climateSiteWithLatLngAndOrdinalModel.Lat * d2r, (double)climateSiteWithLatLngAndOrdinalModel.Lng * d2r, (double)R) / 1000);
@@ -596,8 +598,47 @@ namespace CSSPDBDLL.Services
                         }
                     }
                 }
-            }
 
+            }
+            using (CoCoRaHSEntities cocodb = new CoCoRaHSEntities())
+            {
+
+                foreach (ClimateSiteWithLatLngAndOrdinalModel climateSiteWithLatLngAndOrdinalModel in ClimateSiteWithLatLngAndOrdinalModelList)
+                {
+                    if (climateSiteWithLatLngAndOrdinalModel.IsCoCoRaHS != null && climateSiteWithLatLngAndOrdinalModel.IsCoCoRaHS == true)
+                    {
+                        List<CoCoRaHSValue> cocoRaHSValueList = (from c in cocodb.CoCoRaHSValues
+                                                                 from s in cocodb.CoCoRaHSSites
+                                                                 where c.CoCoRaHSSiteID == s.CoCoRaHSSiteID
+                                                                 && s.StationNumber == climateSiteWithLatLngAndOrdinalModel.ClimateID
+                                                                 orderby c.ObservationDateAndTime descending
+                                                                 select c).ToList();
+
+                        DateTime FirstDate = (from c in cocoRaHSValueList
+                                              orderby c.ObservationDateAndTime
+                                              select c.ObservationDateAndTime).FirstOrDefault();
+
+                        DateTime LastDate = (from c in cocoRaHSValueList
+                                             orderby c.ObservationDateAndTime descending
+                                             select c.ObservationDateAndTime).FirstOrDefault();
+
+                        TimeSpan ts = new TimeSpan(LastDate.Ticks - FirstDate.Ticks);
+
+                        double Days = ts.TotalDays;
+                        double CountValue = cocoRaHSValueList.Count;
+
+                        double AverageHour = (from c in cocoRaHSValueList
+                                              select c.ObservationDateAndTime.Hour).Average();
+
+                        if (Days > 0 && CountValue > 0)
+                        {
+                            double Weeks = Days / 7.0D;
+                            climateSiteWithLatLngAndOrdinalModel.CoCoRaHSSamplesPerWeek = (float)(CountValue / Weeks);
+                            climateSiteWithLatLngAndOrdinalModel.CoCoRaHSSampleTimeAverage = (float)AverageHour;
+                        }
+                    }
+                }
+            }
 
             mwqmSubsectorClimateSites.ClimateSiteModelUsedAndWithinDistanceModelList = ClimateSiteWithLatLngAndOrdinalModelList;
 

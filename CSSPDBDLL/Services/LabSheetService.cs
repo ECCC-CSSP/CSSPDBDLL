@@ -781,6 +781,9 @@ namespace CSSPDBDLL.Services
                 FileContent = FileContent,
             };
 
+            byte[] bytes = Encoding.Default.GetBytes(FileContent);
+            labSheetModelNewOrUpdate.FileContent = Encoding.UTF8.GetString(bytes);
+
             LabSheetModel labSheetModelExist = new LabSheetModel();
 
             labSheetModelExist = GetLabSheetModelExistDB(labSheetModelNewOrUpdate);

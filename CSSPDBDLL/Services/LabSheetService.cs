@@ -1008,17 +1008,17 @@ namespace CSSPDBDLL.Services
                     StartDateTime_Local = StartDateTime,
                     EndDateTime_Local = EndDateTime,
                     RunSampleType = (RoutineExist ? SampleTypeEnum.Routine : sampleTypeList[0]),
-                    //RunSampleType = labSheetA1Sheet.SampleType,
                     RunNumber = labSheetA1Sheet.RunNumber
                     // other field are not important
                 };
                 MWQMRunModel mwqmRunModelToChange = _MWQMRunService.GetMWQMRunModelExistDB(mwqmRunModelModify);
                 if (!string.IsNullOrWhiteSpace(mwqmRunModelToChange.Error))
                 {
-                    TVItemModel tvItemModel = _TVItemService.PostAddChildTVItemDB(labSheetA1Sheet.SubsectorTVItemID,
-                        RunDate.ToString("yyyy MM dd") + (labSheetA1Sheet.RunNumber > 1 ? " " + ServiceRes.Run + " (" + labSheetA1Sheet.RunNumber + ")" : "") + (labSheetA1Sheet.SampleType != SampleTypeEnum.Routine
-                        ? " (" + _BaseEnumService.GetEnumText_SampleTypeEnum(labSheetA1Sheet.SampleType) + ")"
-                        : ""), TVTypeEnum.MWQMRun);
+                    string TVText = RunDate.ToString("yyyy MM dd");
+                    TVText = TVText + (labSheetA1Sheet.RunNumber > 1 ? " " + ServiceRes.Run + " (" + labSheetA1Sheet.RunNumber + ")" : "");
+                    TVText = TVText + (RoutineExist ? "" : " (" + _BaseEnumService.GetEnumText_SampleTypeEnum(sampleTypeList[0])) + ")"; 
+
+                    TVItemModel tvItemModel = _TVItemService.PostAddChildTVItemDB(labSheetA1Sheet.SubsectorTVItemID, TVText, TVTypeEnum.MWQMRun);
                     if (!string.IsNullOrWhiteSpace(tvItemModel.Error))
                         return ReturnError(tvItemModel.Error);
 
@@ -1038,7 +1038,6 @@ namespace CSSPDBDLL.Services
                         AnalyzeMethod = analyzeMethod,
                         SubsectorTVItemID = labSheetA1Sheet.SubsectorTVItemID,
                         RunSampleType = (RoutineExist ? SampleTypeEnum.Routine : sampleTypeList[0]),
-                        //RunSampleType = labSheetA1Sheet.SampleType,
                         StartDateTime_Local = StartDateTime,
                         EndDateTime_Local = EndDateTime,
                         DateTime_Local = RunDate,

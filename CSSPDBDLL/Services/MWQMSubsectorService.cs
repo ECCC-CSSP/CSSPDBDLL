@@ -691,6 +691,7 @@ namespace CSSPDBDLL.Services
                                                                              HourlyNow = c.HourlyNow,
                                                                              HourlyStartDate_Local = c.HourlyStartDate_Local,
                                                                              IsQuebecSite = c.IsQuebecSite,
+                                                                             IsCoCoRaHS = c.IsCoCoRaHS,
                                                                              MonthlyEndDate_Local = c.MonthlyEndDate_Local,
                                                                              MonthlyNow = c.MonthlyNow,
                                                                              MonthlyStartDate_Local = c.MonthlyStartDate_Local,

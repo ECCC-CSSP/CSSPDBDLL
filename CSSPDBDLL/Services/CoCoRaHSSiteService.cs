@@ -183,7 +183,7 @@ namespace CSSPDBDLL.Services
         // Helper
         public string CreateTVText(CoCoRaHSSiteModel coCoRaHSSiteModel)
         {
-            string retStr = "CoCoRaHS " + coCoRaHSSiteModel.StationName + "(" + coCoRaHSSiteModel.StationNumber + ")";
+            string retStr = "CoCoRaHS " + coCoRaHSSiteModel.StationName + " (" + coCoRaHSSiteModel.StationNumber + ")";
 
             return retStr;
         }

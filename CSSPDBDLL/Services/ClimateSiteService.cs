@@ -356,6 +356,7 @@ namespace CSSPDBDLL.Services
                                                     where c.ClimateSiteName == climateSiteModel.ClimateSiteName
                                                     && c.Province == climateSiteModel.Province
                                                     && c.ECDBID == climateSiteModel.ECDBID
+                                                    && c.ClimateID == climateSiteModel.ClimateID
                                                     select new ClimateSiteModel
                                                     {
                                                         Error = "",
@@ -389,10 +390,12 @@ namespace CSSPDBDLL.Services
                 return ReturnError(string.Format(ServiceRes.CouldNotFind_With_Equal_, ServiceRes.ClimateSite,
                     ServiceRes.ClimateSiteName + "," +
                     ServiceRes.Province + "," +
-                    ServiceRes.ECDBID,
+                    ServiceRes.ECDBID + "," +
+                    ServiceRes.ClimateID,
                     climateSiteModel.ClimateSiteName + "," +
                     climateSiteModel.Province + "," +
-                    climateSiteModel.ECDBID.ToString()));
+                    climateSiteModel.ECDBID.ToString() + "," +
+                    climateSiteModel.ClimateID.ToString()));
 
             return climateSiteModelRet;
         }

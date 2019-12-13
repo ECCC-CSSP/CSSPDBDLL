@@ -532,6 +532,8 @@ namespace CSSPDBDLL.Services
                                                                                                                             && cl.Language == (int)LanguageRequest
                                                                                                                             select cl.TVText).FirstOrDefault()
                                                                                                    where c.ClimateSiteTVItemID == id
+                                                                                                   && c.DailyEndDate_Local != null
+                                                                                                   && ((DateTime)c.DailyEndDate_Local).Year > 1979
                                                                                                    orderby climateSiteTVText
                                                                                                    select new ClimateSiteWithLatLngAndOrdinalModel
                                                                                                    {

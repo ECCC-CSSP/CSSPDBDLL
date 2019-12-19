@@ -890,7 +890,7 @@ namespace CSSPDBDLL.Services
         }
         public List<string> GetAllowableExt()
         {
-            return new List<string>() { ".accde", ".csv", ".doc", ".docx", ".htm", ".html", ".jpeg", ".jpg", ".gif", ".kml", ".kmz", ".log", ".mdb", ".pdf", ".png", ".ppt", ".pptx", ".txt", ".xls", ".xlsx", };
+            return new List<string>() { ".accde", ".csv", ".doc", ".docx", ".htm", ".html", ".jpeg", ".jpg", ".gif", ".kml", ".kmz", ".log", ".mdb", ".pdf", ".png", ".ppt", ".pptx", ".txt", ".xls", ".xlsx", ".wmv" };
         }
         public List<string> GetAllowableTemplateExt()
         {

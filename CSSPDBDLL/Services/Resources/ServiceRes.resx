@@ -1512,6 +1512,9 @@
   <data name="HalifaxHarbour" xml:space="preserve">
     <value>Halifax Harbour</value>
   </data>
+  <data name="HasBackupPower" xml:space="preserve">
+    <value>Has backup power</value>
+  </data>
   <data name="HasBeenRead" xml:space="preserve">
     <value>HasBeenRead</value>
   </data>

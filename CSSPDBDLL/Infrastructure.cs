@@ -30,6 +30,7 @@ namespace CSSPDBDLL
         public string InfrastructureCategory { get; set; }
         public Nullable<int> InfrastructureType { get; set; }
         public Nullable<int> FacilityType { get; set; }
+        public Nullable<bool> HasBackupPower { get; set; }
         public Nullable<bool> IsMechanicallyAerated { get; set; }
         public Nullable<int> NumberOfCells { get; set; }
         public Nullable<int> NumberOfAeratedCells { get; set; }
@@ -47,6 +48,7 @@ namespace CSSPDBDLL
         public Nullable<double> PeakFlow_m3_day { get; set; }
         public Nullable<int> PopServed { get; set; }
         public Nullable<bool> CanOverflow { get; set; }
+        public Nullable<int> ValveType { get; set; }
         public Nullable<double> PercFlowOfTotal { get; set; }
         public Nullable<double> TimeOffset_hour { get; set; }
         public string TempCatchAllRemoveLater { get; set; }

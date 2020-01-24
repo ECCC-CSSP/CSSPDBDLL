@@ -47,7 +47,8 @@ namespace CSSPDBDLL.Services
             PreliminaryTreatmentTypeEnum? PreliminaryTreatmentType, PrimaryTreatmentTypeEnum? PrimaryTreatmentType,
             SecondaryTreatmentTypeEnum? SecondaryTreatmentType, TertiaryTreatmentTypeEnum? TertiaryTreatmentType,
             DisinfectionTypeEnum? DisinfectionType, CollectionSystemTypeEnum? CollectionSystemType, AlarmSystemTypeEnum? AlarmSystemType,
-            float? DesignFlow_m3_day, float? AverageFlow_m3_day, float? PeakFlow_m3_day, int? PopServed, bool? CanOverflow,
+            float? DesignFlow_m3_day, float? AverageFlow_m3_day, float? PeakFlow_m3_day, int? PopServed, 
+            bool? CanOverflow, ValveTypeEnum? ValveType, bool? HasBackupPower,
             float? PercFlowOfTotal, float? AverageDepth_m, int? NumberOfPorts,
             float? PortDiameter_m, float? PortSpacing_m, float? PortElevation_m, float? VerticalAngle_deg, float? HorizontalAngle_deg,
             float? DecayRate_per_day, float? NearFieldVelocity_m_s, float? FarFieldVelocity_m_s, float? ReceivingWaterSalinity_PSU,
@@ -325,6 +326,8 @@ namespace CSSPDBDLL.Services
                     infrastructureModelRet.PeakFlow_m3_day = PeakFlow_m3_day;
                     infrastructureModelRet.PopServed = PopServed;
                     infrastructureModelRet.CanOverflow = CanOverflow;
+                    infrastructureModelRet.ValveType = ValveType;
+                    infrastructureModelRet.HasBackupPower = HasBackupPower;
                     infrastructureModelRet.PercFlowOfTotal = PercFlowOfTotal;
                     infrastructureModelRet.AverageDepth_m = AverageDepth_m;
                     infrastructureModelRet.NumberOfPorts = NumberOfPorts;
@@ -408,6 +411,8 @@ namespace CSSPDBDLL.Services
                 {
                     infrastructureModelRet.AlarmSystemType = AlarmSystemType;
                     infrastructureModelRet.CanOverflow = CanOverflow;
+                    infrastructureModelRet.ValveType = ValveType;
+                    infrastructureModelRet.HasBackupPower = HasBackupPower;
                     infrastructureModelRet.PercFlowOfTotal = PercFlowOfTotal;
                 }
 

@@ -464,6 +464,7 @@
           <Property Name="InfrastructureCategory" Type="nvarchar" MaxLength="1" />
           <Property Name="InfrastructureType" Type="int" />
           <Property Name="FacilityType" Type="int" />
+          <Property Name="HasBackupPower" Type="bit" />
           <Property Name="IsMechanicallyAerated" Type="bit" />
           <Property Name="NumberOfCells" Type="int" />
           <Property Name="NumberOfAeratedCells" Type="int" />
@@ -481,6 +482,7 @@
           <Property Name="PeakFlow_m3_day" Type="float" />
           <Property Name="PopServed" Type="int" />
           <Property Name="CanOverflow" Type="bit" />
+          <Property Name="ValveType" Type="int" />
           <Property Name="PercFlowOfTotal" Type="float" />
           <Property Name="TimeOffset_hour" Type="float" />
           <Property Name="TempCatchAllRemoveLater" Type="text" />
@@ -4628,6 +4630,7 @@
           <Property Name="InfrastructureCategory" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
           <Property Name="InfrastructureType" Type="Int32" />
           <Property Name="FacilityType" Type="Int32" />
+          <Property Name="HasBackupPower" Type="Boolean" />
           <Property Name="IsMechanicallyAerated" Type="Boolean" />
           <Property Name="NumberOfCells" Type="Int32" />
           <Property Name="NumberOfAeratedCells" Type="Int32" />
@@ -4645,6 +4648,7 @@
           <Property Name="PeakFlow_m3_day" Type="Double" />
           <Property Name="PopServed" Type="Int32" />
           <Property Name="CanOverflow" Type="Boolean" />
+          <Property Name="ValveType" Type="Int32" />
           <Property Name="PercFlowOfTotal" Type="Double" />
           <Property Name="TimeOffset_hour" Type="Double" />
           <Property Name="TempCatchAllRemoveLater" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
@@ -7816,6 +7820,7 @@
                 <ScalarProperty Name="TempCatchAllRemoveLater" ColumnName="TempCatchAllRemoveLater" />
                 <ScalarProperty Name="TimeOffset_hour" ColumnName="TimeOffset_hour" />
                 <ScalarProperty Name="PercFlowOfTotal" ColumnName="PercFlowOfTotal" />
+                <ScalarProperty Name="ValveType" ColumnName="ValveType" />
                 <ScalarProperty Name="CanOverflow" ColumnName="CanOverflow" />
                 <ScalarProperty Name="PopServed" ColumnName="PopServed" />
                 <ScalarProperty Name="PeakFlow_m3_day" ColumnName="PeakFlow_m3_day" />
@@ -7833,6 +7838,7 @@
                 <ScalarProperty Name="NumberOfAeratedCells" ColumnName="NumberOfAeratedCells" />
                 <ScalarProperty Name="NumberOfCells" ColumnName="NumberOfCells" />
                 <ScalarProperty Name="IsMechanicallyAerated" ColumnName="IsMechanicallyAerated" />
+                <ScalarProperty Name="HasBackupPower" ColumnName="HasBackupPower" />
                 <ScalarProperty Name="FacilityType" ColumnName="FacilityType" />
                 <ScalarProperty Name="InfrastructureType" ColumnName="InfrastructureType" />
                 <ScalarProperty Name="InfrastructureCategory" ColumnName="InfrastructureCategory" />

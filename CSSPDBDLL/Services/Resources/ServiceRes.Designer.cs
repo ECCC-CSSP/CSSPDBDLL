@@ -4606,6 +4606,15 @@ namespace CSSPDBDLL.Services.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Has backup power.
+        /// </summary>
+        public static string HasBackupPower {
+            get {
+                return ResourceManager.GetString("HasBackupPower", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to HasBeenRead.
         /// </summary>
         public static string HasBeenRead {

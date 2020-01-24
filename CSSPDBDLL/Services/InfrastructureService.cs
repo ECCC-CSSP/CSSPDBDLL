@@ -128,6 +128,15 @@ namespace CSSPDBDLL.Services
                 return retStr;
             }
 
+            if (infrastructureModel.HasBackupPower != null)
+            {
+                retStr = FieldCheckNotNullBool(infrastructureModel.HasBackupPower, ServiceRes.HasBackupPower);
+                if (!string.IsNullOrWhiteSpace(retStr))
+                {
+                    return retStr;
+                }
+            }
+
             if (infrastructureModel.IsMechanicallyAerated != null)
             {
                 retStr = FieldCheckNotNullBool(infrastructureModel.IsMechanicallyAerated, ServiceRes.IsMechanicallyAerated);
@@ -198,6 +207,12 @@ namespace CSSPDBDLL.Services
             }
 
             retStr = _BaseEnumService.AlarmSystemTypeOK(infrastructureModel.AlarmSystemType);
+            if (!string.IsNullOrWhiteSpace(retStr))
+            {
+                return retStr;
+            }
+
+            retStr = _BaseEnumService.ValveTypeOK(infrastructureModel.ValveType);
             if (!string.IsNullOrWhiteSpace(retStr))
             {
                 return retStr;
@@ -386,6 +401,10 @@ namespace CSSPDBDLL.Services
             if (infrastructureModel.FacilityType != null)
                 infrastructure.FacilityType = (int)infrastructureModel.FacilityType;
 
+            infrastructure.HasBackupPower = null;
+            if (infrastructureModel.HasBackupPower != null)
+                infrastructure.HasBackupPower = (bool)infrastructureModel.HasBackupPower;
+
             infrastructure.IsMechanicallyAerated = infrastructureModel.IsMechanicallyAerated;
             infrastructure.NumberOfCells = infrastructureModel.NumberOfCells;
             infrastructure.NumberOfAeratedCells = infrastructureModel.NumberOfAeratedCells;
@@ -431,6 +450,11 @@ namespace CSSPDBDLL.Services
             infrastructure.PeakFlow_m3_day = infrastructureModel.PeakFlow_m3_day;
             infrastructure.PopServed = infrastructureModel.PopServed;
             infrastructure.CanOverflow = infrastructureModel.CanOverflow;
+
+            infrastructure.ValveType = null;
+            if (infrastructureModel.ValveType != null)
+                infrastructure.ValveType = (int)infrastructureModel.ValveType;
+
             infrastructure.PercFlowOfTotal = infrastructureModel.PercFlowOfTotal;
             infrastructure.TimeOffset_hour = infrastructureModel.TimeOffset_hour;
             infrastructure.TempCatchAllRemoveLater = infrastructureModel.TempCatchAllRemoveLater;
@@ -492,6 +516,7 @@ namespace CSSPDBDLL.Services
                                                            InfrastructureCategory = c.InfrastructureCategory,
                                                            InfrastructureType = (InfrastructureTypeEnum)c.InfrastructureType,
                                                            FacilityType = (FacilityTypeEnum)c.FacilityType,
+                                                           HasBackupPower = c.HasBackupPower,
                                                            IsMechanicallyAerated = c.IsMechanicallyAerated,
                                                            NumberOfCells = c.NumberOfCells,
                                                            NumberOfAeratedCells = c.NumberOfAeratedCells,
@@ -509,6 +534,7 @@ namespace CSSPDBDLL.Services
                                                            PeakFlow_m3_day = c.PeakFlow_m3_day,
                                                            PopServed = c.PopServed,
                                                            CanOverflow = c.CanOverflow,
+                                                           ValveType = (ValveTypeEnum)c.ValveType,
                                                            PercFlowOfTotal = c.PercFlowOfTotal,
                                                            TimeOffset_hour = c.TimeOffset_hour,
                                                            TempCatchAllRemoveLater = c.TempCatchAllRemoveLater,
@@ -561,6 +587,7 @@ namespace CSSPDBDLL.Services
                                                            InfrastructureCategory = c.InfrastructureCategory,
                                                            InfrastructureType = (InfrastructureTypeEnum)c.InfrastructureType,
                                                            FacilityType = (FacilityTypeEnum)c.FacilityType,
+                                                           HasBackupPower = c.HasBackupPower,
                                                            IsMechanicallyAerated = c.IsMechanicallyAerated,
                                                            NumberOfCells = c.NumberOfCells,
                                                            NumberOfAeratedCells = c.NumberOfAeratedCells,
@@ -578,6 +605,7 @@ namespace CSSPDBDLL.Services
                                                            PeakFlow_m3_day = c.PeakFlow_m3_day,
                                                            PopServed = c.PopServed,
                                                            CanOverflow = c.CanOverflow,
+                                                           ValveType = (ValveTypeEnum)c.ValveType,
                                                            PercFlowOfTotal = c.PercFlowOfTotal,
                                                            TimeOffset_hour = c.TimeOffset_hour,
                                                            TempCatchAllRemoveLater = c.TempCatchAllRemoveLater,
@@ -1129,7 +1157,7 @@ namespace CSSPDBDLL.Services
                 coordList.Add(new Coord() { Lat = Lat, Lng = Lng, Ordinal = 0 });
 
                 bool OneOfDifferentTypeExist = false;
-                foreach(TVTypeEnum tvTypeItem in new List<TVTypeEnum>() { TVTypeEnum.WasteWaterTreatmentPlant, TVTypeEnum.LiftStation, TVTypeEnum.LineOverflow, TVTypeEnum.OtherInfrastructure, TVTypeEnum.SeeOtherMunicipality })
+                foreach (TVTypeEnum tvTypeItem in new List<TVTypeEnum>() { TVTypeEnum.WasteWaterTreatmentPlant, TVTypeEnum.LiftStation, TVTypeEnum.LineOverflow, TVTypeEnum.OtherInfrastructure, TVTypeEnum.SeeOtherMunicipality })
                 {
                     List<MapInfoPointModel> mapInfoPointModelListExist = _MapInfoService._MapInfoPointService.GetMapInfoPointModelListWithTVItemIDAndTVTypeAndMapInfoDrawTypeDB(infrastructureModelRet.InfrastructureTVItemID, tvTypeItem, MapInfoDrawTypeEnum.Point);
                     if (mapInfoPointModelListExist.Count > 0)
@@ -1297,6 +1325,20 @@ namespace CSSPDBDLL.Services
                 infrastructureModelToChange.FacilityType = (FacilityTypeEnum)tempInt;
             }
 
+            if (fc["HasBackupPower"] == "true")
+            {
+                infrastructureModelToChange.HasBackupPower = true;
+            }
+            else if (fc["HasBackupPower"] == "false")
+            {
+                infrastructureModelToChange.HasBackupPower = false;
+            }
+            else
+            {
+                infrastructureModelToChange.HasBackupPower = null;
+            }
+
+
             if (infrastructureModelToChange.FacilityType == FacilityTypeEnum.Lagoon)
             {
                 if (string.IsNullOrWhiteSpace(fc["IsMechanicallyAerated"]))
@@ -1418,10 +1460,27 @@ namespace CSSPDBDLL.Services
                 infrastructureModelToChange.AlarmSystemType = (AlarmSystemTypeEnum)tempInt;
             }
 
-            if (fc["Overflow"] == "0")
-                infrastructureModelToChange.CanOverflow = false;
-            else
+            if (fc["CanOverflow"] == "true")
+            {
                 infrastructureModelToChange.CanOverflow = true;
+                if (string.IsNullOrWhiteSpace(fc["ValveType"]))
+                    infrastructureModelToChange.InfrastructureType = null;
+                else
+                {
+                    int.TryParse(fc["ValveType"], out tempInt);
+                    infrastructureModelToChange.ValveType = (ValveTypeEnum)tempInt;
+                }
+            }
+            else if (fc["CanOverflow"] == "false")
+            {
+                infrastructureModelToChange.CanOverflow = false;
+                infrastructureModelToChange.ValveType = ValveTypeEnum.Error;
+            }
+            else
+            {
+                infrastructureModelToChange.CanOverflow = null;
+                infrastructureModelToChange.ValveType = ValveTypeEnum.Error;
+            }
 
             double.TryParse(fc["PercFlowOfTotal"], out PercFlowOfTotal);
             if (PercFlowOfTotal == 0.0D)

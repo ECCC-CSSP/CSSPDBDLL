@@ -1338,6 +1338,10 @@ namespace CSSPDBDLL.Services
                 sb.AppendLine($"POPSERVED\t{POPSERVED}\t");
                 string CANOVERFLOW = infrastructureModel.CanOverflow != null ? ((bool)infrastructureModel.CanOverflow) == true ? "true" : "false" : "";
                 sb.AppendLine($"CANOVERFLOW\t{CANOVERFLOW}\t");
+                string VALVETYPE = infrastructureModel.ValveType != null ? ((int)infrastructureModel.ValveType).ToString() : "";
+                sb.AppendLine($"VALVETYPE\t{VALVETYPE}\t");
+                string HASBACKUPPOWER = infrastructureModel.HasBackupPower != null ? ((bool)infrastructureModel.HasBackupPower) == true ? "true" : "false" : "";
+                sb.AppendLine($"HASBACKUPPOWER\t{HASBACKUPPOWER}\t");
                 string PERCFLOWOFTOTAL = infrastructureModel.PercFlowOfTotal != null ? ((float)infrastructureModel.PercFlowOfTotal).ToString("F3") : "";
                 sb.AppendLine($"PERCFLOWOFTOTAL\t{PERCFLOWOFTOTAL}\t");
                 string AVERAGEDEPTH_M = infrastructureModel.AverageDepth_m != null ? ((float)infrastructureModel.AverageDepth_m).ToString("F3") : "";

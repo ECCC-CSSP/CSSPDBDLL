@@ -310,6 +310,11 @@ namespace CSSPDBDLL.Services
                         fileType = FileTypeEnum.CSV;
                     }
                     break;
+                case "WMV":
+                    {
+                        fileType = FileTypeEnum.WMV;
+                    }
+                    break;
                 default:
                     break;
             }

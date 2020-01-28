@@ -36,6 +36,9 @@ namespace CSSPDBDLL.Services
         public AddressService _AddressService { get; private set; }
         public PolSourceObservationService _PolSourceObservationService { get; private set; }
         public PolSourceObservationIssueService _PolSourceObservationIssueService { get; private set; }
+        public ContactService _ContactService { get; private set; }
+        public TelService _TelService { get; private set; }
+        public EmailService _EmailService { get; private set; }
         #endregion Properties
 
         #region Constructors
@@ -54,6 +57,9 @@ namespace CSSPDBDLL.Services
             _AddressService = new AddressService(LanguageRequest, User);
             _PolSourceObservationService = new PolSourceObservationService(LanguageRequest, User);
             _PolSourceObservationIssueService = new PolSourceObservationIssueService(LanguageRequest, User);
+            _ContactService = new ContactService(LanguageRequest, User);
+            _TelService = new TelService(LanguageRequest, User);
+            _EmailService = new EmailService(LanguageRequest, User);
         }
         #endregion Constructors
 
@@ -1198,6 +1204,99 @@ namespace CSSPDBDLL.Services
 
             sb.AppendLine($"MUNICIPALITY\t{tvItemModelMunicipality.TVItemID}\t{tvItemModelMunicipality.TVText}\t");
 
+            MapInfo mapInfo = new MapInfo();
+            MapInfoPoint mapInfoPoint = new MapInfoPoint();
+
+            var mapInfoList = (from mi in _TVItemService.db.MapInfos
+                               from mip in _TVItemService.db.MapInfoPoints
+                               where mi.MapInfoID == mip.MapInfoID
+                               && mi.TVType == (int)TVTypeEnum.Municipality
+                               && mi.MapInfoDrawType == (int)MapInfoDrawTypeEnum.Point
+                               && mi.TVItemID == tvItemModelMunicipality.TVItemID
+                               select new { mi, mip }).ToList();
+
+            mapInfo = mapInfoList.Where(c => c.mi.TVItemID == tvItemModelMunicipality.TVItemID).Select(c => c.mi).FirstOrDefault();
+            mapInfoPoint = mapInfoList.Where(c => c.mip.MapInfoID == mapInfo.MapInfoID).Select(c => c.mip).FirstOrDefault();
+
+            string LatText2 = mapInfoPoint != null ? mapInfoPoint.Lat.ToString("F5") : "";
+            string LngText2 = mapInfoPoint != null ? mapInfoPoint.Lng.ToString("F5") : "";
+            sb.AppendLine($"MUNICIPALITYLATLNG\t{LatText2}\t{LngText2}\t");
+
+            List<TVItemLinkModel> tvItemLinkModelList = _TVItemLinkService.GetTVItemLinkModelListWithFromTVItemIDDB(tvItemModelMunicipality.TVItemID);
+
+            foreach (TVItemLinkModel tvItemLinkModel in tvItemLinkModelList)
+            {
+                if (tvItemLinkModel.FromTVType == TVTypeEnum.Municipality && tvItemLinkModel.ToTVType == TVTypeEnum.Contact)
+                {
+                    ContactModel contactModel = _ContactService.GetContactModelWithContactTVItemIDDB(tvItemLinkModel.ToTVItemID);
+
+                    if (string.IsNullOrWhiteSpace(contactModel.Error))
+                    {
+                        sb.AppendLine($"CONTACT\t{contactModel.FirstName}\t{contactModel.Initial}\t{contactModel.LastName}\t");
+                    }
+                    else
+                    {
+                        sb.AppendLine($"CONTACT\tERROR\tERROR\tERROR\t");
+                    }
+
+                    List<TVItemLinkModel> tvItemLinkModelList2 = _TVItemLinkService.GetTVItemLinkModelListWithFromTVItemIDDB(tvItemLinkModel.FromTVItemID);
+
+                    // doing Telephone
+                    foreach (TVItemLinkModel tvItemLinkModel2 in tvItemLinkModelList2)
+                    {
+                        if (tvItemLinkModel2.FromTVType == TVTypeEnum.Contact && tvItemLinkModel2.ToTVType == TVTypeEnum.Tel)
+                        {
+                            TelModel telModel = _TelService.GetTelModelWithTelTVItemIDDB(tvItemLinkModel2.ToTVItemID);
+
+                            if (string.IsNullOrWhiteSpace(telModel.Error))
+                            {
+                                sb.AppendLine($"CONTACTTELEPHONE\t{telModel.TelTypeText}\t{telModel.TelNumber}\t");
+                            }
+                            else
+                            {
+                                sb.AppendLine($"CONTACTTELEPHONE\tERROR\tERROR\t");
+                            }
+                        }
+                    }
+
+                    // doing Email
+                    foreach (TVItemLinkModel tvItemLinkModel2 in tvItemLinkModelList2)
+                    {
+                        if (tvItemLinkModel2.FromTVType == TVTypeEnum.Contact && tvItemLinkModel2.ToTVType == TVTypeEnum.Email)
+                        {
+                            EmailModel emailModel = _EmailService.GetEmailModelWithEmailTVItemIDDB(tvItemLinkModel2.ToTVItemID);
+
+                            if (string.IsNullOrWhiteSpace(emailModel.Error))
+                            {
+                                sb.AppendLine($"CONTACTEMAIL\t{emailModel.EmailTypeText}\t{emailModel.EmailAddress}\t");
+                            }
+                            else
+                            {
+                                sb.AppendLine($"CONTACTEMAIL\tERROR\tERROR\t");
+                            }
+                        }
+                    }
+
+                    // doing Contact Address
+                    foreach (TVItemLinkModel tvItemLinkModel2 in tvItemLinkModelList2)
+                    {
+                        if (tvItemLinkModel2.FromTVType == TVTypeEnum.Contact && tvItemLinkModel2.ToTVType == TVTypeEnum.Address)
+                        {
+                            AddressModel addressModel = _AddressService.GetAddressModelWithAddressTVItemIDDB(tvItemLinkModel2.ToTVItemID);
+
+                            if (string.IsNullOrWhiteSpace(addressModel.Error))
+                            {
+                                sb.AppendLine($"CONTACTADDRESS\t{addressModel.AddressTVItemID}\t{addressModel.MunicipalityTVText}\t{((int)addressModel.AddressType).ToString()}\t{addressModel.StreetNumber}\t{addressModel.StreetName}\t{((int)addressModel.StreetType).ToString()}\t{addressModel.PostalCode}\t");
+                            }
+                            else
+                            {
+                                sb.AppendLine($"CONTACTADDRESS\tERROR\tERROR\tERROR\tERROR\tERROR\tERROR\tERROR\t");
+                            }
+                        }
+                    }
+                }
+            }
+
             List<TVItemModel> tvItemModelInfrastructureList = _TVItemService.GetChildrenTVItemModelListWithTVItemIDAndTVTypeDB(tvItemModelMunicipality.TVItemID, TVTypeEnum.Infrastructure);
 
             foreach (TVItemModel tvItemModelInfrastructure in tvItemModelInfrastructureList)
@@ -1208,9 +1307,6 @@ namespace CSSPDBDLL.Services
                 {
                     continue;
                 }
-
-                MapInfo mapInfo = new MapInfo();
-                MapInfoPoint mapInfoPoint = new MapInfoPoint();
 
                 MapInfo mapInfoOutfall = new MapInfo();
                 MapInfoPoint mapInfoPointOutfall = new MapInfoPoint();
@@ -1242,13 +1338,13 @@ namespace CSSPDBDLL.Services
                     tvTypeInfrastructure = TVTypeEnum.Error;
                 }
 
-                var mapInfoList = (from mi in _TVItemService.db.MapInfos
-                                   from mip in _TVItemService.db.MapInfoPoints
-                                   where mi.MapInfoID == mip.MapInfoID
-                                   && mi.TVType == (int)tvTypeInfrastructure
-                                   && mi.MapInfoDrawType == (int)MapInfoDrawTypeEnum.Point
-                                   && mi.TVItemID == tvItemModelInfrastructure.TVItemID
-                                   select new { mi, mip }).ToList();
+                mapInfoList = (from mi in _TVItemService.db.MapInfos
+                               from mip in _TVItemService.db.MapInfoPoints
+                               where mi.MapInfoID == mip.MapInfoID
+                               && mi.TVType == (int)tvTypeInfrastructure
+                               && mi.MapInfoDrawType == (int)MapInfoDrawTypeEnum.Point
+                               && mi.TVItemID == tvItemModelInfrastructure.TVItemID
+                               select new { mi, mip }).ToList();
 
                 mapInfo = mapInfoList.Where(c => c.mi.TVItemID == tvItemModelInfrastructure.TVItemID).Select(c => c.mi).FirstOrDefault();
                 mapInfoPoint = mapInfoList.Where(c => c.mip.MapInfoID == mapInfo.MapInfoID).Select(c => c.mip).FirstOrDefault();
@@ -1268,8 +1364,8 @@ namespace CSSPDBDLL.Services
 
                 sb.AppendLine($"-----\t-------------------------------------------------\t");
                 sb.AppendLine($"INFRASTRUCTURE\t{tvItemModelInfrastructure.TVItemID}\t{infrastructureModel.LastUpdateDate_UTC.Year}|" +
-                    $"{infrastructureModel.LastUpdateDate_UTC.Month.ToString("0#")}|{infrastructureModel.LastUpdateDate_UTC.Day.ToString("0#")}|" + 
-                    $"{infrastructureModel.LastUpdateDate_UTC.Hour.ToString("0#")}|{infrastructureModel.LastUpdateDate_UTC.Minute.ToString("0#")}|" + 
+                    $"{infrastructureModel.LastUpdateDate_UTC.Month.ToString("0#")}|{infrastructureModel.LastUpdateDate_UTC.Day.ToString("0#")}|" +
+                    $"{infrastructureModel.LastUpdateDate_UTC.Hour.ToString("0#")}|{infrastructureModel.LastUpdateDate_UTC.Minute.ToString("0#")}|" +
                     $"{infrastructureModel.LastUpdateDate_UTC.Second.ToString("0#")}\t{IsActiveTxt}\t");
 
                 string LatText = mapInfoPoint != null ? mapInfoPoint.Lat.ToString("F5") : "";
@@ -1388,8 +1484,8 @@ namespace CSSPDBDLL.Services
                 }
                 sb.AppendLine($"SEEOTHERMUNICIPALITY\t{ SeeOtherMunicipalityTVItemID }\t{ SeeOtherMunicipalityText.Replace(",", "_").Replace("\t", "_").Replace("\r", "_").Replace("\n", "_") }\t");
 
-                List<TVItemLinkModel> tvItemLinkModelList = _TVItemLinkService.GetTVItemLinkModelListWithFromTVItemIDDB(tvItemModelInfrastructure.TVItemID);
-                foreach (TVItemLinkModel tvItemLinkModel in tvItemLinkModelList)
+                List<TVItemLinkModel> tvItemLinkModelList2 = _TVItemLinkService.GetTVItemLinkModelListWithFromTVItemIDDB(tvItemModelInfrastructure.TVItemID);
+                foreach (TVItemLinkModel tvItemLinkModel in tvItemLinkModelList2)
                 {
                     if (tvItemLinkModel.FromTVItemID == tvItemModelInfrastructure.TVItemID && tvItemLinkModel.FromTVType == TVTypeEnum.Infrastructure)
                     {

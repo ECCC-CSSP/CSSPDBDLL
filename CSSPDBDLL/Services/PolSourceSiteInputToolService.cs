@@ -41,6 +41,99 @@ namespace CSSPDBDLL.Services
         #endregion Helper
 
         #region Functions public
+        public TVItemModel CreateOrModifyContactDB(int MunicipalityTVItemID, int ContactTVItemID, string FirstName, 
+            string Initial, string LastName, int? Title, string LoginEmail, bool IsActive, string AdminEmail)
+        {
+            IPrincipal user = new GenericPrincipal(new GenericIdentity(AdminEmail, "Forms"), null);
+
+            ContactService contactService = new ContactService(LanguageRequest, user);
+            ContactModel contactModel = contactService.GetContactModelWithLoginEmailDB(AdminEmail);
+            if (!string.IsNullOrWhiteSpace(contactModel.Error))
+            {
+                return ReturnError($"ERROR: {string.Format(ServiceRes.NoUserWithEmail_, AdminEmail)}");
+            }
+
+            TVItemService tvItemService = new TVItemService(LanguageRequest, user);
+            TVItemLanguageService tvItemLanguageService = new TVItemLanguageService(LanguageRequest, user);
+            TVItemLinkService tvItemLinkService = new TVItemLinkService(LanguageRequest, user);
+            AspNetUserService aspNetUserService = new AspNetUserService(LanguageRequest, user);
+
+            if (MunicipalityTVItemID == 0)
+            {
+                return ReturnError($"ERROR: {string.Format(ServiceRes._ShouldNotBe0, ServiceRes.MunicipalityTVItemID)}");
+            }
+
+            TVItemModel tvItemModelMunicipality = tvItemService.GetTVItemModelWithTVItemIDDB(MunicipalityTVItemID);
+            if (!string.IsNullOrWhiteSpace(tvItemModelMunicipality.Error))
+            {
+                return ReturnError($"ERROR: {tvItemModelMunicipality.Error}");
+            }
+
+            if (ContactTVItemID == 0)
+            {
+                return ReturnError($"ERROR: {string.Format(ServiceRes._ShouldNotBe0, ServiceRes.TVItemID)}");
+            }
+
+            ContactModel contactModelRet = contactService.GetContactModelWithContactTVItemIDDB(ContactTVItemID);
+            if (ContactTVItemID >= 10000000 || !string.IsNullOrWhiteSpace(contactModelRet.Error))
+            {
+                if (!string.IsNullOrWhiteSpace(LoginEmail))
+                {
+                    return ReturnError($"ERROR: LoginEmail is required");
+                }
+
+                NewContactModel newContactModelNew = new NewContactModel()
+                {
+                    FirstName = FirstName,
+                    Initial = Initial,
+                    LastName = LastName,
+                    LoginEmail = LoginEmail,
+                    ContactTitle = (ContactTitleEnum)Title,
+
+                };
+
+                contactModelRet = contactService.PostLoggedInUserCreateNewUserDB(newContactModelNew);
+                if (!string.IsNullOrWhiteSpace(contactModelRet.Error))
+                {
+                    return ReturnError($"ERROR: {contactModelRet.Error}");
+                }
+            }
+
+            List<TVItemLinkModel> tvItemLinkModelList = tvItemLinkService.GetTVItemLinkModelListWithFromTVItemIDDB(MunicipalityTVItemID);
+            bool TVItemLinkModelExist = false;
+            foreach (TVItemLinkModel tvItemLinkModel in tvItemLinkModelList)
+            {
+                if (tvItemLinkModel.FromTVType == TVTypeEnum.Municipality && tvItemLinkModel.ToTVType == TVTypeEnum.Contact)
+                {
+                    TVItemLinkModelExist = true;
+                }
+            }
+
+            if (!TVItemLinkModelExist)
+            {
+                TVItemLinkModel tvItemLinkModelNew = new TVItemLinkModel()
+                {
+                    FromTVItemID = tvItemModelMunicipality.TVItemID,
+                    ToTVItemID = contactModelRet.ContactTVItemID,
+                    FromTVType = TVTypeEnum.Municipality,
+                    ToTVType = TVTypeEnum.Contact,
+                    StartDateTime_Local = DateTime.Now,
+                    EndDateTime_Local = null,
+                    Ordinal = 0,
+                    TVLevel = 0,
+                    TVPath = "p" + tvItemModelMunicipality.TVItemID + "p" + contactModelRet.ContactTVItemID,
+                    ParentTVItemLinkID = null,
+                };
+
+                TVItemLinkModel tvItemLinkModelRet = tvItemLinkService.PostAddTVItemLinkDB(tvItemLinkModelNew);
+                if (!string.IsNullOrWhiteSpace(tvItemLinkModelRet.Error))
+                {
+                    return ReturnError($"ERROR: {tvItemLinkModelRet.Error}");
+                }
+            }
+
+            return ReturnError($"{contactModelRet.ContactTVItemID}");
+        }
         public TVItemModel CreateOrModifyInfrastructureDB(int MunicipalityTVItemID, int TVItemID, string TVText, bool IsActive,
             float? Lat, float? Lng, float? LatOutfall, float? LngOutfall, string CommentEN, string CommentFR, InfrastructureTypeEnum? InfrastructureType,
             FacilityTypeEnum? FacilityType, bool? IsMechanicallyAerated, int? NumberOfCells, int? NumberOfAeratedCells, AerationTypeEnum? AerationType,
@@ -103,6 +196,7 @@ namespace CSSPDBDLL.Services
             }
 
             TVItemService tvItemService = new TVItemService(LanguageRequest, user);
+            TVItemLanguageService tvItemLanguageService = new TVItemLanguageService(LanguageRequest, user);
             InfrastructureService infrastructureService = new InfrastructureService(LanguageRequest, user);
             MapInfoService mapInfoService = new MapInfoService(LanguageRequest, user);
             TVItemLinkService tvItemLinkService = new TVItemLinkService(LanguageRequest, user);
@@ -126,6 +220,35 @@ namespace CSSPDBDLL.Services
             if (string.IsNullOrWhiteSpace(TVText))
             {
                 return ReturnError($"ERROR: {string.Format(ServiceRes._IsRequired, ServiceRes.TVText)}");
+            }
+
+            if (TVText != tvItemModelMunicipality.TVText)
+            {
+                TVItemLanguageModel tvItemLanguageModel = tvItemLanguageService.GetTVItemLanguageModelWithTVItemIDAndLanguageDB(tvItemModelMunicipality.TVItemID, LanguageEnum.en);
+
+                if (!string.IsNullOrWhiteSpace(tvItemLanguageModel.Error))
+                {
+                    tvItemLanguageModel.TVText = TVText;
+                    tvItemLanguageModel.TranslationStatus = TranslationStatusEnum.Translated;
+                    TVItemLanguageModel tvItemLanguageModelRet = tvItemLanguageService.PostUpdateTVItemLanguageDB(tvItemLanguageModel);
+                    if (!string.IsNullOrWhiteSpace(tvItemLanguageModelRet.Error))
+                    {
+                        return ReturnError($"ERROR: { tvItemLanguageModelRet.Error }");
+                    }    
+                }
+
+                tvItemLanguageModel = tvItemLanguageService.GetTVItemLanguageModelWithTVItemIDAndLanguageDB(tvItemModelMunicipality.TVItemID, LanguageEnum.fr);
+
+                if (!string.IsNullOrWhiteSpace(tvItemLanguageModel.Error))
+                {
+                    tvItemLanguageModel.TVText = TVText;
+                    tvItemLanguageModel.TranslationStatus = TranslationStatusEnum.NotTranslated;
+                    TVItemLanguageModel tvItemLanguageModelRet = tvItemLanguageService.PostUpdateTVItemLanguageDB(tvItemLanguageModel);
+                    if (!string.IsNullOrWhiteSpace(tvItemLanguageModelRet.Error))
+                    {
+                        return ReturnError($"ERROR: { tvItemLanguageModelRet.Error }");
+                    }
+                }
             }
 
             InfrastructureModel infrastructureModelRet = infrastructureService.GetInfrastructureModelWithInfrastructureTVItemIDDB(TVItemID);

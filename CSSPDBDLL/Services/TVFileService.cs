@@ -1250,11 +1250,11 @@ namespace CSSPDBDLL.Services
 
                             if (string.IsNullOrWhiteSpace(telModel.Error))
                             {
-                                sb.AppendLine($"CONTACTTELEPHONE\t{telModel.TelTypeText}\t{telModel.TelNumber}\t");
+                                sb.AppendLine($"CONTACTTELEPHONE\t{telModel.TelTVItemID}\t{telModel.TelTypeText}\t{telModel.TelNumber}\t");
                             }
                             else
                             {
-                                sb.AppendLine($"CONTACTTELEPHONE\tERROR\tERROR\t");
+                                sb.AppendLine($"CONTACTTELEPHONE\tERROR\tERROR\tERROR\t");
                             }
                         }
                     }
@@ -1268,11 +1268,11 @@ namespace CSSPDBDLL.Services
 
                             if (string.IsNullOrWhiteSpace(emailModel.Error))
                             {
-                                sb.AppendLine($"CONTACTEMAIL\t{emailModel.EmailTypeText}\t{emailModel.EmailAddress}\t");
+                                sb.AppendLine($"CONTACTEMAIL\t{emailModel.EmailTVItemID}\t{emailModel.EmailTypeText}\t{emailModel.EmailAddress}\t");
                             }
                             else
                             {
-                                sb.AppendLine($"CONTACTEMAIL\tERROR\tERROR\t");
+                                sb.AppendLine($"CONTACTEMAIL\tERROR\tERROR\tERROR\t");
                             }
                         }
                     }

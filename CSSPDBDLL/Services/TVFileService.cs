@@ -888,7 +888,7 @@ namespace CSSPDBDLL.Services
 
         public string ChoseEDriveOrCDrive(string ServerFilePath)
         {
-            if (System.Environment.UserName == "leblancc" || System.Environment.UserName == "admin-leblancc" || System.Environment.UserName == "WMON01DTCHLEBL2$")
+            if (System.Environment.UserName == "charl" || System.Environment.UserName == "leblancc" || System.Environment.UserName == "admin-leblancc" || System.Environment.UserName == "WMON01DTCHLEBL2$")
             {
                 ServerFilePath = ServerFilePath.Replace(@"C:\", @"E:\");
             }
@@ -1546,9 +1546,16 @@ namespace CSSPDBDLL.Services
 
             }
 
-            StreamWriter sw = fi.CreateText();
-            sw.Write(sb.ToString());
-            sw.Close();
+            try
+            {
+                StreamWriter sw = fi.CreateText();
+                sw.Write(sb.ToString());
+                sw.Close();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
 
             return "";
         }

@@ -41,6 +41,167 @@ namespace CSSPDBDLL.Services
         #endregion Helper
 
         #region Functions public
+        public TVItemModel SaveAddressContactDB(int ContactTVItemID, int ProvinceTVItemID, int TVItemID, string StreetNumber, 
+            string StreetName, int StreetType, string Municipality, string PostalCode, bool CreateMunicipality, string AdminEmail)
+        {
+            IPrincipal user = new GenericPrincipal(new GenericIdentity(AdminEmail, "Forms"), null);
+
+            ContactService contactService = new ContactService(LanguageRequest, user);
+            ContactModel contactModel = contactService.GetContactModelWithLoginEmailDB(AdminEmail);
+            if (!string.IsNullOrWhiteSpace(contactModel.Error))
+            {
+                return ReturnError($"ERROR: {string.Format(ServiceRes.NoUserWithEmail_, AdminEmail)}");
+            }
+
+            AddressService addressService = new AddressService(LanguageRequest, user);
+            TVItemService tvItemService = new TVItemService(LanguageRequest, user);
+            TVItemLinkService tvItemLinkService = new TVItemLinkService(LanguageRequest, user);
+
+            if (ContactTVItemID == 0)
+            {
+                return ReturnError($"ERROR: {string.Format(ServiceRes._ShouldNotBe0, ServiceRes.ContactTVItemID)}");
+            }
+
+            TVItemModel tvItemModelContact = tvItemService.GetTVItemModelWithTVItemIDDB(ContactTVItemID);
+            if (!string.IsNullOrWhiteSpace(tvItemModelContact.Error))
+            {
+                return ReturnError($"ERROR: {tvItemModelContact.Error}");
+            }
+
+            if (tvItemModelContact.TVType != TVTypeEnum.Contact)
+            {
+                return ReturnError($"ERROR: ContactTVItemID [{ContactTVItemID}] is not of type Contact");
+            }
+
+            // doing Province
+            if (ProvinceTVItemID == 0)
+            {
+                return ReturnError($"ERROR: {string.Format(ServiceRes._ShouldNotBe0, ServiceRes.ProvinceTVItemID)}");
+            }
+
+            TVItemModel tvItemModelProvince = tvItemService.GetTVItemModelWithTVItemIDDB(ProvinceTVItemID);
+            if (!string.IsNullOrWhiteSpace(tvItemModelProvince.Error))
+            {
+                return ReturnError($"ERROR: {tvItemModelProvince.Error}");
+            }
+
+            if (tvItemModelProvince.TVType != TVTypeEnum.Province)
+            {
+                return ReturnError($"ERROR: ProvinceTVItemID [{ProvinceTVItemID}] is not of type Province");
+            }
+
+            if (TVItemID == 0)
+            {
+                return ReturnError(string.Format(ServiceRes._ShouldNotBe0, ServiceRes.TVItemID));
+            }
+            if (TVItemID >= 10000000)
+            {
+                return ReturnError(string.Format(ServiceRes._ShouldNotBeMoreThan_, ServiceRes.TVItemID, "10000000"));
+            }
+
+            if (string.IsNullOrWhiteSpace(Municipality))
+            {
+                return ReturnError(string.Format(ServiceRes._IsRequired, ServiceRes.Municipality));
+            }
+
+            TVItemModel tvItemModelMunicipality = new TVItemModel();
+            if (CreateMunicipality)
+            {
+                tvItemModelMunicipality = tvItemService.GetChildTVItemModelWithTVItemIDAndTVTextStartWithAndTVTypeDB(ProvinceTVItemID, Municipality, TVTypeEnum.Municipality);
+                if (!string.IsNullOrWhiteSpace(tvItemModelMunicipality.Error))
+                {
+                    tvItemModelMunicipality = tvItemService.PostAddChildTVItemDB(ProvinceTVItemID, Municipality, TVTypeEnum.Municipality);
+                    if (!string.IsNullOrWhiteSpace(tvItemModelMunicipality.Error))
+                    {
+                        return ReturnError($"ERROR: {string.Format(ServiceRes.CouldNotCreateMunicipality_, Municipality)}");
+                    }
+                }
+            }
+            else
+            {
+                tvItemModelMunicipality = tvItemService.GetChildTVItemModelWithTVItemIDAndTVTextStartWithAndTVTypeDB(ProvinceTVItemID, Municipality, TVTypeEnum.Municipality);
+                if (!string.IsNullOrWhiteSpace(tvItemModelMunicipality.Error))
+                {
+                    return ReturnError($"ERROR: {string.Format(ServiceRes.CouldNotFindMunicipality_, Municipality)}");
+                }
+            }
+
+            List<TVItemModel> tvItemModelParents = tvItemService.GetParentsTVItemModelList(tvItemModelMunicipality.TVPath);
+
+            AddressModel addressModelNew = new AddressModel();
+            addressModelNew.AddressType = AddressTypeEnum.Civic;
+            addressModelNew.StreetNumber = StreetNumber;
+            addressModelNew.StreetName = StreetName;
+            addressModelNew.StreetType = (StreetTypeEnum)StreetType;
+            addressModelNew.MunicipalityTVItemID = tvItemModelMunicipality.TVItemID;
+            addressModelNew.ProvinceTVItemID = tvItemModelProvince.TVItemID;
+            addressModelNew.CountryTVItemID = tvItemModelProvince.ParentID;
+            addressModelNew.PostalCode = PostalCode;
+
+            string TVTextAddress = addressService.CreateTVText(addressModelNew);
+
+            TVItemModel tvItemModelRoot = tvItemService.GetRootTVItemModelDB();
+            if (!string.IsNullOrWhiteSpace(tvItemModelRoot.Error))
+            {
+                return ReturnError($"ERROR: {tvItemModelRoot.Error}");
+            }
+
+            AddressModel addressModelRet = addressService.GetAddressModelExistDB(addressModelNew);
+            if (!string.IsNullOrWhiteSpace(addressModelRet.Error))
+            {
+                TVItemModel tvItemModelAddress = tvItemService.PostAddChildTVItemDB(tvItemModelRoot.TVItemID, TVTextAddress, TVTypeEnum.Address);
+                if (!string.IsNullOrWhiteSpace(tvItemModelAddress.Error))
+                {
+                    return ReturnError($"ERROR: {tvItemModelAddress.Error}");
+                }
+
+                addressModelNew.AddressTVItemID = tvItemModelAddress.TVItemID;
+
+                addressModelRet = addressService.PostAddAddressDB(addressModelNew);
+                if (!string.IsNullOrWhiteSpace(addressModelRet.Error))
+                {
+                    return ReturnError($"ERROR: {addressModelRet.Error}");
+                }
+            }
+
+            List<TVItemLinkModel> tvItemLinkModelList = tvItemLinkService.GetTVItemLinkModelListWithFromTVItemIDDB(ContactTVItemID);
+            bool TVItemLinkModelExist = false;
+            foreach (TVItemLinkModel tvItemLinkModel in tvItemLinkModelList)
+            {
+                if (tvItemLinkModel.ToTVItemID == addressModelRet.AddressTVItemID)
+                {
+                    if (tvItemLinkModel.FromTVType == TVTypeEnum.Contact && tvItemLinkModel.ToTVType == TVTypeEnum.Address)
+                    {
+                        TVItemLinkModelExist = true;
+                    }
+                }
+            }
+
+            if (!TVItemLinkModelExist)
+            {
+                TVItemLinkModel tvItemLinkModelNew = new TVItemLinkModel()
+                {
+                    FromTVItemID = tvItemModelContact.TVItemID,
+                    ToTVItemID = addressModelRet.AddressTVItemID,
+                    FromTVType = TVTypeEnum.Contact,
+                    ToTVType = TVTypeEnum.Address,
+                    StartDateTime_Local = DateTime.Now,
+                    EndDateTime_Local = null,
+                    Ordinal = 0,
+                    TVLevel = 0,
+                    TVPath = "p" + tvItemModelContact + "p" + addressModelRet.AddressTVItemID,
+                    ParentTVItemLinkID = null,
+                };
+
+                TVItemLinkModel tvItemLinkModelRet = tvItemLinkService.PostAddTVItemLinkDB(tvItemLinkModelNew);
+                if (!string.IsNullOrWhiteSpace(tvItemLinkModelRet.Error))
+                {
+                    return ReturnError($"ERROR: {tvItemLinkModelRet.Error}");
+                }
+            }
+
+            return ReturnError($"{addressModelRet.AddressTVItemID}");
+        }
         public TVItemModel CreateOrModifyEmaiDB(int ContactTVItemID, int EmailTVItemID, int EmailType, string EmailAddress,
             bool Delete, bool Create, bool Modify, string AdminEmail)
         {
@@ -1410,7 +1571,7 @@ namespace CSSPDBDLL.Services
             return ReturnError("");
 
         }
-        public TVItemModel SaveAddressDB(int ProvinceTVItemID, int TVItemID, string StreetNumber, string StreetName, int StreetType, string Municipality, string PostalCode, bool CreateMunicipality, bool IsPSS, bool IsInfrastructure, string AdminEmail)
+        public TVItemModel SavePSSorInfrastructureAddressDB(int ProvinceTVItemID, int TVItemID, string StreetNumber, string StreetName, int StreetType, string Municipality, string PostalCode, bool CreateMunicipality, bool IsPSS, bool IsInfrastructure, string AdminEmail)
         {
             IPrincipal user = new GenericPrincipal(new GenericIdentity(AdminEmail, "Forms"), null);
 

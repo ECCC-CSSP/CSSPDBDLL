@@ -1239,7 +1239,7 @@ namespace CSSPDBDLL.Services
                         sb.AppendLine($"CONTACT\tERROR\tERROR\tERROR\t");
                     }
 
-                    List<TVItemLinkModel> tvItemLinkModelList2 = _TVItemLinkService.GetTVItemLinkModelListWithFromTVItemIDDB(tvItemLinkModel.FromTVItemID);
+                    List<TVItemLinkModel> tvItemLinkModelList2 = _TVItemLinkService.GetTVItemLinkModelListWithFromTVItemIDDB(tvItemLinkModel.ToTVItemID);
 
                     // doing Telephone
                     foreach (TVItemLinkModel tvItemLinkModel2 in tvItemLinkModelList2)
@@ -1250,7 +1250,7 @@ namespace CSSPDBDLL.Services
 
                             if (string.IsNullOrWhiteSpace(telModel.Error))
                             {
-                                sb.AppendLine($"CONTACTTELEPHONE\t{telModel.TelTVItemID}\t{telModel.TelTypeText}\t{telModel.TelNumber}\t");
+                                sb.AppendLine($"CONTACTTELEPHONE\t{telModel.TelTVItemID}\t{(int)telModel.TelType}\t{telModel.TelNumber}\t");
                             }
                             else
                             {
@@ -1268,7 +1268,7 @@ namespace CSSPDBDLL.Services
 
                             if (string.IsNullOrWhiteSpace(emailModel.Error))
                             {
-                                sb.AppendLine($"CONTACTEMAIL\t{emailModel.EmailTVItemID}\t{emailModel.EmailTypeText}\t{emailModel.EmailAddress}\t");
+                                sb.AppendLine($"CONTACTEMAIL\t{emailModel.EmailTVItemID}\t{(int)emailModel.EmailType}\t{emailModel.EmailAddress}\t");
                             }
                             else
                             {

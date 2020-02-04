@@ -1230,14 +1230,25 @@ namespace CSSPDBDLL.Services
                 {
                     ContactModel contactModel = _ContactService.GetContactModelWithContactTVItemIDDB(tvItemLinkModel.ToTVItemID);
 
-                    if (string.IsNullOrWhiteSpace(contactModel.Error))
+                    TVItemModel tvItemModelContact = _TVItemService.GetTVItemModelWithTVItemIDDB(tvItemLinkModel.ToTVItemID);
+
+                    if (string.IsNullOrWhiteSpace(tvItemModelContact.Error))
                     {
-                        sb.AppendLine($"CONTACT\t{contactModel.FirstName}\t{contactModel.Initial}\t{contactModel.LastName}\t");
+                        string IsActiveContactTxt = (tvItemModelContact.IsActive ? "true" : "false");
+
+                        if (string.IsNullOrWhiteSpace(contactModel.Error))
+                        {
+                            sb.AppendLine($"CONTACT\t{contactModel.ContactTVItemID}\t{contactModel.FirstName}\t{contactModel.Initial}\t{contactModel.LastName}\t{IsActiveContactTxt}\t");
+                        }
+                        else
+                        {
+                            sb.AppendLine($"CONTACT\tERROR\tERROR\tERROR\tERROR\tERROR\t");
+                        }
                     }
                     else
                     {
-                        sb.AppendLine($"CONTACT\tERROR\tERROR\tERROR\t");
-                    }
+                        sb.AppendLine($"CONTACT\tERROR\tERROR\tERROR\tERROR\tERROR\t");
+                    }                 
 
                     List<TVItemLinkModel> tvItemLinkModelList2 = _TVItemLinkService.GetTVItemLinkModelListWithFromTVItemIDDB(tvItemLinkModel.ToTVItemID);
 

@@ -1238,16 +1238,16 @@ namespace CSSPDBDLL.Services
 
                         if (string.IsNullOrWhiteSpace(contactModel.Error))
                         {
-                            sb.AppendLine($"CONTACT\t{contactModel.ContactTVItemID}\t{contactModel.FirstName}\t{contactModel.Initial}\t{contactModel.LastName}\t{IsActiveContactTxt}\t");
+                            sb.AppendLine($"CONTACT\t{contactModel.ContactTVItemID}\t{contactModel.FirstName}\t{contactModel.Initial}\t{contactModel.LastName}\t{contactModel.LoginEmail}\t{IsActiveContactTxt}\t");
                         }
                         else
                         {
-                            sb.AppendLine($"CONTACT\tERROR\tERROR\tERROR\tERROR\tERROR\t");
+                            sb.AppendLine($"CONTACT\tERROR\tERROR\tERROR\tERROR\tERROR\tERROR\t");
                         }
                     }
                     else
                     {
-                        sb.AppendLine($"CONTACT\tERROR\tERROR\tERROR\tERROR\tERROR\t");
+                        sb.AppendLine($"CONTACT\tERROR\tERROR\tERROR\tERROR\tERROR\tERROR\t");
                     }                 
 
                     List<TVItemLinkModel> tvItemLinkModelList2 = _TVItemLinkService.GetTVItemLinkModelListWithFromTVItemIDDB(tvItemLinkModel.ToTVItemID);

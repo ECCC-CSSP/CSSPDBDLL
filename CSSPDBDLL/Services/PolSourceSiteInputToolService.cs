@@ -856,7 +856,7 @@ namespace CSSPDBDLL.Services
             SecondaryTreatmentTypeEnum? SecondaryTreatmentType, TertiaryTreatmentTypeEnum? TertiaryTreatmentType,
             DisinfectionTypeEnum? DisinfectionType, CollectionSystemTypeEnum? CollectionSystemType, AlarmSystemTypeEnum? AlarmSystemType,
             float? DesignFlow_m3_day, float? AverageFlow_m3_day, float? PeakFlow_m3_day, int? PopServed,
-            bool? CanOverflow, ValveTypeEnum? ValveType, bool? HasBackupPower,
+            CanOverflowTypeEnum? CanOverflow, ValveTypeEnum? ValveType, bool? HasBackupPower,
             float? PercFlowOfTotal, float? AverageDepth_m, int? NumberOfPorts,
             float? PortDiameter_m, float? PortSpacing_m, float? PortElevation_m, float? VerticalAngle_deg, float? HorizontalAngle_deg,
             float? DecayRate_per_day, float? NearFieldVelocity_m_s, float? FarFieldVelocity_m_s, float? ReceivingWaterSalinity_PSU,
@@ -1163,7 +1163,18 @@ namespace CSSPDBDLL.Services
                     infrastructureModelRet.AverageFlow_m3_day = AverageFlow_m3_day;
                     infrastructureModelRet.PeakFlow_m3_day = PeakFlow_m3_day;
                     infrastructureModelRet.PopServed = PopServed;
-                    infrastructureModelRet.CanOverflow = CanOverflow;
+                    infrastructureModelRet.CanOverflow = null;
+                    if (CanOverflow != null)
+                    {
+                        if (CanOverflow == CanOverflowTypeEnum.Yes)
+                        {
+                            infrastructureModelRet.CanOverflow = true;
+                        }
+                        else if (CanOverflow == CanOverflowTypeEnum.No)
+                        {
+                            infrastructureModelRet.CanOverflow = false;
+                        }
+                    }
                     infrastructureModelRet.ValveType = ValveType;
                     infrastructureModelRet.HasBackupPower = HasBackupPower;
                     infrastructureModelRet.PercFlowOfTotal = PercFlowOfTotal;
@@ -1248,7 +1259,17 @@ namespace CSSPDBDLL.Services
                 if (InfrastructureType == InfrastructureTypeEnum.LiftStation || InfrastructureType == InfrastructureTypeEnum.LineOverflow)
                 {
                     infrastructureModelRet.AlarmSystemType = AlarmSystemType;
-                    infrastructureModelRet.CanOverflow = CanOverflow;
+                    if (CanOverflow != null)
+                    {
+                        if (CanOverflow == CanOverflowTypeEnum.Yes)
+                        {
+                            infrastructureModelRet.CanOverflow = true;
+                        }
+                        else if (CanOverflow == CanOverflowTypeEnum.No)
+                        {
+                            infrastructureModelRet.CanOverflow = false;
+                        }
+                    }
                     infrastructureModelRet.ValveType = ValveType;
                     infrastructureModelRet.HasBackupPower = HasBackupPower;
                     infrastructureModelRet.PercFlowOfTotal = PercFlowOfTotal;

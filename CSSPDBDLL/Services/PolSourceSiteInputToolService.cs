@@ -202,8 +202,7 @@ namespace CSSPDBDLL.Services
 
             return ReturnError($"{addressModelRet.AddressTVItemID}");
         }
-        public TVItemModel CreateOrModifyEmaiDB(int ContactTVItemID, int EmailTVItemID, int EmailType, string EmailAddress,
-            bool Delete, bool Create, bool Modify, string AdminEmail)
+        public TVItemModel CreateOrModifyEmaiDB(int ContactTVItemID, int EmailTVItemID, int? EmailType, string EmailAddress, bool ShouldDelete, string AdminEmail)
         {
             IPrincipal user = new GenericPrincipal(new GenericIdentity(AdminEmail, "Forms"), null);
 
@@ -240,13 +239,8 @@ namespace CSSPDBDLL.Services
                 return ReturnError($"ERROR: {string.Format(ServiceRes._IsRequired, ServiceRes.EmailType)}");
             }
 
-            if (Delete)
+            if (ShouldDelete)
             {
-                if (EmailTVItemID >= 10000000)
-                {
-                    return ReturnError($"0");
-                }
-
                 EmailModel emailModelRet = emailService.GetEmailModelWithEmailTVItemIDDB(EmailTVItemID);
                 if (!string.IsNullOrWhiteSpace(emailModelRet.Error))
                 {
@@ -271,13 +265,8 @@ namespace CSSPDBDLL.Services
 
                 return ReturnError($"{EmailTVItemID}");
             }
-            else if (Create)
+            else if (EmailTVItemID >= 40000000)
             {
-                if (EmailTVItemID < 10000000)
-                {
-                    return ReturnError($"ERROR: Can't create new Email if EmailTVItemID < 10000000");
-                }
-
                 TVItemModel tvItemModelRoot = tvItemService.GetRootTVItemModelDB();
                 if (!string.IsNullOrWhiteSpace(tvItemModelRoot.Error))
                 {
@@ -327,13 +316,8 @@ namespace CSSPDBDLL.Services
 
                 return ReturnError($"{emailModel.EmailTVItemID}");
             }
-            else if (Modify)
+            else if (EmailTVItemID < 40000000)
             {
-                if (EmailTVItemID >= 10000000)
-                {
-                    return ReturnError($"ERROR: Can't modify Email with EmailTVItemID >= 10000000");
-                }
-
                 EmailModel emailModel = emailService.GetEmailModelWithEmailTVItemIDDB(EmailTVItemID);
                 if (!string.IsNullOrWhiteSpace(emailModel.Error))
                 {
@@ -429,8 +413,7 @@ namespace CSSPDBDLL.Services
                 return ReturnError($"ERROR: One of Delete, Create or Modify needs to be true");
             }
         }
-        public TVItemModel CreateOrModifyTelephoneDB(int ContactTVItemID, int TelTVItemID, int TelType, string TelNumber,
-            bool Delete, bool Create, bool Modify, string AdminEmail)
+        public TVItemModel CreateOrModifyTelephoneDB(int ContactTVItemID, int TelTVItemID, int? TelType, string TelNumber, bool ShouldDelete, string AdminEmail)
         {
             IPrincipal user = new GenericPrincipal(new GenericIdentity(AdminEmail, "Forms"), null);
 
@@ -467,13 +450,8 @@ namespace CSSPDBDLL.Services
                 return ReturnError($"ERROR: {string.Format(ServiceRes._IsRequired, ServiceRes.TelType)}");
             }
 
-            if (Delete)
+            if (ShouldDelete)
             {
-                if (TelTVItemID >= 10000000)
-                {
-                    return ReturnError($"0");
-                }
-
                 TelModel telModelRet = telService.GetTelModelWithTelTVItemIDDB(TelTVItemID);
                 if (!string.IsNullOrWhiteSpace(telModelRet.Error))
                 {
@@ -498,13 +476,8 @@ namespace CSSPDBDLL.Services
 
                 return ReturnError($"{TelTVItemID}");
             }
-            else if (Create)
+            else if (TelTVItemID >= 30000000)
             {
-                if (TelTVItemID < 10000000)
-                {
-                    return ReturnError($"ERROR: Can't create new Tel if TelTVItemID < 10000000");
-                }
-
                 TVItemModel tvItemModelRoot = tvItemService.GetRootTVItemModelDB();
                 if (!string.IsNullOrWhiteSpace(tvItemModelRoot.Error))
                 {
@@ -554,13 +527,8 @@ namespace CSSPDBDLL.Services
 
                 return ReturnError($"{telModel.TelTVItemID}");
             }
-            else if (Modify)
+            else if (TelTVItemID < 30000000)
             {
-                if (TelTVItemID >= 10000000)
-                {
-                    return ReturnError($"ERROR: Can't modify Tel with TelTVItemID >= 10000000");
-                }
-
                 TelModel telModel = telService.GetTelModelWithTelTVItemIDDB(TelTVItemID);
                 if (!string.IsNullOrWhiteSpace(telModel.Error))
                 {
@@ -657,7 +625,7 @@ namespace CSSPDBDLL.Services
             }
         }
         public TVItemModel CreateOrModifyContactDB(int MunicipalityTVItemID, int ContactTVItemID, string FirstName,
-            string Initial, string LastName, int? Title, string LoginEmail, bool IsActive, string AdminEmail)
+            string Initial, string LastName, string Email, int? Title, bool IsActive, string AdminEmail)
         {
             IPrincipal user = new GenericPrincipal(new GenericIdentity(AdminEmail, "Forms"), null);
 
@@ -699,7 +667,7 @@ namespace CSSPDBDLL.Services
                 return ReturnError($"ERROR: {string.Format(ServiceRes._IsRequired, ServiceRes.LastName)}");
             }
 
-            if (string.IsNullOrWhiteSpace(LoginEmail))
+            if (string.IsNullOrWhiteSpace(Email))
             {
                 return ReturnError($"ERROR: {string.Format(ServiceRes._IsRequired, ServiceRes.LoginEmail)}");
             }
@@ -732,17 +700,17 @@ namespace CSSPDBDLL.Services
                     FirstName = FirstName,
                     Initial = Initial,
                     LastName = LastName,
-                    LoginEmail = LoginEmail,
+                    LoginEmail = Email,
                     ContactTitle = (ContactTitleEnum)Title,
                 };
 
-                AspNetUserModel aspNetUserModel2 = aspNetUserService.GetAspNetUserModelWithEmailDB(LoginEmail);
+                AspNetUserModel aspNetUserModel2 = aspNetUserService.GetAspNetUserModelWithEmailDB(Email);
                 if (string.IsNullOrWhiteSpace(aspNetUserModel2.Error)) // already exist
                 {
-                    contactModelRet = contactService.GetContactModelWithLoginEmailDB(LoginEmail);
+                    contactModelRet = contactService.GetContactModelWithLoginEmailDB(Email);
                     if (!string.IsNullOrWhiteSpace(contactModelRet.Error))
                     {
-                        return ReturnError($"ERROR: could not find Contact with Login Email { LoginEmail }");
+                        return ReturnError($"ERROR: could not find Contact with Login Email { Email }");
                     }
                 }
                 else
@@ -780,9 +748,9 @@ namespace CSSPDBDLL.Services
                 contactModelRet.LastName = LastName;
             }
 
-            if (LoginEmail != contactModelRet.LoginEmail)
+            if (Email != contactModelRet.LoginEmail)
             {
-                contactModelRet.LoginEmail = LoginEmail;
+                contactModelRet.LoginEmail = Email;
             }
 
             if (Title != (int)contactModelRet.ContactTitle)
@@ -802,8 +770,8 @@ namespace CSSPDBDLL.Services
                 return ReturnError($"ERROR: {aspNetUserModel.Error}");
             }
 
-            aspNetUserModel.Email = LoginEmail;
-            aspNetUserModel.UserName = LoginEmail;
+            aspNetUserModel.Email = Email;
+            aspNetUserModel.UserName = Email;
 
             aspNetUserModel = aspNetUserService.PostUpdateAspNetUserDB(aspNetUserModel);
             if (!string.IsNullOrWhiteSpace(aspNetUserModel.Error))
@@ -2135,6 +2103,65 @@ namespace CSSPDBDLL.Services
             if (!string.IsNullOrWhiteSpace(contactModel.Error))
             {
                 return ReturnError($"ERROR: {string.Format(ServiceRes.NoUserWithEmail_, AdminEmail)}");
+            }
+
+            return ReturnError("");
+        }
+        public TVItemModel EmailExistDB(int TVItemID, string AdminEmail)
+        {
+            IPrincipal user = new GenericPrincipal(new GenericIdentity(AdminEmail, "Forms"), null);
+
+            ContactService contactService = new ContactService(LanguageRequest, user);
+            ContactModel contactModel = contactService.GetContactModelWithLoginEmailDB(AdminEmail);
+            if (!string.IsNullOrWhiteSpace(contactModel.Error))
+            {
+                return ReturnError($"ERROR: {string.Format(ServiceRes.NoUserWithEmail_, AdminEmail)}");
+            }
+
+            EmailService emailService = new EmailService(LanguageRequest, user);
+            EmailModel emailModel = emailService.GetEmailModelWithEmailTVItemIDDB(TVItemID);
+            if (!string.IsNullOrWhiteSpace(emailModel.Error))
+            {
+                return ReturnError("ERROR: " + string.Format(ServiceRes._DoesNotExist, ServiceRes.Email));
+            }
+
+            return ReturnError("");
+        }
+        public TVItemModel TelExistDB(int TVItemID, string AdminEmail)
+        {
+            IPrincipal user = new GenericPrincipal(new GenericIdentity(AdminEmail, "Forms"), null);
+
+            ContactService contactService = new ContactService(LanguageRequest, user);
+            ContactModel contactModel = contactService.GetContactModelWithLoginEmailDB(AdminEmail);
+            if (!string.IsNullOrWhiteSpace(contactModel.Error))
+            {
+                return ReturnError($"ERROR: {string.Format(ServiceRes.NoUserWithEmail_, AdminEmail)}");
+            }
+
+            TelService telService = new TelService(LanguageRequest, user);
+            TelModel telModel = telService.GetTelModelWithTelTVItemIDDB(TVItemID);
+            if (!string.IsNullOrWhiteSpace(telModel.Error))
+            {
+                return ReturnError("ERROR: " + string.Format(ServiceRes._DoesNotExist, ServiceRes.Tel));
+            }
+
+            return ReturnError("");
+        }
+        public TVItemModel ContactExistDB(int TVItemID, string AdminEmail)
+        {
+            IPrincipal user = new GenericPrincipal(new GenericIdentity(AdminEmail, "Forms"), null);
+
+            ContactService contactService = new ContactService(LanguageRequest, user);
+            ContactModel contactModel = contactService.GetContactModelWithLoginEmailDB(AdminEmail);
+            if (!string.IsNullOrWhiteSpace(contactModel.Error))
+            {
+                return ReturnError($"ERROR: {string.Format(ServiceRes.NoUserWithEmail_, AdminEmail)}");
+            }
+
+            ContactModel contactModel2 = contactService.GetContactModelWithContactTVItemIDDB(TVItemID);
+            if (!string.IsNullOrWhiteSpace(contactModel2.Error))
+            {
+                return ReturnError("ERROR: " + string.Format(ServiceRes._DoesNotExist, ServiceRes.Contact));
             }
 
             return ReturnError("");

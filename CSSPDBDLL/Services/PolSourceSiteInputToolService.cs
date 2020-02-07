@@ -41,7 +41,7 @@ namespace CSSPDBDLL.Services
         #endregion Helper
 
         #region Functions public
-        public TVItemModel SaveAddressContactDB(int ContactTVItemID, int ProvinceTVItemID, int TVItemID, string StreetNumber, 
+        public TVItemModel SaveAddressContactDB(int ContactTVItemID, int ProvinceTVItemID, int TVItemID, string StreetNumber,
             string StreetName, int StreetType, string Municipality, string PostalCode, bool CreateMunicipality, string AdminEmail)
         {
             IPrincipal user = new GenericPrincipal(new GenericIdentity(AdminEmail, "Forms"), null);
@@ -379,6 +379,7 @@ namespace CSSPDBDLL.Services
                         if (tvItemLinkModel.FromTVType == TVTypeEnum.Contact && tvItemLinkModel.ToTVType == TVTypeEnum.Email)
                         {
                             TVItemLinkModelExist4 = true;
+                            break;
                         }
                     }
                 }
@@ -590,6 +591,7 @@ namespace CSSPDBDLL.Services
                         if (tvItemLinkModel.FromTVType == TVTypeEnum.Contact && tvItemLinkModel.ToTVType == TVTypeEnum.Tel)
                         {
                             TVItemLinkModelExist4 = true;
+                            break;
                         }
                     }
                 }
@@ -693,7 +695,7 @@ namespace CSSPDBDLL.Services
             }
 
             ContactModel contactModelRet = contactService.GetContactModelWithContactTVItemIDDB(ContactTVItemID);
-            if (ContactTVItemID >= 10000000 || !string.IsNullOrWhiteSpace(contactModelRet.Error))
+            if (ContactTVItemID >= 20000000 || !string.IsNullOrWhiteSpace(contactModelRet.Error))
             {
                 NewContactModel newContactModelNew = new NewContactModel()
                 {
@@ -715,10 +717,17 @@ namespace CSSPDBDLL.Services
                 }
                 else
                 {
+                    // create Contact, TVItem and TVLanguage items
                     contactModelRet = contactService.PostLoggedInUserCreateNewUserDB(newContactModelNew);
                     if (!string.IsNullOrWhiteSpace(contactModelRet.Error))
                     {
-                        return ReturnError($"ERROR: {contactModelRet.Error}");
+                        // this is not really an error, we just try to create a new contact 
+                        // but one already exist so it just return it with an error attached to it
+                        contactModelRet = contactService.GetContactModelWithFirstNameInitialAndLastNameDB(FirstName, Initial, LastName);
+                        if (!string.IsNullOrWhiteSpace(contactModelRet.Error))
+                        {
+                            return ReturnError($"ERROR: {FirstName} {Initial}, {LastName} exist but could not find it");
+                        }
                     }
                 }
             }
@@ -770,13 +779,26 @@ namespace CSSPDBDLL.Services
                 return ReturnError($"ERROR: {aspNetUserModel.Error}");
             }
 
-            aspNetUserModel.Email = Email;
-            aspNetUserModel.UserName = Email;
-
-            aspNetUserModel = aspNetUserService.PostUpdateAspNetUserDB(aspNetUserModel);
-            if (!string.IsNullOrWhiteSpace(aspNetUserModel.Error))
+            using (CSSPDBEntities db2 = new CSSPDBEntities())
             {
-                return ReturnError($"ERROR: {aspNetUserModel.Error}");
+                AspNetUser aspNetUser = (from c in db2.AspNetUsers
+                                         where c.Id == contactModelRet.Id
+                                         select c).FirstOrDefault();
+
+                if (aspNetUser != null)
+                {
+                    aspNetUser.Email = Email;
+                    aspNetUser.UserName = Email;
+                }
+
+                try
+                {
+                    db2.SaveChanges();
+                }
+                catch (Exception ex)
+                {
+                    return ReturnError($"ERROR: {ex.Message}");
+                }
             }
 
             List<TVItemLinkModel> tvItemLinkModelList = tvItemLinkService.GetTVItemLinkModelListWithFromTVItemIDDB(MunicipalityTVItemID);
@@ -788,6 +810,7 @@ namespace CSSPDBDLL.Services
                     if (tvItemLinkModel.FromTVType == TVTypeEnum.Municipality && tvItemLinkModel.ToTVType == TVTypeEnum.Contact)
                     {
                         TVItemLinkModelExist = true;
+                        break;
                     }
                 }
             }

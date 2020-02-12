@@ -130,6 +130,32 @@ namespace CSSPDBDLL.Services
             }
             return telModel;
         }
+        public TelModel GetTelModelExistDB(TelModel telModel)
+        {
+            TelModel telModelExist = (from c in db.Tels
+                                 where c.TelNumber == telModel.TelNumber
+                                 select new TelModel
+                                 {
+                                     Error = "",
+                                     TelID = c.TelID,
+                                     TelTVItemID = c.TelTVItemID,
+                                     TelNumber = c.TelNumber,
+                                     TelType = (TelTypeEnum)c.TelType,
+                                     TelTypeText = "",
+                                     LastUpdateDate_UTC = c.LastUpdateDate_UTC,
+                                     LastUpdateContactTVItemID = c.LastUpdateContactTVItemID,
+                                 }).FirstOrDefault<TelModel>();
+
+            if (telModelExist == null)
+            {
+                return ReturnError(string.Format(ServiceRes.CouldNotFind_With_Equal_, ServiceRes.Tel, ServiceRes.TelNumber, telModel.TelNumber));
+            }
+            else
+            {
+                telModelExist.TelTypeText = _BaseEnumService.GetEnumText_TelTypeEnum((TelTypeEnum)telModel.TelType);
+            }
+            return telModelExist;
+        }
         public TelModel GetTelModelWithTelTVItemIDDB(int TelTVItemID)
         {
             TelModel telModel = (from c in db.Tels

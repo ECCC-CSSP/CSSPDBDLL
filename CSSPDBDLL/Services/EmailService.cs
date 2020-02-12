@@ -132,6 +132,32 @@ namespace CSSPDBDLL.Services
             }
             return emailModel;
         }
+        public EmailModel GetEmailModelExistDB(EmailModel emailModel)
+        {
+            EmailModel emailModelExist = (from c in db.Emails
+                                     where c.EmailAddress == emailModel.EmailAddress
+                                     select new EmailModel
+                                     {
+                                         Error = "",
+                                         EmailID = c.EmailID,
+                                         EmailTVItemID = c.EmailTVItemID,
+                                         EmailAddress = c.EmailAddress,
+                                         EmailType = (EmailTypeEnum)c.EmailType,
+                                         EmailTypeText = "",
+                                         LastUpdateDate_UTC = c.LastUpdateDate_UTC,
+                                         LastUpdateContactTVItemID = c.LastUpdateContactTVItemID,
+                                     }).FirstOrDefault<EmailModel>();
+
+            if (emailModelExist == null)
+            {
+                return ReturnError(string.Format(ServiceRes.CouldNotFind_With_Equal_, ServiceRes.Email, ServiceRes.EmailAddress, emailModel.EmailAddress));
+            }
+            else
+            {
+                emailModelExist.EmailTypeText = _BaseEnumService.GetEnumText_EmailTypeEnum((EmailTypeEnum)emailModel.EmailType);
+            }
+            return emailModelExist;
+        }
         public EmailModel GetEmailModelWithEmailTVItemIDDB(int EmailTVItemID)
         {
             EmailModel emailModel = (from c in db.Emails

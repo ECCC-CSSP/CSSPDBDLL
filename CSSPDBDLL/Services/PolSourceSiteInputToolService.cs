@@ -202,7 +202,7 @@ namespace CSSPDBDLL.Services
 
             return ReturnError($"{addressModelRet.AddressTVItemID}");
         }
-        public TVItemModel CreateOrModifyEmaiDB(int ContactTVItemID, int EmailTVItemID, int? EmailType, string EmailAddress, bool ShouldDelete, string AdminEmail)
+        public TVItemModel CreateOrModifyEmailDB(int ContactTVItemID, int EmailTVItemID, int? EmailType, string EmailAddress, bool ShouldDelete, string AdminEmail)
         {
             IPrincipal user = new GenericPrincipal(new GenericIdentity(AdminEmail, "Forms"), null);
 
@@ -265,154 +265,82 @@ namespace CSSPDBDLL.Services
 
                 return ReturnError($"{EmailTVItemID}");
             }
-            else if (EmailTVItemID >= 40000000)
+
+            TVItemModel tvItemModelRoot = tvItemService.GetRootTVItemModelDB();
+            if (!string.IsNullOrWhiteSpace(tvItemModelRoot.Error))
             {
-                TVItemModel tvItemModelRoot = tvItemService.GetRootTVItemModelDB();
-                if (!string.IsNullOrWhiteSpace(tvItemModelRoot.Error))
-                {
-                    return ReturnError($"ERROR: {tvItemModelRoot.Error}");
-                }
+                return ReturnError($"ERROR: {tvItemModelRoot.Error}");
+            }
 
-                string TVText = EmailAddress;
+            string TVText = EmailAddress;
 
-                TVItemModel tvItemModel = tvItemService.PostCreateTVItem(tvItemModelRoot.TVItemID, TVText, TVText, TVTypeEnum.Email);
+            TVItemModel tvItemModel = tvItemService.GetChildTVItemModelWithParentIDAndTVTextAndTVTypeDB(tvItemModelRoot.TVItemID, TVText, TVTypeEnum.Email);
+            if (!string.IsNullOrWhiteSpace(tvItemModel.Error))
+            {
+                // does not exist so create
+                tvItemModel = tvItemService.PostCreateTVItem(tvItemModelRoot.TVItemID, TVText, TVText, TVTypeEnum.Email);
                 if (!string.IsNullOrWhiteSpace(tvItemModel.Error))
                 {
                     return ReturnError($"ERROR: {tvItemModel.Error}");
                 }
+            }
 
-                EmailModel emailModelNew = new EmailModel()
-                {
-                    EmailType = (EmailTypeEnum)EmailType,
-                    EmailAddress = EmailAddress,
-                    EmailTVItemID = tvItemModel.TVItemID,
-                };
+            EmailModel emailModelNew = new EmailModel()
+            {
+                EmailType = (EmailTypeEnum)EmailType,
+                EmailAddress = EmailAddress,
+                EmailTVItemID = tvItemModel.TVItemID,
+            };
 
-                EmailModel emailModel = emailService.PostAddEmailDB(emailModelNew);
+            EmailModel emailModel = emailService.GetEmailModelExistDB(emailModelNew);
+            if (!string.IsNullOrWhiteSpace(emailModel.Error))
+            {
+                emailModel = emailService.PostAddEmailDB(emailModelNew);
                 if (!string.IsNullOrWhiteSpace(emailModel.Error))
                 {
                     return ReturnError($"ERROR: {emailModel.Error}");
                 }
+            }
 
-                TVItemLinkModel tvItemLinkModelNew = new TVItemLinkModel()
+            TVItemLinkModel tvItemLinkModelNew = new TVItemLinkModel()
+            {
+                FromTVItemID = contactModel.ContactTVItemID,
+                ToTVItemID = emailModel.EmailTVItemID,
+                FromTVType = TVTypeEnum.Contact,
+                ToTVType = TVTypeEnum.Email,
+                StartDateTime_Local = DateTime.Now,
+                EndDateTime_Local = null,
+                Ordinal = 0,
+                TVLevel = 0,
+                TVPath = "p" + contactModel.ContactTVItemID + "p" + emailModel.EmailTVItemID,
+                ParentTVItemLinkID = null,
+            };
+
+
+            bool TVItemLinkExist = false;
+            List<TVItemLinkModel> tvItemLinkModelList = tvItemLinkService.GetTVItemLinkModelListWithFromTVItemIDDB(contactModel.ContactTVItemID);
+            if (tvItemLinkModelList.Count > 0)
+            {
+                foreach (TVItemLinkModel tvItemLinkModel in tvItemLinkModelList)
                 {
-                    FromTVItemID = contactModel.ContactTVItemID,
-                    ToTVItemID = emailModel.EmailTVItemID,
-                    FromTVType = TVTypeEnum.Contact,
-                    ToTVType = TVTypeEnum.Email,
-                    StartDateTime_Local = DateTime.Now,
-                    EndDateTime_Local = null,
-                    Ordinal = 0,
-                    TVLevel = 0,
-                    TVPath = "p" + contactModel.ContactTVItemID + "p" + emailModel.EmailTVItemID,
-                    ParentTVItemLinkID = null,
-                };
+                    if (tvItemLinkModel.ToTVItemID == emailModel.EmailTVItemID)
+                    {
+                        TVItemLinkExist = true;
+                        break;
+                    }
+                }
+            }
 
+            if (!TVItemLinkExist)
+            {
                 TVItemLinkModel tvItemLinkModelRet = tvItemLinkService.PostAddTVItemLinkDB(tvItemLinkModelNew);
                 if (!string.IsNullOrWhiteSpace(tvItemLinkModelRet.Error))
                 {
                     return ReturnError($"ERROR: {tvItemLinkModelRet.Error}");
                 }
-
-                return ReturnError($"{emailModel.EmailTVItemID}");
             }
-            else if (EmailTVItemID < 40000000)
-            {
-                EmailModel emailModel = emailService.GetEmailModelWithEmailTVItemIDDB(EmailTVItemID);
-                if (!string.IsNullOrWhiteSpace(emailModel.Error))
-                {
-                    return ReturnError($"ERROR: {emailModel.Error}");
-                }
 
-                if (EmailType != (int)emailModel.EmailType)
-                {
-                    emailModel.EmailType = (EmailTypeEnum)EmailType;
-                }
-
-                if (EmailAddress != emailModel.EmailAddress)
-                {
-                    emailModel.EmailAddress = EmailAddress;
-
-                    // en
-                    TVItemLanguageModel tvItemLanguageModel = tvItemLanguageService.GetTVItemLanguageModelWithTVItemIDAndLanguageDB(EmailTVItemID, LanguageEnum.en);
-                    if (!string.IsNullOrWhiteSpace(tvItemLanguageModel.Error))
-                    {
-                        return ReturnError($"ERROR: {tvItemLanguageModel.Error}");
-                    }
-
-                    tvItemLanguageModel.TVText = EmailAddress;
-
-                    TVItemLanguageModel tvItemLanguageModelRet = tvItemLanguageService.PostUpdateTVItemLanguageDB(tvItemLanguageModel);
-                    if (!string.IsNullOrWhiteSpace(tvItemLanguageModelRet.Error))
-                    {
-                        return ReturnError($"ERROR: {tvItemLanguageModelRet.Error}");
-                    }
-
-                    // fr
-                    tvItemLanguageModel = tvItemLanguageService.GetTVItemLanguageModelWithTVItemIDAndLanguageDB(EmailTVItemID, LanguageEnum.fr);
-                    if (!string.IsNullOrWhiteSpace(tvItemLanguageModel.Error))
-                    {
-                        return ReturnError($"ERROR: {tvItemLanguageModel.Error}");
-                    }
-
-                    tvItemLanguageModel.TVText = EmailAddress;
-
-                    tvItemLanguageModelRet = tvItemLanguageService.PostUpdateTVItemLanguageDB(tvItemLanguageModel);
-                    if (!string.IsNullOrWhiteSpace(tvItemLanguageModelRet.Error))
-                    {
-                        return ReturnError($"ERROR: {tvItemLanguageModelRet.Error}");
-                    }
-                }
-
-                EmailModel emailModelRet = emailService.PostUpdateEmailDB(emailModel);
-                if (!string.IsNullOrWhiteSpace(emailModelRet.Error))
-                {
-                    return ReturnError($"ERROR: {emailModelRet.Error}");
-                }
-
-                List<TVItemLinkModel> tvItemLinkModelList4 = tvItemLinkService.GetTVItemLinkModelListWithFromTVItemIDDB(ContactTVItemID);
-                bool TVItemLinkModelExist4 = false;
-                foreach (TVItemLinkModel tvItemLinkModel in tvItemLinkModelList4)
-                {
-                    if (tvItemLinkModel.ToTVItemID == emailModelRet.EmailTVItemID)
-                    {
-                        if (tvItemLinkModel.FromTVType == TVTypeEnum.Contact && tvItemLinkModel.ToTVType == TVTypeEnum.Email)
-                        {
-                            TVItemLinkModelExist4 = true;
-                            break;
-                        }
-                    }
-                }
-
-                if (!TVItemLinkModelExist4)
-                {
-                    TVItemLinkModel tvItemLinkModelNew = new TVItemLinkModel()
-                    {
-                        FromTVItemID = contactModel.ContactTVItemID,
-                        ToTVItemID = emailModelRet.EmailTVItemID,
-                        FromTVType = TVTypeEnum.Contact,
-                        ToTVType = TVTypeEnum.Email,
-                        StartDateTime_Local = DateTime.Now,
-                        EndDateTime_Local = null,
-                        Ordinal = 0,
-                        TVLevel = 0,
-                        TVPath = "p" + contactModel.ContactTVItemID + "p" + emailModelRet.EmailTVItemID,
-                        ParentTVItemLinkID = null,
-                    };
-
-                    TVItemLinkModel tvItemLinkModelRet = tvItemLinkService.PostAddTVItemLinkDB(tvItemLinkModelNew);
-                    if (!string.IsNullOrWhiteSpace(tvItemLinkModelRet.Error))
-                    {
-                        return ReturnError($"ERROR: {tvItemLinkModelRet.Error}");
-                    }
-                }
-
-                return ReturnError($"{emailModelRet.EmailTVItemID}");
-            }
-            else
-            {
-                return ReturnError($"ERROR: One of Delete, Create or Modify needs to be true");
-            }
+            return ReturnError($"{emailModel.EmailTVItemID}");
         }
         public TVItemModel CreateOrModifyTelephoneDB(int ContactTVItemID, int TelTVItemID, int? TelType, string TelNumber, bool ShouldDelete, string AdminEmail)
         {
@@ -477,154 +405,81 @@ namespace CSSPDBDLL.Services
 
                 return ReturnError($"{TelTVItemID}");
             }
-            else if (TelTVItemID >= 30000000)
+
+            TVItemModel tvItemModelRoot = tvItemService.GetRootTVItemModelDB();
+            if (!string.IsNullOrWhiteSpace(tvItemModelRoot.Error))
             {
-                TVItemModel tvItemModelRoot = tvItemService.GetRootTVItemModelDB();
-                if (!string.IsNullOrWhiteSpace(tvItemModelRoot.Error))
-                {
-                    return ReturnError($"ERROR: {tvItemModelRoot.Error}");
-                }
+                return ReturnError($"ERROR: {tvItemModelRoot.Error}");
+            }
 
-                string TVText = TelNumber;
+            string TVText = TelNumber;
 
-                TVItemModel tvItemModel = tvItemService.PostCreateTVItem(tvItemModelRoot.TVItemID, TVText, TVText, TVTypeEnum.Tel);
+            TVItemModel tvItemModel = tvItemService.GetChildTVItemModelWithParentIDAndTVTextAndTVTypeDB(tvItemModelRoot.TVItemID, TVText, TVTypeEnum.Tel);
+            if (!string.IsNullOrWhiteSpace(tvItemModel.Error))
+            {
+                // does not exist so create
+                tvItemModel = tvItemService.PostCreateTVItem(tvItemModelRoot.TVItemID, TVText, TVText, TVTypeEnum.Tel);
                 if (!string.IsNullOrWhiteSpace(tvItemModel.Error))
                 {
                     return ReturnError($"ERROR: {tvItemModel.Error}");
                 }
+            }
 
-                TelModel telModelNew = new TelModel()
-                {
-                    TelType = (TelTypeEnum)TelType,
-                    TelNumber = TelNumber,
-                    TelTVItemID = tvItemModel.TVItemID,
-                };
+            TelModel telModelNew = new TelModel()
+            {
+                TelType = (TelTypeEnum)TelType,
+                TelNumber = TelNumber,
+                TelTVItemID = tvItemModel.TVItemID,
+            };
 
-                TelModel telModel = telService.PostAddTelDB(telModelNew);
+            TelModel telModel = telService.GetTelModelExistDB(telModelNew);
+            if (!string.IsNullOrWhiteSpace(telModel.Error))
+            {
+                telModel = telService.PostAddTelDB(telModelNew);
                 if (!string.IsNullOrWhiteSpace(telModel.Error))
                 {
                     return ReturnError($"ERROR: {telModel.Error}");
                 }
+            }
 
-                TVItemLinkModel tvItemLinkModelNew = new TVItemLinkModel()
+            TVItemLinkModel tvItemLinkModelNew = new TVItemLinkModel()
+            {
+                FromTVItemID = contactModel.ContactTVItemID,
+                ToTVItemID = telModel.TelTVItemID,
+                FromTVType = TVTypeEnum.Contact,
+                ToTVType = TVTypeEnum.Tel,
+                StartDateTime_Local = DateTime.Now,
+                EndDateTime_Local = null,
+                Ordinal = 0,
+                TVLevel = 0,
+                TVPath = "p" + contactModel.ContactTVItemID + "p" + telModel.TelTVItemID,
+                ParentTVItemLinkID = null,
+            };
+
+            bool TVItemLinkExist = false;
+            List<TVItemLinkModel> tvItemLinkModelList = tvItemLinkService.GetTVItemLinkModelListWithFromTVItemIDDB(contactModel.ContactTVItemID);
+            if (tvItemLinkModelList.Count > 0)
+            {
+                foreach (TVItemLinkModel tvItemLinkModel in tvItemLinkModelList)
                 {
-                    FromTVItemID = contactModel.ContactTVItemID,
-                    ToTVItemID = telModel.TelTVItemID,
-                    FromTVType = TVTypeEnum.Contact,
-                    ToTVType = TVTypeEnum.Tel,
-                    StartDateTime_Local = DateTime.Now,
-                    EndDateTime_Local = null,
-                    Ordinal = 0,
-                    TVLevel = 0,
-                    TVPath = "p" + contactModel.ContactTVItemID + "p" + telModel.TelTVItemID,
-                    ParentTVItemLinkID = null,
-                };
+                    if (tvItemLinkModel.ToTVItemID == telModel.TelTVItemID)
+                    {
+                        TVItemLinkExist = true;
+                        break;
+                    }
+                }
+            }
 
+            if (!TVItemLinkExist)
+            {
                 TVItemLinkModel tvItemLinkModelRet = tvItemLinkService.PostAddTVItemLinkDB(tvItemLinkModelNew);
                 if (!string.IsNullOrWhiteSpace(tvItemLinkModelRet.Error))
                 {
                     return ReturnError($"ERROR: {tvItemLinkModelRet.Error}");
                 }
-
-                return ReturnError($"{telModel.TelTVItemID}");
             }
-            else if (TelTVItemID < 30000000)
-            {
-                TelModel telModel = telService.GetTelModelWithTelTVItemIDDB(TelTVItemID);
-                if (!string.IsNullOrWhiteSpace(telModel.Error))
-                {
-                    return ReturnError($"ERROR: {telModel.Error}");
-                }
 
-                if (TelType != (int)telModel.TelType)
-                {
-                    telModel.TelType = (TelTypeEnum)TelType;
-                }
-
-                if (TelNumber != telModel.TelNumber)
-                {
-                    telModel.TelNumber = TelNumber;
-
-                    // en
-                    TVItemLanguageModel tvItemLanguageModel = tvItemLanguageService.GetTVItemLanguageModelWithTVItemIDAndLanguageDB(TelTVItemID, LanguageEnum.en);
-                    if (!string.IsNullOrWhiteSpace(tvItemLanguageModel.Error))
-                    {
-                        return ReturnError($"ERROR: {tvItemLanguageModel.Error}");
-                    }
-
-                    tvItemLanguageModel.TVText = TelNumber;
-
-                    TVItemLanguageModel tvItemLanguageModelRet = tvItemLanguageService.PostUpdateTVItemLanguageDB(tvItemLanguageModel);
-                    if (!string.IsNullOrWhiteSpace(tvItemLanguageModelRet.Error))
-                    {
-                        return ReturnError($"ERROR: {tvItemLanguageModelRet.Error}");
-                    }
-
-                    // fr
-                    tvItemLanguageModel = tvItemLanguageService.GetTVItemLanguageModelWithTVItemIDAndLanguageDB(TelTVItemID, LanguageEnum.fr);
-                    if (!string.IsNullOrWhiteSpace(tvItemLanguageModel.Error))
-                    {
-                        return ReturnError($"ERROR: {tvItemLanguageModel.Error}");
-                    }
-
-                    tvItemLanguageModel.TVText = TelNumber;
-
-                    tvItemLanguageModelRet = tvItemLanguageService.PostUpdateTVItemLanguageDB(tvItemLanguageModel);
-                    if (!string.IsNullOrWhiteSpace(tvItemLanguageModelRet.Error))
-                    {
-                        return ReturnError($"ERROR: {tvItemLanguageModelRet.Error}");
-                    }
-                }
-
-                TelModel telModelRet = telService.PostUpdateTelDB(telModel);
-                if (!string.IsNullOrWhiteSpace(telModelRet.Error))
-                {
-                    return ReturnError($"ERROR: {telModelRet.Error}");
-                }
-
-                List<TVItemLinkModel> tvItemLinkModelList4 = tvItemLinkService.GetTVItemLinkModelListWithFromTVItemIDDB(ContactTVItemID);
-                bool TVItemLinkModelExist4 = false;
-                foreach (TVItemLinkModel tvItemLinkModel in tvItemLinkModelList4)
-                {
-                    if (tvItemLinkModel.ToTVItemID == telModelRet.TelTVItemID)
-                    {
-                        if (tvItemLinkModel.FromTVType == TVTypeEnum.Contact && tvItemLinkModel.ToTVType == TVTypeEnum.Tel)
-                        {
-                            TVItemLinkModelExist4 = true;
-                            break;
-                        }
-                    }
-                }
-
-                if (!TVItemLinkModelExist4)
-                {
-                    TVItemLinkModel tvItemLinkModelNew = new TVItemLinkModel()
-                    {
-                        FromTVItemID = contactModel.ContactTVItemID,
-                        ToTVItemID = telModelRet.TelTVItemID,
-                        FromTVType = TVTypeEnum.Contact,
-                        ToTVType = TVTypeEnum.Tel,
-                        StartDateTime_Local = DateTime.Now,
-                        EndDateTime_Local = null,
-                        Ordinal = 0,
-                        TVLevel = 0,
-                        TVPath = "p" + contactModel.ContactTVItemID + "p" + telModelRet.TelTVItemID,
-                        ParentTVItemLinkID = null,
-                    };
-
-                    TVItemLinkModel tvItemLinkModelRet = tvItemLinkService.PostAddTVItemLinkDB(tvItemLinkModelNew);
-                    if (!string.IsNullOrWhiteSpace(tvItemLinkModelRet.Error))
-                    {
-                        return ReturnError($"ERROR: {tvItemLinkModelRet.Error}");
-                    }
-                }
-
-                return ReturnError($"{telModelRet.TelTVItemID}");
-            }
-            else
-            {
-                return ReturnError($"ERROR: One of Delete, Create or Modify needs to be true");
-            }
+            return ReturnError($"{telModel.TelTVItemID}");
         }
         public TVItemModel CreateOrModifyContactDB(int MunicipalityTVItemID, int ContactTVItemID, string FirstName,
             string Initial, string LastName, string Email, int? Title, bool IsActive, string AdminEmail)

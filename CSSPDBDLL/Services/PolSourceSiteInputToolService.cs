@@ -617,7 +617,11 @@ namespace CSSPDBDLL.Services
                 contactModelRet.LoginEmail = Email;
             }
 
-            if (Title != (int)contactModelRet.ContactTitle)
+            if (Title == null)
+            {
+                contactModelRet.ContactTitle = ContactTitleEnum.Error;
+            }
+            else
             {
                 contactModelRet.ContactTitle = (ContactTitleEnum)Title;
             }
@@ -783,35 +787,6 @@ namespace CSSPDBDLL.Services
                 return ReturnError($"ERROR: {string.Format(ServiceRes._IsRequired, ServiceRes.TVText)}");
             }
 
-            if (TVText != tvItemModelMunicipality.TVText)
-            {
-                TVItemLanguageModel tvItemLanguageModel = tvItemLanguageService.GetTVItemLanguageModelWithTVItemIDAndLanguageDB(tvItemModelMunicipality.TVItemID, LanguageEnum.en);
-
-                if (!string.IsNullOrWhiteSpace(tvItemLanguageModel.Error))
-                {
-                    tvItemLanguageModel.TVText = TVText;
-                    tvItemLanguageModel.TranslationStatus = TranslationStatusEnum.Translated;
-                    TVItemLanguageModel tvItemLanguageModelRet = tvItemLanguageService.PostUpdateTVItemLanguageDB(tvItemLanguageModel);
-                    if (!string.IsNullOrWhiteSpace(tvItemLanguageModelRet.Error))
-                    {
-                        return ReturnError($"ERROR: { tvItemLanguageModelRet.Error }");
-                    }
-                }
-
-                tvItemLanguageModel = tvItemLanguageService.GetTVItemLanguageModelWithTVItemIDAndLanguageDB(tvItemModelMunicipality.TVItemID, LanguageEnum.fr);
-
-                if (!string.IsNullOrWhiteSpace(tvItemLanguageModel.Error))
-                {
-                    tvItemLanguageModel.TVText = TVText;
-                    tvItemLanguageModel.TranslationStatus = TranslationStatusEnum.NotTranslated;
-                    TVItemLanguageModel tvItemLanguageModelRet = tvItemLanguageService.PostUpdateTVItemLanguageDB(tvItemLanguageModel);
-                    if (!string.IsNullOrWhiteSpace(tvItemLanguageModelRet.Error))
-                    {
-                        return ReturnError($"ERROR: { tvItemLanguageModelRet.Error }");
-                    }
-                }
-            }
-
             InfrastructureModel infrastructureModelRet = infrastructureService.GetInfrastructureModelWithInfrastructureTVItemIDDB(TVItemID);
             if (TVItemID >= 10000000 || !string.IsNullOrWhiteSpace(infrastructureModelRet.Error))
             {
@@ -892,7 +867,6 @@ namespace CSSPDBDLL.Services
                 {
                     return ReturnError($"ERROR: {mapInfoModelRetOutfall.Error}");
                 }
-
             }
 
             if (string.IsNullOrWhiteSpace(infrastructureModelRet.Error))
@@ -911,6 +885,32 @@ namespace CSSPDBDLL.Services
                 if (!string.IsNullOrWhiteSpace(tvItemModelInfrastructureRet.Error))
                 {
                     return ReturnError($"ERROR: {tvItemModelInfrastructureRet.Error}");
+                }
+
+                // changing TVText
+                TVItemLanguageModel tvItemLanguageModelEN = tvItemLanguageService.GetTVItemLanguageModelWithTVItemIDAndLanguageDB(infrastructureModelRet.InfrastructureTVItemID, LanguageEnum.en);
+                if (!string.IsNullOrWhiteSpace(tvItemLanguageModelEN.Error))
+                {
+                    return ReturnError($"ERROR: {tvItemLanguageModelEN.Error}");
+                }
+                tvItemLanguageModelEN.TVText = TVText;
+                TVItemLanguageModel tvItemLanguageModelENRet = tvItemLanguageService.PostUpdateTVItemLanguageDB(tvItemLanguageModelEN);
+                if (!string.IsNullOrWhiteSpace(tvItemLanguageModelENRet.Error))
+                {
+                    return ReturnError($"ERROR: {tvItemLanguageModelENRet.Error}");
+                }
+
+                // changing TVText
+                TVItemLanguageModel tvItemLanguageModelFR = tvItemLanguageService.GetTVItemLanguageModelWithTVItemIDAndLanguageDB(infrastructureModelRet.InfrastructureTVItemID, LanguageEnum.fr);
+                if (!string.IsNullOrWhiteSpace(tvItemLanguageModelFR.Error))
+                {
+                    return ReturnError($"ERROR: {tvItemLanguageModelFR.Error}");
+                }
+                tvItemLanguageModelFR.TVText = TVText;
+                TVItemLanguageModel tvItemLanguageModelFRRet = tvItemLanguageService.PostUpdateTVItemLanguageDB(tvItemLanguageModelFR);
+                if (!string.IsNullOrWhiteSpace(tvItemLanguageModelFRRet.Error))
+                {
+                    return ReturnError($"ERROR: {tvItemLanguageModelFRRet.Error}");
                 }
 
                 List<MapInfoModel> mapInfoModelList = mapInfoService.GetMapInfoModelListWithTVItemIDDB(infrastructureModelRet.InfrastructureTVItemID);
@@ -1132,6 +1132,8 @@ namespace CSSPDBDLL.Services
                 {
                     infrastructureModelRet.SeeOtherMunicipalityTVItemID = null;
                 }
+
+                infrastructureModelRet.InfrastructureTVText = TVText;
 
                 InfrastructureModel infrastructureModelRet2 = infrastructureService.PostUpdateInfrastructureDB(infrastructureModelRet);
                 if (!string.IsNullOrWhiteSpace(infrastructureModelRet2.Error))

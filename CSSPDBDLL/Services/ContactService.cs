@@ -1192,7 +1192,7 @@ namespace CSSPDBDLL.Services
                         LastName = LastName,
                         LoginEmail = LoginEmail,
                         ContactTitle = ContactTitle,
-                        
+
                     };
                     contactModel = PostLoggedInUserCreateNewUserDB(newContactModelNew);
                     if (!string.IsNullOrWhiteSpace(contactModel.Error))
@@ -1430,35 +1430,40 @@ namespace CSSPDBDLL.Services
             if (!string.IsNullOrWhiteSpace(contactModel.Error))
                 return ReturnContactError(contactModel.Error);
 
-            List<TVItemLinkModel> tvItemLinkModelList = _TVItemLinkService.GetTVItemLinkModelListWithToTVItemIDDB(contactModel.ContactTVItemID);
-            if (tvItemLinkModelList.Count > 0)
+
+            List<TVItemLinkModel> tvItemLinkModelList = _TVItemLinkService.GetTVItemLinkModelListWithFromTVItemIDDB(contactModel.ContactTVItemID);
+
+            List<TVItemLinkModel> tvItemLinkModelToDelete = new List<TVItemLinkModel>();
+            foreach (TVItemLinkModel tvItemLinkModel in tvItemLinkModelList)
             {
-                if (tvItemLinkModelList.Count == 1)
-                {
-                    if (tvItemLinkModelList[0].FromTVItemID != tvItemModelParent.TVItemID)
-                        return ReturnContactError(string.Format(ServiceRes.Contact_IsBeingUsed, tvItemModelContact.TVText));
-                }
+                tvItemLinkModelToDelete.Add(tvItemLinkModel);
             }
 
             using (TransactionScope ts = new TransactionScope())
             {
-
-                tvItemLinkModelList = _TVItemLinkService.GetTVItemLinkModelListWithFromTVItemIDDB(contactModel.ContactTVItemID);
-
-                List<TVItemLinkModel> tvItemLinkModelToDelete = new List<TVItemLinkModel>();
-                foreach (TVItemLinkModel tvItemLinkModel in tvItemLinkModelList)
+                foreach (TVItemLinkModel tvItemLinkModel in tvItemLinkModelToDelete)
                 {
-                    tvItemLinkModelToDelete.Add(tvItemLinkModel);
+                    if (contactModel.IsNew == true)
+                    {
+
+                        if (tvItemLinkModel.ToTVType == TVTypeEnum.Tel || tvItemLinkModel.ToTVType == TVTypeEnum.Email || tvItemLinkModel.ToTVType == TVTypeEnum.Address)
+                        {
+                            TVItemLinkModel tvItemLinkModelRet4 = new TVItemLinkModel();
+                            if (contactModel.IsNew == true)
+                            {
+                                tvItemLinkModelRet4 = _TVItemLinkService.PostDeleteTVItemLinkWithFromTVItemIDDB(contactModel.ContactTVItemID);
+                                //if (!string.IsNullOrWhiteSpace(tvItemLinkModelRet.Error))
+                                //    return ReturnContactError(tvItemLinkModelRet.Error);
+                            }
+                        }
+                    }
                 }
 
-                TVItemLinkModel tvItemLinkModelRet = new TVItemLinkModel();
-                if (contactModel.IsNew == true)
-                {
-                    tvItemLinkModelRet = _TVItemLinkService.PostDeleteTVItemLinkWithFromTVItemIDDB(contactModel.ContactTVItemID);
-                    if (!string.IsNullOrWhiteSpace(tvItemLinkModelRet.Error))
-                        return ReturnContactError(tvItemLinkModelRet.Error);
-                }
+                ts.Complete();
+            }
 
+            using (TransactionScope ts = new TransactionScope())
+            {
                 foreach (TVItemLinkModel tvItemLinkModel in tvItemLinkModelToDelete)
                 {
                     if (contactModel.IsNew == true)
@@ -1489,28 +1494,35 @@ namespace CSSPDBDLL.Services
                     }
                 }
 
-                tvItemLinkModelRet = _TVItemLinkService.PostDeleteTVItemLinkWithFromTVItemIDAndToTVItemIDDB(tvItemModelParent.TVItemID, tvItemModelContact.TVItemID);
-                if (!string.IsNullOrWhiteSpace(tvItemLinkModelRet.Error))
-                    return ReturnContactError(tvItemLinkModelRet.Error);
-
-                if (contactModel.IsNew)
-                {
-                    if (!ContactTVItemIDIsBeingUsed(ContactTVItemID))
-                    {
-                        AspNetUserModel aspNetModelRet = _AspNetUserService.PostDeleteAspNetUserWithIdDB(contactModel.Id);
-                        if (!string.IsNullOrWhiteSpace(aspNetModelRet.Error))
-                            return ReturnContactError(aspNetModelRet.Error);
-
-                        tvItemModelContact = _TVItemService.PostDeleteTVItemWithTVItemIDDB(ContactTVItemID);
-                        if (!string.IsNullOrWhiteSpace(tvItemModelContact.Error))
-                            return ReturnContactError(tvItemModelContact.Error);
-                    }
-                    else
-                    {
-                        return ReturnContactError(string.Format(ServiceRes.Contact_IsBeingUsed, tvItemModelContact.TVText));
-                    }
-                }
                 ts.Complete();
+            }
+
+            TVItemLinkModel tvItemLinkModelRet = _TVItemLinkService.PostDeleteTVItemLinkWithFromTVItemIDAndToTVItemIDDB(tvItemModelParent.TVItemID, tvItemModelContact.TVItemID);
+            if (!string.IsNullOrWhiteSpace(tvItemLinkModelRet.Error))
+            {
+                return ReturnContactError(tvItemLinkModelRet.Error);
+            }
+
+            if (contactModel.IsNew)
+            {
+                if (!ContactTVItemIDIsBeingUsed(ContactTVItemID))
+                {
+                    AspNetUserModel aspNetModelRet = _AspNetUserService.PostDeleteAspNetUserWithIdDB(contactModel.Id);
+                    if (!string.IsNullOrWhiteSpace(aspNetModelRet.Error))
+                        return ReturnContactError(aspNetModelRet.Error);
+
+                    tvItemModelContact = _TVItemService.PostDeleteTVItemWithTVItemIDDB(ContactTVItemID);
+                    if (!string.IsNullOrWhiteSpace(tvItemModelContact.Error))
+                        return ReturnContactError(tvItemModelContact.Error);
+
+                    ContactModel contactModelRet = PostDeleteContactWithContactTVItemIDDB(ContactTVItemID);
+                    //if (!string.IsNullOrWhiteSpace(contactModelRet.Error))
+                    //    return ReturnContactError(contactModelRet.Error);
+                }
+                else
+                {
+                    return ReturnContactError(string.Format(ServiceRes.Contact_IsBeingUsed, tvItemModelContact.TVText));
+                }
             }
 
             return new ContactModel() { Error = "" }; // no error

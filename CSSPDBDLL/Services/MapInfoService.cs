@@ -1067,12 +1067,94 @@ namespace CSSPDBDLL.Services
                                         tvLocationList.Add(tvlNew4);
 
                                     }
+
+                                    List<UseOfSiteModel> useOfSiteModelList = _UseOfSiteService.GetUseOfSiteModelListWithSiteTVItemIDDB(tvItemModelCurrent.TVItemID);
+
+                                    foreach (UseOfSiteModel useOfSiteModel in useOfSiteModelList)
+                                    {
+                                        TVItemModel tvItemModelSS = _TVItemService.GetTVItemModelWithTVItemIDDB(useOfSiteModel.SubsectorTVItemID);
+                                        if (string.IsNullOrWhiteSpace(tvItemModelSS.Error))
+                                        {
+                                            ClassificationService classificationService = new ClassificationService(_TVItemService.LanguageRequest, _TVItemService.User);
+
+                                            tvItemModelList = _TVItemService.GetChildrenTVItemModelListWithTVItemIDAndTVTypeDB(tvItemModelSS.TVItemID, TVTypeEnum.Classification);
+
+                                            List<ClassificationModel> classificationModelList = classificationService.GetClassificationModelListWithSubsectorTVItemIDDB(tvItemModelSS.TVItemID);
+
+                                            foreach (TVItemModel tvItemModel in tvItemModelList)
+                                            {
+                                                TVLocation tvlNew = new TVLocation();
+                                                tvlNew.TVItemID = tvItemModel.TVItemID;
+                                                tvlNew.TVText = tvItemModel.TVText;
+                                                tvlNew.TVType = tvItemModel.TVType;
+
+                                                ClassificationModel classificationModel = classificationModelList.Where(c => c.ClassificationTVItemID == tvItemModel.TVItemID).FirstOrDefault();
+
+                                                if (classificationModel != null)
+                                                {
+                                                    TVTypeEnum tvTypeSubType = TVTypeEnum.Error;
+
+                                                    switch (classificationModel.ClassificationType)
+                                                    {
+                                                        case ClassificationTypeEnum.Approved:
+                                                            {
+                                                                tvTypeSubType = TVTypeEnum.Approved;
+                                                            }
+                                                            break;
+                                                        case ClassificationTypeEnum.Restricted:
+                                                            {
+                                                                tvTypeSubType = TVTypeEnum.Restricted;
+                                                            }
+                                                            break;
+                                                        case ClassificationTypeEnum.Prohibited:
+                                                            {
+                                                                tvTypeSubType = TVTypeEnum.Prohibited;
+                                                            }
+                                                            break;
+                                                        case ClassificationTypeEnum.ConditionallyApproved:
+                                                            {
+                                                                tvTypeSubType = TVTypeEnum.ConditionallyApproved;
+                                                            }
+                                                            break;
+                                                        case ClassificationTypeEnum.ConditionallyRestricted:
+                                                            {
+                                                                tvTypeSubType = TVTypeEnum.ConditionallyRestricted;
+                                                            }
+                                                            break;
+                                                        default:
+                                                            break;
+                                                    }
+
+                                                    tvlNew.SubTVType = tvTypeSubType;
+
+                                                    List<MapInfoPointModel> mapInfoPointModelList = _MapInfoPointService.GetMapInfoPointModelListWithTVItemIDAndTVTypeAndMapInfoDrawTypeDB(tvItemModel.TVItemID, tvTypeSubType, MapInfoDrawTypeEnum.Polyline);
+                                                    if (mapInfoPointModelList.Count > 0)
+                                                    {
+                                                        MapObj mapObj = new MapObj();
+                                                        mapObj.MapInfoID = mapInfoPointModelList[0].MapInfoID;
+                                                        mapObj.MapInfoDrawType = MapInfoDrawTypeEnum.Polyline;
+
+                                                        List<Coord> coordList = new List<Coord>();
+
+                                                        foreach (MapInfoPointModel mapInfoPointModel in mapInfoPointModelList)
+                                                        {
+                                                            coordList.Add(new Coord() { Lat = (float)mapInfoPointModel.Lat, Lng = (float)mapInfoPointModel.Lng, Ordinal = mapInfoPointModel.Ordinal });
+                                                        }
+
+                                                        mapObj.CoordList = coordList;
+                                                        tvlNew.MapObjList.Add(mapObj);
+                                                    }
+
+                                                    tvLocationList.Add(tvlNew);
+                                                }
+                                            }
+                                        }
+                                    }
                                 }
                                 break;
                             default:
                                 return new List<TVLocation>() { ReturnTVLocationError(string.Format(ServiceRes.TVType_WithShowTVType_IsNotImplemented, tvItemModelCurrent.TVType.ToString(), ShowTVType.ToString())) };
                         }
-
                     }
                     break;
                 case TVTypeEnum.PolSourceSite:

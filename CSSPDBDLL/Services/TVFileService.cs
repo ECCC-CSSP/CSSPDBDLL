@@ -1357,6 +1357,11 @@ namespace CSSPDBDLL.Services
                     tvTypeInfrastructure = TVTypeEnum.Error;
                 }
 
+                if (tvTypeInfrastructure == TVTypeEnum.OtherInfrastructure)
+                {
+                    continue;
+                }
+
                 mapInfoList = (from mi in _TVItemService.db.MapInfos
                                from mip in _TVItemService.db.MapInfoPoints
                                where mi.MapInfoID == mip.MapInfoID

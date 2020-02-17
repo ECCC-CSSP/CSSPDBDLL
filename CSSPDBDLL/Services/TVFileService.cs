@@ -1156,6 +1156,14 @@ namespace CSSPDBDLL.Services
 
             DirectoryInfo di = new DirectoryInfo(ChoseEDriveOrCDrive(ServerFilePath));
 
+            string illegalChar = "<>:\"/\\|?*.";
+
+            string NewTVText = TVText;
+            foreach (char c in illegalChar)
+            {
+                TVText = TVText.Replace(c.ToString(), "_");
+            }
+
             FileInfo fi = new FileInfo(ChoseEDriveOrCDrive(ServerFilePath) + TVText + ".txt");
 
             if (!di.Exists)

@@ -1440,7 +1440,7 @@ namespace CSSPDBDLL.Services
             return ReturnError("");
 
         }
-        public TVItemModel SavePSSorInfrastructureAddressDB(int ProvinceTVItemID, int TVItemID, string StreetNumber, string StreetName, int StreetType, string Municipality, string PostalCode, bool CreateMunicipality, bool IsPSS, bool IsInfrastructure, string AdminEmail)
+        public TVItemModel SavePSSorInfrastructureAddressDB(int ProvinceTVItemID, int TVItemID, string StreetNumber, string StreetName, int StreetType, string Municipality, string PostalCode, bool CreateMunicipality, bool IsPSS, bool IsInfrastructure, bool IsContact, string AdminEmail)
         {
             IPrincipal user = new GenericPrincipal(new GenericIdentity(AdminEmail, "Forms"), null);
 
@@ -1455,6 +1455,7 @@ namespace CSSPDBDLL.Services
             TVItemService tvItemService = new TVItemService(LanguageRequest, user);
             PolSourceSiteService polSourceSiteService = new PolSourceSiteService(LanguageRequest, user);
             InfrastructureService infrastructureService = new InfrastructureService(LanguageRequest, user);
+            TVItemLinkService tvItemLinkService = new TVItemLinkService(LanguageRequest, user);
 
             // doing Province
             if (ProvinceTVItemID == 0)
@@ -1497,6 +1498,15 @@ namespace CSSPDBDLL.Services
                 if (!string.IsNullOrWhiteSpace(infrastructureModel.Error))
                 {
                     return ReturnError($"ERROR: {infrastructureModel.Error}");
+                }
+            }
+
+            if (IsContact)
+            {
+                ContactModel contactModel2 = contactService.GetContactModelWithContactTVItemIDDB(TVItemID);
+                if (!string.IsNullOrWhiteSpace(contactModel2.Error))
+                {
+                    return ReturnError($"ERROR: {contactModel2.Error}");
                 }
             }
 
@@ -1589,6 +1599,37 @@ namespace CSSPDBDLL.Services
                 if (!string.IsNullOrWhiteSpace(infrastructureModelRet.Error))
                 {
                     return ReturnError($"ERROR: {infrastructureModelRet.Error}");
+                }
+            }
+
+            if (IsContact)
+            {
+                ContactModel contactModel3 = contactService.GetContactModelWithContactTVItemIDDB(TVItemID);
+                if (!string.IsNullOrWhiteSpace(contactModel3.Error))
+                {
+                    return ReturnError($"ERROR: {contactModel3.Error}");
+                }
+
+                TVItemLinkModel tvItemLinkModelNew = new TVItemLinkModel()
+                {
+                    FromTVItemID = contactModel3.ContactTVItemID,
+                    ToTVItemID = addressModelRet.AddressTVItemID,
+                    FromTVType = TVTypeEnum.Contact,
+                    ToTVType = TVTypeEnum.Address,
+                    StartDateTime_Local = DateTime.Now,
+                    Ordinal = 0,
+                    TVLevel = 0,
+                    TVPath = "p" + contactModel3.ContactTVItemID + "p" + addressModelRet.AddressTVItemID,
+                };
+
+                TVItemLinkModel tvItemLinkModel = tvItemLinkService.GetTVItemLinkModelWithFromTVItemIDAndToTVItemIDDB(contactModel3.ContactTVItemID, addressModelRet.AddressTVItemID);
+                if (!string.IsNullOrWhiteSpace(tvItemLinkModel.Error))
+                {
+                    tvItemLinkModel = tvItemLinkService.PostAddTVItemLinkDB(tvItemLinkModelNew);
+                    if (!string.IsNullOrWhiteSpace(tvItemLinkModel.Error))
+                    {
+                        return ReturnError($"ERROR: {tvItemLinkModel.Error}");
+                    }
                 }
             }
 

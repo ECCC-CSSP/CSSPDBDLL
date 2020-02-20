@@ -1319,8 +1319,8 @@ namespace CSSPDBDLL.Services
 
                 foreach (LanguageEnum Lang in LanguageListAllowable)
                 {
-                    if (Lang == LanguageRequest)
-                    {
+                    //if (Lang == LanguageRequest)
+                    //{
                         TVItemLanguageModel tvItemLanguageModelToUpdate = _TVItemService._TVItemLanguageService.GetTVItemLanguageModelWithTVItemIDAndLanguageDB(addressToUpdate.AddressTVItemID, Lang);
                         if (!string.IsNullOrWhiteSpace(tvItemLanguageModelToUpdate.Error))
                             return ReturnError(tvItemLanguageModelToUpdate.Error);
@@ -1332,7 +1332,7 @@ namespace CSSPDBDLL.Services
                         TVItemLanguageModel tvItemLanguageModel = _TVItemService._TVItemLanguageService.PostUpdateTVItemLanguageDB(tvItemLanguageModelToUpdate);
                         if (!string.IsNullOrWhiteSpace(tvItemLanguageModel.Error))
                             return ReturnError(tvItemLanguageModel.Error);
-                    }
+                    //}
                 }
 
                 ts.Complete();

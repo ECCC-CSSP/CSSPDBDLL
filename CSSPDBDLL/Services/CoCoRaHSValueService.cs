@@ -62,31 +62,31 @@ namespace CSSPDBDLL.Services
                 return retStr;
             }
 
-            retStr = FieldCheckIfNotNullWithinRangeDouble(coCoRaHSValueModel.TotalPrecipAmt, ServiceRes.TotalPrecipAmt, 0.0D, 1000.0D);
+            retStr = FieldCheckIfNotNullWithinRangeDouble(coCoRaHSValueModel.TotalPrecipAmt, ServiceRes.TotalPrecipAmt, 0.0D, 100000.0D);
             if (!string.IsNullOrWhiteSpace(retStr))
             {
                 return retStr;
             }
 
-            retStr = FieldCheckIfNotNullWithinRangeDouble(coCoRaHSValueModel.NewSnowDepth, ServiceRes.NewSnowDepth, 0.0D, 1000.0D);
+            retStr = FieldCheckIfNotNullWithinRangeDouble(coCoRaHSValueModel.NewSnowDepth, ServiceRes.NewSnowDepth, 0.0D, 100000.0D);
             if (!string.IsNullOrWhiteSpace(retStr))
             {
                 return retStr;
             }
 
-            retStr = FieldCheckIfNotNullWithinRangeDouble(coCoRaHSValueModel.NewSnowSWE, ServiceRes.NewSnowSWE, 0.0D, 1000.0D);
+            retStr = FieldCheckIfNotNullWithinRangeDouble(coCoRaHSValueModel.NewSnowSWE, ServiceRes.NewSnowSWE, 0.0D, 100000.0D);
             if (!string.IsNullOrWhiteSpace(retStr))
             {
                 return retStr;
             }
 
-            retStr = FieldCheckIfNotNullWithinRangeDouble(coCoRaHSValueModel.TotalSnowDepth, ServiceRes.TotalSnowDepth, 0.0D, 1000.0D);
+            retStr = FieldCheckIfNotNullWithinRangeDouble(coCoRaHSValueModel.TotalSnowDepth, ServiceRes.TotalSnowDepth, 0.0D, 100000.0D);
             if (!string.IsNullOrWhiteSpace(retStr))
             {
                 return retStr;
             }
 
-            retStr = FieldCheckIfNotNullWithinRangeDouble(coCoRaHSValueModel.TotalSnowSWE, ServiceRes.TotalSnowSWE, 0.0D, 1000.0D);
+            retStr = FieldCheckIfNotNullWithinRangeDouble(coCoRaHSValueModel.TotalSnowSWE, ServiceRes.TotalSnowSWE, 0.0D, 100000.0D);
             if (!string.IsNullOrWhiteSpace(retStr))
             {
                 return retStr;

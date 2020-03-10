@@ -17,7 +17,6 @@ namespace CSSPDBDLL
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public ReportSection()
         {
-            this.ReportSectionLanguages = new HashSet<ReportSectionLanguage>();
             this.ReportSections1 = new HashSet<ReportSection>();
             this.ReportSections11 = new HashSet<ReportSection>();
         }
@@ -25,17 +24,18 @@ namespace CSSPDBDLL
         public int ReportSectionID { get; set; }
         public int ReportTypeID { get; set; }
         public Nullable<int> TVItemID { get; set; }
+        public Nullable<int> Language { get; set; }
         public int Ordinal { get; set; }
         public bool IsStatic { get; set; }
         public Nullable<int> ParentReportSectionID { get; set; }
         public Nullable<int> Year { get; set; }
         public bool Locked { get; set; }
         public Nullable<int> TemplateReportSectionID { get; set; }
+        public string ReportSectionName { get; set; }
+        public string ReportSectionText { get; set; }
         public System.DateTime LastUpdateDate_UTC { get; set; }
         public int LastUpdateContactTVItemID { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ReportSectionLanguage> ReportSectionLanguages { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ReportSection> ReportSections1 { get; set; }
         public virtual ReportSection ReportSection1 { get; set; }

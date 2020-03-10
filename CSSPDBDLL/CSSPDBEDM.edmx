@@ -1066,20 +1066,6 @@
           <Property Name="LastUpdateDate_UTC" Type="datetime" Nullable="false" />
           <Property Name="LastUpdateContactTVItemID" Type="int" Nullable="false" />
         </EntityType>
-        <EntityType Name="ReportSectionLanguages">
-          <Key>
-            <PropertyRef Name="ReportSectionLanguageID" />
-          </Key>
-          <Property Name="ReportSectionLanguageID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="ReportSectionID" Type="int" Nullable="false" />
-          <Property Name="Language" Type="int" Nullable="false" />
-          <Property Name="ReportSectionName" Type="nvarchar" MaxLength="100" Nullable="false" />
-          <Property Name="TranslationStatusReportSectionName" Type="int" Nullable="false" />
-          <Property Name="ReportSectionText" Type="text" Nullable="false" />
-          <Property Name="TranslationStatusReportSectionText" Type="int" Nullable="false" />
-          <Property Name="LastUpdateDate_UTC" Type="datetime" Nullable="false" />
-          <Property Name="LastUpdateContactTVItemID" Type="int" Nullable="false" />
-        </EntityType>
         <EntityType Name="ReportSections">
           <Key>
             <PropertyRef Name="ReportSectionID" />
@@ -1087,28 +1073,15 @@
           <Property Name="ReportSectionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ReportTypeID" Type="int" Nullable="false" />
           <Property Name="TVItemID" Type="int" />
+          <Property Name="Language" Type="int" />
           <Property Name="Ordinal" Type="int" Nullable="false" />
           <Property Name="IsStatic" Type="bit" Nullable="false" />
           <Property Name="ParentReportSectionID" Type="int" />
           <Property Name="Year" Type="int" />
           <Property Name="Locked" Type="bit" Nullable="false" />
           <Property Name="TemplateReportSectionID" Type="int" />
-          <Property Name="LastUpdateDate_UTC" Type="datetime" Nullable="false" />
-          <Property Name="LastUpdateContactTVItemID" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="ReportTypeLanguages">
-          <Key>
-            <PropertyRef Name="ReportTypeLanguageID" />
-          </Key>
-          <Property Name="ReportTypeLanguageID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="ReportTypeID" Type="int" Nullable="false" />
-          <Property Name="Language" Type="int" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
-          <Property Name="TranslationStatusName" Type="int" Nullable="false" />
-          <Property Name="Description" Type="text" Nullable="false" />
-          <Property Name="TranslationStatusDescription" Type="int" Nullable="false" />
-          <Property Name="StartOfFileName" Type="nvarchar" MaxLength="100" Nullable="false" />
-          <Property Name="TranslationStatusStartOfFileName" Type="int" Nullable="false" />
+          <Property Name="ReportSectionName" Type="nvarchar" MaxLength="100" />
+          <Property Name="ReportSectionText" Type="text" />
           <Property Name="LastUpdateDate_UTC" Type="datetime" Nullable="false" />
           <Property Name="LastUpdateContactTVItemID" Type="int" Nullable="false" />
         </EntityType>
@@ -1120,6 +1093,10 @@
           <Property Name="TVType" Type="int" Nullable="false" />
           <Property Name="FileType" Type="int" Nullable="false" />
           <Property Name="UniqueCode" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Language" Type="int" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" />
+          <Property Name="Description" Type="text" />
+          <Property Name="StartOfFileName" Type="nvarchar" MaxLength="100" />
           <Property Name="LastUpdateDate_UTC" Type="datetime" Nullable="false" />
           <Property Name="LastUpdateContactTVItemID" Type="int" Nullable="false" />
         </EntityType>
@@ -2527,20 +2504,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_ReportSectionLanguages_ReportSections">
-          <End Role="ReportSections" Type="Self.ReportSections" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="ReportSectionLanguages" Type="Self.ReportSectionLanguages" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ReportSections">
-              <PropertyRef Name="ReportSectionID" />
-            </Principal>
-            <Dependent Role="ReportSectionLanguages">
-              <PropertyRef Name="ReportSectionID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_ReportSections_ReportSections">
           <End Role="ReportSections" Type="Self.ReportSections" Multiplicity="0..1" />
           <End Role="ReportSections1" Type="Self.ReportSections" Multiplicity="*" />
@@ -2586,20 +2549,6 @@
             </Principal>
             <Dependent Role="ReportSections">
               <PropertyRef Name="TVItemID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ReportTypeLanguages_ReportTypes">
-          <End Role="ReportTypes" Type="Self.ReportTypes" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="ReportTypeLanguages" Type="Self.ReportTypeLanguages" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ReportTypes">
-              <PropertyRef Name="ReportTypeID" />
-            </Principal>
-            <Dependent Role="ReportTypeLanguages">
-              <PropertyRef Name="ReportTypeID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -3059,9 +3008,7 @@
           <EntitySet Name="RainExceedances" EntityType="Self.RainExceedances" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RatingCurves" EntityType="Self.RatingCurves" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RatingCurveValues" EntityType="Self.RatingCurveValues" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="ReportSectionLanguages" EntityType="Self.ReportSectionLanguages" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ReportSections" EntityType="Self.ReportSections" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="ReportTypeLanguages" EntityType="Self.ReportTypeLanguages" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ReportTypes" EntityType="Self.ReportTypes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ResetPasswords" EntityType="Self.ResetPasswords" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SamplingPlanEmails" EntityType="Self.SamplingPlanEmails" Schema="dbo" store:Type="Tables" />
@@ -3415,10 +3362,6 @@
             <End Role="RatingCurves" EntitySet="RatingCurves" />
             <End Role="RatingCurveValues" EntitySet="RatingCurveValues" />
           </AssociationSet>
-          <AssociationSet Name="FK_ReportSectionLanguages_ReportSections" Association="Self.FK_ReportSectionLanguages_ReportSections">
-            <End Role="ReportSections" EntitySet="ReportSections" />
-            <End Role="ReportSectionLanguages" EntitySet="ReportSectionLanguages" />
-          </AssociationSet>
           <AssociationSet Name="FK_ReportSections_ReportSections" Association="Self.FK_ReportSections_ReportSections">
             <End Role="ReportSections" EntitySet="ReportSections" />
             <End Role="ReportSections1" EntitySet="ReportSections" />
@@ -3434,10 +3377,6 @@
           <AssociationSet Name="FK_ReportSections_TVItems" Association="Self.FK_ReportSections_TVItems">
             <End Role="TVItems" EntitySet="TVItems" />
             <End Role="ReportSections" EntitySet="ReportSections" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ReportTypeLanguages_ReportTypes" Association="Self.FK_ReportTypeLanguages_ReportTypes">
-            <End Role="ReportTypes" EntitySet="ReportTypes" />
-            <End Role="ReportTypeLanguages" EntitySet="ReportTypeLanguages" />
           </AssociationSet>
           <AssociationSet Name="FK_SamplingPlanEmails_SamplingPlans" Association="Self.FK_SamplingPlanEmails_SamplingPlans">
             <End Role="SamplingPlans" EntitySet="SamplingPlans" />
@@ -3629,9 +3568,7 @@
           <EntitySet Name="RainExceedances" EntityType="CSSPDBModel.RainExceedance" />
           <EntitySet Name="RatingCurves" EntityType="CSSPDBModel.RatingCurve" />
           <EntitySet Name="RatingCurveValues" EntityType="CSSPDBModel.RatingCurveValue" />
-          <EntitySet Name="ReportSectionLanguages" EntityType="CSSPDBModel.ReportSectionLanguage" />
           <EntitySet Name="ReportSections" EntityType="CSSPDBModel.ReportSection" />
-          <EntitySet Name="ReportTypeLanguages" EntityType="CSSPDBModel.ReportTypeLanguage" />
           <EntitySet Name="ReportTypes" EntityType="CSSPDBModel.ReportType" />
           <EntitySet Name="ResetPasswords" EntityType="CSSPDBModel.ResetPassword" />
           <EntitySet Name="SamplingPlanEmails" EntityType="CSSPDBModel.SamplingPlanEmail" />
@@ -3977,10 +3914,6 @@
             <End Role="RatingCurve" EntitySet="RatingCurves" />
             <End Role="RatingCurveValue" EntitySet="RatingCurveValues" />
           </AssociationSet>
-          <AssociationSet Name="FK_ReportSectionLanguages_ReportSections" Association="CSSPDBModel.FK_ReportSectionLanguages_ReportSections">
-            <End Role="ReportSection" EntitySet="ReportSections" />
-            <End Role="ReportSectionLanguage" EntitySet="ReportSectionLanguages" />
-          </AssociationSet>
           <AssociationSet Name="FK_ReportSections_ReportSections" Association="CSSPDBModel.FK_ReportSections_ReportSections">
             <End Role="ReportSection" EntitySet="ReportSections" />
             <End Role="ReportSection1" EntitySet="ReportSections" />
@@ -3996,10 +3929,6 @@
           <AssociationSet Name="FK_ReportSections_TVItems" Association="CSSPDBModel.FK_ReportSections_TVItems">
             <End Role="TVItem" EntitySet="TVItems" />
             <End Role="ReportSection" EntitySet="ReportSections" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ReportTypeLanguages_ReportTypes" Association="CSSPDBModel.FK_ReportTypeLanguages_ReportTypes">
-            <End Role="ReportType" EntitySet="ReportTypes" />
-            <End Role="ReportTypeLanguage" EntitySet="ReportTypeLanguages" />
           </AssociationSet>
           <AssociationSet Name="FK_SamplingPlanEmails_SamplingPlans" Association="CSSPDBModel.FK_SamplingPlanEmails_SamplingPlans">
             <End Role="SamplingPlan" EntitySet="SamplingPlans" />
@@ -5295,21 +5224,6 @@
           <Property Name="LastUpdateContactTVItemID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="RatingCurve" Relationship="CSSPDBModel.FK_RatingCurveValues_RatingCurves" FromRole="RatingCurveValue" ToRole="RatingCurve" />
         </EntityType>
-        <EntityType Name="ReportSectionLanguage">
-          <Key>
-            <PropertyRef Name="ReportSectionLanguageID" />
-          </Key>
-          <Property Name="ReportSectionLanguageID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ReportSectionID" Type="Int32" Nullable="false" />
-          <Property Name="Language" Type="Int32" Nullable="false" />
-          <Property Name="ReportSectionName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="TranslationStatusReportSectionName" Type="Int32" Nullable="false" />
-          <Property Name="ReportSectionText" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="TranslationStatusReportSectionText" Type="Int32" Nullable="false" />
-          <Property Name="LastUpdateDate_UTC" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="LastUpdateContactTVItemID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="ReportSection" Relationship="CSSPDBModel.FK_ReportSectionLanguages_ReportSections" FromRole="ReportSectionLanguage" ToRole="ReportSection" />
-        </EntityType>
         <EntityType Name="ReportSection">
           <Key>
             <PropertyRef Name="ReportSectionID" />
@@ -5317,38 +5231,23 @@
           <Property Name="ReportSectionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ReportTypeID" Type="Int32" Nullable="false" />
           <Property Name="TVItemID" Type="Int32" />
+          <Property Name="Language" Type="Int32" />
           <Property Name="Ordinal" Type="Int32" Nullable="false" />
           <Property Name="IsStatic" Type="Boolean" Nullable="false" />
           <Property Name="ParentReportSectionID" Type="Int32" />
           <Property Name="Year" Type="Int32" />
           <Property Name="Locked" Type="Boolean" Nullable="false" />
           <Property Name="TemplateReportSectionID" Type="Int32" />
+          <Property Name="ReportSectionName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ReportSectionText" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="LastUpdateDate_UTC" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="LastUpdateContactTVItemID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="ReportSectionLanguages" Relationship="CSSPDBModel.FK_ReportSectionLanguages_ReportSections" FromRole="ReportSection" ToRole="ReportSectionLanguage" />
           <NavigationProperty Name="ReportSections1" Relationship="CSSPDBModel.FK_ReportSections_ReportSections" FromRole="ReportSection" ToRole="ReportSection1" />
           <NavigationProperty Name="ReportSection1" Relationship="CSSPDBModel.FK_ReportSections_ReportSections" FromRole="ReportSection1" ToRole="ReportSection" />
           <NavigationProperty Name="ReportSections11" Relationship="CSSPDBModel.FK_ReportSections_ReportSections1" FromRole="ReportSection" ToRole="ReportSection1" />
           <NavigationProperty Name="ReportSection2" Relationship="CSSPDBModel.FK_ReportSections_ReportSections1" FromRole="ReportSection1" ToRole="ReportSection" />
           <NavigationProperty Name="ReportType" Relationship="CSSPDBModel.FK_ReportSections_ReportTypes" FromRole="ReportSection" ToRole="ReportType" />
           <NavigationProperty Name="TVItem" Relationship="CSSPDBModel.FK_ReportSections_TVItems" FromRole="ReportSection" ToRole="TVItem" />
-        </EntityType>
-        <EntityType Name="ReportTypeLanguage">
-          <Key>
-            <PropertyRef Name="ReportTypeLanguageID" />
-          </Key>
-          <Property Name="ReportTypeLanguageID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ReportTypeID" Type="Int32" Nullable="false" />
-          <Property Name="Language" Type="Int32" Nullable="false" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="TranslationStatusName" Type="Int32" Nullable="false" />
-          <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="TranslationStatusDescription" Type="Int32" Nullable="false" />
-          <Property Name="StartOfFileName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="TranslationStatusStartOfFileName" Type="Int32" Nullable="false" />
-          <Property Name="LastUpdateDate_UTC" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="LastUpdateContactTVItemID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="ReportType" Relationship="CSSPDBModel.FK_ReportTypeLanguages_ReportTypes" FromRole="ReportTypeLanguage" ToRole="ReportType" />
         </EntityType>
         <EntityType Name="ReportType">
           <Key>
@@ -5358,10 +5257,13 @@
           <Property Name="TVType" Type="Int32" Nullable="false" />
           <Property Name="FileType" Type="Int32" Nullable="false" />
           <Property Name="UniqueCode" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Language" Type="Int32" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="StartOfFileName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="LastUpdateDate_UTC" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="LastUpdateContactTVItemID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="ReportSections" Relationship="CSSPDBModel.FK_ReportSections_ReportTypes" FromRole="ReportType" ToRole="ReportSection" />
-          <NavigationProperty Name="ReportTypeLanguages" Relationship="CSSPDBModel.FK_ReportTypeLanguages_ReportTypes" FromRole="ReportType" ToRole="ReportTypeLanguage" />
         </EntityType>
         <EntityType Name="ResetPassword">
           <Key>
@@ -6852,20 +6754,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_ReportSectionLanguages_ReportSections">
-          <End Type="CSSPDBModel.ReportSection" Role="ReportSection" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Type="CSSPDBModel.ReportSectionLanguage" Role="ReportSectionLanguage" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ReportSection">
-              <PropertyRef Name="ReportSectionID" />
-            </Principal>
-            <Dependent Role="ReportSectionLanguage">
-              <PropertyRef Name="ReportSectionID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_ReportSections_ReportSections">
           <End Type="CSSPDBModel.ReportSection" Role="ReportSection" Multiplicity="0..1" />
           <End Type="CSSPDBModel.ReportSection" Role="ReportSection1" Multiplicity="*" />
@@ -6911,20 +6799,6 @@
             </Principal>
             <Dependent Role="ReportSection">
               <PropertyRef Name="TVItemID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ReportTypeLanguages_ReportTypes">
-          <End Type="CSSPDBModel.ReportType" Role="ReportType" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Type="CSSPDBModel.ReportTypeLanguage" Role="ReportTypeLanguage" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ReportType">
-              <PropertyRef Name="ReportTypeID" />
-            </Principal>
-            <Dependent Role="ReportTypeLanguage">
-              <PropertyRef Name="ReportTypeID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -8443,52 +8317,23 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="ReportSectionLanguages">
-            <EntityTypeMapping TypeName="CSSPDBModel.ReportSectionLanguage">
-              <MappingFragment StoreEntitySet="ReportSectionLanguages">
-                <ScalarProperty Name="LastUpdateContactTVItemID" ColumnName="LastUpdateContactTVItemID" />
-                <ScalarProperty Name="LastUpdateDate_UTC" ColumnName="LastUpdateDate_UTC" />
-                <ScalarProperty Name="TranslationStatusReportSectionText" ColumnName="TranslationStatusReportSectionText" />
-                <ScalarProperty Name="ReportSectionText" ColumnName="ReportSectionText" />
-                <ScalarProperty Name="TranslationStatusReportSectionName" ColumnName="TranslationStatusReportSectionName" />
-                <ScalarProperty Name="ReportSectionName" ColumnName="ReportSectionName" />
-                <ScalarProperty Name="Language" ColumnName="Language" />
-                <ScalarProperty Name="ReportSectionID" ColumnName="ReportSectionID" />
-                <ScalarProperty Name="ReportSectionLanguageID" ColumnName="ReportSectionLanguageID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="ReportSections">
             <EntityTypeMapping TypeName="CSSPDBModel.ReportSection">
               <MappingFragment StoreEntitySet="ReportSections">
                 <ScalarProperty Name="LastUpdateContactTVItemID" ColumnName="LastUpdateContactTVItemID" />
                 <ScalarProperty Name="LastUpdateDate_UTC" ColumnName="LastUpdateDate_UTC" />
+                <ScalarProperty Name="ReportSectionText" ColumnName="ReportSectionText" />
+                <ScalarProperty Name="ReportSectionName" ColumnName="ReportSectionName" />
                 <ScalarProperty Name="TemplateReportSectionID" ColumnName="TemplateReportSectionID" />
                 <ScalarProperty Name="Locked" ColumnName="Locked" />
                 <ScalarProperty Name="Year" ColumnName="Year" />
                 <ScalarProperty Name="ParentReportSectionID" ColumnName="ParentReportSectionID" />
                 <ScalarProperty Name="IsStatic" ColumnName="IsStatic" />
                 <ScalarProperty Name="Ordinal" ColumnName="Ordinal" />
+                <ScalarProperty Name="Language" ColumnName="Language" />
                 <ScalarProperty Name="TVItemID" ColumnName="TVItemID" />
                 <ScalarProperty Name="ReportTypeID" ColumnName="ReportTypeID" />
                 <ScalarProperty Name="ReportSectionID" ColumnName="ReportSectionID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ReportTypeLanguages">
-            <EntityTypeMapping TypeName="CSSPDBModel.ReportTypeLanguage">
-              <MappingFragment StoreEntitySet="ReportTypeLanguages">
-                <ScalarProperty Name="LastUpdateContactTVItemID" ColumnName="LastUpdateContactTVItemID" />
-                <ScalarProperty Name="LastUpdateDate_UTC" ColumnName="LastUpdateDate_UTC" />
-                <ScalarProperty Name="TranslationStatusStartOfFileName" ColumnName="TranslationStatusStartOfFileName" />
-                <ScalarProperty Name="StartOfFileName" ColumnName="StartOfFileName" />
-                <ScalarProperty Name="TranslationStatusDescription" ColumnName="TranslationStatusDescription" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="TranslationStatusName" ColumnName="TranslationStatusName" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Language" ColumnName="Language" />
-                <ScalarProperty Name="ReportTypeID" ColumnName="ReportTypeID" />
-                <ScalarProperty Name="ReportTypeLanguageID" ColumnName="ReportTypeLanguageID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -8497,6 +8342,10 @@
               <MappingFragment StoreEntitySet="ReportTypes">
                 <ScalarProperty Name="LastUpdateContactTVItemID" ColumnName="LastUpdateContactTVItemID" />
                 <ScalarProperty Name="LastUpdateDate_UTC" ColumnName="LastUpdateDate_UTC" />
+                <ScalarProperty Name="StartOfFileName" ColumnName="StartOfFileName" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Language" ColumnName="Language" />
                 <ScalarProperty Name="UniqueCode" ColumnName="UniqueCode" />
                 <ScalarProperty Name="FileType" ColumnName="FileType" />
                 <ScalarProperty Name="TVType" ColumnName="TVType" />

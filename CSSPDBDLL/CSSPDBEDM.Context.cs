@@ -85,9 +85,7 @@ namespace CSSPDBDLL
         public virtual DbSet<RainExceedance> RainExceedances { get; set; }
         public virtual DbSet<RatingCurve> RatingCurves { get; set; }
         public virtual DbSet<RatingCurveValue> RatingCurveValues { get; set; }
-        public virtual DbSet<ReportSectionLanguage> ReportSectionLanguages { get; set; }
         public virtual DbSet<ReportSection> ReportSections { get; set; }
-        public virtual DbSet<ReportTypeLanguage> ReportTypeLanguages { get; set; }
         public virtual DbSet<ReportType> ReportTypes { get; set; }
         public virtual DbSet<ResetPassword> ResetPasswords { get; set; }
         public virtual DbSet<SamplingPlanEmail> SamplingPlanEmails { get; set; }

@@ -22,7 +22,6 @@ namespace CSSPDBDLL.Services
         #endregion Variables
 
         #region Properties
-        public ReportTypeLanguageService _ReportTypeLanguageService { get; private set; }
         public LogService _LogService { get; private set; }
         #endregion Properties
 
@@ -30,7 +29,6 @@ namespace CSSPDBDLL.Services
         public ReportTypeService(LanguageEnum LanguageRequest, IPrincipal User)
             : base(LanguageRequest, User)
         {
-            _ReportTypeLanguageService = new ReportTypeLanguageService(LanguageRequest, User);
             _LogService = new LogService(LanguageRequest, User);
         }
         #endregion Constructors
@@ -78,6 +76,12 @@ namespace CSSPDBDLL.Services
                 return retStr;
             }
 
+            retStr = _BaseEnumService.LanguageOK(reportTypeModel.Language);
+            if (!string.IsNullOrWhiteSpace(retStr))
+            {
+                return retStr;
+            }
+
             return "";
         }
 
@@ -88,6 +92,10 @@ namespace CSSPDBDLL.Services
             reportType.TVType = (int)reportTypeModel.TVType;
             reportType.FileType = (int)reportTypeModel.FileType;
             reportType.UniqueCode = reportTypeModel.UniqueCode;
+            reportType.Language = (int)reportTypeModel.Language;
+            reportType.Name = reportTypeModel.Name;
+            reportType.Description = reportTypeModel.Description;
+            reportType.StartOfFileName = reportTypeModel.StartOfFileName;
             reportType.LastUpdateDate_UTC = DateTime.UtcNow;
             if (contactOK == null)
             {
@@ -109,18 +117,10 @@ namespace CSSPDBDLL.Services
 
             return ReportTypeModelCount;
         }
-        public List<ReportTypeModel> GetReportTypeModelListAllDB()
+        public List<ReportTypeModel> GetReportTypeModelListWithLanguageDB(LanguageEnum language)
         {
             List<ReportTypeModel> ReportTypeModelList = (from c in db.ReportTypes
-                                                         let name = (from cl in db.ReportTypeLanguages
-                                                                     where cl.ReportTypeID == c.ReportTypeID
-                                                                     select cl.Name).FirstOrDefault()
-                                                         let description = (from cl in db.ReportTypeLanguages
-                                                                            where cl.ReportTypeID == c.ReportTypeID
-                                                                            select cl.Description).FirstOrDefault()
-                                                         let startOfFileName = (from cl in db.ReportTypeLanguages
-                                                                                where cl.ReportTypeID == c.ReportTypeID
-                                                                                select cl.StartOfFileName).FirstOrDefault()
+                                                         where c.Language == (int)language
                                                          orderby c.TVType
                                                          select new ReportTypeModel
                                                          {
@@ -129,28 +129,21 @@ namespace CSSPDBDLL.Services
                                                              TVType = (TVTypeEnum)c.TVType,
                                                              FileType = (FileTypeEnum)c.FileType,
                                                              UniqueCode = c.UniqueCode,
-                                                             Name = name,
-                                                             Description = description,
-                                                             StartOfFileName = startOfFileName,
+                                                             Language = (LanguageEnum)c.Language,
+                                                             Name = c.Name,
+                                                             Description = c.Description,
+                                                             StartOfFileName = c.StartOfFileName,
                                                              LastUpdateDate_UTC = c.LastUpdateDate_UTC,
                                                              LastUpdateContactTVItemID = c.LastUpdateContactTVItemID,
                                                          }).ToList<ReportTypeModel>();
 
             return ReportTypeModelList;
         }
-        public List<ReportTypeModel> GetReportTypeModelListWithTVTypeDB(TVTypeEnum TVType)
+        public List<ReportTypeModel> GetReportTypeModelListWithTVTypeAndLanguageDB(TVTypeEnum TVType, LanguageEnum language)
         {
             List<ReportTypeModel> ReportTypeModelList = (from c in db.ReportTypes
-                                                         let name = (from cl in db.ReportTypeLanguages
-                                                                     where cl.ReportTypeID == c.ReportTypeID
-                                                                     select cl.Name).FirstOrDefault()
-                                                         let description = (from cl in db.ReportTypeLanguages
-                                                                            where cl.ReportTypeID == c.ReportTypeID
-                                                                            select cl.Description).FirstOrDefault()
-                                                         let startOfFileName = (from cl in db.ReportTypeLanguages
-                                                                                where cl.ReportTypeID == c.ReportTypeID
-                                                                                select cl.StartOfFileName).FirstOrDefault()
                                                          where c.TVType == (int)TVType
+                                                         && c.Language == (int)language
                                                          orderby c.TVType
                                                          select new ReportTypeModel
                                                          {
@@ -159,9 +152,10 @@ namespace CSSPDBDLL.Services
                                                              TVType = (TVTypeEnum)c.TVType,
                                                              FileType = (FileTypeEnum)c.FileType,
                                                              UniqueCode = c.UniqueCode,
-                                                             Name = name,
-                                                             Description = description,
-                                                             StartOfFileName = startOfFileName,
+                                                             Language = (LanguageEnum)c.Language,
+                                                             Name = c.Name,
+                                                             Description = c.Description,
+                                                             StartOfFileName = c.StartOfFileName,
                                                              LastUpdateDate_UTC = c.LastUpdateDate_UTC,
                                                              LastUpdateContactTVItemID = c.LastUpdateContactTVItemID,
                                                          }).ToList<ReportTypeModel>();
@@ -171,15 +165,6 @@ namespace CSSPDBDLL.Services
         public ReportTypeModel GetReportTypeModelWithReportTypeIDDB(int ReportTypeID)
         {
             ReportTypeModel reportTypeModel = (from c in db.ReportTypes
-                                               let name = (from cl in db.ReportTypeLanguages
-                                                           where cl.ReportTypeID == c.ReportTypeID
-                                                           select cl.Name).FirstOrDefault()
-                                               let description = (from cl in db.ReportTypeLanguages
-                                                                  where cl.ReportTypeID == c.ReportTypeID
-                                                                  select cl.Description).FirstOrDefault()
-                                               let startOfFileName = (from cl in db.ReportTypeLanguages
-                                                                      where cl.ReportTypeID == c.ReportTypeID
-                                                                      select cl.StartOfFileName).FirstOrDefault()
                                                where c.ReportTypeID == ReportTypeID
                                                orderby c.TVType
                                                select new ReportTypeModel
@@ -189,9 +174,10 @@ namespace CSSPDBDLL.Services
                                                    TVType = (TVTypeEnum)c.TVType,
                                                    FileType = (FileTypeEnum)c.FileType,
                                                    UniqueCode = c.UniqueCode,
-                                                   Name = name,
-                                                   Description = description,
-                                                   StartOfFileName = startOfFileName,
+                                                   Language = (LanguageEnum)c.Language,
+                                                   Name = c.Name,
+                                                   Description = c.Description,
+                                                   StartOfFileName = c.StartOfFileName,
                                                    LastUpdateDate_UTC = c.LastUpdateDate_UTC,
                                                    LastUpdateContactTVItemID = c.LastUpdateContactTVItemID,
                                                }).FirstOrDefault<ReportTypeModel>();
@@ -211,55 +197,10 @@ namespace CSSPDBDLL.Services
 
             return reportType;
         }
-        public ReportTypeModel GetReportTypeModelExistDB(ReportTypeModel reportTypeModel)
+        public ReportTypeModel GetReportTypeModelWithUniqueCodeDB(string UniqueCode)
         {
             ReportTypeModel reportTypeModelRet = (from c in db.ReportTypes
-                                                  let name = (from cl in db.ReportTypeLanguages
-                                                              where cl.ReportTypeID == c.ReportTypeID
-                                                              select cl.Name).FirstOrDefault()
-                                                  let description = (from cl in db.ReportTypeLanguages
-                                                                     where cl.ReportTypeID == c.ReportTypeID
-                                                                     select cl.Description).FirstOrDefault()
-                                                  let startOfFileName = (from cl in db.ReportTypeLanguages
-                                                                         where cl.ReportTypeID == c.ReportTypeID
-                                                                         select cl.StartOfFileName).FirstOrDefault()
-                                                  where c.TVType == (int)reportTypeModel.TVType
-                                                  && c.UniqueCode == reportTypeModel.UniqueCode
-                                                  select new ReportTypeModel
-                                                  {
-                                                      Error = "",
-                                                      ReportTypeID = c.ReportTypeID,
-                                                      TVType = (TVTypeEnum)c.TVType,
-                                                      FileType = (FileTypeEnum)c.FileType,
-                                                      UniqueCode = c.UniqueCode,
-                                                      Name = name,
-                                                      Description = description,
-                                                      StartOfFileName = startOfFileName,
-                                                      LastUpdateDate_UTC = c.LastUpdateDate_UTC,
-                                                      LastUpdateContactTVItemID = c.LastUpdateContactTVItemID,
-                                                  }).FirstOrDefault<ReportTypeModel>();
-
-            if (reportTypeModelRet == null)
-            {
-                return ReturnError(string.Format(ServiceRes.CouldNotFind_With_Equal_, ServiceRes.ReportType, ServiceRes.TVType + "," + ServiceRes.UniqueCode, reportTypeModel.TVType.ToString() + "," + reportTypeModel.UniqueCode));
-            }
-
-            return reportTypeModelRet;
-        }
-        public ReportTypeModel GetReportTypeModelWithUniqueCodeDB(int ReportTypeID, string UniqueCode)
-        {
-            ReportTypeModel reportTypeModelRet = (from c in db.ReportTypes
-                                                  let name = (from cl in db.ReportTypeLanguages
-                                                              where cl.ReportTypeID == c.ReportTypeID
-                                                              select cl.Name).FirstOrDefault()
-                                                  let description = (from cl in db.ReportTypeLanguages
-                                                                     where cl.ReportTypeID == c.ReportTypeID
-                                                                     select cl.Description).FirstOrDefault()
-                                                  let startOfFileName = (from cl in db.ReportTypeLanguages
-                                                                         where cl.ReportTypeID == c.ReportTypeID
-                                                                         select cl.StartOfFileName).FirstOrDefault()
                                                   where c.UniqueCode == UniqueCode
-                                                  && c.ReportTypeID != ReportTypeID
                                                   select new ReportTypeModel
                                                   {
                                                       Error = "",
@@ -267,9 +208,10 @@ namespace CSSPDBDLL.Services
                                                       TVType = (TVTypeEnum)c.TVType,
                                                       FileType = (FileTypeEnum)c.FileType,
                                                       UniqueCode = c.UniqueCode,
-                                                      Name = name,
-                                                      Description = description,
-                                                      StartOfFileName = startOfFileName,
+                                                      Language = (LanguageEnum)c.Language,
+                                                      Name = c.Name,
+                                                      Description = c.Description,
+                                                      StartOfFileName = c.StartOfFileName,
                                                       LastUpdateDate_UTC = c.LastUpdateDate_UTC,
                                                       LastUpdateContactTVItemID = c.LastUpdateContactTVItemID,
                                                   }).FirstOrDefault<ReportTypeModel>();
@@ -295,9 +237,10 @@ namespace CSSPDBDLL.Services
             TVTypeEnum TVType = TVTypeEnum.Error;
             FileTypeEnum FileType = FileTypeEnum.Error;
             string UniqueCode = "";
-            string Name = "";
-            string StartOfFileName = "";
-            string Description = "";
+            LanguageEnum Language = LanguageEnum.Error;
+            //string Name = "";
+            //string StartOfFileName = "";
+            //string Description = "";
 
             int.TryParse(fc["ReportTypeID"], out ReportTypeID);
             // if ReportTypeID == 0 then we should create a new one else we should modify the existing one
@@ -321,15 +264,19 @@ namespace CSSPDBDLL.Services
             UniqueCode = fc["UniqueCode"];
             reportTypeModel.UniqueCode = UniqueCode;
 
-            Name = fc["Name"];
-            StartOfFileName = fc["StartOfFileName"];
-            Description = fc["Description"];
+            int.TryParse(fc["Language"], out tempInt);
+            Language = (LanguageEnum)tempInt;
+            reportTypeModel.Language = Language;
+
+            reportTypeModel.Name = fc["Name"];
+            reportTypeModel.StartOfFileName = fc["StartOfFileName"];
+            reportTypeModel.Description = fc["Description"];
 
             ContactOK contactOK = IsContactOK();
             if (!string.IsNullOrEmpty(contactOK.Error))
                 return ReturnError(contactOK.Error);
 
-            ReportTypeModel reportTypeModelHasUniqueCode = GetReportTypeModelWithUniqueCodeDB(ReportTypeID, UniqueCode);
+            ReportTypeModel reportTypeModelHasUniqueCode = GetReportTypeModelWithUniqueCodeDB(UniqueCode);
             if (string.IsNullOrWhiteSpace(reportTypeModelHasUniqueCode.Error))
             {
                 return ReturnError(string.Format(ServiceRes._AlreadyExists, ServiceRes.UniqueCode));
@@ -347,30 +294,6 @@ namespace CSSPDBDLL.Services
                     LogModel logModel = _LogService.PostAddLogForObj("ReportTypes", reportTypeModelRet.ReportTypeID, LogCommandEnum.Add, reportTypeModelRet);
                     if (!string.IsNullOrWhiteSpace(logModel.Error))
                         return ReturnError(logModel.Error);
-
-                    foreach (LanguageEnum Lang in LanguageListAllowable)
-                    {
-                        ReportTypeLanguageModel reportTypeLanguageModelNew = new ReportTypeLanguageModel()
-                        {
-                            ReportTypeID = reportTypeModelRet.ReportTypeID,
-                            Language = Lang,
-                            Name = (string.IsNullOrWhiteSpace(Name) ? "---" : Name),
-                            TranslationStatusName = (Lang == LanguageRequest ? TranslationStatusEnum.Translated : TranslationStatusEnum.NotTranslated),
-                            Description = (string.IsNullOrWhiteSpace(Description) ? "---" : Description),
-                            TranslationStatusDescription = (Lang == LanguageRequest ? TranslationStatusEnum.Translated : TranslationStatusEnum.NotTranslated),
-                            StartOfFileName = (string.IsNullOrWhiteSpace(StartOfFileName) ? "---" : StartOfFileName),
-                            TranslationStatusStartOfFileName = (Lang == LanguageRequest ? TranslationStatusEnum.Translated : TranslationStatusEnum.NotTranslated),
-                        };
-
-                        ReportTypeLanguageModel reportTypeLanguageModelRet = _ReportTypeLanguageService.PostAddReportTypeLanguageDB(reportTypeLanguageModelNew);
-                        if (!string.IsNullOrEmpty(reportTypeLanguageModelRet.Error))
-                            return ReturnError(reportTypeLanguageModelRet.Error);
-
-                        logModel = _LogService.PostAddLogForObj("ReportTypeLanguages", reportTypeLanguageModelRet.ReportTypeLanguageID, LogCommandEnum.Add, reportTypeLanguageModelRet);
-                        if (!string.IsNullOrWhiteSpace(logModel.Error))
-                            return ReturnError(logModel.Error);
-
-                    }
                 }
                 else
                 {
@@ -381,33 +304,6 @@ namespace CSSPDBDLL.Services
                     LogModel logModel = _LogService.PostAddLogForObj("ReportTypes", reportTypeModelRet.ReportTypeID, LogCommandEnum.Change, reportTypeModelRet);
                     if (!string.IsNullOrWhiteSpace(logModel.Error))
                         return ReturnError(logModel.Error);
-
-                    foreach (LanguageEnum Lang in LanguageListAllowable)
-                    {
-                        if (Lang == LanguageRequest)
-                        {
-                            ReportTypeLanguageModel reportTypeLanguageModelNew = new ReportTypeLanguageModel()
-                            {
-                                ReportTypeID = reportTypeModelRet.ReportTypeID,
-                                Language = Lang,
-                                Name = (string.IsNullOrWhiteSpace(Name) ? "---" : Name),
-                                TranslationStatusName = (Lang == LanguageRequest ? TranslationStatusEnum.Translated : TranslationStatusEnum.NotTranslated),
-                                Description = (string.IsNullOrWhiteSpace(Description) ? "---" : Description),
-                                TranslationStatusDescription = (Lang == LanguageRequest ? TranslationStatusEnum.Translated : TranslationStatusEnum.NotTranslated),
-                                StartOfFileName = (string.IsNullOrWhiteSpace(StartOfFileName) ? "---" : StartOfFileName),
-                                TranslationStatusStartOfFileName = (Lang == LanguageRequest ? TranslationStatusEnum.Translated : TranslationStatusEnum.NotTranslated),
-                            };
-
-                            ReportTypeLanguageModel reportTypeLanguageModelRet = _ReportTypeLanguageService.PostUpdateReportTypeLanguageDB(reportTypeLanguageModelNew);
-                            if (!string.IsNullOrEmpty(reportTypeLanguageModelRet.Error))
-                                return ReturnError(reportTypeLanguageModelRet.Error);
-
-                            logModel = _LogService.PostAddLogForObj("ReportTypeLanguages", reportTypeLanguageModelRet.ReportTypeLanguageID, LogCommandEnum.Change, reportTypeLanguageModelRet);
-                            if (!string.IsNullOrWhiteSpace(logModel.Error))
-                                return ReturnError(logModel.Error);
-
-                        }
-                    }
                 }
 
                 ts.Complete();
@@ -424,7 +320,7 @@ namespace CSSPDBDLL.Services
             if (!string.IsNullOrEmpty(contactOK.Error))
                 return ReturnError(contactOK.Error);
 
-            ReportTypeModel reportTypeModelExist = GetReportTypeModelExistDB(reportTypeModel);
+            ReportTypeModel reportTypeModelExist = GetReportTypeModelWithUniqueCodeDB(reportTypeModel.UniqueCode);
             if (string.IsNullOrWhiteSpace(reportTypeModelExist.Error))
                 return ReturnError(string.Format(ServiceRes._AlreadyExists, ServiceRes.ReportType));
 

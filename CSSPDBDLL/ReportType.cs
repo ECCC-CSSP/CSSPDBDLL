@@ -18,19 +18,20 @@ namespace CSSPDBDLL
         public ReportType()
         {
             this.ReportSections = new HashSet<ReportSection>();
-            this.ReportTypeLanguages = new HashSet<ReportTypeLanguage>();
         }
     
         public int ReportTypeID { get; set; }
         public int TVType { get; set; }
         public int FileType { get; set; }
         public string UniqueCode { get; set; }
+        public Nullable<int> Language { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public string StartOfFileName { get; set; }
         public System.DateTime LastUpdateDate_UTC { get; set; }
         public int LastUpdateContactTVItemID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ReportSection> ReportSections { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ReportTypeLanguage> ReportTypeLanguages { get; set; }
     }
 }

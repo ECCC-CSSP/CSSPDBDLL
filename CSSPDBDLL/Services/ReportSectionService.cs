@@ -22,7 +22,6 @@ namespace CSSPDBDLL.Services
         #endregion Variables
 
         #region Properties
-        public ReportSectionLanguageService _ReportSectionLanguageService { get; private set; }
         public LogService _LogService { get; private set; }
         #endregion Properties
 
@@ -30,7 +29,6 @@ namespace CSSPDBDLL.Services
         public ReportSectionService(LanguageEnum LanguageRequest, IPrincipal User)
             : base(LanguageRequest, User)
         {
-            _ReportSectionLanguageService = new ReportSectionLanguageService(LanguageRequest, User);
             _LogService = new LogService(LanguageRequest, User);
         }
         #endregion Constructors
@@ -58,38 +56,43 @@ namespace CSSPDBDLL.Services
         }
 
         // Check
-        public string ReportSectionModelOK(ReportSectionModel ReportSectionModel)
+        public string ReportSectionModelOK(ReportSectionModel reportSectionModel)
         {
-            string retStr = FieldCheckNotZeroInt(ReportSectionModel.ReportTypeID, ServiceRes.ReportTypeID);
+            string retStr = FieldCheckNotZeroInt(reportSectionModel.ReportTypeID, ServiceRes.ReportTypeID);
             if (!string.IsNullOrWhiteSpace(retStr))
             {
                 return retStr;
             }
 
-            retStr = FieldCheckIfNotNullNotZeroInt(ReportSectionModel.TVItemID, ServiceRes.TVItemID);
+            retStr = FieldCheckIfNotNullNotZeroInt(reportSectionModel.TVItemID, ServiceRes.TVItemID);
             if (!string.IsNullOrWhiteSpace(retStr))
             {
                 return retStr;
             }
 
-            retStr = FieldCheckNotNullAndWithinRangeInt(ReportSectionModel.Ordinal, ServiceRes.Ordinal, 0, 1000);
+            retStr = FieldCheckNotNullAndWithinRangeInt(reportSectionModel.Ordinal, ServiceRes.Ordinal, 0, 1000);
             if (!string.IsNullOrWhiteSpace(retStr))
             {
                 return retStr;
             }
 
-            retStr = FieldCheckIfNotNullNotZeroInt(ReportSectionModel.ParentReportSectionID, ServiceRes.ParentReportSectionID);
+            retStr = FieldCheckIfNotNullNotZeroInt(reportSectionModel.ParentReportSectionID, ServiceRes.ParentReportSectionID);
             if (!string.IsNullOrWhiteSpace(retStr))
             {
                 return retStr;
             }
 
-            retStr = FieldCheckIfNotNullWithinRangeInt(ReportSectionModel.Year, ServiceRes.Year, 1980, 2050);
+            retStr = FieldCheckIfNotNullWithinRangeInt(reportSectionModel.Year, ServiceRes.Year, 1980, 2050);
             if (!string.IsNullOrWhiteSpace(retStr))
             {
                 return retStr;
             }
 
+            retStr = _BaseEnumService.LanguageOK(reportSectionModel.Language);
+            if (!string.IsNullOrWhiteSpace(retStr))
+            {
+                return retStr;
+            }
             return "";
         }
 
@@ -99,12 +102,15 @@ namespace CSSPDBDLL.Services
             reportSection.ReportSectionID = reportSectionModel.ReportSectionID;
             reportSection.ReportTypeID = (int)reportSectionModel.ReportTypeID;
             reportSection.TVItemID = reportSectionModel.TVItemID;
+            reportSection.Language = (int)reportSectionModel.Language;
             reportSection.Ordinal = reportSectionModel.Ordinal;
             reportSection.IsStatic = reportSectionModel.IsStatic;
             reportSection.ParentReportSectionID = reportSectionModel.ParentReportSectionID;
             reportSection.Year = reportSectionModel.Year;
             reportSection.Locked = reportSectionModel.Locked;
             reportSection.TemplateReportSectionID = reportSectionModel.TemplateReportSectionID;
+            reportSection.ReportSectionName = reportSectionModel.ReportSectionName;
+            reportSection.ReportSectionText = reportSectionModel.ReportSectionText;
             reportSection.LastUpdateDate_UTC = DateTime.UtcNow;
             if (contactOK == null)
             {
@@ -126,34 +132,34 @@ namespace CSSPDBDLL.Services
 
             return ReportSectionModelCount;
         }
-        public List<int?> GetReportSectionYearListWithReportTypeIDDB(int ReportTypeID)
+        public List<int?> GetReportSectionYearListWithReportTypeIDAndLanguageDB(int ReportTypeID, LanguageEnum language)
         {
             List<int?> reportSectionYearList = (from c in db.ReportSections
                                                 where c.ReportTypeID == ReportTypeID
+                                                && c.Language == (int)language
                                                 orderby c.Year descending
                                                 select c.Year).Distinct().ToList<int?>();
 
             return reportSectionYearList;
         }
-        public List<ReportSectionModel> GetReportSectionModelListWithReportTypeIDAndTVItemIDNoReportSectionTextDB(int ReportTypeID, int? TVItemID)
+        public List<ReportSectionModel> GetReportSectionModelListWithReportTypeIDAndTVItemIDNoReportSectionTextDB(int ReportTypeID, LanguageEnum language, int? TVItemID)
         {
             List<ReportSectionModel> reportSectionModelList = (from c in db.ReportSections
-                                                               let reportSectionName = (from cl in db.ReportSectionLanguages
-                                                                                        where cl.ReportSectionID == c.ReportSectionID
-                                                                                        select cl.ReportSectionName).FirstOrDefault()
                                                                where c.ReportTypeID == ReportTypeID
+                                                               && c.Language == (int)language
                                                                && c.TVItemID == TVItemID
-                                                               orderby c.Ordinal, reportSectionName
+                                                               orderby c.Ordinal, c.ReportSectionName
                                                                select new ReportSectionModel
                                                                {
                                                                    Error = "",
                                                                    ReportSectionID = c.ReportSectionID,
                                                                    ReportTypeID = c.ReportTypeID,
                                                                    TVItemID = c.TVItemID,
+                                                                   Language = (LanguageEnum)c.Language,
                                                                    Ordinal = c.Ordinal,
                                                                    IsStatic = c.IsStatic,
-                                                                   ReportSectionName = reportSectionName,
-                                                                   ReportSectionText = "",
+                                                                   ReportSectionName = c.ReportSectionName,
+                                                                   ReportSectionText = c.ReportSectionText,
                                                                    ParentReportSectionID = c.ParentReportSectionID,
                                                                    Year = c.Year,
                                                                    Locked = c.Locked,
@@ -164,28 +170,24 @@ namespace CSSPDBDLL.Services
 
             return reportSectionModelList;
         }
-        public List<ReportSectionModel> GetReportSectionModelListWithReportSectionIDTemplateLinkAndTVItemIDForAllYearsDB(int ReportSectionID, int TVItemID)
+        public List<ReportSectionModel> GetReportSectionModelListWithReportSectionIDTemplateLinkAndTVItemIDForAllYearsDB(int ReportSectionID, int TVItemID, LanguageEnum language)
         {
             List<ReportSectionModel> reportSectionModelList = (from c in db.ReportSections
-                                                               let reportSectionName = (from cl in db.ReportSectionLanguages
-                                                                                        where cl.ReportSectionID == c.ReportSectionID
-                                                                                        select cl.ReportSectionName).FirstOrDefault()
-                                                               let reportSectionText = (from cl in db.ReportSectionLanguages
-                                                                                        where cl.ReportSectionID == c.ReportSectionID
-                                                                                        select cl.ReportSectionText).FirstOrDefault()
                                                                where c.TemplateReportSectionID == ReportSectionID
                                                                && c.TVItemID == TVItemID
-                                                               orderby c.Ordinal, reportSectionName
+                                                               && c.Language == (int)language
+                                                               orderby c.Ordinal, c.ReportSectionName
                                                                select new ReportSectionModel
                                                                {
                                                                    Error = "",
                                                                    ReportSectionID = c.ReportSectionID,
                                                                    ReportTypeID = c.ReportTypeID,
                                                                    TVItemID = c.TVItemID,
+                                                                   Language = (LanguageEnum)c.Language,
                                                                    Ordinal = c.Ordinal,
                                                                    IsStatic = c.IsStatic,
-                                                                   ReportSectionName = reportSectionName,
-                                                                   ReportSectionText = reportSectionText,
+                                                                   ReportSectionName = c.ReportSectionName,
+                                                                   ReportSectionText = c.ReportSectionText,
                                                                    ParentReportSectionID = c.ParentReportSectionID,
                                                                    Year = c.Year,
                                                                    Locked = c.Locked,
@@ -196,29 +198,25 @@ namespace CSSPDBDLL.Services
 
             return reportSectionModelList;
         }
-        public List<ReportSectionModel> GetReportSectionModelListWithReportTypeIDAndTVItemIDAndYearDB(int ReportTypeID, int? TVItemID, int? Year)
+        public List<ReportSectionModel> GetReportSectionModelListWithReportTypeIDAndTVItemIDAndYearDB(int ReportTypeID, LanguageEnum language, int? TVItemID, int? Year)
         {
             List<ReportSectionModel> reportSectionModelList = (from c in db.ReportSections
-                                                               let reportSectionName = (from cl in db.ReportSectionLanguages
-                                                                                        where cl.ReportSectionID == c.ReportSectionID
-                                                                                        select cl.ReportSectionName).FirstOrDefault()
-                                                               let reportSectionText = (from cl in db.ReportSectionLanguages
-                                                                                        where cl.ReportSectionID == c.ReportSectionID
-                                                                                        select cl.ReportSectionText).FirstOrDefault()
                                                                where c.ReportTypeID == ReportTypeID
+                                                               && c.Language == (int)language
                                                                && c.TVItemID == TVItemID
                                                                && c.Year == Year
-                                                               orderby c.Ordinal, reportSectionName
+                                                               orderby c.Ordinal, c.ReportSectionName
                                                                select new ReportSectionModel
                                                                {
                                                                    Error = "",
                                                                    ReportSectionID = c.ReportSectionID,
                                                                    ReportTypeID = c.ReportTypeID,
                                                                    TVItemID = c.TVItemID,
+                                                                   Language = (LanguageEnum)c.Language,
                                                                    Ordinal = c.Ordinal,
                                                                    IsStatic = c.IsStatic,
-                                                                   ReportSectionName = reportSectionName,
-                                                                   ReportSectionText = reportSectionText,
+                                                                   ReportSectionName = c.ReportSectionName,
+                                                                   ReportSectionText = c.ReportSectionText,
                                                                    ParentReportSectionID = c.ParentReportSectionID,
                                                                    Year = c.Year,
                                                                    Locked = c.Locked,
@@ -229,30 +227,26 @@ namespace CSSPDBDLL.Services
 
             return reportSectionModelList;
         }
-        public List<ReportSectionModel> GetReportSectionModelListWithReportTypeIDAndTVItemIDAndYearAndParentReportSectionIDDB(int ReportTypeID, int? TVItemID, int? Year, int? ParentReportSectionID)
+        public List<ReportSectionModel> GetReportSectionModelListWithReportTypeIDAndTVItemIDAndYearAndParentReportSectionIDDB(int ReportTypeID, LanguageEnum language, int? TVItemID, int? Year, int? ParentReportSectionID)
         {
             List<ReportSectionModel> reportSectionModelList = (from c in db.ReportSections
-                                                               let reportSectionName = (from cl in db.ReportSectionLanguages
-                                                                                        where cl.ReportSectionID == c.ReportSectionID
-                                                                                        select cl.ReportSectionName).FirstOrDefault()
-                                                               let reportSectionText = (from cl in db.ReportSectionLanguages
-                                                                                        where cl.ReportSectionID == c.ReportSectionID
-                                                                                        select cl.ReportSectionText).FirstOrDefault()
                                                                where c.ReportTypeID == ReportTypeID
+                                                               && c.Language == (int)language
                                                                && c.TVItemID == TVItemID
                                                                && c.Year == Year
                                                                && c.ParentReportSectionID == ParentReportSectionID
-                                                               orderby c.Ordinal, reportSectionName
+                                                               orderby c.Ordinal, c.ReportSectionName
                                                                select new ReportSectionModel
                                                                {
                                                                    Error = "",
                                                                    ReportSectionID = c.ReportSectionID,
                                                                    ReportTypeID = c.ReportTypeID,
                                                                    TVItemID = c.TVItemID,
+                                                                   Language = (LanguageEnum)c.Language,
                                                                    Ordinal = c.Ordinal,
                                                                    IsStatic = c.IsStatic,
-                                                                   ReportSectionName = reportSectionName,
-                                                                   ReportSectionText = reportSectionText,
+                                                                   ReportSectionName = c.ReportSectionName,
+                                                                   ReportSectionText = c.ReportSectionText,
                                                                    ParentReportSectionID = c.ParentReportSectionID,
                                                                    Year = c.Year,
                                                                    Locked = c.Locked,
@@ -266,24 +260,19 @@ namespace CSSPDBDLL.Services
         public ReportSectionModel GetReportSectionModelWithReportSectionIDDB(int ReportSectionID)
         {
             ReportSectionModel reportSectionModel = (from c in db.ReportSections
-                                                     let reportSectionName = (from cl in db.ReportSectionLanguages
-                                                                              where cl.ReportSectionID == c.ReportSectionID
-                                                                              select cl.ReportSectionName).FirstOrDefault()
-                                                     let reportSectionText = (from cl in db.ReportSectionLanguages
-                                                                              where cl.ReportSectionID == c.ReportSectionID
-                                                                              select cl.ReportSectionText).FirstOrDefault()
                                                      where c.ReportSectionID == ReportSectionID
-                                                     orderby c.Ordinal, reportSectionName
+                                                     orderby c.Ordinal, c.ReportSectionName
                                                      select new ReportSectionModel
                                                      {
                                                          Error = "",
                                                          ReportSectionID = c.ReportSectionID,
                                                          ReportTypeID = c.ReportTypeID,
                                                          TVItemID = c.TVItemID,
+                                                         Language = (LanguageEnum)c.Language,
                                                          Ordinal = c.Ordinal,
                                                          IsStatic = c.IsStatic,
-                                                         ReportSectionName = reportSectionName,
-                                                         ReportSectionText = reportSectionText,
+                                                         ReportSectionName = c.ReportSectionName,
+                                                         ReportSectionText = c.ReportSectionText,
                                                          ParentReportSectionID = c.ParentReportSectionID,
                                                          Year = c.Year,
                                                          Locked = c.Locked,
@@ -299,27 +288,23 @@ namespace CSSPDBDLL.Services
 
             return reportSectionModel;
         }
-        public List<ReportSectionModel> GetReportSectionModelListWithTemplateReportSectionIDDB(int TemplateReportSectionID)
+        public List<ReportSectionModel> GetReportSectionModelListWithTemplateReportSectionIDDB(int TemplateReportSectionID, LanguageEnum language)
         {
             List<ReportSectionModel> reportSectionModelList = (from c in db.ReportSections
-                                                               let reportSectionName = (from cl in db.ReportSectionLanguages
-                                                                                        where cl.ReportSectionID == c.ReportSectionID
-                                                                                        select cl.ReportSectionName).FirstOrDefault()
-                                                               let reportSectionText = (from cl in db.ReportSectionLanguages
-                                                                                        where cl.ReportSectionID == c.ReportSectionID
-                                                                                        select cl.ReportSectionText).FirstOrDefault()
                                                                where c.TemplateReportSectionID == TemplateReportSectionID
-                                                               orderby c.Ordinal, reportSectionName
+                                                               && c.Language == (int)language
+                                                               orderby c.Ordinal, c.ReportSectionName
                                                                select new ReportSectionModel
                                                                {
                                                                    Error = "",
                                                                    ReportSectionID = c.ReportSectionID,
                                                                    ReportTypeID = c.ReportTypeID,
                                                                    TVItemID = c.TVItemID,
+                                                                   Language = (LanguageEnum)c.Language,
                                                                    Ordinal = c.Ordinal,
                                                                    IsStatic = c.IsStatic,
-                                                                   ReportSectionName = reportSectionName,
-                                                                   ReportSectionText = reportSectionText,
+                                                                   ReportSectionName = c.ReportSectionName,
+                                                                   ReportSectionText = c.ReportSectionText,
                                                                    ParentReportSectionID = c.ParentReportSectionID,
                                                                    Year = c.Year,
                                                                    Locked = c.Locked,
@@ -330,27 +315,23 @@ namespace CSSPDBDLL.Services
 
             return reportSectionModelList;
         }
-        public List<ReportSectionModel> GetReportSectionModelListWithParentReportSectionIDDB(int ParentReportSectionID)
+        public List<ReportSectionModel> GetReportSectionModelListWithParentReportSectionIDDB(int ParentReportSectionID, LanguageEnum language)
         {
             List<ReportSectionModel> reportSectionModelList = (from c in db.ReportSections
-                                                               let reportSectionName = (from cl in db.ReportSectionLanguages
-                                                                                        where cl.ReportSectionID == c.ReportSectionID
-                                                                                        select cl.ReportSectionName).FirstOrDefault()
-                                                               let reportSectionText = (from cl in db.ReportSectionLanguages
-                                                                                        where cl.ReportSectionID == c.ReportSectionID
-                                                                                        select cl.ReportSectionText).FirstOrDefault()
                                                                where c.ParentReportSectionID == ParentReportSectionID
-                                                               orderby c.Ordinal, reportSectionName
+                                                               && c.Language == (int)language
+                                                               orderby c.Ordinal, c.ReportSectionName
                                                                select new ReportSectionModel
                                                                {
                                                                    Error = "",
                                                                    ReportSectionID = c.ReportSectionID,
                                                                    ReportTypeID = c.ReportTypeID,
                                                                    TVItemID = c.TVItemID,
+                                                                   Language = (LanguageEnum)c.Language,
                                                                    Ordinal = c.Ordinal,
                                                                    IsStatic = c.IsStatic,
-                                                                   ReportSectionName = reportSectionName,
-                                                                   ReportSectionText = reportSectionText,
+                                                                   ReportSectionName = c.ReportSectionName,
+                                                                   ReportSectionText = c.ReportSectionText,
                                                                    ParentReportSectionID = c.ParentReportSectionID,
                                                                    Year = c.Year,
                                                                    Locked = c.Locked,
@@ -372,27 +353,23 @@ namespace CSSPDBDLL.Services
         public ReportSectionModel GetReportSectionModelExistDB(ReportSectionModel reportSectionModel)
         {
             ReportSectionModel reportSectionModelRet = (from c in db.ReportSections
-                                                        let reportSectionName = (from cl in db.ReportSectionLanguages
-                                                                                 where cl.ReportSectionID == c.ReportSectionID
-                                                                                 select cl.ReportSectionName).FirstOrDefault()
-                                                        let reportSectionText = (from cl in db.ReportSectionLanguages
-                                                                                 where cl.ReportSectionID == c.ReportSectionID
-                                                                                 select cl.ReportSectionText).FirstOrDefault()
                                                         where c.ReportTypeID == reportSectionModel.ReportTypeID
                                                         && c.TVItemID == reportSectionModel.TVItemID
+                                                        && c.Language == (int)reportSectionModel.Language
                                                         && c.ParentReportSectionID == reportSectionModel.ParentReportSectionID
                                                         && c.Year == reportSectionModel.Year
-                                                        && reportSectionName == reportSectionModel.ReportSectionName
+                                                        && c.ReportSectionName == reportSectionModel.ReportSectionName
                                                         select new ReportSectionModel
                                                         {
                                                             Error = "",
                                                             ReportSectionID = c.ReportSectionID,
                                                             ReportTypeID = c.ReportTypeID,
                                                             TVItemID = c.TVItemID,
+                                                            Language = (LanguageEnum)c.Language,
                                                             Ordinal = c.Ordinal,
                                                             IsStatic = c.IsStatic,
-                                                            ReportSectionName = reportSectionName,
-                                                            ReportSectionText = reportSectionText,
+                                                            ReportSectionName = c.ReportSectionName,
+                                                            ReportSectionText = c.ReportSectionText,
                                                             ParentReportSectionID = c.ParentReportSectionID,
                                                             Year = c.Year,
                                                             Locked = c.Locked,
@@ -434,7 +411,7 @@ namespace CSSPDBDLL.Services
             }
 
             int MaxOrdinal = 0;
-            ReportSectionModel reportSectionModelMaxOrdinal = GetReportSectionModelListWithReportTypeIDAndTVItemIDAndYearDB(reportSectionModelParent.ReportTypeID, null, null).OrderByDescending(c => c.Ordinal).FirstOrDefault();
+            ReportSectionModel reportSectionModelMaxOrdinal = GetReportSectionModelListWithReportTypeIDAndTVItemIDAndYearDB(reportSectionModelParent.ReportTypeID, reportSectionModelParent.Language, null, null).OrderByDescending(c => c.Ordinal).FirstOrDefault();
             if (reportSectionModelMaxOrdinal != null)
             {
                 MaxOrdinal = reportSectionModelMaxOrdinal.Ordinal + 1;
@@ -476,28 +453,6 @@ namespace CSSPDBDLL.Services
                 if (!string.IsNullOrWhiteSpace(logModel.Error))
                     return ReturnError(logModel.Error);
 
-                foreach (LanguageEnum Lang in LanguageListAllowable)
-                {
-                    ReportSectionLanguageModel ReportSectionLanguageModelNew = new ReportSectionLanguageModel()
-                    {
-                        ReportSectionID = ReportSectionModelRet.ReportSectionID,
-                        Language = Lang,
-                        ReportSectionName = reportSectionModel.ReportSectionName,
-                        TranslationStatusReportSectionName = (Lang == LanguageRequest ? TranslationStatusEnum.Translated : TranslationStatusEnum.NotTranslated),
-                        ReportSectionText = reportSectionModel.ReportSectionText,
-                        TranslationStatusReportSectionText = (Lang == LanguageRequest ? TranslationStatusEnum.Translated : TranslationStatusEnum.NotTranslated),
-                    };
-
-                    ReportSectionLanguageModel ReportSectionLanguageModelRet = _ReportSectionLanguageService.PostAddReportSectionLanguageDB(ReportSectionLanguageModelNew);
-                    if (!string.IsNullOrEmpty(ReportSectionLanguageModelRet.Error))
-                        return ReturnError(ReportSectionLanguageModelRet.Error);
-
-                    logModel = _LogService.PostAddLogForObj("ReportSectionLanguages", ReportSectionLanguageModelRet.ReportSectionLanguageID, LogCommandEnum.Add, ReportSectionLanguageModelRet);
-                    if (!string.IsNullOrWhiteSpace(logModel.Error))
-                        return ReturnError(logModel.Error);
-
-                }
-
                 ts.Complete();
             }
             return GetReportSectionModelWithReportSectionIDDB(ReportSectionModelRet.ReportSectionID);
@@ -513,12 +468,12 @@ namespace CSSPDBDLL.Services
             ReportSectionModel ReportSectionModelRet = new ReportSectionModel();
             if (reportSectionModelSibling.ParentReportSectionID == null)
             {
-                ReportSectionModelRet = PostReportSectionAddTopDB(reportSectionModelSibling.ReportTypeID);
+                ReportSectionModelRet = PostReportSectionAddTopDB(reportSectionModelSibling.ReportTypeID, reportSectionModelSibling.Language);
             }
             else
             {
                 int MaxOrdinal = 0;
-                ReportSectionModel reportSectionModelMaxOrdinal = GetReportSectionModelListWithReportTypeIDAndTVItemIDAndYearDB(reportSectionModelSibling.ReportTypeID, null, null).OrderByDescending(c => c.Ordinal).FirstOrDefault();
+                ReportSectionModel reportSectionModelMaxOrdinal = GetReportSectionModelListWithReportTypeIDAndTVItemIDAndYearDB(reportSectionModelSibling.ReportTypeID, reportSectionModelSibling.Language, null, null).OrderByDescending(c => c.Ordinal).FirstOrDefault();
                 if (reportSectionModelMaxOrdinal != null)
                 {
                     MaxOrdinal = reportSectionModelMaxOrdinal.Ordinal + 1;
@@ -558,38 +513,16 @@ namespace CSSPDBDLL.Services
                     if (!string.IsNullOrWhiteSpace(logModel.Error))
                         return ReturnError(logModel.Error);
 
-                    foreach (LanguageEnum Lang in LanguageListAllowable)
-                    {
-                        ReportSectionLanguageModel ReportSectionLanguageModelNew = new ReportSectionLanguageModel()
-                        {
-                            ReportSectionID = ReportSectionModelRet.ReportSectionID,
-                            Language = Lang,
-                            ReportSectionName = reportSectionModel.ReportSectionName,
-                            TranslationStatusReportSectionName = (Lang == LanguageRequest ? TranslationStatusEnum.Translated : TranslationStatusEnum.NotTranslated),
-                            ReportSectionText = reportSectionModel.ReportSectionText,
-                            TranslationStatusReportSectionText = (Lang == LanguageRequest ? TranslationStatusEnum.Translated : TranslationStatusEnum.NotTranslated),
-                        };
-
-                        ReportSectionLanguageModel ReportSectionLanguageModelRet = _ReportSectionLanguageService.PostAddReportSectionLanguageDB(ReportSectionLanguageModelNew);
-                        if (!string.IsNullOrEmpty(ReportSectionLanguageModelRet.Error))
-                            return ReturnError(ReportSectionLanguageModelRet.Error);
-
-                        logModel = _LogService.PostAddLogForObj("ReportSectionLanguages", ReportSectionLanguageModelRet.ReportSectionLanguageID, LogCommandEnum.Add, ReportSectionLanguageModelRet);
-                        if (!string.IsNullOrWhiteSpace(logModel.Error))
-                            return ReturnError(logModel.Error);
-
-                    }
-
                     ts.Complete();
                 }
 
             }
             return GetReportSectionModelWithReportSectionIDDB(ReportSectionModelRet.ReportSectionID);
         }
-        public ReportSectionModel PostReportSectionAddTopDB(int ReportTypeID)
+        public ReportSectionModel PostReportSectionAddTopDB(int ReportTypeID, LanguageEnum language)
         {
             int MaxOrdinal = 0;
-            ReportSectionModel reportSectionModelMaxOrdinal = GetReportSectionModelListWithReportTypeIDAndTVItemIDAndYearDB(ReportTypeID, null, null).OrderByDescending(c => c.Ordinal).FirstOrDefault();
+            ReportSectionModel reportSectionModelMaxOrdinal = GetReportSectionModelListWithReportTypeIDAndTVItemIDAndYearDB(ReportTypeID, language, null, null).OrderByDescending(c => c.Ordinal).FirstOrDefault();
             if (reportSectionModelMaxOrdinal != null)
             {
                 MaxOrdinal = reportSectionModelMaxOrdinal.Ordinal + 1;
@@ -631,28 +564,6 @@ namespace CSSPDBDLL.Services
                 if (!string.IsNullOrWhiteSpace(logModel.Error))
                     return ReturnError(logModel.Error);
 
-                foreach (LanguageEnum Lang in LanguageListAllowable)
-                {
-                    ReportSectionLanguageModel ReportSectionLanguageModelNew = new ReportSectionLanguageModel()
-                    {
-                        ReportSectionID = ReportSectionModelRet.ReportSectionID,
-                        Language = Lang,
-                        ReportSectionName = reportSectionModel.ReportSectionName,
-                        TranslationStatusReportSectionName = (Lang == LanguageRequest ? TranslationStatusEnum.Translated : TranslationStatusEnum.NotTranslated),
-                        ReportSectionText = reportSectionModel.ReportSectionText,
-                        TranslationStatusReportSectionText = (Lang == LanguageRequest ? TranslationStatusEnum.Translated : TranslationStatusEnum.NotTranslated),
-                    };
-
-                    ReportSectionLanguageModel ReportSectionLanguageModelRet = _ReportSectionLanguageService.PostAddReportSectionLanguageDB(ReportSectionLanguageModelNew);
-                    if (!string.IsNullOrEmpty(ReportSectionLanguageModelRet.Error))
-                        return ReturnError(ReportSectionLanguageModelRet.Error);
-
-                    logModel = _LogService.PostAddLogForObj("ReportSectionLanguages", ReportSectionLanguageModelRet.ReportSectionLanguageID, LogCommandEnum.Add, ReportSectionLanguageModelRet);
-                    if (!string.IsNullOrWhiteSpace(logModel.Error))
-                        return ReturnError(logModel.Error);
-
-                }
-
                 ts.Complete();
             }
             return GetReportSectionModelWithReportSectionIDDB(ReportSectionModelRet.ReportSectionID);
@@ -686,9 +597,9 @@ namespace CSSPDBDLL.Services
             }
             return GetReportSectionModelWithReportSectionIDDB(ReportSectionModelRet.ReportSectionID);
         }
-        public ReportSectionModel PostReportSectionChangeLockedDB(int ReportTypeID, bool Locked)
+        public ReportSectionModel PostReportSectionChangeLockedDB(int ReportTypeID, LanguageEnum language, bool Locked)
         {
-            List<ReportSectionModel> reportSectionModelList = GetReportSectionModelListWithReportTypeIDAndTVItemIDAndYearDB(ReportTypeID, null, null);
+            List<ReportSectionModel> reportSectionModelList = GetReportSectionModelListWithReportTypeIDAndTVItemIDAndYearDB(ReportTypeID, language, null, null);
 
             if (reportSectionModelList.Count == 0)
             {
@@ -773,7 +684,7 @@ namespace CSSPDBDLL.Services
             ReportSectionModel ReportSectionModelRet = new ReportSectionModel();
             using (TransactionScope ts = new TransactionScope())
             {
-                List<ReportSectionModel> reportSectionModelList = GetReportSectionModelListWithReportTypeIDAndTVItemIDAndYearDB(reportSectionModel.ReportTypeID, reportSectionModel.TVItemID, reportSectionModel.Year).Where(c => c.ParentReportSectionID == reportSectionModel.ParentReportSectionID).OrderBy(c => c.Ordinal).ToList();
+                List<ReportSectionModel> reportSectionModelList = GetReportSectionModelListWithReportTypeIDAndTVItemIDAndYearDB(reportSectionModel.ReportTypeID, reportSectionModel.Language, reportSectionModel.TVItemID, reportSectionModel.Year).Where(c => c.ParentReportSectionID == reportSectionModel.ParentReportSectionID).OrderBy(c => c.Ordinal).ToList();
 
                 for (int i = 0, count = reportSectionModelList.Count; i < count; i++)
                 {
@@ -849,28 +760,6 @@ namespace CSSPDBDLL.Services
                 if (!string.IsNullOrWhiteSpace(logModel.Error))
                     return ReturnError(logModel.Error);
 
-                foreach (LanguageEnum Lang in LanguageListAllowable)
-                {
-                    ReportSectionLanguageModel ReportSectionLanguageModelNew = new ReportSectionLanguageModel()
-                    {
-                        ReportSectionID = ReportSectionModelRet.ReportSectionID,
-                        Language = Lang,
-                        ReportSectionName = "---",
-                        TranslationStatusReportSectionName = (Lang == LanguageRequest ? TranslationStatusEnum.Translated : TranslationStatusEnum.NotTranslated),
-                        ReportSectionText = ServiceRes.CopyOf + " - " + reportSectionModel.ReportSectionText,
-                        TranslationStatusReportSectionText = (Lang == LanguageRequest ? TranslationStatusEnum.Translated : TranslationStatusEnum.NotTranslated),
-                    };
-
-                    ReportSectionLanguageModel ReportSectionLanguageModelRet = _ReportSectionLanguageService.PostAddReportSectionLanguageDB(ReportSectionLanguageModelNew);
-                    if (!string.IsNullOrEmpty(ReportSectionLanguageModelRet.Error))
-                        return ReturnError(ReportSectionLanguageModelRet.Error);
-
-                    logModel = _LogService.PostAddLogForObj("ReportSectionLanguages", ReportSectionLanguageModelRet.ReportSectionLanguageID, LogCommandEnum.Add, ReportSectionLanguageModelRet);
-                    if (!string.IsNullOrWhiteSpace(logModel.Error))
-                        return ReturnError(logModel.Error);
-
-                }
-
                 ts.Complete();
             }
 
@@ -912,28 +801,6 @@ namespace CSSPDBDLL.Services
                 if (!string.IsNullOrWhiteSpace(logModel.Error))
                     return ReturnError(logModel.Error);
 
-                foreach (LanguageEnum Lang in LanguageListAllowable)
-                {
-                    ReportSectionLanguageModel ReportSectionLanguageModelNew = new ReportSectionLanguageModel()
-                    {
-                        ReportSectionID = ReportSectionModelRet.ReportSectionID,
-                        Language = Lang,
-                        ReportSectionName = reportSectionModel.ReportSectionName,
-                        TranslationStatusReportSectionName = (Lang == LanguageRequest ? TranslationStatusEnum.Translated : TranslationStatusEnum.NotTranslated),
-                        ReportSectionText = reportSectionModel.ReportSectionText,
-                        TranslationStatusReportSectionText = (Lang == LanguageRequest ? TranslationStatusEnum.Translated : TranslationStatusEnum.NotTranslated),
-                    };
-
-                    ReportSectionLanguageModel ReportSectionLanguageModelRet = _ReportSectionLanguageService.PostUpdateReportSectionLanguageDB(ReportSectionLanguageModelNew);
-                    if (!string.IsNullOrEmpty(ReportSectionLanguageModelRet.Error))
-                        return ReturnError(ReportSectionLanguageModelRet.Error);
-
-                    logModel = _LogService.PostAddLogForObj("ReportSectionLanguages", ReportSectionLanguageModelRet.ReportSectionLanguageID, LogCommandEnum.Add, ReportSectionLanguageModelRet);
-                    if (!string.IsNullOrWhiteSpace(logModel.Error))
-                        return ReturnError(logModel.Error);
-
-                }
-
                 ts.Complete();
             }
             return GetReportSectionModelWithReportSectionIDDB(ReportSectionModelRet.ReportSectionID);
@@ -974,28 +841,6 @@ namespace CSSPDBDLL.Services
                 if (!string.IsNullOrWhiteSpace(logModel.Error))
                     return ReturnError(logModel.Error);
 
-                foreach (LanguageEnum Lang in LanguageListAllowable)
-                {
-                    ReportSectionLanguageModel ReportSectionLanguageModelNew = new ReportSectionLanguageModel()
-                    {
-                        ReportSectionID = ReportSectionModelRet.ReportSectionID,
-                        Language = Lang,
-                        ReportSectionName = reportSectionModel.ReportSectionName,
-                        TranslationStatusReportSectionName = (Lang == LanguageRequest ? TranslationStatusEnum.Translated : TranslationStatusEnum.NotTranslated),
-                        ReportSectionText = reportSectionModel.ReportSectionText,
-                        TranslationStatusReportSectionText = (Lang == LanguageRequest ? TranslationStatusEnum.Translated : TranslationStatusEnum.NotTranslated),
-                    };
-
-                    ReportSectionLanguageModel ReportSectionLanguageModelRet = _ReportSectionLanguageService.PostUpdateReportSectionLanguageDB(ReportSectionLanguageModelNew);
-                    if (!string.IsNullOrEmpty(ReportSectionLanguageModelRet.Error))
-                        return ReturnError(ReportSectionLanguageModelRet.Error);
-
-                    logModel = _LogService.PostAddLogForObj("ReportSectionLanguages", ReportSectionLanguageModelRet.ReportSectionLanguageID, LogCommandEnum.Add, ReportSectionLanguageModelRet);
-                    if (!string.IsNullOrWhiteSpace(logModel.Error))
-                        return ReturnError(logModel.Error);
-
-                }
-
                 ts.Complete();
             }
             return GetReportSectionModelWithReportSectionIDDB(ReportSectionModelRet.ReportSectionID);
@@ -1015,7 +860,7 @@ namespace CSSPDBDLL.Services
             ReportSectionModel ReportSectionModelRet = new ReportSectionModel();
             using (TransactionScope ts = new TransactionScope())
             {
-                List<ReportSectionModel> reportSectionModelList = GetReportSectionModelListWithReportTypeIDAndTVItemIDAndYearDB(reportSectionModel.ReportTypeID, reportSectionModel.TVItemID, reportSectionModel.Year).Where(c => c.ParentReportSectionID == reportSectionModel.ParentReportSectionID).OrderBy(c => c.Ordinal).ToList();
+                List<ReportSectionModel> reportSectionModelList = GetReportSectionModelListWithReportTypeIDAndTVItemIDAndYearDB(reportSectionModel.ReportTypeID, reportSectionModel.Language, reportSectionModel.TVItemID, reportSectionModel.Year).Where(c => c.ParentReportSectionID == reportSectionModel.ParentReportSectionID).OrderBy(c => c.Ordinal).ToList();
 
                 for (int i = 0, count = reportSectionModelList.Count; i < count; i++)
                 {
@@ -1066,7 +911,7 @@ namespace CSSPDBDLL.Services
             ReportSectionModel ReportSectionModelRet = new ReportSectionModel();
             using (TransactionScope ts = new TransactionScope())
             {
-                List<ReportSectionModel> reportSectionModelList = GetReportSectionModelListWithReportTypeIDAndTVItemIDAndYearDB(reportSectionModel.ReportTypeID, reportSectionModel.TVItemID, reportSectionModel.Year).Where(c => c.ParentReportSectionID == reportSectionModel.ParentReportSectionID).OrderBy(c => c.Ordinal).ToList();
+                List<ReportSectionModel> reportSectionModelList = GetReportSectionModelListWithReportTypeIDAndTVItemIDAndYearDB(reportSectionModel.ReportTypeID, reportSectionModel.Language, reportSectionModel.TVItemID, reportSectionModel.Year).Where(c => c.ParentReportSectionID == reportSectionModel.ParentReportSectionID).OrderBy(c => c.Ordinal).ToList();
 
                 for (int i = 0, count = reportSectionModelList.Count; i < count; i++)
                 {

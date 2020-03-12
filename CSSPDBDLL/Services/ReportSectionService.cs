@@ -132,21 +132,19 @@ namespace CSSPDBDLL.Services
 
             return ReportSectionModelCount;
         }
-        public List<int?> GetReportSectionYearListWithReportTypeIDAndLanguageDB(int ReportTypeID, LanguageEnum language)
+        public List<int?> GetReportSectionYearListWithReportTypeIDDB(int ReportTypeID)
         {
             List<int?> reportSectionYearList = (from c in db.ReportSections
                                                 where c.ReportTypeID == ReportTypeID
-                                                && c.Language == (int)language
                                                 orderby c.Year descending
                                                 select c.Year).Distinct().ToList<int?>();
 
             return reportSectionYearList;
         }
-        public List<ReportSectionModel> GetReportSectionModelListWithReportTypeIDAndTVItemIDNoReportSectionTextDB(int ReportTypeID, LanguageEnum language, int? TVItemID)
+        public List<ReportSectionModel> GetReportSectionModelListWithReportTypeIDAndTVItemIDNoReportSectionTextDB(int ReportTypeID, int? TVItemID)
         {
             List<ReportSectionModel> reportSectionModelList = (from c in db.ReportSections
                                                                where c.ReportTypeID == ReportTypeID
-                                                               && c.Language == (int)language
                                                                && c.TVItemID == TVItemID
                                                                orderby c.Ordinal, c.ReportSectionName
                                                                select new ReportSectionModel
@@ -170,12 +168,11 @@ namespace CSSPDBDLL.Services
 
             return reportSectionModelList;
         }
-        public List<ReportSectionModel> GetReportSectionModelListWithReportSectionIDTemplateLinkAndTVItemIDForAllYearsDB(int ReportSectionID, int TVItemID, LanguageEnum language)
+        public List<ReportSectionModel> GetReportSectionModelListWithReportSectionIDTemplateLinkAndTVItemIDForAllYearsDB(int ReportSectionID, int TVItemID)
         {
             List<ReportSectionModel> reportSectionModelList = (from c in db.ReportSections
                                                                where c.TemplateReportSectionID == ReportSectionID
                                                                && c.TVItemID == TVItemID
-                                                               && c.Language == (int)language
                                                                orderby c.Ordinal, c.ReportSectionName
                                                                select new ReportSectionModel
                                                                {
@@ -198,11 +195,10 @@ namespace CSSPDBDLL.Services
 
             return reportSectionModelList;
         }
-        public List<ReportSectionModel> GetReportSectionModelListWithReportTypeIDAndTVItemIDAndYearDB(int ReportTypeID, LanguageEnum language, int? TVItemID, int? Year)
+        public List<ReportSectionModel> GetReportSectionModelListWithReportTypeIDAndTVItemIDAndYearDB(int ReportTypeID, int? TVItemID, int? Year)
         {
             List<ReportSectionModel> reportSectionModelList = (from c in db.ReportSections
                                                                where c.ReportTypeID == ReportTypeID
-                                                               && c.Language == (int)language
                                                                && c.TVItemID == TVItemID
                                                                && c.Year == Year
                                                                orderby c.Ordinal, c.ReportSectionName
@@ -383,11 +379,13 @@ namespace CSSPDBDLL.Services
                 return ReturnError(string.Format(ServiceRes.CouldNotFind_With_Equal_, ServiceRes.ReportSection,
                     ServiceRes.ReportTypeID + "," +
                     ServiceRes.TVItemID + "," +
+                    ServiceRes.Language + "," +
                     ServiceRes.ParentReportSectionID + "," +
                     ServiceRes.Year + "," +
                     ServiceRes.ReportSectionName,
                     reportSectionModel.ReportTypeID.ToString() + "," +
                     (reportSectionModel.TVItemID == null ? "null" : reportSectionModel.TVItemID.ToString()) + "," +
+                    reportSectionModel.Language + "," +
                     (reportSectionModel.ParentReportSectionID == null ? "null" : reportSectionModel.ParentReportSectionID.ToString()) + "," +
                     reportSectionModel.Year.ToString() + "," +
                     reportSectionModel.ReportSectionName));
@@ -411,7 +409,7 @@ namespace CSSPDBDLL.Services
             }
 
             int MaxOrdinal = 0;
-            ReportSectionModel reportSectionModelMaxOrdinal = GetReportSectionModelListWithReportTypeIDAndTVItemIDAndYearDB(reportSectionModelParent.ReportTypeID, reportSectionModelParent.Language, null, null).OrderByDescending(c => c.Ordinal).FirstOrDefault();
+            ReportSectionModel reportSectionModelMaxOrdinal = GetReportSectionModelListWithReportTypeIDAndTVItemIDAndYearDB(reportSectionModelParent.ReportTypeID, null, null).OrderByDescending(c => c.Ordinal).FirstOrDefault();
             if (reportSectionModelMaxOrdinal != null)
             {
                 MaxOrdinal = reportSectionModelMaxOrdinal.Ordinal + 1;
@@ -443,6 +441,7 @@ namespace CSSPDBDLL.Services
                     TemplateReportSectionID = null,
                     ReportSectionName = reportSectionModelParent.ReportSectionName + " - " + RandomText,
                     ReportSectionText = reportSectionModelParent.ReportSectionName + " - " + RandomText,
+                    Language = reportSectionModelParent.Language,
                 };
 
                 ReportSectionModelRet = PostAddReportSectionDB(reportSectionModel);
@@ -468,12 +467,12 @@ namespace CSSPDBDLL.Services
             ReportSectionModel ReportSectionModelRet = new ReportSectionModel();
             if (reportSectionModelSibling.ParentReportSectionID == null)
             {
-                ReportSectionModelRet = PostReportSectionAddTopDB(reportSectionModelSibling.ReportTypeID, reportSectionModelSibling.Language);
+                ReportSectionModelRet = PostReportSectionAddTopDB(reportSectionModelSibling.ReportTypeID);
             }
             else
             {
                 int MaxOrdinal = 0;
-                ReportSectionModel reportSectionModelMaxOrdinal = GetReportSectionModelListWithReportTypeIDAndTVItemIDAndYearDB(reportSectionModelSibling.ReportTypeID, reportSectionModelSibling.Language, null, null).OrderByDescending(c => c.Ordinal).FirstOrDefault();
+                ReportSectionModel reportSectionModelMaxOrdinal = GetReportSectionModelListWithReportTypeIDAndTVItemIDAndYearDB(reportSectionModelSibling.ReportTypeID, null, null).OrderByDescending(c => c.Ordinal).FirstOrDefault();
                 if (reportSectionModelMaxOrdinal != null)
                 {
                     MaxOrdinal = reportSectionModelMaxOrdinal.Ordinal + 1;
@@ -503,6 +502,7 @@ namespace CSSPDBDLL.Services
                         TemplateReportSectionID = null,
                         ReportSectionName = reportSectionModelSibling.ReportSectionName + " - " + RandomText,
                         ReportSectionText = reportSectionModelSibling.ReportSectionName + " - " + RandomText,
+                        Language = reportSectionModelSibling.Language,
                     };
 
                     ReportSectionModelRet = PostAddReportSectionDB(reportSectionModel);
@@ -519,10 +519,10 @@ namespace CSSPDBDLL.Services
             }
             return GetReportSectionModelWithReportSectionIDDB(ReportSectionModelRet.ReportSectionID);
         }
-        public ReportSectionModel PostReportSectionAddTopDB(int ReportTypeID, LanguageEnum language)
+        public ReportSectionModel PostReportSectionAddTopDB(int ReportTypeID)
         {
             int MaxOrdinal = 0;
-            ReportSectionModel reportSectionModelMaxOrdinal = GetReportSectionModelListWithReportTypeIDAndTVItemIDAndYearDB(ReportTypeID, language, null, null).OrderByDescending(c => c.Ordinal).FirstOrDefault();
+            ReportSectionModel reportSectionModelMaxOrdinal = GetReportSectionModelListWithReportTypeIDAndTVItemIDAndYearDB(ReportTypeID, null, null).OrderByDescending(c => c.Ordinal).FirstOrDefault();
             if (reportSectionModelMaxOrdinal != null)
             {
                 MaxOrdinal = reportSectionModelMaxOrdinal.Ordinal + 1;
@@ -554,6 +554,7 @@ namespace CSSPDBDLL.Services
                     TemplateReportSectionID = null,
                     ReportSectionName = ServiceRes.ReportSectionName + " - " + RandomText,
                     ReportSectionText = ServiceRes.ReportSectionName + " - " + RandomText,
+                    Language = reportSectionModelMaxOrdinal.Language,
                 };
 
                 ReportSectionModelRet = PostAddReportSectionDB(reportSectionModel);
@@ -599,7 +600,7 @@ namespace CSSPDBDLL.Services
         }
         public ReportSectionModel PostReportSectionChangeLockedDB(int ReportTypeID, LanguageEnum language, bool Locked)
         {
-            List<ReportSectionModel> reportSectionModelList = GetReportSectionModelListWithReportTypeIDAndTVItemIDAndYearDB(ReportTypeID, language, null, null);
+            List<ReportSectionModel> reportSectionModelList = GetReportSectionModelListWithReportTypeIDAndTVItemIDAndYearDB(ReportTypeID, null, null);
 
             if (reportSectionModelList.Count == 0)
             {
@@ -684,7 +685,7 @@ namespace CSSPDBDLL.Services
             ReportSectionModel ReportSectionModelRet = new ReportSectionModel();
             using (TransactionScope ts = new TransactionScope())
             {
-                List<ReportSectionModel> reportSectionModelList = GetReportSectionModelListWithReportTypeIDAndTVItemIDAndYearDB(reportSectionModel.ReportTypeID, reportSectionModel.Language, reportSectionModel.TVItemID, reportSectionModel.Year).Where(c => c.ParentReportSectionID == reportSectionModel.ParentReportSectionID).OrderBy(c => c.Ordinal).ToList();
+                List<ReportSectionModel> reportSectionModelList = GetReportSectionModelListWithReportTypeIDAndTVItemIDAndYearDB(reportSectionModel.ReportTypeID, reportSectionModel.TVItemID, reportSectionModel.Year).Where(c => c.ParentReportSectionID == reportSectionModel.ParentReportSectionID).OrderBy(c => c.Ordinal).ToList();
 
                 for (int i = 0, count = reportSectionModelList.Count; i < count; i++)
                 {
@@ -743,6 +744,7 @@ namespace CSSPDBDLL.Services
                 TemplateReportSectionID = reportSectionModel.ReportSectionID,
                 ReportSectionName = "---",
                 ReportSectionText = ServiceRes.CopyOf + " - " + reportSectionModel.ReportSectionText,
+                Language = reportSectionModel.Language,
             };
 
             ReportSectionModel reportSectionModelExist = GetReportSectionModelExistDB(reportSectionModelToCopy);
@@ -860,7 +862,7 @@ namespace CSSPDBDLL.Services
             ReportSectionModel ReportSectionModelRet = new ReportSectionModel();
             using (TransactionScope ts = new TransactionScope())
             {
-                List<ReportSectionModel> reportSectionModelList = GetReportSectionModelListWithReportTypeIDAndTVItemIDAndYearDB(reportSectionModel.ReportTypeID, reportSectionModel.Language, reportSectionModel.TVItemID, reportSectionModel.Year).Where(c => c.ParentReportSectionID == reportSectionModel.ParentReportSectionID).OrderBy(c => c.Ordinal).ToList();
+                List<ReportSectionModel> reportSectionModelList = GetReportSectionModelListWithReportTypeIDAndTVItemIDAndYearDB(reportSectionModel.ReportTypeID, reportSectionModel.TVItemID, reportSectionModel.Year).Where(c => c.ParentReportSectionID == reportSectionModel.ParentReportSectionID).OrderBy(c => c.Ordinal).ToList();
 
                 for (int i = 0, count = reportSectionModelList.Count; i < count; i++)
                 {
@@ -911,7 +913,7 @@ namespace CSSPDBDLL.Services
             ReportSectionModel ReportSectionModelRet = new ReportSectionModel();
             using (TransactionScope ts = new TransactionScope())
             {
-                List<ReportSectionModel> reportSectionModelList = GetReportSectionModelListWithReportTypeIDAndTVItemIDAndYearDB(reportSectionModel.ReportTypeID, reportSectionModel.Language, reportSectionModel.TVItemID, reportSectionModel.Year).Where(c => c.ParentReportSectionID == reportSectionModel.ParentReportSectionID).OrderBy(c => c.Ordinal).ToList();
+                List<ReportSectionModel> reportSectionModelList = GetReportSectionModelListWithReportTypeIDAndTVItemIDAndYearDB(reportSectionModel.ReportTypeID, reportSectionModel.TVItemID, reportSectionModel.Year).Where(c => c.ParentReportSectionID == reportSectionModel.ParentReportSectionID).OrderBy(c => c.Ordinal).ToList();
 
                 for (int i = 0, count = reportSectionModelList.Count; i < count; i++)
                 {

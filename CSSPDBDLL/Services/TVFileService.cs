@@ -1256,7 +1256,7 @@ namespace CSSPDBDLL.Services
                     else
                     {
                         sb.AppendLine($"CONTACT\tERROR\tERROR\tERROR\tERROR\tERROR\tERROR\tERROR\t");
-                    }                 
+                    }
 
                     List<TVItemLinkModel> tvItemLinkModelList2 = _TVItemLinkService.GetTVItemLinkModelListWithFromTVItemIDDB(tvItemLinkModel.ToTVItemID);
 
@@ -1405,6 +1405,83 @@ namespace CSSPDBDLL.Services
                     tvItemModelInfrastructure.TVText = tvItemModelInfrastructure.TVText.Replace("  ", " ");
                 }
                 sb.AppendLine($"TVTEXT\t{tvItemModelInfrastructure.TVText.Replace(",", "_").Replace("\t", "_").Replace("\r", "_").Replace("\n", "_")}\t");
+
+
+                TVTypeEnum tvTypeInf = TVTypeEnum.Error;
+                switch (infrastructureModel.InfrastructureType)
+                {
+                    case InfrastructureTypeEnum.LiftStation:
+                        {
+                            tvTypeInf = TVTypeEnum.LiftStation;
+                        }
+                        break;
+                    case InfrastructureTypeEnum.LineOverflow:
+                        {
+                            tvTypeInf = TVTypeEnum.LineOverflow;
+                        }
+                        break;
+                    case InfrastructureTypeEnum.WWTP:
+                        {
+                            tvTypeInf = TVTypeEnum.WasteWaterTreatmentPlant;
+                        }
+                        break;
+                    default:
+                        break;
+                }
+
+                // getting line path for infrastructure to other infrastructure
+                List<MapInfoPoint> mapInfoPointInfList = (from mi in _TVItemService.db.MapInfos
+                                                          from mip in _TVItemService.db.MapInfoPoints
+                                                          where mi.MapInfoID == mip.MapInfoID
+                                                          && mi.TVType == (int)tvTypeInf
+                                                          && mi.MapInfoDrawType == (int)MapInfoDrawTypeEnum.Polyline
+                                                          && mi.TVItemID == tvItemModelInfrastructure.TVItemID
+                                                          select mip).ToList();
+
+                StringBuilder LinePathInf = new StringBuilder();
+                int mapInfoID = 0;
+                if (mapInfoPointInfList.Count > 0)
+                {
+                    mapInfoID = mapInfoPointInfList[0].MapInfoID;
+                    foreach (MapInfoPoint mapInfoPointInf in mapInfoPointInfList)
+                    {
+                        LinePathInf.Append($"|{mapInfoPointInf.Lng.ToString("F5")},{mapInfoPointInf.Lat.ToString("F5")}");
+                    }
+                }
+                else
+                {
+                    mapInfoID = 10000000;
+                    LinePathInf.Append($"|{ LatText },{ LngText }|{ LatText },{ LngText }");
+                }
+
+                sb.AppendLine($"LINEPATHINF\t{mapInfoID}\t{LinePathInf}\t");
+
+                // getting line path for infrastructure to outfall
+                List<MapInfoPoint> mapInfoPointInfOutList = (from mi in _TVItemService.db.MapInfos
+                                                          from mip in _TVItemService.db.MapInfoPoints
+                                                          where mi.MapInfoID == mip.MapInfoID
+                                                          && mi.TVType == (int)TVTypeEnum.Outfall
+                                                          && mi.MapInfoDrawType == (int)MapInfoDrawTypeEnum.Polyline
+                                                          && mi.TVItemID == tvItemModelInfrastructure.TVItemID
+                                                          select mip).ToList();
+
+                StringBuilder LinePathInfOut = new StringBuilder();
+                int mapInfoIDOut = 0;
+                if (mapInfoPointInfOutList.Count > 0)
+                {
+                    mapInfoIDOut = mapInfoPointInfOutList[0].MapInfoID;
+                    foreach (MapInfoPoint mapInfoPointInfOut in mapInfoPointInfOutList)
+                    {
+                        LinePathInfOut.Append($"|{mapInfoPointInfOut.Lng.ToString("F5")},{mapInfoPointInfOut.Lat.ToString("F5")}");
+                    }
+                }
+                else
+                {
+                    mapInfoIDOut = 10000000;
+                    LinePathInfOut.Append($"|{ LatText },{ LngText }|{ LatOutfallText },{ LngOutfallText }");
+                }
+
+                sb.AppendLine($"LINEPATHINFOUTFALL\t{mapInfoIDOut}\t{LinePathInfOut}\t");
 
                 string CommentEN = "";
                 string CommentFR = "";

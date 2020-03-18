@@ -1445,7 +1445,7 @@ namespace CSSPDBDLL.Services
                     mapInfoID = mapInfoPointInfList[0].MapInfoID;
                     foreach (MapInfoPoint mapInfoPointInf in mapInfoPointInfList)
                     {
-                        LinePathInf.Append($"|{mapInfoPointInf.Lng.ToString("F5")},{mapInfoPointInf.Lat.ToString("F5")}");
+                        LinePathInf.Append($"|{mapInfoPointInf.Lat.ToString("F5")},{mapInfoPointInf.Lng.ToString("F5")}");
                     }
                 }
                 else
@@ -1472,7 +1472,7 @@ namespace CSSPDBDLL.Services
                     mapInfoIDOut = mapInfoPointInfOutList[0].MapInfoID;
                     foreach (MapInfoPoint mapInfoPointInfOut in mapInfoPointInfOutList)
                     {
-                        LinePathInfOut.Append($"|{mapInfoPointInfOut.Lng.ToString("F5")},{mapInfoPointInfOut.Lat.ToString("F5")}");
+                        LinePathInfOut.Append($"|{mapInfoPointInfOut.Lat.ToString("F5")},{mapInfoPointInfOut.Lng.ToString("F5")}");
                     }
                 }
                 else

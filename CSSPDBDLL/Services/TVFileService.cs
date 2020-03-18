@@ -1483,6 +1483,8 @@ namespace CSSPDBDLL.Services
 
                 sb.AppendLine($"LINEPATHINFOUTFALL\t{mapInfoIDOut}\t{LinePathInfOut}\t");
 
+                sb.AppendLine($"LINEPATHCHANGED\tfalse\t");
+
                 string CommentEN = "";
                 string CommentFR = "";
 

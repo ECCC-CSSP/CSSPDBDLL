@@ -711,7 +711,7 @@ namespace CSSPDBDLL.Services
             float? PortDiameter_m, float? PortSpacing_m, float? PortElevation_m, float? VerticalAngle_deg, float? HorizontalAngle_deg,
             float? DecayRate_per_day, float? NearFieldVelocity_m_s, float? FarFieldVelocity_m_s, float? ReceivingWaterSalinity_PSU,
             float? ReceivingWaterTemperature_C, int? ReceivingWater_MPN_per_100ml, float? DistanceFromShore_m,
-            int? SeeOtherMunicipalityTVItemID, string SeeOtherMunicipalityText, int? PumpsToTVItemID, string AdminEmail)
+            int? SeeOtherMunicipalityTVItemID, string SeeOtherMunicipalityText, int? PumpsToTVItemID, string LinePathInf, string LinePathInfOutfall, string AdminEmail)
         {
             IPrincipal user = new GenericPrincipal(new GenericIdentity(AdminEmail, "Forms"), null);
 
@@ -727,33 +727,33 @@ namespace CSSPDBDLL.Services
                 return ReturnError($"ERROR: {string.Format(ServiceRes._IsRequired, ServiceRes.InfrastructureType)}");
             }
 
-            TVTypeEnum tvTypeInfrasturture = TVTypeEnum.Error;
+            TVTypeEnum tvTypeInfrastructure = TVTypeEnum.Error;
 
             switch (InfrastructureType)
             {
                 case InfrastructureTypeEnum.LiftStation:
                     {
-                        tvTypeInfrasturture = TVTypeEnum.LiftStation;
+                        tvTypeInfrastructure = TVTypeEnum.LiftStation;
                     }
                     break;
                 case InfrastructureTypeEnum.LineOverflow:
                     {
-                        tvTypeInfrasturture = TVTypeEnum.LineOverflow;
+                        tvTypeInfrastructure = TVTypeEnum.LineOverflow;
                     }
                     break;
                 case InfrastructureTypeEnum.Other:
                     {
-                        tvTypeInfrasturture = TVTypeEnum.OtherInfrastructure;
+                        tvTypeInfrastructure = TVTypeEnum.OtherInfrastructure;
                     }
                     break;
                 case InfrastructureTypeEnum.SeeOtherMunicipality:
                     {
-                        tvTypeInfrasturture = TVTypeEnum.SeeOtherMunicipality;
+                        tvTypeInfrastructure = TVTypeEnum.SeeOtherMunicipality;
                     }
                     break;
                 case InfrastructureTypeEnum.WWTP:
                     {
-                        tvTypeInfrasturture = TVTypeEnum.WasteWaterTreatmentPlant;
+                        tvTypeInfrastructure = TVTypeEnum.WasteWaterTreatmentPlant;
                     }
                     break;
                 default:
@@ -851,7 +851,7 @@ namespace CSSPDBDLL.Services
                     }
                 }
 
-                MapInfoModel mapInfoModelRet = mapInfoService.CreateMapInfoObjectDB(coordList, MapInfoDrawTypeEnum.Point, tvTypeInfrasturture, tvItemModelInfrastructure.TVItemID);
+                MapInfoModel mapInfoModelRet = mapInfoService.CreateMapInfoObjectDB(coordList, MapInfoDrawTypeEnum.Point, tvTypeInfrastructure, tvItemModelInfrastructure.TVItemID);
                 if (!string.IsNullOrWhiteSpace(mapInfoModelRet.Error))
                 {
                     return ReturnError($"ERROR: {mapInfoModelRet.Error}");
@@ -866,6 +866,60 @@ namespace CSSPDBDLL.Services
                 if (!string.IsNullOrWhiteSpace(mapInfoModelRetOutfall.Error))
                 {
                     return ReturnError($"ERROR: {mapInfoModelRetOutfall.Error}");
+                }
+
+                // doing LinePathInf
+                List<string> coordArrText = LinePathInf.Split("|".ToCharArray(), StringSplitOptions.RemoveEmptyEntries).ToList();
+
+                List<Coord> coordLinePathInf = new List<Coord>();
+
+                int ordinal = 1;
+                foreach (string coordText in coordArrText)
+                {
+                    List<string> valStr = coordText.Split(",".ToCharArray(), StringSplitOptions.RemoveEmptyEntries).ToList();
+
+                    if (valStr.Count != 3)
+                    {
+                        return ReturnError($"ERROR: LinePathInf not well formed. valStr != 3");
+                    }
+
+                    Coord coord = new Coord() { Lat = float.Parse(valStr[0]), Lng = float.Parse(valStr[1]), Ordinal = ordinal };
+                    ordinal++;
+
+                    coordLinePathInf.Add(coord);
+                }
+
+                MapInfoModel mapInfoModelLinePathRet = mapInfoService.CreateMapInfoObjectDB(coordLinePathInf, MapInfoDrawTypeEnum.Polyline, tvTypeInfrastructure, tvItemModelInfrastructure.TVItemID);
+                if (!string.IsNullOrWhiteSpace(mapInfoModelLinePathRet.Error))
+                {
+                    return ReturnError($"ERROR: {mapInfoModelLinePathRet.Error}");
+                }
+
+                // doing LinePathInfOutfall
+                List<string> coordArrTextOutfall = LinePathInfOutfall.Split("|".ToCharArray(), StringSplitOptions.RemoveEmptyEntries).ToList();
+
+                List<Coord> coordLinePathInfOutfall = new List<Coord>();
+
+                int ordinalOutfall = 1;
+                foreach (string coordText in coordArrTextOutfall)
+                {
+                    List<string> valStr = coordText.Split(",".ToCharArray(), StringSplitOptions.RemoveEmptyEntries).ToList();
+
+                    if (valStr.Count != 3)
+                    {
+                        return ReturnError($"ERROR: LinePathInfOutfall not well formed. valStr != 3");
+                    }
+
+                    Coord coord = new Coord() { Lat = float.Parse(valStr[0]), Lng = float.Parse(valStr[1]), Ordinal = ordinalOutfall };
+                    ordinalOutfall++;
+
+                    coordLinePathInf.Add(coord);
+                }
+
+                MapInfoModel mapInfoModelLinePathOutfallRet = mapInfoService.CreateMapInfoObjectDB(coordLinePathInf, MapInfoDrawTypeEnum.Polyline, TVTypeEnum.Outfall, tvItemModelInfrastructure.TVItemID);
+                if (!string.IsNullOrWhiteSpace(mapInfoModelLinePathOutfallRet.Error))
+                {
+                    return ReturnError($"ERROR: {mapInfoModelLinePathOutfallRet.Error}");
                 }
             }
 
@@ -916,7 +970,7 @@ namespace CSSPDBDLL.Services
                 List<MapInfoModel> mapInfoModelList = mapInfoService.GetMapInfoModelListWithTVItemIDDB(infrastructureModelRet.InfrastructureTVItemID);
                 foreach (MapInfoModel mapInfoModel in mapInfoModelList)
                 {
-                    if (!(mapInfoModel.TVType == tvTypeInfrasturture || mapInfoModel.TVType == TVTypeEnum.Outfall))
+                    if (!(mapInfoModel.TVType == tvTypeInfrastructure || mapInfoModel.TVType == TVTypeEnum.Outfall))
                     {
                         MapInfoModel mapInfoModelRet2 = mapInfoService.PostDeleteMapInfoDB(mapInfoModel.MapInfoID);
                         if (!string.IsNullOrWhiteSpace(mapInfoModelRet2.Error))
@@ -932,16 +986,16 @@ namespace CSSPDBDLL.Services
                     new Coord() { Lat = Lat == null ? 0.0f : (float)Lat, Lng = Lng == null ? 0.0f : (float)Lng, Ordinal = 0 },
                 };
 
-                List<MapInfoPointModel> mapInfoPointModelList = mapInfoService._MapInfoPointService.GetMapInfoPointModelListWithTVItemIDAndTVTypeAndMapInfoDrawTypeDB(infrastructureModelRet.InfrastructureTVItemID, tvTypeInfrasturture, MapInfoDrawTypeEnum.Point);
+                List<MapInfoPointModel> mapInfoPointModelList = mapInfoService._MapInfoPointService.GetMapInfoPointModelListWithTVItemIDAndTVTypeAndMapInfoDrawTypeDB(infrastructureModelRet.InfrastructureTVItemID, tvTypeInfrastructure, MapInfoDrawTypeEnum.Point);
                 if (mapInfoPointModelList.Count == 0)
                 {
-                    MapInfoModel mapInfoModelRet = mapInfoService.CreateMapInfoObjectDB(coordList, MapInfoDrawTypeEnum.Point, tvTypeInfrasturture, infrastructureModelRet.InfrastructureTVItemID);
+                    MapInfoModel mapInfoModelRet = mapInfoService.CreateMapInfoObjectDB(coordList, MapInfoDrawTypeEnum.Point, tvTypeInfrastructure, infrastructureModelRet.InfrastructureTVItemID);
                     if (!string.IsNullOrWhiteSpace(mapInfoModelRet.Error))
                     {
                         return ReturnError($"ERROR: {mapInfoModelRet.Error}");
                     }
 
-                    mapInfoPointModelList = mapInfoService._MapInfoPointService.GetMapInfoPointModelListWithTVItemIDAndTVTypeAndMapInfoDrawTypeDB(infrastructureModelRet.InfrastructureTVItemID, tvTypeInfrasturture, MapInfoDrawTypeEnum.Point);
+                    mapInfoPointModelList = mapInfoService._MapInfoPointService.GetMapInfoPointModelListWithTVItemIDAndTVTypeAndMapInfoDrawTypeDB(infrastructureModelRet.InfrastructureTVItemID, tvTypeInfrastructure, MapInfoDrawTypeEnum.Point);
                 }
 
                 if (mapInfoPointModelList[0].Lat != coordList[0].Lat || mapInfoPointModelList[0].Lng != coordList[0].Lng)
@@ -982,6 +1036,211 @@ namespace CSSPDBDLL.Services
                         return ReturnError($"ERROR: {mapInfoPointModelRet.Error}");
                     }
                 }
+
+                // doing LinePathInf
+                List<string> coordArrText = LinePathInf.Split("|".ToCharArray(), StringSplitOptions.RemoveEmptyEntries).ToList();
+
+                if (!string.IsNullOrEmpty(LinePathInf))
+                {
+                    List<Coord> coordLinePathInf = new List<Coord>();
+
+                    int ordinal = 1;
+                    foreach (string coordText in coordArrText)
+                    {
+                        List<string> valStr = coordText.Split(",".ToCharArray(), StringSplitOptions.RemoveEmptyEntries).ToList();
+
+                        if (valStr.Count != 3)
+                        {
+                            return ReturnError($"ERROR: LinePathInf not well formed. valStr != 3");
+                        }
+
+                        Coord coord = new Coord() { Lat = float.Parse(valStr[0]), Lng = float.Parse(valStr[1]), Ordinal = ordinal };
+                        ordinal++;
+
+                        coordLinePathInf.Add(coord);
+                    }
+
+                    List<MapInfoPointModel> mapInfoPointModelLinePathList = mapInfoService._MapInfoPointService.GetMapInfoPointModelListWithTVItemIDAndTVTypeAndMapInfoDrawTypeDB(infrastructureModelRet.InfrastructureTVItemID, tvTypeInfrastructure, MapInfoDrawTypeEnum.Polyline);
+                    if (mapInfoPointModelLinePathList.Count == 0)
+                    {
+                        MapInfoModel mapInfoModelRet = mapInfoService.CreateMapInfoObjectDB(coordLinePathInf, MapInfoDrawTypeEnum.Polyline, tvTypeInfrastructure, infrastructureModelRet.InfrastructureTVItemID);
+                        if (!string.IsNullOrWhiteSpace(mapInfoModelRet.Error))
+                        {
+                            return ReturnError($"ERROR: {mapInfoModelRet.Error}");
+                        }
+                        mapInfoPointModelLinePathList = mapInfoService._MapInfoPointService.GetMapInfoPointModelListWithTVItemIDAndTVTypeAndMapInfoDrawTypeDB(infrastructureModelRet.InfrastructureTVItemID, tvTypeInfrastructure, MapInfoDrawTypeEnum.Polyline);
+                        if (mapInfoPointModelLinePathList.Count == 0)
+                        {
+                            return ReturnError($"ERROR: Could not find MapInfoModel created with TVType [{tvTypeInfrastructure.ToString()}] as Polyline for InfrastructureTVItemID = [{infrastructureModelRet.InfrastructureTVItemID}]");
+                        }
+                    }
+                    else
+                    {
+                        bool FoundDifferent = false;
+                        if (coordLinePathInf.Count != mapInfoPointModelLinePathList.Count)
+                        {
+                            FoundDifferent = true;
+                        }
+                        else
+                        {
+                            int count = coordLinePathInf.Count;
+                            for (int i = 0; i < count; i++)
+                            {
+                                if (coordLinePathInf[i].Lat.ToString("F5") != mapInfoPointModelLinePathList[i].Lat.ToString("F5") || coordLinePathInf[i].Lng.ToString("F5") != mapInfoPointModelLinePathList[i].Lng.ToString("F5"))
+                                {
+                                    FoundDifferent = true;
+                                    break;
+                                }
+                            }
+                        }
+
+                        if (FoundDifferent)
+                        {
+                            MapInfoModel mapInfoModel = mapInfoService.GetMapInfoModelWithMapInfoIDDB(mapInfoPointModelLinePathList[0].MapInfoID);
+                            if (!string.IsNullOrEmpty(mapInfoModel.Error))
+                            {
+                                MapInfoModel mapInfoModelRet = mapInfoService.PostDeleteMapInfoDB(mapInfoModel.MapInfoID);
+                                if (!string.IsNullOrWhiteSpace(mapInfoModelRet.Error))
+                                {
+                                    return ReturnError($"ERROR: Could not delete MapInfoModel with MapInfoID = [{mapInfoModel.MapInfoID}]");
+                                }
+                            }
+
+                            MapInfoModel mapInfoModelRet2 = mapInfoService.CreateMapInfoObjectDB(coordLinePathInf, MapInfoDrawTypeEnum.Polyline, tvTypeInfrastructure, infrastructureModelRet.InfrastructureTVItemID);
+                            if (!string.IsNullOrWhiteSpace(mapInfoModelRet2.Error))
+                            {
+                                return ReturnError($"ERROR: {mapInfoModelRet2.Error}");
+                            }
+                            mapInfoPointModelLinePathList = mapInfoService._MapInfoPointService.GetMapInfoPointModelListWithTVItemIDAndTVTypeAndMapInfoDrawTypeDB(infrastructureModelRet.InfrastructureTVItemID, tvTypeInfrastructure, MapInfoDrawTypeEnum.Polyline);
+                            if (mapInfoPointModelLinePathList.Count == 0)
+                            {
+                                return ReturnError($"ERROR: Could not find MapInfoModel created with TVType [{tvTypeInfrastructure.ToString()}] as Polyline for InfrastructureTVItemID = [{infrastructureModelRet.InfrastructureTVItemID}]");
+                            }
+
+                        }
+                    }
+                }
+                else
+                {
+                    List<MapInfoPointModel> mapInfoPointModelLinePathListToDelete = mapInfoService._MapInfoPointService.GetMapInfoPointModelListWithTVItemIDAndTVTypeAndMapInfoDrawTypeDB(infrastructureModelRet.InfrastructureTVItemID, tvTypeInfrastructure, MapInfoDrawTypeEnum.Polyline);
+
+                    if (mapInfoPointModelLinePathListToDelete.Count > 0)
+                    {
+                        MapInfoModel mapInfoModel = mapInfoService.GetMapInfoModelWithMapInfoIDDB(mapInfoPointModelLinePathListToDelete[0].MapInfoID);
+                        if (!string.IsNullOrEmpty(mapInfoModel.Error))
+                        {
+                            MapInfoModel mapInfoModelRet = mapInfoService.PostDeleteMapInfoDB(mapInfoModel.MapInfoID);
+                            if (!string.IsNullOrWhiteSpace(mapInfoModelRet.Error))
+                            {
+                                return ReturnError($"ERROR: Could not delete MapInfoModel with MapInfoID = [{mapInfoModel.MapInfoID}]");
+                            }
+                        }
+                    }
+
+                }
+
+                // doing LinePathInfOutfall
+                List<string> coordArrTextOutfall = LinePathInfOutfall.Split("|".ToCharArray(), StringSplitOptions.RemoveEmptyEntries).ToList();
+
+                if (!string.IsNullOrEmpty(LinePathInfOutfall))
+                {
+                    List<Coord> coordLinePathInfOutfall = new List<Coord>();
+
+                    int ordinal = 1;
+                    foreach (string coordText in coordArrText)
+                    {
+                        List<string> valStr = coordText.Split(",".ToCharArray(), StringSplitOptions.RemoveEmptyEntries).ToList();
+
+                        if (valStr.Count != 3)
+                        {
+                            return ReturnError($"ERROR: LinePathInf not well formed. valStr != 3");
+                        }
+
+                        Coord coord = new Coord() { Lat = float.Parse(valStr[0]), Lng = float.Parse(valStr[1]), Ordinal = ordinal };
+                        ordinal++;
+
+                        coordLinePathInfOutfall.Add(coord);
+                    }
+
+                    List<MapInfoPointModel> mapInfoPointModelLinePathOutfallList = mapInfoService._MapInfoPointService.GetMapInfoPointModelListWithTVItemIDAndTVTypeAndMapInfoDrawTypeDB(infrastructureModelRet.InfrastructureTVItemID, TVTypeEnum.Outfall, MapInfoDrawTypeEnum.Polyline);
+                    if (mapInfoPointModelLinePathOutfallList.Count == 0)
+                    {
+                        MapInfoModel mapInfoModelRet = mapInfoService.CreateMapInfoObjectDB(coordLinePathInfOutfall, MapInfoDrawTypeEnum.Polyline, TVTypeEnum.Outfall, infrastructureModelRet.InfrastructureTVItemID);
+                        if (!string.IsNullOrWhiteSpace(mapInfoModelRet.Error))
+                        {
+                            return ReturnError($"ERROR: {mapInfoModelRet.Error}");
+                        }
+                        mapInfoPointModelLinePathOutfallList = mapInfoService._MapInfoPointService.GetMapInfoPointModelListWithTVItemIDAndTVTypeAndMapInfoDrawTypeDB(infrastructureModelRet.InfrastructureTVItemID, TVTypeEnum.Outfall, MapInfoDrawTypeEnum.Polyline);
+                        if (mapInfoPointModelLinePathOutfallList.Count == 0)
+                        {
+                            return ReturnError($"ERROR: Could not find MapInfoModel created with TVType [{tvTypeInfrastructure.ToString()}] as Polyline for InfrastructureTVItemID = [{infrastructureModelRet.InfrastructureTVItemID}]");
+                        }
+                    }
+                    else
+                    {
+                        bool FoundDifferent = false;
+                        if (coordLinePathInfOutfall.Count != mapInfoPointModelLinePathOutfallList.Count)
+                        {
+                            FoundDifferent = true;
+                        }
+                        else
+                        {
+                            int count = coordLinePathInfOutfall.Count;
+                            for (int i = 0; i < count; i++)
+                            {
+                                if (coordLinePathInfOutfall[i].Lat.ToString("F5") != mapInfoPointModelLinePathOutfallList[i].Lat.ToString("F5") || coordLinePathInfOutfall[i].Lng.ToString("F5") != mapInfoPointModelLinePathOutfallList[i].Lng.ToString("F5"))
+                                {
+                                    FoundDifferent = true;
+                                    break;
+                                }
+                            }
+                        }
+
+                        if (FoundDifferent)
+                        {
+                            MapInfoModel mapInfoModel = mapInfoService.GetMapInfoModelWithMapInfoIDDB(mapInfoPointModelLinePathOutfallList[0].MapInfoID);
+                            if (!string.IsNullOrEmpty(mapInfoModel.Error))
+                            {
+                                MapInfoModel mapInfoModelRet = mapInfoService.PostDeleteMapInfoDB(mapInfoModel.MapInfoID);
+                                if (!string.IsNullOrWhiteSpace(mapInfoModelRet.Error))
+                                {
+                                    return ReturnError($"ERROR: Could not delete MapInfoModel with MapInfoID = [{mapInfoModel.MapInfoID}]");
+                                }
+                            }
+
+                            MapInfoModel mapInfoModelRet2 = mapInfoService.CreateMapInfoObjectDB(coordLinePathInfOutfall, MapInfoDrawTypeEnum.Polyline, TVTypeEnum.Outfall, infrastructureModelRet.InfrastructureTVItemID);
+                            if (!string.IsNullOrWhiteSpace(mapInfoModelRet2.Error))
+                            {
+                                return ReturnError($"ERROR: {mapInfoModelRet2.Error}");
+                            }
+                            mapInfoPointModelLinePathOutfallList = mapInfoService._MapInfoPointService.GetMapInfoPointModelListWithTVItemIDAndTVTypeAndMapInfoDrawTypeDB(infrastructureModelRet.InfrastructureTVItemID, TVTypeEnum.Outfall, MapInfoDrawTypeEnum.Polyline);
+                            if (mapInfoPointModelLinePathOutfallList.Count == 0)
+                            {
+                                return ReturnError($"ERROR: Could not find MapInfoModel created with TVType [{tvTypeInfrastructure.ToString()}] as Polyline for InfrastructureTVItemID = [{infrastructureModelRet.InfrastructureTVItemID}]");
+                            }
+
+                        }
+                    }
+                }
+                else
+                {
+                    List<MapInfoPointModel> mapInfoPointModelLinePathListToDelete = mapInfoService._MapInfoPointService.GetMapInfoPointModelListWithTVItemIDAndTVTypeAndMapInfoDrawTypeDB(infrastructureModelRet.InfrastructureTVItemID, TVTypeEnum.Outfall, MapInfoDrawTypeEnum.Polyline);
+
+                    if (mapInfoPointModelLinePathListToDelete.Count > 0)
+                    {
+                        MapInfoModel mapInfoModel = mapInfoService.GetMapInfoModelWithMapInfoIDDB(mapInfoPointModelLinePathListToDelete[0].MapInfoID);
+                        if (!string.IsNullOrEmpty(mapInfoModel.Error))
+                        {
+                            MapInfoModel mapInfoModelRet = mapInfoService.PostDeleteMapInfoDB(mapInfoModel.MapInfoID);
+                            if (!string.IsNullOrWhiteSpace(mapInfoModelRet.Error))
+                            {
+                                return ReturnError($"ERROR: Could not delete MapInfoModel with MapInfoID = [{mapInfoModel.MapInfoID}]");
+                            }
+                        }
+                    }
+
+                }
+
 
                 // changing Infrastructure
                 if (!string.IsNullOrWhiteSpace(infrastructureModelRet.Error))

@@ -1049,7 +1049,7 @@ namespace CSSPDBDLL.Services
                     {
                         List<string> valStr = coordText.Split(",".ToCharArray(), StringSplitOptions.RemoveEmptyEntries).ToList();
 
-                        if (valStr.Count != 3)
+                        if (valStr.Count != 2)
                         {
                             return ReturnError($"ERROR: LinePathInf not well formed. valStr != 3");
                         }
@@ -1067,6 +1067,35 @@ namespace CSSPDBDLL.Services
                         if (!string.IsNullOrWhiteSpace(mapInfoModelRet.Error))
                         {
                             return ReturnError($"ERROR: {mapInfoModelRet.Error}");
+                        }
+                        mapInfoPointModelLinePathList = mapInfoService._MapInfoPointService.GetMapInfoPointModelListWithTVItemIDAndTVTypeAndMapInfoDrawTypeDB(infrastructureModelRet.InfrastructureTVItemID, tvTypeInfrastructure, MapInfoDrawTypeEnum.Polyline);
+                        if (mapInfoPointModelLinePathList.Count == 0)
+                        {
+                            return ReturnError($"ERROR: Could not find MapInfoModel created with TVType [{tvTypeInfrastructure.ToString()}] as Polyline for InfrastructureTVItemID = [{infrastructureModelRet.InfrastructureTVItemID}]");
+                        }
+                    }
+                    else if (mapInfoPointModelLinePathList.Count > 1)
+                    {
+                        List<int> MapInfoIDList = (from c in mapInfoPointModelLinePathList
+                                                   select c.MapInfoID).Distinct().ToList();
+
+                        foreach (int mapInfoID in MapInfoIDList)
+                        {
+                            MapInfoModel mapInfoModel = mapInfoService.GetMapInfoModelWithMapInfoIDDB(mapInfoID);
+                            if (string.IsNullOrEmpty(mapInfoModel.Error))
+                            {
+                                MapInfoModel mapInfoModelRet = mapInfoService.PostDeleteMapInfoDB(mapInfoModel.MapInfoID);
+                                if (!string.IsNullOrWhiteSpace(mapInfoModelRet.Error))
+                                {
+                                    return ReturnError($"ERROR: Could not delete MapInfoModel with MapInfoID = [{mapInfoModel.MapInfoID}]");
+                                }
+                            }
+                        }
+
+                        MapInfoModel mapInfoModelRet2 = mapInfoService.CreateMapInfoObjectDB(coordLinePathInf, MapInfoDrawTypeEnum.Polyline, tvTypeInfrastructure, infrastructureModelRet.InfrastructureTVItemID);
+                        if (!string.IsNullOrWhiteSpace(mapInfoModelRet2.Error))
+                        {
+                            return ReturnError($"ERROR: {mapInfoModelRet2.Error}");
                         }
                         mapInfoPointModelLinePathList = mapInfoService._MapInfoPointService.GetMapInfoPointModelListWithTVItemIDAndTVTypeAndMapInfoDrawTypeDB(infrastructureModelRet.InfrastructureTVItemID, tvTypeInfrastructure, MapInfoDrawTypeEnum.Polyline);
                         if (mapInfoPointModelLinePathList.Count == 0)
@@ -1097,7 +1126,7 @@ namespace CSSPDBDLL.Services
                         if (FoundDifferent)
                         {
                             MapInfoModel mapInfoModel = mapInfoService.GetMapInfoModelWithMapInfoIDDB(mapInfoPointModelLinePathList[0].MapInfoID);
-                            if (!string.IsNullOrEmpty(mapInfoModel.Error))
+                            if (string.IsNullOrEmpty(mapInfoModel.Error))
                             {
                                 MapInfoModel mapInfoModelRet = mapInfoService.PostDeleteMapInfoDB(mapInfoModel.MapInfoID);
                                 if (!string.IsNullOrWhiteSpace(mapInfoModelRet.Error))
@@ -1127,7 +1156,7 @@ namespace CSSPDBDLL.Services
                     if (mapInfoPointModelLinePathListToDelete.Count > 0)
                     {
                         MapInfoModel mapInfoModel = mapInfoService.GetMapInfoModelWithMapInfoIDDB(mapInfoPointModelLinePathListToDelete[0].MapInfoID);
-                        if (!string.IsNullOrEmpty(mapInfoModel.Error))
+                        if (string.IsNullOrEmpty(mapInfoModel.Error))
                         {
                             MapInfoModel mapInfoModelRet = mapInfoService.PostDeleteMapInfoDB(mapInfoModel.MapInfoID);
                             if (!string.IsNullOrWhiteSpace(mapInfoModelRet.Error))
@@ -1147,11 +1176,11 @@ namespace CSSPDBDLL.Services
                     List<Coord> coordLinePathInfOutfall = new List<Coord>();
 
                     int ordinal = 1;
-                    foreach (string coordText in coordArrText)
+                    foreach (string coordText in coordArrTextOutfall)
                     {
                         List<string> valStr = coordText.Split(",".ToCharArray(), StringSplitOptions.RemoveEmptyEntries).ToList();
 
-                        if (valStr.Count != 3)
+                        if (valStr.Count != 2)
                         {
                             return ReturnError($"ERROR: LinePathInf not well formed. valStr != 3");
                         }
@@ -1174,6 +1203,35 @@ namespace CSSPDBDLL.Services
                         if (mapInfoPointModelLinePathOutfallList.Count == 0)
                         {
                             return ReturnError($"ERROR: Could not find MapInfoModel created with TVType [{tvTypeInfrastructure.ToString()}] as Polyline for InfrastructureTVItemID = [{infrastructureModelRet.InfrastructureTVItemID}]");
+                        }
+                    }
+                    else if (mapInfoPointModelLinePathOutfallList.Count > 1)
+                    {
+                        List<int> MapInfoIDList = (from c in mapInfoPointModelLinePathOutfallList
+                                                   select c.MapInfoID).Distinct().ToList();
+
+                        foreach (int mapInfoID in MapInfoIDList)
+                        {
+                            MapInfoModel mapInfoModel = mapInfoService.GetMapInfoModelWithMapInfoIDDB(mapInfoID);
+                            if (string.IsNullOrEmpty(mapInfoModel.Error))
+                            {
+                                MapInfoModel mapInfoModelRet = mapInfoService.PostDeleteMapInfoDB(mapInfoModel.MapInfoID);
+                                if (!string.IsNullOrWhiteSpace(mapInfoModelRet.Error))
+                                {
+                                    return ReturnError($"ERROR: Could not delete MapInfoModel with MapInfoID = [{mapInfoModel.MapInfoID}]");
+                                }
+                            }
+                        }
+
+                        MapInfoModel mapInfoModelRet2 = mapInfoService.CreateMapInfoObjectDB(coordLinePathInfOutfall, MapInfoDrawTypeEnum.Polyline, TVTypeEnum.Outfall, infrastructureModelRet.InfrastructureTVItemID);
+                        if (!string.IsNullOrWhiteSpace(mapInfoModelRet2.Error))
+                        {
+                            return ReturnError($"ERROR: {mapInfoModelRet2.Error}");
+                        }
+                        mapInfoPointModelLinePathOutfallList = mapInfoService._MapInfoPointService.GetMapInfoPointModelListWithTVItemIDAndTVTypeAndMapInfoDrawTypeDB(infrastructureModelRet.InfrastructureTVItemID, TVTypeEnum.Outfall, MapInfoDrawTypeEnum.Polyline);
+                        if (mapInfoPointModelLinePathOutfallList.Count == 0)
+                        {
+                            return ReturnError($"ERROR: Could not find MapInfoModel created with TVType [{TVTypeEnum.Outfall.ToString()}] as Polyline for InfrastructureTVItemID = [{infrastructureModelRet.InfrastructureTVItemID}]");
                         }
                     }
                     else
@@ -1199,7 +1257,7 @@ namespace CSSPDBDLL.Services
                         if (FoundDifferent)
                         {
                             MapInfoModel mapInfoModel = mapInfoService.GetMapInfoModelWithMapInfoIDDB(mapInfoPointModelLinePathOutfallList[0].MapInfoID);
-                            if (!string.IsNullOrEmpty(mapInfoModel.Error))
+                            if (string.IsNullOrEmpty(mapInfoModel.Error))
                             {
                                 MapInfoModel mapInfoModelRet = mapInfoService.PostDeleteMapInfoDB(mapInfoModel.MapInfoID);
                                 if (!string.IsNullOrWhiteSpace(mapInfoModelRet.Error))
@@ -1216,7 +1274,7 @@ namespace CSSPDBDLL.Services
                             mapInfoPointModelLinePathOutfallList = mapInfoService._MapInfoPointService.GetMapInfoPointModelListWithTVItemIDAndTVTypeAndMapInfoDrawTypeDB(infrastructureModelRet.InfrastructureTVItemID, TVTypeEnum.Outfall, MapInfoDrawTypeEnum.Polyline);
                             if (mapInfoPointModelLinePathOutfallList.Count == 0)
                             {
-                                return ReturnError($"ERROR: Could not find MapInfoModel created with TVType [{tvTypeInfrastructure.ToString()}] as Polyline for InfrastructureTVItemID = [{infrastructureModelRet.InfrastructureTVItemID}]");
+                                return ReturnError($"ERROR: Could not find MapInfoModel created with TVType [{TVTypeEnum.Outfall.ToString()}] as Polyline for InfrastructureTVItemID = [{infrastructureModelRet.InfrastructureTVItemID}]");
                             }
 
                         }
@@ -1229,7 +1287,7 @@ namespace CSSPDBDLL.Services
                     if (mapInfoPointModelLinePathListToDelete.Count > 0)
                     {
                         MapInfoModel mapInfoModel = mapInfoService.GetMapInfoModelWithMapInfoIDDB(mapInfoPointModelLinePathListToDelete[0].MapInfoID);
-                        if (!string.IsNullOrEmpty(mapInfoModel.Error))
+                        if (string.IsNullOrEmpty(mapInfoModel.Error))
                         {
                             MapInfoModel mapInfoModelRet = mapInfoService.PostDeleteMapInfoDB(mapInfoModel.MapInfoID);
                             if (!string.IsNullOrWhiteSpace(mapInfoModelRet.Error))

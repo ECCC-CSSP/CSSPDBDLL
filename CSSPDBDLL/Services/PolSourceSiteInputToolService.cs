@@ -799,6 +799,7 @@ namespace CSSPDBDLL.Services
                 InfrastructureModel infrastructureModelNew = new InfrastructureModel();
                 infrastructureModelNew.InfrastructureTVItemID = tvItemModelInfrastructure.TVItemID;
                 infrastructureModelNew.InfrastructureTVText = TVText;
+                infrastructureModelNew.InfrastructureType = InfrastructureType;
 
                 infrastructureModelRet = infrastructureService.PostAddInfrastructureDB(infrastructureModelNew);
                 if (!string.IsNullOrWhiteSpace(infrastructureModelRet.Error))
@@ -868,59 +869,59 @@ namespace CSSPDBDLL.Services
                     return ReturnError($"ERROR: {mapInfoModelRetOutfall.Error}");
                 }
 
-                // doing LinePathInf
-                List<string> coordArrText = LinePathInf.Split("|".ToCharArray(), StringSplitOptions.RemoveEmptyEntries).ToList();
+                //// doing LinePathInf
+                //List<string> coordArrText = LinePathInf.Split("|".ToCharArray(), StringSplitOptions.RemoveEmptyEntries).ToList();
 
-                List<Coord> coordLinePathInf = new List<Coord>();
+                //List<Coord> coordLinePathInf = new List<Coord>();
 
-                int ordinal = 1;
-                foreach (string coordText in coordArrText)
-                {
-                    List<string> valStr = coordText.Split(",".ToCharArray(), StringSplitOptions.RemoveEmptyEntries).ToList();
+                //int ordinal = 1;
+                //foreach (string coordText in coordArrText)
+                //{
+                //    List<string> valStr = coordText.Split(",".ToCharArray(), StringSplitOptions.RemoveEmptyEntries).ToList();
 
-                    if (valStr.Count != 3)
-                    {
-                        return ReturnError($"ERROR: LinePathInf not well formed. valStr != 3");
-                    }
+                //    if (valStr.Count != 3)
+                //    {
+                //        return ReturnError($"ERROR: LinePathInf not well formed. valStr != 3");
+                //    }
 
-                    Coord coord = new Coord() { Lat = float.Parse(valStr[0]), Lng = float.Parse(valStr[1]), Ordinal = ordinal };
-                    ordinal++;
+                //    Coord coord = new Coord() { Lat = float.Parse(valStr[0]), Lng = float.Parse(valStr[1]), Ordinal = ordinal };
+                //    ordinal++;
 
-                    coordLinePathInf.Add(coord);
-                }
+                //    coordLinePathInf.Add(coord);
+                //}
 
-                MapInfoModel mapInfoModelLinePathRet = mapInfoService.CreateMapInfoObjectDB(coordLinePathInf, MapInfoDrawTypeEnum.Polyline, tvTypeInfrastructure, tvItemModelInfrastructure.TVItemID);
-                if (!string.IsNullOrWhiteSpace(mapInfoModelLinePathRet.Error))
-                {
-                    return ReturnError($"ERROR: {mapInfoModelLinePathRet.Error}");
-                }
+                //MapInfoModel mapInfoModelLinePathRet = mapInfoService.CreateMapInfoObjectDB(coordLinePathInf, MapInfoDrawTypeEnum.Polyline, tvTypeInfrastructure, tvItemModelInfrastructure.TVItemID);
+                //if (!string.IsNullOrWhiteSpace(mapInfoModelLinePathRet.Error))
+                //{
+                //    return ReturnError($"ERROR: {mapInfoModelLinePathRet.Error}");
+                //}
 
-                // doing LinePathInfOutfall
-                List<string> coordArrTextOutfall = LinePathInfOutfall.Split("|".ToCharArray(), StringSplitOptions.RemoveEmptyEntries).ToList();
+                //// doing LinePathInfOutfall
+                //List<string> coordArrTextOutfall = LinePathInfOutfall.Split("|".ToCharArray(), StringSplitOptions.RemoveEmptyEntries).ToList();
 
-                List<Coord> coordLinePathInfOutfall = new List<Coord>();
+                //List<Coord> coordLinePathInfOutfall = new List<Coord>();
 
-                int ordinalOutfall = 1;
-                foreach (string coordText in coordArrTextOutfall)
-                {
-                    List<string> valStr = coordText.Split(",".ToCharArray(), StringSplitOptions.RemoveEmptyEntries).ToList();
+                //int ordinalOutfall = 1;
+                //foreach (string coordText in coordArrTextOutfall)
+                //{
+                //    List<string> valStr = coordText.Split(",".ToCharArray(), StringSplitOptions.RemoveEmptyEntries).ToList();
 
-                    if (valStr.Count != 3)
-                    {
-                        return ReturnError($"ERROR: LinePathInfOutfall not well formed. valStr != 3");
-                    }
+                //    if (valStr.Count != 3)
+                //    {
+                //        return ReturnError($"ERROR: LinePathInfOutfall not well formed. valStr != 3");
+                //    }
 
-                    Coord coord = new Coord() { Lat = float.Parse(valStr[0]), Lng = float.Parse(valStr[1]), Ordinal = ordinalOutfall };
-                    ordinalOutfall++;
+                //    Coord coord = new Coord() { Lat = float.Parse(valStr[0]), Lng = float.Parse(valStr[1]), Ordinal = ordinalOutfall };
+                //    ordinalOutfall++;
 
-                    coordLinePathInf.Add(coord);
-                }
+                //    coordLinePathInf.Add(coord);
+                //}
 
-                MapInfoModel mapInfoModelLinePathOutfallRet = mapInfoService.CreateMapInfoObjectDB(coordLinePathInf, MapInfoDrawTypeEnum.Polyline, TVTypeEnum.Outfall, tvItemModelInfrastructure.TVItemID);
-                if (!string.IsNullOrWhiteSpace(mapInfoModelLinePathOutfallRet.Error))
-                {
-                    return ReturnError($"ERROR: {mapInfoModelLinePathOutfallRet.Error}");
-                }
+                //MapInfoModel mapInfoModelLinePathOutfallRet = mapInfoService.CreateMapInfoObjectDB(coordLinePathInf, MapInfoDrawTypeEnum.Polyline, TVTypeEnum.Outfall, tvItemModelInfrastructure.TVItemID);
+                //if (!string.IsNullOrWhiteSpace(mapInfoModelLinePathOutfallRet.Error))
+                //{
+                //    return ReturnError($"ERROR: {mapInfoModelLinePathOutfallRet.Error}");
+                //}
             }
 
             if (string.IsNullOrWhiteSpace(infrastructureModelRet.Error))

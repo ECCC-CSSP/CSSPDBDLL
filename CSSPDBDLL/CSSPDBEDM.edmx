@@ -267,6 +267,7 @@
           <Property Name="Disabled" Type="bit" Nullable="false" />
           <Property Name="IsNew" Type="bit" Nullable="false" />
           <Property Name="SamplingPlanner_ProvincesTVItemID" Type="nvarchar" MaxLength="200" />
+          <Property Name="Token" Type="nvarchar" MaxLength="255" />
           <Property Name="LastUpdateDate_UTC" Type="datetime" Nullable="false" />
           <Property Name="LastUpdateContactTVItemID" Type="int" Nullable="false" />
         </EntityType>
@@ -949,6 +950,39 @@
           <Property Name="MWQMSubsectorTVItemID" Type="int" Nullable="false" />
           <Property Name="SubsectorHistoricKey" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="TideLocationSIDText" Type="nvarchar" MaxLength="30" />
+          <Property Name="LastUpdateDate_UTC" Type="datetime" Nullable="false" />
+          <Property Name="LastUpdateContactTVItemID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PolSourceGroupingLanguages">
+          <Key>
+            <PropertyRef Name="PolSourceGroupingLanguageID" />
+          </Key>
+          <Property Name="PolSourceGroupingLanguageID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PolSourceGroupingID" Type="int" Nullable="false" />
+          <Property Name="Language" Type="int" Nullable="false" />
+          <Property Name="SourceName" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="SourceNameOrder" Type="int" Nullable="false" />
+          <Property Name="TranslationStatusSourceName" Type="int" Nullable="false" />
+          <Property Name="Init" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="TranslationStatusInit" Type="int" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="TranslationStatusDescription" Type="int" Nullable="false" />
+          <Property Name="Report" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="TranslationStatusReport" Type="int" Nullable="false" />
+          <Property Name="Text" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="TranslationStatusText" Type="int" Nullable="false" />
+          <Property Name="LastUpdateDate_UTC" Type="datetime" Nullable="false" />
+          <Property Name="LastUpdateContactTVItemID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PolSourceGroupings">
+          <Key>
+            <PropertyRef Name="PolSourceGroupingID" />
+          </Key>
+          <Property Name="PolSourceGroupingID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CSSPID" Type="int" Nullable="false" />
+          <Property Name="GroupName" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="Child" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="Hide" Type="nvarchar" MaxLength="150" Nullable="false" />
           <Property Name="LastUpdateDate_UTC" Type="datetime" Nullable="false" />
           <Property Name="LastUpdateContactTVItemID" Type="int" Nullable="false" />
         </EntityType>
@@ -2078,6 +2112,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_MikeScenarios_ForSimulatingMWQMRunTVItemID">
+          <End Role="TVItems" Type="Self.TVItems" Multiplicity="0..1" />
+          <End Role="MikeScenarios" Type="Self.MikeScenarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TVItems">
+              <PropertyRef Name="TVItemID" />
+            </Principal>
+            <Dependent Role="MikeScenarios">
+              <PropertyRef Name="ForSimulatingMWQMRunTVItemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_MikeScenarios_MikeScenarios">
           <End Role="MikeScenarios" Type="Self.MikeScenarios" Multiplicity="0..1" />
           <End Role="MikeScenarios1" Type="Self.MikeScenarios" Multiplicity="*" />
@@ -2099,6 +2145,18 @@
             </Principal>
             <Dependent Role="MikeScenarios">
               <PropertyRef Name="MikeScenarioTVItemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MikeScenarios_UseSalinityAndTemperatureInitialConditionFromTVFileTVItemID">
+          <End Role="TVItems" Type="Self.TVItems" Multiplicity="0..1" />
+          <End Role="MikeScenarios" Type="Self.MikeScenarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TVItems">
+              <PropertyRef Name="TVItemID" />
+            </Principal>
+            <Dependent Role="MikeScenarios">
+              <PropertyRef Name="UseSalinityAndTemperatureInitialConditionFromTVFileTVItemID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2301,6 +2359,20 @@
             </Principal>
             <Dependent Role="MWQMSubsectors">
               <PropertyRef Name="MWQMSubsectorTVItemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PolSourceGroupingLanguages_PolSourceGroupings">
+          <End Role="PolSourceGroupings" Type="Self.PolSourceGroupings" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PolSourceGroupingLanguages" Type="Self.PolSourceGroupingLanguages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PolSourceGroupings">
+              <PropertyRef Name="PolSourceGroupingID" />
+            </Principal>
+            <Dependent Role="PolSourceGroupingLanguages">
+              <PropertyRef Name="PolSourceGroupingID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2999,6 +3071,8 @@
           <EntitySet Name="MWQMSiteStartEndDates" EntityType="Self.MWQMSiteStartEndDates" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MWQMSubsectorLanguages" EntityType="Self.MWQMSubsectorLanguages" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MWQMSubsectors" EntityType="Self.MWQMSubsectors" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PolSourceGroupingLanguages" EntityType="Self.PolSourceGroupingLanguages" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PolSourceGroupings" EntityType="Self.PolSourceGroupings" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PolSourceObservationIssues" EntityType="Self.PolSourceObservationIssues" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PolSourceObservations" EntityType="Self.PolSourceObservations" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PolSourceSiteEffects" EntityType="Self.PolSourceSiteEffects" Schema="dbo" store:Type="Tables" />
@@ -3226,11 +3300,19 @@
             <End Role="TVItems" EntitySet="TVItems" />
             <End Role="MikeScenarioResults" EntitySet="MikeScenarioResults" />
           </AssociationSet>
+          <AssociationSet Name="FK_MikeScenarios_ForSimulatingMWQMRunTVItemID" Association="Self.FK_MikeScenarios_ForSimulatingMWQMRunTVItemID">
+            <End Role="TVItems" EntitySet="TVItems" />
+            <End Role="MikeScenarios" EntitySet="MikeScenarios" />
+          </AssociationSet>
           <AssociationSet Name="FK_MikeScenarios_MikeScenarios" Association="Self.FK_MikeScenarios_MikeScenarios">
             <End Role="MikeScenarios" EntitySet="MikeScenarios" />
             <End Role="MikeScenarios1" EntitySet="MikeScenarios" />
           </AssociationSet>
           <AssociationSet Name="FK_MikeScenarios_TVItems" Association="Self.FK_MikeScenarios_TVItems">
+            <End Role="TVItems" EntitySet="TVItems" />
+            <End Role="MikeScenarios" EntitySet="MikeScenarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MikeScenarios_UseSalinityAndTemperatureInitialConditionFromTVFileTVItemID" Association="Self.FK_MikeScenarios_UseSalinityAndTemperatureInitialConditionFromTVFileTVItemID">
             <End Role="TVItems" EntitySet="TVItems" />
             <End Role="MikeScenarios" EntitySet="MikeScenarios" />
           </AssociationSet>
@@ -3297,6 +3379,10 @@
           <AssociationSet Name="FK_MWQMSubsectors_TVItems" Association="Self.FK_MWQMSubsectors_TVItems">
             <End Role="TVItems" EntitySet="TVItems" />
             <End Role="MWQMSubsectors" EntitySet="MWQMSubsectors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PolSourceGroupingLanguages_PolSourceGroupings" Association="Self.FK_PolSourceGroupingLanguages_PolSourceGroupings">
+            <End Role="PolSourceGroupings" EntitySet="PolSourceGroupings" />
+            <End Role="PolSourceGroupingLanguages" EntitySet="PolSourceGroupingLanguages" />
           </AssociationSet>
           <AssociationSet Name="FK_PolSourceObservationIssues_PolSourceObservations" Association="Self.FK_PolSourceObservationIssues_PolSourceObservations">
             <End Role="PolSourceObservations" EntitySet="PolSourceObservations" />
@@ -3559,6 +3645,8 @@
           <EntitySet Name="MWQMSiteStartEndDates" EntityType="CSSPDBModel.MWQMSiteStartEndDate" />
           <EntitySet Name="MWQMSubsectorLanguages" EntityType="CSSPDBModel.MWQMSubsectorLanguage" />
           <EntitySet Name="MWQMSubsectors" EntityType="CSSPDBModel.MWQMSubsector" />
+          <EntitySet Name="PolSourceGroupingLanguages" EntityType="CSSPDBModel.PolSourceGroupingLanguage" />
+          <EntitySet Name="PolSourceGroupings" EntityType="CSSPDBModel.PolSourceGrouping" />
           <EntitySet Name="PolSourceObservationIssues" EntityType="CSSPDBModel.PolSourceObservationIssue" />
           <EntitySet Name="PolSourceObservations" EntityType="CSSPDBModel.PolSourceObservation" />
           <EntitySet Name="PolSourceSiteEffects" EntityType="CSSPDBModel.PolSourceSiteEffect" />
@@ -3790,11 +3878,19 @@
             <End Role="TVItem" EntitySet="TVItems" />
             <End Role="MikeScenarioResult" EntitySet="MikeScenarioResults" />
           </AssociationSet>
+          <AssociationSet Name="FK_MikeScenarios_ForSimulatingMWQMRunTVItemID" Association="CSSPDBModel.FK_MikeScenarios_ForSimulatingMWQMRunTVItemID">
+            <End Role="TVItem" EntitySet="TVItems" />
+            <End Role="MikeScenario" EntitySet="MikeScenarios" />
+          </AssociationSet>
           <AssociationSet Name="FK_MikeScenarios_MikeScenarios" Association="CSSPDBModel.FK_MikeScenarios_MikeScenarios">
             <End Role="MikeScenario" EntitySet="MikeScenarios" />
             <End Role="MikeScenario1" EntitySet="MikeScenarios" />
           </AssociationSet>
           <AssociationSet Name="FK_MikeScenarios_TVItems" Association="CSSPDBModel.FK_MikeScenarios_TVItems">
+            <End Role="TVItem" EntitySet="TVItems" />
+            <End Role="MikeScenario" EntitySet="MikeScenarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MikeScenarios_UseSalinityAndTemperatureInitialConditionFromTVFileTVItemID" Association="CSSPDBModel.FK_MikeScenarios_UseSalinityAndTemperatureInitialConditionFromTVFileTVItemID">
             <End Role="TVItem" EntitySet="TVItems" />
             <End Role="MikeScenario" EntitySet="MikeScenarios" />
           </AssociationSet>
@@ -3861,6 +3957,10 @@
           <AssociationSet Name="FK_MWQMSubsectors_TVItems" Association="CSSPDBModel.FK_MWQMSubsectors_TVItems">
             <End Role="TVItem" EntitySet="TVItems" />
             <End Role="MWQMSubsector" EntitySet="MWQMSubsectors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PolSourceGroupingLanguages_PolSourceGroupings" Association="CSSPDBModel.FK_PolSourceGroupingLanguages_PolSourceGroupings">
+            <End Role="PolSourceGrouping" EntitySet="PolSourceGroupings" />
+            <End Role="PolSourceGroupingLanguage" EntitySet="PolSourceGroupingLanguages" />
           </AssociationSet>
           <AssociationSet Name="FK_PolSourceObservationIssues_PolSourceObservations" Association="CSSPDBModel.FK_PolSourceObservationIssues_PolSourceObservations">
             <End Role="PolSourceObservation" EntitySet="PolSourceObservations" />
@@ -4338,6 +4438,7 @@
           <Property Name="Disabled" Type="Boolean" Nullable="false" />
           <Property Name="IsNew" Type="Boolean" Nullable="false" />
           <Property Name="SamplingPlanner_ProvincesTVItemID" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Token" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="LastUpdateDate_UTC" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="LastUpdateContactTVItemID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="AspNetUser" Relationship="CSSPDBModel.FK_Contacts_AspNetUsers" FromRole="Contact" ToRole="AspNetUser" />
@@ -4841,9 +4942,11 @@
           <Property Name="EstimatedTransFileSize" Type="Int64" />
           <Property Name="LastUpdateDate_UTC" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="LastUpdateContactTVItemID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TVItem" Relationship="CSSPDBModel.FK_MikeScenarios_ForSimulatingMWQMRunTVItemID" FromRole="MikeScenario" ToRole="TVItem" />
           <NavigationProperty Name="MikeScenarios1" Relationship="CSSPDBModel.FK_MikeScenarios_MikeScenarios" FromRole="MikeScenario" ToRole="MikeScenario1" />
           <NavigationProperty Name="MikeScenario1" Relationship="CSSPDBModel.FK_MikeScenarios_MikeScenarios" FromRole="MikeScenario1" ToRole="MikeScenario" />
-          <NavigationProperty Name="TVItem" Relationship="CSSPDBModel.FK_MikeScenarios_TVItems" FromRole="MikeScenario" ToRole="TVItem" />
+          <NavigationProperty Name="TVItem1" Relationship="CSSPDBModel.FK_MikeScenarios_TVItems" FromRole="MikeScenario" ToRole="TVItem" />
+          <NavigationProperty Name="TVItem2" Relationship="CSSPDBModel.FK_MikeScenarios_UseSalinityAndTemperatureInitialConditionFromTVFileTVItemID" FromRole="MikeScenario" ToRole="TVItem" />
         </EntityType>
         <EntityType Name="MikeSource">
           <Key>
@@ -5089,6 +5192,41 @@
           <Property Name="LastUpdateContactTVItemID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="MWQMSubsectorLanguages" Relationship="CSSPDBModel.FK_MWQMSubsectorLanguages_MWQMSubsectors" FromRole="MWQMSubsector" ToRole="MWQMSubsectorLanguage" />
           <NavigationProperty Name="TVItem" Relationship="CSSPDBModel.FK_MWQMSubsectors_TVItems" FromRole="MWQMSubsector" ToRole="TVItem" />
+        </EntityType>
+        <EntityType Name="PolSourceGroupingLanguage">
+          <Key>
+            <PropertyRef Name="PolSourceGroupingLanguageID" />
+          </Key>
+          <Property Name="PolSourceGroupingLanguageID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PolSourceGroupingID" Type="Int32" Nullable="false" />
+          <Property Name="Language" Type="Int32" Nullable="false" />
+          <Property Name="SourceName" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="SourceNameOrder" Type="Int32" Nullable="false" />
+          <Property Name="TranslationStatusSourceName" Type="Int32" Nullable="false" />
+          <Property Name="Init" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TranslationStatusInit" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="TranslationStatusDescription" Type="Int32" Nullable="false" />
+          <Property Name="Report" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="TranslationStatusReport" Type="Int32" Nullable="false" />
+          <Property Name="Text" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="TranslationStatusText" Type="Int32" Nullable="false" />
+          <Property Name="LastUpdateDate_UTC" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastUpdateContactTVItemID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="PolSourceGrouping" Relationship="CSSPDBModel.FK_PolSourceGroupingLanguages_PolSourceGroupings" FromRole="PolSourceGroupingLanguage" ToRole="PolSourceGrouping" />
+        </EntityType>
+        <EntityType Name="PolSourceGrouping">
+          <Key>
+            <PropertyRef Name="PolSourceGroupingID" />
+          </Key>
+          <Property Name="PolSourceGroupingID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CSSPID" Type="Int32" Nullable="false" />
+          <Property Name="GroupName" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Child" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Hide" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="LastUpdateDate_UTC" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastUpdateContactTVItemID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="PolSourceGroupingLanguages" Relationship="CSSPDBModel.FK_PolSourceGroupingLanguages_PolSourceGroupings" FromRole="PolSourceGrouping" ToRole="PolSourceGroupingLanguage" />
         </EntityType>
         <EntityType Name="PolSourceObservationIssue">
           <Key>
@@ -5551,7 +5689,9 @@
           <NavigationProperty Name="MapInfos" Relationship="CSSPDBModel.FK_MapInfos_TVItems" FromRole="TVItem" ToRole="MapInfo" />
           <NavigationProperty Name="MikeBoundaryConditions" Relationship="CSSPDBModel.FK_MikeBoundaryConditions_TVItems" FromRole="TVItem" ToRole="MikeBoundaryCondition" />
           <NavigationProperty Name="MikeScenarioResults" Relationship="CSSPDBModel.FK_MikeScenarioResults_TVItems" FromRole="TVItem" ToRole="MikeScenarioResult" />
-          <NavigationProperty Name="MikeScenarios" Relationship="CSSPDBModel.FK_MikeScenarios_TVItems" FromRole="TVItem" ToRole="MikeScenario" />
+          <NavigationProperty Name="MikeScenarios" Relationship="CSSPDBModel.FK_MikeScenarios_ForSimulatingMWQMRunTVItemID" FromRole="TVItem" ToRole="MikeScenario" />
+          <NavigationProperty Name="MikeScenarios1" Relationship="CSSPDBModel.FK_MikeScenarios_TVItems" FromRole="TVItem" ToRole="MikeScenario" />
+          <NavigationProperty Name="MikeScenarios2" Relationship="CSSPDBModel.FK_MikeScenarios_UseSalinityAndTemperatureInitialConditionFromTVFileTVItemID" FromRole="TVItem" ToRole="MikeScenario" />
           <NavigationProperty Name="MikeSources" Relationship="CSSPDBModel.FK_MikeSources_HydrometricTVItemID" FromRole="TVItem" ToRole="MikeSource" />
           <NavigationProperty Name="MikeSources1" Relationship="CSSPDBModel.FK_MikeSources_TVItems" FromRole="TVItem" ToRole="MikeSource" />
           <NavigationProperty Name="MWQMAnalysisReportParameters" Relationship="CSSPDBModel.FK_MWQMAnalysisReportParameters_ExcelTVFileTVItemID" FromRole="TVItem" ToRole="MWQMAnalysisReportParameter" />
@@ -6364,6 +6504,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_MikeScenarios_ForSimulatingMWQMRunTVItemID">
+          <End Type="CSSPDBModel.TVItem" Role="TVItem" Multiplicity="0..1" />
+          <End Type="CSSPDBModel.MikeScenario" Role="MikeScenario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TVItem">
+              <PropertyRef Name="TVItemID" />
+            </Principal>
+            <Dependent Role="MikeScenario">
+              <PropertyRef Name="ForSimulatingMWQMRunTVItemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_MikeScenarios_MikeScenarios">
           <End Type="CSSPDBModel.MikeScenario" Role="MikeScenario" Multiplicity="0..1" />
           <End Type="CSSPDBModel.MikeScenario" Role="MikeScenario1" Multiplicity="*" />
@@ -6385,6 +6537,18 @@
             </Principal>
             <Dependent Role="MikeScenario">
               <PropertyRef Name="MikeScenarioTVItemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MikeScenarios_UseSalinityAndTemperatureInitialConditionFromTVFileTVItemID">
+          <End Type="CSSPDBModel.TVItem" Role="TVItem" Multiplicity="0..1" />
+          <End Type="CSSPDBModel.MikeScenario" Role="MikeScenario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TVItem">
+              <PropertyRef Name="TVItemID" />
+            </Principal>
+            <Dependent Role="MikeScenario">
+              <PropertyRef Name="UseSalinityAndTemperatureInitialConditionFromTVFileTVItemID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -6587,6 +6751,20 @@
             </Principal>
             <Dependent Role="MWQMSubsector">
               <PropertyRef Name="MWQMSubsectorTVItemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PolSourceGroupingLanguages_PolSourceGroupings">
+          <End Type="CSSPDBModel.PolSourceGrouping" Role="PolSourceGrouping" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="CSSPDBModel.PolSourceGroupingLanguage" Role="PolSourceGroupingLanguage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PolSourceGrouping">
+              <PropertyRef Name="PolSourceGroupingID" />
+            </Principal>
+            <Dependent Role="PolSourceGroupingLanguage">
+              <PropertyRef Name="PolSourceGroupingID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -7460,6 +7638,7 @@
               <MappingFragment StoreEntitySet="Contacts">
                 <ScalarProperty Name="LastUpdateContactTVItemID" ColumnName="LastUpdateContactTVItemID" />
                 <ScalarProperty Name="LastUpdateDate_UTC" ColumnName="LastUpdateDate_UTC" />
+                <ScalarProperty Name="Token" ColumnName="Token" />
                 <ScalarProperty Name="SamplingPlanner_ProvincesTVItemID" ColumnName="SamplingPlanner_ProvincesTVItemID" />
                 <ScalarProperty Name="IsNew" ColumnName="IsNew" />
                 <ScalarProperty Name="Disabled" ColumnName="Disabled" />
@@ -8191,6 +8370,41 @@
                 <ScalarProperty Name="SubsectorHistoricKey" ColumnName="SubsectorHistoricKey" />
                 <ScalarProperty Name="MWQMSubsectorTVItemID" ColumnName="MWQMSubsectorTVItemID" />
                 <ScalarProperty Name="MWQMSubsectorID" ColumnName="MWQMSubsectorID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PolSourceGroupingLanguages">
+            <EntityTypeMapping TypeName="CSSPDBModel.PolSourceGroupingLanguage">
+              <MappingFragment StoreEntitySet="PolSourceGroupingLanguages">
+                <ScalarProperty Name="LastUpdateContactTVItemID" ColumnName="LastUpdateContactTVItemID" />
+                <ScalarProperty Name="LastUpdateDate_UTC" ColumnName="LastUpdateDate_UTC" />
+                <ScalarProperty Name="TranslationStatusText" ColumnName="TranslationStatusText" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="TranslationStatusReport" ColumnName="TranslationStatusReport" />
+                <ScalarProperty Name="Report" ColumnName="Report" />
+                <ScalarProperty Name="TranslationStatusDescription" ColumnName="TranslationStatusDescription" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="TranslationStatusInit" ColumnName="TranslationStatusInit" />
+                <ScalarProperty Name="Init" ColumnName="Init" />
+                <ScalarProperty Name="TranslationStatusSourceName" ColumnName="TranslationStatusSourceName" />
+                <ScalarProperty Name="SourceNameOrder" ColumnName="SourceNameOrder" />
+                <ScalarProperty Name="SourceName" ColumnName="SourceName" />
+                <ScalarProperty Name="Language" ColumnName="Language" />
+                <ScalarProperty Name="PolSourceGroupingID" ColumnName="PolSourceGroupingID" />
+                <ScalarProperty Name="PolSourceGroupingLanguageID" ColumnName="PolSourceGroupingLanguageID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PolSourceGroupings">
+            <EntityTypeMapping TypeName="CSSPDBModel.PolSourceGrouping">
+              <MappingFragment StoreEntitySet="PolSourceGroupings">
+                <ScalarProperty Name="LastUpdateContactTVItemID" ColumnName="LastUpdateContactTVItemID" />
+                <ScalarProperty Name="LastUpdateDate_UTC" ColumnName="LastUpdateDate_UTC" />
+                <ScalarProperty Name="Hide" ColumnName="Hide" />
+                <ScalarProperty Name="Child" ColumnName="Child" />
+                <ScalarProperty Name="GroupName" ColumnName="GroupName" />
+                <ScalarProperty Name="CSSPID" ColumnName="CSSPID" />
+                <ScalarProperty Name="PolSourceGroupingID" ColumnName="PolSourceGroupingID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

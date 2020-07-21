@@ -312,6 +312,12 @@
     <Compile Include="MWQMSubsectorLanguage.cs">
       <DependentUpon>CSSPDBEDM.tt</DependentUpon>
     </Compile>
+    <Compile Include="PolSourceGrouping.cs">
+      <DependentUpon>CSSPDBEDM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PolSourceGroupingLanguage.cs">
+      <DependentUpon>CSSPDBEDM.tt</DependentUpon>
+    </Compile>
     <Compile Include="PolSourceObservation.cs">
       <DependentUpon>CSSPDBEDM.tt</DependentUpon>
     </Compile>

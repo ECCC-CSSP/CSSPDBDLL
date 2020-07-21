@@ -44,6 +44,8 @@ namespace CSSPDBDLL
             this.MikeBoundaryConditions = new HashSet<MikeBoundaryCondition>();
             this.MikeScenarioResults = new HashSet<MikeScenarioResult>();
             this.MikeScenarios = new HashSet<MikeScenario>();
+            this.MikeScenarios1 = new HashSet<MikeScenario>();
+            this.MikeScenarios2 = new HashSet<MikeScenario>();
             this.MikeSources = new HashSet<MikeSource>();
             this.MikeSources1 = new HashSet<MikeSource>();
             this.MWQMAnalysisReportParameters = new HashSet<MWQMAnalysisReportParameter>();
@@ -153,6 +155,10 @@ namespace CSSPDBDLL
         public virtual ICollection<MikeScenarioResult> MikeScenarioResults { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MikeScenario> MikeScenarios { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<MikeScenario> MikeScenarios1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<MikeScenario> MikeScenarios2 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MikeSource> MikeSources { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

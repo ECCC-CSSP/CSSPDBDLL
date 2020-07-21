@@ -53,9 +53,11 @@ namespace CSSPDBDLL
         public System.DateTime LastUpdateDate_UTC { get; set; }
         public int LastUpdateContactTVItemID { get; set; }
     
+        public virtual TVItem TVItem { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MikeScenario> MikeScenarios1 { get; set; }
         public virtual MikeScenario MikeScenario1 { get; set; }
-        public virtual TVItem TVItem { get; set; }
+        public virtual TVItem TVItem1 { get; set; }
+        public virtual TVItem TVItem2 { get; set; }
     }
 }

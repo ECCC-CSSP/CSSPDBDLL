@@ -35,6 +35,7 @@ namespace CSSPDBDLL
         public bool Disabled { get; set; }
         public bool IsNew { get; set; }
         public string SamplingPlanner_ProvincesTVItemID { get; set; }
+        public string Token { get; set; }
         public System.DateTime LastUpdateDate_UTC { get; set; }
         public int LastUpdateContactTVItemID { get; set; }
     

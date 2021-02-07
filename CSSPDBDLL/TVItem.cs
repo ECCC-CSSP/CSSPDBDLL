@@ -93,10 +93,11 @@ namespace CSSPDBDLL
         }
     
         public int TVItemID { get; set; }
+        public int DBCommand { get; set; }
         public int TVLevel { get; set; }
         public string TVPath { get; set; }
         public int TVType { get; set; }
-        public int ParentID { get; set; }
+        public Nullable<int> ParentID { get; set; }
         public bool IsActive { get; set; }
         public System.DateTime LastUpdateDate_UTC { get; set; }
         public int LastUpdateContactTVItemID { get; set; }

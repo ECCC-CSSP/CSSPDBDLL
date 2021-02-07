@@ -15,6 +15,7 @@ namespace CSSPDBDLL
     public partial class MikeSourceStartEnd
     {
         public int MikeSourceStartEndID { get; set; }
+        public int DBCommand { get; set; }
         public int MikeSourceID { get; set; }
         public System.DateTime StartDateAndTime_Local { get; set; }
         public System.DateTime EndDateAndTime_Local { get; set; }

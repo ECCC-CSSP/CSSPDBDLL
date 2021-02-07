@@ -74,6 +74,11 @@ namespace CSSPDBDLL.Services
                 return retStr;
             }
 
+            retStr = _BaseEnumService.DBCommandOK(mwqmRunLanguageModel.DBCommand);
+            if (!string.IsNullOrWhiteSpace(retStr))
+            {
+                return retStr;
+            }
 
             return "";
         }
@@ -81,6 +86,7 @@ namespace CSSPDBDLL.Services
         // Fill
         public string FillMWQMRunLanguage(MWQMRunLanguage mwqmRunLanguageNew, MWQMRunLanguageModel mwqmRunLanguageModel, ContactOK contactOK)
         {
+            mwqmRunLanguageNew.DBCommand = (int)mwqmRunLanguageModel.DBCommand;
             mwqmRunLanguageNew.MWQMRunID = mwqmRunLanguageModel.MWQMRunID;
             mwqmRunLanguageNew.Language = (int)mwqmRunLanguageModel.Language;
             mwqmRunLanguageNew.TranslationStatusRunComment = (int)mwqmRunLanguageModel.TranslationStatusRunComment;
@@ -117,6 +123,7 @@ namespace CSSPDBDLL.Services
                                                          {
                                                              Error = "",
                                                              MWQMRunID = c.MWQMRunID,
+                                                             DBCommand = (DBCommandEnum)c.DBCommand,
                                                              MWQMRunLanguageID = c.MWQMRunLanguageID,
                                                              Language = (LanguageEnum)c.Language,
                                                              TranslationStatusRunComment = (TranslationStatusEnum)c.TranslationStatusRunComment,

@@ -21,6 +21,7 @@ namespace CSSPDBDLL
         }
     
         public int CoCoRaHSSiteID { get; set; }
+        public int DBCommand { get; set; }
         public string StationNumber { get; set; }
         public string StationName { get; set; }
         public double Latitude { get; set; }

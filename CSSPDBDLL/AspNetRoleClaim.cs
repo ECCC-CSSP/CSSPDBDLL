@@ -12,15 +12,13 @@ namespace CSSPDBDLL
     using System;
     using System.Collections.Generic;
     
-    public partial class Log
+    public partial class AspNetRoleClaim
     {
-        public int LogID { get; set; }
-        public int DBCommand { get; set; }
-        public string TableName { get; set; }
-        public int ID { get; set; }
-        public int LogCommand { get; set; }
-        public string Information { get; set; }
-        public System.DateTime LastUpdateDate_UTC { get; set; }
-        public int LastUpdateContactTVItemID { get; set; }
+        public int Id { get; set; }
+        public string RoleId { get; set; }
+        public string ClaimType { get; set; }
+        public string ClaimValue { get; set; }
+    
+        public virtual AspNetRole AspNetRole { get; set; }
     }
 }

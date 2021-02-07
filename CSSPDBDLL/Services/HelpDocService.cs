@@ -69,12 +69,19 @@ namespace CSSPDBDLL.Services
                 return retStr;
             }
 
+            retStr = _BaseEnumService.DBCommandOK(helpDocModel.DBCommand);
+            if (!string.IsNullOrWhiteSpace(retStr))
+            {
+                return retStr;
+            }
+
             return "";
         }
 
         // Fill
         public string FillHelpDoc(HelpDoc helpDocNew, HelpDocModel helpDocModel, ContactOK contactOK)
         {
+            helpDocNew.DBCommand = (int)helpDocModel.DBCommand;
             helpDocNew.DocKey = helpDocModel.DocKey;
             helpDocNew.Language = (int)helpDocModel.Language;
             helpDocNew.DocHTMLText = helpDocModel.DocHTMLText;
@@ -108,6 +115,7 @@ namespace CSSPDBDLL.Services
                                          {
                                              Error = "",
                                              HelpDocID = c.HelpDocID,
+                                             DBCommand = (DBCommandEnum)c.DBCommand,
                                              DocKey = c.DocKey,
                                              Language = (LanguageEnum)c.Language,
                                              DocHTMLText = c.DocHTMLText,
@@ -129,6 +137,7 @@ namespace CSSPDBDLL.Services
                                          {
                                              Error = "",
                                              HelpDocID = c.HelpDocID,
+                                             DBCommand = (DBCommandEnum)c.DBCommand,
                                              DocKey = c.DocKey,
                                              Language = (LanguageEnum)c.Language,
                                              DocHTMLText = c.DocHTMLText,
@@ -175,6 +184,7 @@ namespace CSSPDBDLL.Services
             {
                 HelpDocModel helpDocModelNew = new HelpDocModel()
                 {
+                    DBCommand = DBCommandEnum.Original,
                     DocKey = DocKey,
                     DocHTMLText = DocHTMLText,
                     Language = Language,

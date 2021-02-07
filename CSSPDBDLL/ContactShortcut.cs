@@ -15,6 +15,7 @@ namespace CSSPDBDLL
     public partial class ContactShortcut
     {
         public int ContactShortcutID { get; set; }
+        public int DBCommand { get; set; }
         public int ContactID { get; set; }
         public string ShortCutText { get; set; }
         public string ShortCutAddress { get; set; }

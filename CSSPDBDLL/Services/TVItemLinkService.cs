@@ -92,12 +92,19 @@ namespace CSSPDBDLL.Services
                 return retStr;
             }
 
+            retStr = _BaseEnumService.DBCommandOK(tvItemLinkModel.DBCommand);
+            if (!string.IsNullOrWhiteSpace(retStr))
+            {
+                return retStr;
+            }
+
             return "";
         }
 
         // Fill
         public string FillTVItemLink(TVItemLink tvItemLinkNew, TVItemLinkModel tvItemLinkModel, ContactOK contactOK)
         {
+            tvItemLinkNew.DBCommand = (int)tvItemLinkModel.DBCommand;
             tvItemLinkNew.FromTVItemID = tvItemLinkModel.FromTVItemID;
             tvItemLinkNew.ToTVItemID = tvItemLinkModel.ToTVItemID;
             tvItemLinkNew.FromTVType = (int)tvItemLinkModel.FromTVType;
@@ -145,6 +152,7 @@ namespace CSSPDBDLL.Services
                                                          {
                                                              Error = "",
                                                              TVItemLinkID = c.TVItemLinkID,
+                                                             DBCommand = (DBCommandEnum)c.DBCommand,
                                                              FromTVItemID = c.FromTVItemID,
                                                              FromTVText = fromName,
                                                              ToTVItemID = c.ToTVItemID,
@@ -174,6 +182,7 @@ namespace CSSPDBDLL.Services
                                                          {
                                                              Error = "",
                                                              TVItemLinkID = c.TVItemLinkID,
+                                                             DBCommand = (DBCommandEnum)c.DBCommand,
                                                              FromTVItemID = c.FromTVItemID,
                                                              FromTVText = fromName,
                                                              ToTVItemID = c.ToTVItemID,
@@ -204,6 +213,7 @@ namespace CSSPDBDLL.Services
                                                {
                                                    Error = "",
                                                    TVItemLinkID = c.TVItemLinkID,
+                                                   DBCommand = (DBCommandEnum)c.DBCommand,
                                                    FromTVItemID = c.FromTVItemID,
                                                    FromTVText = fromName,
                                                    ToTVItemID = c.ToTVItemID,
@@ -258,6 +268,7 @@ namespace CSSPDBDLL.Services
                                                {
                                                    Error = "",
                                                    TVItemLinkID = c.TVItemLinkID,
+                                                   DBCommand = (DBCommandEnum)c.DBCommand,
                                                    FromTVItemID = c.FromTVItemID,
                                                    FromTVText = fromName,
                                                    ToTVItemID = c.ToTVItemID,

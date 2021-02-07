@@ -94,12 +94,19 @@ namespace CSSPDBDLL.Services
                 return retStr;
             }
 
+            retStr = _BaseEnumService.DBCommandOK(mwqmSiteModel.DBCommand);
+            if (!string.IsNullOrWhiteSpace(retStr))
+            {
+                return retStr;
+            }
+
             return "";
         }
 
         // Fill
         public string FillMWQMSite(MWQMSite mwqmSite, MWQMSiteModel mwqmSiteModel, ContactOK contactOK)
         {
+            mwqmSite.DBCommand = (int)mwqmSiteModel.DBCommand;
             mwqmSite.MWQMSiteTVItemID = mwqmSiteModel.MWQMSiteTVItemID;
             mwqmSite.MWQMSiteNumber = mwqmSiteModel.MWQMSiteNumber;
             mwqmSite.MWQMSiteDescription = mwqmSiteModel.MWQMSiteDescription;
@@ -196,6 +203,7 @@ namespace CSSPDBDLL.Services
                                            {
                                                Error = "",
                                                MWQMSiteID = c.MWQMSiteID,
+                                               DBCommand = (DBCommandEnum)c.DBCommand,
                                                MWQMSiteTVItemID = c.MWQMSiteTVItemID,
                                                MWQMSiteTVText = mwqmSiteName,
                                                MWQMSiteNumber = c.MWQMSiteNumber,
@@ -220,6 +228,7 @@ namespace CSSPDBDLL.Services
                                            {
                                                Error = "",
                                                MWQMSiteID = c.MWQMSiteID,
+                                               DBCommand = (DBCommandEnum)c.DBCommand,
                                                MWQMSiteTVItemID = c.MWQMSiteTVItemID,
                                                MWQMSiteTVText = mwqmSiteName,
                                                MWQMSiteNumber = c.MWQMSiteNumber,
@@ -246,6 +255,7 @@ namespace CSSPDBDLL.Services
                     {
                         Error = "",
                         MWQMSiteID = s.MWQMSiteID,
+                        DBCommand = (DBCommandEnum)s.DBCommand,
                         MWQMSiteTVItemID = s.MWQMSiteTVItemID,
                         MWQMSiteTVText = mwqmSiteName,
                         MWQMSiteNumber = s.MWQMSiteNumber,
@@ -643,6 +653,8 @@ namespace CSSPDBDLL.Services
                 if (!string.IsNullOrWhiteSpace(mwqmSiteNewOrToChange.Error))
                     return ReturnError(mwqmSiteNewOrToChange.Error);
             }
+
+            mwqmSiteNewOrToChange.DBCommand = DBCommandEnum.Original;
 
             MWQMSiteTVText = fc["MWQMSiteTVText"];
             if (string.IsNullOrWhiteSpace(MWQMSiteTVText))

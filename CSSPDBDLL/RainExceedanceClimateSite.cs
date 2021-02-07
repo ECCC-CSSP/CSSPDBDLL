@@ -15,6 +15,7 @@ namespace CSSPDBDLL
     public partial class RainExceedanceClimateSite
     {
         public int RainExceedanceClimateSiteID { get; set; }
+        public int DBCommand { get; set; }
         public int RainExceedanceTVItemID { get; set; }
         public int ClimateSiteTVItemID { get; set; }
         public System.DateTime LastUpdateDate_UTC { get; set; }

@@ -65,12 +65,19 @@ namespace CSSPDBDLL.Services
                 return retStr;
             }
 
+            retStr = _BaseEnumService.DBCommandOK(rainExceedanceClimateSiteModel.DBCommand);
+            if (!string.IsNullOrWhiteSpace(retStr))
+            {
+                return retStr;
+            }
+
             return "";
         }
 
         // Fill
         public string FillRainExceedanceClimateSite(RainExceedanceClimateSite rainExceedanceClimateSiteNew, RainExceedanceClimateSiteModel rainExceedanceClimateSiteModel, ContactOK contactOK)
         {
+            rainExceedanceClimateSiteNew.DBCommand = (int)rainExceedanceClimateSiteModel.DBCommand;
             rainExceedanceClimateSiteNew.RainExceedanceTVItemID = rainExceedanceClimateSiteModel.RainExceedanceTVItemID;
             rainExceedanceClimateSiteNew.ClimateSiteTVItemID = rainExceedanceClimateSiteModel.ClimateSiteTVItemID;
             rainExceedanceClimateSiteNew.LastUpdateDate_UTC = DateTime.UtcNow;
@@ -101,6 +108,7 @@ namespace CSSPDBDLL.Services
                                                                                        {
                                                                                            Error = "",
                                                                                            RainExceedanceClimateSiteID = c.RainExceedanceClimateSiteID,
+                                                                                           DBCommand = (DBCommandEnum)c.DBCommand,
                                                                                            RainExceedanceTVItemID = c.RainExceedanceTVItemID,
                                                                                            ClimateSiteTVItemID = c.ClimateSiteTVItemID,
                                                                                            LastUpdateDate_UTC = c.LastUpdateDate_UTC,
@@ -117,6 +125,7 @@ namespace CSSPDBDLL.Services
                                                                                        {
                                                                                            Error = "",
                                                                                            RainExceedanceClimateSiteID = c.RainExceedanceClimateSiteID,
+                                                                                           DBCommand = (DBCommandEnum)c.DBCommand,
                                                                                            RainExceedanceTVItemID = c.RainExceedanceTVItemID,
                                                                                            ClimateSiteTVItemID = c.ClimateSiteTVItemID,
                                                                                            LastUpdateDate_UTC = c.LastUpdateDate_UTC,
@@ -133,6 +142,7 @@ namespace CSSPDBDLL.Services
                                                                              {
                                                                                  Error = "",
                                                                                  RainExceedanceClimateSiteID = c.RainExceedanceClimateSiteID,
+                                                                                 DBCommand = (DBCommandEnum)c.DBCommand,
                                                                                  RainExceedanceTVItemID = c.RainExceedanceTVItemID,
                                                                                  ClimateSiteTVItemID = c.ClimateSiteTVItemID,
                                                                                  LastUpdateDate_UTC = c.LastUpdateDate_UTC,
@@ -184,6 +194,7 @@ namespace CSSPDBDLL.Services
                 {
                     RainExceedanceClimateSiteModel rainExceedanceClimateSiteModelNew = new RainExceedanceClimateSiteModel()
                     {
+                        DBCommand = DBCommandEnum.Original,
                         RainExceedanceTVItemID = RainExceedanceTVItemID,
                         ClimateSiteTVItemID = ClimateSiteTVItemID,
                     };
@@ -203,6 +214,7 @@ namespace CSSPDBDLL.Services
                 {
                     RainExceedanceClimateSiteModel rainExceedanceClimateSiteModelNew = new RainExceedanceClimateSiteModel()
                     {
+                        DBCommand = DBCommandEnum.Original,
                         RainExceedanceTVItemID = RainExceedanceTVItemID,
                         ClimateSiteTVItemID = ClimateSiteTVItemID,
                     };

@@ -15,6 +15,7 @@ namespace CSSPDBDLL
     public partial class UseOfSite
     {
         public int UseOfSiteID { get; set; }
+        public int DBCommand { get; set; }
         public int SiteTVItemID { get; set; }
         public int SubsectorTVItemID { get; set; }
         public int TVType { get; set; }

@@ -26,7 +26,6 @@ namespace CSSPDBDLL.Services
         #region Variables public
         public List<LanguageEnum> LanguageListAllowable = new List<LanguageEnum>() { LanguageEnum.en, LanguageEnum.fr };
         public CSSPDBEntities db;
-        public CoCoRaHSEntities CoCoRaHSdb;
         public LanguageEnum LanguageRequest;
         public IPrincipal User;
         public int TakeMax = 1000000;
@@ -75,7 +74,6 @@ namespace CSSPDBDLL.Services
 
             this.User = User;
             db = new CSSPDBEntities();
-            CoCoRaHSdb = new CoCoRaHSEntities();
             FillTVTypeNamesAndPathList();
             _BaseModelService.FillPolSourceObsInfoChild(polSourceObsInfoChildList);
 
@@ -89,42 +87,42 @@ namespace CSSPDBDLL.Services
 
         #region Functions public
         #region Functions Checks
-        public virtual string CoCoRaHSDoAddChanges()
-        {
-            try
-            {
-                CoCoRaHSdb.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-                return string.Format(ServiceRes.CouldNotAddError_, ex.Message);
-            }
-            return "";
-        }
-        public virtual string CoCoRaHSDoDeleteChanges()
-        {
-            try
-            {
-                CoCoRaHSdb.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-                return string.Format(ServiceRes.CouldNotDeleteError_, ex.Message);
-            }
-            return "";
-        }
-        public virtual string CoCoRaHSDoUpdateChanges()
-        {
-            try
-            {
-                CoCoRaHSdb.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-                return string.Format(ServiceRes.CouldNotUpdateError_, ex.Message);
-            }
-            return "";
-        }
+        //public virtual string CoCoRaHSDoAddChanges()
+        //{
+        //    try
+        //    {
+        //        CoCoRaHSdb.SaveChanges();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return string.Format(ServiceRes.CouldNotAddError_, ex.Message);
+        //    }
+        //    return "";
+        //}
+        //public virtual string CoCoRaHSDoDeleteChanges()
+        //{
+        //    try
+        //    {
+        //        CoCoRaHSdb.SaveChanges();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return string.Format(ServiceRes.CouldNotDeleteError_, ex.Message);
+        //    }
+        //    return "";
+        //}
+        //public virtual string CoCoRaHSDoUpdateChanges()
+        //{
+        //    try
+        //    {
+        //        CoCoRaHSdb.SaveChanges();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return string.Format(ServiceRes.CouldNotUpdateError_, ex.Message);
+        //    }
+        //    return "";
+        //}
         public virtual string DoAddChanges()
         {
             try

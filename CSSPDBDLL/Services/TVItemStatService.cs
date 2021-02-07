@@ -64,12 +64,19 @@ namespace CSSPDBDLL.Services
                 return retStr;
             }
 
+            retStr = _BaseEnumService.DBCommandOK(tvItemStatModel.DBCommand);
+            if (!string.IsNullOrWhiteSpace(retStr))
+            {
+                return retStr;
+            }
+
             return "";
         }
 
         // Fill
         public string FillTVItemStat(TVItemStat tvItemStat, TVItemStatModel tvItemStatModel, ContactOK contactOK)
         {
+            tvItemStat.DBCommand = (int)tvItemStatModel.DBCommand;
             tvItemStat.TVItemID = tvItemStatModel.TVItemID;
             tvItemStat.TVType = (int)tvItemStatModel.TVType;
             tvItemStat.ChildCount = tvItemStatModel.ChildCount;
@@ -1371,6 +1378,7 @@ namespace CSSPDBDLL.Services
                                                          {
                                                              Error = "",
                                                              TVItemStatID = c.TVItemStatID,
+                                                             DBCommand = (DBCommandEnum)c.DBCommand,
                                                              TVItemID = c.TVItemID,
                                                              TVType = (TVTypeEnum)c.TVType,
                                                              ChildCount = c.ChildCount,
@@ -1390,6 +1398,7 @@ namespace CSSPDBDLL.Services
                                                {
                                                    Error = "",
                                                    TVItemStatID = c.TVItemStatID,
+                                                   DBCommand = (DBCommandEnum)c.DBCommand,
                                                    TVItemID = c.TVItemID,
                                                    TVType = (TVTypeEnum)c.TVType,
                                                    ChildCount = c.ChildCount,

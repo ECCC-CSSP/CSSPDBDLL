@@ -121,6 +121,12 @@ namespace CSSPDBDLL.Services
                 return retStr;
             }
 
+            retStr = _BaseEnumService.DBCommandOK(mikeSourceModel.DBCommand);
+            if (!string.IsNullOrWhiteSpace(retStr))
+            {
+                return retStr;
+            }
+
             return "";
         }
         public string CheckIfSourceNameIsUniqueDB(int MikeScenarioTVItemID, string SourceName)
@@ -145,6 +151,7 @@ namespace CSSPDBDLL.Services
         // Fill
         public string FillMikeSource(MikeSource mikeSource, MikeSourceModel mikeSourceModel, ContactOK contactOK)
         {
+            mikeSource.DBCommand = (int)mikeSourceModel.DBCommand;
             mikeSource.MikeSourceTVItemID = mikeSourceModel.MikeSourceTVItemID;
             mikeSource.Include = mikeSourceModel.Include;
             mikeSource.IsContinuous = mikeSourceModel.IsContinuous;
@@ -185,6 +192,7 @@ namespace CSSPDBDLL.Services
                                                                                         {
                                                                                             Error = "",
                                                                                             MikeSourceStartEndID = mse.MikeSourceStartEndID,
+                                                                                            DBCommand = (DBCommandEnum)mse.DBCommand,
                                                                                             MikeSourceID = mse.MikeSourceID,
                                                                                             StartDateAndTime_Local = mse.StartDateAndTime_Local,
                                                                                             EndDateAndTime_Local = mse.EndDateAndTime_Local,
@@ -206,6 +214,7 @@ namespace CSSPDBDLL.Services
                                                          {
                                                              Error = "",
                                                              MikeSourceID = m.MikeSourceID,
+                                                             DBCommand = (DBCommandEnum)c.DBCommand,
                                                              MikeSourceTVText = sourceName,
                                                              Include = m.Include,
                                                              IsContinuous = m.IsContinuous,
@@ -245,6 +254,7 @@ namespace CSSPDBDLL.Services
                                                          {
                                                              Error = "",
                                                              MikeSourceID = m.MikeSourceID,
+                                                             DBCommand = (DBCommandEnum)c.DBCommand,
                                                              MikeSourceTVText = sourceName,
                                                              Include = m.Include,
                                                              IsContinuous = m.IsContinuous,
@@ -280,6 +290,7 @@ namespace CSSPDBDLL.Services
                                                {
                                                    Error = "",
                                                    MikeSourceID = c.MikeSourceID,
+                                                   DBCommand = (DBCommandEnum)c.DBCommand,
                                                    MikeSourceTVText = sourceName,
                                                    Include = c.Include,
                                                    IsContinuous = c.IsContinuous,
@@ -318,6 +329,7 @@ namespace CSSPDBDLL.Services
                                                {
                                                    Error = "",
                                                    MikeSourceID = c.MikeSourceID,
+                                                   DBCommand = (DBCommandEnum)c.DBCommand,
                                                    MikeSourceTVText = sourceName,
                                                    Include = c.Include,
                                                    IsContinuous = c.IsContinuous,

@@ -15,6 +15,7 @@ namespace CSSPDBDLL
     public partial class MWQMLookupMPN
     {
         public int MWQMLookupMPNID { get; set; }
+        public int DBCommand { get; set; }
         public int Tubes10 { get; set; }
         public int Tubes1 { get; set; }
         public int Tubes01 { get; set; }

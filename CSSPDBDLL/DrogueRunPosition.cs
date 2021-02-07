@@ -15,6 +15,7 @@ namespace CSSPDBDLL
     public partial class DrogueRunPosition
     {
         public int DrogueRunPositionID { get; set; }
+        public int DBCommand { get; set; }
         public int DrogueRunID { get; set; }
         public int Ordinal { get; set; }
         public double StepLat { get; set; }

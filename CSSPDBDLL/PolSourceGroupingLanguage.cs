@@ -15,6 +15,7 @@ namespace CSSPDBDLL
     public partial class PolSourceGroupingLanguage
     {
         public int PolSourceGroupingLanguageID { get; set; }
+        public int DBCommand { get; set; }
         public int PolSourceGroupingID { get; set; }
         public int Language { get; set; }
         public string SourceName { get; set; }

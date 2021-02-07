@@ -15,6 +15,7 @@ namespace CSSPDBDLL
     public partial class ResetPassword
     {
         public int ResetPasswordID { get; set; }
+        public int DBCommand { get; set; }
         public string Email { get; set; }
         public System.DateTime ExpireDate_Local { get; set; }
         public string Code { get; set; }

@@ -74,12 +74,19 @@ namespace CSSPDBDLL.Services
                 return retStr;
             }
 
+            retStr = _BaseEnumService.DBCommandOK(mwqmLookupMPNModel.DBCommand);
+            if (!string.IsNullOrWhiteSpace(retStr))
+            {
+                return retStr;
+            }
+
             return "";
         }
 
         // Fill
         public string FillMWQMLookupMPN(MWQMLookupMPN mwqmLookupMPNNew, MWQMLookupMPNModel mwqmLookupMPNModel, ContactOK contactOK)
         {
+            mwqmLookupMPNNew.DBCommand = (int)mwqmLookupMPNModel.DBCommand;
             mwqmLookupMPNNew.Tubes01 = mwqmLookupMPNModel.Tubes01;
             mwqmLookupMPNNew.Tubes1 = mwqmLookupMPNModel.Tubes1;
             mwqmLookupMPNNew.Tubes10 = mwqmLookupMPNModel.Tubes10;
@@ -112,6 +119,7 @@ namespace CSSPDBDLL.Services
                                                                {
                                                                    Error = "",
                                                                    MWQMLookupMPNID = c.MWQMLookupMPNID,
+                                                                   DBCommand = (DBCommandEnum)c.DBCommand,
                                                                    Tubes01 = c.Tubes01,
                                                                    Tubes1 = c.Tubes1,
                                                                    Tubes10 = c.Tubes10,
@@ -130,6 +138,7 @@ namespace CSSPDBDLL.Services
                                                      {
                                                          Error = "",
                                                          MWQMLookupMPNID = c.MWQMLookupMPNID,
+                                                         DBCommand = (DBCommandEnum)c.DBCommand,
                                                          Tubes01 = c.Tubes01,
                                                          Tubes1 = c.Tubes1,
                                                          Tubes10 = c.Tubes10,

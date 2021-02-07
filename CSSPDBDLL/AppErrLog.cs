@@ -15,6 +15,7 @@ namespace CSSPDBDLL
     public partial class AppErrLog
     {
         public int AppErrLogID { get; set; }
+        public int DBCommand { get; set; }
         public string Tag { get; set; }
         public int LineNumber { get; set; }
         public string Source { get; set; }

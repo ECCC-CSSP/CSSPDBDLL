@@ -62,12 +62,19 @@ namespace CSSPDBDLL.Services
             if (!string.IsNullOrWhiteSpace(retStr))
                 return retStr;
 
+            retStr = _BaseEnumService.DBCommandOK(vpScenarioLanguageModel.DBCommand);
+            if (!string.IsNullOrWhiteSpace(retStr))
+            {
+                return retStr;
+            }
+
             return "";
         }
 
         // Fill
         public string FillVPScenarioLanguage(VPScenarioLanguage vpScenarioLanguageNew, VPScenarioLanguageModel vpScenarioLanguageModel, ContactOK contactOK)
         {
+            vpScenarioLanguageNew.DBCommand = (int)vpScenarioLanguageModel.DBCommand;
             vpScenarioLanguageNew.VPScenarioID = vpScenarioLanguageModel.VPScenarioID;
             vpScenarioLanguageNew.Language = (int)vpScenarioLanguageModel.Language;
             vpScenarioLanguageNew.TranslationStatus = (int)vpScenarioLanguageModel.TranslationStatus;
@@ -102,6 +109,7 @@ namespace CSSPDBDLL.Services
                                                                {
                                                                    Error = "",
                                                                    VPScenarioID = c.VPScenarioID,
+                                                                   DBCommand = (DBCommandEnum)c.DBCommand,
                                                                    Language = (LanguageEnum)c.Language,
                                                                    TranslationStatus = (TranslationStatusEnum)c.TranslationStatus,
                                                                    VPScenarioName = c.VPScenarioName,

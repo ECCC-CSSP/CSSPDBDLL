@@ -22,6 +22,7 @@ namespace CSSPDBDLL
         }
     
         public int ContactID { get; set; }
+        public int DBCommand { get; set; }
         public string Id { get; set; }
         public int ContactTVItemID { get; set; }
         public string LoginEmail { get; set; }
@@ -35,7 +36,6 @@ namespace CSSPDBDLL
         public bool Disabled { get; set; }
         public bool IsNew { get; set; }
         public string SamplingPlanner_ProvincesTVItemID { get; set; }
-        public string Token { get; set; }
         public System.DateTime LastUpdateDate_UTC { get; set; }
         public int LastUpdateContactTVItemID { get; set; }
     

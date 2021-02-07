@@ -15,6 +15,7 @@ namespace CSSPDBDLL
     public partial class MWQMAnalysisReportParameter
     {
         public int MWQMAnalysisReportParameterID { get; set; }
+        public int DBCommand { get; set; }
         public int SubsectorTVItemID { get; set; }
         public string AnalysisName { get; set; }
         public Nullable<int> AnalysisReportYear { get; set; }

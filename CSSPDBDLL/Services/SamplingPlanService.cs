@@ -72,19 +72,19 @@ namespace CSSPDBDLL.Services
         }
 
         // Check
-        public string SamplingPlanModelOK(SamplingPlanModel SamplingPlanModel)
+        public string SamplingPlanModelOK(SamplingPlanModel samplingPlanModel)
         {
-            string retStr = FieldCheckNotNullAndMinMaxLengthString(SamplingPlanModel.SamplingPlanName, ServiceRes.SamplingPlanName, 3, 100);
+            string retStr = FieldCheckNotNullAndMinMaxLengthString(samplingPlanModel.SamplingPlanName, ServiceRes.SamplingPlanName, 3, 100);
             if (!string.IsNullOrWhiteSpace(retStr))
             {
                 return retStr;
             }
 
-            if (SamplingPlanModel.SamplingPlanID > 0)
+            if (samplingPlanModel.SamplingPlanID > 0)
             {
                 SamplingPlan SamplingPlan = (from c in db.SamplingPlans
-                                             where c.SamplingPlanID != SamplingPlanModel.SamplingPlanID
-                                             && c.SamplingPlanName == SamplingPlanModel.SamplingPlanName
+                                             where c.SamplingPlanID != samplingPlanModel.SamplingPlanID
+                                             && c.SamplingPlanName == samplingPlanModel.SamplingPlanName
                                              select c).FirstOrDefault();
 
                 if (SamplingPlan != null)
@@ -95,7 +95,7 @@ namespace CSSPDBDLL.Services
             else
             {
                 SamplingPlan SamplingPlan = (from c in db.SamplingPlans
-                                             where c.SamplingPlanName == SamplingPlanModel.SamplingPlanName
+                                             where c.SamplingPlanName == samplingPlanModel.SamplingPlanName
                                              select c).FirstOrDefault();
 
                 if (SamplingPlan != null)
@@ -104,63 +104,63 @@ namespace CSSPDBDLL.Services
                 }
             }
 
-            retStr = FieldCheckNotNullAndMinMaxLengthString(SamplingPlanModel.ForGroupName, ServiceRes.ForGroupName, 3, 100);
+            retStr = FieldCheckNotNullAndMinMaxLengthString(samplingPlanModel.ForGroupName, ServiceRes.ForGroupName, 3, 100);
             if (!string.IsNullOrWhiteSpace(retStr))
             {
                 return retStr;
             }
 
-            retStr = _BaseEnumService.SampleTypeOK(SamplingPlanModel.SampleType);
+            retStr = _BaseEnumService.SampleTypeOK(samplingPlanModel.SampleType);
             if (!string.IsNullOrWhiteSpace(retStr))
             {
                 return retStr;
             }
 
-            retStr = _BaseEnumService.SamplingPlanTypeOK(SamplingPlanModel.SamplingPlanType);
+            retStr = _BaseEnumService.SamplingPlanTypeOK(samplingPlanModel.SamplingPlanType);
             if (!string.IsNullOrWhiteSpace(retStr))
             {
                 return retStr;
             }
 
-            retStr = _BaseEnumService.LabSheetTypeOK(SamplingPlanModel.LabSheetType);
+            retStr = _BaseEnumService.LabSheetTypeOK(samplingPlanModel.LabSheetType);
             if (!string.IsNullOrWhiteSpace(retStr))
             {
                 return retStr;
             }
 
-            retStr = FieldCheckNotZeroInt(SamplingPlanModel.ProvinceTVItemID, ServiceRes.ProvinceTVItemID);
+            retStr = FieldCheckNotZeroInt(samplingPlanModel.ProvinceTVItemID, ServiceRes.ProvinceTVItemID);
             if (!string.IsNullOrWhiteSpace(retStr))
             {
                 return retStr;
             }
 
-            retStr = FieldCheckNotZeroInt(SamplingPlanModel.CreatorTVItemID, ServiceRes.CreatorTVItemID);
+            retStr = FieldCheckNotZeroInt(samplingPlanModel.CreatorTVItemID, ServiceRes.CreatorTVItemID);
             if (!string.IsNullOrWhiteSpace(retStr))
             {
                 return retStr;
             }
 
-            retStr = FieldCheckNotNullAndWithinRangeInt(SamplingPlanModel.Year, ServiceRes.Year, 2000, 2050);
+            retStr = FieldCheckNotNullAndWithinRangeInt(samplingPlanModel.Year, ServiceRes.Year, 2000, 2050);
             if (!string.IsNullOrWhiteSpace(retStr))
             {
                 return retStr;
             }
 
-            retStr = FieldCheckNotNullAndMinMaxLengthString(SamplingPlanModel.AccessCode, ServiceRes.AccessCode, 3, 10);
+            retStr = FieldCheckNotNullAndMinMaxLengthString(samplingPlanModel.AccessCode, ServiceRes.AccessCode, 3, 10);
             if (!string.IsNullOrWhiteSpace(retStr))
             {
                 return retStr;
             }
 
-            retStr = FieldCheckNotNullBool(SamplingPlanModel.IncludeLaboratoryQAQC, ServiceRes.IncludeLaboratoryQAQC);
+            retStr = FieldCheckNotNullBool(samplingPlanModel.IncludeLaboratoryQAQC, ServiceRes.IncludeLaboratoryQAQC);
             if (!string.IsNullOrWhiteSpace(retStr))
             {
                 return retStr;
             }
 
-            if (SamplingPlanModel.IncludeLaboratoryQAQC)
+            if (samplingPlanModel.IncludeLaboratoryQAQC)
             {
-                retStr = FieldCheckIfNotNullMaxLengthString(SamplingPlanModel.ApprovalCode, ServiceRes.ApprovalCode, 10);
+                retStr = FieldCheckIfNotNullMaxLengthString(samplingPlanModel.ApprovalCode, ServiceRes.ApprovalCode, 10);
                 if (!string.IsNullOrWhiteSpace(retStr))
                 {
                     return retStr;
@@ -196,7 +196,13 @@ namespace CSSPDBDLL.Services
                 //}
             }
 
-            retStr = FieldCheckIfNotNullNotZeroInt(SamplingPlanModel.SamplingPlanFileTVItemID, ServiceRes.SamplingPlanFileTVItemID);
+            retStr = FieldCheckIfNotNullNotZeroInt(samplingPlanModel.SamplingPlanFileTVItemID, ServiceRes.SamplingPlanFileTVItemID);
+            if (!string.IsNullOrWhiteSpace(retStr))
+            {
+                return retStr;
+            }
+
+            retStr = _BaseEnumService.DBCommandOK(samplingPlanModel.DBCommand);
             if (!string.IsNullOrWhiteSpace(retStr))
             {
                 return retStr;
@@ -208,6 +214,7 @@ namespace CSSPDBDLL.Services
         // Fill
         public string FillSamplingPlan(SamplingPlan SamplingPlan, SamplingPlanModel SamplingPlanModel, ContactOK contactOK)
         {
+            SamplingPlan.DBCommand = (int)SamplingPlanModel.DBCommand;
             SamplingPlan.SamplingPlanName = SamplingPlanModel.SamplingPlanName;
             SamplingPlan.ForGroupName = SamplingPlanModel.ForGroupName;
             SamplingPlan.SampleType = (int)SamplingPlanModel.SampleType;
@@ -259,6 +266,7 @@ namespace CSSPDBDLL.Services
                                                              {
                                                                  Error = "",
                                                                  SamplingPlanID = c.SamplingPlanID,
+                                                                 DBCommand = (DBCommandEnum)c.DBCommand,
                                                                  SamplingPlanName = c.SamplingPlanName,
                                                                  ForGroupName = c.ForGroupName,
                                                                  SampleType = (SampleTypeEnum)c.SampleType,
@@ -302,6 +310,7 @@ namespace CSSPDBDLL.Services
                                                       {
                                                           Error = "",
                                                           SamplingPlanID = c.SamplingPlanID,
+                                                          DBCommand = (DBCommandEnum)c.DBCommand,
                                                           SamplingPlanName = c.SamplingPlanName,
                                                           ForGroupName = c.ForGroupName,
                                                           SampleType = (SampleTypeEnum)c.SampleType,
@@ -359,6 +368,7 @@ namespace CSSPDBDLL.Services
                                                              {
                                                                  Error = "",
                                                                  SamplingPlanID = c.SamplingPlanID,
+                                                                 DBCommand = (DBCommandEnum)c.DBCommand,
                                                                  SamplingPlanName = c.SamplingPlanName,
                                                                  ForGroupName = c.ForGroupName,
                                                                  SampleType = (SampleTypeEnum)c.SampleType,
@@ -396,6 +406,7 @@ namespace CSSPDBDLL.Services
                                                    {
                                                        Error = "",
                                                        SamplingPlanID = c.SamplingPlanID,
+                                                       DBCommand = (DBCommandEnum)c.DBCommand,
                                                        SamplingPlanName = c.SamplingPlanName,
                                                        ForGroupName = c.ForGroupName,
                                                        SampleType = (SampleTypeEnum)c.SampleType,
@@ -440,6 +451,7 @@ namespace CSSPDBDLL.Services
                                                    {
                                                        Error = "",
                                                        SamplingPlanID = c.SamplingPlanID,
+                                                       DBCommand = (DBCommandEnum)c.DBCommand,
                                                        SamplingPlanName = c.SamplingPlanName,
                                                        ForGroupName = c.ForGroupName,
                                                        SampleType = (SampleTypeEnum)c.SampleType,
@@ -635,6 +647,7 @@ namespace CSSPDBDLL.Services
                 {
                     SamplingPlanModel SamplingPlanModelNew = new SamplingPlanModel()
                     {
+                        DBCommand = DBCommandEnum.Original,
                         ProvinceTVItemID = ProvinceTVItemID,
                         SamplingPlanName = SamplingPlanName,
                         ForGroupName = ForGroupName,
@@ -663,6 +676,8 @@ namespace CSSPDBDLL.Services
                 else
                 {
                     SamplingPlanModel SamplingPlanModelToUpdate = GetSamplingPlanModelWithSamplingPlanIDDB(SamplingPlanID);
+
+                    SamplingPlanModelToUpdate.DBCommand = DBCommandEnum.Original;
                     SamplingPlanModelToUpdate.ProvinceTVItemID = ProvinceTVItemID;
                     SamplingPlanModelToUpdate.SamplingPlanName = SamplingPlanName;
                     SamplingPlanModelToUpdate.ForGroupName = ForGroupName;
@@ -761,6 +776,7 @@ namespace CSSPDBDLL.Services
                 {
                     SamplingPlanSubsectorModel SamplingPlanSubsectorModelNew = new SamplingPlanSubsectorModel()
                     {
+                        DBCommand = DBCommandEnum.Original,
                         SamplingPlanID = SamplingPlanID,
                         SubsectorTVItemID = SubsectorTVItemID,
                     };
@@ -782,6 +798,7 @@ namespace CSSPDBDLL.Services
                         }
                         SamplingPlanSubsectorSiteModel SamplingPlanSubsectorSiteModelNew = new SamplingPlanSubsectorSiteModel()
                         {
+                            DBCommand = DBCommandEnum.Original,
                             IsDuplicate = IsDuplicate,
                             SamplingPlanSubsectorID = SamplingPlanSubsectorModel.SamplingPlanSubsectorID,
                             MWQMSiteTVItemID = tvItemModelMWQMSite.TVItemID,
@@ -826,6 +843,7 @@ namespace CSSPDBDLL.Services
             {
                 SamplingPlanModel SamplingPlanModelNew = new SamplingPlanModel()
                 {
+                    DBCommand = DBCommandEnum.Original,
                     ProvinceTVItemID = SamplingPlanModel.ProvinceTVItemID,
                     SamplingPlanName = ServiceRes.CopyOf + "_" + SamplingPlanModel.SamplingPlanName,
                     ForGroupName = ServiceRes.CopyOf + "_" + SamplingPlanModel.ForGroupName,
@@ -857,6 +875,7 @@ namespace CSSPDBDLL.Services
                 {
                     SamplingPlanSubsectorModel SamplingPlanSubsectorModelNew = new SamplingPlanSubsectorModel()
                     {
+                        DBCommand = DBCommandEnum.Original,
                         SamplingPlanID = SamplingPlanModelRet.SamplingPlanID,
                         SubsectorTVItemID = SamplingPlanSubsectorModel.SubsectorTVItemID,
                     };
@@ -871,6 +890,7 @@ namespace CSSPDBDLL.Services
                     {
                         SamplingPlanSubsectorSiteModel SamplingPlanSubsectorSiteModelNew = new SamplingPlanSubsectorSiteModel()
                         {
+                            DBCommand = DBCommandEnum.Original,
                             IsDuplicate = SamplingPlanSubsectorSiteModel.IsDuplicate,
                             SamplingPlanSubsectorID = SamplingPlanSubsectorModelRet.SamplingPlanSubsectorID,
                             MWQMSiteTVItemID = SamplingPlanSubsectorSiteModel.MWQMSiteTVItemID,
@@ -889,6 +909,7 @@ namespace CSSPDBDLL.Services
                 {
                     SamplingPlanEmailModel SamplingPlanEmailModelNew = new SamplingPlanEmailModel()
                     {
+                        DBCommand = DBCommandEnum.Original,
                         SamplingPlanID = SamplingPlanModelRet.SamplingPlanID,
                         Email = SamplingPlanEmailModel.Email,
                         LabSheetHasValueOver500 = SamplingPlanEmailModel.LabSheetHasValueOver500,
@@ -1005,6 +1026,7 @@ namespace CSSPDBDLL.Services
             }
             AppTaskModel appTaskModelNew = new AppTaskModel()
             {
+                DBCommand = DBCommandEnum.Original,
                 TVItemID = SamplingPlanModel.ProvinceTVItemID,
                 TVItemID2 = SamplingPlanModel.ProvinceTVItemID,
                 AppTaskCommand = appTaskCommand,

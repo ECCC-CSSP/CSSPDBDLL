@@ -114,12 +114,19 @@ namespace CSSPDBDLL.Services
                 return retStr;
             }
 
+            retStr = _BaseEnumService.DBCommandOK(mapInfoModel.DBCommand);
+            if (!string.IsNullOrWhiteSpace(retStr))
+            {
+                return retStr;
+            }
+
             return "";
         }
 
         // Fill
         public string FillMapInfo(MapInfo mapInfo, MapInfoModel mapInfoModel, ContactOK contactOK)
         {
+            mapInfo.DBCommand = (int)mapInfoModel.DBCommand;
             mapInfo.TVItemID = mapInfoModel.TVItemID;
             mapInfo.TVType = (int)mapInfoModel.TVType;
             mapInfo.LatMin = mapInfoModel.LatMin;
@@ -2469,6 +2476,7 @@ namespace CSSPDBDLL.Services
             {
                 MapInfoModel mapInfoModelNew = new MapInfoModel()
                 {
+                    DBCommand = DBCommandEnum.Original,
                     TVItemID = TVItemID,
                     TVType = TVType,
                     MapInfoDrawType = mapInfoDrawType,
@@ -2487,6 +2495,7 @@ namespace CSSPDBDLL.Services
                 {
                     MapInfoPointModel mapInfoPointModelNew = new MapInfoPointModel()
                     {
+                        DBCommand = DBCommandEnum.Original,
                         MapInfoID = mapInfoModelRet.MapInfoID,
                         Lat = c.Lat,
                         Lng = c.Lng,
@@ -2761,6 +2770,7 @@ namespace CSSPDBDLL.Services
                 // need to add a new point
                 MapInfoPointModel mapInfoPointModelLabel = new MapInfoPointModel()
                 {
+                    DBCommand = DBCommandEnum.Original,
                     MapInfoID = MapInfoID,
                     Lat = Lat,
                     Lng = Lng,
@@ -3104,6 +3114,7 @@ namespace CSSPDBDLL.Services
 
                 MapInfoPointModel mapInfoPointModelNew = new MapInfoPointModel()
                 {
+                    DBCommand = DBCommandEnum.Original,
                     MapInfoID = mapInfoPointModel.MapInfoID,
                     Lat = labelPosition.LabelPoint.Lat,
                     Lng = labelPosition.LabelPoint.Lng,
@@ -3261,6 +3272,7 @@ namespace CSSPDBDLL.Services
                     else
                     {
                         MapInfoPointModel mapInfoPointModelNew = new MapInfoPointModel();
+                        mapInfoPointModelNew.DBCommand = DBCommandEnum.Original;
                         mapInfoPointModelNew.Lat = LatLngList[i].Lat;
                         mapInfoPointModelNew.Lng = LatLngList[i].Lng;
                         mapInfoPointModelNew.MapInfoID = MapInfoID;

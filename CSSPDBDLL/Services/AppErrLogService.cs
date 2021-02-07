@@ -86,6 +86,12 @@ namespace CSSPDBDLL.Services
                 return retStr;
             }
 
+            retStr = _BaseEnumService.DBCommandOK(appErrLogModel.DBCommand);
+            if (!string.IsNullOrWhiteSpace(retStr))
+            {
+                return retStr;
+            }
+
             return "";
         }
 
@@ -108,6 +114,7 @@ namespace CSSPDBDLL.Services
                                                        {
                                                            Error = "",
                                                            AppErrLogID = c.AppErrLogID,
+                                                           DBCommand = (DBCommandEnum)c.DBCommand,
                                                            Tag = c.Tag,
                                                            LineNumber = c.LineNumber,
                                                            Message = c.Message,
@@ -130,6 +137,7 @@ namespace CSSPDBDLL.Services
                                                        {
                                                            Error = "",
                                                            AppErrLogID = c.AppErrLogID,
+                                                           DBCommand = (DBCommandEnum)c.DBCommand,
                                                            Tag = c.Tag,
                                                            LineNumber = c.LineNumber,
                                                            Message = c.Message,
@@ -152,6 +160,7 @@ namespace CSSPDBDLL.Services
                                                        {
                                                            Error = "",
                                                            AppErrLogID = c.AppErrLogID,
+                                                           DBCommand = (DBCommandEnum)c.DBCommand,
                                                            Tag = c.Tag,
                                                            LineNumber = c.LineNumber,
                                                            Message = c.Message,
@@ -171,6 +180,7 @@ namespace CSSPDBDLL.Services
                                              {
                                                  Error = "",
                                                  AppErrLogID = c.AppErrLogID,
+                                                 DBCommand = (DBCommandEnum)c.DBCommand,
                                                  Tag = c.Tag,
                                                  LineNumber = c.LineNumber,
                                                  Message = c.Message,
@@ -181,9 +191,9 @@ namespace CSSPDBDLL.Services
                                              }).FirstOrDefault<AppErrLogModel>();
 
 
-            if (appErrLogModel == null) 
+            if (appErrLogModel == null)
                 return ReturnError(string.Format(ServiceRes.CouldNotFind_With_Equal_, ServiceRes.AppErrLog, ServiceRes.AppErrLogID, AppErrLogID));
-            
+
             return appErrLogModel;
         }
         public AppErrLog GetAppErrLogWithAppErrLogIDDB(int AppErrLogID)
@@ -197,22 +207,22 @@ namespace CSSPDBDLL.Services
         // Fill
         public string FillAppErrLog(AppErrLog appErrLog, AppErrLogModel appErrLogModel, ContactOK contactOK)
         {
-           
-                appErrLog.Tag = appErrLogModel.Tag;
-                appErrLog.LineNumber = appErrLogModel.LineNumber;
-                appErrLog.Source = appErrLogModel.Source;
-                appErrLog.Message = appErrLogModel.Message;
-                appErrLog.DateTime_UTC = appErrLogModel.DateTime_UTC;
-                appErrLog.LastUpdateDate_UTC = DateTime.UtcNow;
-                if (contactOK == null)
-                {
-                    appErrLog.LastUpdateContactTVItemID = 2;
-                }
-                else
-                {
-                    appErrLog.LastUpdateContactTVItemID = contactOK.ContactTVItemID;
-                }
-           
+            appErrLog.DBCommand = (int)appErrLogModel.DBCommand;
+            appErrLog.Tag = appErrLogModel.Tag;
+            appErrLog.LineNumber = appErrLogModel.LineNumber;
+            appErrLog.Source = appErrLogModel.Source;
+            appErrLog.Message = appErrLogModel.Message;
+            appErrLog.DateTime_UTC = appErrLogModel.DateTime_UTC;
+            appErrLog.LastUpdateDate_UTC = DateTime.UtcNow;
+            if (contactOK == null)
+            {
+                appErrLog.LastUpdateContactTVItemID = 2;
+            }
+            else
+            {
+                appErrLog.LastUpdateContactTVItemID = contactOK.ContactTVItemID;
+            }
+
 
             return "";
         }
@@ -227,26 +237,26 @@ namespace CSSPDBDLL.Services
         public AppErrLogModel PostAddAppErrLogDB(AppErrLogModel appErrLogModel)
         {
             string retStr = AppErrLogModelOK(appErrLogModel);
-            if (!string.IsNullOrWhiteSpace(retStr)) 
+            if (!string.IsNullOrWhiteSpace(retStr))
                 return ReturnError(retStr);
-          
+
 
             ContactOK contactOK = IsContactOK();
-            if (!string.IsNullOrEmpty(contactOK.Error)) 
+            if (!string.IsNullOrEmpty(contactOK.Error))
                 return ReturnError(contactOK.Error);
-   
+
 
             AppErrLog appErrLogNew = new AppErrLog();
             retStr = FillAppErrLog(appErrLogNew, appErrLogModel, contactOK);
-            if (!string.IsNullOrWhiteSpace(retStr)) 
+            if (!string.IsNullOrWhiteSpace(retStr))
                 return ReturnError(retStr);
-          
+
 
             using (TransactionScope ts = new TransactionScope())
             {
                 db.AppErrLogs.Add(appErrLogNew);
                 retStr = DoAddChanges();
-                if (!string.IsNullOrWhiteSpace(retStr)) 
+                if (!string.IsNullOrWhiteSpace(retStr))
                     return ReturnError(retStr);
 
                 LogModel logModel = _LogService.PostAddLogForObj("AppErrLogs", appErrLogNew.AppErrLogID, LogCommandEnum.Add, appErrLogNew);
@@ -260,19 +270,19 @@ namespace CSSPDBDLL.Services
         public AppErrLogModel PostDeleteAppErrLogDB(int AppErrLogID)
         {
             ContactOK contactOK = IsContactOK();
-            if (!string.IsNullOrEmpty(contactOK.Error)) 
+            if (!string.IsNullOrEmpty(contactOK.Error))
                 return ReturnError(contactOK.Error);
-            
+
             AppErrLog appErrLogToDelete = GetAppErrLogWithAppErrLogIDDB(AppErrLogID);
-            if (appErrLogToDelete == null) 
+            if (appErrLogToDelete == null)
                 return ReturnError(string.Format(ServiceRes.CouldNotFind_ToDelete, ServiceRes.AppErrLog));
-          
+
 
             using (TransactionScope ts = new TransactionScope())
             {
                 db.AppErrLogs.Remove(appErrLogToDelete);
                 string retStr = DoDeleteChanges();
-                if (!string.IsNullOrWhiteSpace(retStr)) 
+                if (!string.IsNullOrWhiteSpace(retStr))
                     return ReturnError(retStr);
 
                 LogModel logModel = _LogService.PostAddLogForObj("AppErrLogs", appErrLogToDelete.AppErrLogID, LogCommandEnum.Delete, appErrLogToDelete);
@@ -286,22 +296,22 @@ namespace CSSPDBDLL.Services
         public AppErrLogModel PostUpdateAppErrLogDB(AppErrLogModel appErrLogModel)
         {
             string retStr = AppErrLogModelOK(appErrLogModel);
-            if (!string.IsNullOrWhiteSpace(retStr)) 
+            if (!string.IsNullOrWhiteSpace(retStr))
                 return ReturnError(retStr);
-            
+
             ContactOK contactOK = IsContactOK();
-            if (!string.IsNullOrEmpty(contactOK.Error)) 
+            if (!string.IsNullOrEmpty(contactOK.Error))
                 return ReturnError(contactOK.Error);
-           
+
             AppErrLog appErrLogToUpdate = GetAppErrLogWithAppErrLogIDDB(appErrLogModel.AppErrLogID);
-            if (appErrLogToUpdate == null) 
+            if (appErrLogToUpdate == null)
                 return ReturnError(string.Format(ServiceRes.CouldNotFind_ToUpdate, ServiceRes.AppErrLog));
-            
+
 
             retStr = FillAppErrLog(appErrLogToUpdate, appErrLogModel, contactOK);
-            if (!string.IsNullOrWhiteSpace(retStr)) 
+            if (!string.IsNullOrWhiteSpace(retStr))
                 return ReturnError(retStr);
-           
+
             using (TransactionScope ts = new TransactionScope())
             {
                 retStr = DoUpdateChanges();

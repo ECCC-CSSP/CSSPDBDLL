@@ -75,27 +75,33 @@ namespace CSSPDBDLL.Services
                 return retStr;
             }
 
+            retStr = _BaseEnumService.DBCommandOK(appTaskLanguageModel.DBCommand);
+            if (!string.IsNullOrWhiteSpace(retStr))
+            {
+                return retStr;
+            }
+
             return "";
         }
 
         // Fill
         public string FillAppTaskLanguage(AppTaskLanguage appTaskLanguageNew, AppTaskLanguageModel appTaskLanguageModel, ContactOK contactOK)
         {
-
-                appTaskLanguageNew.AppTaskID = appTaskLanguageModel.AppTaskID;
-                appTaskLanguageNew.Language = (int)appTaskLanguageModel.Language;
-                appTaskLanguageNew.TranslationStatus = (int)appTaskLanguageModel.TranslationStatus;
-                appTaskLanguageNew.StatusText = appTaskLanguageModel.StatusText;
-                appTaskLanguageNew.ErrorText = appTaskLanguageModel.ErrorText;
-                appTaskLanguageNew.LastUpdateDate_UTC = DateTime.UtcNow;
-                if (contactOK == null)
-                {
-                    appTaskLanguageNew.LastUpdateContactTVItemID = 2;
-                }
-                else
-                {
-                    appTaskLanguageNew.LastUpdateContactTVItemID = contactOK.ContactTVItemID;
-                }
+            appTaskLanguageNew.DBCommand = (int)appTaskLanguageModel.DBCommand;
+            appTaskLanguageNew.AppTaskID = appTaskLanguageModel.AppTaskID;
+            appTaskLanguageNew.Language = (int)appTaskLanguageModel.Language;
+            appTaskLanguageNew.TranslationStatus = (int)appTaskLanguageModel.TranslationStatus;
+            appTaskLanguageNew.StatusText = appTaskLanguageModel.StatusText;
+            appTaskLanguageNew.ErrorText = appTaskLanguageModel.ErrorText;
+            appTaskLanguageNew.LastUpdateDate_UTC = DateTime.UtcNow;
+            if (contactOK == null)
+            {
+                appTaskLanguageNew.LastUpdateContactTVItemID = 2;
+            }
+            else
+            {
+                appTaskLanguageNew.LastUpdateContactTVItemID = contactOK.ContactTVItemID;
+            }
 
             return "";
         }
@@ -117,7 +123,8 @@ namespace CSSPDBDLL.Services
                                                          {
                                                              Error = "",
                                                              AppTaskLanguageID = c.AppTaskLanguageID,
-                                                             AppTaskID = c.AppTaskID,
+                                                             DBCommand = (DBCommandEnum)c.DBCommand,
+                                                             AppTaskID = (int)c.AppTaskID,
                                                              Language = (LanguageEnum)c.Language,
                                                              TranslationStatus = (TranslationStatusEnum)c.TranslationStatus,
                                                              StatusText = c.StatusText,
@@ -126,7 +133,7 @@ namespace CSSPDBDLL.Services
                                                              LastUpdateContactTVItemID = c.LastUpdateContactTVItemID,
                                                          }).FirstOrDefault<AppTaskLanguageModel>();
 
-            if (appTaskLanguageModel == null) 
+            if (appTaskLanguageModel == null)
                 return ReturnError(string.Format(ServiceRes.CouldNotFind_With_Equal_, ServiceRes.AppTaskLanguage, ServiceRes.AppTaskID + "," + ServiceRes.Language, AppTaskID.ToString() + "," + Language));
 
             return appTaskLanguageModel;
@@ -151,27 +158,27 @@ namespace CSSPDBDLL.Services
         public AppTaskLanguageModel PostAddAppTaskLanguageDB(AppTaskLanguageModel appTaskLanguageModel)
         {
             string retStr = AppTaskLanguageModelOK(appTaskLanguageModel);
-            if (!string.IsNullOrEmpty(retStr)) 
+            if (!string.IsNullOrEmpty(retStr))
                 return ReturnError(retStr);
 
             ContactOK contactOK = IsContactOK();
-            if (!string.IsNullOrEmpty(contactOK.Error)) 
+            if (!string.IsNullOrEmpty(contactOK.Error))
                 return ReturnError(contactOK.Error);
 
             AppTaskLanguageModel appTaskLanguageModelExist = GetAppTaskLanguageModelWithAppTaskIDAndLanguageDB(appTaskLanguageModel.AppTaskID, appTaskLanguageModel.Language);
-            if (string.IsNullOrWhiteSpace(appTaskLanguageModelExist.Error)) 
+            if (string.IsNullOrWhiteSpace(appTaskLanguageModelExist.Error))
                 return ReturnError(string.Format(ServiceRes._AlreadyExists, ServiceRes.AppTaskLanguage));
 
             AppTaskLanguage appTaskLanguageNew = new AppTaskLanguage();
             retStr = FillAppTaskLanguage(appTaskLanguageNew, appTaskLanguageModel, contactOK);
-            if (!string.IsNullOrWhiteSpace(retStr)) 
+            if (!string.IsNullOrWhiteSpace(retStr))
                 return ReturnError(retStr);
 
             using (TransactionScope ts = new TransactionScope())
             {
                 db.AppTaskLanguages.Add(appTaskLanguageNew);
                 retStr = DoAddChanges();
-                if (!string.IsNullOrWhiteSpace(retStr)) 
+                if (!string.IsNullOrWhiteSpace(retStr))
                     return ReturnError(retStr);
 
                 LogModel logModel = _LogService.PostAddLogForObj("AppTaskLanguages", appTaskLanguageNew.AppTaskLanguageID, LogCommandEnum.Add, appTaskLanguageNew);
@@ -181,23 +188,23 @@ namespace CSSPDBDLL.Services
 
                 ts.Complete();
             }
-            return GetAppTaskLanguageModelWithAppTaskIDAndLanguageDB(appTaskLanguageNew.AppTaskID, appTaskLanguageModel.Language);
+            return GetAppTaskLanguageModelWithAppTaskIDAndLanguageDB((int)appTaskLanguageNew.AppTaskID, appTaskLanguageModel.Language);
         }
         public AppTaskLanguageModel PostDeleteAppTaskLanguageDB(int AppTaskID, LanguageEnum Language)
         {
             ContactOK contactOK = IsContactOK();
-            if (!string.IsNullOrEmpty(contactOK.Error)) 
+            if (!string.IsNullOrEmpty(contactOK.Error))
                 return ReturnError(contactOK.Error);
 
             AppTaskLanguage appTaskLanguageToDelete = GetAppTaskLanguageWithAppTaskIDAndLanguageDB(AppTaskID, Language);
-            if (appTaskLanguageToDelete == null) 
+            if (appTaskLanguageToDelete == null)
                 return ReturnError(string.Format(ServiceRes.CouldNotFind_ToDelete, ServiceRes.AppTaskLanguage));
 
             using (TransactionScope ts = new TransactionScope())
             {
                 db.AppTaskLanguages.Remove(appTaskLanguageToDelete);
                 string retStr = DoDeleteChanges();
-                if (!string.IsNullOrWhiteSpace(retStr)) 
+                if (!string.IsNullOrWhiteSpace(retStr))
                     return ReturnError(retStr);
 
                 LogModel logModel = _LogService.PostAddLogForObj("AppTaskLanguages", appTaskLanguageToDelete.AppTaskLanguageID, LogCommandEnum.Delete, appTaskLanguageToDelete);
@@ -206,30 +213,30 @@ namespace CSSPDBDLL.Services
 
                 ts.Complete();
             }
-            return ReturnError("");;
+            return ReturnError(""); ;
         }
         public AppTaskLanguageModel PostUpdateAppTaskLanguageDB(AppTaskLanguageModel appTaskLanguageModel)
         {
             string retStr = AppTaskLanguageModelOK(appTaskLanguageModel);
-            if (!string.IsNullOrWhiteSpace(retStr)) 
+            if (!string.IsNullOrWhiteSpace(retStr))
                 return ReturnError(retStr);
 
             ContactOK contactOK = IsContactOK();
-            if (!string.IsNullOrEmpty(contactOK.Error)) 
+            if (!string.IsNullOrEmpty(contactOK.Error))
                 return ReturnError(contactOK.Error);
 
             AppTaskLanguage appTaskLanguageToUpdate = GetAppTaskLanguageWithAppTaskIDAndLanguageDB(appTaskLanguageModel.AppTaskID, appTaskLanguageModel.Language);
-            if (appTaskLanguageToUpdate == null) 
+            if (appTaskLanguageToUpdate == null)
                 return ReturnError(string.Format(ServiceRes.CouldNotFind_ToUpdate, ServiceRes.AppTaskLanguage));
 
             retStr = FillAppTaskLanguage(appTaskLanguageToUpdate, appTaskLanguageModel, contactOK);
-            if (!string.IsNullOrWhiteSpace(retStr)) 
+            if (!string.IsNullOrWhiteSpace(retStr))
                 return ReturnError(retStr);
 
             using (TransactionScope ts = new TransactionScope())
             {
                 retStr = DoUpdateChanges();
-                if (!string.IsNullOrWhiteSpace(retStr)) 
+                if (!string.IsNullOrWhiteSpace(retStr))
                     return ReturnError(retStr);
 
                 try
@@ -239,15 +246,14 @@ namespace CSSPDBDLL.Services
                         return ReturnError(logModel.Error);
 
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
-
-                    
+                    // nothing for now
                 }
 
                 ts.Complete();
             }
-            return GetAppTaskLanguageModelWithAppTaskIDAndLanguageDB(appTaskLanguageToUpdate.AppTaskID, (LanguageEnum)appTaskLanguageToUpdate.Language);
+            return GetAppTaskLanguageModelWithAppTaskIDAndLanguageDB((int)appTaskLanguageToUpdate.AppTaskID, (LanguageEnum)appTaskLanguageToUpdate.Language);
         }
         #endregion Functions public
 

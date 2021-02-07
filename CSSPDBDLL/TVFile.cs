@@ -21,6 +21,7 @@ namespace CSSPDBDLL
         }
     
         public int TVFileID { get; set; }
+        public int DBCommand { get; set; }
         public int TVFileTVItemID { get; set; }
         public Nullable<int> TemplateTVType { get; set; }
         public Nullable<int> ReportTypeID { get; set; }

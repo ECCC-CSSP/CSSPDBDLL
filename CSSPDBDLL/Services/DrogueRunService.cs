@@ -83,12 +83,19 @@ namespace CSSPDBDLL.Services
                 return retStr;
             }
 
+            retStr = _BaseEnumService.DBCommandOK(drogueRunModel.DBCommand);
+            if (!string.IsNullOrWhiteSpace(retStr))
+            {
+                return retStr;
+            }
+
             return "";
         }
 
         // Fill
         public string FillDrogueRun(DrogueRun drogueRunNew, DrogueRunModel drogueRunModel, ContactOK contactOK)
         {
+            drogueRunNew.DBCommand = (int)drogueRunModel.DBCommand;
             drogueRunNew.SubsectorTVItemID = drogueRunModel.SubsectorTVItemID;
             drogueRunNew.DrogueNumber = drogueRunModel.DrogueNumber;
             drogueRunNew.DrogueType = (int)drogueRunModel.DrogueType;
@@ -123,6 +130,7 @@ namespace CSSPDBDLL.Services
                                              {
                                                  Error = "",
                                                  DrogueRunID = c.DrogueRunID,
+                                                 DBCommand = (DBCommandEnum)c.DBCommand,
                                                  SubsectorTVItemID = c.SubsectorTVItemID,
                                                  DrogueNumber = c.DrogueNumber,
                                                  DrogueType = (DrogueTypeEnum)c.DrogueType,
@@ -146,6 +154,7 @@ namespace CSSPDBDLL.Services
                                                        {
                                                            Error = "",
                                                            DrogueRunID = c.DrogueRunID,
+                                                           DBCommand = (DBCommandEnum)c.DBCommand,
                                                            SubsectorTVItemID = c.SubsectorTVItemID,
                                                            DrogueNumber = c.DrogueNumber,
                                                            DrogueType = (DrogueTypeEnum)c.DrogueType,
@@ -168,6 +177,7 @@ namespace CSSPDBDLL.Services
                                              {
                                                  Error = "",
                                                  DrogueRunID = c.DrogueRunID,
+                                                 DBCommand = (DBCommandEnum)c.DBCommand,
                                                  SubsectorTVItemID = c.SubsectorTVItemID,
                                                  DrogueNumber = c.DrogueNumber,
                                                  DrogueType = (DrogueTypeEnum)c.DrogueType,
@@ -270,6 +280,7 @@ namespace CSSPDBDLL.Services
                 {
                     DrogueRunModel drogueRunModelNew = new DrogueRunModel()
                     {
+                        DBCommand = DBCommandEnum.Original,
                         DrogueNumber = DrogueNumber,
                         DrogueType = DrogueType,
                         RunStartDateTime = RunStartDateTime,
@@ -385,6 +396,7 @@ namespace CSSPDBDLL.Services
                         {
                             DrogueRunPositionModel drogueRunPositionModel = new DrogueRunPositionModel()
                             {
+                                DBCommand = DBCommandEnum.Original,
                                 StepLat = Lat,
                                 StepLng = Lng,
                                 StepDateTime_Local = StepDate,

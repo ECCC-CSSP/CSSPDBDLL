@@ -21,6 +21,7 @@ namespace CSSPDBDLL
         }
     
         public int TVItemLinkID { get; set; }
+        public int DBCommand { get; set; }
         public int FromTVItemID { get; set; }
         public int ToTVItemID { get; set; }
         public int FromTVType { get; set; }

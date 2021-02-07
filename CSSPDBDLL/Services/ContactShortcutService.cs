@@ -74,12 +74,19 @@ namespace CSSPDBDLL.Services
                 return retStr;
             }
 
+            retStr = _BaseEnumService.DBCommandOK(contactShortcutModel.DBCommand);
+            if (!string.IsNullOrWhiteSpace(retStr))
+            {
+                return retStr;
+            }
+
             return "";
         }
 
         // Fill
         public string FillContactShortcut(ContactShortcut contactShortcut, ContactShortcutModel contactShortcutModel, ContactOK contactOK)
         {
+            contactShortcut.DBCommand = (int)contactShortcutModel.DBCommand;
             contactShortcut.ContactShortcutID = contactShortcutModel.ContactShortcutID;
             contactShortcut.ContactID = (int)contactShortcutModel.ContactID;
             contactShortcut.ShortCutText = contactShortcutModel.ShortCutText;
@@ -113,6 +120,7 @@ namespace CSSPDBDLL.Services
                                                             {
                                                                 Error = "",
                                                                 ContactShortcutID = c.ContactShortcutID,
+                                                                DBCommand = (DBCommandEnum)c.DBCommand,
                                                                 ContactID = c.ContactID,
                                                                 ShortCutText = c.ShortCutText,
                                                                 ShortCutAddress = c.ShortCutAddress,
@@ -139,6 +147,7 @@ namespace CSSPDBDLL.Services
                                                          {
                                                              Error = "",
                                                              ContactShortcutID = c.ContactShortcutID,
+                                                             DBCommand = (DBCommandEnum)c.DBCommand,
                                                              ContactID = c.ContactID,
                                                              ShortCutText = c.ShortCutText,
                                                              ShortCutAddress = c.ShortCutAddress,
@@ -161,6 +170,7 @@ namespace CSSPDBDLL.Services
                                                                    {
                                                                        Error = "",
                                                                        ContactShortcutID = c.ContactShortcutID,
+                                                                       DBCommand = (DBCommandEnum)c.DBCommand,
                                                                        ContactID = c.ContactID,
                                                                        ShortCutText = c.ShortCutText,
                                                                        ShortCutAddress = c.ShortCutAddress,
@@ -222,6 +232,7 @@ namespace CSSPDBDLL.Services
 
                     ContactShortcutModel contactShortcutModelNew = new ContactShortcutModel()
                     {
+                        DBCommand = DBCommandEnum.Original,
                         ContactID = ContactID,
                         ShortCutText = ShortCutText,
                         ShortCutAddress = ShortCutAddress,
@@ -242,6 +253,7 @@ namespace CSSPDBDLL.Services
 
                     ContactShortcutModel contactShortcutModelNew = new ContactShortcutModel()
                     {
+                        DBCommand = DBCommandEnum.Original,
                         ContactID = ContactID,
                         ShortCutText = ShortCutText,
                         ShortCutAddress = ShortCutAddress,

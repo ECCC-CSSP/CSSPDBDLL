@@ -102,12 +102,19 @@ namespace CSSPDBDLL.Services
                 return retStr;
             }
 
+            retStr = _BaseEnumService.DBCommandOK(hydrometricDataValueModel.DBCommand);
+            if (!string.IsNullOrWhiteSpace(retStr))
+            {
+                return retStr;
+            }
+
             return "";
         }
 
         // Fill
         public string FillHydrometricDataValue(HydrometricDataValue hydrometricDataValueNew, HydrometricDataValueModel hydrometricDataValueModel, ContactOK contactOK)
         {
+            hydrometricDataValueNew.DBCommand = (int)hydrometricDataValueModel.DBCommand;
             hydrometricDataValueNew.HydrometricSiteID = hydrometricDataValueModel.HydrometricSiteID;
             hydrometricDataValueNew.DateTime_Local = hydrometricDataValueModel.DateTime_Local;
             hydrometricDataValueNew.Keep = hydrometricDataValueModel.Keep;
@@ -146,6 +153,7 @@ namespace CSSPDBDLL.Services
                                                                    {
                                                                        Error = "",
                                                                        HydrometricSiteID = c.HydrometricSiteID,
+                                                                       DBCommand = (DBCommandEnum)c.DBCommand,
                                                                        HydrometricDataValueID = c.HydrometricDataValueID,
                                                                        DateTime_Local = c.DateTime_Local,
                                                                        Keep = c.Keep,
@@ -175,6 +183,7 @@ namespace CSSPDBDLL.Services
                                                                    {
                                                                        Error = "",
                                                                        HydrometricSiteID = c.HydrometricSiteID,
+                                                                       DBCommand = (DBCommandEnum)c.DBCommand,
                                                                        HydrometricDataValueID = c.HydrometricDataValueID,
                                                                        DateTime_Local = c.DateTime_Local,
                                                                        Keep = c.Keep,
@@ -198,6 +207,7 @@ namespace CSSPDBDLL.Services
                                                                              {
                                                                                  Error = "",
                                                                                  HydrometricSiteID = c.HydrometricSiteID,
+                                                                                 DBCommand = (DBCommandEnum)c.DBCommand,
                                                                                  HydrometricDataValueID = c.HydrometricDataValueID,
                                                                                  DateTime_Local = c.DateTime_Local,
                                                                                  Keep = c.Keep,
@@ -222,6 +232,7 @@ namespace CSSPDBDLL.Services
                                                                              {
                                                                                  Error = "",
                                                                                  HydrometricSiteID = c.HydrometricSiteID,
+                                                                                 DBCommand = (DBCommandEnum)c.DBCommand,
                                                                                  HydrometricDataValueID = c.HydrometricDataValueID,
                                                                                  DateTime_Local = c.DateTime_Local,
                                                                                  Keep = c.Keep,

@@ -225,12 +225,19 @@ namespace CSSPDBDLL.Services
                 return retStr;
             }
 
+            retStr = _BaseEnumService.DBCommandOK(mikeScenarioModel.DBCommand);
+            if (!string.IsNullOrWhiteSpace(retStr))
+            {
+                return retStr;
+            }
+
             return "";
         }
 
         // Fill
         public string FillMikeScenario(MikeScenario mikeScenario, MikeScenarioModel mikeScenarioModel, ContactOK contactOK)
         {
+            mikeScenario.DBCommand = (int)mikeScenarioModel.DBCommand;
             mikeScenario.AmbientSalinity_PSU = mikeScenarioModel.AmbientSalinity_PSU;
             mikeScenario.AmbientTemperature_C = mikeScenarioModel.AmbientTemperature_C;
             mikeScenario.DecayFactor_per_day = mikeScenarioModel.DecayFactor_per_day;
@@ -412,6 +419,7 @@ namespace CSSPDBDLL.Services
                                                    {
                                                        Error = "",
                                                        MikeScenarioID = c.MikeScenarioID,
+                                                       DBCommand  = (DBCommandEnum)c.DBCommand,
                                                        AmbientSalinity_PSU = c.AmbientSalinity_PSU,
                                                        AmbientTemperature_C = c.AmbientTemperature_C,
                                                        DecayFactor_per_day = c.DecayFactor_per_day,
@@ -460,6 +468,7 @@ namespace CSSPDBDLL.Services
                                                    {
                                                        Error = "",
                                                        MikeScenarioID = c.MikeScenarioID,
+                                                       DBCommand = (DBCommandEnum)c.DBCommand,
                                                        AmbientSalinity_PSU = c.AmbientSalinity_PSU,
                                                        AmbientTemperature_C = c.AmbientTemperature_C,
                                                        DecayFactor_per_day = c.DecayFactor_per_day,
@@ -517,6 +526,7 @@ namespace CSSPDBDLL.Services
                                                              {
                                                                  Error = "",
                                                                  MikeScenarioID = c.MikeScenarioID,
+                                                                 DBCommand = (DBCommandEnum)c.DBCommand,
                                                                  AmbientSalinity_PSU = c.AmbientSalinity_PSU,
                                                                  AmbientTemperature_C = c.AmbientTemperature_C,
                                                                  DecayFactor_per_day = c.DecayFactor_per_day,
@@ -640,6 +650,7 @@ namespace CSSPDBDLL.Services
 
             MikeBoundaryConditionModel mikeBoundaryConditionModelNew = new MikeBoundaryConditionModel()
             {
+                DBCommand = DBCommandEnum.Original,
                 MikeBoundaryConditionCode = mikeBoundaryConditionModel.MikeBoundaryConditionCode,
                 MikeBoundaryConditionFormat = mikeBoundaryConditionModel.MikeBoundaryConditionFormat,
                 MikeBoundaryConditionLength_m = mikeBoundaryConditionModel.MikeBoundaryConditionLength_m,
@@ -685,6 +696,7 @@ namespace CSSPDBDLL.Services
 
             MikeSourceModel mikeSourceModelNew = new MikeSourceModel()
             {
+                DBCommand = DBCommandEnum.Original,
                 IsContinuous = msm.IsContinuous,
                 Include = msm.Include,
                 IsRiver = msm.IsRiver,
@@ -711,6 +723,7 @@ namespace CSSPDBDLL.Services
             {
                 MikeSourceStartEndModel mikeSourceStartEndModelNew = new MikeSourceStartEndModel()
                 {
+                    DBCommand = DBCommandEnum.Original,
                     EndDateAndTime_Local = mssem.EndDateAndTime_Local,
                     LastUpdateDate_UTC = DateTime.UtcNow,
                     MikeSourceID = mikeSourceModelRet.MikeSourceID,
@@ -755,6 +768,7 @@ namespace CSSPDBDLL.Services
 
 
             TVFileModel tvFileModelNew = new TVFileModel();
+            tvFileModelNew.DBCommand = DBCommandEnum.Original;
             tvFileModelNew.TVFileTVItemID = tvItemModelTVFile.TVItemID;
             tvFileModelNew.FileCreatedDate_UTC = tvFileModel.FileCreatedDate_UTC;
             tvFileModelNew.FileDescription = tvFileModel.FileDescription;
@@ -924,6 +938,7 @@ namespace CSSPDBDLL.Services
 
             AppTaskModel appTaskModelNew = new AppTaskModel()
             {
+                DBCommand = DBCommandEnum.Original,
                 TVItemID = MikeScenarioTVItemID,
                 TVItemID2 = MikeScenarioTVItemID,
                 AppTaskCommand = AppTaskCommandEnum.CreateWebTideDataWLAtFirstNode,
@@ -981,6 +996,7 @@ namespace CSSPDBDLL.Services
 
             AppTaskModel appTaskModelNew = new AppTaskModel()
             {
+                DBCommand = DBCommandEnum.Original,
                 TVItemID = MikeScenarioTVItemID,
                 TVItemID2 = MikeScenarioTVItemID,
                 AppTaskCommand = AppTaskCommandEnum.MikeScenarioAskToRun,
@@ -1061,6 +1077,7 @@ namespace CSSPDBDLL.Services
 
             AppTaskModel appTaskModelNew = new AppTaskModel()
             {
+                DBCommand = DBCommandEnum.Original,
                 TVItemID = MikeSourceTVItemID,
                 TVItemID2 = MikeSourceTVItemID,
                 AppTaskCommand = AppTaskCommandEnum.LoadHydrometricDataValue,
@@ -1531,7 +1548,7 @@ namespace CSSPDBDLL.Services
             if (!string.IsNullOrWhiteSpace(contactOK.Error))
                 return ReturnMikeScenarioError(contactOK.Error);
 
-            bool DateChanged = false;
+            //bool DateChanged = false;
             int MikeScenarioTVItemID = 0;
             int StartYear = 0;
             int StartMonth = 0;
@@ -1670,7 +1687,7 @@ namespace CSSPDBDLL.Services
                 if (mikeScenarioModel.MikeScenarioStartDateTime_Local != StartDate)
                 {
                     mikeScenarioModel.MikeScenarioStartDateTime_Local = StartDate;
-                    DateChanged = true;
+                    //DateChanged = true;
                 }
 
                 int.TryParse(fc["MikeScenarioEndYear"], out EndYear);
@@ -1717,7 +1734,7 @@ namespace CSSPDBDLL.Services
                 if (mikeScenarioModel.MikeScenarioEndDateTime_Local != EndDate)
                 {
                     mikeScenarioModel.MikeScenarioEndDateTime_Local = EndDate;
-                    DateChanged = true;
+                    //DateChanged = true;
                 }
             }
             else
@@ -1872,6 +1889,7 @@ namespace CSSPDBDLL.Services
 
             AppTaskModel appTaskModelNew = new AppTaskModel()
             {
+                DBCommand = DBCommandEnum.Original,
                 TVItemID = MikeScenarioTVItemID,
                 TVItemID2 = MikeScenarioTVItemID,
                 AppTaskCommand = AppTaskCommandEnum.MikeScenarioPrepareResults,
@@ -2034,6 +2052,7 @@ namespace CSSPDBDLL.Services
                     }
 
                     MikeSourceModel mikeSourceModelNew = new MikeSourceModel();
+                    mikeSourceModelNew.DBCommand = DBCommandEnum.Original;
                     mikeSourceModelNew.IsContinuous = IsContinuous;
                     mikeSourceModelNew.Include = Include;
                     mikeSourceModelNew.IsRiver = IsRiver;
@@ -2059,6 +2078,7 @@ namespace CSSPDBDLL.Services
 
                     MikeSourceStartEndModel mikeSourceStartEndModelNew = new MikeSourceStartEndModel()
                     {
+                        DBCommand = DBCommandEnum.Original,
                         EndDateAndTime_Local = mikeScenarioModel.MikeScenarioEndDateTime_Local,
                         MikeSourceID = mikeSourceModelRet.MikeSourceID,
                         SourceFlowEnd_m3_day = 1234f,
@@ -2172,6 +2192,7 @@ namespace CSSPDBDLL.Services
 
             MikeSourceStartEndModel mikeSourceStartEndModelNew = new MikeSourceStartEndModel()
             {
+                DBCommand = DBCommandEnum.Original,
                 MikeSourceID = mikeSourceModelRet.MikeSourceID,
                 StartDateAndTime_Local = LatestDate.AddHours(1),
                 EndDateAndTime_Local = LatestDate.AddHours(2),

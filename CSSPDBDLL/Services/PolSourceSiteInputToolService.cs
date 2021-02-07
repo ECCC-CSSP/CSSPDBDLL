@@ -129,6 +129,7 @@ namespace CSSPDBDLL.Services
             List<TVItemModel> tvItemModelParents = tvItemService.GetParentsTVItemModelList(tvItemModelMunicipality.TVPath);
 
             AddressModel addressModelNew = new AddressModel();
+            addressModelNew.DBCommand = DBCommandEnum.Original;
             addressModelNew.AddressType = AddressTypeEnum.Civic;
             addressModelNew.StreetNumber = StreetNumber;
             addressModelNew.StreetName = StreetName;
@@ -181,6 +182,7 @@ namespace CSSPDBDLL.Services
             {
                 TVItemLinkModel tvItemLinkModelNew = new TVItemLinkModel()
                 {
+                    DBCommand = DBCommandEnum.Original,
                     FromTVItemID = tvItemModelContact.TVItemID,
                     ToTVItemID = addressModelRet.AddressTVItemID,
                     FromTVType = TVTypeEnum.Contact,
@@ -287,6 +289,7 @@ namespace CSSPDBDLL.Services
 
             EmailModel emailModelNew = new EmailModel()
             {
+                DBCommand = DBCommandEnum.Original,
                 EmailType = (EmailTypeEnum)EmailType,
                 EmailAddress = EmailAddress,
                 EmailTVItemID = tvItemModel.TVItemID,
@@ -304,6 +307,7 @@ namespace CSSPDBDLL.Services
 
             TVItemLinkModel tvItemLinkModelNew = new TVItemLinkModel()
             {
+                DBCommand = DBCommandEnum.Original,
                 FromTVItemID = contactModel.ContactTVItemID,
                 ToTVItemID = emailModel.EmailTVItemID,
                 FromTVType = TVTypeEnum.Contact,
@@ -427,6 +431,7 @@ namespace CSSPDBDLL.Services
 
             TelModel telModelNew = new TelModel()
             {
+                DBCommand = DBCommandEnum.Original,
                 TelType = (TelTypeEnum)TelType,
                 TelNumber = TelNumber,
                 TelTVItemID = tvItemModel.TVItemID,
@@ -444,6 +449,7 @@ namespace CSSPDBDLL.Services
 
             TVItemLinkModel tvItemLinkModelNew = new TVItemLinkModel()
             {
+                DBCommand = DBCommandEnum.Original,
                 FromTVItemID = contactModel.ContactTVItemID,
                 ToTVItemID = telModel.TelTVItemID,
                 FromTVType = TVTypeEnum.Contact,
@@ -678,6 +684,7 @@ namespace CSSPDBDLL.Services
             {
                 TVItemLinkModel tvItemLinkModelNew = new TVItemLinkModel()
                 {
+                    DBCommand = DBCommandEnum.Original,
                     FromTVItemID = tvItemModelMunicipality.TVItemID,
                     ToTVItemID = contactModelRet.ContactTVItemID,
                     FromTVType = TVTypeEnum.Municipality,
@@ -797,6 +804,7 @@ namespace CSSPDBDLL.Services
                 }
 
                 InfrastructureModel infrastructureModelNew = new InfrastructureModel();
+                infrastructureModelNew.DBCommand = DBCommandEnum.Original;
                 infrastructureModelNew.InfrastructureTVItemID = tvItemModelInfrastructure.TVItemID;
                 infrastructureModelNew.InfrastructureTVText = TVText;
                 infrastructureModelNew.InfrastructureType = InfrastructureType;
@@ -1309,6 +1317,8 @@ namespace CSSPDBDLL.Services
 
                 infrastructureModelRet.InfrastructureType = InfrastructureType;
 
+                infrastructureModelRet.DBCommand = DBCommandEnum.Original;
+
                 if (InfrastructureType == InfrastructureTypeEnum.WWTP)
                 {
                     infrastructureModelRet.FacilityType = FacilityType;
@@ -1525,6 +1535,7 @@ namespace CSSPDBDLL.Services
                     {
                         TVItemLinkModel tvItemLinkModelNew = new TVItemLinkModel()
                         {
+                            DBCommand = DBCommandEnum.Original,
                             FromTVItemID = infrastructureModelRet2.InfrastructureTVItemID,
                             ToTVItemID = (int)PumpsToTVItemID,
                             FromTVType = TVTypeEnum.Infrastructure,
@@ -1544,6 +1555,7 @@ namespace CSSPDBDLL.Services
                     }
                     else
                     {
+                        tvItemLinkModel.DBCommand = DBCommandEnum.Original;
                         tvItemLinkModel.FromTVItemID = infrastructureModelRet2.InfrastructureTVItemID;
                         tvItemLinkModel.ToTVItemID = (int)PumpsToTVItemID;
                         tvItemLinkModel.FromTVType = TVTypeEnum.Infrastructure;
@@ -1617,6 +1629,7 @@ namespace CSSPDBDLL.Services
                 }
 
                 PolSourceSiteModel polSourceSiteModelNew = new PolSourceSiteModel();
+                polSourceSiteModelNew.DBCommand = DBCommandEnum.Original;
                 polSourceSiteModelNew.PolSourceSiteTVItemID = tvItemModelPSS.TVItemID;
                 polSourceSiteModelNew.PolSourceSiteTVText = TVText;
                 polSourceSiteModelNew.IsPointSource = false;
@@ -1678,6 +1691,7 @@ namespace CSSPDBDLL.Services
             }
 
             PolSourceObservationModel polSourceObservationModelNew = new PolSourceObservationModel();
+            polSourceObservationModelNew.DBCommand = DBCommandEnum.Original;
             polSourceObservationModelNew.PolSourceSiteTVItemID = PSSTVItemID;
             polSourceObservationModelNew.PolSourceSiteID = polSourceSiteModel.PolSourceSiteID;
             polSourceObservationModelNew.ContactTVItemID = contactModel.ContactTVItemID;
@@ -1853,6 +1867,7 @@ namespace CSSPDBDLL.Services
             List<TVItemModel> tvItemModelParents = tvItemService.GetParentsTVItemModelList(tvItemModelMunicipality.TVPath);
 
             AddressModel addressModelNew = new AddressModel();
+            addressModelNew.DBCommand = DBCommandEnum.Original;
             addressModelNew.AddressType = AddressTypeEnum.Civic;
             addressModelNew.StreetNumber = StreetNumber;
             addressModelNew.StreetName = StreetName;
@@ -1930,6 +1945,7 @@ namespace CSSPDBDLL.Services
 
                 TVItemLinkModel tvItemLinkModelNew = new TVItemLinkModel()
                 {
+                    DBCommand = DBCommandEnum.Original,
                     FromTVItemID = contactModel3.ContactTVItemID,
                     ToTVItemID = addressModelRet.AddressTVItemID,
                     FromTVType = TVTypeEnum.Contact,
@@ -2193,6 +2209,7 @@ namespace CSSPDBDLL.Services
             else
             {
                 PolSourceObservationIssueModel polSourceObservationIssueModelNew = new PolSourceObservationIssueModel();
+                polSourceObservationIssueModelNew.DBCommand = DBCommandEnum.Original;
                 polSourceObservationIssueModelNew.PolSourceObservationID = ObsID;
                 polSourceObservationIssueModelNew.Ordinal = Ordinal;
                 polSourceObservationIssueModelNew.ObservationInfo = ObservationInfo;

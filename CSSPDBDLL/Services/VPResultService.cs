@@ -90,12 +90,19 @@ namespace CSSPDBDLL.Services
                 return retStr;
             }
 
+            retStr = _BaseEnumService.DBCommandOK(vpResultModel.DBCommand);
+            if (!string.IsNullOrWhiteSpace(retStr))
+            {
+                return retStr;
+            }
+
             return "";
         }
 
         // Fill
         public string FillVPResult(VPResult vpResult, VPResultModel vpResultModel, ContactOK contactOK)
         {
+            vpResult.DBCommand = (int)vpResultModel.DBCommand;
             vpResult.VPScenarioID = vpResultModel.VPScenarioID;
             vpResult.Ordinal = vpResultModel.Ordinal;
             vpResult.Concentration_MPN_100ml = vpResultModel.Concentration_MPN_100ml;
@@ -132,6 +139,7 @@ namespace CSSPDBDLL.Services
                                                      {
                                                          Error = "",
                                                          VPScenarioID = c.VPScenarioID,
+                                                         DBCommand = (DBCommandEnum)c.DBCommand,
                                                          Ordinal = c.Ordinal,
                                                          Concentration_MPN_100ml = c.Concentration_MPN_100ml,
                                                          Dilution = c.Dilution,
@@ -153,6 +161,7 @@ namespace CSSPDBDLL.Services
                                            {
                                                Error = "",
                                                VPResultID = c.VPResultID,
+                                               DBCommand = (DBCommandEnum)c.DBCommand,
                                                VPScenarioID = c.VPScenarioID,
                                                Ordinal = c.Ordinal,
                                                Concentration_MPN_100ml = c.Concentration_MPN_100ml,

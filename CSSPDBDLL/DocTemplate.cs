@@ -15,6 +15,7 @@ namespace CSSPDBDLL
     public partial class DocTemplate
     {
         public int DocTemplateID { get; set; }
+        public int DBCommand { get; set; }
         public int Language { get; set; }
         public int TVType { get; set; }
         public int TVFileTVItemID { get; set; }

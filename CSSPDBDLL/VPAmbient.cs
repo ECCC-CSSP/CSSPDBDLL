@@ -15,6 +15,7 @@ namespace CSSPDBDLL
     public partial class VPAmbient
     {
         public int VPAmbientID { get; set; }
+        public int DBCommand { get; set; }
         public int VPScenarioID { get; set; }
         public int Row { get; set; }
         public Nullable<double> MeasurementDepth_m { get; set; }

@@ -15,6 +15,7 @@ namespace CSSPDBDLL
     public partial class VPResult
     {
         public int VPResultID { get; set; }
+        public int DBCommand { get; set; }
         public int VPScenarioID { get; set; }
         public int Ordinal { get; set; }
         public int Concentration_MPN_100ml { get; set; }

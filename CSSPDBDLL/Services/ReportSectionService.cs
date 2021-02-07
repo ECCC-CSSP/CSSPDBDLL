@@ -93,12 +93,20 @@ namespace CSSPDBDLL.Services
             {
                 return retStr;
             }
+
+            retStr = _BaseEnumService.DBCommandOK(reportSectionModel.DBCommand);
+            if (!string.IsNullOrWhiteSpace(retStr))
+            {
+                return retStr;
+            }
+
             return "";
         }
 
         // Fill
         public string FillReportSection(ReportSection reportSection, ReportSectionModel reportSectionModel, ContactOK contactOK)
         {
+            reportSection.DBCommand = (int)reportSectionModel.DBCommand;
             reportSection.ReportSectionID = reportSectionModel.ReportSectionID;
             reportSection.ReportTypeID = (int)reportSectionModel.ReportTypeID;
             reportSection.TVItemID = reportSectionModel.TVItemID;
@@ -151,6 +159,7 @@ namespace CSSPDBDLL.Services
                                                                {
                                                                    Error = "",
                                                                    ReportSectionID = c.ReportSectionID,
+                                                                   DBCommand = (DBCommandEnum)c.DBCommand,
                                                                    ReportTypeID = c.ReportTypeID,
                                                                    TVItemID = c.TVItemID,
                                                                    Language = (LanguageEnum)c.Language,
@@ -178,6 +187,7 @@ namespace CSSPDBDLL.Services
                                                                {
                                                                    Error = "",
                                                                    ReportSectionID = c.ReportSectionID,
+                                                                   DBCommand = (DBCommandEnum)c.DBCommand,
                                                                    ReportTypeID = c.ReportTypeID,
                                                                    TVItemID = c.TVItemID,
                                                                    Language = (LanguageEnum)c.Language,
@@ -206,6 +216,7 @@ namespace CSSPDBDLL.Services
                                                                {
                                                                    Error = "",
                                                                    ReportSectionID = c.ReportSectionID,
+                                                                   DBCommand = (DBCommandEnum)c.DBCommand,
                                                                    ReportTypeID = c.ReportTypeID,
                                                                    TVItemID = c.TVItemID,
                                                                    Language = (LanguageEnum)c.Language,
@@ -236,6 +247,7 @@ namespace CSSPDBDLL.Services
                                                                {
                                                                    Error = "",
                                                                    ReportSectionID = c.ReportSectionID,
+                                                                   DBCommand = (DBCommandEnum)c.DBCommand,
                                                                    ReportTypeID = c.ReportTypeID,
                                                                    TVItemID = c.TVItemID,
                                                                    Language = (LanguageEnum)c.Language,
@@ -262,6 +274,7 @@ namespace CSSPDBDLL.Services
                                                      {
                                                          Error = "",
                                                          ReportSectionID = c.ReportSectionID,
+                                                         DBCommand = (DBCommandEnum)c.DBCommand,
                                                          ReportTypeID = c.ReportTypeID,
                                                          TVItemID = c.TVItemID,
                                                          Language = (LanguageEnum)c.Language,
@@ -294,6 +307,7 @@ namespace CSSPDBDLL.Services
                                                                {
                                                                    Error = "",
                                                                    ReportSectionID = c.ReportSectionID,
+                                                                   DBCommand = (DBCommandEnum)c.DBCommand,
                                                                    ReportTypeID = c.ReportTypeID,
                                                                    TVItemID = c.TVItemID,
                                                                    Language = (LanguageEnum)c.Language,
@@ -321,6 +335,7 @@ namespace CSSPDBDLL.Services
                                                                {
                                                                    Error = "",
                                                                    ReportSectionID = c.ReportSectionID,
+                                                                   DBCommand = (DBCommandEnum)c.DBCommand,
                                                                    ReportTypeID = c.ReportTypeID,
                                                                    TVItemID = c.TVItemID,
                                                                    Language = (LanguageEnum)c.Language,
@@ -359,6 +374,7 @@ namespace CSSPDBDLL.Services
                                                         {
                                                             Error = "",
                                                             ReportSectionID = c.ReportSectionID,
+                                                            DBCommand = (DBCommandEnum)c.DBCommand,
                                                             ReportTypeID = c.ReportTypeID,
                                                             TVItemID = c.TVItemID,
                                                             Language = (LanguageEnum)c.Language,
@@ -431,6 +447,7 @@ namespace CSSPDBDLL.Services
                 }
                 ReportSectionModel reportSectionModel = new ReportSectionModel()
                 {
+                    DBCommand = DBCommandEnum.Original,
                     ReportTypeID = reportSectionModelParent.ReportTypeID,
                     TVItemID = null,
                     Ordinal = MaxOrdinal,
@@ -492,6 +509,7 @@ namespace CSSPDBDLL.Services
                     }
                     ReportSectionModel reportSectionModel = new ReportSectionModel()
                     {
+                        DBCommand = DBCommandEnum.Original,
                         ReportTypeID = reportSectionModelSibling.ReportTypeID,
                         TVItemID = null,
                         Ordinal = MaxOrdinal,
@@ -544,6 +562,7 @@ namespace CSSPDBDLL.Services
 
                 ReportSectionModel reportSectionModel = new ReportSectionModel()
                 {
+                    DBCommand = DBCommandEnum.Original,
                     ReportTypeID = ReportTypeID,
                     TVItemID = null,
                     Ordinal = MaxOrdinal,
@@ -734,6 +753,7 @@ namespace CSSPDBDLL.Services
 
             ReportSectionModel reportSectionModelToCopy = new ReportSectionModel()
             {
+                DBCommand = DBCommandEnum.Original,
                 ReportTypeID = reportSectionModel.ReportTypeID,
                 TVItemID = TVItemID,
                 Ordinal = reportSectionModel.Ordinal,

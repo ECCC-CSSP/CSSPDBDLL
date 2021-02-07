@@ -15,6 +15,7 @@ namespace CSSPDBDLL
     public partial class EmailDistributionListContactLanguage
     {
         public int EmailDistributionListContactLanguageID { get; set; }
+        public int DBCommand { get; set; }
         public int EmailDistributionListContactID { get; set; }
         public int Language { get; set; }
         public string Agency { get; set; }

@@ -15,6 +15,7 @@ namespace CSSPDBDLL
     public partial class Classification
     {
         public int ClassificationID { get; set; }
+        public int DBCommand { get; set; }
         public int ClassificationTVItemID { get; set; }
         public int ClassificationType { get; set; }
         public int Ordinal { get; set; }

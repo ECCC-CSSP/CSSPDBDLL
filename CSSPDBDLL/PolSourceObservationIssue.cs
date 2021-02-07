@@ -15,6 +15,7 @@ namespace CSSPDBDLL
     public partial class PolSourceObservationIssue
     {
         public int PolSourceObservationIssueID { get; set; }
+        public int DBCommand { get; set; }
         public int PolSourceObservationID { get; set; }
         public string ObservationInfo { get; set; }
         public int Ordinal { get; set; }

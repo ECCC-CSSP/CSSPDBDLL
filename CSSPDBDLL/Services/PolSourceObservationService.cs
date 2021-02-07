@@ -81,12 +81,19 @@ namespace CSSPDBDLL.Services
                 return retStr;
             }
 
+            retStr = _BaseEnumService.DBCommandOK(polSourceObservationModel.DBCommand);
+            if (!string.IsNullOrWhiteSpace(retStr))
+            {
+                return retStr;
+            }
+
             return "";
         }
 
         // Fill
         public string FillPolSourceObservation(PolSourceObservation polSourceObservation, PolSourceObservationModel polSourceObservationModel, ContactOK contactOK)
         {
+            polSourceObservation.DBCommand = (int)polSourceObservationModel.DBCommand;
             polSourceObservation.PolSourceSiteID = polSourceObservationModel.PolSourceSiteID;
             polSourceObservation.ObservationDate_Local = polSourceObservationModel.ObservationDate_Local;
             polSourceObservation.Observation_ToBeDeleted = polSourceObservationModel.Observation_ToBeDeleted;
@@ -126,6 +133,7 @@ namespace CSSPDBDLL.Services
                                                                              {
                                                                                  Error = "",
                                                                                  PolSourceObservationID = pso.PolSourceObservationID,
+                                                                                 DBCommand = (DBCommandEnum)pso.DBCommand,
                                                                                  PolSourceSiteID = pso.PolSourceSiteID,
                                                                                  PolSourceSiteTVItemID = t.TVItemID,
                                                                                  PolSourceSiteTVText = "",
@@ -152,6 +160,7 @@ namespace CSSPDBDLL.Services
                                                                              {
                                                                                  Error = "",
                                                                                  PolSourceObservationID = c.PolSourceObservationID,
+                                                                                 DBCommand = (DBCommandEnum)c.DBCommand,
                                                                                  PolSourceSiteID = c.PolSourceSiteID,
                                                                                  PolSourceSiteTVItemID = PolSourceSiteTVItemID,
                                                                                  PolSourceSiteTVText = tvText,
@@ -178,6 +187,7 @@ namespace CSSPDBDLL.Services
                                                                    {
                                                                        Error = "",
                                                                        PolSourceObservationID = c.PolSourceObservationID,
+                                                                       DBCommand = (DBCommandEnum)c.DBCommand,
                                                                        PolSourceSiteID = c.PolSourceSiteID,
                                                                        PolSourceSiteTVItemID = PolSourceSiteTVItemID,
                                                                        PolSourceSiteTVText = tvText,
@@ -206,6 +216,7 @@ namespace CSSPDBDLL.Services
                                                                    {
                                                                        Error = "",
                                                                        PolSourceObservationID = c.PolSourceObservationID,
+                                                                       DBCommand = (DBCommandEnum)c.DBCommand,
                                                                        PolSourceSiteID = c.PolSourceSiteID,
                                                                        PolSourceSiteTVItemID = PolSourceSiteTVItemID,
                                                                        PolSourceSiteTVText = tvText,
@@ -234,6 +245,7 @@ namespace CSSPDBDLL.Services
                                                                         {
                                                                             Error = "",
                                                                             PolSourceObservationID = c.PolSourceObservationID,
+                                                                            DBCommand = (DBCommandEnum)c.DBCommand,
                                                                             PolSourceSiteID = c.PolSourceSiteID,
                                                                             PolSourceSiteTVItemID = PolSourceSiteTVItemID,
                                                                             PolSourceSiteTVText = tvText,
@@ -262,6 +274,7 @@ namespace CSSPDBDLL.Services
                                                                              {
                                                                                  Error = "",
                                                                                  PolSourceObservationID = c.PolSourceObservationID,
+                                                                                 DBCommand = (DBCommandEnum)c.DBCommand,
                                                                                  PolSourceSiteID = c.PolSourceSiteID,
                                                                                  PolSourceSiteTVItemID = PolSourceSiteTVItemID,
                                                                                  PolSourceSiteTVText = tvText,
@@ -296,6 +309,7 @@ namespace CSSPDBDLL.Services
                                                                       {
                                                                           Error = "",
                                                                           PolSourceObservationID = c.PolSourceObservationID,
+                                                                          DBCommand = (DBCommandEnum)c.DBCommand,
                                                                           PolSourceSiteID = c.PolSourceSiteID,
                                                                           PolSourceSiteTVItemID = PolSourceSiteTVItemID,
                                                                           PolSourceSiteTVText = tvText,
@@ -414,6 +428,7 @@ namespace CSSPDBDLL.Services
             {
                 PolSourceObservationModel polSourceObservationModelNew = new PolSourceObservationModel()
                 {
+                    DBCommand = DBCommandEnum.Original,
                     PolSourceSiteID = PolSourceSiteID,
                     ObservationDate_Local = ObsDate,
                     ContactTVItemID = contactOK.ContactTVItemID,
@@ -431,6 +446,7 @@ namespace CSSPDBDLL.Services
                     List<int> obsIntList = ObservationInfo.Split(",".ToCharArray(), StringSplitOptions.RemoveEmptyEntries).Select(int.Parse).ToList();
 
                     PolSourceObservationIssueModel polSourceObservationIssueModelNew = new PolSourceObservationIssueModel();
+                    polSourceObservationIssueModelNew.DBCommand = DBCommandEnum.Original;
                     polSourceObservationIssueModelNew.PolSourceObservationID = polSourceObservationModelToAddOrChange.PolSourceObservationID;
                     polSourceObservationIssueModelNew.ObservationInfo = ObservationInfo;
                     polSourceObservationIssueModelNew.Ordinal = 0;
@@ -457,6 +473,7 @@ namespace CSSPDBDLL.Services
                         TVText = TVText + " - " + "000000".Substring(0, "000000".Length - Site.ToString().Length) + Site.ToString();
 
                         TVItemLanguageModel tvItemLanguageModel = new TVItemLanguageModel();
+                        tvItemLanguageModel.DBCommand = DBCommandEnum.Original;
                         tvItemLanguageModel.Language = lang;
                         tvItemLanguageModel.TVText = TVText;
                         tvItemLanguageModel.TVItemID = PolSourceSiteID;
@@ -499,6 +516,7 @@ namespace CSSPDBDLL.Services
             using (TransactionScope ts = new TransactionScope())
             {
                 polSourceObservationModelToCopy.PolSourceObservationID = 0;
+                polSourceObservationModelToCopy.DBCommand = DBCommandEnum.Original;
                 polSourceObservationModelToCopy.ObservationDate_Local = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
                 polSourceObservationModelRet = PostAddPolSourceObservationDB(polSourceObservationModelToCopy);
                 if (!string.IsNullOrWhiteSpace(polSourceObservationModelRet.Error))
@@ -506,6 +524,7 @@ namespace CSSPDBDLL.Services
 
                 foreach (PolSourceObservationIssueModel polSourceObservationIssueModel in polSourceObservationIssueModelList)
                 {
+                    polSourceObservationIssueModel.DBCommand = DBCommandEnum.Original;
                     polSourceObservationIssueModel.PolSourceObservationID = polSourceObservationModelRet.PolSourceObservationID;
                     polSourceObservationIssueModel.PolSourceObservationIssueID = 0;
 

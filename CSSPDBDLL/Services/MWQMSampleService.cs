@@ -130,6 +130,11 @@ namespace CSSPDBDLL.Services
                 return retStr;
             }
 
+            retStr = _BaseEnumService.DBCommandOK(mwqmSampleModel.DBCommand);
+            if (!string.IsNullOrWhiteSpace(retStr))
+            {
+                return retStr;
+            }
 
             return "";
         }
@@ -137,6 +142,7 @@ namespace CSSPDBDLL.Services
         // Fill
         public string FillMWQMSample(MWQMSample mwqmSample, MWQMSampleModel mwqmSampleModel, ContactOK contactOK)
         {
+            mwqmSample.DBCommand = (int)mwqmSampleModel.DBCommand;
             mwqmSample.MWQMSiteTVItemID = mwqmSampleModel.MWQMSiteTVItemID;
             mwqmSample.MWQMRunTVItemID = mwqmSampleModel.MWQMRunTVItemID;
             mwqmSample.Depth_m = mwqmSampleModel.Depth_m;
@@ -187,6 +193,7 @@ namespace CSSPDBDLL.Services
                                                          {
                                                              Error = "",
                                                              MWQMSampleID = c.MWQMSampleID,
+                                                             DBCommand = (DBCommandEnum)c.DBCommand,
                                                              MWQMSampleNote = mwqmSampleNote,
                                                              MWQMSiteTVItemID = c.MWQMSiteTVItemID,
                                                              MWQMSiteTVText = mwqmSiteTVText,
@@ -228,6 +235,7 @@ namespace CSSPDBDLL.Services
                                                          {
                                                              Error = "",
                                                              MWQMSampleID = c.MWQMSampleID,
+                                                             DBCommand = (DBCommandEnum)c.DBCommand,
                                                              MWQMSampleNote = mwqmSampleNote,
                                                              MWQMSiteTVItemID = c.MWQMSiteTVItemID,
                                                              MWQMSiteTVText = mwqmSiteTVText,
@@ -269,6 +277,7 @@ namespace CSSPDBDLL.Services
                                                          {
                                                              Error = "",
                                                              MWQMSampleID = c.MWQMSampleID,
+                                                             DBCommand = (DBCommandEnum)c.DBCommand,
                                                              MWQMSampleNote = mwqmSampleNote,
                                                              MWQMSiteTVItemID = c.MWQMSiteTVItemID,
                                                              MWQMSiteTVText = mwqmSiteTVText,
@@ -309,6 +318,7 @@ namespace CSSPDBDLL.Services
                                                {
                                                    Error = "",
                                                    MWQMSampleID = c.MWQMSampleID,
+                                                   DBCommand = (DBCommandEnum)c.DBCommand,
                                                    MWQMSampleNote = mwqmSampleNote,
                                                    MWQMSiteTVItemID = c.MWQMSiteTVItemID,
                                                    MWQMSiteTVText = siteName,
@@ -356,6 +366,7 @@ namespace CSSPDBDLL.Services
                                                   {
                                                       Error = "",
                                                       MWQMSampleID = c.MWQMSampleID,
+                                                      DBCommand = (DBCommandEnum)c.DBCommand,
                                                       MWQMSampleNote = mwqmSampleNote,
                                                       MWQMSiteTVItemID = c.MWQMSiteTVItemID,
                                                       MWQMSiteTVText = siteName,
@@ -414,6 +425,7 @@ namespace CSSPDBDLL.Services
                                                          {
                                                              Error = "",
                                                              MWQMSampleID = c.MWQMSampleID,
+                                                             DBCommand = (DBCommandEnum)c.DBCommand,
                                                              MWQMSampleNote = mwqmSampleNote,
                                                              MWQMSiteTVItemID = c.MWQMSiteTVItemID,
                                                              MWQMSiteTVText = siteName,
@@ -537,6 +549,8 @@ namespace CSSPDBDLL.Services
                 if (!string.IsNullOrWhiteSpace(mwqmSampleModelToChange.Error))
                     return ReturnError(mwqmSampleModelToChange.Error);
             }
+
+            mwqmSampleModelToChange.DBCommand = DBCommandEnum.Original;
 
             // MWQMRunTVItemID
             if (string.IsNullOrWhiteSpace(fc["MWQMRunTVItemID"]))
@@ -783,6 +797,7 @@ namespace CSSPDBDLL.Services
                 {
                     MWQMSampleLanguageModel mwqmSampleLanguageModel = new MWQMSampleLanguageModel()
                     {
+                        DBCommand = DBCommandEnum.Original,
                         MWQMSampleID = mwqmSampleNew.MWQMSampleID,
                         Language = Lang,
                         MWQMSampleNote = mwqmSampleModel.MWQMSampleNote,
@@ -862,6 +877,7 @@ namespace CSSPDBDLL.Services
                     {
                         MWQMSampleLanguageModel mwqmSampleLanguageModel = new MWQMSampleLanguageModel()
                         {
+                            DBCommand = DBCommandEnum.Original,
                             MWQMSampleID = mwqmSampleModel.MWQMSampleID,
                             Language = Lang,
                             MWQMSampleNote = mwqmSampleModel.MWQMSampleNote ?? "",

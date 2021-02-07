@@ -144,12 +144,19 @@ namespace CSSPDBDLL.Services
                 return retStr;
             }
 
+            retStr = _BaseEnumService.DBCommandOK(useOfSiteModel.DBCommand);
+            if (!string.IsNullOrWhiteSpace(retStr))
+            {
+                return retStr;
+            }
+
             return "";
         }
 
         // Fill
         public string FillUseOfSite(UseOfSite useOfSite, UseOfSiteModel useOfSiteModel, ContactOK contactOK)
         {
+            useOfSite.DBCommand = (int)useOfSiteModel.DBCommand;
             useOfSite.SiteTVItemID = useOfSiteModel.SiteTVItemID;
             useOfSite.SubsectorTVItemID = useOfSiteModel.SubsectorTVItemID;
             useOfSite.TVType = (int)useOfSiteModel.TVType;
@@ -194,6 +201,7 @@ namespace CSSPDBDLL.Services
                                              {
                                                  Error = "",
                                                  UseOfSiteID = c.UseOfSiteID,
+                                                 DBCommand = (DBCommandEnum)c.DBCommand,
                                                  SiteTVItemID = c.SiteTVItemID,
                                                  SiteTVText = siteTVText,
                                                  SubsectorTVItemID = c.SubsectorTVItemID,
@@ -229,6 +237,7 @@ namespace CSSPDBDLL.Services
                                                        {
                                                            Error = "",
                                                            UseOfSiteID = c.UseOfSiteID,
+                                                           DBCommand = (DBCommandEnum)c.DBCommand,
                                                            SiteTVItemID = c.SiteTVItemID,
                                                            SiteTVText = siteTVText,
                                                            SubsectorTVItemID = c.SubsectorTVItemID,
@@ -262,6 +271,7 @@ namespace CSSPDBDLL.Services
                                                        {
                                                            Error = "",
                                                            UseOfSiteID = c.UseOfSiteID,
+                                                           DBCommand = (DBCommandEnum)c.DBCommand,
                                                            SiteTVItemID = c.SiteTVItemID,
                                                            SiteTVText = siteTVText,
                                                            SubsectorTVItemID = c.SubsectorTVItemID,
@@ -295,6 +305,7 @@ namespace CSSPDBDLL.Services
                                              {
                                                  Error = "",
                                                  UseOfSiteID = c.UseOfSiteID,
+                                                 DBCommand = (DBCommandEnum)c.DBCommand,
                                                  SiteTVItemID = c.SiteTVItemID,
                                                  SiteTVText = siteTVText,
                                                  SubsectorTVItemID = c.SubsectorTVItemID,
@@ -330,6 +341,7 @@ namespace CSSPDBDLL.Services
                                                        {
                                                            Error = "",
                                                            UseOfSiteID = c.UseOfSiteID,
+                                                           DBCommand = (DBCommandEnum)c.DBCommand,
                                                            SiteTVItemID = c.SiteTVItemID,
                                                            SiteTVText = siteTVText,
                                                            SubsectorTVItemID = c.SubsectorTVItemID,
@@ -366,6 +378,7 @@ namespace CSSPDBDLL.Services
                                                 {
                                                     Error = "",
                                                     UseOfSiteID = c.UseOfSiteID,
+                                                    DBCommand = (DBCommandEnum)c.DBCommand,
                                                     SiteTVItemID = c.SiteTVItemID,
                                                     SiteTVText = siteTVText,
                                                     SubsectorTVItemID = c.SubsectorTVItemID,

@@ -15,6 +15,7 @@ namespace CSSPDBDLL
     public partial class Email
     {
         public int EmailID { get; set; }
+        public int DBCommand { get; set; }
         public int EmailTVItemID { get; set; }
         public string EmailAddress { get; set; }
         public int EmailType { get; set; }

@@ -15,6 +15,7 @@ namespace CSSPDBDLL
     public partial class TVTypeUserAuthorization
     {
         public int TVTypeUserAuthorizationID { get; set; }
+        public int DBCommand { get; set; }
         public int ContactTVItemID { get; set; }
         public int TVType { get; set; }
         public int TVAuth { get; set; }

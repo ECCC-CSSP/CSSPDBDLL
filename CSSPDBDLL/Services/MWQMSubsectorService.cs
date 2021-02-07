@@ -87,12 +87,19 @@ namespace CSSPDBDLL.Services
                 return retStr;
             }
 
+            retStr = _BaseEnumService.DBCommandOK(mwqmSubsectorModel.DBCommand);
+            if (!string.IsNullOrWhiteSpace(retStr))
+            {
+                return retStr;
+            }
+
             return "";
         }
 
         // Fill
         public string FillMWQMSubsector(MWQMSubsector mwqmSubsector, MWQMSubsectorModel mwqmSubsectorModel, ContactOK contactOK)
         {
+            mwqmSubsector.DBCommand = (int)mwqmSubsectorModel.DBCommand;
             mwqmSubsector.MWQMSubsectorTVItemID = mwqmSubsectorModel.MWQMSubsectorTVItemID;
             mwqmSubsector.SubsectorHistoricKey = mwqmSubsectorModel.SubsectorHistoricKey;
             mwqmSubsector.TideLocationSIDText = mwqmSubsectorModel.TideLocationSIDText;
@@ -174,6 +181,7 @@ namespace CSSPDBDLL.Services
                                                      {
                                                          Error = "",
                                                          MWQMSubsectorID = c.MWQMSubsectorID,
+                                                         DBCommand = (DBCommandEnum)c.DBCommand,
                                                          MWQMSubsectorTVItemID = c.MWQMSubsectorTVItemID,
                                                          MWQMSubsectorTVText = tvItemModelSS.TVText,
                                                          SubsectorHistoricKey = c.SubsectorHistoricKey,
@@ -201,6 +209,7 @@ namespace CSSPDBDLL.Services
                                                                      {
                                                                          Error = "",
                                                                          MWQMSiteID = c.MWQMSiteID,
+                                                                         DBCommand = (DBCommandEnum)c.DBCommand,
                                                                          MWQMSiteTVItemID = c.MWQMSiteTVItemID,
                                                                          MWQMSiteTVText = tl.TVText,
                                                                          MWQMSiteNumber = c.MWQMSiteNumber,
@@ -229,6 +238,7 @@ namespace CSSPDBDLL.Services
                                                                    {
                                                                        Error = "",
                                                                        MWQMRunID = c.MWQMRunID,
+                                                                       DBCommand = (DBCommandEnum)c.DBCommand,
                                                                        SubsectorTVItemID = c.SubsectorTVItemID,
                                                                        SubsectorTVText = tvItemModelSS.TVText,
                                                                        MWQMRunTVItemID = (int)c.MWQMRunTVItemID,
@@ -306,6 +316,7 @@ namespace CSSPDBDLL.Services
                                                {
                                                    Error = "",
                                                    MWQMSampleID = c.MWQMSampleID,
+                                                   DBCommand = (DBCommandEnum)c.DBCommand,
                                                    MWQMSampleNote = cl.MWQMSampleNote,
                                                    MWQMSiteTVItemID = c.MWQMSiteTVItemID,
                                                    MWQMSiteTVText = (from sl in db.TVItemLanguages
@@ -371,6 +382,7 @@ namespace CSSPDBDLL.Services
                                                                {
                                                                    Error = "",
                                                                    MWQMSubsectorID = c.MWQMSubsectorID,
+                                                                   DBCommand = (DBCommandEnum)c.DBCommand,
                                                                    MWQMSubsectorTVItemID = c.MWQMSubsectorTVItemID,
                                                                    MWQMSubsectorTVText = mwqmsubsectorName,
                                                                    SubsectorHistoricKey = c.SubsectorHistoricKey,
@@ -392,6 +404,7 @@ namespace CSSPDBDLL.Services
                                                      {
                                                          Error = "",
                                                          MWQMSubsectorID = c.MWQMSubsectorID,
+                                                         DBCommand = (DBCommandEnum)c.DBCommand,
                                                          MWQMSubsectorTVItemID = c.MWQMSubsectorTVItemID,
                                                          MWQMSubsectorTVText = mwqmsubsectorName,
                                                          SubsectorHistoricKey = c.SubsectorHistoricKey,
@@ -415,6 +428,7 @@ namespace CSSPDBDLL.Services
                                                      {
                                                          Error = "",
                                                          MWQMSubsectorID = c.MWQMSubsectorID,
+                                                         DBCommand = (DBCommandEnum)c.DBCommand,
                                                          MWQMSubsectorTVItemID = c.MWQMSubsectorTVItemID,
                                                          MWQMSubsectorTVText = mwqmSubsectorName,
                                                          SubsectorHistoricKey = c.SubsectorHistoricKey,
@@ -438,6 +452,7 @@ namespace CSSPDBDLL.Services
                                                      {
                                                          Error = "",
                                                          MWQMSubsectorID = c.MWQMSubsectorID,
+                                                         DBCommand = (DBCommandEnum)c.DBCommand,
                                                          MWQMSubsectorTVItemID = c.MWQMSubsectorTVItemID,
                                                          MWQMSubsectorTVText = mwqmSubsectorName,
                                                          SubsectorHistoricKey = c.SubsectorHistoricKey,
@@ -488,6 +503,7 @@ namespace CSSPDBDLL.Services
                                                                          {
                                                                              Error = "",
                                                                              MWQMSubsectorID = c.MWQMSubsectorID,
+                                                                             DBCommand = (DBCommandEnum)c.DBCommand,
                                                                              MWQMSubsectorTVItemID = c.MWQMSubsectorTVItemID,
                                                                              MWQMSubsectorTVText = mwqmsubsectorName,
                                                                              SubsectorHistoricKey = c.SubsectorHistoricKey,
@@ -539,6 +555,7 @@ namespace CSSPDBDLL.Services
                                                                                                    {
                                                                                                        Error = "",
                                                                                                        ClimateSiteID = c.ClimateSiteID,
+                                                                                                       DBCommand = (DBCommandEnum)c.DBCommand,
                                                                                                        ClimateSiteTVItemID = c.ClimateSiteTVItemID,
                                                                                                        ClimateID = c.ClimateID,
                                                                                                        ClimateSiteName = c.ClimateSiteName,
@@ -602,7 +619,7 @@ namespace CSSPDBDLL.Services
                 }
 
             }
-            using (CoCoRaHSEntities cocodb = new CoCoRaHSEntities())
+            using (CSSPDBEntities cocodb = new CSSPDBEntities())
             {
 
                 foreach (ClimateSiteWithLatLngAndOrdinalModel climateSiteWithLatLngAndOrdinalModel in ClimateSiteWithLatLngAndOrdinalModelList)
@@ -680,6 +697,7 @@ namespace CSSPDBDLL.Services
                                                                          {
                                                                              Error = "",
                                                                              ClimateSiteID = c.ClimateSiteID,
+                                                                             DBCommand = (DBCommandEnum)c.DBCommand,
                                                                              ClimateSiteTVItemID = c.ClimateSiteTVItemID,
                                                                              ClimateID = c.ClimateID,
                                                                              ClimateSiteName = c.ClimateSiteName,
@@ -720,6 +738,7 @@ namespace CSSPDBDLL.Services
                                                                          {
                                                                              Error = "",
                                                                              ClimateSiteID = c.ClimateSiteID,
+                                                                             DBCommand = (DBCommandEnum)c.DBCommand,
                                                                              ClimateDataValueID = c.ClimateDataValueID,
                                                                              DateTime_Local = c.DateTime_Local,
                                                                              Keep = c.Keep,
@@ -763,6 +782,7 @@ namespace CSSPDBDLL.Services
                         {
                             Error = "",
                             ClimateSiteID = climateSiteModel.ClimateSiteID,
+                            DBCommand = DBCommandEnum.Original,
                             ClimateDataValueID = 0,
                             DateTime_Local = RunDateTemp,
                             Keep = false,
@@ -824,6 +844,7 @@ namespace CSSPDBDLL.Services
                                                                 {
                                                                     Error = "",
                                                                     UseOfSiteID = c.UseOfSiteID,
+                                                                    DBCommand = (DBCommandEnum)c.DBCommand,
                                                                     SiteTVItemID = c.SiteTVItemID,
                                                                     SiteTVText = siteTVText,
                                                                     SubsectorTVItemID = c.SubsectorTVItemID,
@@ -869,6 +890,7 @@ namespace CSSPDBDLL.Services
                                                                          {
                                                                              Error = "",
                                                                              MWQMSubsectorID = c.MWQMSubsectorID,
+                                                                             DBCommand = (DBCommandEnum)c.DBCommand,
                                                                              MWQMSubsectorTVItemID = c.MWQMSubsectorTVItemID,
                                                                              MWQMSubsectorTVText = mwqmsubsectorName,
                                                                              SubsectorHistoricKey = c.SubsectorHistoricKey,
@@ -918,6 +940,7 @@ namespace CSSPDBDLL.Services
                                                                                                            {
                                                                                                                Error = "",
                                                                                                                HydrometricSiteID = c.HydrometricSiteID,
+                                                                                                               DBCommand = (DBCommandEnum)c.DBCommand,
                                                                                                                HydrometricSiteTVItemID = c.HydrometricSiteTVItemID,
                                                                                                                FedSiteNumber = c.FedSiteNumber,
                                                                                                                QuebecSiteNumber = c.QuebecSiteNumber,
@@ -1003,6 +1026,7 @@ namespace CSSPDBDLL.Services
                                                                          {
                                                                              Error = "",
                                                                              MWQMSubsectorID = c.MWQMSubsectorID,
+                                                                             DBCommand = (DBCommandEnum)c.DBCommand,
                                                                              MWQMSubsectorTVItemID = c.MWQMSubsectorTVItemID,
                                                                              MWQMSubsectorTVText = mwqmsubsectorName,
                                                                              SubsectorHistoricKey = c.SubsectorHistoricKey,
@@ -1111,6 +1135,7 @@ namespace CSSPDBDLL.Services
                                                                          {
                                                                              Error = "",
                                                                              MWQMSubsectorID = c.MWQMSubsectorID,
+                                                                             DBCommand = (DBCommandEnum)c.DBCommand,
                                                                              MWQMSubsectorTVItemID = c.MWQMSubsectorTVItemID,
                                                                              MWQMSubsectorTVText = mwqmsubsectorName,
                                                                              SubsectorHistoricKey = c.SubsectorHistoricKey,
@@ -1233,6 +1258,7 @@ namespace CSSPDBDLL.Services
                                                                                  {
                                                                                      Error = "",
                                                                                      HydrometricSiteID = c.HydrometricSiteID,
+                                                                                     DBCommand = (DBCommandEnum)c.DBCommand,
                                                                                      HydrometricSiteTVItemID = c.HydrometricSiteTVItemID,
                                                                                      FedSiteNumber = c.FedSiteNumber,
                                                                                      QuebecSiteNumber = c.QuebecSiteNumber,
@@ -1271,6 +1297,7 @@ namespace CSSPDBDLL.Services
                                                                                  {
                                                                                      Error = "",
                                                                                      HydrometricSiteID = c.HydrometricSiteID,
+                                                                                     DBCommand = (DBCommandEnum)c.DBCommand,
                                                                                      HydrometricDataValueID = c.HydrometricDataValueID,
                                                                                      DateTime_Local = c.DateTime_Local,
                                                                                      Keep = c.Keep,
@@ -1306,6 +1333,7 @@ namespace CSSPDBDLL.Services
                         {
                             Error = "",
                             HydrometricSiteID = hydrometricSiteModel.HydrometricSiteID,
+                            DBCommand = DBCommandEnum.Original,
                             HydrometricDataValueID = 0,
                             DateTime_Local = RunDateTemp,
                             Keep = false,
@@ -1359,6 +1387,7 @@ namespace CSSPDBDLL.Services
                                                                     {
                                                                         Error = "",
                                                                         UseOfSiteID = c.UseOfSiteID,
+                                                                        DBCommand = (DBCommandEnum)c.DBCommand,
                                                                         SiteTVItemID = c.SiteTVItemID,
                                                                         SiteTVText = siteTVText,
                                                                         SubsectorTVItemID = c.SubsectorTVItemID,
@@ -1805,6 +1834,7 @@ namespace CSSPDBDLL.Services
 
             AppTaskModel appTaskModelNew = new AppTaskModel()
             {
+                DBCommand = DBCommandEnum.Original,
                 TVItemID = SubsectorTVItemID,
                 TVItemID2 = SubsectorTVItemID,
                 AppTaskCommand = AppTaskCommandEnum.GetClimateSitesDataForRunsOfYear,
@@ -1852,6 +1882,7 @@ namespace CSSPDBDLL.Services
 
             AppTaskModel appTaskModelNew = new AppTaskModel()
             {
+                DBCommand = DBCommandEnum.Original,
                 TVItemID = tvItemModelRoot.TVItemID,
                 TVItemID2 = tvItemModelRoot.TVItemID,
                 AppTaskCommand = AppTaskCommandEnum.ClimateSiteLoadCoCoRaHSData,
@@ -2406,6 +2437,7 @@ namespace CSSPDBDLL.Services
 
                     UseOfSiteModel useOfSiteModelNew = new UseOfSiteModel()
                     {
+                        DBCommand = DBCommandEnum.Original,
                         Ordinal = 0,
                         SiteTVItemID = climateSiteTVItemIDYearsText.ClimateSiteTVItemID,
                         TVType = TVTypeEnum.ClimateSite,
@@ -2455,6 +2487,7 @@ namespace CSSPDBDLL.Services
                 {
                     UseOfSiteModel useOfSiteModelNew = new UseOfSiteModel()
                     {
+                        DBCommand = DBCommandEnum.Original,
                         EndYear = useOfSiteModel.EndYear,
                         Ordinal = useOfSiteModel.Ordinal,
                         Param1 = useOfSiteModel.Param1,
@@ -2510,6 +2543,7 @@ namespace CSSPDBDLL.Services
 
             AppTaskModel appTaskModelNew = new AppTaskModel()
             {
+                DBCommand = DBCommandEnum.Original,
                 TVItemID = SubsectorTVItemID,
                 TVItemID2 = SubsectorTVItemID,
                 AppTaskCommand = AppTaskCommandEnum.GetHydrometricSitesDataForRunsOfYear,
@@ -2597,6 +2631,7 @@ namespace CSSPDBDLL.Services
 
                     UseOfSiteModel useOfSiteModelNew = new UseOfSiteModel()
                     {
+                        DBCommand = DBCommandEnum.Original,
                         Ordinal = 0,
                         SiteTVItemID = hydrometricSiteTVItemIDYearsText.HydrometricSiteTVItemID,
                         TVType = TVTypeEnum.HydrometricSite,
@@ -2653,6 +2688,7 @@ namespace CSSPDBDLL.Services
             {
                 UseOfSiteModel useOfSiteModelNew = new UseOfSiteModel()
                 {
+                    DBCommand = DBCommandEnum.Original,
                     Ordinal = 0,
                     SiteTVItemID = municipalityTVItemID,
                     TVType = TVTypeEnum.Municipality,
@@ -2709,6 +2745,7 @@ namespace CSSPDBDLL.Services
             {
                 UseOfSiteModel useOfSiteModelNew = new UseOfSiteModel()
                 {
+                    DBCommand = DBCommandEnum.Original,
                     Ordinal = 0,
                     SiteTVItemID = tideSiteTVItemID,
                     TVType = TVTypeEnum.TideSite,
@@ -2819,6 +2856,7 @@ namespace CSSPDBDLL.Services
                 {
                     MWQMSubsectorLanguageModel mwqmSubsectorLanguageModel = new MWQMSubsectorLanguageModel()
                     {
+                        DBCommand = DBCommandEnum.Original,
                         MWQMSubsectorID = mwqmSubsectorNew.MWQMSubsectorID,
                         Language = Lang,
                         SubsectorDesc = mwqmSubsectorModel.SubsectorDesc,
@@ -2895,6 +2933,7 @@ namespace CSSPDBDLL.Services
                     {
                         MWQMSubsectorLanguageModel mwqmSubsectorLanguageModel = new MWQMSubsectorLanguageModel()
                         {
+                            DBCommand = DBCommandEnum.Original,
                             MWQMSubsectorID = mwqmSubsectorModel.MWQMSubsectorID,
                             Language = Lang,
                             SubsectorDesc = mwqmSubsectorModel.SubsectorDesc,

@@ -21,6 +21,7 @@ namespace CSSPDBDLL
         }
     
         public int DrogueRunID { get; set; }
+        public int DBCommand { get; set; }
         public int SubsectorTVItemID { get; set; }
         public int DrogueNumber { get; set; }
         public int DrogueType { get; set; }

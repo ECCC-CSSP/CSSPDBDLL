@@ -15,6 +15,7 @@ namespace CSSPDBDLL
     public partial class ClimateDataValue
     {
         public int ClimateDataValueID { get; set; }
+        public int DBCommand { get; set; }
         public int ClimateSiteID { get; set; }
         public System.DateTime DateTime_Local { get; set; }
         public bool Keep { get; set; }

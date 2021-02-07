@@ -379,12 +379,19 @@ namespace CSSPDBDLL.Services
                 return retStr;
             }
 
+            retStr = _BaseEnumService.DBCommandOK(infrastructureModel.DBCommand);
+            if (!string.IsNullOrWhiteSpace(retStr))
+            {
+                return retStr;
+            }
+
             return "";
         }
 
         // Fill
         public string FillInfrastructure(Infrastructure infrastructure, InfrastructureModel infrastructureModel, ContactOK contactOK)
         {
+            infrastructure.DBCommand = (int)infrastructureModel.DBCommand;
             infrastructure.InfrastructureTVItemID = infrastructureModel.InfrastructureTVItemID;
             infrastructure.PrismID = infrastructureModel.PrismID;
             infrastructure.TPID = infrastructureModel.TPID;
@@ -506,6 +513,7 @@ namespace CSSPDBDLL.Services
                                                        {
                                                            Error = "",
                                                            InfrastructureID = c.InfrastructureID,
+                                                           DBCommand = (DBCommandEnum)c.DBCommand,
                                                            InfrastructureTVItemID = c.InfrastructureTVItemID,
                                                            InfrastructureTVText = infrastructureTVText,
                                                            PrismID = c.PrismID,
@@ -577,6 +585,7 @@ namespace CSSPDBDLL.Services
                                                        {
                                                            Error = "",
                                                            InfrastructureID = c.InfrastructureID,
+                                                           DBCommand = (DBCommandEnum)c.DBCommand,
                                                            InfrastructureTVItemID = c.InfrastructureTVItemID,
                                                            InfrastructureTVText = infrastructureTVText,
                                                            PrismID = c.PrismID,
@@ -1662,6 +1671,7 @@ namespace CSSPDBDLL.Services
                 {
                     InfrastructureLanguageModel infrastructureLanguageModelNew = new InfrastructureLanguageModel()
                     {
+                        DBCommand = DBCommandEnum.Original,
                         InfrastructureID = infrastructureNew.InfrastructureID,
                         Comment = infrastructureModel.Comment,
                         Language = Lang,
@@ -1856,6 +1866,7 @@ namespace CSSPDBDLL.Services
                 {
                     TVItemLinkModel tvItemLinkModelNew = new TVItemLinkModel()
                     {
+                        DBCommand = DBCommandEnum.Original,
                         FromTVItemID = ChildTVItemID,
                         ToTVItemID = ParentTVItemID,
                         FromTVType = tvItemModelFromExist.TVType,

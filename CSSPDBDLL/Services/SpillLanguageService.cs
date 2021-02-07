@@ -68,12 +68,18 @@ namespace CSSPDBDLL.Services
                 return retStr;
             }
 
+            retStr = _BaseEnumService.DBCommandOK(spillLanguageModel.DBCommand);
+            if (!string.IsNullOrWhiteSpace(retStr))
+            {
+                return retStr;
+            }
             return "";
         }
 
         // Fill
         public string FillSpillLanguage(SpillLanguage spillLanguageNew, SpillLanguageModel spillLanguageModel, ContactOK contactOK)
         {
+            spillLanguageNew.DBCommand = (int)spillLanguageModel.DBCommand;
             spillLanguageNew.SpillID = spillLanguageModel.SpillID;
             spillLanguageNew.Language = (int)spillLanguageModel.Language;
             spillLanguageNew.TranslationStatus = (int)spillLanguageModel.TranslationStatus;
@@ -108,6 +114,7 @@ namespace CSSPDBDLL.Services
                                                      {
                                                          Error = "",
                                                          SpillID = c.SpillID,
+                                                         DBCommand = (DBCommandEnum)c.DBCommand,
                                                          Language = (LanguageEnum)c.Language,
                                                          TranslationStatus = (TranslationStatusEnum)c.TranslationStatus,
                                                          SpillComment = c.SpillComment,

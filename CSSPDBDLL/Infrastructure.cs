@@ -21,6 +21,7 @@ namespace CSSPDBDLL
         }
     
         public int InfrastructureID { get; set; }
+        public int DBCommand { get; set; }
         public int InfrastructureTVItemID { get; set; }
         public Nullable<int> PrismID { get; set; }
         public Nullable<int> TPID { get; set; }

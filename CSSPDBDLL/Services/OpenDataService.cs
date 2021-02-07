@@ -57,6 +57,7 @@ namespace CSSPDBDLL.Services
 
                 AppTaskModel appTaskModelNew = new AppTaskModel()
                 {
+                    DBCommand = DBCommandEnum.Original,
                     TVItemID = ProvinceTVItemID,
                     TVItemID2 = ProvinceTVItemID,
                     AppTaskCommand = AppTaskCommandEnum.OpenDataCSVOfMWQMSites,
@@ -93,6 +94,7 @@ namespace CSSPDBDLL.Services
 
                 AppTaskModel appTaskModelNew = new AppTaskModel()
                 {
+                    DBCommand = DBCommandEnum.Original,
                     TVItemID = CountryTVItemID,
                     TVItemID2 = CountryTVItemID,
                     AppTaskCommand = AppTaskCommandEnum.OpenDataCSVNationalOfMWQMSites,
@@ -129,6 +131,7 @@ namespace CSSPDBDLL.Services
 
                 AppTaskModel appTaskModelNew = new AppTaskModel()
                 {
+                    DBCommand = DBCommandEnum.Original,
                     TVItemID = ProvinceTVItemID,
                     TVItemID2 = ProvinceTVItemID,
                     AppTaskCommand = AppTaskCommandEnum.OpenDataCSVOfMWQMSamples,
@@ -165,6 +168,7 @@ namespace CSSPDBDLL.Services
 
                 AppTaskModel appTaskModelNew = new AppTaskModel()
                 {
+                    DBCommand = DBCommandEnum.Original,
                     TVItemID = CountryTVItemID,
                     TVItemID2 = CountryTVItemID,
                     AppTaskCommand = AppTaskCommandEnum.OpenDataCSVNationalOfMWQMSamples,
@@ -201,6 +205,7 @@ namespace CSSPDBDLL.Services
 
                 AppTaskModel appTaskModelNew = new AppTaskModel()
                 {
+                    DBCommand = DBCommandEnum.Original,
                     TVItemID = ProvinceTVItemID,
                     TVItemID2 = ProvinceTVItemID,
                     AppTaskCommand = AppTaskCommandEnum.OpenDataKMZOfMWQMSites,
@@ -237,6 +242,7 @@ namespace CSSPDBDLL.Services
 
                 AppTaskModel appTaskModelNew = new AppTaskModel()
                 {
+                    DBCommand = DBCommandEnum.Original,
                     TVItemID = ProvinceTVItemID,
                     TVItemID2 = ProvinceTVItemID,
                     AppTaskCommand = AppTaskCommandEnum.OpenDataXlsxOfMWQMSitesAndSamples,

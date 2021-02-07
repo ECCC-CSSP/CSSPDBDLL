@@ -22,6 +22,7 @@ namespace CSSPDBDLL
         }
     
         public int BoxModelID { get; set; }
+        public int DBCommand { get; set; }
         public int InfrastructureTVItemID { get; set; }
         public double Discharge_m3_day { get; set; }
         public double Depth_m { get; set; }

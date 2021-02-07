@@ -148,13 +148,19 @@ namespace CSSPDBDLL.Services
                 }
             }
 
+            retStr = _BaseEnumService.DBCommandOK(climateSiteModel.DBCommand);
+            if (!string.IsNullOrWhiteSpace(retStr))
+            {
+                return retStr;
+            }
+
             return "";
         }
 
         // Fill
         public string FillClimateSite(ClimateSite climateSiteNew, ClimateSiteModel climateSiteModel, ContactOK contactOK)
         {
-
+            climateSiteNew.DBCommand = (int)climateSiteModel.DBCommand;
             climateSiteNew.ClimateSiteTVItemID = climateSiteModel.ClimateSiteTVItemID;
             climateSiteNew.ClimateID = climateSiteModel.ClimateID;
             climateSiteNew.ClimateSiteName = climateSiteModel.ClimateSiteName;
@@ -205,6 +211,7 @@ namespace CSSPDBDLL.Services
                                                  {
                                                      Error = "",
                                                      ClimateSiteID = c.ClimateSiteID,
+                                                     DBCommand = (DBCommandEnum)c.DBCommand,
                                                      ClimateSiteTVItemID = c.ClimateSiteTVItemID,
                                                      ClimateID = c.ClimateID,
                                                      ClimateSiteName = c.ClimateSiteName,
@@ -243,6 +250,7 @@ namespace CSSPDBDLL.Services
                                                  {
                                                      Error = "",
                                                      ClimateSiteID = c.ClimateSiteID,
+                                                     DBCommand = (DBCommandEnum)c.DBCommand,
                                                      ClimateSiteTVItemID = c.ClimateSiteTVItemID,
                                                      ClimateID = c.ClimateID,
                                                      ClimateSiteName = c.ClimateSiteName,
@@ -281,6 +289,7 @@ namespace CSSPDBDLL.Services
                                                  {
                                                      Error = "",
                                                      ClimateSiteID = c.ClimateSiteID,
+                                                     DBCommand = (DBCommandEnum)c.DBCommand,
                                                      ClimateSiteTVItemID = c.ClimateSiteTVItemID,
                                                      ClimateID = c.ClimateID,
                                                      ClimateSiteName = c.ClimateSiteName,
@@ -320,6 +329,7 @@ namespace CSSPDBDLL.Services
                                                  {
                                                      Error = "",
                                                      ClimateSiteID = c.ClimateSiteID,
+                                                     DBCommand = (DBCommandEnum)c.DBCommand,
                                                      ClimateSiteTVItemID = c.ClimateSiteTVItemID,
                                                      ClimateID = c.ClimateID,
                                                      ClimateSiteName = c.ClimateSiteName,
@@ -361,6 +371,7 @@ namespace CSSPDBDLL.Services
                                                     {
                                                         Error = "",
                                                         ClimateSiteID = c.ClimateSiteID,
+                                                        DBCommand = (DBCommandEnum)c.DBCommand,
                                                         ClimateSiteTVItemID = c.ClimateSiteTVItemID,
                                                         ClimateID = c.ClimateID,
                                                         ClimateSiteName = c.ClimateSiteName,
@@ -662,6 +673,7 @@ namespace CSSPDBDLL.Services
 
             AppTaskModel appTaskModelNew = new AppTaskModel()
             {
+                DBCommand = DBCommandEnum.Original,
                 TVItemID = ProvinceTVItemID,
                 TVItemID2 = ProvinceTVItemID,
                 AppTaskCommand = AppTaskCommandEnum.UpdateClimateSiteInformation,
@@ -720,6 +732,7 @@ namespace CSSPDBDLL.Services
 
             AppTaskModel appTaskModelNew = new AppTaskModel()
             {
+                DBCommand = DBCommandEnum.Original,
                 TVItemID = ClimateSiteTVItemID,
                 TVItemID2 = ClimateSiteTVItemID,
                 AppTaskCommand = AppTaskCommandEnum.UpdateClimateSiteDailyAndHourlyFromStartDateToEndDate,
@@ -778,6 +791,7 @@ namespace CSSPDBDLL.Services
 
             AppTaskModel appTaskModelNew = new AppTaskModel()
             {
+                DBCommand = DBCommandEnum.Original,
                 TVItemID = SubsectorTVItemID,
                 TVItemID2 = SubsectorTVItemID,
                 AppTaskCommand = AppTaskCommandEnum.UpdateClimateSiteDailyAndHourlyForSubsectorFromStartDateToEndDate,

@@ -113,12 +113,18 @@ namespace CSSPDBDLL.Services
                 return retStr;
             }
 
+            retStr = _BaseEnumService.DBCommandOK(polSourceSiteEffectTermModel.DBCommand);
+            if (!string.IsNullOrWhiteSpace(retStr))
+            {
+                return retStr;
+            }
             return "";
         }
 
         // Fill
         public string FillPolSourceSiteEffectTerm(PolSourceSiteEffectTerm polSourceSiteEffectTerm, PolSourceSiteEffectTermModel polSourceSiteEffectTermModel, ContactOK contactOK)
         {
+            polSourceSiteEffectTerm.DBCommand = (int)polSourceSiteEffectTermModel.DBCommand;
             polSourceSiteEffectTerm.IsGroup = polSourceSiteEffectTermModel.IsGroup;
             polSourceSiteEffectTerm.UnderGroupID = polSourceSiteEffectTermModel.UnderGroupID;
             polSourceSiteEffectTerm.EffectTermEN = polSourceSiteEffectTermModel.EffectTermEN;
@@ -151,6 +157,7 @@ namespace CSSPDBDLL.Services
                                                                                    {
                                                                                        Error = "",
                                                                                        PolSourceSiteEffectTermID = c.PolSourceSiteEffectTermID,
+                                                                                       DBCommand = (DBCommandEnum)c.DBCommand,
                                                                                        IsGroup = c.IsGroup,
                                                                                        UnderGroupID = c.UnderGroupID,
                                                                                        EffectTermEN = c.EffectTermEN,
@@ -174,6 +181,7 @@ namespace CSSPDBDLL.Services
                                                                          {
                                                                              Error = "",
                                                                              PolSourceSiteEffectTermID = c.PolSourceSiteEffectTermID,
+                                                                             DBCommand = (DBCommandEnum)c.DBCommand,
                                                                              IsGroup = c.IsGroup,
                                                                              UnderGroupID = c.UnderGroupID,
                                                                              EffectTermEN = c.EffectTermEN,
@@ -206,6 +214,7 @@ namespace CSSPDBDLL.Services
                                                                          {
                                                                              Error = "",
                                                                              PolSourceSiteEffectTermID = c.PolSourceSiteEffectTermID,
+                                                                             DBCommand = (DBCommandEnum)c.DBCommand,
                                                                              IsGroup = c.IsGroup,
                                                                              UnderGroupID = c.UnderGroupID,
                                                                              EffectTermEN = c.EffectTermEN,
@@ -229,6 +238,7 @@ namespace CSSPDBDLL.Services
                                                                          {
                                                                              Error = "",
                                                                              PolSourceSiteEffectTermID = c.PolSourceSiteEffectTermID,
+                                                                             DBCommand = (DBCommandEnum)c.DBCommand,
                                                                              IsGroup = c.IsGroup,
                                                                              UnderGroupID = c.UnderGroupID,
                                                                              EffectTermEN = c.EffectTermEN,
@@ -282,6 +292,8 @@ namespace CSSPDBDLL.Services
                 if (!string.IsNullOrWhiteSpace(polSourceSiteEffectTermNewOrToChange.Error))
                     return ReturnError(polSourceSiteEffectTermNewOrToChange.Error);
             }
+
+            polSourceSiteEffectTermNewOrToChange.DBCommand = DBCommandEnum.Original;
 
             IsGroup = bool.Parse(fc["IsGroup"]);
 
@@ -349,6 +361,7 @@ namespace CSSPDBDLL.Services
                 {
                     PolSourceSiteEffectTermModel polSourceSiteEffectTermModelNew = new PolSourceSiteEffectTermModel()
                     {
+                        DBCommand = DBCommandEnum.Original,
                         IsGroup = IsGroup,
                         UnderGroupID = UnderGroupID,
                         EffectTermEN = EffectTermEN,
@@ -361,6 +374,7 @@ namespace CSSPDBDLL.Services
                 }
                 else
                 {
+                    polSourceSiteEffectTermNewOrToChange.DBCommand = DBCommandEnum.Original;
                     polSourceSiteEffectTermNewOrToChange.IsGroup = IsGroup;
                     polSourceSiteEffectTermNewOrToChange.UnderGroupID = UnderGroupID;
                     polSourceSiteEffectTermNewOrToChange.EffectTermEN = EffectTermEN;

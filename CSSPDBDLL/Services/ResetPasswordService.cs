@@ -109,10 +109,16 @@ namespace CSSPDBDLL.Services
                 return string.Format(ServiceRes.CouldNotFind_, ServiceRes.EmailIN);
             }
 
-            string RetStr = CleanResetPasswordWithEmail(resetPassword.Email);
-            if (!string.IsNullOrEmpty(RetStr))
+            string retStr = CleanResetPasswordWithEmail(resetPassword.Email);
+            if (!string.IsNullOrEmpty(retStr))
             {
-                return RetStr;
+                return retStr;
+            }
+
+            retStr = _BaseEnumService.DBCommandOK(resetPassword.DBCommand);
+            if (!string.IsNullOrWhiteSpace(retStr))
+            {
+                return retStr;
             }
 
             return "";
@@ -123,6 +129,7 @@ namespace CSSPDBDLL.Services
         {
             try
             {
+                resetPassword.DBCommand = (int)DBCommandEnum.Original;
                 resetPassword.Code = resetPasswordModel.Code;
                 resetPassword.Email = resetPasswordModel.Email;
                 resetPassword.ExpireDate_Local = resetPasswordModel.ExpireDate_Local;
@@ -158,6 +165,7 @@ namespace CSSPDBDLL.Services
                                                                {
                                                                    Error = "",
                                                                    ResetPasswordID = c.ResetPasswordID,
+                                                                   DBCommand = (DBCommandEnum)c.DBCommand,
                                                                    Code = c.Code,
                                                                    Email = c.Email,
                                                                    ExpireDate_Local = c.ExpireDate_Local,
@@ -176,6 +184,7 @@ namespace CSSPDBDLL.Services
                                                                {
                                                                    Error = "",
                                                                    ResetPasswordID = c.ResetPasswordID,
+                                                                   DBCommand = (DBCommandEnum)c.DBCommand,
                                                                    Code = c.Code,
                                                                    Email = c.Email,
                                                                    ExpireDate_Local = c.ExpireDate_Local,
@@ -194,6 +203,7 @@ namespace CSSPDBDLL.Services
                                                                {
                                                                    Error = "",
                                                                    ResetPasswordID = c.ResetPasswordID,
+                                                                   DBCommand = (DBCommandEnum)c.DBCommand,
                                                                    Code = c.Code,
                                                                    Email = c.Email,
                                                                    ExpireDate_Local = c.ExpireDate_Local,
@@ -213,6 +223,7 @@ namespace CSSPDBDLL.Services
                                                      {
                                                          Error = "",
                                                          ResetPasswordID = c.ResetPasswordID,
+                                                         DBCommand = (DBCommandEnum)c.DBCommand,
                                                          Code = c.Code,
                                                          Email = c.Email,
                                                          ExpireDate_Local = c.ExpireDate_Local,
@@ -233,6 +244,7 @@ namespace CSSPDBDLL.Services
                                                      {
                                                          Error = "",
                                                          ResetPasswordID = c.ResetPasswordID,
+                                                         DBCommand = (DBCommandEnum)c.DBCommand,
                                                          Code = c.Code,
                                                          Email = c.Email,
                                                          ExpireDate_Local = c.ExpireDate_Local,

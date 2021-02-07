@@ -106,12 +106,19 @@ namespace CSSPDBDLL.Services
                 return retStr;
             }
 
+            retStr = _BaseEnumService.DBCommandOK(polSourceObservationIssueModel.DBCommand);
+            if (!string.IsNullOrWhiteSpace(retStr))
+            {
+                return retStr;
+            }
+
             return "";
         }
 
         // Fill
         public string FillPolSourceObservationIssue(PolSourceObservationIssue polSourceObservationIssue, PolSourceObservationIssueModel polSourceObservationIssueModel, ContactOK contactOK)
         {
+            polSourceObservationIssue.DBCommand = (int)polSourceObservationIssueModel.DBCommand;
             polSourceObservationIssue.PolSourceObservationID = polSourceObservationIssueModel.PolSourceObservationID;
             string ObservationInfo = "";
             if (polSourceObservationIssueModel.PolSourceObsInfoList != null)
@@ -160,6 +167,7 @@ namespace CSSPDBDLL.Services
                                                                                        {
                                                                                            Error = "",
                                                                                            PolSourceObservationIssueID = psoi.PolSourceObservationIssueID,
+                                                                                           DBCommand = (DBCommandEnum)psoi.DBCommand,
                                                                                            PolSourceObservationID = psoi.PolSourceObservationID,
                                                                                            ObservationInfo = psoi.ObservationInfo,
                                                                                            Ordinal = psoi.Ordinal,
@@ -195,6 +203,7 @@ namespace CSSPDBDLL.Services
                                                                                        {
                                                                                            Error = "",
                                                                                            PolSourceObservationIssueID = c.PolSourceObservationIssueID,
+                                                                                           DBCommand = (DBCommandEnum)c.DBCommand,
                                                                                            PolSourceObservationID = c.PolSourceObservationID,
                                                                                            ObservationInfo = c.ObservationInfo,
                                                                                            Ordinal = c.Ordinal,
@@ -229,6 +238,7 @@ namespace CSSPDBDLL.Services
                                                                              {
                                                                                  Error = "",
                                                                                  PolSourceObservationIssueID = c.PolSourceObservationIssueID,
+                                                                                 DBCommand = (DBCommandEnum)c.DBCommand,
                                                                                  PolSourceObservationID = c.PolSourceObservationID,
                                                                                  ObservationInfo = c.ObservationInfo,
                                                                                  Ordinal = c.Ordinal,
@@ -273,6 +283,7 @@ namespace CSSPDBDLL.Services
                                                                                 {
                                                                                     Error = "",
                                                                                     PolSourceObservationIssueID = c.PolSourceObservationIssueID,
+                                                                                    DBCommand = (DBCommandEnum)c.DBCommand,
                                                                                     PolSourceObservationID = c.PolSourceObservationID,
                                                                                     ObservationInfo = c.ObservationInfo,
                                                                                     Ordinal = c.Ordinal,
@@ -332,6 +343,7 @@ namespace CSSPDBDLL.Services
             int.TryParse(fc["NextIssueOrdinal"], out NextIssueOrdinal); // will default to 0
 
             PolSourceObservationIssueModel polSourceObservationIssueModelNew = new PolSourceObservationIssueModel();
+            polSourceObservationIssueModelNew.DBCommand = DBCommandEnum.Original;
             polSourceObservationIssueModelNew.PolSourceObservationID = polSourceObservationModel.PolSourceObservationID;
             polSourceObservationIssueModelNew.ObservationInfo = ((int)PolSourceObsInfoEnum.SourceStart).ToString() + ",";
             polSourceObservationIssueModelNew.PolSourceObsInfoList = polSourceObservationIssueModelNew.ObservationInfo.Trim().Split(",".ToCharArray(), StringSplitOptions.RemoveEmptyEntries).Select(c => ((PolSourceObsInfoEnum)int.Parse(c))).ToList();
@@ -832,6 +844,7 @@ namespace CSSPDBDLL.Services
                 TVText = "P00000".Substring(0, "P00000".Length - polSourceSite.Site.ToString().Length) + polSourceSite.Site.ToString() + " - " + NC + TVText;
 
                 TVItemLanguageModel tvItemLanguageModel = new TVItemLanguageModel();
+                tvItemLanguageModel.DBCommand = DBCommandEnum.Original;
                 tvItemLanguageModel.Language = lang;
 
                 bool Found = true;

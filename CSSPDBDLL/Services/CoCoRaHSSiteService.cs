@@ -33,18 +33,18 @@ namespace CSSPDBDLL.Services
         {
             return base.IsContactOK();
         }
-        public override string CoCoRaHSDoAddChanges()
-        {
-            return base.CoCoRaHSDoAddChanges();
-        }
-        public override string CoCoRaHSDoDeleteChanges()
-        {
-            return base.CoCoRaHSDoDeleteChanges();
-        }
-        public override string CoCoRaHSDoUpdateChanges()
-        {
-            return base.CoCoRaHSDoUpdateChanges();
-        }
+        //public override string CoCoRaHSDoAddChanges()
+        //{
+        //    return base.CoCoRaHSDoAddChanges();
+        //}
+        //public override string CoCoRaHSDoDeleteChanges()
+        //{
+        //    return base.CoCoRaHSDoDeleteChanges();
+        //}
+        //public override string CoCoRaHSDoUpdateChanges()
+        //{
+        //    return base.CoCoRaHSDoUpdateChanges();
+        //}
 
         // Check
         public string CoCoRaHSSiteModelOK(CoCoRaHSSiteModel coCoRaHSSiteModel)
@@ -73,12 +73,19 @@ namespace CSSPDBDLL.Services
                 return retStr;
             }
 
+            retStr = _BaseEnumService.DBCommandOK(coCoRaHSSiteModel.DBCommand);
+            if (!string.IsNullOrWhiteSpace(retStr))
+            {
+                return retStr;
+            }
+
             return "";
         }
 
         // Fill
         public string FillCoCoRaHSSite(CoCoRaHSSite coCoRaHSSiteNew, CoCoRaHSSiteModel coCoRaHSSiteModel, ContactOK contactOK)
         {
+            coCoRaHSSiteNew.DBCommand = (int)coCoRaHSSiteModel.DBCommand;
             coCoRaHSSiteNew.StationNumber = coCoRaHSSiteModel.StationNumber;
             coCoRaHSSiteNew.StationName = coCoRaHSSiteModel.StationName;
             coCoRaHSSiteNew.Latitude = coCoRaHSSiteModel.Latitude;
@@ -99,19 +106,20 @@ namespace CSSPDBDLL.Services
         // Get
         public int GetCoCoRaHSSiteModelCountDB()
         {
-            int CoCoRaHSSiteModelCount = (from c in CoCoRaHSdb.CoCoRaHSSites
+            int CoCoRaHSSiteModelCount = (from c in db.CoCoRaHSSites
                                           select c).Count();
 
             return CoCoRaHSSiteModelCount;
         }
         public CoCoRaHSSiteModel GetCoCoRaHSSiteModelWithCoCoRaHSSiteIDDB(string StationNumber)
         {
-            CoCoRaHSSiteModel coCoRaHSSiteModel = (from c in CoCoRaHSdb.CoCoRaHSSites
+            CoCoRaHSSiteModel coCoRaHSSiteModel = (from c in db.CoCoRaHSSites
                                                    where c.StationNumber == StationNumber
                                                    select new CoCoRaHSSiteModel
                                                    {
                                                        Error = "",
                                                        CoCoRaHSSiteID = c.CoCoRaHSSiteID,
+                                                       DBCommand = (DBCommandEnum)c.DBCommand,
                                                        StationNumber = c.StationNumber,
                                                        StationName = c.StationName,
                                                        Latitude = c.Latitude,
@@ -127,12 +135,13 @@ namespace CSSPDBDLL.Services
         }
         public CoCoRaHSSiteModel GetCoCoRaHSSiteModelWithCoCoRaHSSiteIDDB(int CoCoRaHSSiteID)
         {
-            CoCoRaHSSiteModel coCoRaHSSiteModel = (from c in CoCoRaHSdb.CoCoRaHSSites
+            CoCoRaHSSiteModel coCoRaHSSiteModel = (from c in db.CoCoRaHSSites
                                                    where c.CoCoRaHSSiteID == CoCoRaHSSiteID
                                                    select new CoCoRaHSSiteModel
                                                    {
                                                        Error = "",
                                                        CoCoRaHSSiteID = c.CoCoRaHSSiteID,
+                                                       DBCommand = (DBCommandEnum)c.DBCommand,
                                                        StationNumber = c.StationNumber,
                                                        StationName = c.StationName,
                                                        Latitude = c.Latitude,
@@ -148,13 +157,14 @@ namespace CSSPDBDLL.Services
         }
         public CoCoRaHSSiteModel GetCoCoRaHSSiteModelExistDB(CoCoRaHSSiteModel coCoRaHSSiteModel)
         {
-            CoCoRaHSSiteModel coCoRaHSSiteModelRet = (from c in CoCoRaHSdb.CoCoRaHSSites
+            CoCoRaHSSiteModel coCoRaHSSiteModelRet = (from c in db.CoCoRaHSSites
                                                       where c.StationNumber == coCoRaHSSiteModel.StationNumber
                                                       && c.StationName == coCoRaHSSiteModel.StationName
                                                       select new CoCoRaHSSiteModel
                                                       {
                                                           Error = "",
                                                           CoCoRaHSSiteID = c.CoCoRaHSSiteID,
+                                                          DBCommand = (DBCommandEnum)c.DBCommand,
                                                           StationNumber = c.StationNumber,
                                                           StationName = c.StationName,
                                                           Latitude = c.Latitude,
@@ -174,7 +184,7 @@ namespace CSSPDBDLL.Services
         }
         public CoCoRaHSSite GetCoCoRaHSSiteWithCoCoRaHSSiteIDDB(int CoCoRaHSSiteID)
         {
-            CoCoRaHSSite CoCoRaHSSite = (from c in CoCoRaHSdb.CoCoRaHSSites
+            CoCoRaHSSite CoCoRaHSSite = (from c in db.CoCoRaHSSites
                                          where c.CoCoRaHSSiteID == CoCoRaHSSiteID
                                          select c).FirstOrDefault<CoCoRaHSSite>();
             return CoCoRaHSSite;
@@ -211,8 +221,8 @@ namespace CSSPDBDLL.Services
 
             using (TransactionScope ts = new TransactionScope())
             {
-                CoCoRaHSdb.CoCoRaHSSites.Add(coCoRaHSSiteNew);
-                retStr = CoCoRaHSDoAddChanges();
+                db.CoCoRaHSSites.Add(coCoRaHSSiteNew);
+                retStr = DoAddChanges();
                 if (!string.IsNullOrWhiteSpace(retStr))
                     return ReturnError(retStr);
 
@@ -232,8 +242,8 @@ namespace CSSPDBDLL.Services
 
             using (TransactionScope ts = new TransactionScope())
             {
-                CoCoRaHSdb.CoCoRaHSSites.Remove(coCoRaHSSiteToDelete);
-                string retStr = CoCoRaHSDoDeleteChanges();
+                db.CoCoRaHSSites.Remove(coCoRaHSSiteToDelete);
+                string retStr = DoDeleteChanges();
                 if (!string.IsNullOrWhiteSpace(retStr))
                     return ReturnError(retStr);
 
@@ -262,7 +272,7 @@ namespace CSSPDBDLL.Services
 
             using (TransactionScope ts = new TransactionScope())
             {
-                retStr = CoCoRaHSDoUpdateChanges();
+                retStr = DoUpdateChanges();
                 if (!string.IsNullOrWhiteSpace(retStr))
                     return ReturnError(retStr);
 

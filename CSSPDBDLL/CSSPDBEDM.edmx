@@ -10,6 +10,7 @@
             <PropertyRef Name="AddressID" />
           </Key>
           <Property Name="AddressID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DBCommand" Type="int" Nullable="false" />
           <Property Name="AddressTVItemID" Type="int" Nullable="false" />
           <Property Name="AddressType" Type="int" Nullable="false" />
           <Property Name="CountryTVItemID" Type="int" Nullable="false" />
@@ -28,6 +29,7 @@
             <PropertyRef Name="AppErrLogID" />
           </Key>
           <Property Name="AppErrLogID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DBCommand" Type="int" Nullable="false" />
           <Property Name="Tag" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="LineNumber" Type="int" Nullable="false" />
           <Property Name="Source" Type="text" Nullable="false" />
@@ -41,7 +43,8 @@
             <PropertyRef Name="AppTaskLanguageID" />
           </Key>
           <Property Name="AppTaskLanguageID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="AppTaskID" Type="int" Nullable="false" />
+          <Property Name="DBCommand" Type="int" Nullable="false" />
+          <Property Name="AppTaskID" Type="int" />
           <Property Name="Language" Type="int" Nullable="false" />
           <Property Name="StatusText" Type="nvarchar" MaxLength="250" />
           <Property Name="ErrorText" Type="nvarchar" MaxLength="250" />
@@ -54,6 +57,7 @@
             <PropertyRef Name="AppTaskID" />
           </Key>
           <Property Name="AppTaskID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DBCommand" Type="int" Nullable="false" />
           <Property Name="TVItemID" Type="int" Nullable="false" />
           <Property Name="TVItemID2" Type="int" Nullable="false" />
           <Property Name="AppTaskCommand" Type="int" Nullable="false" />
@@ -68,19 +72,30 @@
           <Property Name="LastUpdateDate_UTC" Type="datetime" Nullable="false" />
           <Property Name="LastUpdateContactTVItemID" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="AspNetRoleClaims">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoleId" Type="nvarchar" MaxLength="450" Nullable="false" />
+          <Property Name="ClaimType" Type="nvarchar(max)" />
+          <Property Name="ClaimValue" Type="nvarchar(max)" />
+        </EntityType>
         <EntityType Name="AspNetRoles">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Id" Type="nvarchar" MaxLength="450" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="256" />
+          <Property Name="NormalizedName" Type="nvarchar" MaxLength="256" />
+          <Property Name="ConcurrencyStamp" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="AspNetUserClaims">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="450" Nullable="false" />
           <Property Name="ClaimType" Type="nvarchar(max)" />
           <Property Name="ClaimValue" Type="nvarchar(max)" />
         </EntityType>
@@ -88,25 +103,25 @@
           <Key>
             <PropertyRef Name="LoginProvider" />
             <PropertyRef Name="ProviderKey" />
-            <PropertyRef Name="UserId" />
           </Key>
           <Property Name="LoginProvider" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="ProviderKey" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ProviderDisplayName" Type="nvarchar(max)" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="450" Nullable="false" />
         </EntityType>
         <EntityType Name="AspNetUserRoles">
           <Key>
             <PropertyRef Name="UserId" />
             <PropertyRef Name="RoleId" />
           </Key>
-          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="RoleId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="450" Nullable="false" />
+          <Property Name="RoleId" Type="nvarchar" MaxLength="450" Nullable="false" />
         </EntityType>
         <EntityType Name="AspNetUsers">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Id" Type="nvarchar" MaxLength="450" Nullable="false" />
           <Property Name="Email" Type="nvarchar" MaxLength="256" />
           <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
           <Property Name="PasswordHash" Type="nvarchar(max)" />
@@ -118,12 +133,28 @@
           <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
           <Property Name="AccessFailedCount" Type="int" Nullable="false" />
           <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="NormalizedUserName" Type="nvarchar" MaxLength="256" />
+          <Property Name="NormalizedEmail" Type="nvarchar" MaxLength="256" />
+          <Property Name="ConcurrencyStamp" Type="nvarchar(max)" />
+          <Property Name="LockoutEnd" Type="datetimeoffset" Precision="7" />
+        </EntityType>
+        <EntityType Name="AspNetUserTokens">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="Name" />
+          </Key>
+          <Property Name="UserId" Type="nvarchar" MaxLength="450" Nullable="false" />
+          <Property Name="LoginProvider" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Value" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="BoxModelLanguages">
           <Key>
             <PropertyRef Name="BoxModelLanguageID" />
           </Key>
           <Property Name="BoxModelLanguageID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DBCommand" Type="int" Nullable="false" />
           <Property Name="BoxModelID" Type="int" Nullable="false" />
           <Property Name="Language" Type="int" Nullable="false" />
           <Property Name="ScenarioName" Type="nvarchar" MaxLength="250" Nullable="false" />
@@ -136,6 +167,7 @@
             <PropertyRef Name="BoxModelResultID" />
           </Key>
           <Property Name="BoxModelResultID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DBCommand" Type="int" Nullable="false" />
           <Property Name="BoxModelID" Type="int" Nullable="false" />
           <Property Name="BoxModelResultType" Type="int" Nullable="false" />
           <Property Name="Volume_m3" Type="float" Nullable="false" />
@@ -159,6 +191,7 @@
             <PropertyRef Name="BoxModelID" />
           </Key>
           <Property Name="BoxModelID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DBCommand" Type="int" Nullable="false" />
           <Property Name="InfrastructureTVItemID" Type="int" Nullable="false" />
           <Property Name="Discharge_m3_day" Type="float" Nullable="false" />
           <Property Name="Depth_m" Type="float" Nullable="false" />
@@ -178,6 +211,7 @@
             <PropertyRef Name="ClassificationID" />
           </Key>
           <Property Name="ClassificationID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DBCommand" Type="int" Nullable="false" />
           <Property Name="ClassificationTVItemID" Type="int" Nullable="false" />
           <Property Name="ClassificationType" Type="int" Nullable="false" />
           <Property Name="Ordinal" Type="int" Nullable="false" />
@@ -189,6 +223,7 @@
             <PropertyRef Name="ClimateDataValueID" />
           </Key>
           <Property Name="ClimateDataValueID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DBCommand" Type="int" Nullable="false" />
           <Property Name="ClimateSiteID" Type="int" Nullable="false" />
           <Property Name="DateTime_Local" Type="datetime" Nullable="false" />
           <Property Name="Keep" Type="bit" Nullable="false" />
@@ -214,6 +249,7 @@
             <PropertyRef Name="ClimateSiteID" />
           </Key>
           <Property Name="ClimateSiteID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DBCommand" Type="int" Nullable="false" />
           <Property Name="ClimateSiteTVItemID" Type="int" Nullable="false" />
           <Property Name="ECDBID" Type="int" />
           <Property Name="ClimateSiteName" Type="nvarchar" MaxLength="100" Nullable="false" />
@@ -238,11 +274,41 @@
           <Property Name="LastUpdateDate_UTC" Type="datetime" Nullable="false" />
           <Property Name="LastUpdateContactTVItemID" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="CoCoRaHSSites">
+          <Key>
+            <PropertyRef Name="CoCoRaHSSiteID" />
+          </Key>
+          <Property Name="CoCoRaHSSiteID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DBCommand" Type="int" Nullable="false" />
+          <Property Name="StationNumber" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="StationName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Latitude" Type="float" Nullable="false" />
+          <Property Name="Longitude" Type="float" Nullable="false" />
+          <Property Name="LastUpdateDate_UTC" Type="datetime" Nullable="false" />
+          <Property Name="LastUpdateContactTVItemID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CoCoRaHSValues">
+          <Key>
+            <PropertyRef Name="CoCoRaHSValueID" />
+          </Key>
+          <Property Name="CoCoRaHSValueID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DBCommand" Type="int" Nullable="false" />
+          <Property Name="CoCoRaHSSiteID" Type="int" Nullable="false" />
+          <Property Name="ObservationDateAndTime" Type="datetime" Nullable="false" />
+          <Property Name="TotalPrecipAmt" Type="float" />
+          <Property Name="NewSnowDepth" Type="float" />
+          <Property Name="NewSnowSWE" Type="float" />
+          <Property Name="TotalSnowDepth" Type="float" />
+          <Property Name="TotalSnowSWE" Type="float" />
+          <Property Name="LastUpdateDate_UTC" Type="datetime" Nullable="false" />
+          <Property Name="LastUpdateContactTVItemID" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="ContactPreferences">
           <Key>
             <PropertyRef Name="ContactPreferenceID" />
           </Key>
           <Property Name="ContactPreferenceID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DBCommand" Type="int" Nullable="false" />
           <Property Name="ContactID" Type="int" Nullable="false" />
           <Property Name="TVType" Type="int" Nullable="false" />
           <Property Name="MarkerSize" Type="int" Nullable="false" />
@@ -254,7 +320,8 @@
             <PropertyRef Name="ContactID" />
           </Key>
           <Property Name="ContactID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="DBCommand" Type="int" Nullable="false" />
+          <Property Name="Id" Type="nvarchar" MaxLength="450" Nullable="false" />
           <Property Name="ContactTVItemID" Type="int" Nullable="false" />
           <Property Name="LoginEmail" Type="nvarchar" MaxLength="255" Nullable="false" />
           <Property Name="FirstName" Type="nvarchar" MaxLength="100" Nullable="false" />
@@ -267,7 +334,6 @@
           <Property Name="Disabled" Type="bit" Nullable="false" />
           <Property Name="IsNew" Type="bit" Nullable="false" />
           <Property Name="SamplingPlanner_ProvincesTVItemID" Type="nvarchar" MaxLength="200" />
-          <Property Name="Token" Type="nvarchar" MaxLength="255" />
           <Property Name="LastUpdateDate_UTC" Type="datetime" Nullable="false" />
           <Property Name="LastUpdateContactTVItemID" Type="int" Nullable="false" />
         </EntityType>
@@ -276,17 +342,31 @@
             <PropertyRef Name="ContactShortcutID" />
           </Key>
           <Property Name="ContactShortcutID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DBCommand" Type="int" Nullable="false" />
           <Property Name="ContactID" Type="int" Nullable="false" />
           <Property Name="ShortCutText" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="ShortCutAddress" Type="nvarchar" MaxLength="200" Nullable="false" />
           <Property Name="LastUpdateDate_UTC" Type="datetime" Nullable="false" />
           <Property Name="LastUpdateContactTVItemID" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="DeviceCodes">
+          <Key>
+            <PropertyRef Name="UserCode" />
+          </Key>
+          <Property Name="UserCode" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="DeviceCode" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="SubjectId" Type="nvarchar" MaxLength="200" />
+          <Property Name="ClientId" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="CreationTime" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="Expiration" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="Data" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
         <EntityType Name="DocTemplates">
           <Key>
             <PropertyRef Name="DocTemplateID" />
           </Key>
           <Property Name="DocTemplateID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DBCommand" Type="int" Nullable="false" />
           <Property Name="Language" Type="int" Nullable="false" />
           <Property Name="TVType" Type="int" Nullable="false" />
           <Property Name="TVFileTVItemID" Type="int" Nullable="false" />
@@ -299,6 +379,7 @@
             <PropertyRef Name="DrogueRunPositionID" />
           </Key>
           <Property Name="DrogueRunPositionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DBCommand" Type="int" Nullable="false" />
           <Property Name="DrogueRunID" Type="int" Nullable="false" />
           <Property Name="Ordinal" Type="int" Nullable="false" />
           <Property Name="StepLat" Type="float" Nullable="false" />
@@ -314,6 +395,7 @@
             <PropertyRef Name="DrogueRunID" />
           </Key>
           <Property Name="DrogueRunID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DBCommand" Type="int" Nullable="false" />
           <Property Name="SubsectorTVItemID" Type="int" Nullable="false" />
           <Property Name="DrogueNumber" Type="int" Nullable="false" />
           <Property Name="DrogueType" Type="int" Nullable="false" />
@@ -327,6 +409,7 @@
             <PropertyRef Name="EmailDistributionListContactLanguageID" />
           </Key>
           <Property Name="EmailDistributionListContactLanguageID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DBCommand" Type="int" Nullable="false" />
           <Property Name="EmailDistributionListContactID" Type="int" Nullable="false" />
           <Property Name="Language" Type="int" Nullable="false" />
           <Property Name="Agency" Type="nvarchar" MaxLength="100" Nullable="false" />
@@ -339,6 +422,7 @@
             <PropertyRef Name="EmailDistributionListContactID" />
           </Key>
           <Property Name="EmailDistributionListContactID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DBCommand" Type="int" Nullable="false" />
           <Property Name="EmailDistributionListID" Type="int" Nullable="false" />
           <Property Name="IsCC" Type="bit" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
@@ -356,6 +440,7 @@
             <PropertyRef Name="EmailDistributionListLanguageID" />
           </Key>
           <Property Name="EmailDistributionListLanguageID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DBCommand" Type="int" Nullable="false" />
           <Property Name="EmailDistributionListID" Type="int" Nullable="false" />
           <Property Name="Language" Type="int" Nullable="false" />
           <Property Name="EmailListName" Type="nvarchar" MaxLength="100" Nullable="false" />
@@ -368,6 +453,7 @@
             <PropertyRef Name="EmailDistributionListID" />
           </Key>
           <Property Name="EmailDistributionListID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DBCommand" Type="int" Nullable="false" />
           <Property Name="ParentTVItemID" Type="int" Nullable="false" />
           <Property Name="Ordinal" Type="int" Nullable="false" />
           <Property Name="LastUpdateDate_UTC" Type="datetime" Nullable="false" />
@@ -378,6 +464,7 @@
             <PropertyRef Name="EmailID" />
           </Key>
           <Property Name="EmailID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DBCommand" Type="int" Nullable="false" />
           <Property Name="EmailTVItemID" Type="int" Nullable="false" />
           <Property Name="EmailAddress" Type="nvarchar" MaxLength="255" Nullable="false" />
           <Property Name="EmailType" Type="int" Nullable="false" />
@@ -389,6 +476,7 @@
             <PropertyRef Name="HelpDocID" />
           </Key>
           <Property Name="HelpDocID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DBCommand" Type="int" Nullable="false" />
           <Property Name="DocKey" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="Language" Type="int" Nullable="false" />
           <Property Name="DocHTMLText" Type="text" Nullable="false" />
@@ -400,6 +488,7 @@
             <PropertyRef Name="HydrometricDataValueID" />
           </Key>
           <Property Name="HydrometricDataValueID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DBCommand" Type="int" Nullable="false" />
           <Property Name="HydrometricSiteID" Type="int" Nullable="false" />
           <Property Name="DateTime_Local" Type="datetime" Nullable="false" />
           <Property Name="Keep" Type="bit" Nullable="false" />
@@ -417,6 +506,7 @@
             <PropertyRef Name="HydrometricSiteID" />
           </Key>
           <Property Name="HydrometricSiteID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DBCommand" Type="int" Nullable="false" />
           <Property Name="HydrometricSiteTVItemID" Type="int" Nullable="false" />
           <Property Name="FedSiteNumber" Type="nvarchar" MaxLength="7" />
           <Property Name="QuebecSiteNumber" Type="nvarchar" MaxLength="7" />
@@ -444,6 +534,7 @@
             <PropertyRef Name="InfrastructureLanguageID" />
           </Key>
           <Property Name="InfrastructureLanguageID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DBCommand" Type="int" Nullable="false" />
           <Property Name="InfrastructureID" Type="int" Nullable="false" />
           <Property Name="Language" Type="int" Nullable="false" />
           <Property Name="Comment" Type="text" Nullable="false" />
@@ -456,6 +547,7 @@
             <PropertyRef Name="InfrastructureID" />
           </Key>
           <Property Name="InfrastructureID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DBCommand" Type="int" Nullable="false" />
           <Property Name="InfrastructureTVItemID" Type="int" Nullable="false" />
           <Property Name="PrismID" Type="int" />
           <Property Name="TPID" Type="int" />
@@ -511,6 +603,7 @@
             <PropertyRef Name="LabSheetDetailID" />
           </Key>
           <Property Name="LabSheetDetailID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DBCommand" Type="int" Nullable="false" />
           <Property Name="LabSheetID" Type="int" Nullable="false" />
           <Property Name="SamplingPlanID" Type="int" Nullable="false" />
           <Property Name="SubsectorTVItemID" Type="int" Nullable="false" />
@@ -581,6 +674,7 @@
             <PropertyRef Name="LabSheetID" />
           </Key>
           <Property Name="LabSheetID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DBCommand" Type="int" Nullable="false" />
           <Property Name="OtherServerLabSheetID" Type="int" Nullable="false" />
           <Property Name="SamplingPlanID" Type="int" Nullable="false" />
           <Property Name="SamplingPlanName" Type="nvarchar" MaxLength="250" Nullable="false" />
@@ -608,6 +702,7 @@
             <PropertyRef Name="LabSheetTubeMPNDetailID" />
           </Key>
           <Property Name="LabSheetTubeMPNDetailID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DBCommand" Type="int" Nullable="false" />
           <Property Name="LabSheetDetailID" Type="int" Nullable="false" />
           <Property Name="Ordinal" Type="int" Nullable="false" />
           <Property Name="MWQMSiteTVItemID" Type="int" Nullable="false" />
@@ -629,6 +724,7 @@
             <PropertyRef Name="LogID" />
           </Key>
           <Property Name="LogID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DBCommand" Type="int" Nullable="false" />
           <Property Name="TableName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="ID" Type="int" Nullable="false" />
           <Property Name="LogCommand" Type="int" Nullable="false" />
@@ -641,6 +737,7 @@
             <PropertyRef Name="MapInfoPointID" />
           </Key>
           <Property Name="MapInfoPointID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DBCommand" Type="int" Nullable="false" />
           <Property Name="MapInfoID" Type="int" Nullable="false" />
           <Property Name="Ordinal" Type="int" Nullable="false" />
           <Property Name="Lat" Type="float" Nullable="false" />
@@ -653,6 +750,7 @@
             <PropertyRef Name="MapInfoID" />
           </Key>
           <Property Name="MapInfoID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DBCommand" Type="int" Nullable="false" />
           <Property Name="TVItemID" Type="int" Nullable="false" />
           <Property Name="TVType" Type="int" Nullable="false" />
           <Property Name="LatMin" Type="float" Nullable="false" />
@@ -668,6 +766,7 @@
             <PropertyRef Name="MikeBoundaryConditionID" />
           </Key>
           <Property Name="MikeBoundaryConditionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DBCommand" Type="int" Nullable="false" />
           <Property Name="MikeBoundaryConditionTVItemID" Type="int" Nullable="false" />
           <Property Name="MikeBoundaryConditionCode" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="MikeBoundaryConditionName" Type="nvarchar" MaxLength="100" Nullable="false" />
@@ -686,6 +785,7 @@
             <PropertyRef Name="MikeScenarioResultID" />
           </Key>
           <Property Name="MikeScenarioResultID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DBCommand" Type="int" Nullable="false" />
           <Property Name="MikeScenarioTVItemID" Type="int" Nullable="false" />
           <Property Name="MikeResultsJSON" Type="text" />
           <Property Name="LastUpdateDate_UTC" Type="datetime" Nullable="false" />
@@ -696,6 +796,7 @@
             <PropertyRef Name="MikeScenarioID" />
           </Key>
           <Property Name="MikeScenarioID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DBCommand" Type="int" Nullable="false" />
           <Property Name="MikeScenarioTVItemID" Type="int" Nullable="false" />
           <Property Name="ParentMikeScenarioID" Type="int" />
           <Property Name="ScenarioStatus" Type="int" Nullable="false" />
@@ -733,6 +834,7 @@
             <PropertyRef Name="MikeSourceID" />
           </Key>
           <Property Name="MikeSourceID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DBCommand" Type="int" Nullable="false" />
           <Property Name="MikeSourceTVItemID" Type="int" Nullable="false" />
           <Property Name="IsContinuous" Type="bit" Nullable="false" />
           <Property Name="Include" Type="bit" Nullable="false" />
@@ -750,6 +852,7 @@
             <PropertyRef Name="MikeSourceStartEndID" />
           </Key>
           <Property Name="MikeSourceStartEndID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DBCommand" Type="int" Nullable="false" />
           <Property Name="MikeSourceID" Type="int" Nullable="false" />
           <Property Name="StartDateAndTime_Local" Type="datetime" Nullable="false" />
           <Property Name="EndDateAndTime_Local" Type="datetime" Nullable="false" />
@@ -769,6 +872,7 @@
             <PropertyRef Name="MWQMAnalysisReportParameterID" />
           </Key>
           <Property Name="MWQMAnalysisReportParameterID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DBCommand" Type="int" Nullable="false" />
           <Property Name="SubsectorTVItemID" Type="int" Nullable="false" />
           <Property Name="AnalysisName" Type="nvarchar" MaxLength="250" Nullable="false" />
           <Property Name="AnalysisReportYear" Type="int" />
@@ -800,6 +904,7 @@
             <PropertyRef Name="MWQMLookupMPNID" />
           </Key>
           <Property Name="MWQMLookupMPNID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DBCommand" Type="int" Nullable="false" />
           <Property Name="Tubes10" Type="int" Nullable="false" />
           <Property Name="Tubes1" Type="int" Nullable="false" />
           <Property Name="Tubes01" Type="int" Nullable="false" />
@@ -812,6 +917,7 @@
             <PropertyRef Name="MWQMRunLanguageID" />
           </Key>
           <Property Name="MWQMRunLanguageID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DBCommand" Type="int" Nullable="false" />
           <Property Name="MWQMRunID" Type="int" Nullable="false" />
           <Property Name="Language" Type="int" Nullable="false" />
           <Property Name="RunComment" Type="text" Nullable="false" />
@@ -826,6 +932,7 @@
             <PropertyRef Name="MWQMRunID" />
           </Key>
           <Property Name="MWQMRunID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DBCommand" Type="int" Nullable="false" />
           <Property Name="SubsectorTVItemID" Type="int" Nullable="false" />
           <Property Name="MWQMRunTVItemID" Type="int" Nullable="false" />
           <Property Name="RunSampleType" Type="int" Nullable="false" />
@@ -873,6 +980,7 @@
             <PropertyRef Name="MWQMSampleLanguageID" />
           </Key>
           <Property Name="MWQMSampleLanguageID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DBCommand" Type="int" Nullable="false" />
           <Property Name="MWQMSampleID" Type="int" Nullable="false" />
           <Property Name="Language" Type="int" Nullable="false" />
           <Property Name="MWQMSampleNote" Type="text" Nullable="false" />
@@ -885,6 +993,7 @@
             <PropertyRef Name="MWQMSampleID" />
           </Key>
           <Property Name="MWQMSampleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DBCommand" Type="int" Nullable="false" />
           <Property Name="MWQMSiteTVItemID" Type="int" Nullable="false" />
           <Property Name="MWQMRunTVItemID" Type="int" Nullable="false" />
           <Property Name="SampleDateTime_Local" Type="datetime" Nullable="false" />
@@ -909,6 +1018,7 @@
             <PropertyRef Name="MWQMSiteID" />
           </Key>
           <Property Name="MWQMSiteID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DBCommand" Type="int" Nullable="false" />
           <Property Name="MWQMSiteTVItemID" Type="int" Nullable="false" />
           <Property Name="MWQMSiteNumber" Type="nvarchar" MaxLength="8" Nullable="false" />
           <Property Name="MWQMSiteDescription" Type="nvarchar" MaxLength="200" Nullable="false" />
@@ -922,6 +1032,7 @@
             <PropertyRef Name="MWQMSiteStartEndDateID" />
           </Key>
           <Property Name="MWQMSiteStartEndDateID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DBCommand" Type="int" Nullable="false" />
           <Property Name="MWQMSiteTVItemID" Type="int" Nullable="false" />
           <Property Name="StartDate" Type="datetime" Nullable="false" />
           <Property Name="EndDate" Type="datetime" />
@@ -933,6 +1044,7 @@
             <PropertyRef Name="MWQMSubsectorLanguageID" />
           </Key>
           <Property Name="MWQMSubsectorLanguageID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DBCommand" Type="int" Nullable="false" />
           <Property Name="MWQMSubsectorID" Type="int" Nullable="false" />
           <Property Name="Language" Type="int" Nullable="false" />
           <Property Name="SubsectorDesc" Type="nvarchar" MaxLength="250" Nullable="false" />
@@ -947,17 +1059,31 @@
             <PropertyRef Name="MWQMSubsectorID" />
           </Key>
           <Property Name="MWQMSubsectorID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DBCommand" Type="int" Nullable="false" />
           <Property Name="MWQMSubsectorTVItemID" Type="int" Nullable="false" />
           <Property Name="SubsectorHistoricKey" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="TideLocationSIDText" Type="nvarchar" MaxLength="30" />
           <Property Name="LastUpdateDate_UTC" Type="datetime" Nullable="false" />
           <Property Name="LastUpdateContactTVItemID" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="PersistedGrants">
+          <Key>
+            <PropertyRef Name="Key" />
+          </Key>
+          <Property Name="Key" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Type" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="SubjectId" Type="nvarchar" MaxLength="200" />
+          <Property Name="ClientId" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="CreationTime" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="Expiration" Type="datetime2" Precision="7" />
+          <Property Name="Data" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
         <EntityType Name="PolSourceGroupingLanguages">
           <Key>
             <PropertyRef Name="PolSourceGroupingLanguageID" />
           </Key>
           <Property Name="PolSourceGroupingLanguageID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DBCommand" Type="int" Nullable="false" />
           <Property Name="PolSourceGroupingID" Type="int" Nullable="false" />
           <Property Name="Language" Type="int" Nullable="false" />
           <Property Name="SourceName" Type="nvarchar" MaxLength="250" Nullable="false" />
@@ -979,6 +1105,7 @@
             <PropertyRef Name="PolSourceGroupingID" />
           </Key>
           <Property Name="PolSourceGroupingID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DBCommand" Type="int" Nullable="false" />
           <Property Name="CSSPID" Type="int" Nullable="false" />
           <Property Name="GroupName" Type="nvarchar" MaxLength="150" Nullable="false" />
           <Property Name="Child" Type="nvarchar" MaxLength="150" Nullable="false" />
@@ -991,6 +1118,7 @@
             <PropertyRef Name="PolSourceObservationIssueID" />
           </Key>
           <Property Name="PolSourceObservationIssueID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DBCommand" Type="int" Nullable="false" />
           <Property Name="PolSourceObservationID" Type="int" Nullable="false" />
           <Property Name="ObservationInfo" Type="nvarchar" MaxLength="250" Nullable="false" />
           <Property Name="Ordinal" Type="int" Nullable="false" />
@@ -1003,6 +1131,7 @@
             <PropertyRef Name="PolSourceObservationID" />
           </Key>
           <Property Name="PolSourceObservationID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DBCommand" Type="int" Nullable="false" />
           <Property Name="PolSourceSiteID" Type="int" Nullable="false" />
           <Property Name="ObservationDate_Local" Type="datetime" Nullable="false" />
           <Property Name="ContactTVItemID" Type="int" Nullable="false" />
@@ -1016,6 +1145,7 @@
             <PropertyRef Name="PolSourceSiteEffectID" />
           </Key>
           <Property Name="PolSourceSiteEffectID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DBCommand" Type="int" Nullable="false" />
           <Property Name="PolSourceSiteOrInfrastructureTVItemID" Type="int" Nullable="false" />
           <Property Name="MWQMSiteTVItemID" Type="int" Nullable="false" />
           <Property Name="PolSourceSiteEffectTermIDs" Type="nvarchar" MaxLength="250" />
@@ -1029,6 +1159,7 @@
             <PropertyRef Name="PolSourceSiteEffectTermID" />
           </Key>
           <Property Name="PolSourceSiteEffectTermID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DBCommand" Type="int" Nullable="false" />
           <Property Name="IsGroup" Type="bit" Nullable="false" />
           <Property Name="UnderGroupID" Type="int" />
           <Property Name="EffectTermEN" Type="nvarchar" MaxLength="100" Nullable="false" />
@@ -1041,6 +1172,7 @@
             <PropertyRef Name="PolSourceSiteID" />
           </Key>
           <Property Name="PolSourceSiteID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DBCommand" Type="int" Nullable="false" />
           <Property Name="PolSourceSiteTVItemID" Type="int" Nullable="false" />
           <Property Name="Temp_Locator_CanDelete" Type="nvarchar" MaxLength="50" />
           <Property Name="Oldsiteid" Type="int" />
@@ -1057,6 +1189,7 @@
             <PropertyRef Name="RainExceedanceClimateSiteID" />
           </Key>
           <Property Name="RainExceedanceClimateSiteID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DBCommand" Type="int" Nullable="false" />
           <Property Name="RainExceedanceTVItemID" Type="int" Nullable="false" />
           <Property Name="ClimateSiteTVItemID" Type="int" Nullable="false" />
           <Property Name="LastUpdateDate_UTC" Type="datetime" Nullable="false" />
@@ -1067,6 +1200,7 @@
             <PropertyRef Name="RainExceedanceID" />
           </Key>
           <Property Name="RainExceedanceID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DBCommand" Type="int" Nullable="false" />
           <Property Name="RainExceedanceTVItemID" Type="int" Nullable="false" />
           <Property Name="StartMonth" Type="int" Nullable="false" />
           <Property Name="StartDay" Type="int" Nullable="false" />
@@ -1084,6 +1218,7 @@
             <PropertyRef Name="RatingCurveID" />
           </Key>
           <Property Name="RatingCurveID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DBCommand" Type="int" Nullable="false" />
           <Property Name="HydrometricSiteID" Type="int" Nullable="false" />
           <Property Name="RatingCurveNumber" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="LastUpdateDate_UTC" Type="datetime" Nullable="false" />
@@ -1094,6 +1229,7 @@
             <PropertyRef Name="RatingCurveValueID" />
           </Key>
           <Property Name="RatingCurveValueID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DBCommand" Type="int" Nullable="false" />
           <Property Name="RatingCurveID" Type="int" Nullable="false" />
           <Property Name="StageValue_m" Type="float" Nullable="false" />
           <Property Name="DischargeValue_m3_s" Type="float" Nullable="false" />
@@ -1105,6 +1241,7 @@
             <PropertyRef Name="ReportSectionID" />
           </Key>
           <Property Name="ReportSectionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DBCommand" Type="int" Nullable="false" />
           <Property Name="ReportTypeID" Type="int" Nullable="false" />
           <Property Name="TVItemID" Type="int" />
           <Property Name="Language" Type="int" />
@@ -1124,6 +1261,7 @@
             <PropertyRef Name="ReportTypeID" />
           </Key>
           <Property Name="ReportTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DBCommand" Type="int" Nullable="false" />
           <Property Name="TVType" Type="int" Nullable="false" />
           <Property Name="FileType" Type="int" Nullable="false" />
           <Property Name="UniqueCode" Type="nvarchar" MaxLength="100" Nullable="false" />
@@ -1139,6 +1277,7 @@
             <PropertyRef Name="ResetPasswordID" />
           </Key>
           <Property Name="ResetPasswordID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DBCommand" Type="int" Nullable="false" />
           <Property Name="Email" Type="nvarchar" MaxLength="256" Nullable="false" />
           <Property Name="ExpireDate_Local" Type="datetime" Nullable="false" />
           <Property Name="Code" Type="nvarchar" MaxLength="8" Nullable="false" />
@@ -1150,6 +1289,7 @@
             <PropertyRef Name="SamplingPlanEmailID" />
           </Key>
           <Property Name="SamplingPlanEmailID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DBCommand" Type="int" Nullable="false" />
           <Property Name="SamplingPlanID" Type="int" Nullable="false" />
           <Property Name="Email" Type="nvarchar" MaxLength="150" Nullable="false" />
           <Property Name="IsContractor" Type="bit" Nullable="false" />
@@ -1165,6 +1305,7 @@
             <PropertyRef Name="SamplingPlanID" />
           </Key>
           <Property Name="SamplingPlanID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DBCommand" Type="int" Nullable="false" />
           <Property Name="IsActive" Type="bit" Nullable="false" />
           <Property Name="SamplingPlanName" Type="nvarchar" MaxLength="200" Nullable="false" />
           <Property Name="ForGroupName" Type="nvarchar" MaxLength="100" Nullable="false" />
@@ -1192,6 +1333,7 @@
             <PropertyRef Name="SamplingPlanSubsectorID" />
           </Key>
           <Property Name="SamplingPlanSubsectorID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DBCommand" Type="int" Nullable="false" />
           <Property Name="SamplingPlanID" Type="int" Nullable="false" />
           <Property Name="SubsectorTVItemID" Type="int" Nullable="false" />
           <Property Name="LastUpdateDate_UTC" Type="datetime" Nullable="false" />
@@ -1202,6 +1344,7 @@
             <PropertyRef Name="SamplingPlanSubsectorSiteID" />
           </Key>
           <Property Name="SamplingPlanSubsectorSiteID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DBCommand" Type="int" Nullable="false" />
           <Property Name="SamplingPlanSubsectorID" Type="int" Nullable="false" />
           <Property Name="MWQMSiteTVItemID" Type="int" Nullable="false" />
           <Property Name="IsDuplicate" Type="bit" Nullable="false" />
@@ -1213,6 +1356,7 @@
             <PropertyRef Name="SpillLanguageID" />
           </Key>
           <Property Name="SpillLanguageID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DBCommand" Type="int" Nullable="false" />
           <Property Name="SpillID" Type="int" Nullable="false" />
           <Property Name="Language" Type="int" Nullable="false" />
           <Property Name="SpillComment" Type="text" Nullable="false" />
@@ -1225,6 +1369,7 @@
             <PropertyRef Name="SpillID" />
           </Key>
           <Property Name="SpillID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DBCommand" Type="int" Nullable="false" />
           <Property Name="MunicipalityTVItemID" Type="int" Nullable="false" />
           <Property Name="InfrastructureTVItemID" Type="int" />
           <Property Name="StartDateTime_Local" Type="datetime" Nullable="false" />
@@ -1238,6 +1383,7 @@
             <PropertyRef Name="TelID" />
           </Key>
           <Property Name="TelID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DBCommand" Type="int" Nullable="false" />
           <Property Name="TelTVItemID" Type="int" Nullable="false" />
           <Property Name="TelNumber" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="TelType" Type="int" Nullable="false" />
@@ -1249,6 +1395,7 @@
             <PropertyRef Name="TideDataValueID" />
           </Key>
           <Property Name="TideDataValueID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DBCommand" Type="int" Nullable="false" />
           <Property Name="TideSiteTVItemID" Type="int" Nullable="false" />
           <Property Name="DateTime_Local" Type="datetime" Nullable="false" />
           <Property Name="Keep" Type="bit" Nullable="false" />
@@ -1267,6 +1414,7 @@
             <PropertyRef Name="TideLocationID" />
           </Key>
           <Property Name="TideLocationID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DBCommand" Type="int" Nullable="false" />
           <Property Name="Zone" Type="int" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="Prov" Type="nvarchar" MaxLength="10" Nullable="false" />
@@ -1281,6 +1429,7 @@
             <PropertyRef Name="TideSiteID" />
           </Key>
           <Property Name="TideSiteID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DBCommand" Type="int" Nullable="false" />
           <Property Name="TideSiteTVItemID" Type="int" Nullable="false" />
           <Property Name="TideSiteName" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="Province" Type="nvarchar" MaxLength="2" Nullable="false" />
@@ -1294,6 +1443,7 @@
             <PropertyRef Name="TVFileLanguageID" />
           </Key>
           <Property Name="TVFileLanguageID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DBCommand" Type="int" Nullable="false" />
           <Property Name="TVFileID" Type="int" Nullable="false" />
           <Property Name="Language" Type="int" Nullable="false" />
           <Property Name="FileDescription" Type="text" />
@@ -1306,6 +1456,7 @@
             <PropertyRef Name="TVFileID" />
           </Key>
           <Property Name="TVFileID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DBCommand" Type="int" Nullable="false" />
           <Property Name="TVFileTVItemID" Type="int" Nullable="false" />
           <Property Name="TemplateTVType" Type="int" />
           <Property Name="ReportTypeID" Type="int" />
@@ -1329,6 +1480,7 @@
             <PropertyRef Name="TVItemLanguageID" />
           </Key>
           <Property Name="TVItemLanguageID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DBCommand" Type="int" Nullable="false" />
           <Property Name="TVItemID" Type="int" Nullable="false" />
           <Property Name="Language" Type="int" Nullable="false" />
           <Property Name="TVText" Type="nvarchar" MaxLength="200" Nullable="false" />
@@ -1341,6 +1493,7 @@
             <PropertyRef Name="TVItemLinkID" />
           </Key>
           <Property Name="TVItemLinkID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DBCommand" Type="int" Nullable="false" />
           <Property Name="FromTVItemID" Type="int" Nullable="false" />
           <Property Name="ToTVItemID" Type="int" Nullable="false" />
           <Property Name="FromTVType" Type="int" Nullable="false" />
@@ -1359,10 +1512,11 @@
             <PropertyRef Name="TVItemID" />
           </Key>
           <Property Name="TVItemID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DBCommand" Type="int" Nullable="false" />
           <Property Name="TVLevel" Type="int" Nullable="false" />
           <Property Name="TVPath" Type="nvarchar" MaxLength="250" Nullable="false" />
           <Property Name="TVType" Type="int" Nullable="false" />
-          <Property Name="ParentID" Type="int" Nullable="false" />
+          <Property Name="ParentID" Type="int" />
           <Property Name="IsActive" Type="bit" Nullable="false" />
           <Property Name="LastUpdateDate_UTC" Type="datetime" Nullable="false" />
           <Property Name="LastUpdateContactTVItemID" Type="int" Nullable="false" />
@@ -1372,6 +1526,7 @@
             <PropertyRef Name="TVItemStatID" />
           </Key>
           <Property Name="TVItemStatID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DBCommand" Type="int" Nullable="false" />
           <Property Name="TVItemID" Type="int" Nullable="false" />
           <Property Name="TVType" Type="int" Nullable="false" />
           <Property Name="ChildCount" Type="int" Nullable="false" />
@@ -1383,6 +1538,7 @@
             <PropertyRef Name="TVItemUserAuthorizationID" />
           </Key>
           <Property Name="TVItemUserAuthorizationID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DBCommand" Type="int" Nullable="false" />
           <Property Name="ContactTVItemID" Type="int" Nullable="false" />
           <Property Name="TVItemID1" Type="int" Nullable="false" />
           <Property Name="TVItemID2" Type="int" />
@@ -1397,6 +1553,7 @@
             <PropertyRef Name="TVTypeUserAuthorizationID" />
           </Key>
           <Property Name="TVTypeUserAuthorizationID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DBCommand" Type="int" Nullable="false" />
           <Property Name="ContactTVItemID" Type="int" Nullable="false" />
           <Property Name="TVType" Type="int" Nullable="false" />
           <Property Name="TVAuth" Type="int" Nullable="false" />
@@ -1408,6 +1565,7 @@
             <PropertyRef Name="UseOfSiteID" />
           </Key>
           <Property Name="UseOfSiteID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DBCommand" Type="int" Nullable="false" />
           <Property Name="SiteTVItemID" Type="int" Nullable="false" />
           <Property Name="SubsectorTVItemID" Type="int" Nullable="false" />
           <Property Name="TVType" Type="int" Nullable="false" />
@@ -1429,6 +1587,7 @@
             <PropertyRef Name="VPAmbientID" />
           </Key>
           <Property Name="VPAmbientID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DBCommand" Type="int" Nullable="false" />
           <Property Name="VPScenarioID" Type="int" Nullable="false" />
           <Property Name="Row" Type="int" Nullable="false" />
           <Property Name="MeasurementDepth_m" Type="float" />
@@ -1449,6 +1608,7 @@
             <PropertyRef Name="VPResultID" />
           </Key>
           <Property Name="VPResultID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DBCommand" Type="int" Nullable="false" />
           <Property Name="VPScenarioID" Type="int" Nullable="false" />
           <Property Name="Ordinal" Type="int" Nullable="false" />
           <Property Name="Concentration_MPN_100ml" Type="int" Nullable="false" />
@@ -1464,6 +1624,7 @@
             <PropertyRef Name="VPScenarioLanguageID" />
           </Key>
           <Property Name="VPScenarioLanguageID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DBCommand" Type="int" Nullable="false" />
           <Property Name="VPScenarioID" Type="int" Nullable="false" />
           <Property Name="Language" Type="int" Nullable="false" />
           <Property Name="VPScenarioName" Type="nvarchar" MaxLength="100" Nullable="false" />
@@ -1476,6 +1637,7 @@
             <PropertyRef Name="VPScenarioID" />
           </Key>
           <Property Name="VPScenarioID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DBCommand" Type="int" Nullable="false" />
           <Property Name="InfrastructureTVItemID" Type="int" Nullable="false" />
           <Property Name="VPScenarioStatus" Type="int" Nullable="false" />
           <Property Name="UseAsBestEstimate" Type="bit" Nullable="false" />
@@ -1547,7 +1709,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_AppTaskLanguages_AppTasks">
-          <End Role="AppTasks" Type="Self.AppTasks" Multiplicity="1">
+          <End Role="AppTasks" Type="Self.AppTasks" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
           </End>
           <End Role="AppTaskLanguages" Type="Self.AppTaskLanguages" Multiplicity="*" />
@@ -1583,6 +1745,90 @@
             </Principal>
             <Dependent Role="AppTasks">
               <PropertyRef Name="TVItemID2" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AspNetRoleClaims_AspNetRoles_RoleId">
+          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetRoleClaims" Type="Self.AspNetRoleClaims" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetRoles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetRoleClaims">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AspNetUserClaims_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserClaims" Type="Self.AspNetUserClaims" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserClaims">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AspNetUserLogins_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserLogins" Type="Self.AspNetUserLogins" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserLogins">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AspNetUserRoles_AspNetRoles_RoleId">
+          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetRoles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AspNetUserRoles_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AspNetUserTokens_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserTokens" Type="Self.AspNetUserTokens" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserTokens">
+              <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1666,6 +1912,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_CoCoRaHSValues_CoCoRaHSSites">
+          <End Role="CoCoRaHSSites" Type="Self.CoCoRaHSSites" Multiplicity="1" />
+          <End Role="CoCoRaHSValues" Type="Self.CoCoRaHSValues" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CoCoRaHSSites">
+              <PropertyRef Name="CoCoRaHSSiteID" />
+            </Principal>
+            <Dependent Role="CoCoRaHSValues">
+              <PropertyRef Name="CoCoRaHSSiteID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_ContactPreferences_Contacts">
           <End Role="Contacts" Type="Self.Contacts" Multiplicity="1" />
           <End Role="ContactPreferences" Type="Self.ContactPreferences" Multiplicity="*" />
@@ -1715,62 +1973,6 @@
             </Principal>
             <Dependent Role="ContactShortcuts">
               <PropertyRef Name="ContactID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
-          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="AspNetUserClaims" Type="Self.AspNetUserClaims" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="AspNetUserClaims">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
-          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="AspNetUserLogins" Type="Self.AspNetUserLogins" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="AspNetUserLogins">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
-          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetRoles">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="AspNetUserRoles">
-              <PropertyRef Name="RoleId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
-          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="AspNetUserRoles">
-              <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2875,7 +3077,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_TVItems_ParentID">
-          <End Role="TVItems" Type="Self.TVItems" Multiplicity="1" />
+          <End Role="TVItems" Type="Self.TVItems" Multiplicity="0..1" />
           <End Role="TVItems1" Type="Self.TVItems" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TVItems">
@@ -3023,20 +3225,25 @@
           <EntitySet Name="AppErrLogs" EntityType="Self.AppErrLogs" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AppTaskLanguages" EntityType="Self.AppTaskLanguages" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AppTasks" EntityType="Self.AppTasks" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetRoleClaims" EntityType="Self.AspNetRoleClaims" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserTokens" EntityType="Self.AspNetUserTokens" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BoxModelLanguages" EntityType="Self.BoxModelLanguages" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BoxModelResults" EntityType="Self.BoxModelResults" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BoxModels" EntityType="Self.BoxModels" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Classifications" EntityType="Self.Classifications" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ClimateDataValues" EntityType="Self.ClimateDataValues" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ClimateSites" EntityType="Self.ClimateSites" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CoCoRaHSSites" EntityType="Self.CoCoRaHSSites" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CoCoRaHSValues" EntityType="Self.CoCoRaHSValues" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ContactPreferences" EntityType="Self.ContactPreferences" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Contacts" EntityType="Self.Contacts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ContactShortcuts" EntityType="Self.ContactShortcuts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DeviceCodes" EntityType="Self.DeviceCodes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DocTemplates" EntityType="Self.DocTemplates" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DrogueRunPositions" EntityType="Self.DrogueRunPositions" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DrogueRuns" EntityType="Self.DrogueRuns" Schema="dbo" store:Type="Tables" />
@@ -3071,6 +3278,7 @@
           <EntitySet Name="MWQMSiteStartEndDates" EntityType="Self.MWQMSiteStartEndDates" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MWQMSubsectorLanguages" EntityType="Self.MWQMSubsectorLanguages" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MWQMSubsectors" EntityType="Self.MWQMSubsectors" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PersistedGrants" EntityType="Self.PersistedGrants" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PolSourceGroupingLanguages" EntityType="Self.PolSourceGroupingLanguages" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PolSourceGroupings" EntityType="Self.PolSourceGroupings" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PolSourceObservationIssues" EntityType="Self.PolSourceObservationIssues" Schema="dbo" store:Type="Tables" />
@@ -3136,6 +3344,30 @@
             <End Role="TVItems" EntitySet="TVItems" />
             <End Role="AppTasks" EntitySet="AppTasks" />
           </AssociationSet>
+          <AssociationSet Name="FK_AspNetRoleClaims_AspNetRoles_RoleId" Association="Self.FK_AspNetRoleClaims_AspNetRoles_RoleId">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetRoleClaims" EntitySet="AspNetRoleClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AspNetUserClaims_AspNetUsers_UserId" Association="Self.FK_AspNetUserClaims_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AspNetUserLogins_AspNetUsers_UserId" Association="Self.FK_AspNetUserLogins_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AspNetUserRoles_AspNetRoles_RoleId" Association="Self.FK_AspNetUserRoles_AspNetRoles_RoleId">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AspNetUserRoles_AspNetUsers_UserId" Association="Self.FK_AspNetUserRoles_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AspNetUserTokens_AspNetUsers_UserId" Association="Self.FK_AspNetUserTokens_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserTokens" EntitySet="AspNetUserTokens" />
+          </AssociationSet>
           <AssociationSet Name="FK_BoxModelLanguages_BoxModels" Association="Self.FK_BoxModelLanguages_BoxModels">
             <End Role="BoxModels" EntitySet="BoxModels" />
             <End Role="BoxModelLanguages" EntitySet="BoxModelLanguages" />
@@ -3160,6 +3392,10 @@
             <End Role="TVItems" EntitySet="TVItems" />
             <End Role="ClimateSites" EntitySet="ClimateSites" />
           </AssociationSet>
+          <AssociationSet Name="FK_CoCoRaHSValues_CoCoRaHSSites" Association="Self.FK_CoCoRaHSValues_CoCoRaHSSites">
+            <End Role="CoCoRaHSSites" EntitySet="CoCoRaHSSites" />
+            <End Role="CoCoRaHSValues" EntitySet="CoCoRaHSValues" />
+          </AssociationSet>
           <AssociationSet Name="FK_ContactPreferences_Contacts" Association="Self.FK_ContactPreferences_Contacts">
             <End Role="Contacts" EntitySet="Contacts" />
             <End Role="ContactPreferences" EntitySet="ContactPreferences" />
@@ -3175,22 +3411,6 @@
           <AssociationSet Name="FK_ContactShortcuts_Contacts" Association="Self.FK_ContactShortcuts_Contacts">
             <End Role="Contacts" EntitySet="Contacts" />
             <End Role="ContactShortcuts" EntitySet="ContactShortcuts" />
-          </AssociationSet>
-          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
-          </AssociationSet>
-          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
-          </AssociationSet>
-          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
-            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
-            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
-          </AssociationSet>
-          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
           </AssociationSet>
           <AssociationSet Name="FK_DocTemplates_TVItems" Association="Self.FK_DocTemplates_TVItems">
             <End Role="TVItems" EntitySet="TVItems" />
@@ -3598,19 +3818,24 @@
           <EntitySet Name="AppErrLogs" EntityType="CSSPDBModel.AppErrLog" />
           <EntitySet Name="AppTaskLanguages" EntityType="CSSPDBModel.AppTaskLanguage" />
           <EntitySet Name="AppTasks" EntityType="CSSPDBModel.AppTask" />
+          <EntitySet Name="AspNetRoleClaims" EntityType="CSSPDBModel.AspNetRoleClaim" />
           <EntitySet Name="AspNetRoles" EntityType="CSSPDBModel.AspNetRole" />
           <EntitySet Name="AspNetUserClaims" EntityType="CSSPDBModel.AspNetUserClaim" />
           <EntitySet Name="AspNetUserLogins" EntityType="CSSPDBModel.AspNetUserLogin" />
           <EntitySet Name="AspNetUsers" EntityType="CSSPDBModel.AspNetUser" />
+          <EntitySet Name="AspNetUserTokens" EntityType="CSSPDBModel.AspNetUserToken" />
           <EntitySet Name="BoxModelLanguages" EntityType="CSSPDBModel.BoxModelLanguage" />
           <EntitySet Name="BoxModelResults" EntityType="CSSPDBModel.BoxModelResult" />
           <EntitySet Name="BoxModels" EntityType="CSSPDBModel.BoxModel" />
           <EntitySet Name="Classifications" EntityType="CSSPDBModel.Classification" />
           <EntitySet Name="ClimateDataValues" EntityType="CSSPDBModel.ClimateDataValue" />
           <EntitySet Name="ClimateSites" EntityType="CSSPDBModel.ClimateSite" />
+          <EntitySet Name="CoCoRaHSSites" EntityType="CSSPDBModel.CoCoRaHSSite" />
+          <EntitySet Name="CoCoRaHSValues" EntityType="CSSPDBModel.CoCoRaHSValue" />
           <EntitySet Name="ContactPreferences" EntityType="CSSPDBModel.ContactPreference" />
           <EntitySet Name="Contacts" EntityType="CSSPDBModel.Contact" />
           <EntitySet Name="ContactShortcuts" EntityType="CSSPDBModel.ContactShortcut" />
+          <EntitySet Name="DeviceCodes" EntityType="CSSPDBModel.DeviceCode" />
           <EntitySet Name="DocTemplates" EntityType="CSSPDBModel.DocTemplate" />
           <EntitySet Name="DrogueRunPositions" EntityType="CSSPDBModel.DrogueRunPosition" />
           <EntitySet Name="DrogueRuns" EntityType="CSSPDBModel.DrogueRun" />
@@ -3645,6 +3870,7 @@
           <EntitySet Name="MWQMSiteStartEndDates" EntityType="CSSPDBModel.MWQMSiteStartEndDate" />
           <EntitySet Name="MWQMSubsectorLanguages" EntityType="CSSPDBModel.MWQMSubsectorLanguage" />
           <EntitySet Name="MWQMSubsectors" EntityType="CSSPDBModel.MWQMSubsector" />
+          <EntitySet Name="PersistedGrants" EntityType="CSSPDBModel.PersistedGrant" />
           <EntitySet Name="PolSourceGroupingLanguages" EntityType="CSSPDBModel.PolSourceGroupingLanguage" />
           <EntitySet Name="PolSourceGroupings" EntityType="CSSPDBModel.PolSourceGrouping" />
           <EntitySet Name="PolSourceObservationIssues" EntityType="CSSPDBModel.PolSourceObservationIssue" />
@@ -3710,13 +3936,21 @@
             <End Role="TVItem" EntitySet="TVItems" />
             <End Role="AppTask" EntitySet="AppTasks" />
           </AssociationSet>
-          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="CSSPDBModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+          <AssociationSet Name="FK_AspNetRoleClaims_AspNetRoles_RoleId" Association="CSSPDBModel.FK_AspNetRoleClaims_AspNetRoles_RoleId">
+            <End Role="AspNetRole" EntitySet="AspNetRoles" />
+            <End Role="AspNetRoleClaim" EntitySet="AspNetRoleClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AspNetUserClaims_AspNetUsers_UserId" Association="CSSPDBModel.FK_AspNetUserClaims_AspNetUsers_UserId">
             <End Role="AspNetUser" EntitySet="AspNetUsers" />
             <End Role="AspNetUserClaim" EntitySet="AspNetUserClaims" />
           </AssociationSet>
-          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="CSSPDBModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+          <AssociationSet Name="FK_AspNetUserLogins_AspNetUsers_UserId" Association="CSSPDBModel.FK_AspNetUserLogins_AspNetUsers_UserId">
             <End Role="AspNetUser" EntitySet="AspNetUsers" />
             <End Role="AspNetUserLogin" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AspNetUserTokens_AspNetUsers_UserId" Association="CSSPDBModel.FK_AspNetUserTokens_AspNetUsers_UserId">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserToken" EntitySet="AspNetUserTokens" />
           </AssociationSet>
           <AssociationSet Name="FK_Contacts_AspNetUsers" Association="CSSPDBModel.FK_Contacts_AspNetUsers">
             <End Role="AspNetUser" EntitySet="AspNetUsers" />
@@ -3745,6 +3979,10 @@
           <AssociationSet Name="FK_ClimateSites_TVItems" Association="CSSPDBModel.FK_ClimateSites_TVItems">
             <End Role="TVItem" EntitySet="TVItems" />
             <End Role="ClimateSite" EntitySet="ClimateSites" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CoCoRaHSValues_CoCoRaHSSites" Association="CSSPDBModel.FK_CoCoRaHSValues_CoCoRaHSSites">
+            <End Role="CoCoRaHSSite" EntitySet="CoCoRaHSSites" />
+            <End Role="CoCoRaHSValue" EntitySet="CoCoRaHSValues" />
           </AssociationSet>
           <AssociationSet Name="FK_ContactPreferences_Contacts" Association="CSSPDBModel.FK_ContactPreferences_Contacts">
             <End Role="Contact" EntitySet="Contacts" />
@@ -4164,6 +4402,7 @@
             <PropertyRef Name="AddressID" />
           </Key>
           <Property Name="AddressID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DBCommand" Type="Int32" Nullable="false" />
           <Property Name="AddressTVItemID" Type="Int32" Nullable="false" />
           <Property Name="AddressType" Type="Int32" Nullable="false" />
           <Property Name="CountryTVItemID" Type="Int32" Nullable="false" />
@@ -4186,6 +4425,7 @@
             <PropertyRef Name="AppErrLogID" />
           </Key>
           <Property Name="AppErrLogID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DBCommand" Type="Int32" Nullable="false" />
           <Property Name="Tag" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="LineNumber" Type="Int32" Nullable="false" />
           <Property Name="Source" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
@@ -4199,7 +4439,8 @@
             <PropertyRef Name="AppTaskLanguageID" />
           </Key>
           <Property Name="AppTaskLanguageID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="AppTaskID" Type="Int32" Nullable="false" />
+          <Property Name="DBCommand" Type="Int32" Nullable="false" />
+          <Property Name="AppTaskID" Type="Int32" />
           <Property Name="Language" Type="Int32" Nullable="false" />
           <Property Name="StatusText" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="ErrorText" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
@@ -4213,6 +4454,7 @@
             <PropertyRef Name="AppTaskID" />
           </Key>
           <Property Name="AppTaskID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DBCommand" Type="Int32" Nullable="false" />
           <Property Name="TVItemID" Type="Int32" Nullable="false" />
           <Property Name="TVItemID2" Type="Int32" Nullable="false" />
           <Property Name="AppTaskCommand" Type="Int32" Nullable="false" />
@@ -4230,12 +4472,25 @@
           <NavigationProperty Name="TVItem" Relationship="CSSPDBModel.FK_AppTasks_TVItems" FromRole="AppTask" ToRole="TVItem" />
           <NavigationProperty Name="TVItem1" Relationship="CSSPDBModel.FK_AppTasks_TVItems2" FromRole="AppTask" ToRole="TVItem" />
         </EntityType>
+        <EntityType Name="AspNetRoleClaim">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleId" Type="String" Nullable="false" MaxLength="450" FixedLength="false" Unicode="true" />
+          <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetRole" Relationship="CSSPDBModel.FK_AspNetRoleClaims_AspNetRoles_RoleId" FromRole="AspNetRoleClaim" ToRole="AspNetRole" />
+        </EntityType>
         <EntityType Name="AspNetRole">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="450" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="NormalizedName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="ConcurrencyStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetRoleClaims" Relationship="CSSPDBModel.FK_AspNetRoleClaims_AspNetRoles_RoleId" FromRole="AspNetRole" ToRole="AspNetRoleClaim" />
           <NavigationProperty Name="AspNetUsers" Relationship="CSSPDBModel.AspNetUserRoles" FromRole="AspNetRole" ToRole="AspNetUser" />
         </EntityType>
         <EntityType Name="AspNetUserClaim">
@@ -4243,27 +4498,27 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="450" FixedLength="false" Unicode="true" />
           <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="AspNetUser" Relationship="CSSPDBModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaim" ToRole="AspNetUser" />
+          <NavigationProperty Name="AspNetUser" Relationship="CSSPDBModel.FK_AspNetUserClaims_AspNetUsers_UserId" FromRole="AspNetUserClaim" ToRole="AspNetUser" />
         </EntityType>
         <EntityType Name="AspNetUserLogin">
           <Key>
             <PropertyRef Name="LoginProvider" />
             <PropertyRef Name="ProviderKey" />
-            <PropertyRef Name="UserId" />
           </Key>
           <Property Name="LoginProvider" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="ProviderKey" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="AspNetUser" Relationship="CSSPDBModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogin" ToRole="AspNetUser" />
+          <Property Name="ProviderDisplayName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="450" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUser" Relationship="CSSPDBModel.FK_AspNetUserLogins_AspNetUsers_UserId" FromRole="AspNetUserLogin" ToRole="AspNetUser" />
         </EntityType>
         <EntityType Name="AspNetUser">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="450" FixedLength="false" Unicode="true" />
           <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
           <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
@@ -4275,16 +4530,34 @@
           <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
           <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
           <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="AspNetUserClaims" Relationship="CSSPDBModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserClaim" />
-          <NavigationProperty Name="AspNetUserLogins" Relationship="CSSPDBModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserLogin" />
+          <Property Name="NormalizedUserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="NormalizedEmail" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="ConcurrencyStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LockoutEnd" Type="DateTimeOffset" Precision="7" />
+          <NavigationProperty Name="AspNetUserClaims" Relationship="CSSPDBModel.FK_AspNetUserClaims_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserClaim" />
+          <NavigationProperty Name="AspNetUserLogins" Relationship="CSSPDBModel.FK_AspNetUserLogins_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserLogin" />
+          <NavigationProperty Name="AspNetUserTokens" Relationship="CSSPDBModel.FK_AspNetUserTokens_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserToken" />
           <NavigationProperty Name="Contacts" Relationship="CSSPDBModel.FK_Contacts_AspNetUsers" FromRole="AspNetUser" ToRole="Contact" />
           <NavigationProperty Name="AspNetRoles" Relationship="CSSPDBModel.AspNetUserRoles" FromRole="AspNetUser" ToRole="AspNetRole" />
+        </EntityType>
+        <EntityType Name="AspNetUserToken">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="Name" />
+          </Key>
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="450" FixedLength="false" Unicode="true" />
+          <Property Name="LoginProvider" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Value" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUser" Relationship="CSSPDBModel.FK_AspNetUserTokens_AspNetUsers_UserId" FromRole="AspNetUserToken" ToRole="AspNetUser" />
         </EntityType>
         <EntityType Name="BoxModelLanguage">
           <Key>
             <PropertyRef Name="BoxModelLanguageID" />
           </Key>
           <Property Name="BoxModelLanguageID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DBCommand" Type="Int32" Nullable="false" />
           <Property Name="BoxModelID" Type="Int32" Nullable="false" />
           <Property Name="Language" Type="Int32" Nullable="false" />
           <Property Name="ScenarioName" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
@@ -4298,6 +4571,7 @@
             <PropertyRef Name="BoxModelResultID" />
           </Key>
           <Property Name="BoxModelResultID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DBCommand" Type="Int32" Nullable="false" />
           <Property Name="BoxModelID" Type="Int32" Nullable="false" />
           <Property Name="BoxModelResultType" Type="Int32" Nullable="false" />
           <Property Name="Volume_m3" Type="Double" Nullable="false" />
@@ -4322,6 +4596,7 @@
             <PropertyRef Name="BoxModelID" />
           </Key>
           <Property Name="BoxModelID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DBCommand" Type="Int32" Nullable="false" />
           <Property Name="InfrastructureTVItemID" Type="Int32" Nullable="false" />
           <Property Name="Discharge_m3_day" Type="Double" Nullable="false" />
           <Property Name="Depth_m" Type="Double" Nullable="false" />
@@ -4344,6 +4619,7 @@
             <PropertyRef Name="ClassificationID" />
           </Key>
           <Property Name="ClassificationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DBCommand" Type="Int32" Nullable="false" />
           <Property Name="ClassificationTVItemID" Type="Int32" Nullable="false" />
           <Property Name="ClassificationType" Type="Int32" Nullable="false" />
           <Property Name="Ordinal" Type="Int32" Nullable="false" />
@@ -4356,6 +4632,7 @@
             <PropertyRef Name="ClimateDataValueID" />
           </Key>
           <Property Name="ClimateDataValueID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DBCommand" Type="Int32" Nullable="false" />
           <Property Name="ClimateSiteID" Type="Int32" Nullable="false" />
           <Property Name="DateTime_Local" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Keep" Type="Boolean" Nullable="false" />
@@ -4382,6 +4659,7 @@
             <PropertyRef Name="ClimateSiteID" />
           </Key>
           <Property Name="ClimateSiteID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DBCommand" Type="Int32" Nullable="false" />
           <Property Name="ClimateSiteTVItemID" Type="Int32" Nullable="false" />
           <Property Name="ECDBID" Type="Int32" />
           <Property Name="ClimateSiteName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
@@ -4408,11 +4686,43 @@
           <NavigationProperty Name="ClimateDataValues" Relationship="CSSPDBModel.FK_ClimateDataValues_ClimateSites" FromRole="ClimateSite" ToRole="ClimateDataValue" />
           <NavigationProperty Name="TVItem" Relationship="CSSPDBModel.FK_ClimateSites_TVItems" FromRole="ClimateSite" ToRole="TVItem" />
         </EntityType>
+        <EntityType Name="CoCoRaHSSite">
+          <Key>
+            <PropertyRef Name="CoCoRaHSSiteID" />
+          </Key>
+          <Property Name="CoCoRaHSSiteID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DBCommand" Type="Int32" Nullable="false" />
+          <Property Name="StationNumber" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="StationName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Latitude" Type="Double" Nullable="false" />
+          <Property Name="Longitude" Type="Double" Nullable="false" />
+          <Property Name="LastUpdateDate_UTC" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastUpdateContactTVItemID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="CoCoRaHSValues" Relationship="CSSPDBModel.FK_CoCoRaHSValues_CoCoRaHSSites" FromRole="CoCoRaHSSite" ToRole="CoCoRaHSValue" />
+        </EntityType>
+        <EntityType Name="CoCoRaHSValue">
+          <Key>
+            <PropertyRef Name="CoCoRaHSValueID" />
+          </Key>
+          <Property Name="CoCoRaHSValueID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DBCommand" Type="Int32" Nullable="false" />
+          <Property Name="CoCoRaHSSiteID" Type="Int32" Nullable="false" />
+          <Property Name="ObservationDateAndTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="TotalPrecipAmt" Type="Double" />
+          <Property Name="NewSnowDepth" Type="Double" />
+          <Property Name="NewSnowSWE" Type="Double" />
+          <Property Name="TotalSnowDepth" Type="Double" />
+          <Property Name="TotalSnowSWE" Type="Double" />
+          <Property Name="LastUpdateDate_UTC" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastUpdateContactTVItemID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="CoCoRaHSSite" Relationship="CSSPDBModel.FK_CoCoRaHSValues_CoCoRaHSSites" FromRole="CoCoRaHSValue" ToRole="CoCoRaHSSite" />
+        </EntityType>
         <EntityType Name="ContactPreference">
           <Key>
             <PropertyRef Name="ContactPreferenceID" />
           </Key>
           <Property Name="ContactPreferenceID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DBCommand" Type="Int32" Nullable="false" />
           <Property Name="ContactID" Type="Int32" Nullable="false" />
           <Property Name="TVType" Type="Int32" Nullable="false" />
           <Property Name="MarkerSize" Type="Int32" Nullable="false" />
@@ -4425,7 +4735,8 @@
             <PropertyRef Name="ContactID" />
           </Key>
           <Property Name="ContactID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="DBCommand" Type="Int32" Nullable="false" />
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="450" FixedLength="false" Unicode="true" />
           <Property Name="ContactTVItemID" Type="Int32" Nullable="false" />
           <Property Name="LoginEmail" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="FirstName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
@@ -4438,7 +4749,6 @@
           <Property Name="Disabled" Type="Boolean" Nullable="false" />
           <Property Name="IsNew" Type="Boolean" Nullable="false" />
           <Property Name="SamplingPlanner_ProvincesTVItemID" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="Token" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="LastUpdateDate_UTC" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="LastUpdateContactTVItemID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="AspNetUser" Relationship="CSSPDBModel.FK_Contacts_AspNetUsers" FromRole="Contact" ToRole="AspNetUser" />
@@ -4451,6 +4761,7 @@
             <PropertyRef Name="ContactShortcutID" />
           </Key>
           <Property Name="ContactShortcutID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DBCommand" Type="Int32" Nullable="false" />
           <Property Name="ContactID" Type="Int32" Nullable="false" />
           <Property Name="ShortCutText" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="ShortCutAddress" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
@@ -4458,11 +4769,24 @@
           <Property Name="LastUpdateContactTVItemID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Contact" Relationship="CSSPDBModel.FK_ContactShortcuts_Contacts" FromRole="ContactShortcut" ToRole="Contact" />
         </EntityType>
+        <EntityType Name="DeviceCode">
+          <Key>
+            <PropertyRef Name="UserCode" />
+          </Key>
+          <Property Name="UserCode" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="DeviceCode1" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="SubjectId" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="ClientId" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="CreationTime" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="Expiration" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="Data" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
         <EntityType Name="DocTemplate">
           <Key>
             <PropertyRef Name="DocTemplateID" />
           </Key>
           <Property Name="DocTemplateID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DBCommand" Type="Int32" Nullable="false" />
           <Property Name="Language" Type="Int32" Nullable="false" />
           <Property Name="TVType" Type="Int32" Nullable="false" />
           <Property Name="TVFileTVItemID" Type="Int32" Nullable="false" />
@@ -4476,6 +4800,7 @@
             <PropertyRef Name="DrogueRunPositionID" />
           </Key>
           <Property Name="DrogueRunPositionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DBCommand" Type="Int32" Nullable="false" />
           <Property Name="DrogueRunID" Type="Int32" Nullable="false" />
           <Property Name="Ordinal" Type="Int32" Nullable="false" />
           <Property Name="StepLat" Type="Double" Nullable="false" />
@@ -4492,6 +4817,7 @@
             <PropertyRef Name="DrogueRunID" />
           </Key>
           <Property Name="DrogueRunID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DBCommand" Type="Int32" Nullable="false" />
           <Property Name="SubsectorTVItemID" Type="Int32" Nullable="false" />
           <Property Name="DrogueNumber" Type="Int32" Nullable="false" />
           <Property Name="DrogueType" Type="Int32" Nullable="false" />
@@ -4507,6 +4833,7 @@
             <PropertyRef Name="EmailDistributionListContactLanguageID" />
           </Key>
           <Property Name="EmailDistributionListContactLanguageID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DBCommand" Type="Int32" Nullable="false" />
           <Property Name="EmailDistributionListContactID" Type="Int32" Nullable="false" />
           <Property Name="Language" Type="Int32" Nullable="false" />
           <Property Name="Agency" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
@@ -4520,6 +4847,7 @@
             <PropertyRef Name="EmailDistributionListContactID" />
           </Key>
           <Property Name="EmailDistributionListContactID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DBCommand" Type="Int32" Nullable="false" />
           <Property Name="EmailDistributionListID" Type="Int32" Nullable="false" />
           <Property Name="IsCC" Type="Boolean" Nullable="false" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
@@ -4539,6 +4867,7 @@
             <PropertyRef Name="EmailDistributionListLanguageID" />
           </Key>
           <Property Name="EmailDistributionListLanguageID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DBCommand" Type="Int32" Nullable="false" />
           <Property Name="EmailDistributionListID" Type="Int32" Nullable="false" />
           <Property Name="Language" Type="Int32" Nullable="false" />
           <Property Name="EmailListName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
@@ -4552,6 +4881,7 @@
             <PropertyRef Name="EmailDistributionListID" />
           </Key>
           <Property Name="EmailDistributionListID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DBCommand" Type="Int32" Nullable="false" />
           <Property Name="ParentTVItemID" Type="Int32" Nullable="false" />
           <Property Name="Ordinal" Type="Int32" Nullable="false" />
           <Property Name="LastUpdateDate_UTC" Type="DateTime" Nullable="false" Precision="3" />
@@ -4567,6 +4897,7 @@
             <PropertyRef Name="EmailID" />
           </Key>
           <Property Name="EmailID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DBCommand" Type="Int32" Nullable="false" />
           <Property Name="EmailTVItemID" Type="Int32" Nullable="false" />
           <Property Name="EmailAddress" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="EmailType" Type="Int32" Nullable="false" />
@@ -4579,6 +4910,7 @@
             <PropertyRef Name="HelpDocID" />
           </Key>
           <Property Name="HelpDocID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DBCommand" Type="Int32" Nullable="false" />
           <Property Name="DocKey" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Language" Type="Int32" Nullable="false" />
           <Property Name="DocHTMLText" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
@@ -4590,6 +4922,7 @@
             <PropertyRef Name="HydrometricDataValueID" />
           </Key>
           <Property Name="HydrometricDataValueID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DBCommand" Type="Int32" Nullable="false" />
           <Property Name="HydrometricSiteID" Type="Int32" Nullable="false" />
           <Property Name="DateTime_Local" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Keep" Type="Boolean" Nullable="false" />
@@ -4608,6 +4941,7 @@
             <PropertyRef Name="HydrometricSiteID" />
           </Key>
           <Property Name="HydrometricSiteID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DBCommand" Type="Int32" Nullable="false" />
           <Property Name="HydrometricSiteTVItemID" Type="Int32" Nullable="false" />
           <Property Name="FedSiteNumber" Type="String" MaxLength="7" FixedLength="false" Unicode="true" />
           <Property Name="QuebecSiteNumber" Type="String" MaxLength="7" FixedLength="false" Unicode="true" />
@@ -4638,6 +4972,7 @@
             <PropertyRef Name="InfrastructureLanguageID" />
           </Key>
           <Property Name="InfrastructureLanguageID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DBCommand" Type="Int32" Nullable="false" />
           <Property Name="InfrastructureID" Type="Int32" Nullable="false" />
           <Property Name="Language" Type="Int32" Nullable="false" />
           <Property Name="Comment" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
@@ -4651,6 +4986,7 @@
             <PropertyRef Name="InfrastructureID" />
           </Key>
           <Property Name="InfrastructureID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DBCommand" Type="Int32" Nullable="false" />
           <Property Name="InfrastructureTVItemID" Type="Int32" Nullable="false" />
           <Property Name="PrismID" Type="Int32" />
           <Property Name="TPID" Type="Int32" />
@@ -4710,6 +5046,7 @@
             <PropertyRef Name="LabSheetDetailID" />
           </Key>
           <Property Name="LabSheetDetailID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DBCommand" Type="Int32" Nullable="false" />
           <Property Name="LabSheetID" Type="Int32" Nullable="false" />
           <Property Name="SamplingPlanID" Type="Int32" Nullable="false" />
           <Property Name="SubsectorTVItemID" Type="Int32" Nullable="false" />
@@ -4784,6 +5121,7 @@
             <PropertyRef Name="LabSheetID" />
           </Key>
           <Property Name="LabSheetID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DBCommand" Type="Int32" Nullable="false" />
           <Property Name="OtherServerLabSheetID" Type="Int32" Nullable="false" />
           <Property Name="SamplingPlanID" Type="Int32" Nullable="false" />
           <Property Name="SamplingPlanName" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
@@ -4816,6 +5154,7 @@
             <PropertyRef Name="LabSheetTubeMPNDetailID" />
           </Key>
           <Property Name="LabSheetTubeMPNDetailID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DBCommand" Type="Int32" Nullable="false" />
           <Property Name="LabSheetDetailID" Type="Int32" Nullable="false" />
           <Property Name="Ordinal" Type="Int32" Nullable="false" />
           <Property Name="MWQMSiteTVItemID" Type="Int32" Nullable="false" />
@@ -4839,6 +5178,7 @@
             <PropertyRef Name="LogID" />
           </Key>
           <Property Name="LogID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DBCommand" Type="Int32" Nullable="false" />
           <Property Name="TableName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ID" Type="Int32" Nullable="false" />
           <Property Name="LogCommand" Type="Int32" Nullable="false" />
@@ -4851,6 +5191,7 @@
             <PropertyRef Name="MapInfoPointID" />
           </Key>
           <Property Name="MapInfoPointID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DBCommand" Type="Int32" Nullable="false" />
           <Property Name="MapInfoID" Type="Int32" Nullable="false" />
           <Property Name="Ordinal" Type="Int32" Nullable="false" />
           <Property Name="Lat" Type="Double" Nullable="false" />
@@ -4864,6 +5205,7 @@
             <PropertyRef Name="MapInfoID" />
           </Key>
           <Property Name="MapInfoID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DBCommand" Type="Int32" Nullable="false" />
           <Property Name="TVItemID" Type="Int32" Nullable="false" />
           <Property Name="TVType" Type="Int32" Nullable="false" />
           <Property Name="LatMin" Type="Double" Nullable="false" />
@@ -4881,6 +5223,7 @@
             <PropertyRef Name="MikeBoundaryConditionID" />
           </Key>
           <Property Name="MikeBoundaryConditionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DBCommand" Type="Int32" Nullable="false" />
           <Property Name="MikeBoundaryConditionTVItemID" Type="Int32" Nullable="false" />
           <Property Name="MikeBoundaryConditionCode" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="MikeBoundaryConditionName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
@@ -4900,6 +5243,7 @@
             <PropertyRef Name="MikeScenarioResultID" />
           </Key>
           <Property Name="MikeScenarioResultID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DBCommand" Type="Int32" Nullable="false" />
           <Property Name="MikeScenarioTVItemID" Type="Int32" Nullable="false" />
           <Property Name="MikeResultsJSON" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="LastUpdateDate_UTC" Type="DateTime" Nullable="false" Precision="3" />
@@ -4911,6 +5255,7 @@
             <PropertyRef Name="MikeScenarioID" />
           </Key>
           <Property Name="MikeScenarioID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DBCommand" Type="Int32" Nullable="false" />
           <Property Name="MikeScenarioTVItemID" Type="Int32" Nullable="false" />
           <Property Name="ParentMikeScenarioID" Type="Int32" />
           <Property Name="ScenarioStatus" Type="Int32" Nullable="false" />
@@ -4953,6 +5298,7 @@
             <PropertyRef Name="MikeSourceID" />
           </Key>
           <Property Name="MikeSourceID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DBCommand" Type="Int32" Nullable="false" />
           <Property Name="MikeSourceTVItemID" Type="Int32" Nullable="false" />
           <Property Name="IsContinuous" Type="Boolean" Nullable="false" />
           <Property Name="Include" Type="Boolean" Nullable="false" />
@@ -4973,6 +5319,7 @@
             <PropertyRef Name="MikeSourceStartEndID" />
           </Key>
           <Property Name="MikeSourceStartEndID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DBCommand" Type="Int32" Nullable="false" />
           <Property Name="MikeSourceID" Type="Int32" Nullable="false" />
           <Property Name="StartDateAndTime_Local" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="EndDateAndTime_Local" Type="DateTime" Nullable="false" Precision="3" />
@@ -4993,6 +5340,7 @@
             <PropertyRef Name="MWQMAnalysisReportParameterID" />
           </Key>
           <Property Name="MWQMAnalysisReportParameterID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DBCommand" Type="Int32" Nullable="false" />
           <Property Name="SubsectorTVItemID" Type="Int32" Nullable="false" />
           <Property Name="AnalysisName" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="AnalysisReportYear" Type="Int32" />
@@ -5026,6 +5374,7 @@
             <PropertyRef Name="MWQMLookupMPNID" />
           </Key>
           <Property Name="MWQMLookupMPNID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DBCommand" Type="Int32" Nullable="false" />
           <Property Name="Tubes10" Type="Int32" Nullable="false" />
           <Property Name="Tubes1" Type="Int32" Nullable="false" />
           <Property Name="Tubes01" Type="Int32" Nullable="false" />
@@ -5038,6 +5387,7 @@
             <PropertyRef Name="MWQMRunLanguageID" />
           </Key>
           <Property Name="MWQMRunLanguageID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DBCommand" Type="Int32" Nullable="false" />
           <Property Name="MWQMRunID" Type="Int32" Nullable="false" />
           <Property Name="Language" Type="Int32" Nullable="false" />
           <Property Name="RunComment" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
@@ -5053,6 +5403,7 @@
             <PropertyRef Name="MWQMRunID" />
           </Key>
           <Property Name="MWQMRunID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DBCommand" Type="Int32" Nullable="false" />
           <Property Name="SubsectorTVItemID" Type="Int32" Nullable="false" />
           <Property Name="MWQMRunTVItemID" Type="Int32" Nullable="false" />
           <Property Name="RunSampleType" Type="Int32" Nullable="false" />
@@ -5104,6 +5455,7 @@
             <PropertyRef Name="MWQMSampleLanguageID" />
           </Key>
           <Property Name="MWQMSampleLanguageID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DBCommand" Type="Int32" Nullable="false" />
           <Property Name="MWQMSampleID" Type="Int32" Nullable="false" />
           <Property Name="Language" Type="Int32" Nullable="false" />
           <Property Name="MWQMSampleNote" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
@@ -5117,6 +5469,7 @@
             <PropertyRef Name="MWQMSampleID" />
           </Key>
           <Property Name="MWQMSampleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DBCommand" Type="Int32" Nullable="false" />
           <Property Name="MWQMSiteTVItemID" Type="Int32" Nullable="false" />
           <Property Name="MWQMRunTVItemID" Type="Int32" Nullable="false" />
           <Property Name="SampleDateTime_Local" Type="DateTime" Nullable="false" Precision="3" />
@@ -5144,6 +5497,7 @@
             <PropertyRef Name="MWQMSiteID" />
           </Key>
           <Property Name="MWQMSiteID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DBCommand" Type="Int32" Nullable="false" />
           <Property Name="MWQMSiteTVItemID" Type="Int32" Nullable="false" />
           <Property Name="MWQMSiteNumber" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="true" />
           <Property Name="MWQMSiteDescription" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
@@ -5158,6 +5512,7 @@
             <PropertyRef Name="MWQMSiteStartEndDateID" />
           </Key>
           <Property Name="MWQMSiteStartEndDateID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DBCommand" Type="Int32" Nullable="false" />
           <Property Name="MWQMSiteTVItemID" Type="Int32" Nullable="false" />
           <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="EndDate" Type="DateTime" Precision="3" />
@@ -5170,6 +5525,7 @@
             <PropertyRef Name="MWQMSubsectorLanguageID" />
           </Key>
           <Property Name="MWQMSubsectorLanguageID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DBCommand" Type="Int32" Nullable="false" />
           <Property Name="MWQMSubsectorID" Type="Int32" Nullable="false" />
           <Property Name="Language" Type="Int32" Nullable="false" />
           <Property Name="SubsectorDesc" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
@@ -5185,6 +5541,7 @@
             <PropertyRef Name="MWQMSubsectorID" />
           </Key>
           <Property Name="MWQMSubsectorID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DBCommand" Type="Int32" Nullable="false" />
           <Property Name="MWQMSubsectorTVItemID" Type="Int32" Nullable="false" />
           <Property Name="SubsectorHistoricKey" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="TideLocationSIDText" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
@@ -5193,11 +5550,24 @@
           <NavigationProperty Name="MWQMSubsectorLanguages" Relationship="CSSPDBModel.FK_MWQMSubsectorLanguages_MWQMSubsectors" FromRole="MWQMSubsector" ToRole="MWQMSubsectorLanguage" />
           <NavigationProperty Name="TVItem" Relationship="CSSPDBModel.FK_MWQMSubsectors_TVItems" FromRole="MWQMSubsector" ToRole="TVItem" />
         </EntityType>
+        <EntityType Name="PersistedGrant">
+          <Key>
+            <PropertyRef Name="Key" />
+          </Key>
+          <Property Name="Key" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Type" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SubjectId" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="ClientId" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="CreationTime" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="Expiration" Type="DateTime" Precision="7" />
+          <Property Name="Data" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
         <EntityType Name="PolSourceGroupingLanguage">
           <Key>
             <PropertyRef Name="PolSourceGroupingLanguageID" />
           </Key>
           <Property Name="PolSourceGroupingLanguageID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DBCommand" Type="Int32" Nullable="false" />
           <Property Name="PolSourceGroupingID" Type="Int32" Nullable="false" />
           <Property Name="Language" Type="Int32" Nullable="false" />
           <Property Name="SourceName" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
@@ -5220,6 +5590,7 @@
             <PropertyRef Name="PolSourceGroupingID" />
           </Key>
           <Property Name="PolSourceGroupingID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DBCommand" Type="Int32" Nullable="false" />
           <Property Name="CSSPID" Type="Int32" Nullable="false" />
           <Property Name="GroupName" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
           <Property Name="Child" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
@@ -5233,6 +5604,7 @@
             <PropertyRef Name="PolSourceObservationIssueID" />
           </Key>
           <Property Name="PolSourceObservationIssueID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DBCommand" Type="Int32" Nullable="false" />
           <Property Name="PolSourceObservationID" Type="Int32" Nullable="false" />
           <Property Name="ObservationInfo" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="Ordinal" Type="Int32" Nullable="false" />
@@ -5246,6 +5618,7 @@
             <PropertyRef Name="PolSourceObservationID" />
           </Key>
           <Property Name="PolSourceObservationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DBCommand" Type="Int32" Nullable="false" />
           <Property Name="PolSourceSiteID" Type="Int32" Nullable="false" />
           <Property Name="ObservationDate_Local" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="ContactTVItemID" Type="Int32" Nullable="false" />
@@ -5262,6 +5635,7 @@
             <PropertyRef Name="PolSourceSiteEffectID" />
           </Key>
           <Property Name="PolSourceSiteEffectID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DBCommand" Type="Int32" Nullable="false" />
           <Property Name="PolSourceSiteOrInfrastructureTVItemID" Type="Int32" Nullable="false" />
           <Property Name="MWQMSiteTVItemID" Type="Int32" Nullable="false" />
           <Property Name="PolSourceSiteEffectTermIDs" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
@@ -5278,6 +5652,7 @@
             <PropertyRef Name="PolSourceSiteEffectTermID" />
           </Key>
           <Property Name="PolSourceSiteEffectTermID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DBCommand" Type="Int32" Nullable="false" />
           <Property Name="IsGroup" Type="Boolean" Nullable="false" />
           <Property Name="UnderGroupID" Type="Int32" />
           <Property Name="EffectTermEN" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
@@ -5292,6 +5667,7 @@
             <PropertyRef Name="PolSourceSiteID" />
           </Key>
           <Property Name="PolSourceSiteID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DBCommand" Type="Int32" Nullable="false" />
           <Property Name="PolSourceSiteTVItemID" Type="Int32" Nullable="false" />
           <Property Name="Temp_Locator_CanDelete" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Oldsiteid" Type="Int32" />
@@ -5311,6 +5687,7 @@
             <PropertyRef Name="RainExceedanceClimateSiteID" />
           </Key>
           <Property Name="RainExceedanceClimateSiteID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DBCommand" Type="Int32" Nullable="false" />
           <Property Name="RainExceedanceTVItemID" Type="Int32" Nullable="false" />
           <Property Name="ClimateSiteTVItemID" Type="Int32" Nullable="false" />
           <Property Name="LastUpdateDate_UTC" Type="DateTime" Nullable="false" Precision="3" />
@@ -5323,6 +5700,7 @@
             <PropertyRef Name="RainExceedanceID" />
           </Key>
           <Property Name="RainExceedanceID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DBCommand" Type="Int32" Nullable="false" />
           <Property Name="RainExceedanceTVItemID" Type="Int32" Nullable="false" />
           <Property Name="StartMonth" Type="Int32" Nullable="false" />
           <Property Name="StartDay" Type="Int32" Nullable="false" />
@@ -5343,6 +5721,7 @@
             <PropertyRef Name="RatingCurveID" />
           </Key>
           <Property Name="RatingCurveID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DBCommand" Type="Int32" Nullable="false" />
           <Property Name="HydrometricSiteID" Type="Int32" Nullable="false" />
           <Property Name="RatingCurveNumber" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="LastUpdateDate_UTC" Type="DateTime" Nullable="false" Precision="3" />
@@ -5355,6 +5734,7 @@
             <PropertyRef Name="RatingCurveValueID" />
           </Key>
           <Property Name="RatingCurveValueID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DBCommand" Type="Int32" Nullable="false" />
           <Property Name="RatingCurveID" Type="Int32" Nullable="false" />
           <Property Name="StageValue_m" Type="Double" Nullable="false" />
           <Property Name="DischargeValue_m3_s" Type="Double" Nullable="false" />
@@ -5367,6 +5747,7 @@
             <PropertyRef Name="ReportSectionID" />
           </Key>
           <Property Name="ReportSectionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DBCommand" Type="Int32" Nullable="false" />
           <Property Name="ReportTypeID" Type="Int32" Nullable="false" />
           <Property Name="TVItemID" Type="Int32" />
           <Property Name="Language" Type="Int32" />
@@ -5392,6 +5773,7 @@
             <PropertyRef Name="ReportTypeID" />
           </Key>
           <Property Name="ReportTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DBCommand" Type="Int32" Nullable="false" />
           <Property Name="TVType" Type="Int32" Nullable="false" />
           <Property Name="FileType" Type="Int32" Nullable="false" />
           <Property Name="UniqueCode" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
@@ -5408,6 +5790,7 @@
             <PropertyRef Name="ResetPasswordID" />
           </Key>
           <Property Name="ResetPasswordID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DBCommand" Type="Int32" Nullable="false" />
           <Property Name="Email" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="ExpireDate_Local" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Code" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="true" />
@@ -5419,6 +5802,7 @@
             <PropertyRef Name="SamplingPlanEmailID" />
           </Key>
           <Property Name="SamplingPlanEmailID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DBCommand" Type="Int32" Nullable="false" />
           <Property Name="SamplingPlanID" Type="Int32" Nullable="false" />
           <Property Name="Email" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
           <Property Name="IsContractor" Type="Boolean" Nullable="false" />
@@ -5435,6 +5819,7 @@
             <PropertyRef Name="SamplingPlanID" />
           </Key>
           <Property Name="SamplingPlanID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DBCommand" Type="Int32" Nullable="false" />
           <Property Name="IsActive" Type="Boolean" Nullable="false" />
           <Property Name="SamplingPlanName" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="ForGroupName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
@@ -5469,6 +5854,7 @@
             <PropertyRef Name="SamplingPlanSubsectorID" />
           </Key>
           <Property Name="SamplingPlanSubsectorID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DBCommand" Type="Int32" Nullable="false" />
           <Property Name="SamplingPlanID" Type="Int32" Nullable="false" />
           <Property Name="SubsectorTVItemID" Type="Int32" Nullable="false" />
           <Property Name="LastUpdateDate_UTC" Type="DateTime" Nullable="false" Precision="3" />
@@ -5482,6 +5868,7 @@
             <PropertyRef Name="SamplingPlanSubsectorSiteID" />
           </Key>
           <Property Name="SamplingPlanSubsectorSiteID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DBCommand" Type="Int32" Nullable="false" />
           <Property Name="SamplingPlanSubsectorID" Type="Int32" Nullable="false" />
           <Property Name="MWQMSiteTVItemID" Type="Int32" Nullable="false" />
           <Property Name="IsDuplicate" Type="Boolean" Nullable="false" />
@@ -5495,6 +5882,7 @@
             <PropertyRef Name="SpillLanguageID" />
           </Key>
           <Property Name="SpillLanguageID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DBCommand" Type="Int32" Nullable="false" />
           <Property Name="SpillID" Type="Int32" Nullable="false" />
           <Property Name="Language" Type="Int32" Nullable="false" />
           <Property Name="SpillComment" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
@@ -5508,6 +5896,7 @@
             <PropertyRef Name="SpillID" />
           </Key>
           <Property Name="SpillID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DBCommand" Type="Int32" Nullable="false" />
           <Property Name="MunicipalityTVItemID" Type="Int32" Nullable="false" />
           <Property Name="InfrastructureTVItemID" Type="Int32" />
           <Property Name="StartDateTime_Local" Type="DateTime" Nullable="false" Precision="3" />
@@ -5524,6 +5913,7 @@
             <PropertyRef Name="TelID" />
           </Key>
           <Property Name="TelID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DBCommand" Type="Int32" Nullable="false" />
           <Property Name="TelTVItemID" Type="Int32" Nullable="false" />
           <Property Name="TelNumber" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="TelType" Type="Int32" Nullable="false" />
@@ -5536,6 +5926,7 @@
             <PropertyRef Name="TideDataValueID" />
           </Key>
           <Property Name="TideDataValueID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DBCommand" Type="Int32" Nullable="false" />
           <Property Name="TideSiteTVItemID" Type="Int32" Nullable="false" />
           <Property Name="DateTime_Local" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Keep" Type="Boolean" Nullable="false" />
@@ -5555,6 +5946,7 @@
             <PropertyRef Name="TideLocationID" />
           </Key>
           <Property Name="TideLocationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DBCommand" Type="Int32" Nullable="false" />
           <Property Name="Zone" Type="Int32" Nullable="false" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Prov" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
@@ -5569,6 +5961,7 @@
             <PropertyRef Name="TideSiteID" />
           </Key>
           <Property Name="TideSiteID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DBCommand" Type="Int32" Nullable="false" />
           <Property Name="TideSiteTVItemID" Type="Int32" Nullable="false" />
           <Property Name="TideSiteName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Province" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="true" />
@@ -5583,6 +5976,7 @@
             <PropertyRef Name="TVFileLanguageID" />
           </Key>
           <Property Name="TVFileLanguageID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DBCommand" Type="Int32" Nullable="false" />
           <Property Name="TVFileID" Type="Int32" Nullable="false" />
           <Property Name="Language" Type="Int32" Nullable="false" />
           <Property Name="FileDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
@@ -5596,6 +5990,7 @@
             <PropertyRef Name="TVFileID" />
           </Key>
           <Property Name="TVFileID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DBCommand" Type="Int32" Nullable="false" />
           <Property Name="TVFileTVItemID" Type="Int32" Nullable="false" />
           <Property Name="TemplateTVType" Type="Int32" />
           <Property Name="ReportTypeID" Type="Int32" />
@@ -5621,6 +6016,7 @@
             <PropertyRef Name="TVItemLanguageID" />
           </Key>
           <Property Name="TVItemLanguageID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DBCommand" Type="Int32" Nullable="false" />
           <Property Name="TVItemID" Type="Int32" Nullable="false" />
           <Property Name="Language" Type="Int32" Nullable="false" />
           <Property Name="TVText" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
@@ -5634,6 +6030,7 @@
             <PropertyRef Name="TVItemLinkID" />
           </Key>
           <Property Name="TVItemLinkID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DBCommand" Type="Int32" Nullable="false" />
           <Property Name="FromTVItemID" Type="Int32" Nullable="false" />
           <Property Name="ToTVItemID" Type="Int32" Nullable="false" />
           <Property Name="FromTVType" Type="Int32" Nullable="false" />
@@ -5656,10 +6053,11 @@
             <PropertyRef Name="TVItemID" />
           </Key>
           <Property Name="TVItemID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DBCommand" Type="Int32" Nullable="false" />
           <Property Name="TVLevel" Type="Int32" Nullable="false" />
           <Property Name="TVPath" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="TVType" Type="Int32" Nullable="false" />
-          <Property Name="ParentID" Type="Int32" Nullable="false" />
+          <Property Name="ParentID" Type="Int32" />
           <Property Name="IsActive" Type="Boolean" Nullable="false" />
           <Property Name="LastUpdateDate_UTC" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="LastUpdateContactTVItemID" Type="Int32" Nullable="false" />
@@ -5743,6 +6141,7 @@
             <PropertyRef Name="TVItemStatID" />
           </Key>
           <Property Name="TVItemStatID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DBCommand" Type="Int32" Nullable="false" />
           <Property Name="TVItemID" Type="Int32" Nullable="false" />
           <Property Name="TVType" Type="Int32" Nullable="false" />
           <Property Name="ChildCount" Type="Int32" Nullable="false" />
@@ -5755,6 +6154,7 @@
             <PropertyRef Name="TVItemUserAuthorizationID" />
           </Key>
           <Property Name="TVItemUserAuthorizationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DBCommand" Type="Int32" Nullable="false" />
           <Property Name="ContactTVItemID" Type="Int32" Nullable="false" />
           <Property Name="TVItemID1" Type="Int32" Nullable="false" />
           <Property Name="TVItemID2" Type="Int32" />
@@ -5771,6 +6171,7 @@
             <PropertyRef Name="TVTypeUserAuthorizationID" />
           </Key>
           <Property Name="TVTypeUserAuthorizationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DBCommand" Type="Int32" Nullable="false" />
           <Property Name="ContactTVItemID" Type="Int32" Nullable="false" />
           <Property Name="TVType" Type="Int32" Nullable="false" />
           <Property Name="TVAuth" Type="Int32" Nullable="false" />
@@ -5783,6 +6184,7 @@
             <PropertyRef Name="UseOfSiteID" />
           </Key>
           <Property Name="UseOfSiteID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DBCommand" Type="Int32" Nullable="false" />
           <Property Name="SiteTVItemID" Type="Int32" Nullable="false" />
           <Property Name="SubsectorTVItemID" Type="Int32" Nullable="false" />
           <Property Name="TVType" Type="Int32" Nullable="false" />
@@ -5806,6 +6208,7 @@
             <PropertyRef Name="VPAmbientID" />
           </Key>
           <Property Name="VPAmbientID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DBCommand" Type="Int32" Nullable="false" />
           <Property Name="VPScenarioID" Type="Int32" Nullable="false" />
           <Property Name="Row" Type="Int32" Nullable="false" />
           <Property Name="MeasurementDepth_m" Type="Double" />
@@ -5827,6 +6230,7 @@
             <PropertyRef Name="VPResultID" />
           </Key>
           <Property Name="VPResultID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DBCommand" Type="Int32" Nullable="false" />
           <Property Name="VPScenarioID" Type="Int32" Nullable="false" />
           <Property Name="Ordinal" Type="Int32" Nullable="false" />
           <Property Name="Concentration_MPN_100ml" Type="Int32" Nullable="false" />
@@ -5843,6 +6247,7 @@
             <PropertyRef Name="VPScenarioLanguageID" />
           </Key>
           <Property Name="VPScenarioLanguageID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DBCommand" Type="Int32" Nullable="false" />
           <Property Name="VPScenarioID" Type="Int32" Nullable="false" />
           <Property Name="Language" Type="Int32" Nullable="false" />
           <Property Name="VPScenarioName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
@@ -5856,6 +6261,7 @@
             <PropertyRef Name="VPScenarioID" />
           </Key>
           <Property Name="VPScenarioID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DBCommand" Type="Int32" Nullable="false" />
           <Property Name="InfrastructureTVItemID" Type="Int32" Nullable="false" />
           <Property Name="VPScenarioStatus" Type="Int32" Nullable="false" />
           <Property Name="UseAsBestEstimate" Type="Boolean" Nullable="false" />
@@ -5931,7 +6337,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_AppTaskLanguages_AppTasks">
-          <End Type="CSSPDBModel.AppTask" Role="AppTask" Multiplicity="1">
+          <End Type="CSSPDBModel.AppTask" Role="AppTask" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
           </End>
           <End Type="CSSPDBModel.AppTaskLanguage" Role="AppTaskLanguage" Multiplicity="*" />
@@ -5970,7 +6376,21 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+        <Association Name="FK_AspNetRoleClaims_AspNetRoles_RoleId">
+          <End Type="CSSPDBModel.AspNetRole" Role="AspNetRole" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="CSSPDBModel.AspNetRoleClaim" Role="AspNetRoleClaim" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetRole">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetRoleClaim">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AspNetUserClaims_AspNetUsers_UserId">
           <End Type="CSSPDBModel.AspNetUser" Role="AspNetUser" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
@@ -5984,7 +6404,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+        <Association Name="FK_AspNetUserLogins_AspNetUsers_UserId">
           <End Type="CSSPDBModel.AspNetUser" Role="AspNetUser" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
@@ -5994,6 +6414,20 @@
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="AspNetUserLogin">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AspNetUserTokens_AspNetUsers_UserId">
+          <End Type="CSSPDBModel.AspNetUser" Role="AspNetUser" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="CSSPDBModel.AspNetUserToken" Role="AspNetUserToken" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserToken">
               <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
@@ -6089,6 +6523,18 @@
             </Principal>
             <Dependent Role="ClimateSite">
               <PropertyRef Name="ClimateSiteTVItemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CoCoRaHSValues_CoCoRaHSSites">
+          <End Type="CSSPDBModel.CoCoRaHSSite" Role="CoCoRaHSSite" Multiplicity="1" />
+          <End Type="CSSPDBModel.CoCoRaHSValue" Role="CoCoRaHSValue" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CoCoRaHSSite">
+              <PropertyRef Name="CoCoRaHSSiteID" />
+            </Principal>
+            <Dependent Role="CoCoRaHSValue">
+              <PropertyRef Name="CoCoRaHSSiteID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -7231,7 +7677,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_TVItems_ParentID">
-          <End Type="CSSPDBModel.TVItem" Role="TVItem" Multiplicity="1" />
+          <End Type="CSSPDBModel.TVItem" Role="TVItem" Multiplicity="0..1" />
           <End Type="CSSPDBModel.TVItem" Role="TVItem1" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TVItem">
@@ -7399,6 +7845,7 @@
                 <ScalarProperty Name="CountryTVItemID" ColumnName="CountryTVItemID" />
                 <ScalarProperty Name="AddressType" ColumnName="AddressType" />
                 <ScalarProperty Name="AddressTVItemID" ColumnName="AddressTVItemID" />
+                <ScalarProperty Name="DBCommand" ColumnName="DBCommand" />
                 <ScalarProperty Name="AddressID" ColumnName="AddressID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -7413,6 +7860,7 @@
                 <ScalarProperty Name="Source" ColumnName="Source" />
                 <ScalarProperty Name="LineNumber" ColumnName="LineNumber" />
                 <ScalarProperty Name="Tag" ColumnName="Tag" />
+                <ScalarProperty Name="DBCommand" ColumnName="DBCommand" />
                 <ScalarProperty Name="AppErrLogID" ColumnName="AppErrLogID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -7427,6 +7875,7 @@
                 <ScalarProperty Name="StatusText" ColumnName="StatusText" />
                 <ScalarProperty Name="Language" ColumnName="Language" />
                 <ScalarProperty Name="AppTaskID" ColumnName="AppTaskID" />
+                <ScalarProperty Name="DBCommand" ColumnName="DBCommand" />
                 <ScalarProperty Name="AppTaskLanguageID" ColumnName="AppTaskLanguageID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -7447,13 +7896,26 @@
                 <ScalarProperty Name="AppTaskCommand" ColumnName="AppTaskCommand" />
                 <ScalarProperty Name="TVItemID2" ColumnName="TVItemID2" />
                 <ScalarProperty Name="TVItemID" ColumnName="TVItemID" />
+                <ScalarProperty Name="DBCommand" ColumnName="DBCommand" />
                 <ScalarProperty Name="AppTaskID" ColumnName="AppTaskID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetRoleClaims">
+            <EntityTypeMapping TypeName="CSSPDBModel.AspNetRoleClaim">
+              <MappingFragment StoreEntitySet="AspNetRoleClaims">
+                <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
+                <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="AspNetRoles">
             <EntityTypeMapping TypeName="CSSPDBModel.AspNetRole">
               <MappingFragment StoreEntitySet="AspNetRoles">
+                <ScalarProperty Name="ConcurrencyStamp" ColumnName="ConcurrencyStamp" />
+                <ScalarProperty Name="NormalizedName" ColumnName="NormalizedName" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
@@ -7473,6 +7935,7 @@
             <EntityTypeMapping TypeName="CSSPDBModel.AspNetUserLogin">
               <MappingFragment StoreEntitySet="AspNetUserLogins">
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ProviderDisplayName" ColumnName="ProviderDisplayName" />
                 <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
                 <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
               </MappingFragment>
@@ -7481,6 +7944,10 @@
           <EntitySetMapping Name="AspNetUsers">
             <EntityTypeMapping TypeName="CSSPDBModel.AspNetUser">
               <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="LockoutEnd" ColumnName="LockoutEnd" />
+                <ScalarProperty Name="ConcurrencyStamp" ColumnName="ConcurrencyStamp" />
+                <ScalarProperty Name="NormalizedEmail" ColumnName="NormalizedEmail" />
+                <ScalarProperty Name="NormalizedUserName" ColumnName="NormalizedUserName" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
                 <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
@@ -7496,6 +7963,16 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserTokens">
+            <EntityTypeMapping TypeName="CSSPDBModel.AspNetUserToken">
+              <MappingFragment StoreEntitySet="AspNetUserTokens">
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="BoxModelLanguages">
             <EntityTypeMapping TypeName="CSSPDBModel.BoxModelLanguage">
               <MappingFragment StoreEntitySet="BoxModelLanguages">
@@ -7505,6 +7982,7 @@
                 <ScalarProperty Name="ScenarioName" ColumnName="ScenarioName" />
                 <ScalarProperty Name="Language" ColumnName="Language" />
                 <ScalarProperty Name="BoxModelID" ColumnName="BoxModelID" />
+                <ScalarProperty Name="DBCommand" ColumnName="DBCommand" />
                 <ScalarProperty Name="BoxModelLanguageID" ColumnName="BoxModelLanguageID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -7529,6 +8007,7 @@
                 <ScalarProperty Name="Volume_m3" ColumnName="Volume_m3" />
                 <ScalarProperty Name="BoxModelResultType" ColumnName="BoxModelResultType" />
                 <ScalarProperty Name="BoxModelID" ColumnName="BoxModelID" />
+                <ScalarProperty Name="DBCommand" ColumnName="DBCommand" />
                 <ScalarProperty Name="BoxModelResultID" ColumnName="BoxModelResultID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -7549,6 +8028,7 @@
                 <ScalarProperty Name="Depth_m" ColumnName="Depth_m" />
                 <ScalarProperty Name="Discharge_m3_day" ColumnName="Discharge_m3_day" />
                 <ScalarProperty Name="InfrastructureTVItemID" ColumnName="InfrastructureTVItemID" />
+                <ScalarProperty Name="DBCommand" ColumnName="DBCommand" />
                 <ScalarProperty Name="BoxModelID" ColumnName="BoxModelID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -7561,6 +8041,7 @@
                 <ScalarProperty Name="Ordinal" ColumnName="Ordinal" />
                 <ScalarProperty Name="ClassificationType" ColumnName="ClassificationType" />
                 <ScalarProperty Name="ClassificationTVItemID" ColumnName="ClassificationTVItemID" />
+                <ScalarProperty Name="DBCommand" ColumnName="DBCommand" />
                 <ScalarProperty Name="ClassificationID" ColumnName="ClassificationID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -7587,6 +8068,7 @@
                 <ScalarProperty Name="Keep" ColumnName="Keep" />
                 <ScalarProperty Name="DateTime_Local" ColumnName="DateTime_Local" />
                 <ScalarProperty Name="ClimateSiteID" ColumnName="ClimateSiteID" />
+                <ScalarProperty Name="DBCommand" ColumnName="DBCommand" />
                 <ScalarProperty Name="ClimateDataValueID" ColumnName="ClimateDataValueID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -7617,7 +8099,39 @@
                 <ScalarProperty Name="ClimateSiteName" ColumnName="ClimateSiteName" />
                 <ScalarProperty Name="ECDBID" ColumnName="ECDBID" />
                 <ScalarProperty Name="ClimateSiteTVItemID" ColumnName="ClimateSiteTVItemID" />
+                <ScalarProperty Name="DBCommand" ColumnName="DBCommand" />
                 <ScalarProperty Name="ClimateSiteID" ColumnName="ClimateSiteID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CoCoRaHSSites">
+            <EntityTypeMapping TypeName="CSSPDBModel.CoCoRaHSSite">
+              <MappingFragment StoreEntitySet="CoCoRaHSSites">
+                <ScalarProperty Name="LastUpdateContactTVItemID" ColumnName="LastUpdateContactTVItemID" />
+                <ScalarProperty Name="LastUpdateDate_UTC" ColumnName="LastUpdateDate_UTC" />
+                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+                <ScalarProperty Name="StationName" ColumnName="StationName" />
+                <ScalarProperty Name="StationNumber" ColumnName="StationNumber" />
+                <ScalarProperty Name="DBCommand" ColumnName="DBCommand" />
+                <ScalarProperty Name="CoCoRaHSSiteID" ColumnName="CoCoRaHSSiteID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CoCoRaHSValues">
+            <EntityTypeMapping TypeName="CSSPDBModel.CoCoRaHSValue">
+              <MappingFragment StoreEntitySet="CoCoRaHSValues">
+                <ScalarProperty Name="LastUpdateContactTVItemID" ColumnName="LastUpdateContactTVItemID" />
+                <ScalarProperty Name="LastUpdateDate_UTC" ColumnName="LastUpdateDate_UTC" />
+                <ScalarProperty Name="TotalSnowSWE" ColumnName="TotalSnowSWE" />
+                <ScalarProperty Name="TotalSnowDepth" ColumnName="TotalSnowDepth" />
+                <ScalarProperty Name="NewSnowSWE" ColumnName="NewSnowSWE" />
+                <ScalarProperty Name="NewSnowDepth" ColumnName="NewSnowDepth" />
+                <ScalarProperty Name="TotalPrecipAmt" ColumnName="TotalPrecipAmt" />
+                <ScalarProperty Name="ObservationDateAndTime" ColumnName="ObservationDateAndTime" />
+                <ScalarProperty Name="CoCoRaHSSiteID" ColumnName="CoCoRaHSSiteID" />
+                <ScalarProperty Name="DBCommand" ColumnName="DBCommand" />
+                <ScalarProperty Name="CoCoRaHSValueID" ColumnName="CoCoRaHSValueID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -7629,6 +8143,7 @@
                 <ScalarProperty Name="MarkerSize" ColumnName="MarkerSize" />
                 <ScalarProperty Name="TVType" ColumnName="TVType" />
                 <ScalarProperty Name="ContactID" ColumnName="ContactID" />
+                <ScalarProperty Name="DBCommand" ColumnName="DBCommand" />
                 <ScalarProperty Name="ContactPreferenceID" ColumnName="ContactPreferenceID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -7638,7 +8153,6 @@
               <MappingFragment StoreEntitySet="Contacts">
                 <ScalarProperty Name="LastUpdateContactTVItemID" ColumnName="LastUpdateContactTVItemID" />
                 <ScalarProperty Name="LastUpdateDate_UTC" ColumnName="LastUpdateDate_UTC" />
-                <ScalarProperty Name="Token" ColumnName="Token" />
                 <ScalarProperty Name="SamplingPlanner_ProvincesTVItemID" ColumnName="SamplingPlanner_ProvincesTVItemID" />
                 <ScalarProperty Name="IsNew" ColumnName="IsNew" />
                 <ScalarProperty Name="Disabled" ColumnName="Disabled" />
@@ -7652,6 +8166,7 @@
                 <ScalarProperty Name="LoginEmail" ColumnName="LoginEmail" />
                 <ScalarProperty Name="ContactTVItemID" ColumnName="ContactTVItemID" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="DBCommand" ColumnName="DBCommand" />
                 <ScalarProperty Name="ContactID" ColumnName="ContactID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -7664,7 +8179,21 @@
                 <ScalarProperty Name="ShortCutAddress" ColumnName="ShortCutAddress" />
                 <ScalarProperty Name="ShortCutText" ColumnName="ShortCutText" />
                 <ScalarProperty Name="ContactID" ColumnName="ContactID" />
+                <ScalarProperty Name="DBCommand" ColumnName="DBCommand" />
                 <ScalarProperty Name="ContactShortcutID" ColumnName="ContactShortcutID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DeviceCodes">
+            <EntityTypeMapping TypeName="CSSPDBModel.DeviceCode">
+              <MappingFragment StoreEntitySet="DeviceCodes">
+                <ScalarProperty Name="Data" ColumnName="Data" />
+                <ScalarProperty Name="Expiration" ColumnName="Expiration" />
+                <ScalarProperty Name="CreationTime" ColumnName="CreationTime" />
+                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+                <ScalarProperty Name="SubjectId" ColumnName="SubjectId" />
+                <ScalarProperty Name="DeviceCode1" ColumnName="DeviceCode" />
+                <ScalarProperty Name="UserCode" ColumnName="UserCode" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -7677,6 +8206,7 @@
                 <ScalarProperty Name="TVFileTVItemID" ColumnName="TVFileTVItemID" />
                 <ScalarProperty Name="TVType" ColumnName="TVType" />
                 <ScalarProperty Name="Language" ColumnName="Language" />
+                <ScalarProperty Name="DBCommand" ColumnName="DBCommand" />
                 <ScalarProperty Name="DocTemplateID" ColumnName="DocTemplateID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -7693,6 +8223,7 @@
                 <ScalarProperty Name="StepLat" ColumnName="StepLat" />
                 <ScalarProperty Name="Ordinal" ColumnName="Ordinal" />
                 <ScalarProperty Name="DrogueRunID" ColumnName="DrogueRunID" />
+                <ScalarProperty Name="DBCommand" ColumnName="DBCommand" />
                 <ScalarProperty Name="DrogueRunPositionID" ColumnName="DrogueRunPositionID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -7707,6 +8238,7 @@
                 <ScalarProperty Name="DrogueType" ColumnName="DrogueType" />
                 <ScalarProperty Name="DrogueNumber" ColumnName="DrogueNumber" />
                 <ScalarProperty Name="SubsectorTVItemID" ColumnName="SubsectorTVItemID" />
+                <ScalarProperty Name="DBCommand" ColumnName="DBCommand" />
                 <ScalarProperty Name="DrogueRunID" ColumnName="DrogueRunID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -7720,6 +8252,7 @@
                 <ScalarProperty Name="Agency" ColumnName="Agency" />
                 <ScalarProperty Name="Language" ColumnName="Language" />
                 <ScalarProperty Name="EmailDistributionListContactID" ColumnName="EmailDistributionListContactID" />
+                <ScalarProperty Name="DBCommand" ColumnName="DBCommand" />
                 <ScalarProperty Name="EmailDistributionListContactLanguageID" ColumnName="EmailDistributionListContactLanguageID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -7738,6 +8271,7 @@
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="IsCC" ColumnName="IsCC" />
                 <ScalarProperty Name="EmailDistributionListID" ColumnName="EmailDistributionListID" />
+                <ScalarProperty Name="DBCommand" ColumnName="DBCommand" />
                 <ScalarProperty Name="EmailDistributionListContactID" ColumnName="EmailDistributionListContactID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -7751,6 +8285,7 @@
                 <ScalarProperty Name="EmailListName" ColumnName="EmailListName" />
                 <ScalarProperty Name="Language" ColumnName="Language" />
                 <ScalarProperty Name="EmailDistributionListID" ColumnName="EmailDistributionListID" />
+                <ScalarProperty Name="DBCommand" ColumnName="DBCommand" />
                 <ScalarProperty Name="EmailDistributionListLanguageID" ColumnName="EmailDistributionListLanguageID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -7762,6 +8297,7 @@
                 <ScalarProperty Name="LastUpdateDate_UTC" ColumnName="LastUpdateDate_UTC" />
                 <ScalarProperty Name="Ordinal" ColumnName="Ordinal" />
                 <ScalarProperty Name="ParentTVItemID" ColumnName="ParentTVItemID" />
+                <ScalarProperty Name="DBCommand" ColumnName="DBCommand" />
                 <ScalarProperty Name="EmailDistributionListID" ColumnName="EmailDistributionListID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -7774,6 +8310,7 @@
                 <ScalarProperty Name="EmailType" ColumnName="EmailType" />
                 <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
                 <ScalarProperty Name="EmailTVItemID" ColumnName="EmailTVItemID" />
+                <ScalarProperty Name="DBCommand" ColumnName="DBCommand" />
                 <ScalarProperty Name="EmailID" ColumnName="EmailID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -7786,6 +8323,7 @@
                 <ScalarProperty Name="DocHTMLText" ColumnName="DocHTMLText" />
                 <ScalarProperty Name="Language" ColumnName="Language" />
                 <ScalarProperty Name="DocKey" ColumnName="DocKey" />
+                <ScalarProperty Name="DBCommand" ColumnName="DBCommand" />
                 <ScalarProperty Name="HelpDocID" ColumnName="HelpDocID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -7804,6 +8342,7 @@
                 <ScalarProperty Name="Keep" ColumnName="Keep" />
                 <ScalarProperty Name="DateTime_Local" ColumnName="DateTime_Local" />
                 <ScalarProperty Name="HydrometricSiteID" ColumnName="HydrometricSiteID" />
+                <ScalarProperty Name="DBCommand" ColumnName="DBCommand" />
                 <ScalarProperty Name="HydrometricDataValueID" ColumnName="HydrometricDataValueID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -7832,6 +8371,7 @@
                 <ScalarProperty Name="QuebecSiteNumber" ColumnName="QuebecSiteNumber" />
                 <ScalarProperty Name="FedSiteNumber" ColumnName="FedSiteNumber" />
                 <ScalarProperty Name="HydrometricSiteTVItemID" ColumnName="HydrometricSiteTVItemID" />
+                <ScalarProperty Name="DBCommand" ColumnName="DBCommand" />
                 <ScalarProperty Name="HydrometricSiteID" ColumnName="HydrometricSiteID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -7845,6 +8385,7 @@
                 <ScalarProperty Name="Comment" ColumnName="Comment" />
                 <ScalarProperty Name="Language" ColumnName="Language" />
                 <ScalarProperty Name="InfrastructureID" ColumnName="InfrastructureID" />
+                <ScalarProperty Name="DBCommand" ColumnName="DBCommand" />
                 <ScalarProperty Name="InfrastructureLanguageID" ColumnName="InfrastructureLanguageID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -7901,6 +8442,7 @@
                 <ScalarProperty Name="TPID" ColumnName="TPID" />
                 <ScalarProperty Name="PrismID" ColumnName="PrismID" />
                 <ScalarProperty Name="InfrastructureTVItemID" ColumnName="InfrastructureTVItemID" />
+                <ScalarProperty Name="DBCommand" ColumnName="DBCommand" />
                 <ScalarProperty Name="InfrastructureID" ColumnName="InfrastructureID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -7972,6 +8514,7 @@
                 <ScalarProperty Name="SubsectorTVItemID" ColumnName="SubsectorTVItemID" />
                 <ScalarProperty Name="SamplingPlanID" ColumnName="SamplingPlanID" />
                 <ScalarProperty Name="LabSheetID" ColumnName="LabSheetID" />
+                <ScalarProperty Name="DBCommand" ColumnName="DBCommand" />
                 <ScalarProperty Name="LabSheetDetailID" ColumnName="LabSheetDetailID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -8000,6 +8543,7 @@
                 <ScalarProperty Name="SamplingPlanName" ColumnName="SamplingPlanName" />
                 <ScalarProperty Name="SamplingPlanID" ColumnName="SamplingPlanID" />
                 <ScalarProperty Name="OtherServerLabSheetID" ColumnName="OtherServerLabSheetID" />
+                <ScalarProperty Name="DBCommand" ColumnName="DBCommand" />
                 <ScalarProperty Name="LabSheetID" ColumnName="LabSheetID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -8022,6 +8566,7 @@
                 <ScalarProperty Name="MWQMSiteTVItemID" ColumnName="MWQMSiteTVItemID" />
                 <ScalarProperty Name="Ordinal" ColumnName="Ordinal" />
                 <ScalarProperty Name="LabSheetDetailID" ColumnName="LabSheetDetailID" />
+                <ScalarProperty Name="DBCommand" ColumnName="DBCommand" />
                 <ScalarProperty Name="LabSheetTubeMPNDetailID" ColumnName="LabSheetTubeMPNDetailID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -8035,6 +8580,7 @@
                 <ScalarProperty Name="LogCommand" ColumnName="LogCommand" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="TableName" ColumnName="TableName" />
+                <ScalarProperty Name="DBCommand" ColumnName="DBCommand" />
                 <ScalarProperty Name="LogID" ColumnName="LogID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -8048,6 +8594,7 @@
                 <ScalarProperty Name="Lat" ColumnName="Lat" />
                 <ScalarProperty Name="Ordinal" ColumnName="Ordinal" />
                 <ScalarProperty Name="MapInfoID" ColumnName="MapInfoID" />
+                <ScalarProperty Name="DBCommand" ColumnName="DBCommand" />
                 <ScalarProperty Name="MapInfoPointID" ColumnName="MapInfoPointID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -8064,6 +8611,7 @@
                 <ScalarProperty Name="LatMin" ColumnName="LatMin" />
                 <ScalarProperty Name="TVType" ColumnName="TVType" />
                 <ScalarProperty Name="TVItemID" ColumnName="TVItemID" />
+                <ScalarProperty Name="DBCommand" ColumnName="DBCommand" />
                 <ScalarProperty Name="MapInfoID" ColumnName="MapInfoID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -8083,6 +8631,7 @@
                 <ScalarProperty Name="MikeBoundaryConditionName" ColumnName="MikeBoundaryConditionName" />
                 <ScalarProperty Name="MikeBoundaryConditionCode" ColumnName="MikeBoundaryConditionCode" />
                 <ScalarProperty Name="MikeBoundaryConditionTVItemID" ColumnName="MikeBoundaryConditionTVItemID" />
+                <ScalarProperty Name="DBCommand" ColumnName="DBCommand" />
                 <ScalarProperty Name="MikeBoundaryConditionID" ColumnName="MikeBoundaryConditionID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -8094,6 +8643,7 @@
                 <ScalarProperty Name="LastUpdateDate_UTC" ColumnName="LastUpdateDate_UTC" />
                 <ScalarProperty Name="MikeResultsJSON" ColumnName="MikeResultsJSON" />
                 <ScalarProperty Name="MikeScenarioTVItemID" ColumnName="MikeScenarioTVItemID" />
+                <ScalarProperty Name="DBCommand" ColumnName="DBCommand" />
                 <ScalarProperty Name="MikeScenarioResultID" ColumnName="MikeScenarioResultID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -8132,6 +8682,7 @@
                 <ScalarProperty Name="ScenarioStatus" ColumnName="ScenarioStatus" />
                 <ScalarProperty Name="ParentMikeScenarioID" ColumnName="ParentMikeScenarioID" />
                 <ScalarProperty Name="MikeScenarioTVItemID" ColumnName="MikeScenarioTVItemID" />
+                <ScalarProperty Name="DBCommand" ColumnName="DBCommand" />
                 <ScalarProperty Name="MikeScenarioID" ColumnName="MikeScenarioID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -8150,6 +8701,7 @@
                 <ScalarProperty Name="Include" ColumnName="Include" />
                 <ScalarProperty Name="IsContinuous" ColumnName="IsContinuous" />
                 <ScalarProperty Name="MikeSourceTVItemID" ColumnName="MikeSourceTVItemID" />
+                <ScalarProperty Name="DBCommand" ColumnName="DBCommand" />
                 <ScalarProperty Name="MikeSourceID" ColumnName="MikeSourceID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -8170,6 +8722,7 @@
                 <ScalarProperty Name="EndDateAndTime_Local" ColumnName="EndDateAndTime_Local" />
                 <ScalarProperty Name="StartDateAndTime_Local" ColumnName="StartDateAndTime_Local" />
                 <ScalarProperty Name="MikeSourceID" ColumnName="MikeSourceID" />
+                <ScalarProperty Name="DBCommand" ColumnName="DBCommand" />
                 <ScalarProperty Name="MikeSourceStartEndID" ColumnName="MikeSourceStartEndID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -8202,6 +8755,7 @@
                 <ScalarProperty Name="AnalysisReportYear" ColumnName="AnalysisReportYear" />
                 <ScalarProperty Name="AnalysisName" ColumnName="AnalysisName" />
                 <ScalarProperty Name="SubsectorTVItemID" ColumnName="SubsectorTVItemID" />
+                <ScalarProperty Name="DBCommand" ColumnName="DBCommand" />
                 <ScalarProperty Name="MWQMAnalysisReportParameterID" ColumnName="MWQMAnalysisReportParameterID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -8215,6 +8769,7 @@
                 <ScalarProperty Name="Tubes01" ColumnName="Tubes01" />
                 <ScalarProperty Name="Tubes1" ColumnName="Tubes1" />
                 <ScalarProperty Name="Tubes10" ColumnName="Tubes10" />
+                <ScalarProperty Name="DBCommand" ColumnName="DBCommand" />
                 <ScalarProperty Name="MWQMLookupMPNID" ColumnName="MWQMLookupMPNID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -8230,6 +8785,7 @@
                 <ScalarProperty Name="RunComment" ColumnName="RunComment" />
                 <ScalarProperty Name="Language" ColumnName="Language" />
                 <ScalarProperty Name="MWQMRunID" ColumnName="MWQMRunID" />
+                <ScalarProperty Name="DBCommand" ColumnName="DBCommand" />
                 <ScalarProperty Name="MWQMRunLanguageID" ColumnName="MWQMRunLanguageID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -8278,6 +8834,7 @@
                 <ScalarProperty Name="RunSampleType" ColumnName="RunSampleType" />
                 <ScalarProperty Name="MWQMRunTVItemID" ColumnName="MWQMRunTVItemID" />
                 <ScalarProperty Name="SubsectorTVItemID" ColumnName="SubsectorTVItemID" />
+                <ScalarProperty Name="DBCommand" ColumnName="DBCommand" />
                 <ScalarProperty Name="MWQMRunID" ColumnName="MWQMRunID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -8291,6 +8848,7 @@
                 <ScalarProperty Name="MWQMSampleNote" ColumnName="MWQMSampleNote" />
                 <ScalarProperty Name="Language" ColumnName="Language" />
                 <ScalarProperty Name="MWQMSampleID" ColumnName="MWQMSampleID" />
+                <ScalarProperty Name="DBCommand" ColumnName="DBCommand" />
                 <ScalarProperty Name="MWQMSampleLanguageID" ColumnName="MWQMSampleLanguageID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -8316,6 +8874,7 @@
                 <ScalarProperty Name="SampleDateTime_Local" ColumnName="SampleDateTime_Local" />
                 <ScalarProperty Name="MWQMRunTVItemID" ColumnName="MWQMRunTVItemID" />
                 <ScalarProperty Name="MWQMSiteTVItemID" ColumnName="MWQMSiteTVItemID" />
+                <ScalarProperty Name="DBCommand" ColumnName="DBCommand" />
                 <ScalarProperty Name="MWQMSampleID" ColumnName="MWQMSampleID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -8330,6 +8889,7 @@
                 <ScalarProperty Name="MWQMSiteDescription" ColumnName="MWQMSiteDescription" />
                 <ScalarProperty Name="MWQMSiteNumber" ColumnName="MWQMSiteNumber" />
                 <ScalarProperty Name="MWQMSiteTVItemID" ColumnName="MWQMSiteTVItemID" />
+                <ScalarProperty Name="DBCommand" ColumnName="DBCommand" />
                 <ScalarProperty Name="MWQMSiteID" ColumnName="MWQMSiteID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -8342,6 +8902,7 @@
                 <ScalarProperty Name="EndDate" ColumnName="EndDate" />
                 <ScalarProperty Name="StartDate" ColumnName="StartDate" />
                 <ScalarProperty Name="MWQMSiteTVItemID" ColumnName="MWQMSiteTVItemID" />
+                <ScalarProperty Name="DBCommand" ColumnName="DBCommand" />
                 <ScalarProperty Name="MWQMSiteStartEndDateID" ColumnName="MWQMSiteStartEndDateID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -8357,6 +8918,7 @@
                 <ScalarProperty Name="SubsectorDesc" ColumnName="SubsectorDesc" />
                 <ScalarProperty Name="Language" ColumnName="Language" />
                 <ScalarProperty Name="MWQMSubsectorID" ColumnName="MWQMSubsectorID" />
+                <ScalarProperty Name="DBCommand" ColumnName="DBCommand" />
                 <ScalarProperty Name="MWQMSubsectorLanguageID" ColumnName="MWQMSubsectorLanguageID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -8369,7 +8931,21 @@
                 <ScalarProperty Name="TideLocationSIDText" ColumnName="TideLocationSIDText" />
                 <ScalarProperty Name="SubsectorHistoricKey" ColumnName="SubsectorHistoricKey" />
                 <ScalarProperty Name="MWQMSubsectorTVItemID" ColumnName="MWQMSubsectorTVItemID" />
+                <ScalarProperty Name="DBCommand" ColumnName="DBCommand" />
                 <ScalarProperty Name="MWQMSubsectorID" ColumnName="MWQMSubsectorID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PersistedGrants">
+            <EntityTypeMapping TypeName="CSSPDBModel.PersistedGrant">
+              <MappingFragment StoreEntitySet="PersistedGrants">
+                <ScalarProperty Name="Data" ColumnName="Data" />
+                <ScalarProperty Name="Expiration" ColumnName="Expiration" />
+                <ScalarProperty Name="CreationTime" ColumnName="CreationTime" />
+                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+                <ScalarProperty Name="SubjectId" ColumnName="SubjectId" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Key" ColumnName="Key" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -8391,6 +8967,7 @@
                 <ScalarProperty Name="SourceName" ColumnName="SourceName" />
                 <ScalarProperty Name="Language" ColumnName="Language" />
                 <ScalarProperty Name="PolSourceGroupingID" ColumnName="PolSourceGroupingID" />
+                <ScalarProperty Name="DBCommand" ColumnName="DBCommand" />
                 <ScalarProperty Name="PolSourceGroupingLanguageID" ColumnName="PolSourceGroupingLanguageID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -8404,6 +8981,7 @@
                 <ScalarProperty Name="Child" ColumnName="Child" />
                 <ScalarProperty Name="GroupName" ColumnName="GroupName" />
                 <ScalarProperty Name="CSSPID" ColumnName="CSSPID" />
+                <ScalarProperty Name="DBCommand" ColumnName="DBCommand" />
                 <ScalarProperty Name="PolSourceGroupingID" ColumnName="PolSourceGroupingID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -8417,6 +8995,7 @@
                 <ScalarProperty Name="Ordinal" ColumnName="Ordinal" />
                 <ScalarProperty Name="ObservationInfo" ColumnName="ObservationInfo" />
                 <ScalarProperty Name="PolSourceObservationID" ColumnName="PolSourceObservationID" />
+                <ScalarProperty Name="DBCommand" ColumnName="DBCommand" />
                 <ScalarProperty Name="PolSourceObservationIssueID" ColumnName="PolSourceObservationIssueID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -8431,6 +9010,7 @@
                 <ScalarProperty Name="ContactTVItemID" ColumnName="ContactTVItemID" />
                 <ScalarProperty Name="ObservationDate_Local" ColumnName="ObservationDate_Local" />
                 <ScalarProperty Name="PolSourceSiteID" ColumnName="PolSourceSiteID" />
+                <ScalarProperty Name="DBCommand" ColumnName="DBCommand" />
                 <ScalarProperty Name="PolSourceObservationID" ColumnName="PolSourceObservationID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -8445,6 +9025,7 @@
                 <ScalarProperty Name="PolSourceSiteEffectTermIDs" ColumnName="PolSourceSiteEffectTermIDs" />
                 <ScalarProperty Name="MWQMSiteTVItemID" ColumnName="MWQMSiteTVItemID" />
                 <ScalarProperty Name="PolSourceSiteOrInfrastructureTVItemID" ColumnName="PolSourceSiteOrInfrastructureTVItemID" />
+                <ScalarProperty Name="DBCommand" ColumnName="DBCommand" />
                 <ScalarProperty Name="PolSourceSiteEffectID" ColumnName="PolSourceSiteEffectID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -8458,6 +9039,7 @@
                 <ScalarProperty Name="EffectTermEN" ColumnName="EffectTermEN" />
                 <ScalarProperty Name="UnderGroupID" ColumnName="UnderGroupID" />
                 <ScalarProperty Name="IsGroup" ColumnName="IsGroup" />
+                <ScalarProperty Name="DBCommand" ColumnName="DBCommand" />
                 <ScalarProperty Name="PolSourceSiteEffectTermID" ColumnName="PolSourceSiteEffectTermID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -8475,6 +9057,7 @@
                 <ScalarProperty Name="Oldsiteid" ColumnName="Oldsiteid" />
                 <ScalarProperty Name="Temp_Locator_CanDelete" ColumnName="Temp_Locator_CanDelete" />
                 <ScalarProperty Name="PolSourceSiteTVItemID" ColumnName="PolSourceSiteTVItemID" />
+                <ScalarProperty Name="DBCommand" ColumnName="DBCommand" />
                 <ScalarProperty Name="PolSourceSiteID" ColumnName="PolSourceSiteID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -8486,6 +9069,7 @@
                 <ScalarProperty Name="LastUpdateDate_UTC" ColumnName="LastUpdateDate_UTC" />
                 <ScalarProperty Name="ClimateSiteTVItemID" ColumnName="ClimateSiteTVItemID" />
                 <ScalarProperty Name="RainExceedanceTVItemID" ColumnName="RainExceedanceTVItemID" />
+                <ScalarProperty Name="DBCommand" ColumnName="DBCommand" />
                 <ScalarProperty Name="RainExceedanceClimateSiteID" ColumnName="RainExceedanceClimateSiteID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -8504,6 +9088,7 @@
                 <ScalarProperty Name="StartDay" ColumnName="StartDay" />
                 <ScalarProperty Name="StartMonth" ColumnName="StartMonth" />
                 <ScalarProperty Name="RainExceedanceTVItemID" ColumnName="RainExceedanceTVItemID" />
+                <ScalarProperty Name="DBCommand" ColumnName="DBCommand" />
                 <ScalarProperty Name="RainExceedanceID" ColumnName="RainExceedanceID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -8515,6 +9100,7 @@
                 <ScalarProperty Name="LastUpdateDate_UTC" ColumnName="LastUpdateDate_UTC" />
                 <ScalarProperty Name="RatingCurveNumber" ColumnName="RatingCurveNumber" />
                 <ScalarProperty Name="HydrometricSiteID" ColumnName="HydrometricSiteID" />
+                <ScalarProperty Name="DBCommand" ColumnName="DBCommand" />
                 <ScalarProperty Name="RatingCurveID" ColumnName="RatingCurveID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -8527,6 +9113,7 @@
                 <ScalarProperty Name="DischargeValue_m3_s" ColumnName="DischargeValue_m3_s" />
                 <ScalarProperty Name="StageValue_m" ColumnName="StageValue_m" />
                 <ScalarProperty Name="RatingCurveID" ColumnName="RatingCurveID" />
+                <ScalarProperty Name="DBCommand" ColumnName="DBCommand" />
                 <ScalarProperty Name="RatingCurveValueID" ColumnName="RatingCurveValueID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -8547,6 +9134,7 @@
                 <ScalarProperty Name="Language" ColumnName="Language" />
                 <ScalarProperty Name="TVItemID" ColumnName="TVItemID" />
                 <ScalarProperty Name="ReportTypeID" ColumnName="ReportTypeID" />
+                <ScalarProperty Name="DBCommand" ColumnName="DBCommand" />
                 <ScalarProperty Name="ReportSectionID" ColumnName="ReportSectionID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -8563,6 +9151,7 @@
                 <ScalarProperty Name="UniqueCode" ColumnName="UniqueCode" />
                 <ScalarProperty Name="FileType" ColumnName="FileType" />
                 <ScalarProperty Name="TVType" ColumnName="TVType" />
+                <ScalarProperty Name="DBCommand" ColumnName="DBCommand" />
                 <ScalarProperty Name="ReportTypeID" ColumnName="ReportTypeID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -8575,6 +9164,7 @@
                 <ScalarProperty Name="Code" ColumnName="Code" />
                 <ScalarProperty Name="ExpireDate_Local" ColumnName="ExpireDate_Local" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="DBCommand" ColumnName="DBCommand" />
                 <ScalarProperty Name="ResetPasswordID" ColumnName="ResetPasswordID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -8591,6 +9181,7 @@
                 <ScalarProperty Name="IsContractor" ColumnName="IsContractor" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="SamplingPlanID" ColumnName="SamplingPlanID" />
+                <ScalarProperty Name="DBCommand" ColumnName="DBCommand" />
                 <ScalarProperty Name="SamplingPlanEmailID" ColumnName="SamplingPlanEmailID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -8619,6 +9210,7 @@
                 <ScalarProperty Name="ForGroupName" ColumnName="ForGroupName" />
                 <ScalarProperty Name="SamplingPlanName" ColumnName="SamplingPlanName" />
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="DBCommand" ColumnName="DBCommand" />
                 <ScalarProperty Name="SamplingPlanID" ColumnName="SamplingPlanID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -8630,6 +9222,7 @@
                 <ScalarProperty Name="LastUpdateDate_UTC" ColumnName="LastUpdateDate_UTC" />
                 <ScalarProperty Name="SubsectorTVItemID" ColumnName="SubsectorTVItemID" />
                 <ScalarProperty Name="SamplingPlanID" ColumnName="SamplingPlanID" />
+                <ScalarProperty Name="DBCommand" ColumnName="DBCommand" />
                 <ScalarProperty Name="SamplingPlanSubsectorID" ColumnName="SamplingPlanSubsectorID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -8642,6 +9235,7 @@
                 <ScalarProperty Name="IsDuplicate" ColumnName="IsDuplicate" />
                 <ScalarProperty Name="MWQMSiteTVItemID" ColumnName="MWQMSiteTVItemID" />
                 <ScalarProperty Name="SamplingPlanSubsectorID" ColumnName="SamplingPlanSubsectorID" />
+                <ScalarProperty Name="DBCommand" ColumnName="DBCommand" />
                 <ScalarProperty Name="SamplingPlanSubsectorSiteID" ColumnName="SamplingPlanSubsectorSiteID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -8655,6 +9249,7 @@
                 <ScalarProperty Name="SpillComment" ColumnName="SpillComment" />
                 <ScalarProperty Name="Language" ColumnName="Language" />
                 <ScalarProperty Name="SpillID" ColumnName="SpillID" />
+                <ScalarProperty Name="DBCommand" ColumnName="DBCommand" />
                 <ScalarProperty Name="SpillLanguageID" ColumnName="SpillLanguageID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -8669,6 +9264,7 @@
                 <ScalarProperty Name="StartDateTime_Local" ColumnName="StartDateTime_Local" />
                 <ScalarProperty Name="InfrastructureTVItemID" ColumnName="InfrastructureTVItemID" />
                 <ScalarProperty Name="MunicipalityTVItemID" ColumnName="MunicipalityTVItemID" />
+                <ScalarProperty Name="DBCommand" ColumnName="DBCommand" />
                 <ScalarProperty Name="SpillID" ColumnName="SpillID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -8681,6 +9277,7 @@
                 <ScalarProperty Name="TelType" ColumnName="TelType" />
                 <ScalarProperty Name="TelNumber" ColumnName="TelNumber" />
                 <ScalarProperty Name="TelTVItemID" ColumnName="TelTVItemID" />
+                <ScalarProperty Name="DBCommand" ColumnName="DBCommand" />
                 <ScalarProperty Name="TelID" ColumnName="TelID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -8700,6 +9297,7 @@
                 <ScalarProperty Name="Keep" ColumnName="Keep" />
                 <ScalarProperty Name="DateTime_Local" ColumnName="DateTime_Local" />
                 <ScalarProperty Name="TideSiteTVItemID" ColumnName="TideSiteTVItemID" />
+                <ScalarProperty Name="DBCommand" ColumnName="DBCommand" />
                 <ScalarProperty Name="TideDataValueID" ColumnName="TideDataValueID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -8715,6 +9313,7 @@
                 <ScalarProperty Name="Prov" ColumnName="Prov" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Zone" ColumnName="Zone" />
+                <ScalarProperty Name="DBCommand" ColumnName="DBCommand" />
                 <ScalarProperty Name="TideLocationID" ColumnName="TideLocationID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -8729,6 +9328,7 @@
                 <ScalarProperty Name="Province" ColumnName="Province" />
                 <ScalarProperty Name="TideSiteName" ColumnName="TideSiteName" />
                 <ScalarProperty Name="TideSiteTVItemID" ColumnName="TideSiteTVItemID" />
+                <ScalarProperty Name="DBCommand" ColumnName="DBCommand" />
                 <ScalarProperty Name="TideSiteID" ColumnName="TideSiteID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -8742,6 +9342,7 @@
                 <ScalarProperty Name="FileDescription" ColumnName="FileDescription" />
                 <ScalarProperty Name="Language" ColumnName="Language" />
                 <ScalarProperty Name="TVFileID" ColumnName="TVFileID" />
+                <ScalarProperty Name="DBCommand" ColumnName="DBCommand" />
                 <ScalarProperty Name="TVFileLanguageID" ColumnName="TVFileLanguageID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -8766,6 +9367,7 @@
                 <ScalarProperty Name="ReportTypeID" ColumnName="ReportTypeID" />
                 <ScalarProperty Name="TemplateTVType" ColumnName="TemplateTVType" />
                 <ScalarProperty Name="TVFileTVItemID" ColumnName="TVFileTVItemID" />
+                <ScalarProperty Name="DBCommand" ColumnName="DBCommand" />
                 <ScalarProperty Name="TVFileID" ColumnName="TVFileID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -8779,6 +9381,7 @@
                 <ScalarProperty Name="TVText" ColumnName="TVText" />
                 <ScalarProperty Name="Language" ColumnName="Language" />
                 <ScalarProperty Name="TVItemID" ColumnName="TVItemID" />
+                <ScalarProperty Name="DBCommand" ColumnName="DBCommand" />
                 <ScalarProperty Name="TVItemLanguageID" ColumnName="TVItemLanguageID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -8798,6 +9401,7 @@
                 <ScalarProperty Name="FromTVType" ColumnName="FromTVType" />
                 <ScalarProperty Name="ToTVItemID" ColumnName="ToTVItemID" />
                 <ScalarProperty Name="FromTVItemID" ColumnName="FromTVItemID" />
+                <ScalarProperty Name="DBCommand" ColumnName="DBCommand" />
                 <ScalarProperty Name="TVItemLinkID" ColumnName="TVItemLinkID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -8812,6 +9416,7 @@
                 <ScalarProperty Name="TVType" ColumnName="TVType" />
                 <ScalarProperty Name="TVPath" ColumnName="TVPath" />
                 <ScalarProperty Name="TVLevel" ColumnName="TVLevel" />
+                <ScalarProperty Name="DBCommand" ColumnName="DBCommand" />
                 <ScalarProperty Name="TVItemID" ColumnName="TVItemID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -8824,6 +9429,7 @@
                 <ScalarProperty Name="ChildCount" ColumnName="ChildCount" />
                 <ScalarProperty Name="TVType" ColumnName="TVType" />
                 <ScalarProperty Name="TVItemID" ColumnName="TVItemID" />
+                <ScalarProperty Name="DBCommand" ColumnName="DBCommand" />
                 <ScalarProperty Name="TVItemStatID" ColumnName="TVItemStatID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -8839,6 +9445,7 @@
                 <ScalarProperty Name="TVItemID2" ColumnName="TVItemID2" />
                 <ScalarProperty Name="TVItemID1" ColumnName="TVItemID1" />
                 <ScalarProperty Name="ContactTVItemID" ColumnName="ContactTVItemID" />
+                <ScalarProperty Name="DBCommand" ColumnName="DBCommand" />
                 <ScalarProperty Name="TVItemUserAuthorizationID" ColumnName="TVItemUserAuthorizationID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -8851,6 +9458,7 @@
                 <ScalarProperty Name="TVAuth" ColumnName="TVAuth" />
                 <ScalarProperty Name="TVType" ColumnName="TVType" />
                 <ScalarProperty Name="ContactTVItemID" ColumnName="ContactTVItemID" />
+                <ScalarProperty Name="DBCommand" ColumnName="DBCommand" />
                 <ScalarProperty Name="TVTypeUserAuthorizationID" ColumnName="TVTypeUserAuthorizationID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -8873,6 +9481,7 @@
                 <ScalarProperty Name="TVType" ColumnName="TVType" />
                 <ScalarProperty Name="SubsectorTVItemID" ColumnName="SubsectorTVItemID" />
                 <ScalarProperty Name="SiteTVItemID" ColumnName="SiteTVItemID" />
+                <ScalarProperty Name="DBCommand" ColumnName="DBCommand" />
                 <ScalarProperty Name="UseOfSiteID" ColumnName="UseOfSiteID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -8894,6 +9503,7 @@
                 <ScalarProperty Name="MeasurementDepth_m" ColumnName="MeasurementDepth_m" />
                 <ScalarProperty Name="Row" ColumnName="Row" />
                 <ScalarProperty Name="VPScenarioID" ColumnName="VPScenarioID" />
+                <ScalarProperty Name="DBCommand" ColumnName="DBCommand" />
                 <ScalarProperty Name="VPAmbientID" ColumnName="VPAmbientID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -8910,6 +9520,7 @@
                 <ScalarProperty Name="Concentration_MPN_100ml" ColumnName="Concentration_MPN_100ml" />
                 <ScalarProperty Name="Ordinal" ColumnName="Ordinal" />
                 <ScalarProperty Name="VPScenarioID" ColumnName="VPScenarioID" />
+                <ScalarProperty Name="DBCommand" ColumnName="DBCommand" />
                 <ScalarProperty Name="VPResultID" ColumnName="VPResultID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -8923,6 +9534,7 @@
                 <ScalarProperty Name="VPScenarioName" ColumnName="VPScenarioName" />
                 <ScalarProperty Name="Language" ColumnName="Language" />
                 <ScalarProperty Name="VPScenarioID" ColumnName="VPScenarioID" />
+                <ScalarProperty Name="DBCommand" ColumnName="DBCommand" />
                 <ScalarProperty Name="VPScenarioLanguageID" ColumnName="VPScenarioLanguageID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -8951,6 +9563,7 @@
                 <ScalarProperty Name="UseAsBestEstimate" ColumnName="UseAsBestEstimate" />
                 <ScalarProperty Name="VPScenarioStatus" ColumnName="VPScenarioStatus" />
                 <ScalarProperty Name="InfrastructureTVItemID" ColumnName="InfrastructureTVItemID" />
+                <ScalarProperty Name="DBCommand" ColumnName="DBCommand" />
                 <ScalarProperty Name="VPScenarioID" ColumnName="VPScenarioID" />
               </MappingFragment>
             </EntityTypeMapping>

@@ -82,12 +82,19 @@ namespace CSSPDBDLL.Services
                 return retStr;
             }
 
+            retStr = _BaseEnumService.DBCommandOK(tvTypeUserAuthorizationModel.DBCommand);
+            if (!string.IsNullOrWhiteSpace(retStr))
+            {
+                return retStr;
+            }
+
             return "";
         }
 
         // Fill
         public string FillTVTypeUserAuthorization(TVTypeUserAuthorization tvTypeUserAuthorization, TVTypeUserAuthorizationModel tvTypeUserAuthorizationModel, ContactOK contactOK)
         {
+            tvTypeUserAuthorization.DBCommand = (int)tvTypeUserAuthorizationModel.DBCommand;
             tvTypeUserAuthorization.ContactTVItemID = tvTypeUserAuthorizationModel.ContactTVItemID;
             tvTypeUserAuthorization.TVType = (int)tvTypeUserAuthorizationModel.TVType;
             tvTypeUserAuthorization.TVAuth = (int)tvTypeUserAuthorizationModel.TVAuth;
@@ -122,6 +129,7 @@ namespace CSSPDBDLL.Services
                                                                                    {
                                                                                        Error = "",
                                                                                        TVTypeUserAuthorizationID = c.TVTypeUserAuthorizationID,
+                                                                                       DBCommand = (DBCommandEnum)c.DBCommand,
                                                                                        ContactTVItemID = c.ContactTVItemID,
                                                                                        TVType = (TVTypeEnum)c.TVType,
                                                                                        TVPath = "",
@@ -149,6 +157,7 @@ namespace CSSPDBDLL.Services
                                                                                    {
                                                                                        Error = "",
                                                                                        TVTypeUserAuthorizationID = c.TVTypeUserAuthorizationID,
+                                                                                       DBCommand = (DBCommandEnum)c.DBCommand,
                                                                                        ContactTVItemID = c.ContactTVItemID,
                                                                                        TVType = (TVTypeEnum)c.TVType,
                                                                                        TVPath = "",
@@ -178,6 +187,7 @@ namespace CSSPDBDLL.Services
                                                                          {
                                                                              Error = "",
                                                                              TVTypeUserAuthorizationID = c.TVTypeUserAuthorizationID,
+                                                                             DBCommand = (DBCommandEnum)c.DBCommand,
                                                                              ContactTVItemID = c.ContactTVItemID,
                                                                              TVType = (TVTypeEnum)c.TVType,
                                                                              TVPath = "",
@@ -205,6 +215,7 @@ namespace CSSPDBDLL.Services
                                                                          {
                                                                              Error = "",
                                                                              TVTypeUserAuthorizationID = c.TVTypeUserAuthorizationID,
+                                                                             DBCommand = (DBCommandEnum)c.DBCommand,
                                                                              ContactTVItemID = c.ContactTVItemID,
                                                                              TVType = (TVTypeEnum)c.TVType,
                                                                              TVPath = "",
@@ -350,6 +361,8 @@ namespace CSSPDBDLL.Services
             TVTypeUserAuthorization tvTypeUserAuthorizationToUpdate = GetTVTypeUserAuthorizationWithContactTVItemIDAndTVTypeDB(tvTypeUserAuthorizationModel.ContactTVItemID, tvTypeUserAuthorizationModel.TVType);
             if (tvTypeUserAuthorizationToUpdate == null)
             {
+                tvTypeUserAuthorizationModel.DBCommand = DBCommandEnum.Original;
+
                 return PostAddTVTypeUserAuthorizationDB(tvTypeUserAuthorizationModel);
             }
             else

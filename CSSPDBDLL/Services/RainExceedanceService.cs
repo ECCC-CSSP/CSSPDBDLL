@@ -89,12 +89,19 @@ namespace CSSPDBDLL.Services
                 return retStr;
             }
 
+            retStr = _BaseEnumService.DBCommandOK(rainExceedanceModel.DBCommand);
+            if (!string.IsNullOrWhiteSpace(retStr))
+            {
+                return retStr;
+            }
+
             return "";
         }
 
         // Fill
         public string FillRainExceedance(RainExceedance rainExceedanceNew, RainExceedanceModel rainExceedanceModel, ContactOK contactOK)
         {
+            rainExceedanceNew.DBCommand = (int)rainExceedanceModel.DBCommand;
             rainExceedanceNew.RainExceedanceTVItemID = rainExceedanceModel.RainExceedanceTVItemID;
             rainExceedanceNew.StartMonth = rainExceedanceModel.StartMonth;
             rainExceedanceNew.StartDay = rainExceedanceModel.StartDay;
@@ -166,6 +173,7 @@ namespace CSSPDBDLL.Services
                                                                                                    {
                                                                                                        Error = "",
                                                                                                        ClimateSiteID = c.ClimateSiteID,
+                                                                                                       DBCommand = (DBCommandEnum)c.DBCommand,
                                                                                                        ClimateSiteTVItemID = c.ClimateSiteTVItemID,
                                                                                                        ClimateID = c.ClimateID,
                                                                                                        ClimateSiteName = c.ClimateSiteName,
@@ -247,6 +255,7 @@ namespace CSSPDBDLL.Services
                                                                  {
                                                                      Error = "",
                                                                      RainExceedanceID = c.RainExceedanceID,
+                                                                     DBCommand = (DBCommandEnum)c.DBCommand,
                                                                      RainExceedanceTVItemID = c.RainExceedanceTVItemID,
                                                                      RainExceedanceName = rainExceedanceName ?? "",
                                                                      StartMonth = c.StartMonth,
@@ -300,6 +309,7 @@ namespace CSSPDBDLL.Services
                                                        {
                                                            Error = "",
                                                            RainExceedanceID = c.RainExceedanceID,
+                                                           DBCommand = (DBCommandEnum)c.DBCommand,
                                                            RainExceedanceTVItemID = c.RainExceedanceTVItemID,
                                                            RainExceedanceName = rainExceedanceName ?? "",
                                                            StartMonth = c.StartMonth,
@@ -356,6 +366,7 @@ namespace CSSPDBDLL.Services
                                                        {
                                                            Error = "",
                                                            RainExceedanceID = c.RainExceedanceID,
+                                                           DBCommand = (DBCommandEnum)c.DBCommand,
                                                            RainExceedanceTVItemID = c.RainExceedanceTVItemID,
                                                            RainExceedanceName = rainExceedanceName ?? "",
                                                            StartMonth = c.StartMonth,
@@ -540,6 +551,7 @@ namespace CSSPDBDLL.Services
 
                     RainExceedanceModel RainExceedanceModelNew = new RainExceedanceModel()
                     {
+                        DBCommand = DBCommandEnum.Original,
                         RainExceedanceTVItemID = tvItemModelRainExceedance.TVItemID,
                         StartMonth = StartMonth,
                         StartDay = StartDay,

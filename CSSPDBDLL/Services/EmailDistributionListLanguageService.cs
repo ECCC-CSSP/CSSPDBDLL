@@ -70,6 +70,12 @@ namespace CSSPDBDLL.Services
                 return retStr;
             }
 
+            retStr = _BaseEnumService.DBCommandOK(emailDistributionListLanguageModel.DBCommand);
+            if (!string.IsNullOrWhiteSpace(retStr))
+            {
+                return retStr;
+            }
+
             return "";
         }
 
@@ -78,6 +84,7 @@ namespace CSSPDBDLL.Services
         {
             try
             {
+                emailDistributionListLanguage.DBCommand = (int)emailDistributionListLanguageModel.DBCommand;
                 emailDistributionListLanguage.EmailDistributionListID = emailDistributionListLanguageModel.EmailDistributionListID;
                 emailDistributionListLanguage.Language = (int)emailDistributionListLanguageModel.Language;
                 emailDistributionListLanguage.EmailListName = emailDistributionListLanguageModel.EmailListName;
@@ -118,6 +125,7 @@ namespace CSSPDBDLL.Services
                                                            {
                                                                Error = "",
                                                                EmailDistributionListLanguageID = c.EmailDistributionListLanguageID,
+                                                               DBCommand = (DBCommandEnum)c.DBCommand,
                                                                EmailDistributionListID = c.EmailDistributionListID,
                                                                Language = (LanguageEnum)c.Language,
                                                                EmailListName = c.EmailListName,

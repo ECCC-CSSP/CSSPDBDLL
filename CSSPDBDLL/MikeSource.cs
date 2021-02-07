@@ -21,6 +21,7 @@ namespace CSSPDBDLL
         }
     
         public int MikeSourceID { get; set; }
+        public int DBCommand { get; set; }
         public int MikeSourceTVItemID { get; set; }
         public bool IsContinuous { get; set; }
         public bool Include { get; set; }

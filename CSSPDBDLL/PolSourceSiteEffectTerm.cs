@@ -21,6 +21,7 @@ namespace CSSPDBDLL
         }
     
         public int PolSourceSiteEffectTermID { get; set; }
+        public int DBCommand { get; set; }
         public bool IsGroup { get; set; }
         public Nullable<int> UnderGroupID { get; set; }
         public string EffectTermEN { get; set; }

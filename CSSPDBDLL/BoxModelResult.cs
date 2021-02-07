@@ -15,6 +15,7 @@ namespace CSSPDBDLL
     public partial class BoxModelResult
     {
         public int BoxModelResultID { get; set; }
+        public int DBCommand { get; set; }
         public int BoxModelID { get; set; }
         public int BoxModelResultType { get; set; }
         public double Volume_m3 { get; set; }

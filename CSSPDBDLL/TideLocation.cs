@@ -15,6 +15,7 @@ namespace CSSPDBDLL
     public partial class TideLocation
     {
         public int TideLocationID { get; set; }
+        public int DBCommand { get; set; }
         public int Zone { get; set; }
         public string Name { get; set; }
         public string Prov { get; set; }

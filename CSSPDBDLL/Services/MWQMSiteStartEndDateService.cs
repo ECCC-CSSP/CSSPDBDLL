@@ -75,12 +75,19 @@ namespace CSSPDBDLL.Services
                 }
             }
 
+            retStr = _BaseEnumService.DBCommandOK(mwqmSiteStartEndDateModel.DBCommand);
+            if (!string.IsNullOrWhiteSpace(retStr))
+            {
+                return retStr;
+            }
+
             return "";
         }
 
         // Fill
         public string FillMWQMSiteStartEndDate(MWQMSiteStartEndDate mwqmSiteStartEndDate, MWQMSiteStartEndDateModel mwqmSiteStartEndDateModel, ContactOK contactOK)
         {
+            mwqmSiteStartEndDate.DBCommand = (int)mwqmSiteStartEndDateModel.DBCommand;
             mwqmSiteStartEndDate.MWQMSiteTVItemID = mwqmSiteStartEndDateModel.MWQMSiteTVItemID;
             mwqmSiteStartEndDate.StartDate = mwqmSiteStartEndDateModel.StartDate;
             mwqmSiteStartEndDate.EndDate = mwqmSiteStartEndDateModel.EndDate;
@@ -113,6 +120,7 @@ namespace CSSPDBDLL.Services
                                                                    {
                                                                        Error = "",
                                                                        MWQMSiteStartEndDateID = c.MWQMSiteStartEndDateID,
+                                                                       DBCommand = (DBCommandEnum)c.DBCommand,
                                                                        MWQMSiteTVItemID = c.MWQMSiteTVItemID,
                                                                        StartDate = c.StartDate,
                                                                        EndDate = c.EndDate,
@@ -134,6 +142,7 @@ namespace CSSPDBDLL.Services
                                                                              {
                                                                                  Error = "",
                                                                                  MWQMSiteStartEndDateID = c.MWQMSiteStartEndDateID,
+                                                                                 DBCommand = (DBCommandEnum)c.DBCommand,
                                                                                  MWQMSiteTVItemID = c.MWQMSiteTVItemID,
                                                                                  StartDate = c.StartDate,
                                                                                  EndDate = c.EndDate,
@@ -153,6 +162,7 @@ namespace CSSPDBDLL.Services
                                                                       {
                                                                           Error = "",
                                                                           MWQMSiteStartEndDateID = c.MWQMSiteStartEndDateID,
+                                                                          DBCommand = (DBCommandEnum)c.DBCommand,
                                                                           MWQMSiteTVItemID = c.MWQMSiteTVItemID,
                                                                           StartDate = c.StartDate,
                                                                           EndDate = c.EndDate,
@@ -215,6 +225,8 @@ namespace CSSPDBDLL.Services
                 if (!string.IsNullOrWhiteSpace(mwqmSiteStartEndDateNewOrToChange.Error))
                     return ReturnError(mwqmSiteStartEndDateNewOrToChange.Error);
             }
+
+            mwqmSiteStartEndDateNewOrToChange.DBCommand = DBCommandEnum.Original;
 
             int.TryParse(fc["MWQMSiteTVItemID"], out MWQMSiteTVItemID);
             if (MWQMSiteTVItemID == 0)

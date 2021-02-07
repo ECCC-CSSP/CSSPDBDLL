@@ -21,6 +21,7 @@ namespace CSSPDBDLL
         }
     
         public int EmailDistributionListContactID { get; set; }
+        public int DBCommand { get; set; }
         public int EmailDistributionListID { get; set; }
         public bool IsCC { get; set; }
         public string Name { get; set; }

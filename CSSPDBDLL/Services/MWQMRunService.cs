@@ -255,12 +255,19 @@ namespace CSSPDBDLL.Services
                 return retStr;
             }
 
+            retStr = _BaseEnumService.DBCommandOK(mwqmRunModel.DBCommand);
+            if (!string.IsNullOrWhiteSpace(retStr))
+            {
+                return retStr;
+            }
+
             return "";
         }
 
         // Fill
         public string FillMWQMRun(MWQMRun mwqmRun, MWQMRunModel mwqmRunModel, ContactOK contactOK)
         {
+            mwqmRun.DBCommand = (int)mwqmRunModel.DBCommand;
             mwqmRun.SubsectorTVItemID = mwqmRunModel.SubsectorTVItemID;
             mwqmRun.MWQMRunTVItemID = mwqmRunModel.MWQMRunTVItemID;
             mwqmRun.RunSampleType = (int)mwqmRunModel.RunSampleType;
@@ -341,6 +348,7 @@ namespace CSSPDBDLL.Services
                                          {
                                              Error = "",
                                              MWQMRunID = c.MWQMRunID,
+                                             DBCommand = (DBCommandEnum)c.DBCommand,
                                              SubsectorTVItemID = c.SubsectorTVItemID,
                                              SubsectorTVText = mwqmSubsectorName,
                                              MWQMRunTVItemID = (int)c.MWQMRunTVItemID,
@@ -406,6 +414,7 @@ namespace CSSPDBDLL.Services
                                                    {
                                                        Error = "",
                                                        MWQMRunID = c.MWQMRunID,
+                                                       DBCommand = (DBCommandEnum)c.DBCommand,
                                                        RunComment = runComment,
                                                        RunWeatherComment = runWeatherComment,
                                                        SubsectorTVItemID = c.SubsectorTVItemID,
@@ -471,6 +480,7 @@ namespace CSSPDBDLL.Services
                                                    {
                                                        Error = "",
                                                        MWQMRunID = c.MWQMRunID,
+                                                       DBCommand = (DBCommandEnum)c.DBCommand,
                                                        SubsectorTVItemID = c.SubsectorTVItemID,
                                                        SubsectorTVText = mwqmSubsectorName,
                                                        MWQMRunTVItemID = (int)c.MWQMRunTVItemID,
@@ -534,6 +544,7 @@ namespace CSSPDBDLL.Services
                                          {
                                              Error = "",
                                              MWQMRunID = c.MWQMRunID,
+                                             DBCommand = (DBCommandEnum)c.DBCommand,
                                              SubsectorTVItemID = c.SubsectorTVItemID,
                                              SubsectorTVText = mwqmSubsectorName,
                                              MWQMRunTVItemID = (int)c.MWQMRunTVItemID,
@@ -598,6 +609,7 @@ namespace CSSPDBDLL.Services
                                          {
                                              Error = "",
                                              MWQMRunID = c.MWQMRunID,
+                                             DBCommand = (DBCommandEnum)c.DBCommand,
                                              SubsectorTVItemID = c.SubsectorTVItemID,
                                              SubsectorTVText = mwqmSubsectorName,
                                              MWQMRunTVItemID = (int)c.MWQMRunTVItemID,
@@ -662,6 +674,7 @@ namespace CSSPDBDLL.Services
                                          {
                                              Error = "",
                                              MWQMRunID = c.MWQMRunID,
+                                             DBCommand = (DBCommandEnum)c.DBCommand,
                                              SubsectorTVItemID = c.SubsectorTVItemID,
                                              SubsectorTVText = mwqmSubsectorName,
                                              MWQMRunTVItemID = (int)c.MWQMRunTVItemID,
@@ -726,6 +739,7 @@ namespace CSSPDBDLL.Services
                                                    {
                                                        Error = "",
                                                        MWQMRunID = c.MWQMRunID,
+                                                       DBCommand = (DBCommandEnum)c.DBCommand,
                                                        SubsectorTVItemID = c.SubsectorTVItemID,
                                                        SubsectorTVText = mwqmSubsectorName,
                                                        MWQMRunTVItemID = (int)c.MWQMRunTVItemID,
@@ -790,6 +804,7 @@ namespace CSSPDBDLL.Services
                                             {
                                                 Error = "",
                                                 MWQMRunID = c.MWQMRunID,
+                                                DBCommand = (DBCommandEnum)c.DBCommand,
                                                 SubsectorTVItemID = c.SubsectorTVItemID,
                                                 SubsectorTVText = mwqmSubsectorName,
                                                 MWQMRunTVItemID = (int)c.MWQMRunTVItemID,
@@ -965,7 +980,7 @@ namespace CSSPDBDLL.Services
             TideTextEnum EndTide = TideTextEnum.Error;
             string RunComment = "";
             string RunWeatherComment = "";
-            bool ShouldChangeTVText = false;
+            //bool ShouldChangeTVText = false;
 
 
             // will be 0 to add a new MWQMRun
@@ -1035,7 +1050,7 @@ namespace CSSPDBDLL.Services
 
             if (mwqmRunModel.DateTime_Local != RunDate)
             {
-                ShouldChangeTVText = true;
+                //ShouldChangeTVText = true;
             }
 
             mwqmRunModel.DateTime_Local = RunDate;
@@ -1840,6 +1855,7 @@ namespace CSSPDBDLL.Services
                 {
                     MWQMRunLanguageModel mwqmRunLanguageModel = new MWQMRunLanguageModel()
                     {
+                        DBCommand = DBCommandEnum.Original,
                         MWQMRunID = mwqmRunNew.MWQMRunID,
                         Language = Lang,
                         RunComment = mwqmRunModel.RunComment,
@@ -1943,6 +1959,7 @@ namespace CSSPDBDLL.Services
                     {
                         MWQMRunLanguageModel mwqmRunLanguageModel = new MWQMRunLanguageModel()
                         {
+                            DBCommand = DBCommandEnum.Original,
                             MWQMRunID = mwqmRunModel.MWQMRunID,
                             Language = Lang,
                             RunComment = mwqmRunModel.RunComment,

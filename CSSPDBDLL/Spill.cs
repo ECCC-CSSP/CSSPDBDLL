@@ -21,6 +21,7 @@ namespace CSSPDBDLL
         }
     
         public int SpillID { get; set; }
+        public int DBCommand { get; set; }
         public int MunicipalityTVItemID { get; set; }
         public Nullable<int> InfrastructureTVItemID { get; set; }
         public System.DateTime StartDateTime_Local { get; set; }

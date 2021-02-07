@@ -15,6 +15,7 @@ namespace CSSPDBDLL
     public partial class TideDataValue
     {
         public int TideDataValueID { get; set; }
+        public int DBCommand { get; set; }
         public int TideSiteTVItemID { get; set; }
         public System.DateTime DateTime_Local { get; set; }
         public bool Keep { get; set; }

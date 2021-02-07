@@ -57,27 +57,33 @@ namespace CSSPDBDLL.Services
         }
 
         // Check
-        public string ClassificationModelOK(ClassificationModel ClassificationModel)
+        public string ClassificationModelOK(ClassificationModel classificationModel)
         {
-            string retStr = FieldCheckNotZeroInt(ClassificationModel.ClassificationTVItemID, ServiceRes.ClassificationTVItemID);
+            string retStr = FieldCheckNotZeroInt(classificationModel.ClassificationTVItemID, ServiceRes.ClassificationTVItemID);
             if (!string.IsNullOrWhiteSpace(retStr))
             {
                 return retStr;
             }
 
-            retStr = FieldCheckNotNullAndMinMaxLengthString(ClassificationModel.ClassificationTVText, ServiceRes.ClassificationTVText, 3, 200);
+            retStr = FieldCheckNotNullAndMinMaxLengthString(classificationModel.ClassificationTVText, ServiceRes.ClassificationTVText, 3, 200);
             if (!string.IsNullOrWhiteSpace(retStr))
             {
                 return retStr;
             }
 
-            retStr = _BaseEnumService.ClassificationTypeOK(ClassificationModel.ClassificationType);
+            retStr = _BaseEnumService.ClassificationTypeOK(classificationModel.ClassificationType);
             if (!string.IsNullOrWhiteSpace(retStr))
             {
                 return retStr;
             }
 
-            retStr = FieldCheckNotNullAndWithinRangeInt(ClassificationModel.Ordinal, ServiceRes.Ordinal, 0, 10000);
+            retStr = FieldCheckNotNullAndWithinRangeInt(classificationModel.Ordinal, ServiceRes.Ordinal, 0, 10000);
+            if (!string.IsNullOrWhiteSpace(retStr))
+            {
+                return retStr;
+            }
+
+            retStr = _BaseEnumService.DBCommandOK(classificationModel.DBCommand);
             if (!string.IsNullOrWhiteSpace(retStr))
             {
                 return retStr;
@@ -89,6 +95,7 @@ namespace CSSPDBDLL.Services
         // Fill
         public string FillClassification(Classification Classification, ClassificationModel ClassificationModel, ContactOK contactOK)
         {
+            Classification.DBCommand = (int)ClassificationModel.DBCommand;
             Classification.ClassificationTVItemID = ClassificationModel.ClassificationTVItemID;
             Classification.ClassificationType = (int)ClassificationModel.ClassificationType;
             Classification.Ordinal = ClassificationModel.Ordinal;
@@ -124,6 +131,7 @@ namespace CSSPDBDLL.Services
                                                                  {
                                                                      Error = "",
                                                                      ClassificationID = p.ClassificationID,
+                                                                     DBCommand = (DBCommandEnum)p.DBCommand,
                                                                      ClassificationTVItemID = p.ClassificationTVItemID,
                                                                      ClassificationTVText = classTVText,
                                                                      ClassificationType = (ClassificationTypeEnum)p.ClassificationType,
@@ -143,6 +151,7 @@ namespace CSSPDBDLL.Services
                                                        {
                                                            Error = "",
                                                            ClassificationID = c.ClassificationID,
+                                                           DBCommand = (DBCommandEnum)c.DBCommand,
                                                            ClassificationTVItemID = c.ClassificationTVItemID,
                                                            ClassificationTVText = classTVText,
                                                            ClassificationType = (ClassificationTypeEnum)c.ClassificationType,
@@ -167,6 +176,7 @@ namespace CSSPDBDLL.Services
                                                        {
                                                            Error = "",
                                                            ClassificationID = c.ClassificationID,
+                                                           DBCommand = (DBCommandEnum)c.DBCommand,
                                                            ClassificationTVItemID = c.ClassificationTVItemID,
                                                            ClassificationTVText = classTVText,
                                                            ClassificationType = (ClassificationTypeEnum)c.ClassificationType,

@@ -86,6 +86,11 @@ namespace CSSPDBDLL.Services
                 return retStr;
             }
 
+            retStr = _BaseEnumService.DBCommandOK(tideSiteModel.DBCommand);
+            if (!string.IsNullOrWhiteSpace(retStr))
+            {
+                return retStr;
+            }
 
             return "";
         }
@@ -93,6 +98,7 @@ namespace CSSPDBDLL.Services
         // Fill
         public string FillTideSite(TideSite tideSiteNew, TideSiteModel tideSiteModel, ContactOK contactOK)
         {
+            tideSiteNew.DBCommand = (int)tideSiteModel.DBCommand;
             tideSiteNew.TideSiteTVItemID = tideSiteModel.TideSiteTVItemID;
             tideSiteNew.TideSiteName = tideSiteModel.TideSiteName;
             tideSiteNew.Province = tideSiteModel.Province;
@@ -128,6 +134,7 @@ namespace CSSPDBDLL.Services
                                            {
                                                Error = "",
                                                TideSiteID = c.TideSiteID,
+                                               DBCommand = (DBCommandEnum)c.DBCommand,
                                                TideSiteTVItemID = c.TideSiteTVItemID,
                                                TideSiteName = tideSiteName,
                                                Province = c.Province,
@@ -154,6 +161,7 @@ namespace CSSPDBDLL.Services
                                            {
                                                Error = "",
                                                TideSiteID = c.TideSiteID,
+                                               DBCommand = (DBCommandEnum)c.DBCommand,
                                                TideSiteTVItemID = c.TideSiteTVItemID,
                                                TideSiteName = tideSiteName,
                                                Province = c.Province,
@@ -187,6 +195,7 @@ namespace CSSPDBDLL.Services
                                                Error = "",
 
                                                TideSiteID = c.TideSiteID,
+                                               DBCommand = (DBCommandEnum)c.DBCommand,
                                                TideSiteTVItemID = c.TideSiteTVItemID,
                                                TideSiteName = tideSiteName,
                                                Province = c.Province,
@@ -339,6 +348,7 @@ namespace CSSPDBDLL.Services
 
             AppTaskModel appTaskModelNew = new AppTaskModel()
             {
+                DBCommand = DBCommandEnum.Original,
                 TVItemID = MikeScenarioTVItemID,
                 TVItemID2 = MikeScenarioTVItemID,
                 AppTaskCommand = AppTaskCommandEnum.GenerateWebTide,
@@ -434,6 +444,7 @@ namespace CSSPDBDLL.Services
 
             AppTaskModel appTaskModelNew = new AppTaskModel()
             {
+                DBCommand = DBCommandEnum.Original,
                 TVItemID = MikeScenarioTVItemID,
                 TVItemID2 = MikeScenarioTVItemID,
                 AppTaskCommand = AppTaskCommandEnum.SetupWebTide,

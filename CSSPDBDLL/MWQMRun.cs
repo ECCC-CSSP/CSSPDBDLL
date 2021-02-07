@@ -21,6 +21,7 @@ namespace CSSPDBDLL
         }
     
         public int MWQMRunID { get; set; }
+        public int DBCommand { get; set; }
         public int SubsectorTVItemID { get; set; }
         public int MWQMRunTVItemID { get; set; }
         public int RunSampleType { get; set; }

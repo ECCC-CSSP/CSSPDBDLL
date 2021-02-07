@@ -15,6 +15,7 @@ namespace CSSPDBDLL
     public partial class Address
     {
         public int AddressID { get; set; }
+        public int DBCommand { get; set; }
         public int AddressTVItemID { get; set; }
         public int AddressType { get; set; }
         public int CountryTVItemID { get; set; }

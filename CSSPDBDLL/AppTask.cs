@@ -21,6 +21,7 @@ namespace CSSPDBDLL
         }
     
         public int AppTaskID { get; set; }
+        public int DBCommand { get; set; }
         public int TVItemID { get; set; }
         public int TVItemID2 { get; set; }
         public int AppTaskCommand { get; set; }

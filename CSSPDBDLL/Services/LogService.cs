@@ -78,12 +78,19 @@ namespace CSSPDBDLL.Services
                 return retStr;
             }
 
+            retStr = _BaseEnumService.DBCommandOK(logModel.DBCommand);
+            if (!string.IsNullOrWhiteSpace(retStr))
+            {
+                return retStr;
+            }
+
             return "";
         }
 
         // Fill
         public string FillLog(Log log, LogModel logModel, ContactOK contactOK)
         {
+            log.DBCommand = (int)logModel.DBCommand;
             log.LogID = logModel.LogID;
             log.TableName = logModel.TableName;
             log.ID = logModel.ID;
@@ -118,6 +125,7 @@ namespace CSSPDBDLL.Services
                                            {
                                                Error = "",
                                                LogID = c.LogID,
+                                               DBCommand = (DBCommandEnum)c.DBCommand,
                                                TableName = c.TableName,
                                                ID = c.ID,
                                                LogCommand = (LogCommandEnum)c.LogCommand,
@@ -138,6 +146,7 @@ namespace CSSPDBDLL.Services
                                            {
                                                Error = "",
                                                LogID = c.LogID,
+                                               DBCommand = (DBCommandEnum)c.DBCommand,
                                                TableName = c.TableName,
                                                ID = c.ID,
                                                LogCommand = (LogCommandEnum)c.LogCommand,
@@ -156,6 +165,7 @@ namespace CSSPDBDLL.Services
                                  {
                                      Error = "",
                                      LogID = c.LogID,
+                                     DBCommand = (DBCommandEnum)c.DBCommand,
                                      TableName = c.TableName,
                                      ID = c.ID,
                                      LogCommand = (LogCommandEnum)c.LogCommand,
@@ -190,10 +200,9 @@ namespace CSSPDBDLL.Services
                     sb.AppendLine(string.Format("{0}\t{1}",
                         propertyInfo.Name, propertyInfo.GetValue(obj, null)));
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
-
-                   
+                    // nothing for now                  
                 }
             }
 
@@ -261,6 +270,7 @@ namespace CSSPDBDLL.Services
         {
             LogModel logModelNew = new LogModel()
             {
+                DBCommand = DBCommandEnum.Original,
                 TableName = TableName,
                 ID = ID,
                 LogCommand = LogCommand,

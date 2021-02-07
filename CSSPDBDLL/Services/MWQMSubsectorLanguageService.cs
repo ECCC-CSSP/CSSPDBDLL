@@ -68,12 +68,19 @@ namespace CSSPDBDLL.Services
                 return retStr;
             }
 
+            retStr = _BaseEnumService.DBCommandOK(mwqmSubsectorLanguageModel.DBCommand);
+            if (!string.IsNullOrWhiteSpace(retStr))
+            {
+                return retStr;
+            }
+
             return "";
         }
 
         // Fill
         public string FillMWQMSubsectorLanguage(MWQMSubsectorLanguage mwqmSubsectorLanguageNew, MWQMSubsectorLanguageModel mwqmSubsectorLanguageModel, ContactOK contactOK)
         {
+            mwqmSubsectorLanguageNew.DBCommand = (int)mwqmSubsectorLanguageModel.DBCommand;
             mwqmSubsectorLanguageNew.MWQMSubsectorID = mwqmSubsectorLanguageModel.MWQMSubsectorID;
             mwqmSubsectorLanguageNew.Language = (int)mwqmSubsectorLanguageModel.Language;
             mwqmSubsectorLanguageNew.SubsectorDesc = mwqmSubsectorLanguageModel.SubsectorDesc;
@@ -110,6 +117,7 @@ namespace CSSPDBDLL.Services
                                                                      {
                                                                          Error = "",
                                                                          MWQMSubsectorID = c.MWQMSubsectorID,
+                                                                         DBCommand = (DBCommandEnum)c.DBCommand,
                                                                          Language = (LanguageEnum)c.Language,
                                                                          SubsectorDesc = c.SubsectorDesc,
                                                                          TranslationStatusSubsectorDesc = (TranslationStatusEnum)c.TranslationStatusSubsectorDesc,

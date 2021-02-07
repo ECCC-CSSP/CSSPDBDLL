@@ -128,6 +128,12 @@ namespace CSSPDBDLL.Services
                 return retStr;
             }
 
+            retStr = _BaseEnumService.DBCommandOK(boxModelModel.DBCommand);
+            if (!string.IsNullOrWhiteSpace(retStr))
+            {
+                return retStr;
+            }
+
             return "";
         }
         public string CheckUniquenessOfBoxModelScenarioNameDB(int InfrastructureTVItemID, int BoxModelID, string ScenarioName)
@@ -140,6 +146,7 @@ namespace CSSPDBDLL.Services
                                                      {
                                                          Error = "",
                                                          BoxModelID = c.BoxModelID,
+                                                         DBCommand = (DBCommandEnum)c.DBCommand,
                                                          ScenarioName = scenarioName,
                                                          InfrastructureTVItemID = c.InfrastructureTVItemID,
                                                          Discharge_m3_day = c.Discharge_m3_day,
@@ -167,6 +174,7 @@ namespace CSSPDBDLL.Services
         // Fill
         public string FillBoxModel(BoxModel boxModel, BoxModelModel boxModelModel, ContactOK contactOK)
         {
+            boxModel.DBCommand = (int)boxModelModel.DBCommand;
             boxModel.InfrastructureTVItemID = boxModelModel.InfrastructureTVItemID;
             boxModel.Discharge_m3_day = boxModelModel.Discharge_m3_day;
             boxModel.Depth_m = boxModelModel.Depth_m;
@@ -209,6 +217,7 @@ namespace CSSPDBDLL.Services
                                                      {
                                                          Error = "",
                                                          BoxModelID = c.BoxModelID,
+                                                         DBCommand = (DBCommandEnum)c.DBCommand,
                                                          ScenarioName = scenarioName,
                                                          InfrastructureTVItemID = c.InfrastructureTVItemID,
                                                          Discharge_m3_day = c.Discharge_m3_day,
@@ -236,6 +245,7 @@ namespace CSSPDBDLL.Services
                                            {
                                                Error = "",
                                                BoxModelID = c.BoxModelID,
+                                               DBCommand = (DBCommandEnum)c.DBCommand,
                                                ScenarioName = scenarioName,
                                                InfrastructureTVItemID = c.InfrastructureTVItemID,
                                                Discharge_m3_day = c.Discharge_m3_day,
@@ -269,6 +279,7 @@ namespace CSSPDBDLL.Services
                                            {
                                                Error = "",
                                                BoxModelID = c.BoxModelID,
+                                               DBCommand = (DBCommandEnum)c.DBCommand,
                                                ScenarioName = scenarioName,
                                                InfrastructureTVItemID = c.InfrastructureTVItemID,
                                                Discharge_m3_day = c.Discharge_m3_day,
@@ -333,6 +344,7 @@ namespace CSSPDBDLL.Services
                     ShouldAdd = false;
                     boxModelResultModel = boxModelResultModelRet;
                 }
+                boxModelResultModel.DBCommand = DBCommandEnum.Original;
                 boxModelResultModel.BoxModelID = boxModelModel.BoxModelID;
                 boxModelResultModel.BoxModelResultType = (BoxModelResultTypeEnum)i;
                 switch (i)
@@ -437,6 +449,7 @@ namespace CSSPDBDLL.Services
 
             BoxModelModel boxModelModelNew = new BoxModelModel()
             {
+                DBCommand = DBCommandEnum.Original,
                 Concentration_MPN_100ml = boxModelModelToCopy.Concentration_MPN_100ml,
                 DecayRate_per_day = boxModelModelToCopy.DecayRate_per_day,
                 Depth_m = boxModelModelToCopy.Depth_m,
@@ -483,6 +496,7 @@ namespace CSSPDBDLL.Services
 
             BoxModelModel boxModelModelNew = new BoxModelModel()
             {
+                DBCommand = DBCommandEnum.Original,
                 Concentration_MPN_100ml = Concentration_MPN_100ml,
                 DecayRate_per_day = DecayRate_per_day,
                 Depth_m = Depth_m,
@@ -635,6 +649,7 @@ namespace CSSPDBDLL.Services
             }
             boxModelModelToChange.FixLength = FixLength;
             boxModelModelToChange.FixWidth = FixWidth;
+            boxModelModelToChange.DBCommand = DBCommandEnum.Original;
             using (TransactionScope ts = new TransactionScope())
             {
                 BoxModelModel boxModelModelRet = PostUpdateBoxModelDB(boxModelModelToChange);
@@ -681,6 +696,7 @@ namespace CSSPDBDLL.Services
                 {
                     BoxModelLanguageModel boxModelLanguageModel = new BoxModelLanguageModel()
                     {
+                        DBCommand = DBCommandEnum.Original,
                         BoxModelID = boxModelNew.BoxModelID,
                         Language = Lang,
                         ScenarioName = boxModelModel.ScenarioName,
@@ -760,6 +776,7 @@ namespace CSSPDBDLL.Services
                 {
                     BoxModelLanguageModel boxModelLanguageModel = new BoxModelLanguageModel()
                     {
+                        DBCommand = DBCommandEnum.Original,
                         BoxModelID = boxModelModel.BoxModelID,
                         Language = Lang,
                         ScenarioName = boxModelModel.ScenarioName,

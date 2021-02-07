@@ -21,6 +21,7 @@ namespace CSSPDBDLL
         }
     
         public int MikeScenarioID { get; set; }
+        public int DBCommand { get; set; }
         public int MikeScenarioTVItemID { get; set; }
         public Nullable<int> ParentMikeScenarioID { get; set; }
         public int ScenarioStatus { get; set; }

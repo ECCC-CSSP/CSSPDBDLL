@@ -70,12 +70,19 @@ namespace CSSPDBDLL.Services
                 return retStr;
             }
 
+            retStr = _BaseEnumService.DBCommandOK(mapInfoPointModel.DBCommand);
+            if (!string.IsNullOrWhiteSpace(retStr))
+            {
+                return retStr;
+            }
+
             return "";
         }
 
         // Fill
         public string FillMapInfoPoint(MapInfoPoint mapInfoPoint, MapInfoPointModel mapInfoPointModel, ContactOK contactOK)
         {
+            mapInfoPoint.DBCommand = (int)mapInfoPointModel.DBCommand;
             mapInfoPoint.MapInfoID = mapInfoPointModel.MapInfoID;
             mapInfoPoint.Ordinal = mapInfoPointModel.Ordinal;
             mapInfoPoint.Lat = mapInfoPointModel.Lat;
@@ -110,6 +117,7 @@ namespace CSSPDBDLL.Services
                                                              {
                                                                  Error = "",
                                                                  MapInfoPointID = mip.MapInfoPointID,
+                                                                 DBCommand = (DBCommandEnum)mip.DBCommand,
                                                                  MapInfoID = mip.MapInfoID,
                                                                  Lat = mip.Lat,
                                                                  Lng = mip.Lng,
@@ -131,6 +139,7 @@ namespace CSSPDBDLL.Services
                                                    {
                                                        Error = "",
                                                        MapInfoPointID = mip.MapInfoPointID,
+                                                       DBCommand = (DBCommandEnum)mip.DBCommand,
                                                        MapInfoID = mip.MapInfoID,
                                                        Lat = mip.Lat,
                                                        Lng = mip.Lng,
@@ -165,7 +174,8 @@ namespace CSSPDBDLL.Services
                                                              {
                                                                  Error = "",
                                                                  MapInfoPointID = mip.MapInfoPointID,
-                                                                 MapInfoID = mi.MapInfoID,
+                                                                 DBCommand = (DBCommandEnum)mip.DBCommand,
+                                                                 MapInfoID = mip.MapInfoID,
                                                                  Lat = mip.Lat,
                                                                  Lng = mip.Lng,
                                                                  Ordinal = mip.Ordinal,
@@ -190,6 +200,7 @@ namespace CSSPDBDLL.Services
                                                              {
                                                                  Error = "",
                                                                  MapInfoPointID = mip.MapInfoPointID,
+                                                                 DBCommand = (DBCommandEnum)mip.DBCommand,
                                                                  MapInfoID = mi.MapInfoID,
                                                                  Lat = mip.Lat,
                                                                  Lng = mip.Lng,

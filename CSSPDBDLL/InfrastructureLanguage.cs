@@ -15,6 +15,7 @@ namespace CSSPDBDLL
     public partial class InfrastructureLanguage
     {
         public int InfrastructureLanguageID { get; set; }
+        public int DBCommand { get; set; }
         public int InfrastructureID { get; set; }
         public int Language { get; set; }
         public string Comment { get; set; }

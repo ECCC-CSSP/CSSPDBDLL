@@ -33,18 +33,18 @@ namespace CSSPDBDLL.Services
         {
             return base.IsContactOK();
         }
-        public override string CoCoRaHSDoAddChanges()
-        {
-            return base.CoCoRaHSDoAddChanges();
-        }
-        public override string CoCoRaHSDoDeleteChanges()
-        {
-            return base.CoCoRaHSDoDeleteChanges();
-        }
-        public override string CoCoRaHSDoUpdateChanges()
-        {
-            return base.CoCoRaHSDoUpdateChanges();
-        }
+        //public override string CoCoRaHSDoAddChanges()
+        //{
+        //    return base.CoCoRaHSDoAddChanges();
+        //}
+        //public override string CoCoRaHSDoDeleteChanges()
+        //{
+        //    return base.CoCoRaHSDoDeleteChanges();
+        //}
+        //public override string CoCoRaHSDoUpdateChanges()
+        //{
+        //    return base.CoCoRaHSDoUpdateChanges();
+        //}
 
 
         // Check
@@ -92,12 +92,19 @@ namespace CSSPDBDLL.Services
                 return retStr;
             }
 
+            retStr = _BaseEnumService.DBCommandOK(coCoRaHSValueModel.DBCommand);
+            if (!string.IsNullOrWhiteSpace(retStr))
+            {
+                return retStr;
+            }
+
             return "";
         }
 
         // Fill
         public string FillCoCoRaHSValue(CoCoRaHSValue coCoRaHSValueNew, CoCoRaHSValueModel coCoRaHSValueModel, ContactOK contactOK)
         {
+            coCoRaHSValueNew.DBCommand = (int)coCoRaHSValueModel.DBCommand;
             coCoRaHSValueNew.CoCoRaHSSiteID = coCoRaHSValueModel.CoCoRaHSSiteID;
             coCoRaHSValueNew.ObservationDateAndTime = coCoRaHSValueModel.ObservationDateAndTime;
             coCoRaHSValueNew.TotalPrecipAmt = coCoRaHSValueModel.TotalPrecipAmt;
@@ -121,19 +128,20 @@ namespace CSSPDBDLL.Services
         // Get
         public int GetCoCoRaHSValueModelCountDB()
         {
-            int CoCoRaHSValueModelCount = (from c in CoCoRaHSdb.CoCoRaHSValues
+            int CoCoRaHSValueModelCount = (from c in db.CoCoRaHSValues
                                            select c).Count();
 
             return CoCoRaHSValueModelCount;
         }
         public CoCoRaHSValueModel GetCoCoRaHSValueModelWithCoCoRaHSSiteIDDB(int CoCoRaHSSiteID)
         {
-            CoCoRaHSValueModel coCoRaHSValueModel = (from c in CoCoRaHSdb.CoCoRaHSValues
+            CoCoRaHSValueModel coCoRaHSValueModel = (from c in db.CoCoRaHSValues
                                                      where c.CoCoRaHSSiteID == CoCoRaHSSiteID
                                                      select new CoCoRaHSValueModel
                                                      {
                                                          Error = "",
                                                          CoCoRaHSValueID = c.CoCoRaHSValueID,
+                                                         DBCommand = (DBCommandEnum)c.DBCommand,
                                                          CoCoRaHSSiteID = c.CoCoRaHSSiteID,
                                                          ObservationDateAndTime = c.ObservationDateAndTime,
                                                          TotalPrecipAmt = c.TotalPrecipAmt,
@@ -152,12 +160,13 @@ namespace CSSPDBDLL.Services
         }
         public CoCoRaHSValueModel GetCoCoRaHSValueModelWithCoCoRaHSValueIDDB(int CoCoRaHSValueID)
         {
-            CoCoRaHSValueModel coCoRaHSValueModel = (from c in CoCoRaHSdb.CoCoRaHSValues
+            CoCoRaHSValueModel coCoRaHSValueModel = (from c in db.CoCoRaHSValues
                                                      where c.CoCoRaHSValueID == CoCoRaHSValueID
                                                      select new CoCoRaHSValueModel
                                                      {
                                                          Error = "",
                                                          CoCoRaHSValueID = c.CoCoRaHSValueID,
+                                                         DBCommand = (DBCommandEnum)c.DBCommand,
                                                          CoCoRaHSSiteID = c.CoCoRaHSSiteID,
                                                          ObservationDateAndTime = c.ObservationDateAndTime,
                                                          TotalPrecipAmt = c.TotalPrecipAmt,
@@ -176,13 +185,14 @@ namespace CSSPDBDLL.Services
         }
         public CoCoRaHSValueModel GetCoCoRaHSValueModelExistDB(CoCoRaHSValueModel coCoRaHSValueModel)
         {
-            CoCoRaHSValueModel coCoRaHSValueModelRet = (from c in CoCoRaHSdb.CoCoRaHSValues
+            CoCoRaHSValueModel coCoRaHSValueModelRet = (from c in db.CoCoRaHSValues
                                                         where c.CoCoRaHSSiteID == coCoRaHSValueModel.CoCoRaHSSiteID
                                                         && c.ObservationDateAndTime == coCoRaHSValueModel.ObservationDateAndTime
                                                         select new CoCoRaHSValueModel
                                                         {
                                                             Error = "",
                                                             CoCoRaHSValueID = c.CoCoRaHSValueID,
+                                                            DBCommand = (DBCommandEnum)c.DBCommand,
                                                             CoCoRaHSSiteID = c.CoCoRaHSSiteID,
                                                             ObservationDateAndTime = c.ObservationDateAndTime,
                                                             TotalPrecipAmt = c.TotalPrecipAmt,
@@ -205,7 +215,7 @@ namespace CSSPDBDLL.Services
         }
         public CoCoRaHSValue GetCoCoRaHSValueWithCoCoRaHSValueIDDB(int CoCoRaHSValueID)
         {
-            CoCoRaHSValue CoCoRaHSValue = (from c in CoCoRaHSdb.CoCoRaHSValues
+            CoCoRaHSValue CoCoRaHSValue = (from c in db.CoCoRaHSValues
                                            where c.CoCoRaHSValueID == CoCoRaHSValueID
                                            select c).FirstOrDefault<CoCoRaHSValue>();
             return CoCoRaHSValue;
@@ -236,8 +246,8 @@ namespace CSSPDBDLL.Services
 
             using (TransactionScope ts = new TransactionScope())
             {
-                CoCoRaHSdb.CoCoRaHSValues.Add(coCoRaHSValueNew);
-                retStr = CoCoRaHSDoAddChanges();
+                db.CoCoRaHSValues.Add(coCoRaHSValueNew);
+                retStr = DoAddChanges();
                 if (!string.IsNullOrWhiteSpace(retStr))
                     return ReturnError(retStr);
 
@@ -257,8 +267,8 @@ namespace CSSPDBDLL.Services
 
             using (TransactionScope ts = new TransactionScope())
             {
-                CoCoRaHSdb.CoCoRaHSValues.Remove(coCoRaHSValueToDelete);
-                string retStr = CoCoRaHSDoDeleteChanges();
+                db.CoCoRaHSValues.Remove(coCoRaHSValueToDelete);
+                string retStr = DoDeleteChanges();
                 if (!string.IsNullOrWhiteSpace(retStr))
                     return ReturnError(retStr);
 
@@ -287,7 +297,7 @@ namespace CSSPDBDLL.Services
 
             using (TransactionScope ts = new TransactionScope())
             {
-                retStr = CoCoRaHSDoUpdateChanges();
+                retStr = DoUpdateChanges();
                 if (!string.IsNullOrWhiteSpace(retStr))
                     return ReturnError(retStr);
 

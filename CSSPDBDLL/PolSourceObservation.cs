@@ -21,6 +21,7 @@ namespace CSSPDBDLL
         }
     
         public int PolSourceObservationID { get; set; }
+        public int DBCommand { get; set; }
         public int PolSourceSiteID { get; set; }
         public System.DateTime ObservationDate_Local { get; set; }
         public int ContactTVItemID { get; set; }

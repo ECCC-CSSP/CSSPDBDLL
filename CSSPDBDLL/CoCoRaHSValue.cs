@@ -15,6 +15,7 @@ namespace CSSPDBDLL
     public partial class CoCoRaHSValue
     {
         public int CoCoRaHSValueID { get; set; }
+        public int DBCommand { get; set; }
         public int CoCoRaHSSiteID { get; set; }
         public System.DateTime ObservationDateAndTime { get; set; }
         public Nullable<double> TotalPrecipAmt { get; set; }

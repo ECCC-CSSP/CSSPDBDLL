@@ -115,12 +115,19 @@ namespace CSSPDBDLL.Services
                 return string.Format(ServiceRes.TVTypeForBoundaryConditionShouldBeOneOf_Or_, ServiceRes.MikeBoundaryConditionWebTide, ServiceRes.MikeBoundaryConditionMesh);
             }
 
+            retStr = _BaseEnumService.DBCommandOK(mikeBoundaryConditionModel.DBCommand);
+            if (!string.IsNullOrWhiteSpace(retStr))
+            {
+                return retStr;
+            }
+
             return "";
         }
 
         // Fill
         public string FillMikeBoundaryCondition(MikeBoundaryCondition mikeBoundaryCondition, MikeBoundaryConditionModel mikeBoundaryConditionModel, ContactOK contactOK)
         {
+            mikeBoundaryCondition.DBCommand = (int)mikeBoundaryConditionModel.DBCommand;
             mikeBoundaryCondition.MikeBoundaryConditionTVItemID = mikeBoundaryConditionModel.MikeBoundaryConditionTVItemID;
             mikeBoundaryCondition.MikeBoundaryConditionCode = mikeBoundaryConditionModel.MikeBoundaryConditionCode;
             mikeBoundaryCondition.MikeBoundaryConditionFormat = mikeBoundaryConditionModel.MikeBoundaryConditionFormat;
@@ -162,6 +169,7 @@ namespace CSSPDBDLL.Services
                                                                                {
                                                                                    Error = "",
                                                                                    MikeBoundaryConditionID = m.MikeBoundaryConditionID,
+                                                                                   DBCommand = (DBCommandEnum)m.DBCommand,
                                                                                    MikeBoundaryConditionTVItemID = m.MikeBoundaryConditionTVItemID,
                                                                                    MikeBoundaryConditionTVText = bcName,
                                                                                    MikeBoundaryConditionCode = m.MikeBoundaryConditionCode,
@@ -188,6 +196,7 @@ namespace CSSPDBDLL.Services
                                                                      {
                                                                          Error = "",
                                                                          MikeBoundaryConditionID = c.MikeBoundaryConditionID,
+                                                                         DBCommand = (DBCommandEnum)c.DBCommand,
                                                                          MikeBoundaryConditionTVItemID = c.MikeBoundaryConditionTVItemID,
                                                                          MikeBoundaryConditionTVText = bcName,
                                                                          MikeBoundaryConditionCode = c.MikeBoundaryConditionCode,
@@ -217,6 +226,7 @@ namespace CSSPDBDLL.Services
                                                                      {
                                                                          Error = "",
                                                                          MikeBoundaryConditionID = c.MikeBoundaryConditionID,
+                                                                         DBCommand = (DBCommandEnum)c.DBCommand,
                                                                          MikeBoundaryConditionTVItemID = c.MikeBoundaryConditionTVItemID,
                                                                          MikeBoundaryConditionTVText = bcName,
                                                                          MikeBoundaryConditionCode = c.MikeBoundaryConditionCode,
@@ -250,6 +260,7 @@ namespace CSSPDBDLL.Services
                                                                         {
                                                                             Error = "",
                                                                             MikeBoundaryConditionID = m.MikeBoundaryConditionID,
+                                                                            DBCommand = (DBCommandEnum)m.DBCommand,
                                                                             MikeBoundaryConditionTVItemID = m.MikeBoundaryConditionTVItemID,
                                                                             MikeBoundaryConditionTVText = bcName,
                                                                             MikeBoundaryConditionCode = m.MikeBoundaryConditionCode,

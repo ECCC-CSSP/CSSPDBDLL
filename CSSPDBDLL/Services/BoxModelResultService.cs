@@ -92,12 +92,19 @@ namespace CSSPDBDLL.Services
                 return retStr;
             }
 
+            retStr = _BaseEnumService.DBCommandOK(boxModelResultModel.DBCommand);
+            if (!string.IsNullOrWhiteSpace(retStr))
+            {
+                return retStr;
+            }
+
             return "";
         }
 
         // Fill
         public string FillBoxModelResultModel(BoxModelResult boxModelResult, BoxModelResultModel boxModelResultModel, ContactOK contactOK)
         {
+            boxModelResult.DBCommand = (int)boxModelResultModel.DBCommand;
             boxModelResult.BoxModelID = boxModelResultModel.BoxModelID;
             boxModelResult.CircleCenterLatitude = boxModelResultModel.CircleCenterLatitude;
             boxModelResult.CircleCenterLongitude = boxModelResultModel.CircleCenterLongitude;
@@ -143,6 +150,7 @@ namespace CSSPDBDLL.Services
                                                                  {
                                                                      Error = "",
                                                                      BoxModelResultID = c.BoxModelResultID,
+                                                                     DBCommand = (DBCommandEnum)c.DBCommand,
                                                                      BoxModelID = c.BoxModelID,
                                                                      CircleCenterLatitude = c.CircleCenterLatitude,
                                                                      CircleCenterLongitude = c.CircleCenterLongitude,
@@ -173,6 +181,7 @@ namespace CSSPDBDLL.Services
                                                        {
                                                            Error = "",
                                                            BoxModelResultID = c.BoxModelResultID,
+                                                           DBCommand = (DBCommandEnum)c.DBCommand,
                                                            BoxModelID = c.BoxModelID,
                                                            CircleCenterLatitude = c.CircleCenterLatitude,
                                                            CircleCenterLongitude = c.CircleCenterLongitude,
@@ -205,6 +214,7 @@ namespace CSSPDBDLL.Services
                                                        {
                                                            Error = "",
                                                            BoxModelResultID = c.BoxModelResultID,
+                                                           DBCommand = (DBCommandEnum)c.DBCommand,
                                                            BoxModelID = c.BoxModelID,
                                                            CircleCenterLatitude = c.CircleCenterLatitude,
                                                            CircleCenterLongitude = c.CircleCenterLongitude,

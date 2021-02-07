@@ -15,6 +15,7 @@ namespace CSSPDBDLL
     public partial class VPScenarioLanguage
     {
         public int VPScenarioLanguageID { get; set; }
+        public int DBCommand { get; set; }
         public int VPScenarioID { get; set; }
         public int Language { get; set; }
         public string VPScenarioName { get; set; }

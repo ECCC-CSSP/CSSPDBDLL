@@ -88,6 +88,7 @@ namespace CSSPDBDLL.Services
 
             AppTaskModel appTaskModelNew = new AppTaskModel()
             {
+                DBCommand = DBCommandEnum.Original,
                 TVItemID = ProvinceTVItemID,
                 TVItemID2 = ProvinceTVItemID,
                 AppTaskCommand = AppTaskCommandEnum.GetAllPrecipitationForYear,
@@ -136,6 +137,7 @@ namespace CSSPDBDLL.Services
 
             AppTaskModel appTaskModelNew = new AppTaskModel()
             {
+                DBCommand = DBCommandEnum.Original,
                 TVItemID = ProvinceTVItemID,
                 TVItemID2 = ProvinceTVItemID,
                 AppTaskCommand = AppTaskCommandEnum.FillRunPrecipByClimateSitePriorityForYear,
@@ -184,6 +186,7 @@ namespace CSSPDBDLL.Services
 
             AppTaskModel appTaskModelNew = new AppTaskModel()
             {
+                DBCommand = DBCommandEnum.Original,
                 TVItemID = ProvinceTVItemID,
                 TVItemID2 = ProvinceTVItemID,
                 AppTaskCommand = AppTaskCommandEnum.FindMissingPrecipForProvince,
@@ -388,6 +391,7 @@ namespace CSSPDBDLL.Services
 
             AppTaskModel appTaskModelNew = new AppTaskModel()
             {
+                DBCommand = DBCommandEnum.Original,
                 TVItemID = ProvinceTVItemID,
                 TVItemID2 = ProvinceTVItemID,
                 AppTaskCommand = AppTaskCommandEnum.ProvinceToolsCreateClassificationInputsKML,
@@ -435,6 +439,7 @@ namespace CSSPDBDLL.Services
 
             AppTaskModel appTaskModelNew = new AppTaskModel()
             {
+                DBCommand = DBCommandEnum.Original,
                 TVItemID = ProvinceTVItemID,
                 TVItemID2 = ProvinceTVItemID,
                 AppTaskCommand = AppTaskCommandEnum.ProvinceToolsCreateGroupingInputsKML,
@@ -482,6 +487,7 @@ namespace CSSPDBDLL.Services
 
             AppTaskModel appTaskModelNew = new AppTaskModel()
             {
+                DBCommand = DBCommandEnum.Original,
                 TVItemID = ProvinceTVItemID,
                 TVItemID2 = ProvinceTVItemID,
                 AppTaskCommand = AppTaskCommandEnum.ProvinceToolsCreateMWQMSitesAndPolSourceSitesKML,
@@ -529,6 +535,7 @@ namespace CSSPDBDLL.Services
 
             AppTaskModel appTaskModelNew = new AppTaskModel()
             {
+                DBCommand = DBCommandEnum.Original,
                 TVItemID = ProvinceTVItemID,
                 TVItemID2 = ProvinceTVItemID,
                 AppTaskCommand = AppTaskCommandEnum.GenerateClassificationForCSSPWebToolsVisualization,
@@ -576,6 +583,7 @@ namespace CSSPDBDLL.Services
 
             AppTaskModel appTaskModelNew = new AppTaskModel()
             {
+                DBCommand = DBCommandEnum.Original,
                 TVItemID = ProvinceTVItemID,
                 TVItemID2 = ProvinceTVItemID,
                 AppTaskCommand = AppTaskCommandEnum.GenerateKMLFileClassificationForCSSPWebToolsVisualization,
@@ -623,6 +631,7 @@ namespace CSSPDBDLL.Services
 
             AppTaskModel appTaskModelNew = new AppTaskModel()
             {
+                DBCommand = DBCommandEnum.Original,
                 TVItemID = ProvinceTVItemID,
                 TVItemID2 = ProvinceTVItemID,
                 AppTaskCommand = AppTaskCommandEnum.GenerateLinksBetweenMWQMSitesAndPolSourceSitesForCSSPWebToolsVisualization,
@@ -670,6 +679,7 @@ namespace CSSPDBDLL.Services
 
             AppTaskModel appTaskModelNew = new AppTaskModel()
             {
+                DBCommand = DBCommandEnum.Original,
                 TVItemID = ProvinceTVItemID,
                 TVItemID2 = ProvinceTVItemID,
                 AppTaskCommand = AppTaskCommandEnum.ProvinceToolsGenerateStats,

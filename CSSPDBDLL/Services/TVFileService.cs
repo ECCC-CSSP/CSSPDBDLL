@@ -160,12 +160,19 @@ namespace CSSPDBDLL.Services
                 return retStr;
             }
 
+            retStr = _BaseEnumService.DBCommandOK(tvFileModel.DBCommand);
+            if (!string.IsNullOrWhiteSpace(retStr))
+            {
+                return retStr;
+            }
+
             return "";
         }
 
         // Fill
         public string FillTVFile(TVFile tvFileNew, TVFileModel tvFileModel, ContactOK contactOK)
         {
+            tvFileNew.DBCommand = (int)tvFileModel.DBCommand;
             tvFileNew.TVFileTVItemID = tvFileModel.TVFileTVItemID;
             tvFileNew.TemplateTVType = (int?)tvFileModel.TemplateTVType;
             tvFileNew.ReportTypeID = tvFileModel.ReportTypeID;
@@ -385,6 +392,7 @@ namespace CSSPDBDLL.Services
                                           {
                                               Error = "",
                                               TVFileID = c.TVFileID,
+                                              DBCommand = (DBCommandEnum)c.DBCommand,
                                               TVFileTVItemID = c.TVFileTVItemID,
                                               TemplateTVType = (TVTypeEnum?)c.TemplateTVType,
                                               ReportTypeID = c.ReportTypeID,
@@ -462,6 +470,7 @@ namespace CSSPDBDLL.Services
                                                            {
                                                                Error = "",
                                                                TVFileID = c.TVFileID,
+                                                               DBCommand = (DBCommandEnum)c.DBCommand,
                                                                TVFileTVItemID = c.TVFileTVItemID,
                                                                TemplateTVType = (TVTypeEnum?)c.TemplateTVType,
                                                                ReportTypeID = c.ReportTypeID,
@@ -500,6 +509,7 @@ namespace CSSPDBDLL.Services
                                                          {
                                                              Error = "",
                                                              TVFileID = c.TVFileID,
+                                                             DBCommand = (DBCommandEnum)c.DBCommand,
                                                              TVFileTVItemID = c.TVFileTVItemID,
                                                              TVFileTVText = tvText,
                                                              Language = (LanguageEnum)c.Language,
@@ -533,6 +543,7 @@ namespace CSSPDBDLL.Services
                                        {
                                            Error = "",
                                            TVFileID = c.TVFileID,
+                                           DBCommand = (DBCommandEnum)c.DBCommand,
                                            TVFileTVItemID = c.TVFileTVItemID,
                                            TemplateTVType = (TVTypeEnum?)c.TemplateTVType,
                                            ReportTypeID = c.ReportTypeID,
@@ -572,6 +583,7 @@ namespace CSSPDBDLL.Services
                                        {
                                            Error = "",
                                            TVFileID = c.TVFileID,
+                                           DBCommand = (DBCommandEnum)c.DBCommand,
                                            TVFileTVItemID = c.TVFileTVItemID,
                                            TemplateTVType = (TVTypeEnum?)c.TemplateTVType,
                                            ReportTypeID = c.ReportTypeID,
@@ -621,6 +633,7 @@ namespace CSSPDBDLL.Services
                                                       {
                                                           Error = "",
                                                           TVFileID = c.TVFileID,
+                                                          DBCommand = (DBCommandEnum)c.DBCommand,
                                                           TVFileTVItemID = c.TVFileTVItemID,
                                                           TemplateTVType = (TVTypeEnum?)c.TemplateTVType,
                                                           ReportTypeID = c.ReportTypeID,
@@ -687,6 +700,7 @@ namespace CSSPDBDLL.Services
                                        {
                                            Error = "",
                                            TVFileID = c.TVFileID,
+                                           DBCommand = (DBCommandEnum)c.DBCommand,
                                            TVFileTVItemID = c.TVFileTVItemID,
                                            TemplateTVType = (TVTypeEnum?)c.TemplateTVType,
                                            ReportTypeID = c.ReportTypeID,
@@ -728,6 +742,7 @@ namespace CSSPDBDLL.Services
                                        {
                                            Error = "",
                                            TVFileID = c.TVFileID,
+                                           DBCommand = (DBCommandEnum)c.DBCommand,
                                            TVFileTVItemID = c.TVFileTVItemID,
                                            TemplateTVType = (TVTypeEnum?)c.TemplateTVType,
                                            ReportTypeID = c.ReportTypeID,
@@ -769,6 +784,7 @@ namespace CSSPDBDLL.Services
                                                  {
                                                      Error = "",
                                                      TVFileID = c.TVFileID,
+                                                     DBCommand = (DBCommandEnum)c.DBCommand,
                                                      TVFileTVItemID = c.TVFileTVItemID,
                                                      TemplateTVType = (TVTypeEnum?)c.TemplateTVType,
                                                      ReportTypeID = c.ReportTypeID,
@@ -812,6 +828,7 @@ namespace CSSPDBDLL.Services
                                                  {
                                                      Error = "",
                                                      TVFileID = c.TVFileID,
+                                                     DBCommand = (DBCommandEnum)c.DBCommand,
                                                      TVFileTVItemID = c.TVFileTVItemID,
                                                      TemplateTVType = (TVTypeEnum?)c.TemplateTVType,
                                                      ReportTypeID = c.ReportTypeID,
@@ -859,6 +876,7 @@ namespace CSSPDBDLL.Services
                                                  {
                                                      Error = "",
                                                      TVFileID = c.TVFileID,
+                                                     DBCommand = (DBCommandEnum)c.DBCommand,
                                                      TVFileTVItemID = c.TVFileTVItemID,
                                                      TemplateTVType = (TVTypeEnum?)c.TemplateTVType,
                                                      ReportTypeID = c.ReportTypeID,
@@ -1115,6 +1133,7 @@ namespace CSSPDBDLL.Services
 
             AppTaskModel appTaskModelNew = new AppTaskModel()
             {
+                DBCommand = DBCommandEnum.Original,
                 TVItemID = TVItemID,
                 TVItemID2 = TVItemID,
                 AppTaskCommand = AppTaskCommandEnum.ExportToArcGIS,
@@ -1955,6 +1974,7 @@ namespace CSSPDBDLL.Services
             }
             AppTaskModel appTaskModelNew = new AppTaskModel()
             {
+                DBCommand = DBCommandEnum.Original,
                 TVItemID = TVItemID,
                 TVItemID2 = TVItemID,
                 AppTaskCommand = AppTaskCommandEnum.CreateDocumentFromTemplate,
@@ -2023,6 +2043,7 @@ namespace CSSPDBDLL.Services
             }
             AppTaskModel appTaskModelNew = new AppTaskModel()
             {
+                DBCommand = DBCommandEnum.Original,
                 TVItemID = TVItemID,
                 TVItemID2 = TVItemID,
                 AppTaskCommand = AppTaskCommandEnum.CreateDocxPDF,
@@ -2091,6 +2112,7 @@ namespace CSSPDBDLL.Services
             }
             AppTaskModel appTaskModelNew = new AppTaskModel()
             {
+                DBCommand = DBCommandEnum.Original,
                 TVItemID = TVItemID,
                 TVItemID2 = TVItemID,
                 AppTaskCommand = AppTaskCommandEnum.CreateXlsxPDF,
@@ -2163,6 +2185,7 @@ namespace CSSPDBDLL.Services
             }
             AppTaskModel appTaskModelNew = new AppTaskModel()
             {
+                DBCommand = DBCommandEnum.Original,
                 TVItemID = TVItemID,
                 TVItemID2 = TVItemID,
                 AppTaskCommand = AppTaskCommandEnum.CreateDocumentFromParameters,
@@ -2222,6 +2245,7 @@ namespace CSSPDBDLL.Services
                 {
                     TVFileLanguageModel tvFileLanguageModelNew = new TVFileLanguageModel()
                     {
+                        DBCommand = DBCommandEnum.Original,
                         Language = lang,
                         FileDescription = tvFileModel.FileDescription,
                         TranslationStatus = (lang == LanguageRequest ? TranslationStatusEnum.Translated : TranslationStatusEnum.NotTranslated),

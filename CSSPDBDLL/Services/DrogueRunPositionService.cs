@@ -98,12 +98,19 @@ namespace CSSPDBDLL.Services
                 return retStr;
             }
 
+            retStr = _BaseEnumService.DBCommandOK(drogueRunPositionModel.DBCommand);
+            if (!string.IsNullOrWhiteSpace(retStr))
+            {
+                return retStr;
+            }
+
             return "";
         }
 
         // Fill
         public string FillDrogueRunPosition(DrogueRunPosition drogueRunPositionNew, DrogueRunPositionModel drogueRunPositionModel, ContactOK contactOK)
         {
+            drogueRunPositionNew.DBCommand = (int)drogueRunPositionModel.DBCommand;
             drogueRunPositionNew.DrogueRunID = drogueRunPositionModel.DrogueRunID;
             drogueRunPositionNew.Ordinal = drogueRunPositionModel.Ordinal;
             drogueRunPositionNew.StepLat = drogueRunPositionModel.StepLat;
@@ -140,6 +147,7 @@ namespace CSSPDBDLL.Services
                                                              {
                                                                  Error = "",
                                                                  DrogueRunPositionID = c.DrogueRunPositionID,
+                                                                 DBCommand = (DBCommandEnum)c.DBCommand,
                                                                  DrogueRunID = c.DrogueRunID,
                                                                  Ordinal = c.Ordinal,
                                                                  StepLat = c.StepLat,
@@ -165,6 +173,7 @@ namespace CSSPDBDLL.Services
                                                                        {
                                                                            Error = "",
                                                                            DrogueRunPositionID = c.DrogueRunPositionID,
+                                                                           DBCommand = (DBCommandEnum)c.DBCommand,
                                                                            DrogueRunID = c.DrogueRunID,
                                                                            Ordinal = c.Ordinal,
                                                                            StepLat = c.StepLat,
@@ -188,6 +197,7 @@ namespace CSSPDBDLL.Services
                                                              {
                                                                  Error = "",
                                                                  DrogueRunPositionID = c.DrogueRunPositionID,
+                                                                 DBCommand = (DBCommandEnum)c.DBCommand,
                                                                  DrogueRunID = c.DrogueRunID,
                                                                  Ordinal = c.Ordinal,
                                                                  StepLat = c.StepLat,

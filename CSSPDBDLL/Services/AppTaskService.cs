@@ -143,12 +143,19 @@ namespace CSSPDBDLL.Services
                 return retStr;
             }
 
+            retStr = _BaseEnumService.DBCommandOK(appTaskModel.DBCommand);
+            if (!string.IsNullOrWhiteSpace(retStr))
+            {
+                return retStr;
+            }
+
             return "";
         }
 
         // Fill
         public string FillAppTask(AppTask appTask, AppTaskModel appTaskModel, ContactOK contactOK)
         {
+            appTask.DBCommand = (int)appTaskModel.DBCommand;
             appTask.TVItemID = appTaskModel.TVItemID;
             appTask.TVItemID2 = appTaskModel.TVItemID2;
             appTask.AppTaskCommand = (int)appTaskModel.AppTaskCommand;
@@ -188,6 +195,7 @@ namespace CSSPDBDLL.Services
                                              {
                                                  Error = "",
                                                  AppTaskID = c.AppTaskID,
+                                                 DBCommand = (DBCommandEnum)c.DBCommand,
                                                  AppTaskCommand = (AppTaskCommandEnum)c.AppTaskCommand,
                                                  EndDateTime_UTC = c.EndDateTime_UTC,
                                                  StartDateTime_UTC = c.StartDateTime_UTC,
@@ -244,6 +252,7 @@ namespace CSSPDBDLL.Services
                                                    {
                                                        Error = "",
                                                        AppTaskID = c.AppTaskID,
+                                                       DBCommand = (DBCommandEnum)c.DBCommand,
                                                        TVItemID = c.TVItemID,
                                                        TVItemIDTVText = tvItemIDTVText,
                                                        TVItemID2 = c.TVItemID2,
@@ -279,6 +288,7 @@ namespace CSSPDBDLL.Services
                                                    {
                                                        Error = "",
                                                        AppTaskID = c.AppTaskID,
+                                                       DBCommand = (DBCommandEnum)c.DBCommand,
                                                        TVItemID = c.TVItemID,
                                                        TVItemIDTVText = tvItemIDTVText,
                                                        TVItemID2 = c.TVItemID2,
@@ -312,6 +322,7 @@ namespace CSSPDBDLL.Services
                                          {
                                              Error = "",
                                              AppTaskID = c.AppTaskID,
+                                             DBCommand = (DBCommandEnum)c.DBCommand,
                                              TVItemID = c.TVItemID,
                                              TVItemIDTVText = tvItemIDTVText,
                                              TVItemID2 = c.TVItemID2,
@@ -349,6 +360,7 @@ namespace CSSPDBDLL.Services
                                                    {
                                                        Error = "",
                                                        AppTaskID = c.AppTaskID,
+                                                       DBCommand = (DBCommandEnum)c.DBCommand,
                                                        TVItemID = c.TVItemID,
                                                        TVItemIDTVText = tvItemIDTVText,
                                                        TVItemID2 = c.TVItemID2,
@@ -384,6 +396,7 @@ namespace CSSPDBDLL.Services
                                          {
                                              Error = "",
                                              AppTaskID = c.AppTaskID,
+                                             DBCommand = (DBCommandEnum)c.DBCommand,
                                              TVItemID = c.TVItemID,
                                              TVItemIDTVText = tvItemIDTVText,
                                              TVItemID2 = c.TVItemID2,
@@ -479,6 +492,7 @@ namespace CSSPDBDLL.Services
                     AppTaskLanguageModel appTaskLanguageModelNew = new AppTaskLanguageModel()
                     {
                         AppTaskID = appTaskNew.AppTaskID,
+                        DBCommand = DBCommandEnum.Original,
                         ErrorText = appTaskModel.ErrorText ?? "",
                         StatusText = appTaskModel.StatusText ?? "",
                         Language = Lang,
@@ -544,6 +558,7 @@ namespace CSSPDBDLL.Services
                     AppTaskLanguageModel appTaskLanguageModel = new AppTaskLanguageModel()
                     {
                         AppTaskID = appTaskModel.AppTaskID,
+                        DBCommand = DBCommandEnum.Original,
                         ErrorText = appTaskModel.ErrorText,
                         StatusText = appTaskModel.StatusText,
                         Language = Lang,

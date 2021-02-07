@@ -81,12 +81,19 @@ namespace CSSPDBDLL.Services
                 return retStr;
             }
 
+            retStr = _BaseEnumService.DBCommandOK(mikeScenarioResultModel.DBCommand);
+            if (!string.IsNullOrWhiteSpace(retStr))
+            {
+                return retStr;
+            }
+
             return "";
         }
 
         // Fill
         public string FillMikeScenarioResult(MikeScenarioResult mikeScenarioResult, MikeScenarioResultModel mikeScenarioResultModel, ContactOK contactOK)
         {
+            mikeScenarioResult.DBCommand = (int)mikeScenarioResultModel.DBCommand;
             mikeScenarioResult.MikeScenarioTVItemID = mikeScenarioResultModel.MikeScenarioTVItemID;
             mikeScenarioResult.MikeResultsJSON = mikeScenarioResultModel.MikeResultsJSON;
             mikeScenarioResult.LastUpdateDate_UTC = DateTime.UtcNow;
@@ -119,6 +126,7 @@ namespace CSSPDBDLL.Services
                                                                {
                                                                    Error = "",
                                                                    MikeScenarioResultID = c.MikeScenarioResultID,
+                                                                   DBCommand = (DBCommandEnum)c.DBCommand,
                                                                    MikeScenarioTVItemID = c.MikeScenarioTVItemID,
                                                                    MikeScenarioTVText = tvText,
                                                                    MikeResultsJSON = c.MikeResultsJSON,
@@ -140,6 +148,7 @@ namespace CSSPDBDLL.Services
                                                                {
                                                                    Error = "",
                                                                    MikeScenarioResultID = c.MikeScenarioResultID,
+                                                                   DBCommand = (DBCommandEnum)c.DBCommand,
                                                                    MikeScenarioTVItemID = c.MikeScenarioTVItemID,
                                                                    MikeScenarioTVText = tvText,
                                                                    MikeResultsJSON = c.MikeResultsJSON,

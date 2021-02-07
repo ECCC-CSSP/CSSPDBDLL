@@ -86,12 +86,19 @@ namespace CSSPDBDLL.Services
                 return retStr;
             }
 
+            retStr = _BaseEnumService.DBCommandOK(docTemplateModel.DBCommand);
+            if (!string.IsNullOrWhiteSpace(retStr))
+            {
+                return retStr;
+            }
+
             return "";
         }
 
         // Fill
         public string FillDocTemplate(DocTemplate docTemplate, DocTemplateModel docTemplateModel, ContactOK contactOK)
         {
+            docTemplate.DBCommand = (int)docTemplateModel.DBCommand;
             docTemplate.Language = (int)docTemplateModel.Language;
             docTemplate.TVType = (int)docTemplateModel.TVType;
             docTemplate.TVFileTVItemID = docTemplateModel.TVFileTVItemID;
@@ -126,6 +133,7 @@ namespace CSSPDBDLL.Services
                                                  {
                                                      Error = "",
                                                      DocTemplateID = c.DocTemplateID,
+                                                     DBCommand = (DBCommandEnum)c.DBCommand,
                                                      Language = (LanguageEnum)c.Language,
                                                      TVType = (TVTypeEnum)c.TVType,
                                                      TVFileTVItemID = c.TVFileTVItemID,
@@ -150,6 +158,7 @@ namespace CSSPDBDLL.Services
                                                            {
                                                                Error = "",
                                                                DocTemplateID = c.DocTemplateID,
+                                                               DBCommand = (DBCommandEnum)c.DBCommand,
                                                                Language = (LanguageEnum)c.Language,
                                                                TVType = (TVTypeEnum)c.TVType,
                                                                TVFileTVItemID = c.TVFileTVItemID,
@@ -169,6 +178,7 @@ namespace CSSPDBDLL.Services
                                                  {
                                                      Error = "",
                                                      DocTemplateID = c.DocTemplateID,
+                                                     DBCommand = (DBCommandEnum)c.DBCommand,
                                                      Language = (LanguageEnum)c.Language,
                                                      TVType = (TVTypeEnum)c.TVType,
                                                      TVFileTVItemID = c.TVFileTVItemID,
@@ -201,6 +211,7 @@ namespace CSSPDBDLL.Services
                                                     {
                                                         Error = "",
                                                         DocTemplateID = c.DocTemplateID,
+                                                        DBCommand = (DBCommandEnum)c.DBCommand,
                                                         Language = (LanguageEnum)c.Language,
                                                         TVType = (TVTypeEnum)c.TVType,
                                                         TVFileTVItemID = c.TVFileTVItemID,

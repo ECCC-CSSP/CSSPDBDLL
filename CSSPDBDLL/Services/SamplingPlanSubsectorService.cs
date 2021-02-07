@@ -52,38 +52,43 @@ namespace CSSPDBDLL.Services
         }
 
         // Check
-        public string SamplingPlanSubsectorModelOK(SamplingPlanSubsectorModel SamplingPlanSubsectorModel)
+        public string SamplingPlanSubsectorModelOK(SamplingPlanSubsectorModel samplingPlanSubsectorModel)
         {
-            string retStr = FieldCheckNotZeroInt(SamplingPlanSubsectorModel.SamplingPlanID, ServiceRes.SamplingPlanID);
+            string retStr = FieldCheckNotZeroInt(samplingPlanSubsectorModel.SamplingPlanID, ServiceRes.SamplingPlanID);
             if (!string.IsNullOrWhiteSpace(retStr))
             {
                 return retStr;
             }
 
-            retStr = FieldCheckNotZeroInt(SamplingPlanSubsectorModel.SubsectorTVItemID, ServiceRes.SubsectorTVItemID);
+            retStr = FieldCheckNotZeroInt(samplingPlanSubsectorModel.SubsectorTVItemID, ServiceRes.SubsectorTVItemID);
             if (!string.IsNullOrWhiteSpace(retStr))
             {
                 return retStr;
             }
 
-
+            retStr = _BaseEnumService.DBCommandOK(samplingPlanSubsectorModel.DBCommand);
+            if (!string.IsNullOrWhiteSpace(retStr))
+            {
+                return retStr;
+            }
 
             return "";
         }
 
         // Fill
-        public string FillSamplingPlanSubsector(SamplingPlanSubsector SamplingPlanSubsector, SamplingPlanSubsectorModel SamplingPlanSubsectorModel, ContactOK contactOK)
+        public string FillSamplingPlanSubsector(SamplingPlanSubsector samplingPlanSubsector, SamplingPlanSubsectorModel samplingPlanSubsectorModel, ContactOK contactOK)
         {
-            SamplingPlanSubsector.SamplingPlanID = SamplingPlanSubsectorModel.SamplingPlanID;
-            SamplingPlanSubsector.SubsectorTVItemID = SamplingPlanSubsectorModel.SubsectorTVItemID;
-            SamplingPlanSubsector.LastUpdateDate_UTC = DateTime.UtcNow;
+            samplingPlanSubsector.DBCommand = (int)samplingPlanSubsectorModel.DBCommand;
+            samplingPlanSubsector.SamplingPlanID = samplingPlanSubsectorModel.SamplingPlanID;
+            samplingPlanSubsector.SubsectorTVItemID = samplingPlanSubsectorModel.SubsectorTVItemID;
+            samplingPlanSubsector.LastUpdateDate_UTC = DateTime.UtcNow;
             if (contactOK == null)
             {
-                SamplingPlanSubsector.LastUpdateContactTVItemID = 2;
+                samplingPlanSubsector.LastUpdateContactTVItemID = 2;
             }
             else
             {
-                SamplingPlanSubsector.LastUpdateContactTVItemID = contactOK.ContactTVItemID;
+                samplingPlanSubsector.LastUpdateContactTVItemID = contactOK.ContactTVItemID;
             }
 
             return "";
@@ -108,6 +113,7 @@ namespace CSSPDBDLL.Services
                                                                 {
                                                                     Error = "",
                                                                     SamplingPlanSubsectorID = c.SamplingPlanSubsectorID,
+                                                                    DBCommand = (DBCommandEnum)c.DBCommand,
                                                                     SamplingPlanID = c.SamplingPlanID,
                                                                     SubsectorTVItemID = c.SubsectorTVItemID,
                                                                     SubsectorTVText = subsectorTVText,
@@ -138,6 +144,7 @@ namespace CSSPDBDLL.Services
                                                                        {
                                                                            Error = "",
                                                                            SamplingPlanSubsectorID = c.SamplingPlanSubsectorID,
+                                                                           DBCommand = (DBCommandEnum)c.DBCommand,
                                                                            SamplingPlanID = c.SamplingPlanID,
                                                                            SubsectorTVItemID = c.SubsectorTVItemID,
                                                                            SubsectorTVText = subsectorTVText,
@@ -158,6 +165,7 @@ namespace CSSPDBDLL.Services
                                                              {
                                                                  Error = "",
                                                                  SamplingPlanSubsectorID = c.SamplingPlanSubsectorID,
+                                                                 DBCommand = (DBCommandEnum)c.DBCommand,
                                                                  SamplingPlanID = c.SamplingPlanID,
                                                                  SubsectorTVItemID = c.SubsectorTVItemID,
                                                                  SubsectorTVText = subsectorTVText,
@@ -182,6 +190,7 @@ namespace CSSPDBDLL.Services
                                                              {
                                                                  Error = "",
                                                                  SamplingPlanSubsectorID = c.SamplingPlanSubsectorID,
+                                                                 DBCommand = (DBCommandEnum)c.DBCommand,
                                                                  SamplingPlanID = c.SamplingPlanID,
                                                                  SubsectorTVItemID = c.SubsectorTVItemID,
                                                                  SubsectorTVText = subsectorTVText,

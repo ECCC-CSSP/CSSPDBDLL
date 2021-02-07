@@ -189,12 +189,19 @@ namespace CSSPDBDLL.Services
                 return retStr;
             }
 
+            retStr = _BaseEnumService.DBCommandOK(mwqmAnalysisReportParameterModel.DBCommand);
+            if (!string.IsNullOrWhiteSpace(retStr))
+            {
+                return retStr;
+            }
+
             return "";
         }
 
         // Fill
         public string FillMWQMAnalysisReportParameter(MWQMAnalysisReportParameter mwqmAnalysisReportParameterNew, MWQMAnalysisReportParameterModel mwqmAnalysisReportParameterModel, ContactOK contactOK)
         {
+            mwqmAnalysisReportParameterNew.DBCommand = (int)mwqmAnalysisReportParameterModel.DBCommand;
             mwqmAnalysisReportParameterNew.SubsectorTVItemID = mwqmAnalysisReportParameterModel.SubsectorTVItemID;
             mwqmAnalysisReportParameterNew.AnalysisName = mwqmAnalysisReportParameterModel.AnalysisName;
             mwqmAnalysisReportParameterNew.AnalysisReportYear = mwqmAnalysisReportParameterModel.AnalysisReportYear;
@@ -248,6 +255,7 @@ namespace CSSPDBDLL.Services
                                                                                            {
                                                                                                Error = "",
                                                                                                MWQMAnalysisReportParameterID = c.MWQMAnalysisReportParameterID,
+                                                                                               DBCommand = (DBCommandEnum)c.DBCommand,
                                                                                                SubsectorTVItemID = c.SubsectorTVItemID,
                                                                                                AnalysisName = c.AnalysisName,
                                                                                                AnalysisReportYear = c.AnalysisReportYear,
@@ -288,6 +296,7 @@ namespace CSSPDBDLL.Services
                                                                                  {
                                                                                      Error = "",
                                                                                      MWQMAnalysisReportParameterID = c.MWQMAnalysisReportParameterID,
+                                                                                     DBCommand = (DBCommandEnum)c.DBCommand,
                                                                                      SubsectorTVItemID = c.SubsectorTVItemID,
                                                                                      AnalysisName = c.AnalysisName,
                                                                                      AnalysisReportYear = c.AnalysisReportYear,
@@ -334,6 +343,7 @@ namespace CSSPDBDLL.Services
                                                                                  {
                                                                                      Error = "",
                                                                                      MWQMAnalysisReportParameterID = c.MWQMAnalysisReportParameterID,
+                                                                                     DBCommand = (DBCommandEnum)c.DBCommand,
                                                                                      SubsectorTVItemID = c.SubsectorTVItemID,
                                                                                      AnalysisName = c.AnalysisName,
                                                                                      AnalysisReportYear = c.AnalysisReportYear,
@@ -396,6 +406,7 @@ namespace CSSPDBDLL.Services
                                                                                     {
                                                                                         Error = "",
                                                                                         MWQMAnalysisReportParameterID = c.MWQMAnalysisReportParameterID,
+                                                                                        DBCommand = (DBCommandEnum)c.DBCommand,
                                                                                         SubsectorTVItemID = c.SubsectorTVItemID,
                                                                                         AnalysisName = c.AnalysisName,
                                                                                         AnalysisReportYear = c.AnalysisReportYear,
@@ -674,6 +685,7 @@ namespace CSSPDBDLL.Services
             }
 
             MWQMAnalysisReportParameterModel mwqmAnalysisReportParameterModelNew = new MWQMAnalysisReportParameterModel();
+            mwqmAnalysisReportParameterModelNew.DBCommand = DBCommandEnum.Original;
             mwqmAnalysisReportParameterModelNew.SubsectorTVItemID = SubsectorTVItemID;
             mwqmAnalysisReportParameterModelNew.AnalysisName = AnalysisName;
             mwqmAnalysisReportParameterModelNew.AnalysisReportYear = null;
@@ -742,6 +754,7 @@ namespace CSSPDBDLL.Services
 
                     AppTaskModel appTaskModelNew = new AppTaskModel()
                     {
+                        DBCommand = DBCommandEnum.Original,
                         TVItemID = SubsectorTVItemID,
                         TVItemID2 = SubsectorTVItemID,
                         AppTaskCommand = AppTaskCommandEnum.ExportAnalysisToExcel,

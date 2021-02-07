@@ -15,6 +15,7 @@ namespace CSSPDBDLL
     public partial class MWQMRunLanguage
     {
         public int MWQMRunLanguageID { get; set; }
+        public int DBCommand { get; set; }
         public int MWQMRunID { get; set; }
         public int Language { get; set; }
         public string RunComment { get; set; }

@@ -21,6 +21,7 @@ namespace CSSPDBDLL
         }
     
         public int ReportTypeID { get; set; }
+        public int DBCommand { get; set; }
         public int TVType { get; set; }
         public int FileType { get; set; }
         public string UniqueCode { get; set; }

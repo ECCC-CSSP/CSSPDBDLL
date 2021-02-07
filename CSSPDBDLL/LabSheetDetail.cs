@@ -21,6 +21,7 @@ namespace CSSPDBDLL
         }
     
         public int LabSheetDetailID { get; set; }
+        public int DBCommand { get; set; }
         public int LabSheetID { get; set; }
         public int SamplingPlanID { get; set; }
         public int SubsectorTVItemID { get; set; }

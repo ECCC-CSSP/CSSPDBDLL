@@ -22,6 +22,7 @@ namespace CSSPDBDLL
         }
     
         public int ReportSectionID { get; set; }
+        public int DBCommand { get; set; }
         public int ReportTypeID { get; set; }
         public Nullable<int> TVItemID { get; set; }
         public Nullable<int> Language { get; set; }

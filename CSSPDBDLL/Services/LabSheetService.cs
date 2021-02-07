@@ -196,12 +196,19 @@ namespace CSSPDBDLL.Services
                 }
             }
 
+            retStr = _BaseEnumService.DBCommandOK(labSheetModel.DBCommand);
+            if (!string.IsNullOrWhiteSpace(retStr))
+            {
+                return retStr;
+            }
+
             return "";
         }
 
         // Fill
         public string FillLabSheet(LabSheet labSheet, LabSheetModel labSheetModel, ContactOK contactOK)
         {
+            labSheet.DBCommand = (int)labSheetModel.DBCommand;
             labSheet.OtherServerLabSheetID = labSheetModel.OtherServerLabSheetID;
             labSheet.SamplingPlanID = labSheetModel.SamplingPlanID;
             labSheet.SamplingPlanName = labSheetModel.SamplingPlanName;
@@ -262,6 +269,7 @@ namespace CSSPDBDLL.Services
                                               {
                                                   Error = "",
                                                   LabSheetID = c.LabSheetID,
+                                                  DBCommand = (DBCommandEnum)c.DBCommand,
                                                   OtherServerLabSheetID = c.OtherServerLabSheetID,
                                                   SamplingPlanID = c.SamplingPlanID,
                                                   SamplingPlanName = c.SamplingPlanName,
@@ -324,6 +332,7 @@ namespace CSSPDBDLL.Services
                                                      {
                                                          Error = "",
                                                          LabSheetID = c.LabSheetID,
+                                                         DBCommand = (DBCommandEnum)c.DBCommand,
                                                          OtherServerLabSheetID = c.OtherServerLabSheetID,
                                                          SamplingPlanID = c.SamplingPlanID,
                                                          SamplingPlanName = c.SamplingPlanName,
@@ -364,6 +373,7 @@ namespace CSSPDBDLL.Services
                                                      {
                                                          Error = "",
                                                          LabSheetID = c.LabSheetID,
+                                                         DBCommand = (DBCommandEnum)c.DBCommand,
                                                          OtherServerLabSheetID = c.OtherServerLabSheetID,
                                                          SamplingPlanID = c.SamplingPlanID,
                                                          SamplingPlanName = c.SamplingPlanName,
@@ -404,6 +414,7 @@ namespace CSSPDBDLL.Services
                                                      {
                                                          Error = "",
                                                          LabSheetID = c.LabSheetID,
+                                                         DBCommand = (DBCommandEnum)c.DBCommand,
                                                          OtherServerLabSheetID = c.OtherServerLabSheetID,
                                                          SamplingPlanID = c.SamplingPlanID,
                                                          SamplingPlanName = c.SamplingPlanName,
@@ -480,6 +491,7 @@ namespace CSSPDBDLL.Services
                                                      {
                                                          Error = "",
                                                          LabSheetID = c.LabSheetID,
+                                                         DBCommand = (DBCommandEnum)c.DBCommand,
                                                          OtherServerLabSheetID = c.OtherServerLabSheetID,
                                                          SamplingPlanID = c.SamplingPlanID,
                                                          SamplingPlanName = c.SamplingPlanName,
@@ -519,6 +531,7 @@ namespace CSSPDBDLL.Services
                                            {
                                                Error = "",
                                                LabSheetID = c.LabSheetID,
+                                               DBCommand = (DBCommandEnum)c.DBCommand,
                                                OtherServerLabSheetID = c.OtherServerLabSheetID,
                                                SamplingPlanID = c.SamplingPlanID,
                                                SamplingPlanName = c.SamplingPlanName,
@@ -857,6 +870,7 @@ namespace CSSPDBDLL.Services
             }
             AppTaskModel appTaskModelNew = new AppTaskModel()
             {
+                DBCommand = DBCommandEnum.Original,
                 TVItemID = labSheetModel.SubsectorTVItemID,
                 TVItemID2 = labSheetModel.SubsectorTVItemID,
                 AppTaskCommand = AppTaskCommandEnum.CreateFCForm,
@@ -1003,6 +1017,7 @@ namespace CSSPDBDLL.Services
             {
                 MWQMRunModel mwqmRunModelModify = new MWQMRunModel()
                 {
+                    DBCommand = DBCommandEnum.Original,
                     SubsectorTVItemID = labSheetA1Sheet.SubsectorTVItemID,
                     DateTime_Local = RunDate,
                     StartDateTime_Local = StartDateTime,
@@ -1035,6 +1050,7 @@ namespace CSSPDBDLL.Services
 
                     MWQMRunModel mwqmRunModelNew = new MWQMRunModel()
                     {
+                        DBCommand = DBCommandEnum.Original,
                         AnalyzeMethod = analyzeMethod,
                         SubsectorTVItemID = labSheetA1Sheet.SubsectorTVItemID,
                         RunSampleType = (RoutineExist ? SampleTypeEnum.Routine : sampleTypeList[0]),
@@ -1193,6 +1209,7 @@ namespace CSSPDBDLL.Services
                         TempCont2 = (LanguageRequest == LanguageEnum.fr ? float.Parse(labSheetA1Sheet.TCLab2.Replace(".", ",")) : float.Parse(labSheetA1Sheet.TCLab2));
                     }
 
+                    mwqmRunModelToChange.DBCommand = DBCommandEnum.Original;
                     mwqmRunModelToChange.AnalyzeMethod = analyzeMethod;
                     mwqmRunModelToChange.SubsectorTVItemID = labSheetA1Sheet.SubsectorTVItemID;
                     mwqmRunModelToChange.RunSampleType = (RoutineExist ? SampleTypeEnum.Routine : sampleTypeList[0]);
@@ -1365,6 +1382,7 @@ namespace CSSPDBDLL.Services
 
 
                     MWQMSampleModel mwqmSampleModelNew = new MWQMSampleModel();
+                    mwqmSampleModelNew.DBCommand = DBCommandEnum.Original;
                     mwqmSampleModelNew.FecCol_MPN_100ml = (int)labSheetA1Measurement.MPN;
                     mwqmSampleModelNew.SampleDateTime_Local = (DateTime)labSheetA1Measurement.Time;
                     mwqmSampleModelNew.MWQMSampleNote = labSheetA1Measurement.SiteComment;

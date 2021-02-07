@@ -15,6 +15,7 @@ namespace CSSPDBDLL
     public partial class TVItemLanguage
     {
         public int TVItemLanguageID { get; set; }
+        public int DBCommand { get; set; }
         public int TVItemID { get; set; }
         public int Language { get; set; }
         public string TVText { get; set; }

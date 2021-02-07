@@ -15,6 +15,7 @@ namespace CSSPDBDLL
     public partial class SpillLanguage
     {
         public int SpillLanguageID { get; set; }
+        public int DBCommand { get; set; }
         public int SpillID { get; set; }
         public int Language { get; set; }
         public string SpillComment { get; set; }

@@ -15,6 +15,7 @@ namespace CSSPDBDLL
     public partial class MikeScenarioResult
     {
         public int MikeScenarioResultID { get; set; }
+        public int DBCommand { get; set; }
         public int MikeScenarioTVItemID { get; set; }
         public string MikeResultsJSON { get; set; }
         public System.DateTime LastUpdateDate_UTC { get; set; }

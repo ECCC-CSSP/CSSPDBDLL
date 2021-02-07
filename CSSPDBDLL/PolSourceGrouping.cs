@@ -21,6 +21,7 @@ namespace CSSPDBDLL
         }
     
         public int PolSourceGroupingID { get; set; }
+        public int DBCommand { get; set; }
         public int CSSPID { get; set; }
         public string GroupName { get; set; }
         public string Child { get; set; }

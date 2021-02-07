@@ -183,13 +183,19 @@ namespace CSSPDBDLL.Services
                 }
             }
 
+            retStr = _BaseEnumService.DBCommandOK(climateDataValueModel.DBCommand);
+            if (!string.IsNullOrWhiteSpace(retStr))
+            {
+                return retStr;
+            }
+
             return "";
         }
 
         // Fill
         public string FillClimateDataValue(ClimateDataValue climateDataValueNew, ClimateDataValueModel climateDataValueModel, ContactOK contactOK)
         {
-
+            climateDataValueNew.DBCommand = (int)climateDataValueModel.DBCommand;
             climateDataValueNew.ClimateSiteID = climateDataValueModel.ClimateSiteID;
             climateDataValueNew.DateTime_Local = climateDataValueModel.DateTime_Local;
             climateDataValueNew.Keep = climateDataValueModel.Keep;
@@ -236,6 +242,7 @@ namespace CSSPDBDLL.Services
                                                            {
                                                                Error = "",
                                                                ClimateSiteID = c.ClimateSiteID,
+                                                               DBCommand = (DBCommandEnum)c.DBCommand,
                                                                ClimateDataValueID = c.ClimateDataValueID,
                                                                DateTime_Local = c.DateTime_Local,
                                                                Keep = c.Keep,
@@ -270,6 +277,7 @@ namespace CSSPDBDLL.Services
                                                                      {
                                                                          Error = "",
                                                                          ClimateSiteID = c.ClimateSiteID,
+                                                                         DBCommand = (DBCommandEnum)c.DBCommand,
                                                                          ClimateDataValueID = c.ClimateDataValueID,
                                                                          DateTime_Local = c.DateTime_Local,
                                                                          Keep = c.Keep,
@@ -302,6 +310,7 @@ namespace CSSPDBDLL.Services
                                                               {
                                                                   Error = "",
                                                                   ClimateSiteID = c.ClimateSiteID,
+                                                                  DBCommand = (DBCommandEnum)c.DBCommand,
                                                                   ClimateDataValueID = c.ClimateDataValueID,
                                                                   DateTime_Local = c.DateTime_Local,
                                                                   Keep = c.Keep,

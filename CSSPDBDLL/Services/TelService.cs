@@ -75,12 +75,19 @@ namespace CSSPDBDLL.Services
                 return retStr;
             }
 
+            retStr = _BaseEnumService.DBCommandOK(telModel.DBCommand);
+            if (!string.IsNullOrWhiteSpace(retStr))
+            {
+                return retStr;
+            }
+
             return "";
         }
 
         // Fill
         public string FillTel(Tel tel, TelModel telModel, ContactOK contactOK)
         {
+            tel.DBCommand = (int)telModel.DBCommand;
             tel.TelTVItemID = telModel.TelTVItemID;
             tel.TelNumber = telModel.TelNumber;
             tel.TelType = (int)telModel.TelType;
@@ -112,6 +119,7 @@ namespace CSSPDBDLL.Services
                                  {
                                      Error = "",
                                      TelID = c.TelID,
+                                     DBCommand = (DBCommandEnum)c.DBCommand,
                                      TelTVItemID = c.TelTVItemID,
                                      TelNumber = c.TelNumber,
                                      TelType = (TelTypeEnum)c.TelType,
@@ -138,6 +146,7 @@ namespace CSSPDBDLL.Services
                                  {
                                      Error = "",
                                      TelID = c.TelID,
+                                     DBCommand = (DBCommandEnum)c.DBCommand,
                                      TelTVItemID = c.TelTVItemID,
                                      TelNumber = c.TelNumber,
                                      TelType = (TelTypeEnum)c.TelType,
@@ -164,6 +173,7 @@ namespace CSSPDBDLL.Services
                                  {
                                      Error = "",
                                      TelID = c.TelID,
+                                     DBCommand = (DBCommandEnum)c.DBCommand,
                                      TelTVItemID = c.TelTVItemID,
                                      TelNumber = c.TelNumber,
                                      TelType = (TelTypeEnum)c.TelType,
@@ -245,6 +255,7 @@ namespace CSSPDBDLL.Services
 
                     TelModel telModelNew = new TelModel()
                     {
+                        DBCommand = DBCommandEnum.Original,
                         TelNumber = TelNumber,
                         TelType = TelType,
                     };
@@ -274,6 +285,7 @@ namespace CSSPDBDLL.Services
 
                     TVItemLinkModel tvItemLinkModelNew = new TVItemLinkModel()
                     {
+                        DBCommand = DBCommandEnum.Original,
                         FromTVItemID = tvItemModelContact.TVItemID,
                         ToTVItemID = tvItemModelTel.TVItemID,
                         FromTVType = tvItemModelContact.TVType,

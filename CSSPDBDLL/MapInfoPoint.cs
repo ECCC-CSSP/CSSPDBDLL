@@ -15,6 +15,7 @@ namespace CSSPDBDLL
     public partial class MapInfoPoint
     {
         public int MapInfoPointID { get; set; }
+        public int DBCommand { get; set; }
         public int MapInfoID { get; set; }
         public int Ordinal { get; set; }
         public double Lat { get; set; }

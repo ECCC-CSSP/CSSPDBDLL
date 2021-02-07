@@ -24,6 +24,7 @@ namespace CSSPDBDLL
         }
     
         public int SamplingPlanID { get; set; }
+        public int DBCommand { get; set; }
         public bool IsActive { get; set; }
         public string SamplingPlanName { get; set; }
         public string ForGroupName { get; set; }

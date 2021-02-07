@@ -96,12 +96,19 @@ namespace CSSPDBDLL.Services
                 return retStr;
             }
 
+            retStr = _BaseEnumService.DBCommandOK(spillModel.DBCommand);
+            if (!string.IsNullOrWhiteSpace(retStr))
+            {
+                return retStr;
+            }
+
             return "";
         }
 
         // Fill
         public string FillSpill(Spill spill, SpillModel spillModel, ContactOK contactOK)
         {
+            spill.DBCommand = (int)spillModel.DBCommand;
             spill.MunicipalityTVItemID = spillModel.MunicipalityTVItemID;
             spill.InfrastructureTVItemID = spillModel.InfrastructureTVItemID;
             spill.StartDateTime_Local = spillModel.StartDateTime_Local;
@@ -140,6 +147,7 @@ namespace CSSPDBDLL.Services
                                                {
                                                    Error = "",
                                                    SpillID = c.SpillID,
+                                                   DBCommand = (DBCommandEnum)c.DBCommand,
                                                    SpillComment = spillComment,
                                                    MunicipalityTVItemID = c.MunicipalityTVItemID,
                                                    MunicipalityTVText = muniName,
@@ -166,6 +174,7 @@ namespace CSSPDBDLL.Services
                                                {
                                                    Error = "",
                                                    SpillID = c.SpillID,
+                                                   DBCommand = (DBCommandEnum)c.DBCommand,
                                                    SpillComment = spillComment,
                                                    MunicipalityTVItemID = c.MunicipalityTVItemID,
                                                    MunicipalityTVText = muniName,
@@ -191,6 +200,7 @@ namespace CSSPDBDLL.Services
                                      {
                                          Error = "",
                                          SpillID = c.SpillID,
+                                         DBCommand = (DBCommandEnum)c.DBCommand,
                                          SpillComment = spillComment,
                                          MunicipalityTVItemID = c.MunicipalityTVItemID,
                                          MunicipalityTVText = muniName,

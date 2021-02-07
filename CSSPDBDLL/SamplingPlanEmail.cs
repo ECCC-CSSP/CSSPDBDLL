@@ -15,6 +15,7 @@ namespace CSSPDBDLL
     public partial class SamplingPlanEmail
     {
         public int SamplingPlanEmailID { get; set; }
+        public int DBCommand { get; set; }
         public int SamplingPlanID { get; set; }
         public string Email { get; set; }
         public bool IsContractor { get; set; }

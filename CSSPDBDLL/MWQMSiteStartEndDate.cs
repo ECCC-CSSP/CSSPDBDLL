@@ -15,6 +15,7 @@ namespace CSSPDBDLL
     public partial class MWQMSiteStartEndDate
     {
         public int MWQMSiteStartEndDateID { get; set; }
+        public int DBCommand { get; set; }
         public int MWQMSiteTVItemID { get; set; }
         public System.DateTime StartDate { get; set; }
         public Nullable<System.DateTime> EndDate { get; set; }

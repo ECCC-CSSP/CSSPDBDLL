@@ -151,12 +151,20 @@ namespace CSSPDBDLL.Services
                     return retStr;
                 }
             }
+
+            retStr = _BaseEnumService.DBCommandOK(vpAmbientModel.DBCommand);
+            if (!string.IsNullOrWhiteSpace(retStr))
+            {
+                return retStr;
+            }
+
             return "";
         }
 
         // Fill
         public string FillVPAmbient(VPAmbient vpAmbient, VPAmbientModel vpAmbientModel, ContactOK contactOK)
         {
+            vpAmbient.DBCommand = (int)vpAmbientModel.DBCommand;
             vpAmbient.VPScenarioID = vpAmbientModel.VPScenarioID;
             vpAmbient.Row = vpAmbientModel.Row;
             vpAmbient.MeasurementDepth_m = vpAmbientModel.MeasurementDepth_m;
@@ -199,6 +207,7 @@ namespace CSSPDBDLL.Services
                                                        {
                                                            Error = "",
                                                            VPScenarioID = c.VPScenarioID,
+                                                           DBCommand = (DBCommandEnum)c.DBCommand,
                                                            Row = c.Row,
                                                            MeasurementDepth_m = c.MeasurementDepth_m,
                                                            CurrentSpeed_m_s = c.CurrentSpeed_m_s,
@@ -225,6 +234,7 @@ namespace CSSPDBDLL.Services
                                              {
                                                  Error = "",
                                                  VPAmbientID = c.VPAmbientID,
+                                                 DBCommand = (DBCommandEnum)c.DBCommand,
                                                  VPScenarioID = c.VPScenarioID,
                                                  Row = c.Row,
                                                  MeasurementDepth_m = c.MeasurementDepth_m,

@@ -81,12 +81,19 @@ namespace CSSPDBDLL.Services
                 return retStr;
             }
 
+            retStr = _BaseEnumService.DBCommandOK(tvItemModel.DBCommand);
+            if (!string.IsNullOrWhiteSpace(retStr))
+            {
+                return retStr;
+            }
+
             return "";
         }
 
         // Fill
         public string FillTVItem(TVItem tvItem, TVItemModel tvItemModel, ContactOK contactOK)
         {
+            tvItem.DBCommand = (int)tvItemModel.DBCommand;
             tvItem.TVLevel = tvItemModel.TVLevel;
             tvItem.TVPath = tvItemModel.TVPath;
             tvItem.TVType = (int)tvItemModel.TVType;
@@ -121,8 +128,9 @@ namespace CSSPDBDLL.Services
                                                  {
                                                      Error = "",
                                                      TVItemID = c.TVItemID,
+                                                     DBCommand = (DBCommandEnum)c.DBCommand,
                                                      IsActive = c.IsActive,
-                                                     ParentID = c.ParentID,
+                                                     ParentID = (int)c.ParentID,
                                                      TVLevel = c.TVLevel,
                                                      TVPath = c.TVPath,
                                                      TVType = (TVTypeEnum)c.TVType,
@@ -169,8 +177,9 @@ namespace CSSPDBDLL.Services
                                                                            {
                                                                                Error = "",
                                                                                TVItemID = c.TVItemID,
+                                                                               DBCommand = (DBCommandEnum)c.DBCommand,
                                                                                IsActive = c.IsActive,
-                                                                               ParentID = c.ParentID,
+                                                                               ParentID = (int)c.ParentID,
                                                                                TVLevel = c.TVLevel,
                                                                                TVPath = c.TVPath,
                                                                                TVType = (TVTypeEnum)c.TVType,
@@ -243,8 +252,9 @@ namespace CSSPDBDLL.Services
                                                                            {
                                                                                Error = "",
                                                                                TVItemID = c.TVItemID,
+                                                                               DBCommand = (DBCommandEnum)c.DBCommand,
                                                                                IsActive = c.IsActive,
-                                                                               ParentID = c.ParentID,
+                                                                               ParentID = (int)c.ParentID,
                                                                                TVLevel = c.TVLevel,
                                                                                TVPath = c.TVPath,
                                                                                TVType = (TVTypeEnum)c.TVType,
@@ -311,8 +321,9 @@ namespace CSSPDBDLL.Services
                                        {
                                            Error = "",
                                            TVItemID = c.TVItemID,
+                                           DBCommand = (DBCommandEnum)c.DBCommand,
                                            IsActive = c.IsActive,
-                                           ParentID = c.ParentID,
+                                           ParentID = (int)c.ParentID,
                                            TVLevel = c.TVLevel,
                                            TVPath = c.TVPath,
                                            TVType = (TVTypeEnum)c.TVType,
@@ -341,8 +352,9 @@ namespace CSSPDBDLL.Services
                                        {
                                            Error = "",
                                            TVItemID = c.TVItemID,
+                                           DBCommand = (DBCommandEnum)c.DBCommand,
                                            IsActive = c.IsActive,
-                                           ParentID = c.ParentID,
+                                           ParentID = (int)c.ParentID,
                                            TVLevel = c.TVLevel,
                                            TVPath = c.TVPath,
                                            TVType = (TVTypeEnum)c.TVType,
@@ -427,8 +439,9 @@ namespace CSSPDBDLL.Services
                                                  {
                                                      Error = "",
                                                      TVItemID = c.TVItemID,
+                                                     DBCommand = (DBCommandEnum)c.DBCommand,
                                                      IsActive = c.IsActive,
-                                                     ParentID = c.ParentID,
+                                                     ParentID = (int)c.ParentID,
                                                      TVLevel = c.TVLevel,
                                                      TVPath = c.TVPath,
                                                      TVType = (TVTypeEnum)c.TVType,
@@ -465,8 +478,9 @@ namespace CSSPDBDLL.Services
                                                  {
                                                      Error = "",
                                                      TVItemID = c.TVItemID,
+                                                     DBCommand = (DBCommandEnum)c.DBCommand,
                                                      IsActive = c.IsActive,
-                                                     ParentID = c.ParentID,
+                                                     ParentID = (int)c.ParentID,
                                                      TVLevel = c.TVLevel,
                                                      TVPath = c.TVPath,
                                                      TVType = (TVTypeEnum)c.TVType,
@@ -496,8 +510,9 @@ namespace CSSPDBDLL.Services
                                        {
                                            Error = "",
                                            TVItemID = cp.TVItemID,
+                                           DBCommand = (DBCommandEnum)c.DBCommand,
                                            IsActive = cp.IsActive,
-                                           ParentID = cp.ParentID,
+                                           ParentID = (int)cp.ParentID,
                                            TVLevel = cp.TVLevel,
                                            TVPath = cp.TVPath,
                                            TVType = (TVTypeEnum)cp.TVType,
@@ -528,8 +543,9 @@ namespace CSSPDBDLL.Services
                                        {
                                            Error = "",
                                            TVItemID = cp.TVItemID,
+                                           DBCommand = (DBCommandEnum)c.DBCommand,
                                            IsActive = cp.IsActive,
-                                           ParentID = cp.ParentID,
+                                           ParentID = (int)cp.ParentID,
                                            TVLevel = cp.TVLevel,
                                            TVPath = cp.TVPath,
                                            TVType = (TVTypeEnum)cp.TVType,
@@ -558,8 +574,9 @@ namespace CSSPDBDLL.Services
                                        {
                                            Error = "",
                                            TVItemID = c.TVItemID,
+                                           DBCommand = (DBCommandEnum)c.DBCommand,
                                            IsActive = c.IsActive,
-                                           ParentID = c.ParentID,
+                                           ParentID = (int)c.ParentID,
                                            TVLevel = c.TVLevel,
                                            TVPath = c.TVPath,
                                            TVType = (TVTypeEnum)c.TVType,
@@ -747,8 +764,9 @@ namespace CSSPDBDLL.Services
                                                  {
                                                      Error = "",
                                                      TVItemID = c.TVItemID,
+                                                     DBCommand = (DBCommandEnum)c.DBCommand,
                                                      IsActive = c.IsActive,
-                                                     ParentID = c.ParentID,
+                                                     ParentID = (int)c.ParentID,
                                                      TVLevel = c.TVLevel,
                                                      TVPath = c.TVPath,
                                                      TVType = (TVTypeEnum)c.TVType,
@@ -782,8 +800,9 @@ namespace CSSPDBDLL.Services
                                                  {
                                                      Error = "",
                                                      TVItemID = c.TVItemID,
+                                                     DBCommand = (DBCommandEnum)c.DBCommand,
                                                      IsActive = c.IsActive,
-                                                     ParentID = c.ParentID,
+                                                     ParentID = (int)c.ParentID,
                                                      TVLevel = c.TVLevel,
                                                      TVPath = c.TVPath,
                                                      TVType = (TVTypeEnum)c.TVType,
@@ -812,8 +831,9 @@ namespace CSSPDBDLL.Services
                                                  {
                                                      Error = "",
                                                      TVItemID = c.TVItemID,
+                                                     DBCommand = (DBCommandEnum)c.DBCommand,
                                                      IsActive = c.IsActive,
-                                                     ParentID = c.ParentID,
+                                                     ParentID = (int)c.ParentID,
                                                      TVLevel = c.TVLevel,
                                                      TVPath = c.TVPath,
                                                      TVType = (TVTypeEnum)c.TVType,
@@ -971,8 +991,9 @@ namespace CSSPDBDLL.Services
                                    {
                                        Error = "",
                                        TVItemID = c.TVItemID,
+                                       DBCommand = (DBCommandEnum)c.DBCommand,
                                        IsActive = c.IsActive,
-                                       ParentID = c.ParentID,
+                                       ParentID = (int)c.ParentID,
                                        TVLevel = c.TVLevel,
                                        TVPath = c.TVPath,
                                        TVType = (TVTypeEnum)c.TVType,
@@ -991,8 +1012,9 @@ namespace CSSPDBDLL.Services
                                    {
                                        Error = "",
                                        TVItemID = c.TVItemID,
+                                       DBCommand = (DBCommandEnum)c.DBCommand,
                                        IsActive = c.IsActive,
-                                       ParentID = c.ParentID,
+                                       ParentID = (int)c.ParentID,
                                        TVLevel = c.TVLevel,
                                        TVPath = c.TVPath,
                                        TVType = (TVTypeEnum)c.TVType,
@@ -1017,8 +1039,9 @@ namespace CSSPDBDLL.Services
                                        {
                                            Error = "",
                                            TVItemID = c.TVItemID,
+                                           DBCommand = (DBCommandEnum)c.DBCommand,
                                            IsActive = c.IsActive,
-                                           ParentID = c.ParentID,
+                                           ParentID = (int)c.ParentID,
                                            TVLevel = c.TVLevel,
                                            TVPath = c.TVPath,
                                            TVType = (TVTypeEnum)c.TVType,
@@ -2822,6 +2845,7 @@ namespace CSSPDBDLL.Services
                 {
                     TVItemLanguageModel tvItemLanguageModel = new TVItemLanguageModel()
                     {
+                        DBCommand = DBCommandEnum.Original,
                         Language = Lang,
                         TVText = TVText,
                         TVItemID = tvItemNew.TVItemID,
@@ -2853,6 +2877,7 @@ namespace CSSPDBDLL.Services
                 return ReturnError(string.Format(ServiceRes._AlreadyExists, ServiceRes.TVText));
 
             TVItemModel tvItemModel = new TVItemModel();
+            tvItemModel.DBCommand = DBCommandEnum.Original;
             tvItemModel.TVLevel = tvItemModelParent.TVLevel + 1;
             tvItemModel.TVPath = tvItemModelParent.TVPath + "p0"; // will change
             tvItemModel.TVType = (TVTypeEnum)TVType;
@@ -2891,6 +2916,7 @@ namespace CSSPDBDLL.Services
                 {
                     TVItemLanguageModel tvItemLanguageModel = new TVItemLanguageModel()
                     {
+                        DBCommand = DBCommandEnum.Original,
                         Language = Lang,
                         TVText = TVText,
                         TVItemID = tvItemNew.TVItemID,
@@ -2920,6 +2946,7 @@ namespace CSSPDBDLL.Services
                 return ReturnError(string.Format(ServiceRes._AlreadyExists, ServiceRes.TVText));
 
             TVItemModel tvItemModel = new TVItemModel();
+            tvItemModel.DBCommand = DBCommandEnum.Original;
             tvItemModel.TVLevel = tvItemModelParent.TVLevel + 1;
             tvItemModel.TVPath = tvItemModelParent.TVPath + "p0"; // will change
             tvItemModel.TVType = (TVTypeEnum)TVType;
@@ -2957,6 +2984,7 @@ namespace CSSPDBDLL.Services
                 {
                     TVItemLanguageModel tvItemLanguageModel = new TVItemLanguageModel()
                     {
+                        DBCommand = DBCommandEnum.Original,
                         Language = Lang,
                         TVText = TVText,
                         TVItemID = tvItemNew.TVItemID,

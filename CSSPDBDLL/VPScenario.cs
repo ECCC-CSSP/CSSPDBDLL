@@ -23,6 +23,7 @@ namespace CSSPDBDLL
         }
     
         public int VPScenarioID { get; set; }
+        public int DBCommand { get; set; }
         public int InfrastructureTVItemID { get; set; }
         public int VPScenarioStatus { get; set; }
         public bool UseAsBestEstimate { get; set; }

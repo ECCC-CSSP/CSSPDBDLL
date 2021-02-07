@@ -15,6 +15,7 @@ namespace CSSPDBDLL
     public partial class PolSourceSiteEffect
     {
         public int PolSourceSiteEffectID { get; set; }
+        public int DBCommand { get; set; }
         public int PolSourceSiteOrInfrastructureTVItemID { get; set; }
         public int MWQMSiteTVItemID { get; set; }
         public string PolSourceSiteEffectTermIDs { get; set; }

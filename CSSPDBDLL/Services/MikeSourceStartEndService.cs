@@ -125,12 +125,19 @@ namespace CSSPDBDLL.Services
                 return retStr;
             }
 
+            retStr = _BaseEnumService.DBCommandOK(mikeSourceStartEndModel.DBCommand);
+            if (!string.IsNullOrWhiteSpace(retStr))
+            {
+                return retStr;
+            }
+
             return "";
         }
 
         // Fill
         public string FillMikeSourceStartEnd(MikeSourceStartEnd mikeSourceStartEnd, MikeSourceStartEndModel mikeSourceStartEndModel, ContactOK contactOK)
         {
+            mikeSourceStartEnd.DBCommand = (int)mikeSourceStartEndModel.DBCommand;
             mikeSourceStartEnd.MikeSourceID = mikeSourceStartEndModel.MikeSourceID;
             mikeSourceStartEnd.EndDateAndTime_Local = mikeSourceStartEndModel.EndDateAndTime_Local;
             mikeSourceStartEnd.StartDateAndTime_Local = mikeSourceStartEndModel.StartDateAndTime_Local;
@@ -170,6 +177,7 @@ namespace CSSPDBDLL.Services
                                                                          {
                                                                              Error = "",
                                                                              MikeSourceStartEndID = c.MikeSourceStartEndID,
+                                                                             DBCommand = (DBCommandEnum)c.DBCommand,
                                                                              MikeSourceID = c.MikeSourceID,
                                                                              StartDateAndTime_Local = c.StartDateAndTime_Local,
                                                                              EndDateAndTime_Local = c.EndDateAndTime_Local,
@@ -198,6 +206,7 @@ namespace CSSPDBDLL.Services
                                                                          {
                                                                              Error = "",
                                                                              MikeSourceStartEndID = c.MikeSourceStartEndID,
+                                                                             DBCommand = (DBCommandEnum)c.DBCommand,
                                                                              MikeSourceID = c.MikeSourceID,
                                                                              StartDateAndTime_Local = c.StartDateAndTime_Local,
                                                                              EndDateAndTime_Local = c.EndDateAndTime_Local,
@@ -223,6 +232,7 @@ namespace CSSPDBDLL.Services
                                                                {
                                                                    Error = "",
                                                                    MikeSourceStartEndID = c.MikeSourceStartEndID,
+                                                                   DBCommand = (DBCommandEnum)c.DBCommand,
                                                                    MikeSourceID = c.MikeSourceID,
                                                                    StartDateAndTime_Local = c.StartDateAndTime_Local,
                                                                    EndDateAndTime_Local = c.EndDateAndTime_Local,
@@ -269,6 +279,7 @@ namespace CSSPDBDLL.Services
                                                                {
                                                                    Error = "",
                                                                    MikeSourceStartEndID = c.MikeSourceStartEndID,
+                                                                   DBCommand = (DBCommandEnum)c.DBCommand,
                                                                    MikeSourceID = c.MikeSourceID,
                                                                    StartDateAndTime_Local = c.StartDateAndTime_Local,
                                                                    EndDateAndTime_Local = c.EndDateAndTime_Local,

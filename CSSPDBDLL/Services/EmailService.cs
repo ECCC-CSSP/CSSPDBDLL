@@ -76,12 +76,19 @@ namespace CSSPDBDLL.Services
                 return retStr;
             }
 
+            retStr = _BaseEnumService.DBCommandOK(emailModel.DBCommand);
+            if (!string.IsNullOrWhiteSpace(retStr))
+            {
+                return retStr;
+            }
+
             return "";
         }
 
         // Fill
         public string FillEmail(Email emailNew, EmailModel emailModel, ContactOK contactOK)
         {
+            emailNew.DBCommand = (int)emailModel.DBCommand;
             emailNew.EmailTVItemID = emailModel.EmailTVItemID;
             emailNew.EmailAddress = emailModel.EmailAddress;
             emailNew.EmailType = (int)emailModel.EmailType;
@@ -114,6 +121,7 @@ namespace CSSPDBDLL.Services
                                      {
                                          Error = "",
                                          EmailID = c.EmailID,
+                                         DBCommand = (DBCommandEnum)c.DBCommand,
                                          EmailTVItemID = c.EmailTVItemID,
                                          EmailAddress = c.EmailAddress,
                                          EmailType = (EmailTypeEnum)c.EmailType,
@@ -140,6 +148,7 @@ namespace CSSPDBDLL.Services
                                      {
                                          Error = "",
                                          EmailID = c.EmailID,
+                                         DBCommand = (DBCommandEnum)c.DBCommand,
                                          EmailTVItemID = c.EmailTVItemID,
                                          EmailAddress = c.EmailAddress,
                                          EmailType = (EmailTypeEnum)c.EmailType,
@@ -166,6 +175,7 @@ namespace CSSPDBDLL.Services
                                      {
                                          Error = "",
                                          EmailID = c.EmailID,
+                                         DBCommand = (DBCommandEnum)c.DBCommand,
                                          EmailTVItemID = c.EmailTVItemID,
                                          EmailAddress = c.EmailAddress,
                                          EmailType = (EmailTypeEnum)c.EmailType,
@@ -276,6 +286,7 @@ namespace CSSPDBDLL.Services
 
                     TVItemLinkModel tvItemLinkModelNew = new TVItemLinkModel()
                     {
+                        DBCommand = DBCommandEnum.Original,
                         FromTVItemID = tvItemModelContact.TVItemID,
                         ToTVItemID = tvItemModelEmail.TVItemID,
                         FromTVType = tvItemModelContact.TVType,

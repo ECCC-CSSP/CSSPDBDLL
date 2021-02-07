@@ -15,6 +15,7 @@ namespace CSSPDBDLL
     public partial class MWQMSampleLanguage
     {
         public int MWQMSampleLanguageID { get; set; }
+        public int DBCommand { get; set; }
         public int MWQMSampleID { get; set; }
         public int Language { get; set; }
         public string MWQMSampleNote { get; set; }

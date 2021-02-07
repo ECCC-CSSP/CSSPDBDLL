@@ -131,12 +131,19 @@ namespace CSSPDBDLL.Services
                 return retStr;
             }
 
+            retStr = _BaseEnumService.DBCommandOK(hydrometricSiteModel.DBCommand);
+            if (!string.IsNullOrWhiteSpace(retStr))
+            {
+                return retStr;
+            }
+
             return "";
         }
 
         // Fill
         public string FillHydrometricSite(HydrometricSite hydrometricSiteNew, HydrometricSiteModel hydrometricSiteModel, ContactOK contactOK)
         {
+            hydrometricSiteNew.DBCommand = (int)hydrometricSiteModel.DBCommand;
             hydrometricSiteNew.HydrometricSiteTVItemID = hydrometricSiteModel.HydrometricSiteTVItemID;
             hydrometricSiteNew.FedSiteNumber = hydrometricSiteModel.FedSiteNumber;
             hydrometricSiteNew.QuebecSiteNumber = hydrometricSiteModel.QuebecSiteNumber;
@@ -188,6 +195,7 @@ namespace CSSPDBDLL.Services
                                                          {
                                                              Error = "",
                                                              HydrometricSiteID = c.HydrometricSiteID,
+                                                             DBCommand = (DBCommandEnum)c.DBCommand,
                                                              HydrometricSiteTVItemID = c.HydrometricSiteTVItemID,
                                                              FedSiteNumber = c.FedSiteNumber,
                                                              QuebecSiteNumber = c.QuebecSiteNumber,
@@ -224,6 +232,7 @@ namespace CSSPDBDLL.Services
                                                          {
                                                              Error = "",
                                                              HydrometricSiteID = c.HydrometricSiteID,
+                                                             DBCommand = (DBCommandEnum)c.DBCommand,
                                                              HydrometricSiteTVItemID = c.HydrometricSiteTVItemID,
                                                              FedSiteNumber = c.FedSiteNumber,
                                                              QuebecSiteNumber = c.QuebecSiteNumber,
@@ -260,6 +269,7 @@ namespace CSSPDBDLL.Services
                                                          {
                                                              Error = "",
                                                              HydrometricSiteID = c.HydrometricSiteID,
+                                                             DBCommand = (DBCommandEnum)c.DBCommand,
                                                              HydrometricSiteTVItemID = c.HydrometricSiteTVItemID,
                                                              FedSiteNumber = c.FedSiteNumber,
                                                              QuebecSiteNumber = c.QuebecSiteNumber,
@@ -297,6 +307,7 @@ namespace CSSPDBDLL.Services
                                                          {
                                                              Error = "",
                                                              HydrometricSiteID = c.HydrometricSiteID,
+                                                             DBCommand = (DBCommandEnum)c.DBCommand,
                                                              HydrometricSiteTVItemID = c.HydrometricSiteTVItemID,
                                                              FedSiteNumber = c.FedSiteNumber,
                                                              QuebecSiteNumber = c.QuebecSiteNumber,
@@ -335,6 +346,7 @@ namespace CSSPDBDLL.Services
                                                          {
                                                              Error = "",
                                                              HydrometricSiteID = c.HydrometricSiteID,
+                                                             DBCommand = (DBCommandEnum)c.DBCommand,
                                                              HydrometricSiteTVItemID = c.HydrometricSiteTVItemID,
                                                              FedSiteNumber = c.FedSiteNumber,
                                                              QuebecSiteNumber = c.QuebecSiteNumber,
@@ -425,6 +437,7 @@ namespace CSSPDBDLL.Services
                                                                    {
                                                                        Error = "",
                                                                        HydrometricSiteID = c.HydrometricSiteID,
+                                                                       DBCommand = (DBCommandEnum)c.DBCommand,
                                                                        HydrometricSiteTVItemID = c.HydrometricSiteTVItemID,
                                                                        FedSiteNumber = c.FedSiteNumber,
                                                                        QuebecSiteNumber = c.QuebecSiteNumber,
@@ -778,6 +791,7 @@ namespace CSSPDBDLL.Services
 
             AppTaskModel appTaskModelNew = new AppTaskModel()
             {
+                DBCommand = DBCommandEnum.Original,
                 TVItemID = ProvinceTVItemID,
                 TVItemID2 = ProvinceTVItemID,
                 AppTaskCommand = AppTaskCommandEnum.UpdateHydrometricSiteInformation,
@@ -836,6 +850,7 @@ namespace CSSPDBDLL.Services
 
             AppTaskModel appTaskModelNew = new AppTaskModel()
             {
+                DBCommand = DBCommandEnum.Original,
                 TVItemID = HydrometricSiteTVItemID,
                 TVItemID2 = HydrometricSiteTVItemID,
                 AppTaskCommand = AppTaskCommandEnum.UpdateHydrometricSiteDailyAndHourlyFromStartDateToEndDate,
@@ -894,6 +909,7 @@ namespace CSSPDBDLL.Services
 
             AppTaskModel appTaskModelNew = new AppTaskModel()
             {
+                DBCommand = DBCommandEnum.Original,
                 TVItemID = SubsectorTVItemID,
                 TVItemID2 = SubsectorTVItemID,
                 AppTaskCommand = AppTaskCommandEnum.UpdateHydrometricSiteDailyAndHourlyForSubsectorFromStartDateToEndDate,

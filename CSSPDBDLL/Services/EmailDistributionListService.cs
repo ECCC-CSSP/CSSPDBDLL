@@ -80,12 +80,19 @@ namespace CSSPDBDLL.Services
                 return retStr;
             }
 
+            retStr = _BaseEnumService.DBCommandOK(emailDistributionListModel.DBCommand);
+            if (!string.IsNullOrWhiteSpace(retStr))
+            {
+                return retStr;
+            }
+
             return "";
         }
 
         // Fill
         public string FillEmailDistributionList(EmailDistributionList emailDistributionListNew, EmailDistributionListModel emailDistributionListModel, ContactOK contactOK)
         {
+            emailDistributionListNew.DBCommand = (int)emailDistributionListModel.DBCommand;
             emailDistributionListNew.EmailDistributionListID = emailDistributionListModel.EmailDistributionListID;
             emailDistributionListNew.ParentTVItemID = emailDistributionListModel.ParentTVItemID;
             emailDistributionListNew.Ordinal = emailDistributionListModel.Ordinal;
@@ -123,6 +130,7 @@ namespace CSSPDBDLL.Services
                                                                                {
                                                                                    Error = "",
                                                                                    EmailDistributionListID = c.EmailDistributionListID,
+                                                                                   DBCommand = (DBCommandEnum)c.DBCommand,
                                                                                    ParentTVItemID = c.ParentTVItemID,
                                                                                    EmailListName = cl.EmailListName,
                                                                                    Ordinal = c.Ordinal,
@@ -143,6 +151,7 @@ namespace CSSPDBDLL.Services
                                                                      {
                                                                          Error = "",
                                                                          EmailDistributionListID = c.EmailDistributionListID,
+                                                                         DBCommand = (DBCommandEnum)c.DBCommand,
                                                                          ParentTVItemID = c.ParentTVItemID,
                                                                          EmailListName = cl.EmailListName,
                                                                          Ordinal = c.Ordinal,
@@ -178,6 +187,7 @@ namespace CSSPDBDLL.Services
                                                                                {
                                                                                    Error = "",
                                                                                    EmailDistributionListID = c.EmailDistributionListID,
+                                                                                   DBCommand = (DBCommandEnum)c.DBCommand,
                                                                                    ParentTVItemID = c.ParentTVItemID,
                                                                                    EmailListName = cl.EmailListName,
                                                                                    Ordinal = c.Ordinal,
@@ -235,6 +245,7 @@ namespace CSSPDBDLL.Services
 
             AppTaskModel appTaskModelNew = new AppTaskModel()
             {
+                DBCommand = DBCommandEnum.Original,
                 TVItemID = ParentTVItemID,
                 TVItemID2 = ParentTVItemID,
                 AppTaskCommand = AppTaskCommandEnum.ExportEmailDistributionLists,
@@ -365,6 +376,7 @@ namespace CSSPDBDLL.Services
 
             }
 
+            emailDistributionListModel.DBCommand = DBCommandEnum.Original;
             emailDistributionListModel.ParentTVItemID = ParentTVItemID;
             emailDistributionListModel.EmailListName = EmailListName;
             emailDistributionListModel.Ordinal = Ordinal + 1;
@@ -421,6 +433,7 @@ namespace CSSPDBDLL.Services
                 {
                     EmailDistributionListLanguageModel emailDistributionListLanguageModel = new EmailDistributionListLanguageModel()
                     {
+                        DBCommand = DBCommandEnum.Original,
                         EmailDistributionListID = emailDistributionListNew.EmailDistributionListID,
                         Language = Lang,
                         EmailListName = emailDistributionListModel.EmailListName,
@@ -495,6 +508,7 @@ namespace CSSPDBDLL.Services
                     {
                         EmailDistributionListLanguageModel emailDistributionListLanguageModel = new EmailDistributionListLanguageModel()
                         {
+                            DBCommand = DBCommandEnum.Original,
                             EmailDistributionListID = emailDistributionListToUpdate.EmailDistributionListID,
                             Language = Lang,
                             EmailListName = emailDistributionListModel.EmailListName,

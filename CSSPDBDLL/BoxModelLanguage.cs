@@ -15,6 +15,7 @@ namespace CSSPDBDLL
     public partial class BoxModelLanguage
     {
         public int BoxModelLanguageID { get; set; }
+        public int DBCommand { get; set; }
         public int BoxModelID { get; set; }
         public int Language { get; set; }
         public string ScenarioName { get; set; }

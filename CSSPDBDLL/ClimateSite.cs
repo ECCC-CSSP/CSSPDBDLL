@@ -21,6 +21,7 @@ namespace CSSPDBDLL
         }
     
         public int ClimateSiteID { get; set; }
+        public int DBCommand { get; set; }
         public int ClimateSiteTVItemID { get; set; }
         public Nullable<int> ECDBID { get; set; }
         public string ClimateSiteName { get; set; }

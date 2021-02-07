@@ -52,15 +52,21 @@ namespace CSSPDBDLL.Services
         }
 
         // Check
-        public string SamplingPlanSubsectorSiteModelOK(SamplingPlanSubsectorSiteModel SamplingPlanSubsectorSiteModel)
+        public string SamplingPlanSubsectorSiteModelOK(SamplingPlanSubsectorSiteModel samplingPlanSubsectorSiteModel)
         {
-            string retStr = FieldCheckNotZeroInt(SamplingPlanSubsectorSiteModel.SamplingPlanSubsectorID, ServiceRes.SamplingPlanSubsectorID);
+            string retStr = FieldCheckNotZeroInt(samplingPlanSubsectorSiteModel.SamplingPlanSubsectorID, ServiceRes.SamplingPlanSubsectorID);
             if (!string.IsNullOrWhiteSpace(retStr))
             {
                 return retStr;
             }
 
-            retStr = FieldCheckNotZeroInt(SamplingPlanSubsectorSiteModel.MWQMSiteTVItemID, ServiceRes.MWQMSiteTVItemID);
+            retStr = FieldCheckNotZeroInt(samplingPlanSubsectorSiteModel.MWQMSiteTVItemID, ServiceRes.MWQMSiteTVItemID);
+            if (!string.IsNullOrWhiteSpace(retStr))
+            {
+                return retStr;
+            }
+
+            retStr = _BaseEnumService.DBCommandOK(samplingPlanSubsectorSiteModel.DBCommand);
             if (!string.IsNullOrWhiteSpace(retStr))
             {
                 return retStr;
@@ -70,19 +76,20 @@ namespace CSSPDBDLL.Services
         }
 
         // Fill
-        public string FillSamplingPlanSubsectorSite(SamplingPlanSubsectorSite SamplingPlanSubsectorSite, SamplingPlanSubsectorSiteModel SamplingPlanSubsectorSiteModel, ContactOK contactOK)
+        public string FillSamplingPlanSubsectorSite(SamplingPlanSubsectorSite samplingPlanSubsectorSite, SamplingPlanSubsectorSiteModel samplingPlanSubsectorSiteModel, ContactOK contactOK)
         {
-            SamplingPlanSubsectorSite.SamplingPlanSubsectorID = SamplingPlanSubsectorSiteModel.SamplingPlanSubsectorID;
-            SamplingPlanSubsectorSite.MWQMSiteTVItemID = SamplingPlanSubsectorSiteModel.MWQMSiteTVItemID;
-            SamplingPlanSubsectorSite.IsDuplicate = SamplingPlanSubsectorSiteModel.IsDuplicate;
-            SamplingPlanSubsectorSite.LastUpdateDate_UTC = DateTime.UtcNow;
+            samplingPlanSubsectorSite.DBCommand = (int)samplingPlanSubsectorSiteModel.DBCommand;
+            samplingPlanSubsectorSite.SamplingPlanSubsectorID = samplingPlanSubsectorSiteModel.SamplingPlanSubsectorID;
+            samplingPlanSubsectorSite.MWQMSiteTVItemID = samplingPlanSubsectorSiteModel.MWQMSiteTVItemID;
+            samplingPlanSubsectorSite.IsDuplicate = samplingPlanSubsectorSiteModel.IsDuplicate;
+            samplingPlanSubsectorSite.LastUpdateDate_UTC = DateTime.UtcNow;
             if (contactOK == null)
             {
-                SamplingPlanSubsectorSite.LastUpdateContactTVItemID = 2;
+                samplingPlanSubsectorSite.LastUpdateContactTVItemID = 2;
             }
             else
             {
-                SamplingPlanSubsectorSite.LastUpdateContactTVItemID = contactOK.ContactTVItemID;
+                samplingPlanSubsectorSite.LastUpdateContactTVItemID = contactOK.ContactTVItemID;
             }
 
             return "";
@@ -96,16 +103,17 @@ namespace CSSPDBDLL.Services
 
             return SamplingPlanSubsectorSiteModelCount;
         }
-        public SamplingPlanSubsectorSiteModel GetSamplingPlanSubsectorSiteModelExistDB(SamplingPlanSubsectorSiteModel SamplingPlanSubsectorSiteModel)
+        public SamplingPlanSubsectorSiteModel GetSamplingPlanSubsectorSiteModelExistDB(SamplingPlanSubsectorSiteModel samplingPlanSubsectorSiteModel)
         {
             SamplingPlanSubsectorSiteModel SamplingPlanSubsectorSiteModelRet = (from c in db.SamplingPlanSubsectorSites
                                                                         let mwqmSiteTVText = (from p in db.TVItemLanguages where c.MWQMSiteTVItemID == p.TVItemID select p.TVText).FirstOrDefault()
-                                                                        where c.SamplingPlanSubsectorID == SamplingPlanSubsectorSiteModel.SamplingPlanSubsectorID
-                                                                        && c.MWQMSiteTVItemID == SamplingPlanSubsectorSiteModel.MWQMSiteTVItemID
+                                                                        where c.SamplingPlanSubsectorID == samplingPlanSubsectorSiteModel.SamplingPlanSubsectorID
+                                                                        && c.MWQMSiteTVItemID == samplingPlanSubsectorSiteModel.MWQMSiteTVItemID
                                                                         select new SamplingPlanSubsectorSiteModel
                                                                         {
                                                                             Error = "",
                                                                             SamplingPlanSubsectorSiteID = c.SamplingPlanSubsectorSiteID,
+                                                                            DBCommand = (DBCommandEnum)c.DBCommand,
                                                                             SamplingPlanSubsectorID = c.SamplingPlanSubsectorID,
                                                                             MWQMSiteTVItemID = c.MWQMSiteTVItemID,
                                                                             MWQMSiteText = mwqmSiteTVText,
@@ -119,8 +127,8 @@ namespace CSSPDBDLL.Services
                     ServiceRes.SamplingPlanSubsectorSite,
                     ServiceRes.SamplingPlanSubsectorID + "," +
                     ServiceRes.MWQMSiteTVItemID,
-                    SamplingPlanSubsectorSiteModel.SamplingPlanSubsectorID + "," +
-                    SamplingPlanSubsectorSiteModel.MWQMSiteTVItemID));
+                    samplingPlanSubsectorSiteModel.SamplingPlanSubsectorID + "," +
+                    samplingPlanSubsectorSiteModel.MWQMSiteTVItemID));
 
             return SamplingPlanSubsectorSiteModelRet;
         }
@@ -134,6 +142,7 @@ namespace CSSPDBDLL.Services
                                                                                {
                                                                                    Error = "",
                                                                                    SamplingPlanSubsectorSiteID = c.SamplingPlanSubsectorSiteID,
+                                                                                   DBCommand = (DBCommandEnum)c.DBCommand,
                                                                                    SamplingPlanSubsectorID = c.SamplingPlanSubsectorID,
                                                                                    MWQMSiteTVItemID = c.MWQMSiteTVItemID,
                                                                                    MWQMSiteText = mwqmSiteTVText,
@@ -154,6 +163,7 @@ namespace CSSPDBDLL.Services
                                                                      {
                                                                          Error = "",
                                                                          SamplingPlanSubsectorSiteID = c.SamplingPlanSubsectorSiteID,
+                                                                         DBCommand = (DBCommandEnum)c.DBCommand,
                                                                          SamplingPlanSubsectorID = c.SamplingPlanSubsectorID,
                                                                          MWQMSiteTVItemID = c.MWQMSiteTVItemID,
                                                                          MWQMSiteText = mwqmSiteTVText,
@@ -183,9 +193,9 @@ namespace CSSPDBDLL.Services
         }
 
         // Post
-        public SamplingPlanSubsectorSiteModel PostAddSamplingPlanSubsectorSiteDB(SamplingPlanSubsectorSiteModel SamplingPlanSubsectorSiteModel)
+        public SamplingPlanSubsectorSiteModel PostAddSamplingPlanSubsectorSiteDB(SamplingPlanSubsectorSiteModel samplingPlanSubsectorSiteModel)
         {
-            string retStr = SamplingPlanSubsectorSiteModelOK(SamplingPlanSubsectorSiteModel);
+            string retStr = SamplingPlanSubsectorSiteModelOK(samplingPlanSubsectorSiteModel);
             if (!string.IsNullOrEmpty(retStr))
                 return ReturnError(retStr);
 
@@ -193,12 +203,12 @@ namespace CSSPDBDLL.Services
             if (!string.IsNullOrEmpty(contactOK.Error))
                 return ReturnError(contactOK.Error);
 
-            SamplingPlanSubsectorSiteModel SamplingPlanSubsectorSiteModelExist = GetSamplingPlanSubsectorSiteModelExistDB(SamplingPlanSubsectorSiteModel);
+            SamplingPlanSubsectorSiteModel SamplingPlanSubsectorSiteModelExist = GetSamplingPlanSubsectorSiteModelExistDB(samplingPlanSubsectorSiteModel);
             if (string.IsNullOrWhiteSpace(SamplingPlanSubsectorSiteModelExist.Error))
                 return ReturnError(string.Format(ServiceRes._AlreadyExists, ServiceRes.SamplingPlanSubsectorSite));
 
             SamplingPlanSubsectorSite SamplingPlanSubsectorSiteNew = new SamplingPlanSubsectorSite();
-            retStr = FillSamplingPlanSubsectorSite(SamplingPlanSubsectorSiteNew, SamplingPlanSubsectorSiteModel, contactOK);
+            retStr = FillSamplingPlanSubsectorSite(SamplingPlanSubsectorSiteNew, samplingPlanSubsectorSiteModel, contactOK);
             if (!string.IsNullOrWhiteSpace(retStr))
                 return ReturnError(retStr);
 
@@ -242,9 +252,9 @@ namespace CSSPDBDLL.Services
             }
             return ReturnError("");
         }
-        public SamplingPlanSubsectorSiteModel PostUpdateSamplingPlanSubsectorSiteDB(SamplingPlanSubsectorSiteModel SamplingPlanSubsectorSiteModel)
+        public SamplingPlanSubsectorSiteModel PostUpdateSamplingPlanSubsectorSiteDB(SamplingPlanSubsectorSiteModel samplingPlanSubsectorSiteModel)
         {
-            string retStr = SamplingPlanSubsectorSiteModelOK(SamplingPlanSubsectorSiteModel);
+            string retStr = SamplingPlanSubsectorSiteModelOK(samplingPlanSubsectorSiteModel);
             if (!string.IsNullOrEmpty(retStr))
                 return ReturnError(retStr);
 
@@ -252,11 +262,11 @@ namespace CSSPDBDLL.Services
             if (!string.IsNullOrEmpty(contactOK.Error))
                 return ReturnError(contactOK.Error);
 
-            SamplingPlanSubsectorSite SamplingPlanSubsectorSiteToUpdate = GetSamplingPlanSubsectorSiteWithSamplingPlanSubsectorSiteIDDB(SamplingPlanSubsectorSiteModel.SamplingPlanSubsectorSiteID);
+            SamplingPlanSubsectorSite SamplingPlanSubsectorSiteToUpdate = GetSamplingPlanSubsectorSiteWithSamplingPlanSubsectorSiteIDDB(samplingPlanSubsectorSiteModel.SamplingPlanSubsectorSiteID);
             if (SamplingPlanSubsectorSiteToUpdate == null)
                 return ReturnError(string.Format(ServiceRes.CouldNotFind_ToUpdate, ServiceRes.SamplingPlanSubsectorSite));
 
-            retStr = FillSamplingPlanSubsectorSite(SamplingPlanSubsectorSiteToUpdate, SamplingPlanSubsectorSiteModel, contactOK);
+            retStr = FillSamplingPlanSubsectorSite(SamplingPlanSubsectorSiteToUpdate, samplingPlanSubsectorSiteModel, contactOK);
             if (!string.IsNullOrWhiteSpace(retStr))
                 return ReturnError(retStr);
 

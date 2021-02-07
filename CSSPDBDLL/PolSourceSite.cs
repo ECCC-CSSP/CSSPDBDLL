@@ -21,6 +21,7 @@ namespace CSSPDBDLL
         }
     
         public int PolSourceSiteID { get; set; }
+        public int DBCommand { get; set; }
         public int PolSourceSiteTVItemID { get; set; }
         public string Temp_Locator_CanDelete { get; set; }
         public Nullable<int> Oldsiteid { get; set; }

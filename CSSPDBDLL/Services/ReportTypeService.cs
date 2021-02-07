@@ -82,12 +82,19 @@ namespace CSSPDBDLL.Services
                 return retStr;
             }
 
+            retStr = _BaseEnumService.DBCommandOK(reportTypeModel.DBCommand);
+            if (!string.IsNullOrWhiteSpace(retStr))
+            {
+                return retStr;
+            }
+
             return "";
         }
 
         // Fill
         public string FillReportType(ReportType reportType, ReportTypeModel reportTypeModel, ContactOK contactOK)
         {
+            reportType.DBCommand = (int)reportTypeModel.DBCommand;
             reportType.ReportTypeID = reportTypeModel.ReportTypeID;
             reportType.TVType = (int)reportTypeModel.TVType;
             reportType.FileType = (int)reportTypeModel.FileType;
@@ -126,6 +133,7 @@ namespace CSSPDBDLL.Services
                                                          {
                                                              Error = "",
                                                              ReportTypeID = c.ReportTypeID,
+                                                             DBCommand = DBCommandEnum.Original,
                                                              TVType = (TVTypeEnum)c.TVType,
                                                              FileType = (FileTypeEnum)c.FileType,
                                                              UniqueCode = c.UniqueCode,
@@ -149,6 +157,7 @@ namespace CSSPDBDLL.Services
                                                          {
                                                              Error = "",
                                                              ReportTypeID = c.ReportTypeID,
+                                                             DBCommand = DBCommandEnum.Original,
                                                              TVType = (TVTypeEnum)c.TVType,
                                                              FileType = (FileTypeEnum)c.FileType,
                                                              UniqueCode = c.UniqueCode,
@@ -171,6 +180,7 @@ namespace CSSPDBDLL.Services
                                                {
                                                    Error = "",
                                                    ReportTypeID = c.ReportTypeID,
+                                                   DBCommand = DBCommandEnum.Original,
                                                    TVType = (TVTypeEnum)c.TVType,
                                                    FileType = (FileTypeEnum)c.FileType,
                                                    UniqueCode = c.UniqueCode,
@@ -205,6 +215,7 @@ namespace CSSPDBDLL.Services
                                                   {
                                                       Error = "",
                                                       ReportTypeID = c.ReportTypeID,
+                                                      DBCommand = DBCommandEnum.Original,
                                                       TVType = (TVTypeEnum)c.TVType,
                                                       FileType = (FileTypeEnum)c.FileType,
                                                       UniqueCode = c.UniqueCode,
@@ -252,6 +263,8 @@ namespace CSSPDBDLL.Services
                 if (!string.IsNullOrWhiteSpace(reportTypeModel.Error))
                     return ReturnError(reportTypeModel.Error);
             }
+
+            reportTypeModel.DBCommand = DBCommandEnum.Original;
 
             int.TryParse(fc["TVType"], out tempInt);
             TVType = (TVTypeEnum)tempInt;

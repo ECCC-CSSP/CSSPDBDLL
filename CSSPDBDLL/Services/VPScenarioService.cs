@@ -137,12 +137,19 @@ namespace CSSPDBDLL.Services
             if (!string.IsNullOrWhiteSpace(retStr))
                 return retStr;
 
+            retStr = _BaseEnumService.DBCommandOK(vpScenarioModel.DBCommand);
+            if (!string.IsNullOrWhiteSpace(retStr))
+            {
+                return retStr;
+            }
+
             return "";
         }
 
         // Fill
         public string FillVPScenarioWithoutRawResults(VPScenario vpScenario, VPScenarioModel vpScenarioModel, ContactOK contactOK)
         {
+            vpScenario.DBCommand = (int)vpScenarioModel.DBCommand;
             vpScenario.InfrastructureTVItemID = vpScenarioModel.InfrastructureTVItemID;
             vpScenario.VPScenarioStatus = (int)vpScenarioModel.VPScenarioStatus;
             vpScenario.UseAsBestEstimate = (bool)vpScenarioModel.UseAsBestEstimate;
@@ -185,6 +192,7 @@ namespace CSSPDBDLL.Services
                                        {
                                            Error = "",
                                            VPScenarioID = c.VPScenarioID,
+                                           DBCommand = (DBCommandEnum)c.DBCommand,
                                            AcuteMixZone_m = c.AcuteMixZone_m,
                                            ChronicMixZone_m = c.ChronicMixZone_m,
                                            EffluentConcentration_MPN_100ml = c.EffluentConcentration_MPN_100ml,
@@ -218,6 +226,7 @@ namespace CSSPDBDLL.Services
                                                       {
                                                           Error = "",
                                                           VPAmbientID = c.VPAmbientID,
+                                                          DBCommand = (DBCommandEnum)c.DBCommand,
                                                           VPScenarioID = vpFullModel.VPScenarioID,
                                                           AmbientSalinity_PSU = c.AmbientSalinity_PSU,
                                                           AmbientTemperature_C = c.AmbientTemperature_C,
@@ -267,6 +276,7 @@ namespace CSSPDBDLL.Services
                                        {
                                            Error = "",
                                            VPScenarioID = c.VPScenarioID,
+                                           DBCommand = (DBCommandEnum)c.DBCommand,
                                            InfrastructureTVItemID = c.InfrastructureTVItemID,
                                            InfrastructureTVText = infrastructureTVText,
                                            AcuteMixZone_m = c.AcuteMixZone_m,
@@ -301,6 +311,7 @@ namespace CSSPDBDLL.Services
                                                       {
                                                           Error = "",
                                                           VPAmbientID = c.VPAmbientID,
+                                                          DBCommand = (DBCommandEnum)c.DBCommand,
                                                           VPScenarioID = c.VPScenarioID,
                                                           AmbientSalinity_PSU = c.AmbientSalinity_PSU,
                                                           AmbientTemperature_C = c.AmbientTemperature_C,
@@ -329,6 +340,7 @@ namespace CSSPDBDLL.Services
                                                     {
                                                         Error = "",
                                                         VPResultID = c.VPResultID,
+                                                        DBCommand = (DBCommandEnum)c.DBCommand,
                                                         VPScenarioID = c.VPScenarioID,
                                                         Concentration_MPN_100ml = c.Concentration_MPN_100ml,
                                                         Dilution = c.Dilution,
@@ -364,6 +376,7 @@ namespace CSSPDBDLL.Services
                                                          {
                                                              Error = "",
                                                              VPScenarioID = c.VPScenarioID,
+                                                             DBCommand = (DBCommandEnum)c.DBCommand,
                                                              VPScenarioName = vpScenarioName,
                                                              InfrastructureTVItemID = c.InfrastructureTVItemID,
                                                              InfrastructureTVText = infraName,
@@ -401,6 +414,7 @@ namespace CSSPDBDLL.Services
                                                {
                                                    Error = "",
                                                    VPScenarioID = c.VPScenarioID,
+                                                   DBCommand = (DBCommandEnum)c.DBCommand,
                                                    VPScenarioName = vpScenarioName,
                                                    InfrastructureTVItemID = c.InfrastructureTVItemID,
                                                    InfrastructureTVText = infraName,
@@ -445,6 +459,7 @@ namespace CSSPDBDLL.Services
                                                {
                                                    Error = "",
                                                    VPScenarioID = c.VPScenarioID,
+                                                   DBCommand = (DBCommandEnum)c.DBCommand,
                                                    VPScenarioName = vpScenarioName,
                                                    InfrastructureTVItemID = c.InfrastructureTVItemID,
                                                    InfrastructureTVText = infraName,
@@ -541,6 +556,7 @@ namespace CSSPDBDLL.Services
                 {
                     VPScenarioLanguageModel vpScenarioLanguageModel = new VPScenarioLanguageModel()
                     {
+                        DBCommand = DBCommandEnum.Original,
                         VPScenarioID = vpScenarioNew.VPScenarioID,
                         Language = Lang,
                         VPScenarioName = vpScenarioModel.VPScenarioName,
@@ -616,6 +632,7 @@ namespace CSSPDBDLL.Services
                     {
                         VPScenarioLanguageModel vpScenarioLanguageModel = new VPScenarioLanguageModel()
                         {
+                            DBCommand = DBCommandEnum.Original,
                             VPScenarioID = vpScenarioModel.VPScenarioID,
                             Language = Lang,
                             VPScenarioName = vpScenarioModel.VPScenarioName,
@@ -667,6 +684,7 @@ namespace CSSPDBDLL.Services
                 return ReturnError(vpScenarioModel.Error);
 
             VPScenarioModel vpScenarioModelNew = new VPScenarioModel();
+            vpScenarioModelNew.DBCommand = vpScenarioModel.DBCommand;
             vpScenarioModelNew.AcuteMixZone_m = vpScenarioModel.AcuteMixZone_m;
             vpScenarioModelNew.ChronicMixZone_m = vpScenarioModel.ChronicMixZone_m;
             vpScenarioModelNew.EffluentConcentration_MPN_100ml = vpScenarioModel.EffluentConcentration_MPN_100ml;
@@ -698,6 +716,7 @@ namespace CSSPDBDLL.Services
             foreach (VPAmbientModel vpAmbientModel in vpAmbientModelList)
             {
                 VPAmbientModel vpAmbientModelNew = new VPAmbientModel();
+                vpAmbientModelNew.DBCommand = vpScenarioModelRet.DBCommand;
                 vpAmbientModelNew.VPScenarioID = vpScenarioModelRet.VPScenarioID;
                 vpAmbientModelNew.AmbientSalinity_PSU = vpAmbientModel.AmbientSalinity_PSU;
                 vpAmbientModelNew.AmbientTemperature_C = vpAmbientModel.AmbientTemperature_C;
@@ -724,6 +743,7 @@ namespace CSSPDBDLL.Services
                 return ReturnError(string.Format(ServiceRes._IsRequired, ServiceRes.InfrastructureTVItemID));
 
             VPScenarioModel vpScenarioModelNew = new VPScenarioModel();
+            vpScenarioModelNew.DBCommand = DBCommandEnum.Original;
             vpScenarioModelNew.AcuteMixZone_m = 50;
             vpScenarioModelNew.ChronicMixZone_m = 40000;
             vpScenarioModelNew.EffluentConcentration_MPN_100ml = 3200000;
@@ -754,6 +774,7 @@ namespace CSSPDBDLL.Services
                 return ReturnError(vpScenarioModelRet.Error);
 
             VPAmbientModel vpAmbientModelNew = new VPAmbientModel();
+            vpAmbientModelNew.DBCommand = DBCommandEnum.Original;
             vpAmbientModelNew.AmbientSalinity_PSU = 28;
             vpAmbientModelNew.AmbientTemperature_C = 10;
             vpAmbientModelNew.BackgroundConcentration_MPN_100ml = 5;
@@ -772,6 +793,7 @@ namespace CSSPDBDLL.Services
                 return ReturnError(vpAmbientModelRet.Error);
 
             vpAmbientModelNew.AmbientSalinity_PSU = null;
+            vpAmbientModelNew.DBCommand = DBCommandEnum.Original;
             vpAmbientModelNew.AmbientTemperature_C = null;
             vpAmbientModelNew.BackgroundConcentration_MPN_100ml = null;
             vpAmbientModelNew.CurrentDirection_deg = null;
@@ -788,6 +810,7 @@ namespace CSSPDBDLL.Services
                 return ReturnError(vpAmbientModelRet.Error);
 
             vpAmbientModelNew.AmbientSalinity_PSU = null;
+            vpAmbientModelNew.DBCommand = DBCommandEnum.Original;
             vpAmbientModelNew.AmbientTemperature_C = null;
             vpAmbientModelNew.BackgroundConcentration_MPN_100ml = null;
             vpAmbientModelNew.CurrentDirection_deg = null;
@@ -1181,6 +1204,7 @@ namespace CSSPDBDLL.Services
                             {
                                 count += 1;
                                 VPResultModel vpResultModelNew = new VPResultModel();
+                                vpResultModelNew.DBCommand = DBCommandEnum.Original;
                                 vpResultModelNew.VPScenarioID = VPScenarioID;
                                 vpResultModelNew.Concentration_MPN_100ml = TempVal.Conc;
                                 vpResultModelNew.Dilution = TempVal.Dilu;
@@ -1319,6 +1343,8 @@ namespace CSSPDBDLL.Services
             VPScenarioModel vpScenarioModelToChange = GetVPScenarioModelWithVPScenarioIDDB(VPScenarioID);
             if (!string.IsNullOrWhiteSpace(vpScenarioModelToChange.Error))
                 return ReturnError(vpScenarioModelToChange.Error);
+
+            vpScenarioModelToChange.DBCommand = DBCommandEnum.Original;
 
             VPScenarioName = fc["VPScenarioName"];
             if (string.IsNullOrWhiteSpace(VPScenarioName))

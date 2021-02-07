@@ -66,15 +66,21 @@ namespace CSSPDBDLL.Services
         }
 
         // Check
-        public string SamplingPlanEmailModelOK(SamplingPlanEmailModel SamplingPlanEmailModel)
+        public string SamplingPlanEmailModelOK(SamplingPlanEmailModel samplingPlanEmailModel)
         {
-            string retStr = FieldCheckIfNotNullNotZeroInt(SamplingPlanEmailModel.SamplingPlanID, ServiceRes.SamplingPlanID);
+            string retStr = FieldCheckIfNotNullNotZeroInt(samplingPlanEmailModel.SamplingPlanID, ServiceRes.SamplingPlanID);
             if (!string.IsNullOrWhiteSpace(retStr))
             {
                 return retStr;
             }
 
-            retStr = FieldCheckNotNullAndMinMaxLengthString(SamplingPlanEmailModel.Email, ServiceRes.Email, 3, 150);
+            retStr = FieldCheckNotNullAndMinMaxLengthString(samplingPlanEmailModel.Email, ServiceRes.Email, 3, 150);
+            if (!string.IsNullOrWhiteSpace(retStr))
+            {
+                return retStr;
+            }
+
+            retStr = _BaseEnumService.DBCommandOK(samplingPlanEmailModel.DBCommand);
             if (!string.IsNullOrWhiteSpace(retStr))
             {
                 return retStr;
@@ -86,6 +92,7 @@ namespace CSSPDBDLL.Services
         // Fill
         public string FillSamplingPlanEmail(SamplingPlanEmail SamplingPlanEmail, SamplingPlanEmailModel SamplingPlanEmailModel, ContactOK contactOK)
         {
+            SamplingPlanEmail.DBCommand = (int)SamplingPlanEmailModel.DBCommand;
             SamplingPlanEmail.SamplingPlanID = SamplingPlanEmailModel.SamplingPlanID;
             SamplingPlanEmail.Email = SamplingPlanEmailModel.Email;
             SamplingPlanEmail.IsContractor = SamplingPlanEmailModel.IsContractor;
@@ -124,6 +131,7 @@ namespace CSSPDBDLL.Services
                                                                 {
                                                                     Error = "",
                                                                     SamplingPlanEmailID = c.SamplingPlanEmailID,
+                                                                    DBCommand = (DBCommandEnum)c.DBCommand,
                                                                     Email = c.Email,
                                                                     IsContractor = c.IsContractor,
                                                                     LabSheetHasValueOver500 = c.LabSheetHasValueOver500,
@@ -154,6 +162,7 @@ namespace CSSPDBDLL.Services
                                                                        {
                                                                            Error = "",
                                                                            SamplingPlanEmailID = c.SamplingPlanEmailID,
+                                                                           DBCommand = (DBCommandEnum)c.DBCommand,
                                                                            Email = c.Email,
                                                                            IsContractor = c.IsContractor,
                                                                            LabSheetHasValueOver500 = c.LabSheetHasValueOver500,
@@ -175,6 +184,7 @@ namespace CSSPDBDLL.Services
                                                              {
                                                                  Error = "",
                                                                  SamplingPlanEmailID = c.SamplingPlanEmailID,
+                                                                 DBCommand = (DBCommandEnum)c.DBCommand,
                                                                  Email = c.Email,
                                                                  IsContractor = c.IsContractor,
                                                                  LabSheetHasValueOver500 = c.LabSheetHasValueOver500,
@@ -283,6 +293,7 @@ namespace CSSPDBDLL.Services
                 {
                     SamplingPlanEmailModel SamplingPlanEmailModelNew = new SamplingPlanEmailModel()
                     {
+                        DBCommand = DBCommandEnum.Original,
                         SamplingPlanID = SamplingPlanID,
                         Email = Email,
                         IsContractor = IsContractor,
@@ -300,6 +311,8 @@ namespace CSSPDBDLL.Services
                 else
                 {
                     SamplingPlanEmailModel SamplingPlanEmailModelToUpdate = GetSamplingPlanEmailModelWithSamplingPlanEmailIDDB(SamplingPlanEmailID);
+
+                    SamplingPlanEmailModelToUpdate.DBCommand = DBCommandEnum.Original;
                     SamplingPlanEmailModelToUpdate.SamplingPlanID = SamplingPlanID;
                     SamplingPlanEmailModelToUpdate.Email = Email;
                     SamplingPlanEmailModelToUpdate.IsContractor = IsContractor;

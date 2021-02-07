@@ -15,6 +15,7 @@ namespace CSSPDBDLL
     public partial class MWQMSite
     {
         public int MWQMSiteID { get; set; }
+        public int DBCommand { get; set; }
         public int MWQMSiteTVItemID { get; set; }
         public string MWQMSiteNumber { get; set; }
         public string MWQMSiteDescription { get; set; }

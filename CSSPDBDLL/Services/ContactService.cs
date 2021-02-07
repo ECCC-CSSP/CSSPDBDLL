@@ -461,6 +461,12 @@ namespace CSSPDBDLL.Services
                 return string.Format(ServiceRes._HasToBeUnique, ServiceRes.Email);
             }
 
+            retStr = _BaseEnumService.DBCommandOK(contactModel.DBCommand);
+            if (!string.IsNullOrWhiteSpace(retStr))
+            {
+                return retStr;
+            }
+
             return "";
         }
         public string LoginModelOK(LoginModel loginModel)
@@ -601,6 +607,7 @@ namespace CSSPDBDLL.Services
         // Fill
         public string FillContact(Contact contact, ContactModel contactModel, ContactOK contactOK)
         {
+            contact.DBCommand = (int)contactModel.DBCommand;
             contact.Id = contactModel.Id;
             contact.ContactTVItemID = contactModel.ContactTVItemID;
             contact.LoginEmail = contactModel.LoginEmail;
@@ -647,9 +654,10 @@ namespace CSSPDBDLL.Services
                                                    select new ContactModel
                                                    {
                                                        Error = "",
+                                                       ContactID = c.ContactID,
+                                                       DBCommand = (DBCommandEnum)c.DBCommand,
                                                        Id = c.Id,
                                                        ContactTVItemID = c.ContactTVItemID,
-                                                       ContactID = c.ContactID,
                                                        Disabled = c.Disabled,
                                                        EmailValidated = c.EmailValidated,
                                                        FirstName = c.FirstName,
@@ -682,6 +690,7 @@ namespace CSSPDBDLL.Services
                                          {
                                              Error = "",
                                              ContactID = c.ContactID,
+                                             DBCommand = (DBCommandEnum)c.DBCommand,
                                              Id = c.Id,
                                              ContactTVItemID = c.ContactTVItemID,
                                              Disabled = c.Disabled,
@@ -741,6 +750,7 @@ namespace CSSPDBDLL.Services
                                                    {
                                                        Error = "",
                                                        ContactID = c.ContactID,
+                                                       DBCommand = (DBCommandEnum)c.DBCommand,
                                                        Id = c.Id,
                                                        ContactTVItemID = c.ContactTVItemID,
                                                        Disabled = c.Disabled,
@@ -770,6 +780,7 @@ namespace CSSPDBDLL.Services
                                          {
                                              Error = "",
                                              ContactID = c.ContactID,
+                                             DBCommand = (DBCommandEnum)c.DBCommand,
                                              Id = c.Id,
                                              ContactTVItemID = c.ContactTVItemID,
                                              Disabled = c.Disabled,
@@ -804,6 +815,7 @@ namespace CSSPDBDLL.Services
                                          {
                                              Error = "",
                                              ContactID = c.ContactID,
+                                             DBCommand = (DBCommandEnum)c.DBCommand,
                                              Id = c.Id,
                                              ContactTVItemID = c.ContactTVItemID,
                                              Disabled = c.Disabled,
@@ -847,6 +859,7 @@ namespace CSSPDBDLL.Services
                                                    {
                                                        Error = "",
                                                        ContactID = c.ContactID,
+                                                       DBCommand = (DBCommandEnum)c.DBCommand,
                                                        Id = c.Id,
                                                        ContactTVItemID = c.ContactTVItemID,
                                                        Disabled = c.Disabled,
@@ -876,6 +889,7 @@ namespace CSSPDBDLL.Services
                                                    {
                                                        Error = "",
                                                        ContactID = c.ContactID,
+                                                       DBCommand = (DBCommandEnum)c.DBCommand,
                                                        Id = c.Id,
                                                        ContactTVItemID = c.ContactTVItemID,
                                                        Disabled = c.Disabled,
@@ -1192,7 +1206,6 @@ namespace CSSPDBDLL.Services
                         LastName = LastName,
                         LoginEmail = LoginEmail,
                         ContactTitle = ContactTitle,
-
                     };
                     contactModel = PostLoggedInUserCreateNewUserDB(newContactModelNew);
                     if (!string.IsNullOrWhiteSpace(contactModel.Error))
@@ -1208,6 +1221,7 @@ namespace CSSPDBDLL.Services
 
                     TVItemLinkModel tvItemLinkModelNew = new TVItemLinkModel()
                     {
+                        DBCommand = DBCommandEnum.Original,
                         FromTVItemID = tvItemModelParent.TVItemID,
                         ToTVItemID = contactModel.ContactTVItemID,
                         FromTVType = tvItemModelParent.TVType,
@@ -1246,6 +1260,7 @@ namespace CSSPDBDLL.Services
                     }
                     else
                     {
+                        contactModelToChange.DBCommand = DBCommandEnum.Original;
                         contactModelToChange.FirstName = FirstName;
                         contactModelToChange.Initial = Initial;
                         contactModelToChange.LastName = LastName;
@@ -1565,6 +1580,7 @@ namespace CSSPDBDLL.Services
 
             TVItemLinkModel tvItemLinkModelNew = new TVItemLinkModel()
             {
+                DBCommand = DBCommandEnum.Original,
                 FromTVItemID = ParentTVItemID,
                 ToTVItemID = ContactTVItemID,
                 FromTVType = tvItemModelParent.TVType,
@@ -1611,6 +1627,7 @@ namespace CSSPDBDLL.Services
                     return ReturnContactError(aspNetUserModelRet.Error);
 
                 ContactModel contactModelNew = new ContactModel();
+                contactModelNew.DBCommand = DBCommandEnum.Original;
                 contactModelNew.Id = aspNetUserModelRet.Id;
                 contactModelNew.ContactTVItemID = 1; // will change
                 contactModelNew.LoginEmail = newContactModel.LoginEmail;
@@ -1646,6 +1663,7 @@ namespace CSSPDBDLL.Services
                     return ReturnContactError(contactModelRet.Error);
 
                 TVTypeUserAuthorization tvTypeUserAuthorizationNew = new TVTypeUserAuthorization();
+                tvTypeUserAuthorizationNew.DBCommand = (int)tvItemModelContact.DBCommand;
                 tvTypeUserAuthorizationNew.ContactTVItemID = tvItemModelContact.TVItemID;
                 tvTypeUserAuthorizationNew.TVType = (int)TVTypeEnum.Root;
                 tvTypeUserAuthorizationNew.TVAuth = (int)TVAuthEnum.NoAccess;
@@ -1690,6 +1708,7 @@ namespace CSSPDBDLL.Services
 
                 ContactModel contactModel = new ContactModel()
                 {
+                    DBCommand = DBCommandEnum.Original,
                     LoginEmail = registerModel.LoginEmail,
                     FirstName = registerModel.FirstName,
                     Initial = registerModel.Initial,
@@ -1747,6 +1766,7 @@ namespace CSSPDBDLL.Services
                     return ReturnContactError(logModel.Error);
 
                 TVTypeUserAuthorization tvTypeUserAuthorizationNew = new TVTypeUserAuthorization();
+                tvTypeUserAuthorizationNew.DBCommand = (int)DBCommandEnum.Original;
                 tvTypeUserAuthorizationNew.ContactTVItemID = contactModelRet.ContactTVItemID;
                 tvTypeUserAuthorizationNew.TVType = (int)TVTypeEnum.Root;
                 tvTypeUserAuthorizationNew.TVAuth = (int)TVAuthEnum.NoAccess;
@@ -1967,6 +1987,7 @@ namespace CSSPDBDLL.Services
 
                 ResetPasswordModel resetPasswordModel = new ResetPasswordModel()
                 {
+                    DBCommand = DBCommandEnum.Original,
                     Code = GenerateUniqueCodeForResetPasswordDB(),
                     Password = "sleifjlisjf@24@",
                     ConfirmPassword = "sleifjlisjf@24@",

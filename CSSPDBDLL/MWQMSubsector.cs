@@ -21,6 +21,7 @@ namespace CSSPDBDLL
         }
     
         public int MWQMSubsectorID { get; set; }
+        public int DBCommand { get; set; }
         public int MWQMSubsectorTVItemID { get; set; }
         public string SubsectorHistoricKey { get; set; }
         public string TideLocationSIDText { get; set; }

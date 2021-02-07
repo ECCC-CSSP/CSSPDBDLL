@@ -97,12 +97,18 @@ namespace CSSPDBDLL.Services
                 return retStr;
             }
 
+            retStr = _BaseEnumService.DBCommandOK(polSourceSiteModel.DBCommand);
+            if (!string.IsNullOrWhiteSpace(retStr))
+            {
+                return retStr;
+            }
             return "";
         }
 
         // Fill
         public string FillPolSourceSite(PolSourceSite polSourceSite, PolSourceSiteModel polSourceSiteModel, ContactOK contactOK)
         {
+            polSourceSite.DBCommand = (int)polSourceSiteModel.DBCommand;
             polSourceSite.PolSourceSiteTVItemID = polSourceSiteModel.PolSourceSiteTVItemID;
             polSourceSite.Temp_Locator_CanDelete = polSourceSiteModel.Temp_Locator_CanDelete;
             polSourceSite.Oldsiteid = polSourceSiteModel.Oldsiteid;
@@ -150,6 +156,7 @@ namespace CSSPDBDLL.Services
                                                                {
                                                                    Error = "",
                                                                    PolSourceSiteID = p.PolSourceSiteID,
+                                                                   DBCommand = (DBCommandEnum)p.DBCommand,
                                                                    PolSourceSiteTVItemID = p.PolSourceSiteTVItemID,
                                                                    PolSourceSiteTVText = siteName,
                                                                    Temp_Locator_CanDelete = p.Temp_Locator_CanDelete,
@@ -174,6 +181,7 @@ namespace CSSPDBDLL.Services
                                                      {
                                                          Error = "",
                                                          PolSourceSiteID = c.PolSourceSiteID,
+                                                         DBCommand = (DBCommandEnum)c.DBCommand,
                                                          PolSourceSiteTVItemID = c.PolSourceSiteTVItemID,
                                                          PolSourceSiteTVText = siteName,
                                                          Temp_Locator_CanDelete = c.Temp_Locator_CanDelete,
@@ -206,6 +214,7 @@ namespace CSSPDBDLL.Services
                                                      {
                                                          Error = "",
                                                          PolSourceSiteID = c.PolSourceSiteID,
+                                                         DBCommand = (DBCommandEnum)c.DBCommand,
                                                          PolSourceSiteTVItemID = c.PolSourceSiteTVItemID,
                                                          PolSourceSiteTVText = siteName,
                                                          Temp_Locator_CanDelete = c.Temp_Locator_CanDelete,
@@ -332,6 +341,8 @@ namespace CSSPDBDLL.Services
                     return ReturnError(polSourceSiteNewOrToChange.Error);
             }
 
+            polSourceSiteNewOrToChange.DBCommand = DBCommandEnum.Original;
+
             if (string.IsNullOrWhiteSpace(fc["IsActive"]))
                 IsActive = false;
             else
@@ -397,6 +408,7 @@ namespace CSSPDBDLL.Services
                     // Automatically add one Pollution Source Observation for today
                     PolSourceObservationModel polSourceObservationModelNew = new PolSourceObservationModel()
                     {
+                        DBCommand = DBCommandEnum.Original,
                         PolSourceSiteID = polSourceSiteNewOrToChange.PolSourceSiteID,
                         ObservationDate_Local = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day),
                         ContactTVItemID = contactOK.ContactTVItemID,
@@ -409,6 +421,7 @@ namespace CSSPDBDLL.Services
 
                     // Automatically add one Pollution Source Observation Issue
                     PolSourceObservationIssueModel polSourceObservationIssueModelNew = new PolSourceObservationIssueModel();
+                    polSourceObservationIssueModelNew.DBCommand = DBCommandEnum.Original;
                     polSourceObservationIssueModelNew.PolSourceObservationID = polSourceObservationModelRet.PolSourceObservationID;
                     polSourceObservationIssueModelNew.ObservationInfo = ObservationInfo;
                     polSourceObservationIssueModelNew.Ordinal = 0;
@@ -440,6 +453,7 @@ namespace CSSPDBDLL.Services
                         }
 
                         TVItemLanguageModel tvItemLanguageModel = new TVItemLanguageModel();
+                        tvItemLanguageModel.DBCommand = DBCommandEnum.Original;
                         tvItemLanguageModel.Language = lang;
                         tvItemLanguageModel.TVText = TVText;
                         tvItemLanguageModel.TVItemID = polSourceSiteNewOrToChange.PolSourceSiteTVItemID;

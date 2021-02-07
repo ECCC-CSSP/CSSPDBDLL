@@ -15,6 +15,7 @@ namespace CSSPDBDLL
     public partial class ContactPreference
     {
         public int ContactPreferenceID { get; set; }
+        public int DBCommand { get; set; }
         public int ContactID { get; set; }
         public int TVType { get; set; }
         public int MarkerSize { get; set; }

@@ -68,12 +68,19 @@ namespace CSSPDBDLL.Services
                 return retStr;
             }
 
+            retStr = _BaseEnumService.DBCommandOK(ratingCurveValueModel.DBCommand);
+            if (!string.IsNullOrWhiteSpace(retStr))
+            {
+                return retStr;
+            }
+
             return "";
         }
 
         // Fill
         public string FillRatingCurveValue(RatingCurveValue ratingCurveValueNew, RatingCurveValueModel ratingCurveValueModel, ContactOK contactOK)
         {
+            ratingCurveValueNew.DBCommand = (int)ratingCurveValueModel.DBCommand;
             ratingCurveValueNew.RatingCurveID = ratingCurveValueModel.RatingCurveID;
             ratingCurveValueNew.StageValue_m = ratingCurveValueModel.StageValue_m;
             ratingCurveValueNew.DischargeValue_m3_s = ratingCurveValueModel.DischargeValue_m3_s;
@@ -107,6 +114,7 @@ namespace CSSPDBDLL.Services
                                                                      {
                                                                          Error = "",
                                                                          RatingCurveValueID = c.RatingCurveValueID,
+                                                                         DBCommand = (DBCommandEnum)c.DBCommand,
                                                                          RatingCurveID = c.RatingCurveID,
                                                                          StageValue_m = c.StageValue_m,
                                                                          DischargeValue_m3_s = c.DischargeValue_m3_s,
@@ -124,6 +132,7 @@ namespace CSSPDBDLL.Services
                                                            {
                                                                Error = "",
                                                                RatingCurveValueID = c.RatingCurveValueID,
+                                                               DBCommand = (DBCommandEnum)c.DBCommand,
                                                                RatingCurveID = c.RatingCurveID,
                                                                StageValue_m = c.StageValue_m,
                                                                DischargeValue_m3_s = c.DischargeValue_m3_s,

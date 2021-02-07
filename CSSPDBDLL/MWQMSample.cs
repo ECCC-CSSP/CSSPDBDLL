@@ -21,6 +21,7 @@ namespace CSSPDBDLL
         }
     
         public int MWQMSampleID { get; set; }
+        public int DBCommand { get; set; }
         public int MWQMSiteTVItemID { get; set; }
         public int MWQMRunTVItemID { get; set; }
         public System.DateTime SampleDateTime_Local { get; set; }

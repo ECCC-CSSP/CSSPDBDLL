@@ -15,6 +15,7 @@ namespace CSSPDBDLL
     public partial class Tel
     {
         public int TelID { get; set; }
+        public int DBCommand { get; set; }
         public int TelTVItemID { get; set; }
         public string TelNumber { get; set; }
         public int TelType { get; set; }

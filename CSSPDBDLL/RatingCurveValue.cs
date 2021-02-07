@@ -15,6 +15,7 @@ namespace CSSPDBDLL
     public partial class RatingCurveValue
     {
         public int RatingCurveValueID { get; set; }
+        public int DBCommand { get; set; }
         public int RatingCurveID { get; set; }
         public double StageValue_m { get; set; }
         public double DischargeValue_m3_s { get; set; }

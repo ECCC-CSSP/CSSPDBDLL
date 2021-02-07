@@ -365,12 +365,19 @@ namespace CSSPDBDLL.Services
 
             }
 
+            retStr = _BaseEnumService.DBCommandOK(labSheetDetailModel.DBCommand);
+            if (!string.IsNullOrWhiteSpace(retStr))
+            {
+                return retStr;
+            }
+
             return "";
         }
 
         // Fill
         public string FillLabSheetDetail(LabSheetDetail labSheetDetail, LabSheetDetailModel labSheetDetailModel, ContactOK contactOK)
         {
+            labSheetDetail.DBCommand = (int)labSheetDetailModel.DBCommand;
             labSheetDetail.LabSheetID = labSheetDetailModel.LabSheetID;
             labSheetDetail.SamplingPlanID = labSheetDetailModel.SamplingPlanID;
             labSheetDetail.SubsectorTVItemID = labSheetDetailModel.SubsectorTVItemID;
@@ -466,6 +473,7 @@ namespace CSSPDBDLL.Services
                                                           {
                                                               Error = "",
                                                               LabSheetDetailID = c.LabSheetDetailID,
+                                                              DBCommand = (DBCommandEnum)c.DBCommand,
                                                               LabSheetID = c.LabSheetID,
                                                               SamplingPlanID = c.SamplingPlanID,
                                                               SubsectorTVItemID = c.SubsectorTVItemID,
@@ -556,6 +564,7 @@ namespace CSSPDBDLL.Services
                                                                  {
                                                                      Error = "",
                                                                      LabSheetDetailID = c.LabSheetDetailID,
+                                                                     DBCommand = (DBCommandEnum)c.DBCommand,
                                                                      LabSheetID = c.LabSheetID,
                                                                      SamplingPlanID = c.SamplingPlanID,
                                                                      SubsectorTVItemID = c.SubsectorTVItemID,
@@ -634,6 +643,7 @@ namespace CSSPDBDLL.Services
                                                                  {
                                                                      Error = "",
                                                                      LabSheetDetailID = c.LabSheetDetailID,
+                                                                     DBCommand = (DBCommandEnum)c.DBCommand,
                                                                      LabSheetID = c.LabSheetID,
                                                                      SamplingPlanID = c.SamplingPlanID,
                                                                      SubsectorTVItemID = c.SubsectorTVItemID,
@@ -711,6 +721,7 @@ namespace CSSPDBDLL.Services
                                                        {
                                                            Error = "",
                                                            LabSheetDetailID = c.LabSheetDetailID,
+                                                           DBCommand = (DBCommandEnum)c.DBCommand,
                                                            LabSheetID = c.LabSheetID,
                                                            SamplingPlanID = c.SamplingPlanID,
                                                            SubsectorTVItemID = c.SubsectorTVItemID,

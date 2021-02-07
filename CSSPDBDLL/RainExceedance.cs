@@ -15,6 +15,7 @@ namespace CSSPDBDLL
     public partial class RainExceedance
     {
         public int RainExceedanceID { get; set; }
+        public int DBCommand { get; set; }
         public int RainExceedanceTVItemID { get; set; }
         public int StartMonth { get; set; }
         public int StartDay { get; set; }

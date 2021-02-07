@@ -22,6 +22,7 @@ namespace CSSPDBDLL
         }
     
         public int HydrometricSiteID { get; set; }
+        public int DBCommand { get; set; }
         public int HydrometricSiteTVItemID { get; set; }
         public string FedSiteNumber { get; set; }
         public string QuebecSiteNumber { get; set; }

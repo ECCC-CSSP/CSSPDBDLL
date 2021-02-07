@@ -15,6 +15,7 @@ namespace CSSPDBDLL
     public partial class TVItemStat
     {
         public int TVItemStatID { get; set; }
+        public int DBCommand { get; set; }
         public int TVItemID { get; set; }
         public int TVType { get; set; }
         public int ChildCount { get; set; }

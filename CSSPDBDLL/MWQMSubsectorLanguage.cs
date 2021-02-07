@@ -15,6 +15,7 @@ namespace CSSPDBDLL
     public partial class MWQMSubsectorLanguage
     {
         public int MWQMSubsectorLanguageID { get; set; }
+        public int DBCommand { get; set; }
         public int MWQMSubsectorID { get; set; }
         public int Language { get; set; }
         public string SubsectorDesc { get; set; }

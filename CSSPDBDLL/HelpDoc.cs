@@ -15,6 +15,7 @@ namespace CSSPDBDLL
     public partial class HelpDoc
     {
         public int HelpDocID { get; set; }
+        public int DBCommand { get; set; }
         public string DocKey { get; set; }
         public int Language { get; set; }
         public string DocHTMLText { get; set; }

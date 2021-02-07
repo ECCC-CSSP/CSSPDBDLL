@@ -158,12 +158,19 @@ namespace CSSPDBDLL.Services
                 return retStr;
             }
 
+            retStr = _BaseEnumService.DBCommandOK(labSheetTubeMPNDetailModel.DBCommand);
+            if (!string.IsNullOrWhiteSpace(retStr))
+            {
+                return retStr;
+            }
+
             return "";
         }
 
         // Fill
         public string FillLabSheetTubeMPNDetail(LabSheetTubeMPNDetail labSheetTubeMPNDetail, LabSheetTubeMPNDetailModel labSheetTubeMPNDetailModel, ContactOK contactOK)
         {
+            labSheetTubeMPNDetail.DBCommand = (int)labSheetTubeMPNDetailModel.DBCommand;
             labSheetTubeMPNDetail.LabSheetTubeMPNDetailID = labSheetTubeMPNDetailModel.LabSheetTubeMPNDetailID;
             labSheetTubeMPNDetail.LabSheetDetailID = labSheetTubeMPNDetailModel.LabSheetDetailID;
             labSheetTubeMPNDetail.Ordinal = labSheetTubeMPNDetailModel.Ordinal;
@@ -211,6 +218,7 @@ namespace CSSPDBDLL.Services
                                                                         {
                                                                             Error = "",
                                                                             LabSheetTubeMPNDetailID = c.LabSheetTubeMPNDetailID,
+                                                                            DBCommand = (DBCommandEnum)c.DBCommand,
                                                                             LabSheetDetailID = c.LabSheetDetailID,
                                                                             Ordinal = c.Ordinal,
                                                                             MWQMSiteTVItemID = c.MWQMSiteTVItemID,
@@ -250,6 +258,7 @@ namespace CSSPDBDLL.Services
                                                                                {
                                                                                    Error = "",
                                                                                    LabSheetTubeMPNDetailID = c.LabSheetTubeMPNDetailID,
+                                                                                   DBCommand = (DBCommandEnum)c.DBCommand,
                                                                                    LabSheetDetailID = c.LabSheetDetailID,
                                                                                    Ordinal = c.Ordinal,
                                                                                    MWQMSiteTVItemID = c.MWQMSiteTVItemID,
@@ -278,6 +287,7 @@ namespace CSSPDBDLL.Services
                                                                                {
                                                                                    Error = "",
                                                                                    LabSheetTubeMPNDetailID = c.LabSheetTubeMPNDetailID,
+                                                                                   DBCommand = (DBCommandEnum)c.DBCommand,
                                                                                    LabSheetDetailID = c.LabSheetDetailID,
                                                                                    Ordinal = c.Ordinal,
                                                                                    MWQMSiteTVItemID = c.MWQMSiteTVItemID,
@@ -306,6 +316,7 @@ namespace CSSPDBDLL.Services
                                                                      {
                                                                          Error = "",
                                                                          LabSheetTubeMPNDetailID = c.LabSheetTubeMPNDetailID,
+                                                                         DBCommand = (DBCommandEnum)c.DBCommand,
                                                                          LabSheetDetailID = c.LabSheetDetailID,
                                                                          Ordinal = c.Ordinal,
                                                                          MWQMSiteTVItemID = c.MWQMSiteTVItemID,

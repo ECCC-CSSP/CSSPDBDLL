@@ -70,6 +70,12 @@ namespace CSSPDBDLL.Services
                 return retStr;
             }
 
+            retStr = _BaseEnumService.DBCommandOK(boxModelLanguageModel.DBCommand);
+            if (!string.IsNullOrWhiteSpace(retStr))
+            {
+                return retStr;
+            }
+
             return "";
         }
 
@@ -78,6 +84,7 @@ namespace CSSPDBDLL.Services
         {
             try
             {
+                boxModelLanguage.DBCommand = (int)boxModelLanguageModel.DBCommand;
                 boxModelLanguage.BoxModelID = boxModelLanguageModel.BoxModelID;
                 boxModelLanguage.Language = (int)boxModelLanguageModel.Language;
                 boxModelLanguage.ScenarioName = boxModelLanguageModel.ScenarioName;
@@ -118,6 +125,7 @@ namespace CSSPDBDLL.Services
                                                            {
                                                                Error = "",
                                                                BoxModelLanguageID = c.BoxModelLanguageID,
+                                                               DBCommand = (DBCommandEnum)c.DBCommand,
                                                                BoxModelID = c.BoxModelID,
                                                                Language = (LanguageEnum)c.Language,
                                                                ScenarioName = c.ScenarioName,

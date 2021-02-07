@@ -92,12 +92,18 @@ namespace CSSPDBDLL.Services
             if (!string.IsNullOrWhiteSpace(retStr))
                 return retStr;
 
+            retStr = _BaseEnumService.DBCommandOK(tideDataValueModel.DBCommand);
+            if (!string.IsNullOrWhiteSpace(retStr))
+            {
+                return retStr;
+            }
             return "";
         }
 
         // Fill
         public string FillTideDataValue(TideDataValue tideDataValueNew, TideDataValueModel tideDataValueModel, ContactOK contactOK)
         {
+            tideDataValueNew.DBCommand = (int)tideDataValueModel.DBCommand;
             tideDataValueNew.TideSiteTVItemID = tideDataValueModel.TideSiteTVItemID;
             tideDataValueNew.DateTime_Local = tideDataValueModel.DateTime_Local;
             tideDataValueNew.Keep = tideDataValueModel.Keep;
@@ -137,6 +143,7 @@ namespace CSSPDBDLL.Services
                                                      {
                                                          Error = "",
                                                          TideSiteTVItemID = c.TideSiteTVItemID,
+                                                         DBCommand = (DBCommandEnum)c.DBCommand,
                                                          TideDataValueID = c.TideDataValueID,
                                                          DateTime_Local = c.DateTime_Local,
                                                          Keep = c.Keep,
@@ -167,6 +174,7 @@ namespace CSSPDBDLL.Services
                                                      {
                                                          Error = "",
                                                          TideSiteTVItemID = c.TideSiteTVItemID,
+                                                         DBCommand = (DBCommandEnum)c.DBCommand,
                                                          TideDataValueID = c.TideDataValueID,
                                                          DateTime_Local = c.DateTime_Local,
                                                          Keep = c.Keep,
@@ -195,6 +203,7 @@ namespace CSSPDBDLL.Services
                                                      {
                                                          Error = "",
                                                          TideSiteTVItemID = c.TideSiteTVItemID,
+                                                         DBCommand = (DBCommandEnum)c.DBCommand,
                                                          TideDataValueID = c.TideDataValueID,
                                                          DateTime_Local = c.DateTime_Local,
                                                          Keep = c.Keep,

@@ -124,12 +124,19 @@ namespace CSSPDBDLL.Services
                 return retStr;
             }
 
+            retStr = _BaseEnumService.DBCommandOK(addressModel.DBCommand);
+            if (!string.IsNullOrWhiteSpace(retStr))
+            {
+                return retStr;
+            }
+
             return "";
         }
 
         // Fill
         public string FillAddress(Address address, AddressModel addressModel, ContactOK contactOK)
         {
+            address.DBCommand = (int)addressModel.DBCommand;
             address.AddressTVItemID = addressModel.AddressTVItemID;
             address.MunicipalityTVItemID = addressModel.MunicipalityTVItemID;
             address.ProvinceTVItemID = addressModel.ProvinceTVItemID;
@@ -179,6 +186,7 @@ namespace CSSPDBDLL.Services
                                          {
                                              Error = "",
                                              AddressID = c.AddressID,
+                                             DBCommand = (DBCommandEnum)c.DBCommand,
                                              AddressTVItemID = c.AddressTVItemID,
                                              AddressTVText = "",
                                              AddressType = (AddressTypeEnum)c.AddressType,
@@ -229,6 +237,7 @@ namespace CSSPDBDLL.Services
                                          {
                                              Error = "",
                                              AddressID = c.AddressID,
+                                             DBCommand = (DBCommandEnum)c.DBCommand,
                                              AddressTVItemID = c.AddressTVItemID,
                                              AddressTVText = "",
                                              AddressType = (AddressTypeEnum)c.AddressType,
@@ -271,57 +280,58 @@ namespace CSSPDBDLL.Services
         public AddressModel GetAddressModelExistDB(AddressModel addressModel)
         {
             AddressModel addressModelRet = (from c in db.Addresses
-                                         let muni = (from cl in db.TVItemLanguages where cl.TVItemID == c.MunicipalityTVItemID && cl.Language == (int)LanguageRequest select cl.TVText).FirstOrDefault<string>()
-                                         let prov = (from cl in db.TVItemLanguages where cl.TVItemID == c.ProvinceTVItemID && cl.Language == (int)LanguageRequest select cl.TVText).FirstOrDefault<string>()
-                                         let country = (from cl in db.TVItemLanguages where cl.TVItemID == c.CountryTVItemID && cl.Language == (int)LanguageRequest select cl.TVText).FirstOrDefault<string>()
-                                         let mip = (from mi in db.MapInfos
-                                                    from mip in db.MapInfoPoints
-                                                    where mi.MapInfoID == mip.MapInfoID
-                                                    && mi.TVItemID == c.AddressTVItemID
-                                                    && mi.TVType == (int)TVTypeEnum.Address
-                                                    && mi.MapInfoDrawType == (int)MapInfoDrawTypeEnum.Point
-                                                    select mip).FirstOrDefault()
-                                         where c.StreetNumber == addressModel.StreetNumber
-                                         && c.StreetName == addressModel.StreetName
-                                         && c.StreetType == (int)addressModel.StreetType
-                                         && c.MunicipalityTVItemID == addressModel.MunicipalityTVItemID
-                                         && c.ProvinceTVItemID == addressModel.ProvinceTVItemID
-                                         && c.CountryTVItemID == addressModel.CountryTVItemID
-                                         && c.PostalCode == addressModel.PostalCode
+                                            let muni = (from cl in db.TVItemLanguages where cl.TVItemID == c.MunicipalityTVItemID && cl.Language == (int)LanguageRequest select cl.TVText).FirstOrDefault<string>()
+                                            let prov = (from cl in db.TVItemLanguages where cl.TVItemID == c.ProvinceTVItemID && cl.Language == (int)LanguageRequest select cl.TVText).FirstOrDefault<string>()
+                                            let country = (from cl in db.TVItemLanguages where cl.TVItemID == c.CountryTVItemID && cl.Language == (int)LanguageRequest select cl.TVText).FirstOrDefault<string>()
+                                            let mip = (from mi in db.MapInfos
+                                                       from mip in db.MapInfoPoints
+                                                       where mi.MapInfoID == mip.MapInfoID
+                                                       && mi.TVItemID == c.AddressTVItemID
+                                                       && mi.TVType == (int)TVTypeEnum.Address
+                                                       && mi.MapInfoDrawType == (int)MapInfoDrawTypeEnum.Point
+                                                       select mip).FirstOrDefault()
+                                            where c.StreetNumber == addressModel.StreetNumber
+                                            && c.StreetName == addressModel.StreetName
+                                            && c.StreetType == (int)addressModel.StreetType
+                                            && c.MunicipalityTVItemID == addressModel.MunicipalityTVItemID
+                                            && c.ProvinceTVItemID == addressModel.ProvinceTVItemID
+                                            && c.CountryTVItemID == addressModel.CountryTVItemID
+                                            && c.PostalCode == addressModel.PostalCode
                                             select new AddressModel
-                                         {
-                                             Error = "",
-                                             AddressID = c.AddressID,
-                                             AddressTVItemID = c.AddressTVItemID,
-                                             AddressTVText = "",
-                                             AddressType = (AddressTypeEnum)c.AddressType,
-                                             AddressTypeText = "",
-                                             MunicipalityTVItemID = c.MunicipalityTVItemID,
-                                             MunicipalityTVText = muni,
-                                             ProvinceTVItemID = c.ProvinceTVItemID,
-                                             ProvinceTVText = prov,
-                                             CountryTVItemID = c.CountryTVItemID,
-                                             CountryTVText = country,
-                                             StreetName = c.StreetName,
-                                             StreetNumber = c.StreetNumber,
-                                             StreetType = (StreetTypeEnum)c.StreetType,
-                                             StreetTypeText = "",
-                                             PostalCode = c.PostalCode,
-                                             GoogleAddressText = c.GoogleAddressText,
-                                             LatLngText = mip.Lat + " " + mip.Lng,
-                                             LastUpdateDate_UTC = c.LastUpdateDate_UTC,
-                                             LastUpdateContactTVItemID = c.LastUpdateContactTVItemID,
-                                         }).FirstOrDefault<AddressModel>();
+                                            {
+                                                Error = "",
+                                                AddressID = c.AddressID,
+                                                DBCommand = (DBCommandEnum)c.DBCommand,
+                                                AddressTVItemID = c.AddressTVItemID,
+                                                AddressTVText = "",
+                                                AddressType = (AddressTypeEnum)c.AddressType,
+                                                AddressTypeText = "",
+                                                MunicipalityTVItemID = c.MunicipalityTVItemID,
+                                                MunicipalityTVText = muni,
+                                                ProvinceTVItemID = c.ProvinceTVItemID,
+                                                ProvinceTVText = prov,
+                                                CountryTVItemID = c.CountryTVItemID,
+                                                CountryTVText = country,
+                                                StreetName = c.StreetName,
+                                                StreetNumber = c.StreetNumber,
+                                                StreetType = (StreetTypeEnum)c.StreetType,
+                                                StreetTypeText = "",
+                                                PostalCode = c.PostalCode,
+                                                GoogleAddressText = c.GoogleAddressText,
+                                                LatLngText = mip.Lat + " " + mip.Lng,
+                                                LastUpdateDate_UTC = c.LastUpdateDate_UTC,
+                                                LastUpdateContactTVItemID = c.LastUpdateContactTVItemID,
+                                            }).FirstOrDefault<AddressModel>();
 
             if (addressModelRet == null)
             {
-                return ReturnError(string.Format(ServiceRes.CouldNotFind_With_Equal_, ServiceRes.Address, 
+                return ReturnError(string.Format(ServiceRes.CouldNotFind_With_Equal_, ServiceRes.Address,
                     ServiceRes.StreetNumber + ", " +
                     ServiceRes.StreetName + ", " +
                     ServiceRes.StreetType + ", " +
                     ServiceRes.MunicipalityTVItemID + ", " +
                     ServiceRes.ProvinceTVItemID + ", " +
-                    ServiceRes.CountryTVItemID, 
+                    ServiceRes.CountryTVItemID,
                     addressModel.StreetNumber + ", " +
                     addressModel.StreetName + ", " +
                     addressModel.StreetType + ", " +
@@ -445,6 +455,7 @@ namespace CSSPDBDLL.Services
 
                     AddressModel addressModelNew = new AddressModel()
                     {
+                        DBCommand = DBCommandEnum.Original,
                         CountryTVItemID = CountryTVItemID,
                         ProvinceTVItemID = ProvinceTVItemID,
                         MunicipalityTVItemID = MunicipalityTVItemID,
@@ -482,6 +493,7 @@ namespace CSSPDBDLL.Services
 
                     TVItemLinkModel tvItemLinkModelNew = new TVItemLinkModel()
                     {
+                        DBCommand = DBCommandEnum.Original,
                         FromTVItemID = tvItemModelContact.TVItemID,
                         ToTVItemID = tvItemModelAddress.TVItemID,
                         FromTVType = tvItemModelContact.TVType,
@@ -533,6 +545,7 @@ namespace CSSPDBDLL.Services
                     if (!string.IsNullOrWhiteSpace(addressModelToChange.Error))
                         return ReturnError(addressModelToChange.Error);
 
+                    addressModelToChange.DBCommand = DBCommandEnum.Original; 
                     addressModelToChange.CountryTVItemID = CountryTVItemID;
                     addressModelToChange.ProvinceTVItemID = ProvinceTVItemID;
                     addressModelToChange.MunicipalityTVItemID = MunicipalityTVItemID;
@@ -707,6 +720,7 @@ namespace CSSPDBDLL.Services
 
                     AddressModel addressModelNew = new AddressModel()
                     {
+                        DBCommand = DBCommandEnum.Original,
                         CountryTVItemID = CountryTVItemID,
                         ProvinceTVItemID = ProvinceTVItemID,
                         MunicipalityTVItemID = MunicipalityTVItemID,
@@ -758,6 +772,7 @@ namespace CSSPDBDLL.Services
                     if (!string.IsNullOrWhiteSpace(addressModelToChange.Error))
                         return ReturnError(addressModelToChange.Error);
 
+                    addressModelToChange.DBCommand = DBCommandEnum.Original;
                     addressModelToChange.CountryTVItemID = CountryTVItemID;
                     addressModelToChange.ProvinceTVItemID = ProvinceTVItemID;
                     addressModelToChange.MunicipalityTVItemID = MunicipalityTVItemID;
@@ -928,6 +943,7 @@ namespace CSSPDBDLL.Services
 
                     AddressModel addressModelNew = new AddressModel()
                     {
+                        DBCommand = DBCommandEnum.Original,
                         CountryTVItemID = CountryTVItemID,
                         ProvinceTVItemID = ProvinceTVItemID,
                         MunicipalityTVItemID = MunicipalityTVItemID,
@@ -1002,6 +1018,7 @@ namespace CSSPDBDLL.Services
                     if (!string.IsNullOrWhiteSpace(addressModelToChange.Error))
                         return ReturnError(addressModelToChange.Error);
 
+                    addressModelToChange.DBCommand = DBCommandEnum.Original;
                     addressModelToChange.CountryTVItemID = CountryTVItemID;
                     addressModelToChange.ProvinceTVItemID = ProvinceTVItemID;
                     addressModelToChange.MunicipalityTVItemID = MunicipalityTVItemID;
@@ -1321,17 +1338,17 @@ namespace CSSPDBDLL.Services
                 {
                     //if (Lang == LanguageRequest)
                     //{
-                        TVItemLanguageModel tvItemLanguageModelToUpdate = _TVItemService._TVItemLanguageService.GetTVItemLanguageModelWithTVItemIDAndLanguageDB(addressToUpdate.AddressTVItemID, Lang);
-                        if (!string.IsNullOrWhiteSpace(tvItemLanguageModelToUpdate.Error))
-                            return ReturnError(tvItemLanguageModelToUpdate.Error);
+                    TVItemLanguageModel tvItemLanguageModelToUpdate = _TVItemService._TVItemLanguageService.GetTVItemLanguageModelWithTVItemIDAndLanguageDB(addressToUpdate.AddressTVItemID, Lang);
+                    if (!string.IsNullOrWhiteSpace(tvItemLanguageModelToUpdate.Error))
+                        return ReturnError(tvItemLanguageModelToUpdate.Error);
 
-                        tvItemLanguageModelToUpdate.TVText = CreateTVText(addressModel);
-                        if (string.IsNullOrWhiteSpace(tvItemLanguageModelToUpdate.TVText))
-                            return ReturnError(string.Format(ServiceRes._IsRequired, ServiceRes.TVText));
+                    tvItemLanguageModelToUpdate.TVText = CreateTVText(addressModel);
+                    if (string.IsNullOrWhiteSpace(tvItemLanguageModelToUpdate.TVText))
+                        return ReturnError(string.Format(ServiceRes._IsRequired, ServiceRes.TVText));
 
-                        TVItemLanguageModel tvItemLanguageModel = _TVItemService._TVItemLanguageService.PostUpdateTVItemLanguageDB(tvItemLanguageModelToUpdate);
-                        if (!string.IsNullOrWhiteSpace(tvItemLanguageModel.Error))
-                            return ReturnError(tvItemLanguageModel.Error);
+                    TVItemLanguageModel tvItemLanguageModel = _TVItemService._TVItemLanguageService.PostUpdateTVItemLanguageDB(tvItemLanguageModelToUpdate);
+                    if (!string.IsNullOrWhiteSpace(tvItemLanguageModel.Error))
+                        return ReturnError(tvItemLanguageModel.Error);
                     //}
                 }
 

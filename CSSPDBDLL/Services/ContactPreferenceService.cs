@@ -76,12 +76,19 @@ namespace CSSPDBDLL.Services
                 return retStr;
             }
 
+            retStr = _BaseEnumService.DBCommandOK(contactPreferenceModel.DBCommand);
+            if (!string.IsNullOrWhiteSpace(retStr))
+            {
+                return retStr;
+            }
+
             return "";
         }
 
         // Fill
         public string FillContactPreference(ContactPreference contactPreference, ContactPreferenceModel contactPreferenceModel, ContactOK contactOK)
         {
+            contactPreference.DBCommand = (int)contactPreferenceModel.DBCommand;
             contactPreference.ContactPreferenceID = contactPreferenceModel.ContactPreferenceID;
             contactPreference.ContactID = (int)contactPreferenceModel.ContactID;
             contactPreference.TVType = (int)contactPreferenceModel.TVType;
@@ -115,6 +122,7 @@ namespace CSSPDBDLL.Services
                                                                 {
                                                                     Error = "",
                                                                     ContactPreferenceID = c.ContactPreferenceID,
+                                                                    DBCommand = (DBCommandEnum)c.DBCommand,
                                                                     ContactID = c.ContactID,
                                                                     TVType = (TVTypeEnum)c.TVType,
                                                                     MarkerSize = c.MarkerSize,
@@ -141,6 +149,7 @@ namespace CSSPDBDLL.Services
                                                              {
                                                                  Error = "",
                                                                  ContactPreferenceID = c.ContactPreferenceID,
+                                                                 DBCommand = (DBCommandEnum)c.DBCommand,
                                                                  ContactID = c.ContactID,
                                                                  TVType = (TVTypeEnum)c.TVType,
                                                                  MarkerSize = c.MarkerSize,
@@ -163,6 +172,7 @@ namespace CSSPDBDLL.Services
                                                                        {
                                                                            Error = "",
                                                                            ContactPreferenceID = c.ContactPreferenceID,
+                                                                           DBCommand = (DBCommandEnum)c.DBCommand,
                                                                            ContactID = c.ContactID,
                                                                            TVType = (TVTypeEnum)c.TVType,
                                                                            MarkerSize = c.MarkerSize,
@@ -227,6 +237,7 @@ namespace CSSPDBDLL.Services
 
                     ContactPreferenceModel contactPreferenceModelNew = new ContactPreferenceModel()
                     {
+                        DBCommand = DBCommandEnum.Original,
                         ContactID = ContactID,
                         TVType = TVType,
                         MarkerSize = MarkerSize,
@@ -246,6 +257,7 @@ namespace CSSPDBDLL.Services
 
                     ContactPreferenceModel contactPreferenceModelNew = new ContactPreferenceModel()
                     {
+                        DBCommand = DBCommandEnum.Original,
                         ContactID = ContactID,
                         TVType = TVType,
                         MarkerSize = MarkerSize,

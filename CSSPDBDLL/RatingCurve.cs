@@ -21,6 +21,7 @@ namespace CSSPDBDLL
         }
     
         public int RatingCurveID { get; set; }
+        public int DBCommand { get; set; }
         public int HydrometricSiteID { get; set; }
         public string RatingCurveNumber { get; set; }
         public System.DateTime LastUpdateDate_UTC { get; set; }

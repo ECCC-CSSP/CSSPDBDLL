@@ -33,6 +33,7 @@ namespace CSSPDBDLL.Services
         {
             AddressModel addressModel = new AddressModel();
 
+            addressModel.DBCommand = DBCommandEnum.Original;
             addressModel.CountryTVItemID = tvItemModelCountry.TVItemID;
             addressModel.ProvinceTVItemID = tvItemModelProvince.TVItemID;
             addressModel.MunicipalityTVItemID = tvItemModelMunicipality.TVItemID;
@@ -71,6 +72,7 @@ namespace CSSPDBDLL.Services
         {
             AppErrLogModel appErrLogModel = new AppErrLogModel();
 
+            appErrLogModel.DBCommand = DBCommandEnum.Original;
             appErrLogModel.Tag = RandomString("Tag Text", 10);
             appErrLogModel.DateTime_UTC = RandomDateTime();
             appErrLogModel.LineNumber = RandomInt(5, 150);
@@ -97,6 +99,7 @@ namespace CSSPDBDLL.Services
         {
             AppTaskLanguageModel appTaskLanguageModel = new AppTaskLanguageModel();
 
+            appTaskLanguageModel.DBCommand = DBCommandEnum.Original;
             appTaskLanguageModel.Language = Language;
             appTaskLanguageModel.ErrorText = RandomString("Error Text", 20);
             appTaskLanguageModel.StatusText = RandomString("Status Text", 20);
@@ -113,6 +116,7 @@ namespace CSSPDBDLL.Services
         {
             AppTaskModel appTaskModel = new AppTaskModel();
 
+            appTaskModel.DBCommand = DBCommandEnum.Original;
             appTaskModel.TVItemID = tvItemModelFirstTVItemID.TVItemID;
             appTaskModel.TVItemID2 = tvItemModelSecondTVItemID.TVItemID;
             appTaskModel.AppTaskCommand = AppTaskCommandEnum.MikeScenarioImport;
@@ -220,6 +224,7 @@ namespace CSSPDBDLL.Services
         {
             BoxModelResultModel boxModelResultModel = new BoxModelResultModel();
 
+            boxModelResultModel.DBCommand = DBCommandEnum.Original;
             boxModelResultModel.BoxModelID = boxModelModel.BoxModelID;
             boxModelResultModel.BoxModelResultType = BoxModelResultTypeEnum.Dilution;
             boxModelResultModel.Volume_m3 = RandomDouble(1.0, 1000.0);
@@ -268,6 +273,7 @@ namespace CSSPDBDLL.Services
         {
             BoxModelLanguageModel boxModelLanguageModel = new BoxModelLanguageModel();
 
+            boxModelLanguageModel.DBCommand = DBCommandEnum.Original;
             boxModelLanguageModel.Language = Language;
             boxModelLanguageModel.ScenarioName = RandomString("Scenario Name", 20);
             boxModelLanguageModel.TranslationStatus = TranslationStatusEnum.Translated;
@@ -282,6 +288,7 @@ namespace CSSPDBDLL.Services
         {
             BoxModelModel boxModelModel = new BoxModelModel();
 
+            boxModelModel.DBCommand = DBCommandEnum.Original;
             boxModelModel.InfrastructureTVItemID = tvItemModelInfrastructure.TVItemID;
             boxModelModel.ScenarioName = RandomString("ScenarioName", 20);
             boxModelModel.T90_hour = RandomInt(5, 7);
@@ -330,6 +337,7 @@ namespace CSSPDBDLL.Services
         {
             ClimateDataValueModel climateDataValueModel = new ClimateDataValueModel();
 
+            climateDataValueModel.DBCommand = DBCommandEnum.Original;
             climateDataValueModel.ClimateSiteID = climateSiteModel.ClimateSiteID;
             climateDataValueModel.DateTime_Local = RandomDateTime();
             climateDataValueModel.Keep = true;
@@ -378,6 +386,7 @@ namespace CSSPDBDLL.Services
         {
             ClimateSiteModel climateSiteModel = new ClimateSiteModel();
 
+            climateSiteModel.DBCommand = DBCommandEnum.Original;
             climateSiteModel.ClimateSiteTVItemID = tvItemModelClimateSite.TVItemID;
             climateSiteModel.ClimateID = RandomString("81004", 10);
             climateSiteModel.ClimateSiteName = RandomString("BAS CARAQUET", 15);
@@ -435,6 +444,7 @@ namespace CSSPDBDLL.Services
         {
             ContactModel contactModel = new ContactModel();
 
+            contactModel.DBCommand = DBCommandEnum.Original;
             contactModel.Id = RandomGuid().ToString();
             contactModel.LoginEmail = RandomEmail();
             contactModel.FirstName = RandomString("FirstName", 14);
@@ -451,6 +461,7 @@ namespace CSSPDBDLL.Services
         {
             EmailModel emailModel = new EmailModel();
 
+            emailModel.DBCommand = DBCommandEnum.Original;
             emailModel.EmailTVItemID = 1; // will be replace
             emailModel.EmailAddress = RandomEmail();
             emailModel.EmailType = EmailTypeEnum.Work;
@@ -489,6 +500,7 @@ namespace CSSPDBDLL.Services
         {
             HydrometricDataValueModel hydrometricDataValueModel = new HydrometricDataValueModel();
 
+            hydrometricDataValueModel.DBCommand = DBCommandEnum.Original;
             hydrometricDataValueModel.HydrometricSiteID = hydrometricSiteModel.HydrometricSiteID;
             hydrometricDataValueModel.DateTime_Local = RandomDateTime();
             hydrometricDataValueModel.Discharge_m3_s = RandomDouble(0, 2000);
@@ -514,6 +526,7 @@ namespace CSSPDBDLL.Services
         {
             HydrometricSiteModel hydrometricSiteModel = new HydrometricSiteModel();
 
+            hydrometricSiteModel.DBCommand = DBCommandEnum.Original;
             hydrometricSiteModel.HydrometricSiteTVItemID = tvItemModelHydrometricSite.TVItemID;
             hydrometricSiteModel.FedSiteNumber = RandomString("01BL", 7);
             hydrometricSiteModel.HydrometricSiteName = RandomString("Hydro site ", 20);
@@ -564,6 +577,7 @@ namespace CSSPDBDLL.Services
         {
             InfrastructureLanguageModel infrastructureLanguageModel = new InfrastructureLanguageModel();
 
+            infrastructureLanguageModel.DBCommand = DBCommandEnum.Original;
             infrastructureLanguageModel.Language = Language;
             infrastructureLanguageModel.Comment = RandomString("Comment", 200);
             infrastructureLanguageModel.TranslationStatus = TranslationStatusEnum.Translated;
@@ -577,6 +591,7 @@ namespace CSSPDBDLL.Services
         {
             InfrastructureModel infrastructureModel = new InfrastructureModel();
 
+            infrastructureModel.DBCommand = DBCommandEnum.Original;
             infrastructureModel.InfrastructureTVItemID = tvItemModelInfrastructure.TVItemID;
             infrastructureModel.InfrastructureTVText = RandomString("Infrastructure", 30);
             infrastructureModel.Comment = RandomString("Comment", 80);
@@ -666,6 +681,7 @@ namespace CSSPDBDLL.Services
         {
             MapInfoPointModel mapInfoPointModel = new MapInfoPointModel();
 
+            mapInfoPointModel.DBCommand = DBCommandEnum.Original;
             mapInfoPointModel.MapInfoID = mapInfoModel.MapInfoID;
             mapInfoPointModel.Lat = RandomDouble(45, 46);
             mapInfoPointModel.Lng = RandomDouble(-66, -65);
@@ -691,6 +707,7 @@ namespace CSSPDBDLL.Services
         {
             MapInfoModel mapInfoModel = new MapInfoModel();
 
+            mapInfoModel.DBCommand = DBCommandEnum.Original;
             mapInfoModel.TVItemID = tvItemModel.TVItemID;
             mapInfoModel.TVType = TVTypeEnum.Municipality;
             //Assert.IsTrue(mapInfoModel.TVItemID != 0);
@@ -712,6 +729,7 @@ namespace CSSPDBDLL.Services
         {
             MikeBoundaryConditionModel mikeBoundaryConditionModel = new MikeBoundaryConditionModel();
 
+            mikeBoundaryConditionModel.DBCommand = DBCommandEnum.Original;
             mikeBoundaryConditionModel.MikeBoundaryConditionTVItemID = tvItemModel.TVItemID;
             mikeBoundaryConditionModel.MikeBoundaryConditionTVText = RandomString("BC ", 20);
             mikeBoundaryConditionModel.MikeBoundaryConditionCode = RandomString("BC Code", 12);
@@ -749,6 +767,8 @@ namespace CSSPDBDLL.Services
         public MikeScenarioModel RandomMikeScenarioModel(TVItemModel tvItemModelMikeScenario, bool Add)
         {
             MikeScenarioModel mikeScenarioModel = new MikeScenarioModel();
+
+            mikeScenarioModel.DBCommand = DBCommandEnum.Original;
             mikeScenarioModel.MikeScenarioTVItemID = tvItemModelMikeScenario.TVItemID;
             mikeScenarioModel.MikeScenarioTVText = RandomString("MikeScenario", 30);
             mikeScenarioModel.AmbientSalinity_PSU = RandomDouble(0, 35);
@@ -819,6 +839,7 @@ namespace CSSPDBDLL.Services
         {
             MikeSourceModel mikeSourceModel = new MikeSourceModel();
 
+            mikeSourceModel.DBCommand = DBCommandEnum.Original;
             mikeSourceModel.MikeSourceTVItemID = tvItemModel.TVItemID;
             mikeSourceModel.MikeSourceTVText = RandomString("MikeSource", 30);
             mikeSourceModel.Include = true;
@@ -851,6 +872,7 @@ namespace CSSPDBDLL.Services
         {
             MikeSourceStartEndModel mikeSourceStartEndModel = new MikeSourceStartEndModel();
 
+            mikeSourceStartEndModel.DBCommand = DBCommandEnum.Original;
             mikeSourceStartEndModel.MikeSourceID = mikeSourceModel.MikeSourceID;
             mikeSourceStartEndModel.StartDateAndTime_Local = RandomDateTime();
             mikeSourceStartEndModel.EndDateAndTime_Local = mikeSourceStartEndModel.StartDateAndTime_Local.AddHours(5);
@@ -890,6 +912,7 @@ namespace CSSPDBDLL.Services
         {
             MWQMLookupMPNModel mwqmLookupMPNModel = new MWQMLookupMPNModel();
 
+            mwqmLookupMPNModel.DBCommand = DBCommandEnum.Original;
             mwqmLookupMPNModel.Tubes01 = RandomInt(0, 5);
             mwqmLookupMPNModel.Tubes1 = RandomInt(0, 5);
             mwqmLookupMPNModel.Tubes10 = RandomInt(0, 5);
@@ -915,6 +938,7 @@ namespace CSSPDBDLL.Services
         {
             MWQMRunLanguageModel mwqmRunLanguageModel = new MWQMRunLanguageModel();
 
+            mwqmRunLanguageModel.DBCommand = DBCommandEnum.Original;
             mwqmRunLanguageModel.Language = Language;
             mwqmRunLanguageModel.RunComment = RandomString("Run Comment", 30);
             mwqmRunLanguageModel.TranslationStatusRunComment = TranslationStatusEnum.Translated;
@@ -930,6 +954,7 @@ namespace CSSPDBDLL.Services
         {
             MWQMRunModel mwqmRunModel = new MWQMRunModel();
 
+            mwqmRunModel.DBCommand = DBCommandEnum.Original;
             mwqmRunModel.RunComment = RandomString("", 200);
             mwqmRunModel.RunWeatherComment = RandomString("", 200);
             mwqmRunModel.SubsectorTVItemID = tvItemModelSubsector.TVItemID;
@@ -1000,6 +1025,7 @@ namespace CSSPDBDLL.Services
         {
             MWQMSampleLanguageModel mwqmSampleLanguageModel = new MWQMSampleLanguageModel();
 
+            mwqmSampleLanguageModel.DBCommand = DBCommandEnum.Original;
             mwqmSampleLanguageModel.Language = Language;
             mwqmSampleLanguageModel.MWQMSampleNote = RandomString("Comment", 20);
             mwqmSampleLanguageModel.TranslationStatus = TranslationStatusEnum.Translated;
@@ -1014,6 +1040,7 @@ namespace CSSPDBDLL.Services
         {
             MWQMSampleModel mwqmSampleModel = new MWQMSampleModel() { Error = "" };
 
+            mwqmSampleModel.DBCommand = DBCommandEnum.Original;
             mwqmSampleModel.MWQMSampleNote = RandomString("", 200);
             mwqmSampleModel.MWQMSiteTVItemID = tvItemModelMWQMSite.TVItemID;
             mwqmSampleModel.MWQMRunTVItemID = tvItemModelMWQMRun.TVItemID;
@@ -1051,6 +1078,7 @@ namespace CSSPDBDLL.Services
         {
             MWQMSiteModel mwqmSiteModel = new MWQMSiteModel();
 
+            mwqmSiteModel.DBCommand = DBCommandEnum.Original;
             mwqmSiteModel.MWQMSiteTVItemID = tvItemModelMWQMSite.TVItemID;
             mwqmSiteModel.MWQMSiteTVText = RandomString("MWQMSite", 30);
             mwqmSiteModel.MWQMSiteNumber = RandomString("SN", 8);
@@ -1078,6 +1106,7 @@ namespace CSSPDBDLL.Services
         {
             MWQMSubsectorLanguageModel mwqmSubsectorLanguageModel = new MWQMSubsectorLanguageModel();
 
+            mwqmSubsectorLanguageModel.DBCommand = DBCommandEnum.Original;
             mwqmSubsectorLanguageModel.Language = Language;
             mwqmSubsectorLanguageModel.SubsectorDesc = RandomString("ss desc", 20);
             mwqmSubsectorLanguageModel.TranslationStatusSubsectorDesc = TranslationStatusEnum.Translated;
@@ -1093,6 +1122,7 @@ namespace CSSPDBDLL.Services
         {
             MWQMSubsectorModel mwqmSubsectorModel = new MWQMSubsectorModel();
 
+            mwqmSubsectorModel.DBCommand = DBCommandEnum.Original;
             mwqmSubsectorModel.SubsectorDesc = RandomString("", 80);
             mwqmSubsectorModel.MWQMSubsectorTVItemID = tvItemModelSubsector.TVItemID;
             mwqmSubsectorModel.SubsectorHistoricKey = RandomString("subsekey", 20);
@@ -1115,6 +1145,7 @@ namespace CSSPDBDLL.Services
         {
             PolSourceObservationIssueModel polSourceObservationIssueModel = new PolSourceObservationIssueModel();
 
+            polSourceObservationIssueModel.DBCommand = DBCommandEnum.Original;
             polSourceObservationIssueModel.PolSourceObservationID = polSourceObservationModel.PolSourceObservationID;
             polSourceObservationIssueModel.ObservationInfo = (int)PolSourceObsInfoEnum.SourceStart + "," +
                 (int)PolSourceObsInfoEnum.AgriculturalSourceCrop + "," +
@@ -1144,6 +1175,7 @@ namespace CSSPDBDLL.Services
         {
             PolSourceObservationModel polSourceObservationModel = new PolSourceObservationModel();
 
+            polSourceObservationModel.DBCommand = DBCommandEnum.Original;
             polSourceObservationModel.PolSourceSiteID = polSourceSiteModel.PolSourceSiteID;
             polSourceObservationModel.ObservationDate_Local = RandomDateTime();
             polSourceObservationModel.ContactTVItemID = tvItemModelContact.TVItemID;
@@ -1173,6 +1205,7 @@ namespace CSSPDBDLL.Services
         {
             PolSourceSiteModel polSourceSiteModel = new PolSourceSiteModel();
 
+            polSourceSiteModel.DBCommand = DBCommandEnum.Original;
             polSourceSiteModel.PolSourceSiteTVItemID = tvItemModelPolSourceSite.TVItemID;
             polSourceSiteModel.PolSourceSiteTVText = RandomString("PolSourceSite", 30);
             polSourceSiteModel.Temp_Locator_CanDelete = RandomString("temp locator", 20);
@@ -1215,6 +1248,7 @@ namespace CSSPDBDLL.Services
         {
             RatingCurveModel ratingCurveModel = new RatingCurveModel();
 
+            ratingCurveModel.DBCommand = DBCommandEnum.Original;
             ratingCurveModel.HydrometricSiteID = hydrometricSiteModel.HydrometricSiteID;
             ratingCurveModel.RatingCurveNumber = RandomString("Rating Curve", 30);
             //Assert.IsTrue(ratingCurveModel.HydrometricSiteID != 0);
@@ -1236,6 +1270,7 @@ namespace CSSPDBDLL.Services
         {
             RatingCurveValueModel ratingCurveValueModel = new RatingCurveValueModel();
 
+            ratingCurveValueModel.DBCommand = DBCommandEnum.Original;
             ratingCurveValueModel.RatingCurveID = ratingCurveModel.RatingCurveID;
             ratingCurveValueModel.StageValue_m = RandomDouble(0, 10000);
             ratingCurveValueModel.DischargeValue_m3_s = RandomDouble(0, 100000);
@@ -1259,6 +1294,7 @@ namespace CSSPDBDLL.Services
         {
             ResetPasswordModel resetPasswordModel = new ResetPasswordModel();
 
+            resetPasswordModel.DBCommand = DBCommandEnum.Original;
             resetPasswordModel.Code = RandomInt(12345678, 98765432).ToString();
             resetPasswordModel.Email = RandomString("charles.leblanc2@canada.ca", "charles.leblanc2@canada.ca".Length);
             resetPasswordModel.Password = RandomPassword();
@@ -1288,6 +1324,7 @@ namespace CSSPDBDLL.Services
         {
             SpillLanguageModel spillLanguageModel = new SpillLanguageModel();
 
+            spillLanguageModel.DBCommand = DBCommandEnum.Original;
             spillLanguageModel.Language = Language;
             spillLanguageModel.SpillComment = RandomString("SpillComment text", 80);
             spillLanguageModel.TranslationStatus = TranslationStatusEnum.Translated;
@@ -1301,6 +1338,7 @@ namespace CSSPDBDLL.Services
         {
             SpillModel spillModel = new SpillModel();
 
+            spillModel.DBCommand = DBCommandEnum.Original;
             spillModel.SpillComment = RandomString("SpillComment", 50);
             spillModel.MunicipalityTVItemID = tvItemModelMunicipality.TVItemID;
             spillModel.InfrastructureTVItemID = tvItemModelInfrastructure.TVItemID;
@@ -1330,6 +1368,7 @@ namespace CSSPDBDLL.Services
         {
             TelModel telModel = new TelModel();
 
+            telModel.DBCommand = DBCommandEnum.Original;
             telModel.TelTVItemID = 1; // will be replace
             telModel.TelNumber = RandomTel();
             telModel.TelType = TelTypeEnum.Work;
@@ -1369,6 +1408,7 @@ namespace CSSPDBDLL.Services
         {
             TideDataValueModel tideDataValueModel = new TideDataValueModel();
 
+            tideDataValueModel.DBCommand = DBCommandEnum.Original;
             tideDataValueModel.TideSiteTVItemID = tideSiteModel.TideSiteTVItemID;
             tideDataValueModel.DateTime_Local = RandomDateTime();
             tideDataValueModel.Depth_m = RandomDouble(-10, 10);
@@ -1400,6 +1440,7 @@ namespace CSSPDBDLL.Services
         {
             TideSiteModel tideSiteModel = new TideSiteModel();
 
+            tideSiteModel.DBCommand = DBCommandEnum.Original;
             tideSiteModel.TideSiteTVItemID = tvItemModelTideSite.TVItemID;
             tideSiteModel.TideSiteName = RandomString("TideSite", 30);
             tideSiteModel.Province = "QC"; // RandomString("QC", 2);
@@ -1431,6 +1472,7 @@ namespace CSSPDBDLL.Services
             string ServerFilePath = tvFileService.GetServerFilePath((int)tvItemModelTVFile.ParentID);
             string ServerFileName = RandomString("ServerFileName_", 20) + ".html";
 
+            tvFileModel.DBCommand = DBCommandEnum.Original;
             tvFileModel.TVFileTVItemID = tvItemModelTVFile.TVItemID;
             tvFileModel.Language = LanguageEnum.en;
             tvFileModel.Year = DateTime.Now.Year;
@@ -1511,6 +1553,7 @@ namespace CSSPDBDLL.Services
         {
             TVItemLanguageModel tvItemLanguageModel = new TVItemLanguageModel();
 
+            tvItemLanguageModel.DBCommand = DBCommandEnum.Original;
             tvItemLanguageModel.Language = Language;
             tvItemLanguageModel.TVText = RandomString("TV Text", 20);
             tvItemLanguageModel.TranslationStatus = TranslationStatusEnum.Translated;
@@ -1524,6 +1567,7 @@ namespace CSSPDBDLL.Services
         {
             TVItemLinkModel tvItemLinkModel = new TVItemLinkModel();
 
+            tvItemLinkModel.DBCommand = DBCommandEnum.Original;
             tvItemLinkModel.FromTVItemID = tvItemModelFrom.TVItemID;
             tvItemLinkModel.ToTVItemID = tvItemModelTo.TVItemID;
             tvItemLinkModel.FromTVType = tvItemModelFrom.TVType;
@@ -1561,6 +1605,7 @@ namespace CSSPDBDLL.Services
         {
             TVItemModel tvItemModel = new TVItemModel();
 
+            tvItemModel.DBCommand = DBCommandEnum.Original;
             tvItemModel.TVLevel = tvItemModelParent.TVLevel + 1;
             tvItemModel.TVPath = tvItemModelParent.TVPath + "p0";
             tvItemModel.TVType = tvType;
@@ -1589,6 +1634,7 @@ namespace CSSPDBDLL.Services
         {
             TVItemUserAuthorizationModel tvItemUserAuthorizationModel = new TVItemUserAuthorizationModel();
 
+            tvItemUserAuthorizationModel.DBCommand = DBCommandEnum.Original;
             tvItemUserAuthorizationModel.ContactTVItemID = RandomContact().ContactTVItemID;
             tvItemUserAuthorizationModel.TVItemID1 = RandomTVItem(TVTypeEnum.Municipality).TVItemID;
             tvItemUserAuthorizationModel.TVItemID2 = tvItemUserAuthorizationModel.TVItemID1;
@@ -1616,11 +1662,12 @@ namespace CSSPDBDLL.Services
         }
         public TVTypeUserAuthorizationModel RandomTVTypeUserAuthorizationModel(bool Add)
         {
-            TVTypeUserAuthorizationModel TVTypeUserAuthorizationModel = new TVTypeUserAuthorizationModel();
+            TVTypeUserAuthorizationModel tvTypeUserAuthorizationModel = new TVTypeUserAuthorizationModel();
 
-            TVTypeUserAuthorizationModel.ContactTVItemID = RandomContact().ContactTVItemID;
-            TVTypeUserAuthorizationModel.TVType = TVTypeEnum.Municipality;
-            TVTypeUserAuthorizationModel.TVAuth = TVAuthEnum.Create;
+            tvTypeUserAuthorizationModel.DBCommand = DBCommandEnum.Original;
+            tvTypeUserAuthorizationModel.ContactTVItemID = RandomContact().ContactTVItemID;
+            tvTypeUserAuthorizationModel.TVType = TVTypeEnum.Municipality;
+            tvTypeUserAuthorizationModel.TVAuth = TVAuthEnum.Create;
             //Assert.IsTrue(TVTypeUserAuthorizationModel.ContactTVItemID != 0);
             //Assert.IsTrue(TVTypeUserAuthorizationModel.TVType == TVTypeEnum.Municipality);
             //Assert.IsTrue(TVTypeUserAuthorizationModel.TVAuth == TVAuthEnum.Create);
@@ -1630,17 +1677,18 @@ namespace CSSPDBDLL.Services
 
                 TVTypeUserAuthorizationService TVTypeUserAuthorizationService = new TVTypeUserAuthorizationService(LanguageRequest, User);
 
-                TVTypeUserAuthorizationModel TVTypeUserAuthorizationModelRet = TVTypeUserAuthorizationService.PostAddTVTypeUserAuthorizationDB(TVTypeUserAuthorizationModel);
+                TVTypeUserAuthorizationModel TVTypeUserAuthorizationModelRet = TVTypeUserAuthorizationService.PostAddTVTypeUserAuthorizationDB(tvTypeUserAuthorizationModel);
 
                 return TVTypeUserAuthorizationModelRet;
             }
 
-            return TVTypeUserAuthorizationModel;
+            return tvTypeUserAuthorizationModel;
         }
         public UseOfSiteModel RandomUseOfSiteModel(TVItemModel tvItemModelSite, TVItemModel tvItemModelSubsector, TVTypeEnum tvType, bool Add)
         {
             UseOfSiteModel useOfSiteModel = new UseOfSiteModel();
 
+            useOfSiteModel.DBCommand = DBCommandEnum.Original;
             useOfSiteModel.SiteTVItemID = tvItemModelSite.TVItemID;
             useOfSiteModel.SubsectorTVItemID = tvItemModelSubsector.TVItemID;
             useOfSiteModel.TVType = tvType;
@@ -1684,6 +1732,7 @@ namespace CSSPDBDLL.Services
         {
             VPAmbientModel vpAmbientModel = new VPAmbientModel();
 
+            vpAmbientModel.DBCommand = DBCommandEnum.Original;
             vpAmbientModel.VPScenarioID = vpScenarioModel.VPScenarioID;
             vpAmbientModel.Row = RandomInt(1, 8);
             vpAmbientModel.MeasurementDepth_m = RandomDouble(0, 1000);
@@ -1725,6 +1774,7 @@ namespace CSSPDBDLL.Services
         {
             VPResultModel vpResultModel = new VPResultModel();
 
+            vpResultModel.DBCommand = DBCommandEnum.Original;
             vpResultModel.VPScenarioID = vpScenarioModel.VPScenarioID;
             vpResultModel.Ordinal = RandomInt(1, 8000);
             vpResultModel.Concentration_MPN_100ml = RandomInt(0, 10000000);
@@ -1756,6 +1806,7 @@ namespace CSSPDBDLL.Services
         {
             VPScenarioLanguageModel vpScenarioLanguageModel = new VPScenarioLanguageModel();
 
+            vpScenarioLanguageModel.DBCommand = DBCommandEnum.Original;
             vpScenarioLanguageModel.Language = Language;
             vpScenarioLanguageModel.VPScenarioName = RandomString("VPScenarioName Text", 30);
             vpScenarioLanguageModel.TranslationStatus = TranslationStatusEnum.Translated;
@@ -1769,6 +1820,7 @@ namespace CSSPDBDLL.Services
         {
             VPScenarioModel vpScenarioModel = new VPScenarioModel();
 
+            vpScenarioModel.DBCommand = DBCommandEnum.Original;
             vpScenarioModel.InfrastructureTVItemID = tvItemModelInfrastructure.TVItemID;
             vpScenarioModel.VPScenarioName = RandomString("", 30);
             vpScenarioModel.VPScenarioStatus = ScenarioStatusEnum.Changing;

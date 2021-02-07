@@ -29,19 +29,24 @@ namespace CSSPDBDLL
         public virtual DbSet<AppErrLog> AppErrLogs { get; set; }
         public virtual DbSet<AppTaskLanguage> AppTaskLanguages { get; set; }
         public virtual DbSet<AppTask> AppTasks { get; set; }
+        public virtual DbSet<AspNetRoleClaim> AspNetRoleClaims { get; set; }
         public virtual DbSet<AspNetRole> AspNetRoles { get; set; }
         public virtual DbSet<AspNetUserClaim> AspNetUserClaims { get; set; }
         public virtual DbSet<AspNetUserLogin> AspNetUserLogins { get; set; }
         public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
+        public virtual DbSet<AspNetUserToken> AspNetUserTokens { get; set; }
         public virtual DbSet<BoxModelLanguage> BoxModelLanguages { get; set; }
         public virtual DbSet<BoxModelResult> BoxModelResults { get; set; }
         public virtual DbSet<BoxModel> BoxModels { get; set; }
         public virtual DbSet<Classification> Classifications { get; set; }
         public virtual DbSet<ClimateDataValue> ClimateDataValues { get; set; }
         public virtual DbSet<ClimateSite> ClimateSites { get; set; }
+        public virtual DbSet<CoCoRaHSSite> CoCoRaHSSites { get; set; }
+        public virtual DbSet<CoCoRaHSValue> CoCoRaHSValues { get; set; }
         public virtual DbSet<ContactPreference> ContactPreferences { get; set; }
         public virtual DbSet<Contact> Contacts { get; set; }
         public virtual DbSet<ContactShortcut> ContactShortcuts { get; set; }
+        public virtual DbSet<DeviceCode> DeviceCodes { get; set; }
         public virtual DbSet<DocTemplate> DocTemplates { get; set; }
         public virtual DbSet<DrogueRunPosition> DrogueRunPositions { get; set; }
         public virtual DbSet<DrogueRun> DrogueRuns { get; set; }
@@ -76,6 +81,7 @@ namespace CSSPDBDLL
         public virtual DbSet<MWQMSiteStartEndDate> MWQMSiteStartEndDates { get; set; }
         public virtual DbSet<MWQMSubsectorLanguage> MWQMSubsectorLanguages { get; set; }
         public virtual DbSet<MWQMSubsector> MWQMSubsectors { get; set; }
+        public virtual DbSet<PersistedGrant> PersistedGrants { get; set; }
         public virtual DbSet<PolSourceGroupingLanguage> PolSourceGroupingLanguages { get; set; }
         public virtual DbSet<PolSourceGrouping> PolSourceGroupings { get; set; }
         public virtual DbSet<PolSourceObservationIssue> PolSourceObservationIssues { get; set; }

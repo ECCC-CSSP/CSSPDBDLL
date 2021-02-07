@@ -88,12 +88,19 @@ namespace CSSPDBDLL.Services
                 return retStr;
             }
 
+            retStr = _BaseEnumService.DBCommandOK(tvItemUserAuthorizationModel.DBCommand);
+            if (!string.IsNullOrWhiteSpace(retStr))
+            {
+                return retStr;
+            }
+
             return "";
         }
 
         // Fill
         public string FillTVItemUserAuthorization(TVItemUserAuthorization tvItemUserAuthorization, TVItemUserAuthorizationModel tvItemUserAuthorizationModel, ContactOK contactOK)
         {
+            tvItemUserAuthorization.DBCommand = (int)tvItemUserAuthorizationModel.DBCommand;
             tvItemUserAuthorization.ContactTVItemID = tvItemUserAuthorizationModel.ContactTVItemID;
             tvItemUserAuthorization.TVItemID1 = tvItemUserAuthorizationModel.TVItemID1;
             tvItemUserAuthorization.TVItemID2 = tvItemUserAuthorizationModel.TVItemID2;
@@ -157,6 +164,7 @@ namespace CSSPDBDLL.Services
                                                                                    {
                                                                                        Error = "",
                                                                                        TVItemUserAuthorizationID = c.TVItemUserAuthorizationID,
+                                                                                       DBCommand = (DBCommandEnum)c.DBCommand,
                                                                                        ContactTVItemID = c.ContactTVItemID,
                                                                                        TVItemID1 = c.TVItemID1,
                                                                                        TVText1 = tvItemID1TVText,
@@ -209,6 +217,7 @@ namespace CSSPDBDLL.Services
                                                                                    {
                                                                                        Error = "",
                                                                                        TVItemUserAuthorizationID = c.TVItemUserAuthorizationID,
+                                                                                       DBCommand = (DBCommandEnum)c.DBCommand,
                                                                                        ContactTVItemID = c.ContactTVItemID,
                                                                                        TVItemID1 = c.TVItemID1,
                                                                                        TVText1 = tvItemID1TVText,
@@ -260,6 +269,7 @@ namespace CSSPDBDLL.Services
                                                                                    {
                                                                                        Error = "",
                                                                                        TVItemUserAuthorizationID = c.TVItemUserAuthorizationID,
+                                                                                       DBCommand = (DBCommandEnum)c.DBCommand,
                                                                                        ContactTVItemID = c.ContactTVItemID,
                                                                                        TVItemID1 = c.TVItemID1,
                                                                                        TVText1 = tvItemID1TVText,
@@ -311,6 +321,7 @@ namespace CSSPDBDLL.Services
                                                                          {
                                                                              Error = "",
                                                                              TVItemUserAuthorizationID = c.TVItemUserAuthorizationID,
+                                                                             DBCommand = (DBCommandEnum)c.DBCommand,
                                                                              ContactTVItemID = c.ContactTVItemID,
                                                                              TVItemID1 = c.TVItemID1,
                                                                              TVText1 = tvItemID1TVText,
@@ -369,6 +380,7 @@ namespace CSSPDBDLL.Services
                                                                          {
                                                                              Error = "",
                                                                              TVItemUserAuthorizationID = c.TVItemUserAuthorizationID,
+                                                                             DBCommand = (DBCommandEnum)c.DBCommand,
                                                                              ContactTVItemID = c.ContactTVItemID,
                                                                              TVItemID1 = c.TVItemID1,
                                                                              TVText1 = tvItemID1TVText,
@@ -515,6 +527,8 @@ namespace CSSPDBDLL.Services
             TVItemUserAuthorization tvItemUserAuthorizationToUpdate = GetTVItemUserAuthorizationWithContactTVItemIDTVItemID1TVItemID2TVItemID3TVItemID4DB(tvItemUserAuthorizationModel.ContactTVItemID, tvItemUserAuthorizationModel.TVItemID1, null, null, null);
             if (tvItemUserAuthorizationToUpdate == null)
             {
+                tvItemUserAuthorizationModel.DBCommand = DBCommandEnum.Original;
+
                 return PostAddTVItemUserAuthorizationDB(tvItemUserAuthorizationModel);
             }
             else

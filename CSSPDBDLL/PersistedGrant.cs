@@ -12,15 +12,14 @@ namespace CSSPDBDLL
     using System;
     using System.Collections.Generic;
     
-    public partial class Log
+    public partial class PersistedGrant
     {
-        public int LogID { get; set; }
-        public int DBCommand { get; set; }
-        public string TableName { get; set; }
-        public int ID { get; set; }
-        public int LogCommand { get; set; }
-        public string Information { get; set; }
-        public System.DateTime LastUpdateDate_UTC { get; set; }
-        public int LastUpdateContactTVItemID { get; set; }
+        public string Key { get; set; }
+        public string Type { get; set; }
+        public string SubjectId { get; set; }
+        public string ClientId { get; set; }
+        public System.DateTime CreationTime { get; set; }
+        public Nullable<System.DateTime> Expiration { get; set; }
+        public string Data { get; set; }
     }
 }

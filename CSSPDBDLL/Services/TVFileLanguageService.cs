@@ -68,12 +68,18 @@ namespace CSSPDBDLL.Services
                 return retStr;
             }
 
+            retStr = _BaseEnumService.DBCommandOK(tvFileLanguageModel.DBCommand);
+            if (!string.IsNullOrWhiteSpace(retStr))
+            {
+                return retStr;
+            }
             return "";
         }
 
         // Fill
         public string FillTVFileLanguage(TVFileLanguage tvFileLanguageNew, TVFileLanguageModel tvFileLanguageModel, ContactOK contactOK)
         {
+            tvFileLanguageNew.DBCommand = (int)tvFileLanguageModel.DBCommand;
             tvFileLanguageNew.TVFileID = tvFileLanguageModel.TVFileID;
             tvFileLanguageNew.Language = (int)tvFileLanguageModel.Language;
             tvFileLanguageNew.TranslationStatus = (int)tvFileLanguageModel.TranslationStatus;
@@ -106,6 +112,7 @@ namespace CSSPDBDLL.Services
                                                        {
                                                            Error = "",
                                                            TVFileLanguageID = c.TVFileLanguageID,
+                                                           DBCommand = (DBCommandEnum)c.DBCommand,
                                                            TVFileID = c.TVFileID,
                                                            Language = (LanguageEnum)c.Language,
                                                            TranslationStatus = (TranslationStatusEnum)c.TranslationStatus,

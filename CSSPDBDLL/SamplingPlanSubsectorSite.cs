@@ -15,6 +15,7 @@ namespace CSSPDBDLL
     public partial class SamplingPlanSubsectorSite
     {
         public int SamplingPlanSubsectorSiteID { get; set; }
+        public int DBCommand { get; set; }
         public int SamplingPlanSubsectorID { get; set; }
         public int MWQMSiteTVItemID { get; set; }
         public bool IsDuplicate { get; set; }

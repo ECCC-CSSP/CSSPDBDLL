@@ -15,6 +15,7 @@ namespace CSSPDBDLL
     public partial class MikeBoundaryCondition
     {
         public int MikeBoundaryConditionID { get; set; }
+        public int DBCommand { get; set; }
         public int MikeBoundaryConditionTVItemID { get; set; }
         public string MikeBoundaryConditionCode { get; set; }
         public string MikeBoundaryConditionName { get; set; }

@@ -15,6 +15,7 @@ namespace CSSPDBDLL
     public partial class LabSheetTubeMPNDetail
     {
         public int LabSheetTubeMPNDetailID { get; set; }
+        public int DBCommand { get; set; }
         public int LabSheetDetailID { get; set; }
         public int Ordinal { get; set; }
         public int MWQMSiteTVItemID { get; set; }

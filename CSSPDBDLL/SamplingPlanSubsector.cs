@@ -21,6 +21,7 @@ namespace CSSPDBDLL
         }
     
         public int SamplingPlanSubsectorID { get; set; }
+        public int DBCommand { get; set; }
         public int SamplingPlanID { get; set; }
         public int SubsectorTVItemID { get; set; }
         public System.DateTime LastUpdateDate_UTC { get; set; }

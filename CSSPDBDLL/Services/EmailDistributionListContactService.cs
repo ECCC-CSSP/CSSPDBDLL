@@ -120,12 +120,19 @@ namespace CSSPDBDLL.Services
                 return retStr;
             }
 
+            retStr = _BaseEnumService.DBCommandOK(emailDistributionListContactModel.DBCommand);
+            if (!string.IsNullOrWhiteSpace(retStr))
+            {
+                return retStr;
+            }
+
             return "";
         }
 
         // Fill
         public string FillEmailDistributionListContact(EmailDistributionListContact emailDistributionListContactNew, EmailDistributionListContactModel emailDistributionListContactModel, ContactOK contactOK)
         {
+            emailDistributionListContactNew.DBCommand = (int)emailDistributionListContactModel.DBCommand;
             emailDistributionListContactNew.EmailDistributionListID = emailDistributionListContactModel.EmailDistributionListID;
             emailDistributionListContactNew.IsCC = emailDistributionListContactModel.IsCC;
             //emailDistributionListContactNew.Agency = emailDistributionListContactModel.Agency;
@@ -170,6 +177,7 @@ namespace CSSPDBDLL.Services
                                                                                              {
                                                                                                  Error = "",
                                                                                                  EmailDistributionListContactID = c.EmailDistributionListContactID,
+                                                                                                 DBCommand = (DBCommandEnum)c.DBCommand,
                                                                                                  IsCC = c.IsCC,
                                                                                                  Agency = cl.Agency,
                                                                                                  Name = c.Name,
@@ -196,6 +204,7 @@ namespace CSSPDBDLL.Services
                                                                                    {
                                                                                        Error = "",
                                                                                        EmailDistributionListContactID = c.EmailDistributionListContactID,
+                                                                                       DBCommand = (DBCommandEnum)c.DBCommand,
                                                                                        IsCC = c.IsCC,
                                                                                        Agency = cl.Agency,
                                                                                        Name = c.Name,
@@ -307,6 +316,7 @@ namespace CSSPDBDLL.Services
 
             }
 
+            emailDistributionListContactModel.DBCommand = DBCommandEnum.Original;
             emailDistributionListContactModel.EmailDistributionListID = EmailDistributionListID;
             emailDistributionListContactModel.IsCC = IsCC;
             emailDistributionListContactModel.Agency = Agency;
@@ -370,6 +380,7 @@ namespace CSSPDBDLL.Services
                 {
                     EmailDistributionListContactLanguageModel emailDistributionListContactLanguageModel = new EmailDistributionListContactLanguageModel()
                     {
+                        DBCommand = DBCommandEnum.Original,
                         EmailDistributionListContactID = emailDistributionListContactNew.EmailDistributionListContactID,
                         Language = Lang,
                         Agency = emailDistributionListContactModel.Agency,
@@ -444,6 +455,7 @@ namespace CSSPDBDLL.Services
                     {
                         EmailDistributionListContactLanguageModel emailDistributionListContactLanguageModel = new EmailDistributionListContactLanguageModel()
                         {
+                            DBCommand = DBCommandEnum.Original,
                             EmailDistributionListContactID = emailDistributionListContactToUpdate.EmailDistributionListContactID,
                             Language = Lang,
                             Agency = emailDistributionListContactModel.Agency,

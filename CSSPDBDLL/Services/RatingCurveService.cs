@@ -66,12 +66,19 @@ namespace CSSPDBDLL.Services
                 return retStr;
             }
 
+            retStr = _BaseEnumService.DBCommandOK(ratingCurveModel.DBCommand);
+            if (!string.IsNullOrWhiteSpace(retStr))
+            {
+                return retStr;
+            }
+
             return "";
         }
 
         // Fill
         public string FillRatingCurve(RatingCurve ratingCurveNew, RatingCurveModel ratingCurveModel, ContactOK contactOK)
         {
+            ratingCurveNew.DBCommand = (int)ratingCurveModel.DBCommand;
             ratingCurveNew.HydrometricSiteID = ratingCurveModel.HydrometricSiteID;
             ratingCurveNew.RatingCurveNumber = ratingCurveModel.RatingCurveNumber;
             ratingCurveNew.LastUpdateDate_UTC = DateTime.UtcNow;
@@ -110,6 +117,7 @@ namespace CSSPDBDLL.Services
                                                            {
                                                                Error = "",
                                                                RatingCurveID = c.RatingCurveID,
+                                                               DBCommand = (DBCommandEnum)c.DBCommand,
                                                                HydrometricSiteID = c.HydrometricSiteID,
                                                                HydrometricSiteTVText = tvText,
                                                                RatingCurveNumber = c.RatingCurveNumber,
@@ -133,6 +141,7 @@ namespace CSSPDBDLL.Services
                                                  {
                                                      Error = "",
                                                      RatingCurveID = c.RatingCurveID,
+                                                     DBCommand = (DBCommandEnum)c.DBCommand,
                                                      HydrometricSiteID = c.HydrometricSiteID,
                                                      HydrometricSiteTVText = tvText,
                                                      RatingCurveNumber = c.RatingCurveNumber,

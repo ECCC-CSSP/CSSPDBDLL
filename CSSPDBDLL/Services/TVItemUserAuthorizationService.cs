@@ -147,6 +147,14 @@ namespace CSSPDBDLL.Services
 
             return TVItemUserAuthorizationModelCount;
         }
+        public List<TVItemUserAuthorization> GetTVItemUserAuthorizationWithContactTVItemIDListDB(int ContactTVItemID)
+        {
+            List<TVItemUserAuthorization> tvItemUserAuthorizationList = (from c in db.TVItemUserAuthorizations
+                                                                         where c.ContactTVItemID == ContactTVItemID
+                                                                         select c).ToList();
+
+            return tvItemUserAuthorizationList;
+        }
         public List<TVItemUserAuthorizationModel> GetTVItemUserAuthorizationModelListDB()
         {
             TVItemService tvItemService = new TVItemService(this.LanguageRequest, this.User);

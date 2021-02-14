@@ -16,7 +16,6 @@ using CSSPModelsDLL.Models;
 using CSSPEnumsDLL.Enums;
 using CSSPEnumsDLL.Services;
 using CSSPModelsDLL.Services;
-using CSSPDBDLL;
 
 namespace CSSPDBDLL.Services
 {
@@ -47,7 +46,7 @@ namespace CSSPDBDLL.Services
         #endregion Variables public
 
         #region Properties
-        public BaseEnumService _BaseEnumService { get; set; } 
+        public BaseEnumService _BaseEnumService { get; set; }
         public BaseModelService _BaseModelService { get; set; }
         #endregion Properties
 
@@ -777,14 +776,14 @@ namespace CSSPDBDLL.Services
             return "";
         }
         #endregion Functions field check
-          #endregion Functions public
+        #endregion Functions public
 
         #region Functions private
         #endregion Functions private
 
         public void Dispose()
-    {
-        db.Dispose();
+        {
+            db.Dispose();
+        }
     }
-}
 }

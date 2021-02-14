@@ -44,7 +44,7 @@
           </Key>
           <Property Name="AppTaskLanguageID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="DBCommand" Type="int" Nullable="false" />
-          <Property Name="AppTaskID" Type="int" />
+          <Property Name="AppTaskID" Type="int" Nullable="false" />
           <Property Name="Language" Type="int" Nullable="false" />
           <Property Name="StatusText" Type="nvarchar" MaxLength="250" />
           <Property Name="ErrorText" Type="nvarchar" MaxLength="250" />
@@ -327,6 +327,8 @@
           <Property Name="FirstName" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="LastName" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="Initial" Type="nvarchar" MaxLength="50" />
+          <Property Name="CellNumber" Type="nvarchar" MaxLength="50" />
+          <Property Name="CellNumberConfirmed" Type="bit" />
           <Property Name="WebName" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="ContactTitle" Type="int" />
           <Property Name="IsAdmin" Type="bit" Nullable="false" />
@@ -334,6 +336,9 @@
           <Property Name="Disabled" Type="bit" Nullable="false" />
           <Property Name="IsNew" Type="bit" Nullable="false" />
           <Property Name="SamplingPlanner_ProvincesTVItemID" Type="nvarchar" MaxLength="200" />
+          <Property Name="PasswordHash" Type="nvarchar" MaxLength="255" />
+          <Property Name="Token" Type="nvarchar" MaxLength="255" />
+          <Property Name="AccessFailedCount" Type="int" />
           <Property Name="LastUpdateDate_UTC" Type="datetime" Nullable="false" />
           <Property Name="LastUpdateContactTVItemID" Type="int" Nullable="false" />
         </EntityType>
@@ -1709,7 +1714,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_AppTaskLanguages_AppTasks">
-          <End Role="AppTasks" Type="Self.AppTasks" Multiplicity="0..1">
+          <End Role="AppTasks" Type="Self.AppTasks" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
           <End Role="AppTaskLanguages" Type="Self.AppTaskLanguages" Multiplicity="*" />
@@ -1940,6 +1945,18 @@
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
+          <End Role="Contacts" Type="Self.Contacts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Contacts">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Contacts_AspNetUsers1">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
           <End Role="Contacts" Type="Self.Contacts" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="AspNetUsers">
@@ -3404,6 +3421,10 @@
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="Contacts" EntitySet="Contacts" />
           </AssociationSet>
+          <AssociationSet Name="FK_Contacts_AspNetUsers1" Association="Self.FK_Contacts_AspNetUsers1">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Contacts" EntitySet="Contacts" />
+          </AssociationSet>
           <AssociationSet Name="FK_Contacts_TVItems" Association="Self.FK_Contacts_TVItems">
             <End Role="TVItems" EntitySet="TVItems" />
             <End Role="Contacts" EntitySet="Contacts" />
@@ -3956,6 +3977,10 @@
             <End Role="AspNetUser" EntitySet="AspNetUsers" />
             <End Role="Contact" EntitySet="Contacts" />
           </AssociationSet>
+          <AssociationSet Name="FK_Contacts_AspNetUsers1" Association="CSSPDBModel.FK_Contacts_AspNetUsers1">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="Contact" EntitySet="Contacts" />
+          </AssociationSet>
           <AssociationSet Name="FK_BoxModelLanguages_BoxModels" Association="CSSPDBModel.FK_BoxModelLanguages_BoxModels">
             <End Role="BoxModel" EntitySet="BoxModels" />
             <End Role="BoxModelLanguage" EntitySet="BoxModelLanguages" />
@@ -4440,7 +4465,7 @@
           </Key>
           <Property Name="AppTaskLanguageID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="DBCommand" Type="Int32" Nullable="false" />
-          <Property Name="AppTaskID" Type="Int32" />
+          <Property Name="AppTaskID" Type="Int32" Nullable="false" />
           <Property Name="Language" Type="Int32" Nullable="false" />
           <Property Name="StatusText" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="ErrorText" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
@@ -4538,6 +4563,7 @@
           <NavigationProperty Name="AspNetUserLogins" Relationship="CSSPDBModel.FK_AspNetUserLogins_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserLogin" />
           <NavigationProperty Name="AspNetUserTokens" Relationship="CSSPDBModel.FK_AspNetUserTokens_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserToken" />
           <NavigationProperty Name="Contacts" Relationship="CSSPDBModel.FK_Contacts_AspNetUsers" FromRole="AspNetUser" ToRole="Contact" />
+          <NavigationProperty Name="Contacts1" Relationship="CSSPDBModel.FK_Contacts_AspNetUsers1" FromRole="AspNetUser" ToRole="Contact" />
           <NavigationProperty Name="AspNetRoles" Relationship="CSSPDBModel.AspNetUserRoles" FromRole="AspNetUser" ToRole="AspNetRole" />
         </EntityType>
         <EntityType Name="AspNetUserToken">
@@ -4742,6 +4768,8 @@
           <Property Name="FirstName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="LastName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Initial" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CellNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CellNumberConfirmed" Type="Boolean" />
           <Property Name="WebName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="ContactTitle" Type="Int32" />
           <Property Name="IsAdmin" Type="Boolean" Nullable="false" />
@@ -4749,9 +4777,13 @@
           <Property Name="Disabled" Type="Boolean" Nullable="false" />
           <Property Name="IsNew" Type="Boolean" Nullable="false" />
           <Property Name="SamplingPlanner_ProvincesTVItemID" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="PasswordHash" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Token" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="AccessFailedCount" Type="Int32" />
           <Property Name="LastUpdateDate_UTC" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="LastUpdateContactTVItemID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="AspNetUser" Relationship="CSSPDBModel.FK_Contacts_AspNetUsers" FromRole="Contact" ToRole="AspNetUser" />
+          <NavigationProperty Name="AspNetUser1" Relationship="CSSPDBModel.FK_Contacts_AspNetUsers1" FromRole="Contact" ToRole="AspNetUser" />
           <NavigationProperty Name="ContactPreferences" Relationship="CSSPDBModel.FK_ContactPreferences_Contacts" FromRole="Contact" ToRole="ContactPreference" />
           <NavigationProperty Name="TVItem" Relationship="CSSPDBModel.FK_Contacts_TVItems" FromRole="Contact" ToRole="TVItem" />
           <NavigationProperty Name="ContactShortcuts" Relationship="CSSPDBModel.FK_ContactShortcuts_Contacts" FromRole="Contact" ToRole="ContactShortcut" />
@@ -6337,7 +6369,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_AppTaskLanguages_AppTasks">
-          <End Type="CSSPDBModel.AppTask" Role="AppTask" Multiplicity="0..1">
+          <End Type="CSSPDBModel.AppTask" Role="AppTask" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
           <End Type="CSSPDBModel.AppTaskLanguage" Role="AppTaskLanguage" Multiplicity="*" />
@@ -6436,6 +6468,18 @@
           <End Type="CSSPDBModel.AspNetUser" Role="AspNetUser" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
+          <End Type="CSSPDBModel.Contact" Role="Contact" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Contact">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Contacts_AspNetUsers1">
+          <End Type="CSSPDBModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
           <End Type="CSSPDBModel.Contact" Role="Contact" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="AspNetUser">
@@ -8153,6 +8197,9 @@
               <MappingFragment StoreEntitySet="Contacts">
                 <ScalarProperty Name="LastUpdateContactTVItemID" ColumnName="LastUpdateContactTVItemID" />
                 <ScalarProperty Name="LastUpdateDate_UTC" ColumnName="LastUpdateDate_UTC" />
+                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+                <ScalarProperty Name="Token" ColumnName="Token" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
                 <ScalarProperty Name="SamplingPlanner_ProvincesTVItemID" ColumnName="SamplingPlanner_ProvincesTVItemID" />
                 <ScalarProperty Name="IsNew" ColumnName="IsNew" />
                 <ScalarProperty Name="Disabled" ColumnName="Disabled" />
@@ -8160,6 +8207,8 @@
                 <ScalarProperty Name="IsAdmin" ColumnName="IsAdmin" />
                 <ScalarProperty Name="ContactTitle" ColumnName="ContactTitle" />
                 <ScalarProperty Name="WebName" ColumnName="WebName" />
+                <ScalarProperty Name="CellNumberConfirmed" ColumnName="CellNumberConfirmed" />
+                <ScalarProperty Name="CellNumber" ColumnName="CellNumber" />
                 <ScalarProperty Name="Initial" ColumnName="Initial" />
                 <ScalarProperty Name="LastName" ColumnName="LastName" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />

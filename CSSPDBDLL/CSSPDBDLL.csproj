@@ -44,8 +44,9 @@
     <Reference Include="CSSPLabSheetParserDLL">
       <HintPath>..\..\CSSPLabSheetParserDLL\CSSPLabSheetParserDLL\bin\Debug\CSSPLabSheetParserDLL.dll</HintPath>
     </Reference>
-    <Reference Include="CSSPModelsDLL">
-      <HintPath>..\..\CSSPModelsDLL\CSSPModelsDLL\bin\Debug\CSSPModelsDLL.dll</HintPath>
+    <Reference Include="CSSPModelsDLL, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\CSSPDHI\CSSPDHI\bin\Debug\CSSPModelsDLL.dll</HintPath>
     </Reference>
     <Reference Include="CSSPReportWriterHelperDLL">
       <HintPath>..\..\CSSPReportWriterHelperDLL\CSSPReportWriterHelperDLL\bin\Debug\CSSPReportWriterHelperDLL.dll</HintPath>
@@ -364,6 +365,7 @@
     <Compile Include="SamplingPlanSubsectorSite.cs">
       <DependentUpon>CSSPDBEDM.tt</DependentUpon>
     </Compile>
+    <Compile Include="Services\AspNetUserService.cs" />
     <Compile Include="Services\CoCoRaHSValueService.cs" />
     <Compile Include="Services\CoCoRaHSSiteService.cs" />
     <Compile Include="Services\DrogueRunPositionService.cs" />
@@ -374,7 +376,6 @@
     <Compile Include="Services\AppErrLogService.cs" />
     <Compile Include="Services\AppTaskLanguageService.cs" />
     <Compile Include="Services\AppTaskService.cs" />
-    <Compile Include="Services\AspNetUserService.cs" />
     <Compile Include="Services\BaseService.cs" />
     <Compile Include="Services\BoxModelLanguageService.cs" />
     <Compile Include="Services\BoxModelResultService.cs" />
@@ -561,6 +562,12 @@
       <DependentUpon>CSSPDBEDM.edmx</DependentUpon>
       <LastGenOutput>CSSPDBEDM.cs</LastGenOutput>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\CSSPTemporaryDBDLL\CSSPTemporaryDBDLL.csproj">
+      <Project>{7f1be557-cd50-40b5-93cb-ab089ee0ccdf}</Project>
+      <Name>CSSPTemporaryDBDLL</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

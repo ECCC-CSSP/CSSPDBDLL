@@ -29,6 +29,8 @@ namespace CSSPDBDLL
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Initial { get; set; }
+        public string CellNumber { get; set; }
+        public Nullable<bool> CellNumberConfirmed { get; set; }
         public string WebName { get; set; }
         public Nullable<int> ContactTitle { get; set; }
         public bool IsAdmin { get; set; }
@@ -36,10 +38,14 @@ namespace CSSPDBDLL
         public bool Disabled { get; set; }
         public bool IsNew { get; set; }
         public string SamplingPlanner_ProvincesTVItemID { get; set; }
+        public string PasswordHash { get; set; }
+        public string Token { get; set; }
+        public Nullable<int> AccessFailedCount { get; set; }
         public System.DateTime LastUpdateDate_UTC { get; set; }
         public int LastUpdateContactTVItemID { get; set; }
     
         public virtual AspNetUser AspNetUser { get; set; }
+        public virtual AspNetUser AspNetUser1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ContactPreference> ContactPreferences { get; set; }
         public virtual TVItem TVItem { get; set; }

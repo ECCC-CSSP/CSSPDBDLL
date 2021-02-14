@@ -143,7 +143,7 @@ namespace CSSPDBDLL.Services
                                                    LoginEmail = c.Email,
                                                }).FirstOrDefault<AspNetUserModel>();
 
-            if (aspNetUserModel == null) 
+            if (aspNetUserModel == null)
                 return ReturnError(string.Format(ServiceRes.CouldNotFind_With_Equal_, ServiceRes.AspNetUser, ServiceRes.Email, Email));
 
             return aspNetUserModel;
@@ -208,15 +208,15 @@ namespace CSSPDBDLL.Services
         public AspNetUserModel PostAddFirstAspNetUserDB(AspNetUserModel aspNetUserModel)
         {
             int Count = GetAspNetUserModelCountDB();
-            if (Count > 0) 
+            if (Count > 0)
                 return ReturnError(string.Format(ServiceRes.ToAddFirst_Requires_TableToBeEmpty, ServiceRes.AspNetUser));
 
             string retStr = AspNetUserModelOK(aspNetUserModel);
-            if (!string.IsNullOrWhiteSpace(retStr)) 
+            if (!string.IsNullOrWhiteSpace(retStr))
                 return ReturnError(retStr);
 
             AspNetUser aspNetUserExist = GetAspNetUserWithEmailDB(aspNetUserModel.LoginEmail);
-            if (aspNetUserExist != null) 
+            if (aspNetUserExist != null)
                 return ReturnError(string.Format(ServiceRes.UserWithLoginEmail_AlreadyExist, aspNetUserModel.LoginEmail));
 
             ApplicationUser2 applicationUser = new ApplicationUser2() { UserName = aspNetUserModel.LoginEmail };
@@ -248,12 +248,12 @@ namespace CSSPDBDLL.Services
                 aspNetUserModel.TwoFactorEnabled = applicationUser.TwoFactorEnabled;
 
                 retStr = FillAspNetUser(aspNetUserNew, aspNetUserModel);
-                if (!string.IsNullOrWhiteSpace(retStr)) 
+                if (!string.IsNullOrWhiteSpace(retStr))
                     return ReturnError(retStr);
 
                 db.AspNetUsers.Add(aspNetUserNew);
                 retStr = DoAddChanges();
-                if (!string.IsNullOrWhiteSpace(retStr)) 
+                if (!string.IsNullOrWhiteSpace(retStr))
                     return ReturnError(retStr);
 
                 LogModel logModel = _LogService.PostAddLogForObj("AppNetUsers", -1, LogCommandEnum.Add, aspNetUserNew);
@@ -267,7 +267,7 @@ namespace CSSPDBDLL.Services
         public AspNetUserModel PostAddAspNetUserDB(AspNetUserModel aspNetUserModel, bool LoggedIn)
         {
             string retStr = AspNetUserModelOK(aspNetUserModel);
-            if (!string.IsNullOrWhiteSpace(retStr)) 
+            if (!string.IsNullOrWhiteSpace(retStr))
                 return ReturnError(retStr);
 
             AspNetUser aspNetUserExist = GetAspNetUserWithEmailDB(aspNetUserModel.LoginEmail);
@@ -277,7 +277,7 @@ namespace CSSPDBDLL.Services
             if (LoggedIn)
             {
                 ContactOK contactOK = IsContactOK();
-                if (!string.IsNullOrEmpty(contactOK.Error)) 
+                if (!string.IsNullOrEmpty(contactOK.Error))
                     return ReturnError(contactOK.Error);
             }
 
@@ -311,12 +311,12 @@ namespace CSSPDBDLL.Services
                 aspNetUserModel.TwoFactorEnabled = applicationUser.TwoFactorEnabled;
 
                 retStr = FillAspNetUser(aspNetUserNew, aspNetUserModel);
-                if (!string.IsNullOrWhiteSpace(retStr)) 
+                if (!string.IsNullOrWhiteSpace(retStr))
                     return ReturnError(retStr);
 
                 db.AspNetUsers.Add(aspNetUserNew);
                 retStr = DoAddChanges();
-                if (!string.IsNullOrWhiteSpace(retStr)) 
+                if (!string.IsNullOrWhiteSpace(retStr))
                     return ReturnError(retStr);
 
                 ts.Complete();
@@ -351,7 +351,7 @@ namespace CSSPDBDLL.Services
         public AspNetUserModel PostUpdateAspNetUserDB(AspNetUserModel aspNetUserModel)
         {
             string retStr = AspNetUserModelOK(aspNetUserModel);
-            if (!string.IsNullOrWhiteSpace(retStr)) 
+            if (!string.IsNullOrWhiteSpace(retStr))
                 return ReturnError(retStr);
 
             //ContactOK contactOK = IsContactOK();
@@ -359,17 +359,17 @@ namespace CSSPDBDLL.Services
             //    return ReturnError(contactOK.Error);
 
             AspNetUser aspNetUserToUpdate = GetAspNetUserWithIdDB(aspNetUserModel.Id);
-            if (aspNetUserToUpdate == null) 
+            if (aspNetUserToUpdate == null)
                 return ReturnError(string.Format(ServiceRes.CouldNotFind_ToUpdate, ServiceRes.AspNetUser));
 
             retStr = FillAspNetUser(aspNetUserToUpdate, aspNetUserModel);
-            if (!string.IsNullOrWhiteSpace(retStr)) 
+            if (!string.IsNullOrWhiteSpace(retStr))
                 return ReturnError(retStr);
 
             using (TransactionScope ts = new TransactionScope())
             {
                 retStr = DoUpdateChanges();
-                if (!string.IsNullOrWhiteSpace(retStr)) 
+                if (!string.IsNullOrWhiteSpace(retStr))
                     return ReturnError(retStr);
 
                 LogModel logModel = _LogService.PostAddLogForObj("AppNetUsers", -1, LogCommandEnum.Change, aspNetUserToUpdate);

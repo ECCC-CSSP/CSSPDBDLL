@@ -16,7 +16,7 @@ namespace CSSPDBDLL
     {
         public int AppTaskLanguageID { get; set; }
         public int DBCommand { get; set; }
-        public Nullable<int> AppTaskID { get; set; }
+        public int AppTaskID { get; set; }
         public int Language { get; set; }
         public string StatusText { get; set; }
         public string ErrorText { get; set; }

@@ -119,6 +119,14 @@ namespace CSSPDBDLL.Services
 
             return TVTypeUserAuthorizationModelCount;
         }
+        public List<TVTypeUserAuthorization> GetTVTypeUserAuthorizationWithContactTVItemIDListDB(int ContactTVItemID)
+        {
+            List<TVTypeUserAuthorization> tvTypeUserAuthorizationList = (from c in db.TVTypeUserAuthorizations
+                                                                         where c.ContactTVItemID == ContactTVItemID
+                                                                         select c).ToList();
+
+            return tvTypeUserAuthorizationList;
+        }
         public List<TVTypeUserAuthorizationModel> GetTVTypeUserAuthorizationModelListDB()
         {
             TVItemService tvItemService = new TVItemService(this.LanguageRequest, this.User);
@@ -202,7 +210,7 @@ namespace CSSPDBDLL.Services
 
             tvTypeUserAuthorizationModel.TVPath = tvTypeNamesAndPathList.Where(c => c.Index == (int)tvTypeUserAuthorizationModel.TVType).FirstOrDefault().TVPath;
             tvTypeUserAuthorizationModel.TVLevel = tvItemService.GetTVLevel(tvTypeUserAuthorizationModel.TVPath);
-       
+
             return tvTypeUserAuthorizationModel;
         }
         public TVTypeUserAuthorizationModel GetTVTypeUserAuthorizationModelWithTVTypeUserAuthorizationIDDB(int TVTypeUserAuthorizationID)
@@ -230,7 +238,7 @@ namespace CSSPDBDLL.Services
 
             tvTypeUserAuthorizationModel.TVPath = tvTypeNamesAndPathList.Where(c => c.Index == (int)tvTypeUserAuthorizationModel.TVType).FirstOrDefault().TVPath;
             tvTypeUserAuthorizationModel.TVLevel = tvItemService.GetTVLevel(tvTypeUserAuthorizationModel.TVPath);
-       
+
             return tvTypeUserAuthorizationModel;
         }
         public TVTypeUserAuthorization GetTVTypeUserAuthorizationWithContactTVItemIDAndTVTypeDB(int ContactTVItemID, TVTypeEnum TVType)

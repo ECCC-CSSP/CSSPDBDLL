@@ -10,8 +10,9 @@ using System.Net.Mail;
 using System.Security.Principal;
 using System.Transactions;
 using System.Web.Mvc;
-using CSSPModelsDLL.Models;
 using CSSPEnumsDLL.Enums;
+using CSSPModelsDLL.Models;
+using CSSPTemporaryDBDLL.Services;
 
 namespace CSSPDBDLL.Services
 {
@@ -35,6 +36,10 @@ namespace CSSPDBDLL.Services
         public EmailService _EmailService { get; private set; }
         public AddressService _AddressService { get; private set; }
         public LogService _LogService { get; private set; }
+        public ContactTemporaryService _ContactTemporaryService { get; private set; }
+        public TVItemUserAuthorizationTemporaryService _TVItemUserAuthorizationTemporaryService { get; private set; }
+        public TVTypeUserAuthorizationTemporaryService _TVTypeUserAuthorizationTemporaryService { get; private set; }
+        public ScrambleService _ScrambleService { get; private set; }
         #endregion Properties
 
         #region Constructors
@@ -1048,6 +1053,10 @@ namespace CSSPDBDLL.Services
             _EmailService = new EmailService(LanguageRequest, User);
             _AddressService = new AddressService(LanguageRequest, User);
             _LogService = new LogService(LanguageRequest, User);
+            _ContactTemporaryService = new ContactTemporaryService();
+            _TVItemUserAuthorizationTemporaryService = new TVItemUserAuthorizationTemporaryService();
+            _TVTypeUserAuthorizationTemporaryService = new TVTypeUserAuthorizationTemporaryService();
+            _ScrambleService = new ScrambleService();
         }
         public string GenerateUniqueCodeForResetPasswordDB()
         {
@@ -2072,6 +2081,129 @@ namespace CSSPDBDLL.Services
                 ts.Complete();
             }
             return GetContactModelWithContactIDDB(contactToUpdate.ContactID);
+        }
+        public ContactModel RehashPasswordDB(LoginModel loginModel)
+        {
+            string retStr = "";
+            //ContactOK contactOK = IsContactOK();
+            //if (!string.IsNullOrEmpty(contactOK.Error))
+            //    return ReturnContactError(contactOK.Error);
+
+            if (string.IsNullOrEmpty(loginModel.Email))
+                return ReturnContactError(string.Format(ServiceRes._ShouldNotBeNullOrEmpty, ServiceRes.Email));
+
+            if (string.IsNullOrEmpty(loginModel.Password))
+                return ReturnContactError(string.Format(ServiceRes._ShouldNotBeNullOrEmpty, ServiceRes.Password));
+
+            Contact contactToUpdate = GetContactWithEmailDB(loginModel.Email);
+            if (contactToUpdate == null)
+                return ReturnContactError(string.Format(ServiceRes.CouldNotFind_ToUpdate, ServiceRes.Contact));
+
+            using (TransactionScope ts = new TransactionScope())
+            {
+                contactToUpdate.PasswordHash = _ScrambleService.Scramble(loginModel.Password);
+
+                retStr = DoUpdateChanges();
+                if (!string.IsNullOrWhiteSpace(retStr))
+                    return ReturnContactError(retStr);
+               
+                ts.Complete();
+            }
+
+            CSSPTemporaryDBDLL.Contact contactTemporary = ConvertCSSPDBDLLContactToCSSPTemporaryDBDLLContact(contactToUpdate);
+            retStr = _ContactTemporaryService.ContactAddOrModify(contactTemporary);
+            if (!string.IsNullOrWhiteSpace(retStr))
+                return ReturnContactError(retStr);
+
+            List<TVItemUserAuthorization> tvItemUserAuthorizationList = _TVItemUserAuthorizationService.GetTVItemUserAuthorizationWithContactTVItemIDListDB(contactToUpdate.ContactTVItemID);
+
+            List<CSSPTemporaryDBDLL.TVItemUserAuthorization> tvItemUserAuthorizationTemporaryList = ConvertCSSPDBDLLTVItemUserAuthorizationToCSSPTemporaryDBDLLTVItemUserAuthorization(tvItemUserAuthorizationList);
+            retStr = _TVItemUserAuthorizationTemporaryService.TVItemUserAuthorizationAddOrModify(tvItemUserAuthorizationTemporaryList);
+            if (!string.IsNullOrWhiteSpace(retStr))
+                return ReturnContactError(retStr);
+
+            List<TVTypeUserAuthorization> tvTypeUserAuthorizationList = _TVTypeUserAuthorizationService.GetTVTypeUserAuthorizationWithContactTVItemIDListDB(contactToUpdate.ContactTVItemID);
+
+            List<CSSPTemporaryDBDLL.TVTypeUserAuthorization> tvTypeUserAuthorizationTemporaryList = ConvertCSSPDBDLLTVTypeUserAuthorizationToCSSPTemporaryDBDLLTVTypeUserAuthorization(tvTypeUserAuthorizationList);
+            retStr = _TVTypeUserAuthorizationTemporaryService.TVTypeUserAuthorizationAddOrModify(tvTypeUserAuthorizationTemporaryList);
+            if (!string.IsNullOrWhiteSpace(retStr))
+                return ReturnContactError(retStr);
+
+            return GetContactModelWithContactIDDB(contactToUpdate.ContactID);
+        }
+        public CSSPTemporaryDBDLL.Contact ConvertCSSPDBDLLContactToCSSPTemporaryDBDLLContact(Contact contact)
+        {
+            CSSPTemporaryDBDLL.Contact contactTemp = new CSSPTemporaryDBDLL.Contact();
+
+            contactTemp.ContactID = contact.ContactID;
+            contactTemp.DBCommand = contact.DBCommand;
+            contactTemp.Id = contact.Id;
+            contactTemp.ContactTVItemID = contact.ContactTVItemID;
+            contactTemp.LoginEmail = contact.LoginEmail;
+            contactTemp.FirstName = contact.FirstName;
+            contactTemp.LastName = contact.LastName;
+            contactTemp.Initial = contact.Initial;
+            contactTemp.CellNumber = contact.CellNumber;
+            contactTemp.CellNumberConfirmed = contact.CellNumberConfirmed;
+            contactTemp.WebName = contact.WebName;
+            contactTemp.ContactTitle = contact.ContactTitle;
+            contactTemp.IsAdmin = contact.IsAdmin;
+            contactTemp.EmailValidated = contact.EmailValidated;
+            contactTemp.Disabled = contact.Disabled;
+            contactTemp.IsNew = contact.IsNew;
+            contactTemp.SamplingPlanner_ProvincesTVItemID = contact.SamplingPlanner_ProvincesTVItemID;
+            contactTemp.PasswordHash = contact.PasswordHash;
+            contactTemp.Token = contact.Token;
+            contactTemp.AccessFailedCount = contact.AccessFailedCount;
+            contactTemp.LastUpdateDate_UTC = contact.LastUpdateDate_UTC;
+            contactTemp.LastUpdateContactTVItemID = contact.LastUpdateContactTVItemID;
+
+            return contactTemp;
+        }
+        public List<CSSPTemporaryDBDLL.TVItemUserAuthorization> ConvertCSSPDBDLLTVItemUserAuthorizationToCSSPTemporaryDBDLLTVItemUserAuthorization(List<TVItemUserAuthorization> tvItemUserAuthorizationList)
+        {
+            List<CSSPTemporaryDBDLL.TVItemUserAuthorization> tvItemUserAuthorizationTemporaryList = new List<CSSPTemporaryDBDLL.TVItemUserAuthorization>();
+
+            foreach (TVItemUserAuthorization tvItemUserAuthorization in tvItemUserAuthorizationList)
+            {
+                CSSPTemporaryDBDLL.TVItemUserAuthorization tvItemUserAuthorizationTemporary = new CSSPTemporaryDBDLL.TVItemUserAuthorization();
+
+                tvItemUserAuthorizationTemporary.TVItemUserAuthorizationID = tvItemUserAuthorization.TVItemUserAuthorizationID;
+                tvItemUserAuthorizationTemporary.DBCommand = tvItemUserAuthorization.DBCommand;
+                tvItemUserAuthorizationTemporary.ContactTVItemID = tvItemUserAuthorization.ContactTVItemID;
+                tvItemUserAuthorizationTemporary.TVItemID1 = tvItemUserAuthorization.TVItemID1;
+                tvItemUserAuthorizationTemporary.TVItemID2 = tvItemUserAuthorization.TVItemID2;
+                tvItemUserAuthorizationTemporary.TVItemID3 = tvItemUserAuthorization.TVItemID3;
+                tvItemUserAuthorizationTemporary.TVItemID4 = tvItemUserAuthorization.TVItemID4;
+                tvItemUserAuthorizationTemporary.TVAuth = tvItemUserAuthorization.TVAuth;
+                tvItemUserAuthorizationTemporary.LastUpdateDate_UTC = tvItemUserAuthorization.LastUpdateDate_UTC;
+                tvItemUserAuthorizationTemporary.LastUpdateContactTVItemID = tvItemUserAuthorization.LastUpdateContactTVItemID;
+
+                tvItemUserAuthorizationTemporaryList.Add(tvItemUserAuthorizationTemporary);
+            }
+
+            return tvItemUserAuthorizationTemporaryList;
+        }
+        public List<CSSPTemporaryDBDLL.TVTypeUserAuthorization> ConvertCSSPDBDLLTVTypeUserAuthorizationToCSSPTemporaryDBDLLTVTypeUserAuthorization(List<TVTypeUserAuthorization> tvTypeUserAuthorizationList)
+        {
+            List<CSSPTemporaryDBDLL.TVTypeUserAuthorization> tvTypeUserAuthorizationTemporaryList = new List<CSSPTemporaryDBDLL.TVTypeUserAuthorization>();
+
+            foreach (TVTypeUserAuthorization tvTypeUserAuthorization in tvTypeUserAuthorizationList)
+            {
+                CSSPTemporaryDBDLL.TVTypeUserAuthorization tvTypeUserAuthorizationTemporary = new CSSPTemporaryDBDLL.TVTypeUserAuthorization();
+
+                tvTypeUserAuthorizationTemporary.TVTypeUserAuthorizationID = tvTypeUserAuthorization.TVTypeUserAuthorizationID;
+                tvTypeUserAuthorizationTemporary.DBCommand = tvTypeUserAuthorization.DBCommand;
+                tvTypeUserAuthorizationTemporary.ContactTVItemID = tvTypeUserAuthorization.ContactTVItemID;
+                tvTypeUserAuthorizationTemporary.TVType = tvTypeUserAuthorization.TVType;
+                tvTypeUserAuthorizationTemporary.TVAuth = tvTypeUserAuthorization.TVAuth;
+                tvTypeUserAuthorizationTemporary.LastUpdateDate_UTC = tvTypeUserAuthorization.LastUpdateDate_UTC;
+                tvTypeUserAuthorizationTemporary.LastUpdateContactTVItemID = tvTypeUserAuthorization.LastUpdateContactTVItemID;
+
+                tvTypeUserAuthorizationTemporaryList.Add(tvTypeUserAuthorizationTemporary);
+            }
+
+            return tvTypeUserAuthorizationTemporaryList;
         }
         public ContactModel ProfileSaveDB(FormCollection fc)
         {

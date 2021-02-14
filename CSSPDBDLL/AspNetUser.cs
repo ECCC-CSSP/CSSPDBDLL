@@ -21,6 +21,7 @@ namespace CSSPDBDLL
             this.AspNetUserLogins = new HashSet<AspNetUserLogin>();
             this.AspNetUserTokens = new HashSet<AspNetUserToken>();
             this.Contacts = new HashSet<Contact>();
+            this.Contacts1 = new HashSet<Contact>();
             this.AspNetRoles = new HashSet<AspNetRole>();
         }
     
@@ -49,6 +50,8 @@ namespace CSSPDBDLL
         public virtual ICollection<AspNetUserToken> AspNetUserTokens { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Contact> Contacts { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Contact> Contacts1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AspNetRole> AspNetRoles { get; set; }
     }

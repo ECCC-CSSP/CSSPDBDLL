@@ -40,6 +40,9 @@ namespace CSSPDBDLL
         public string SamplingPlanner_ProvincesTVItemID { get; set; }
         public string PasswordHash { get; set; }
         public string Token { get; set; }
+        public Nullable<bool> HasInternetConnection { get; set; }
+        public Nullable<bool> IsLoggedIn { get; set; }
+        public string GoogleMapKeyHash { get; set; }
         public Nullable<int> AccessFailedCount { get; set; }
         public System.DateTime LastUpdateDate_UTC { get; set; }
         public int LastUpdateContactTVItemID { get; set; }

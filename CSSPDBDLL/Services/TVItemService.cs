@@ -2872,9 +2872,12 @@ namespace CSSPDBDLL.Services
             if (!string.IsNullOrWhiteSpace(tvItemModelParent.Error))
                 return ReturnError(tvItemModelParent.Error);
 
-            TVItemModel tvItemModelExist = GetChildTVItemModelWithParentIDAndTVTextAndTVTypeDB(ParentTVItemID, TVText, TVType);
-            if (string.IsNullOrWhiteSpace(tvItemModelExist.Error))
-                return ReturnError(string.Format(ServiceRes._AlreadyExists, ServiceRes.TVText));
+            if (TVType != TVTypeEnum.PolSourceSite)
+            {
+                TVItemModel tvItemModelExist = GetChildTVItemModelWithParentIDAndTVTextAndTVTypeDB(ParentTVItemID, TVText, TVType);
+                if (string.IsNullOrWhiteSpace(tvItemModelExist.Error))
+                    return ReturnError(string.Format(ServiceRes._AlreadyExists, ServiceRes.TVText));
+            }
 
             TVItemModel tvItemModel = new TVItemModel();
             tvItemModel.DBCommand = DBCommandEnum.Original;
@@ -3148,12 +3151,16 @@ namespace CSSPDBDLL.Services
             if (tvItemToUpdate == null)
                 return ReturnError(string.Format(ServiceRes.CouldNotFind_ToUpdate, ServiceRes.TVItem));
 
-            TVItemModel tvItemModelExist = GetChildTVItemModelWithParentIDAndTVTextAndTVTypeDB((int)tvItemToUpdate.ParentID, tvItemModel.TVText, (TVTypeEnum)tvItemModel.TVType);
-            if (string.IsNullOrWhiteSpace(tvItemModelExist.Error))
+            if (tvItemModel.TVType != TVTypeEnum.PolSourceSite)
             {
-                bool IsSameTVItemModel = GetIsItSameObject(tvItemModel, tvItemModelExist);
-                if (!IsSameTVItemModel)
-                    return ReturnError(string.Format(ServiceRes._AlreadyExists, ServiceRes.TVItem));
+                TVItemModel tvItemModelExist = GetChildTVItemModelWithParentIDAndTVTextAndTVTypeDB((int)tvItemToUpdate.ParentID, tvItemModel.TVText, (TVTypeEnum)tvItemModel.TVType);
+                if (string.IsNullOrWhiteSpace(tvItemModelExist.Error))
+                {
+                    bool IsSameTVItemModel = GetIsItSameObject(tvItemModel, tvItemModelExist);
+                    if (!IsSameTVItemModel)
+                        return ReturnError(string.Format(ServiceRes._AlreadyExists, ServiceRes.TVItem));
+                }
+
             }
 
             retStr = FillTVItem(tvItemToUpdate, tvItemModel, contactOK);

@@ -1031,7 +1031,7 @@ namespace CSSPDBDLL.Services
                 {
                     string TVText = RunDate.ToString("yyyy MM dd");
                     TVText = TVText + (labSheetA1Sheet.RunNumber > 1 ? " " + ServiceRes.Run + " (" + labSheetA1Sheet.RunNumber + ")" : "");
-                    TVText = TVText + (RoutineExist ? "" : " (" + _BaseEnumService.GetEnumText_SampleTypeEnum(sampleTypeList[0])) + ")"; 
+                    TVText = TVText + (RoutineExist ? "" : " (" + _BaseEnumService.GetEnumText_SampleTypeEnum(sampleTypeList[0]) + ")"); 
 
                     TVItemModel tvItemModel = _TVItemService.PostAddChildTVItemDB(labSheetA1Sheet.SubsectorTVItemID, TVText, TVTypeEnum.MWQMRun);
                     if (!string.IsNullOrWhiteSpace(tvItemModel.Error))

@@ -4480,6 +4480,15 @@ namespace CSSPDBDLL.Services.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Generate ClassificationInputs_XX_FromDB.kml.
+        /// </summary>
+        public static string GenerateClassificationInputs_XX_FromDB_kmlFromDataInCSSPDB {
+            get {
+                return ResourceManager.GetString("GenerateClassificationInputs_XX_FromDB_kmlFromDataInCSSPDB", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Generated.
         /// </summary>
         public static string Generated {

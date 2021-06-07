@@ -1470,6 +1470,9 @@
   <data name="GenerateClassificationForCSSPWebToolsVisualization" xml:space="preserve">
     <value>Generate classification for CSSPWebTools visualization</value>
   </data>
+  <data name="GenerateClassificationInputs_XX_FromDB_kmlFromDataInCSSPDB" xml:space="preserve">
+    <value>Generate ClassificationInputs_XX_FromDB.kml</value>
+  </data>
   <data name="Generated" xml:space="preserve">
     <value>Generated</value>
   </data>

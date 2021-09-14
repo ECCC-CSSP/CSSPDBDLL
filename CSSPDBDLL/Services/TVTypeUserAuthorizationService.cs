@@ -94,7 +94,7 @@ namespace CSSPDBDLL.Services
         // Fill
         public string FillTVTypeUserAuthorization(TVTypeUserAuthorization tvTypeUserAuthorization, TVTypeUserAuthorizationModel tvTypeUserAuthorizationModel, ContactOK contactOK)
         {
-            tvTypeUserAuthorization.DBCommand = (int)tvTypeUserAuthorizationModel.DBCommand;
+            tvTypeUserAuthorization.DBCommand = (int)tvTypeUserAuthorizationModel.DBCommand == 0 ? 1 : (int)tvTypeUserAuthorizationModel.DBCommand;
             tvTypeUserAuthorization.ContactTVItemID = tvTypeUserAuthorizationModel.ContactTVItemID;
             tvTypeUserAuthorization.TVType = (int)tvTypeUserAuthorizationModel.TVType;
             tvTypeUserAuthorization.TVAuth = (int)tvTypeUserAuthorizationModel.TVAuth;

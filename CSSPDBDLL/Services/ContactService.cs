@@ -612,7 +612,7 @@ namespace CSSPDBDLL.Services
         // Fill
         public string FillContact(Contact contact, ContactModel contactModel, ContactOK contactOK)
         {
-            contact.DBCommand = (int)contactModel.DBCommand;
+            contact.DBCommand = (int)contactModel.DBCommand == 0 ? 1 : (int)contactModel.DBCommand;
             contact.Id = contactModel.Id;
             contact.ContactTVItemID = contactModel.ContactTVItemID;
             contact.LoginEmail = contactModel.LoginEmail;

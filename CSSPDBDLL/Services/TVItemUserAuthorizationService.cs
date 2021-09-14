@@ -100,7 +100,7 @@ namespace CSSPDBDLL.Services
         // Fill
         public string FillTVItemUserAuthorization(TVItemUserAuthorization tvItemUserAuthorization, TVItemUserAuthorizationModel tvItemUserAuthorizationModel, ContactOK contactOK)
         {
-            tvItemUserAuthorization.DBCommand = (int)tvItemUserAuthorizationModel.DBCommand;
+            tvItemUserAuthorization.DBCommand = (int)tvItemUserAuthorizationModel.DBCommand == 0 ? 1 : (int)tvItemUserAuthorizationModel.DBCommand;
             tvItemUserAuthorization.ContactTVItemID = tvItemUserAuthorizationModel.ContactTVItemID;
             tvItemUserAuthorization.TVItemID1 = tvItemUserAuthorizationModel.TVItemID1;
             tvItemUserAuthorization.TVItemID2 = tvItemUserAuthorizationModel.TVItemID2;

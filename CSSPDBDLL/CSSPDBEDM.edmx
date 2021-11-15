@@ -341,6 +341,7 @@
           <Property Name="HasInternetConnection" Type="bit" />
           <Property Name="IsLoggedIn" Type="bit" />
           <Property Name="GoogleMapKeyHash" Type="nvarchar" MaxLength="50" />
+          <Property Name="AzureStoreHash" Type="nvarchar" MaxLength="150" />
           <Property Name="AccessFailedCount" Type="int" />
           <Property Name="LastUpdateDate_UTC" Type="datetime" Nullable="false" />
           <Property Name="LastUpdateContactTVItemID" Type="int" Nullable="false" />
@@ -1094,16 +1095,16 @@
           <Property Name="DBCommand" Type="int" Nullable="false" />
           <Property Name="PolSourceGroupingID" Type="int" Nullable="false" />
           <Property Name="Language" Type="int" Nullable="false" />
-          <Property Name="SourceName" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="SourceName" Type="nvarchar" MaxLength="500" Nullable="false" />
           <Property Name="SourceNameOrder" Type="int" Nullable="false" />
           <Property Name="TranslationStatusSourceName" Type="int" Nullable="false" />
           <Property Name="Init" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="TranslationStatusInit" Type="int" Nullable="false" />
-          <Property Name="Description" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="500" Nullable="false" />
           <Property Name="TranslationStatusDescription" Type="int" Nullable="false" />
-          <Property Name="Report" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="Report" Type="nvarchar" MaxLength="500" Nullable="false" />
           <Property Name="TranslationStatusReport" Type="int" Nullable="false" />
-          <Property Name="Text" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="Text" Type="nvarchar" MaxLength="500" Nullable="false" />
           <Property Name="TranslationStatusText" Type="int" Nullable="false" />
           <Property Name="LastUpdateDate_UTC" Type="datetime" Nullable="false" />
           <Property Name="LastUpdateContactTVItemID" Type="int" Nullable="false" />
@@ -1115,9 +1116,9 @@
           <Property Name="PolSourceGroupingID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="DBCommand" Type="int" Nullable="false" />
           <Property Name="CSSPID" Type="int" Nullable="false" />
-          <Property Name="GroupName" Type="nvarchar" MaxLength="150" Nullable="false" />
-          <Property Name="Child" Type="nvarchar" MaxLength="150" Nullable="false" />
-          <Property Name="Hide" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="GroupName" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="Child" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="Hide" Type="nvarchar" MaxLength="500" Nullable="false" />
           <Property Name="LastUpdateDate_UTC" Type="datetime" Nullable="false" />
           <Property Name="LastUpdateContactTVItemID" Type="int" Nullable="false" />
         </EntityType>
@@ -1948,18 +1949,6 @@
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Role="Contacts" Type="Self.Contacts" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Contacts">
-              <PropertyRef Name="Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Contacts_AspNetUsers1">
-          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
           <End Role="Contacts" Type="Self.Contacts" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="AspNetUsers">
@@ -3424,10 +3413,6 @@
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="Contacts" EntitySet="Contacts" />
           </AssociationSet>
-          <AssociationSet Name="FK_Contacts_AspNetUsers1" Association="Self.FK_Contacts_AspNetUsers1">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="Contacts" EntitySet="Contacts" />
-          </AssociationSet>
           <AssociationSet Name="FK_Contacts_TVItems" Association="Self.FK_Contacts_TVItems">
             <End Role="TVItems" EntitySet="TVItems" />
             <End Role="Contacts" EntitySet="Contacts" />
@@ -3977,10 +3962,6 @@
             <End Role="AspNetUserToken" EntitySet="AspNetUserTokens" />
           </AssociationSet>
           <AssociationSet Name="FK_Contacts_AspNetUsers" Association="CSSPDBModel.FK_Contacts_AspNetUsers">
-            <End Role="AspNetUser" EntitySet="AspNetUsers" />
-            <End Role="Contact" EntitySet="Contacts" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Contacts_AspNetUsers1" Association="CSSPDBModel.FK_Contacts_AspNetUsers1">
             <End Role="AspNetUser" EntitySet="AspNetUsers" />
             <End Role="Contact" EntitySet="Contacts" />
           </AssociationSet>
@@ -4566,7 +4547,6 @@
           <NavigationProperty Name="AspNetUserLogins" Relationship="CSSPDBModel.FK_AspNetUserLogins_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserLogin" />
           <NavigationProperty Name="AspNetUserTokens" Relationship="CSSPDBModel.FK_AspNetUserTokens_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserToken" />
           <NavigationProperty Name="Contacts" Relationship="CSSPDBModel.FK_Contacts_AspNetUsers" FromRole="AspNetUser" ToRole="Contact" />
-          <NavigationProperty Name="Contacts1" Relationship="CSSPDBModel.FK_Contacts_AspNetUsers1" FromRole="AspNetUser" ToRole="Contact" />
           <NavigationProperty Name="AspNetRoles" Relationship="CSSPDBModel.AspNetUserRoles" FromRole="AspNetUser" ToRole="AspNetRole" />
         </EntityType>
         <EntityType Name="AspNetUserToken">
@@ -4785,11 +4765,11 @@
           <Property Name="HasInternetConnection" Type="Boolean" />
           <Property Name="IsLoggedIn" Type="Boolean" />
           <Property Name="GoogleMapKeyHash" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AzureStoreHash" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
           <Property Name="AccessFailedCount" Type="Int32" />
           <Property Name="LastUpdateDate_UTC" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="LastUpdateContactTVItemID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="AspNetUser" Relationship="CSSPDBModel.FK_Contacts_AspNetUsers" FromRole="Contact" ToRole="AspNetUser" />
-          <NavigationProperty Name="AspNetUser1" Relationship="CSSPDBModel.FK_Contacts_AspNetUsers1" FromRole="Contact" ToRole="AspNetUser" />
           <NavigationProperty Name="ContactPreferences" Relationship="CSSPDBModel.FK_ContactPreferences_Contacts" FromRole="Contact" ToRole="ContactPreference" />
           <NavigationProperty Name="TVItem" Relationship="CSSPDBModel.FK_Contacts_TVItems" FromRole="Contact" ToRole="TVItem" />
           <NavigationProperty Name="ContactShortcuts" Relationship="CSSPDBModel.FK_ContactShortcuts_Contacts" FromRole="Contact" ToRole="ContactShortcut" />
@@ -5608,16 +5588,16 @@
           <Property Name="DBCommand" Type="Int32" Nullable="false" />
           <Property Name="PolSourceGroupingID" Type="Int32" Nullable="false" />
           <Property Name="Language" Type="Int32" Nullable="false" />
-          <Property Name="SourceName" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="SourceName" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="SourceNameOrder" Type="Int32" Nullable="false" />
           <Property Name="TranslationStatusSourceName" Type="Int32" Nullable="false" />
           <Property Name="Init" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="TranslationStatusInit" Type="Int32" Nullable="false" />
-          <Property Name="Description" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="TranslationStatusDescription" Type="Int32" Nullable="false" />
-          <Property Name="Report" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Report" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="TranslationStatusReport" Type="Int32" Nullable="false" />
-          <Property Name="Text" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Text" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="TranslationStatusText" Type="Int32" Nullable="false" />
           <Property Name="LastUpdateDate_UTC" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="LastUpdateContactTVItemID" Type="Int32" Nullable="false" />
@@ -5630,9 +5610,9 @@
           <Property Name="PolSourceGroupingID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="DBCommand" Type="Int32" Nullable="false" />
           <Property Name="CSSPID" Type="Int32" Nullable="false" />
-          <Property Name="GroupName" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
-          <Property Name="Child" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
-          <Property Name="Hide" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="GroupName" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Child" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Hide" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="LastUpdateDate_UTC" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="LastUpdateContactTVItemID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="PolSourceGroupingLanguages" Relationship="CSSPDBModel.FK_PolSourceGroupingLanguages_PolSourceGroupings" FromRole="PolSourceGrouping" ToRole="PolSourceGroupingLanguage" />
@@ -6474,18 +6454,6 @@
           <End Type="CSSPDBModel.AspNetUser" Role="AspNetUser" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Type="CSSPDBModel.Contact" Role="Contact" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUser">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Contact">
-              <PropertyRef Name="Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Contacts_AspNetUsers1">
-          <End Type="CSSPDBModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
           <End Type="CSSPDBModel.Contact" Role="Contact" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="AspNetUser">
@@ -8204,6 +8172,7 @@
                 <ScalarProperty Name="LastUpdateContactTVItemID" ColumnName="LastUpdateContactTVItemID" />
                 <ScalarProperty Name="LastUpdateDate_UTC" ColumnName="LastUpdateDate_UTC" />
                 <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+                <ScalarProperty Name="AzureStoreHash" ColumnName="AzureStoreHash" />
                 <ScalarProperty Name="GoogleMapKeyHash" ColumnName="GoogleMapKeyHash" />
                 <ScalarProperty Name="IsLoggedIn" ColumnName="IsLoggedIn" />
                 <ScalarProperty Name="HasInternetConnection" ColumnName="HasInternetConnection" />

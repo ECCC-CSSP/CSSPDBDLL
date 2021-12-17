@@ -1296,13 +1296,13 @@ namespace CSSPDBDLL.Services
 
             resetPasswordModel.DBCommand = DBCommandEnum.Original;
             resetPasswordModel.Code = RandomInt(12345678, 98765432).ToString();
-            resetPasswordModel.Email = RandomString("charles.leblanc2@canada.ca", "charles.leblanc2@canada.ca".Length);
+            resetPasswordModel.Email = RandomString("charles.leblanc@ec.gc.ca", "charles.leblanc@ec.gc.ca".Length);
             resetPasswordModel.Password = RandomPassword();
             resetPasswordModel.ConfirmPassword = resetPasswordModel.Password;
             resetPasswordModel.ExpireDate_Local = DateTime.UtcNow.AddDays(1);
 
             //Assert.IsTrue(resetPasswordModel.Code.Length == 8);
-            //Assert.IsTrue(resetPasswordModel.Email == "charles.leblanc2@canada.ca");
+            //Assert.IsTrue(resetPasswordModel.Email == "charles.leblanc@ec.gc.ca");
             //Assert.IsTrue(resetPasswordModel.Password.Length > 8);
             //Assert.IsTrue(resetPasswordModel.ConfirmPassword.Length > 8);
             //Assert.AreEqual(resetPasswordModel.Password, resetPasswordModel.ConfirmPassword);

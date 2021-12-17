@@ -37,7 +37,7 @@ namespace CSSPDBDLL.Services
         public List<TVTypeNamesAndPath> tvTypeNamesAndPathList = new List<TVTypeNamesAndPath>();
         public List<PolSourceObsInfoChild> polSourceObsInfoChildList = new List<PolSourceObsInfoChild>();
         public bool CanSendEmail = true;
-        public string FromEmail = "ec.pccsm-cssp.ec@canada.ca";
+        public string FromEmail = "pccsm-cssp@ec.gc.ca";
         public int TileSize = 256;
         public double OriginX, OriginY;
         public double PixelsPerLonDegree;
@@ -610,9 +610,9 @@ namespace CSSPDBDLL.Services
         {
             SmtpClient myClient = new SmtpClient();
 
-            myClient.Host = "smtp.email-courriel.canada.ca";
+            myClient.Host = "mail.ec.gc.ca";
             myClient.Port = 587;
-            myClient.Credentials = new System.Net.NetworkCredential("ec.pccsm-cssp.ec@canada.ca", "H^9h6g@Gy$N57k=Dr@J7=F2y6p6b!T");
+            myClient.Credentials = new System.Net.NetworkCredential("pccsm-cssp@ec.gc.ca", "Gt=UJZ3g]8_P86Q]::p0F(%=$_OL_Y");
             myClient.EnableSsl = true;
 
             try

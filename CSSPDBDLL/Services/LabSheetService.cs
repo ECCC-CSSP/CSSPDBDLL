@@ -1607,7 +1607,7 @@ namespace CSSPDBDLL.Services
                 return string.Format(ServiceRes.CouldNotFind_, ServiceRes.Province);
             }
 
-            string hrefSubsector = "http://wmon01dtchlebl2.ncr.int.ec.gc.ca/csspwebtools/en-CA/#!View/" + (tvItemModelProvince.TVText + "-" + tvItemModelSubsector.TVText).Replace(" ", "-") + "|||" + tvItemModelSubsector.TVItemID.ToString() + "|||30010000001000000000000000001000";
+            string hrefSubsector = "http://wmon01dtchlebl2/csspwebtools/en-CA/#!View/" + (tvItemModelProvince.TVText + "-" + tvItemModelSubsector.TVText).Replace(" ", "-") + "|||" + tvItemModelSubsector.TVItemID.ToString() + "|||30010000001000000000000000001000";
 
             foreach (bool IsContractor in new List<bool> { false, true })
             {
@@ -1879,7 +1879,7 @@ namespace CSSPDBDLL.Services
             if (tvItemModelProvince == null)
                 return ReturnError(string.Format(ServiceRes.CouldNotFind_, ServiceRes.Province));
 
-            string hrefSubsector = "http://wmon01dtchlebl2.ncr.int.ec.gc.ca/csspwebtools/en-CA/#!View/" + (tvItemModelProvince.TVText + "-" + tvItemModelSubsector.TVText).Replace(" ", "-") + "|||" + tvItemModelSubsector.TVItemID.ToString() + "|||30010000001000000000000000001000";
+            string hrefSubsector = "http://wmon01dtchlebl2/csspwebtools/en-CA/#!View/" + (tvItemModelProvince.TVText + "-" + tvItemModelSubsector.TVText).Replace(" ", "-") + "|||" + tvItemModelSubsector.TVItemID.ToString() + "|||30010000001000000000000000001000";
 
             foreach (bool IsContractor in new List<bool> { false, true })
             {

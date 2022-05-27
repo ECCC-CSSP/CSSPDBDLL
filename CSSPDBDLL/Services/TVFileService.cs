@@ -1837,7 +1837,7 @@ namespace CSSPDBDLL.Services
                     sb.AppendLine($"OLDWRITTENDESC\t{polSourceObservationModelLatest.Observation_ToBeDeleted.Replace("\r", "_").Replace("\n", "_").Replace("\t", "_")}\t");
                 }
 
-                string url = @"http://wmon01dtchlebl2/csspwebtoolsjoe/en-CA/TVItem/_TVItemMoreInfo?Q=!View%2F%2Fcsspwebtoolsjoe%2Fen-CA%2F%23!View%2FNB-06-020%20(Bouctouche)%20-%20NB-06-020-002%20(Bouctouche%20River%20and%20Harbour)%7C%7C%7C635%7C%7C%7C30001000002000000000000000000000&TVItemID=" + tvItemModelPSS.TVItemID + @"&NumberOfSample=30";
+                string url = @"http://wmon01dtchlebl2.ncr.int.ec.gc.ca/csspwebtoolsjoe/en-CA/TVItem/_TVItemMoreInfo?Q=!View%2F%2Fcsspwebtoolsjoe%2Fen-CA%2F%23!View%2FNB-06-020%20(Bouctouche)%20-%20NB-06-020-002%20(Bouctouche%20River%20and%20Harbour)%7C%7C%7C635%7C%7C%7C30001000002000000000000000000000&TVItemID=" + tvItemModelPSS.TVItemID + @"&NumberOfSample=30";
                 try
                 {
                     List<string> OldSelectList = new List<string>();

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="CSSPDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="CSSPDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Addresses">
           <Key>
             <PropertyRef Name="AddressID" />
@@ -1029,7 +1029,7 @@
           <Property Name="MWQMSiteID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="DBCommand" Type="int" Nullable="false" />
           <Property Name="MWQMSiteTVItemID" Type="int" Nullable="false" />
-          <Property Name="MWQMSiteNumber" Type="nvarchar" MaxLength="8" Nullable="false" />
+          <Property Name="MWQMSiteNumber" Type="nvarchar" MaxLength="16" Nullable="false" />
           <Property Name="MWQMSiteDescription" Type="nvarchar" MaxLength="200" Nullable="false" />
           <Property Name="MWQMSiteLatestClassification" Type="int" Nullable="false" />
           <Property Name="Ordinal" Type="int" Nullable="false" />
@@ -5517,7 +5517,7 @@
           <Property Name="MWQMSiteID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="DBCommand" Type="Int32" Nullable="false" />
           <Property Name="MWQMSiteTVItemID" Type="Int32" Nullable="false" />
-          <Property Name="MWQMSiteNumber" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="true" />
+          <Property Name="MWQMSiteNumber" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="true" />
           <Property Name="MWQMSiteDescription" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="MWQMSiteLatestClassification" Type="Int32" Nullable="false" />
           <Property Name="Ordinal" Type="Int32" Nullable="false" />

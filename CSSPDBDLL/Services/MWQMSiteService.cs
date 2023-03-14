@@ -69,7 +69,7 @@ namespace CSSPDBDLL.Services
                 return retStr;
             }
 
-            retStr = FieldCheckNotNullAndMinMaxLengthString(mwqmSiteModel.MWQMSiteNumber, ServiceRes.MWQMSiteNumber, 1, 8);
+            retStr = FieldCheckNotNullAndMinMaxLengthString(mwqmSiteModel.MWQMSiteNumber, ServiceRes.MWQMSiteNumber, 1, 16);
             if (!string.IsNullOrWhiteSpace(retStr))
             {
                 return retStr;

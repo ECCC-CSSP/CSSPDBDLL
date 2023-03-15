@@ -162,7 +162,7 @@ namespace CSSPDBDLL.Services
 
             return tvItemModelAdjacentSubsectors;
         }
-        public MWQMSubsectorAnalysisModel GetMWQMSubsectorAnalysisModel(int SubsectorTVItemID)
+        public MWQMSubsectorAnalysisModel GetMWQMSubsectorAnalysisModel(int SubsectorTVItemID, bool IncludeRainCMPData)
         {
             MWQMSubsectorAnalysisModel mwqmSubsectorAnalysisModel = new MWQMSubsectorAnalysisModel();
 
@@ -232,7 +232,8 @@ namespace CSSPDBDLL.Services
                                                                    && t.ParentID == SubsectorTVItemID
                                                                    && tl.Language == (int)LanguageRequest
                                                                    && t.TVType == (int)TVTypeEnum.MWQMRun
-                                                                   && c.RunSampleType == (int)SampleTypeEnum.Routine
+                                                                   && (c.RunSampleType == (int)SampleTypeEnum.Routine
+                                                                   || c.RunSampleType == (int)SampleTypeEnum.RainCMP)
                                                                    orderby c.DateTime_Local descending, c.RunNumber descending
                                                                    select new MWQMRunAnalysisModel
                                                                    {
@@ -296,12 +297,22 @@ namespace CSSPDBDLL.Services
             mwqmSubsectorAnalysisModel.MWQMRunAnalysisModelList = mwqmRunAnalysisModelList;
 
             List<int> SiteTVItemIDList = mwqmSiteAnalysisModelList.Select(c => c.MWQMSiteTVItemID).Distinct().ToList();
-            List<int> RunTVItemIDList = mwqmRunAnalysisModelList.Select(c => c.MWQMRunTVItemID).Distinct().ToList();
+            List<int> RunTVItemIDList = new List<int>();
+
+            if (IncludeRainCMPData)
+            {
+                RunTVItemIDList = mwqmRunAnalysisModelList.Select(c => c.MWQMRunTVItemID).Distinct().ToList();
+            }
+            else
+            {
+                RunTVItemIDList = mwqmRunAnalysisModelList.Where(c => c.RunSampleType == SampleTypeEnum.Routine).Select(c => c.MWQMRunTVItemID).Distinct().ToList();
+            }
 
             List<MWQMSampleAnalysisModel> mwqmSampleAnalysisModelList = new List<MWQMSampleAnalysisModel>();
             if (mwqmSiteAnalysisModelList.Count > 0 && mwqmRunAnalysisModelList.Count > 0)
             {
                 string routineNumberText = ((int)SampleTypeEnum.Routine).ToString() + ",";
+                string rainCMPRainDataText = ((int)SampleTypeEnum.RainCMP).ToString() + ",";
                 mwqmSampleAnalysisModelList = (from c in db.MWQMSamples
                                                from cl in db.MWQMSampleLanguages
                                                from siteTVItemID in SiteTVItemIDList
@@ -310,7 +321,8 @@ namespace CSSPDBDLL.Services
                                                && c.MWQMRunTVItemID == runTVItemID
                                                && c.MWQMSiteTVItemID == siteTVItemID
                                                && cl.Language == (int)LanguageRequest
-                                               && c.SampleTypesText.Contains(routineNumberText)
+                                               && (c.SampleTypesText.Contains(routineNumberText)
+                                               || c.SampleTypesText.Contains(rainCMPRainDataText))
                                                orderby c.SampleDateTime_Local descending
                                                select new MWQMSampleAnalysisModel
                                                {
@@ -363,6 +375,12 @@ namespace CSSPDBDLL.Services
 
             }
 
+            if (!IncludeRainCMPData)
+            {
+                mwqmSubsectorAnalysisModel.MWQMRunAnalysisModelList = (from c in mwqmSubsectorAnalysisModel.MWQMRunAnalysisModelList
+                                                                       where c.RunSampleType == SampleTypeEnum.Routine
+                                                                       select c).ToList();
+            }
 
             return mwqmSubsectorAnalysisModel;
         }

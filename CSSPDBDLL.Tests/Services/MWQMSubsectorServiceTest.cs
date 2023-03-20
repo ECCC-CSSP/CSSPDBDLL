@@ -678,7 +678,7 @@ namespace CSSPWebToolsDBDLL.Tests.Services
 
                 using (TransactionScope ts = new TransactionScope())
                 {
-                    MWQMSubsectorAnalysisModel mwqmSubsectorAnalysisModel = mwqmSubsectorService.GetMWQMSubsectorAnalysisModel(635 /* bouctouche harbour subsector*/);
+                    MWQMSubsectorAnalysisModel mwqmSubsectorAnalysisModel = mwqmSubsectorService.GetMWQMSubsectorAnalysisModel(635, false /* bouctouche harbour subsector*/);
                     Assert.AreEqual("", mwqmSubsectorAnalysisModel.MWQMSubsectorModel.Error);
                     Assert.IsTrue(mwqmSubsectorAnalysisModel.MWQMSiteAnalysisModelList.Count > 0);
                     Assert.IsTrue(mwqmSubsectorAnalysisModel.MWQMRunAnalysisModelList.Count > 0);

@@ -1837,72 +1837,73 @@ namespace CSSPDBDLL.Services
                     sb.AppendLine($"OLDWRITTENDESC\t{polSourceObservationModelLatest.Observation_ToBeDeleted.Replace("\r", "_").Replace("\n", "_").Replace("\t", "_")}\t");
                 }
 
-                string url = @"http://131.235.1.167/csspwebtoolsjoe/en-CA/TVItem/_TVItemMoreInfo?Q=!View%2F%2Fcsspwebtoolsjoe%2Fen-CA%2F%23!View%2FNB-06-020%20(Bouctouche)%20-%20NB-06-020-002%20(Bouctouche%20River%20and%20Harbour)%7C%7C%7C635%7C%7C%7C30001000002000000000000000000000&TVItemID=" + tvItemModelPSS.TVItemID + @"&NumberOfSample=30";
-                try
-                {
-                    List<string> OldSelectList = new List<string>();
-                    string OldSelect = "";
+                //string url = @"http://131.235.1.167/csspwebtoolsjoe/en-CA/TVItem/_TVItemMoreInfo?Q=!View%2F%2Fcsspwebtoolsjoe%2Fen-CA%2F%23!View%2FNB-06-020%20(Bouctouche)%20-%20NB-06-020-002%20(Bouctouche%20River%20and%20Harbour)%7C%7C%7C635%7C%7C%7C30001000002000000000000000000000&TVItemID=" + tvItemModelPSS.TVItemID + @"&NumberOfSample=30";
+                //try
+                //{
+                //    List<string> OldSelectList = new List<string>();
+                //    string OldSelect = "";
 
-                    using (WebClient webClient = new WebClient())
-                    {
-                        WebProxy webProxy = new WebProxy();
-                        webClient.Proxy = webProxy;
+                //    using (WebClient webClient = new WebClient())
+                //    {
+                //        WebProxy webProxy = new WebProxy();
+                //        webClient.Proxy = webProxy;
 
 
-                        var json_data = string.Empty;
-                        byte[] responseBytes = webClient.DownloadData(url);
-                        OldSelect = Encoding.UTF8.GetString(responseBytes);
+                //        var json_data = string.Empty;
+                //        byte[] responseBytes = webClient.DownloadData(url);
+                //        OldSelect = Encoding.UTF8.GetString(responseBytes);
 
-                        int Pos = 1;
-                        while (Pos > 0)
-                        {
-                            Pos = OldSelect.IndexOf(@"Selected Description:");
-                            if (Pos > 0)
-                            {
-                                Pos += @"Selected Description:".Length;
-                                OldSelect = OldSelect.Substring(Pos);
+                //        int Pos = 1;
+                //        while (Pos > 0)
+                //        {
+                //            Pos = OldSelect.IndexOf(@"Selected Description:");
+                //            if (Pos > 0)
+                //            {
+                //                Pos += @"Selected Description:".Length;
+                //                OldSelect = OldSelect.Substring(Pos);
 
-                                Pos = OldSelect.IndexOf(@"<span>");
-                                if (Pos > 0)
-                                {
-                                    Pos += @"<span>".Length;
-                                    OldSelect = OldSelect.Substring(Pos);
+                //                Pos = OldSelect.IndexOf(@"<span>");
+                //                if (Pos > 0)
+                //                {
+                //                    Pos += @"<span>".Length;
+                //                    OldSelect = OldSelect.Substring(Pos);
 
-                                    int Pos2 = OldSelect.IndexOf("</span>");
-                                    if (Pos2 > 0)
-                                    {
-                                        string SelectText = OldSelect.Substring(0, Pos2);
+                //                    int Pos2 = OldSelect.IndexOf("</span>");
+                //                    if (Pos2 > 0)
+                //                    {
+                //                        string SelectText = OldSelect.Substring(0, Pos2);
 
-                                        if (SelectText.Length > 0)
-                                        {
-                                            OldSelectList.Add(SelectText);
-                                        }
+                //                        if (SelectText.Length > 0)
+                //                        {
+                //                            OldSelectList.Add(SelectText);
+                //                        }
 
-                                        OldSelect = OldSelect.Substring(Pos2);
-                                    }
-                                }
-                                else
-                                {
-                                    OldSelect = "";
-                                }
-                            }
-                            else
-                            {
-                                OldSelect = "";
-                            }
-                        }
-                    }
+                //                        OldSelect = OldSelect.Substring(Pos2);
+                //                    }
+                //                }
+                //                else
+                //                {
+                //                    OldSelect = "";
+                //                }
+                //            }
+                //            else
+                //            {
+                //                OldSelect = "";
+                //            }
+                //        }
+                //    }
 
-                    foreach (string s in OldSelectList)
-                    {
-                        sb.AppendLine($"OLDISSUETEXT\t{s.Replace("\r", "_").Replace("\n", "_").Replace("\t", "_")}\t");
-                    }
+                //    foreach (string s in OldSelectList)
+                //    {
+                //        sb.AppendLine($"OLDISSUETEXT\t{s.Replace("\r", "_").Replace("\n", "_").Replace("\t", "_")}\t");
+                //    }
 
-                }
-                catch (Exception)
-                {
-                    // nothing
-                }
+                //}
+                //catch (Exception)
+                //{
+                //    // nothing
+                //}
+                
                 List<PolSourceObservationIssueModel> polSourceObservationIssueModelList = _PolSourceObservationIssueService.GetPolSourceObservationIssueModelListWithPolSourceObservationIDDB(polSourceObservationModelLatest.PolSourceObservationID);
 
                 foreach (PolSourceObservationIssueModel polSourceObservationIssueModel in polSourceObservationIssueModelList.OrderBy(c => c.Ordinal))

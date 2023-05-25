@@ -3726,6 +3726,99 @@
   <data name="TideText" xml:space="preserve">
     <value>TideText</value>
   </data>
+  <data name="Tide_h0_m" xml:space="preserve">
+    <value>Tide_h0_m</value>
+  </data>
+  <data name="Tide_h10_m" xml:space="preserve">
+    <value>Tide_h10_m</value>
+  </data>
+  <data name="Tide_h11_m" xml:space="preserve">
+    <value>Tide_h11_m</value>
+  </data>
+  <data name="Tide_h12_m" xml:space="preserve">
+    <value>Tide_h12_m</value>
+  </data>
+  <data name="Tide_h13_m" xml:space="preserve">
+    <value>Tide_h13_m</value>
+  </data>
+  <data name="Tide_h14_m" xml:space="preserve">
+    <value>Tide_h14_m</value>
+  </data>
+  <data name="Tide_h15_m" xml:space="preserve">
+    <value>Tide_h15_m</value>
+  </data>
+  <data name="Tide_h16_m" xml:space="preserve">
+    <value>Tide_h16_m</value>
+  </data>
+  <data name="Tide_h17_m" xml:space="preserve">
+    <value>Tide_h17_m</value>
+  </data>
+  <data name="Tide_h18_m" xml:space="preserve">
+    <value>Tide_h18_m</value>
+  </data>
+  <data name="Tide_h19_m" xml:space="preserve">
+    <value>Tide_h19_m</value>
+  </data>
+  <data name="Tide_h1_m" xml:space="preserve">
+    <value>Tide_h1_m</value>
+  </data>
+  <data name="Tide_h20_m" xml:space="preserve">
+    <value>Tide_h20_m</value>
+  </data>
+  <data name="Tide_h21_m" xml:space="preserve">
+    <value>Tide_h21_m</value>
+  </data>
+  <data name="Tide_h22_m" xml:space="preserve">
+    <value>Tide_h22_m</value>
+  </data>
+  <data name="Tide_h23_m" xml:space="preserve">
+    <value>Tide_h23_m</value>
+  </data>
+  <data name="Tide_h24_m" xml:space="preserve">
+    <value>Tide_h24_m</value>
+  </data>
+  <data name="Tide_h25_m" xml:space="preserve">
+    <value>Tide_h25_m</value>
+  </data>
+  <data name="Tide_h26_m" xml:space="preserve">
+    <value>Tide_h26_m</value>
+  </data>
+  <data name="Tide_h27_m" xml:space="preserve">
+    <value>Tide_h27_m</value>
+  </data>
+  <data name="Tide_h28_m" xml:space="preserve">
+    <value>Tide_h28_m</value>
+  </data>
+  <data name="Tide_h29_m" xml:space="preserve">
+    <value>Tide_h29_m</value>
+  </data>
+  <data name="Tide_h2_m" xml:space="preserve">
+    <value>Tide_h2_m</value>
+  </data>
+  <data name="Tide_h30_m" xml:space="preserve">
+    <value>Tide_h30_m</value>
+  </data>
+  <data name="Tide_h3_m" xml:space="preserve">
+    <value>Tide_h3_m</value>
+  </data>
+  <data name="Tide_h4_m" xml:space="preserve">
+    <value>Tide_h4_m</value>
+  </data>
+  <data name="Tide_h5_m" xml:space="preserve">
+    <value>Tide_h5_m</value>
+  </data>
+  <data name="Tide_h6_m" xml:space="preserve">
+    <value>Tide_h6_m</value>
+  </data>
+  <data name="Tide_h7_m" xml:space="preserve">
+    <value>Tide_h7_m</value>
+  </data>
+  <data name="Tide_h8_m" xml:space="preserve">
+    <value>Tide_h8_m</value>
+  </data>
+  <data name="Tide_h9_m" xml:space="preserve">
+    <value>Tide_h9_m</value>
+  </data>
   <data name="Time" xml:space="preserve">
     <value>Time</value>
   </data>

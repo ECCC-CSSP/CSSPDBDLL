@@ -11113,6 +11113,285 @@ namespace CSSPDBDLL.Services.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Tide_h0_m.
+        /// </summary>
+        public static string Tide_h0_m {
+            get {
+                return ResourceManager.GetString("Tide_h0_m", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tide_h1_m.
+        /// </summary>
+        public static string Tide_h1_m {
+            get {
+                return ResourceManager.GetString("Tide_h1_m", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tide_h10_m.
+        /// </summary>
+        public static string Tide_h10_m {
+            get {
+                return ResourceManager.GetString("Tide_h10_m", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tide_h11_m.
+        /// </summary>
+        public static string Tide_h11_m {
+            get {
+                return ResourceManager.GetString("Tide_h11_m", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tide_h12_m.
+        /// </summary>
+        public static string Tide_h12_m {
+            get {
+                return ResourceManager.GetString("Tide_h12_m", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tide_h13_m.
+        /// </summary>
+        public static string Tide_h13_m {
+            get {
+                return ResourceManager.GetString("Tide_h13_m", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tide_h14_m.
+        /// </summary>
+        public static string Tide_h14_m {
+            get {
+                return ResourceManager.GetString("Tide_h14_m", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tide_h15_m.
+        /// </summary>
+        public static string Tide_h15_m {
+            get {
+                return ResourceManager.GetString("Tide_h15_m", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tide_h16_m.
+        /// </summary>
+        public static string Tide_h16_m {
+            get {
+                return ResourceManager.GetString("Tide_h16_m", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tide_h17_m.
+        /// </summary>
+        public static string Tide_h17_m {
+            get {
+                return ResourceManager.GetString("Tide_h17_m", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tide_h18_m.
+        /// </summary>
+        public static string Tide_h18_m {
+            get {
+                return ResourceManager.GetString("Tide_h18_m", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tide_h19_m.
+        /// </summary>
+        public static string Tide_h19_m {
+            get {
+                return ResourceManager.GetString("Tide_h19_m", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tide_h2_m.
+        /// </summary>
+        public static string Tide_h2_m {
+            get {
+                return ResourceManager.GetString("Tide_h2_m", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tide_h20_m.
+        /// </summary>
+        public static string Tide_h20_m {
+            get {
+                return ResourceManager.GetString("Tide_h20_m", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tide_h21_m.
+        /// </summary>
+        public static string Tide_h21_m {
+            get {
+                return ResourceManager.GetString("Tide_h21_m", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tide_h22_m.
+        /// </summary>
+        public static string Tide_h22_m {
+            get {
+                return ResourceManager.GetString("Tide_h22_m", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tide_h23_m.
+        /// </summary>
+        public static string Tide_h23_m {
+            get {
+                return ResourceManager.GetString("Tide_h23_m", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tide_h24_m.
+        /// </summary>
+        public static string Tide_h24_m {
+            get {
+                return ResourceManager.GetString("Tide_h24_m", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tide_h25_m.
+        /// </summary>
+        public static string Tide_h25_m {
+            get {
+                return ResourceManager.GetString("Tide_h25_m", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tide_h26_m.
+        /// </summary>
+        public static string Tide_h26_m {
+            get {
+                return ResourceManager.GetString("Tide_h26_m", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tide_h27_m.
+        /// </summary>
+        public static string Tide_h27_m {
+            get {
+                return ResourceManager.GetString("Tide_h27_m", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tide_h28_m.
+        /// </summary>
+        public static string Tide_h28_m {
+            get {
+                return ResourceManager.GetString("Tide_h28_m", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tide_h29_m.
+        /// </summary>
+        public static string Tide_h29_m {
+            get {
+                return ResourceManager.GetString("Tide_h29_m", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tide_h3_m.
+        /// </summary>
+        public static string Tide_h3_m {
+            get {
+                return ResourceManager.GetString("Tide_h3_m", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tide_h30_m.
+        /// </summary>
+        public static string Tide_h30_m {
+            get {
+                return ResourceManager.GetString("Tide_h30_m", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tide_h4_m.
+        /// </summary>
+        public static string Tide_h4_m {
+            get {
+                return ResourceManager.GetString("Tide_h4_m", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tide_h5_m.
+        /// </summary>
+        public static string Tide_h5_m {
+            get {
+                return ResourceManager.GetString("Tide_h5_m", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tide_h6_m.
+        /// </summary>
+        public static string Tide_h6_m {
+            get {
+                return ResourceManager.GetString("Tide_h6_m", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tide_h7_m.
+        /// </summary>
+        public static string Tide_h7_m {
+            get {
+                return ResourceManager.GetString("Tide_h7_m", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tide_h8_m.
+        /// </summary>
+        public static string Tide_h8_m {
+            get {
+                return ResourceManager.GetString("Tide_h8_m", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tide_h9_m.
+        /// </summary>
+        public static string Tide_h9_m {
+            get {
+                return ResourceManager.GetString("Tide_h9_m", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to TideDataDateTime_Local.
         /// </summary>
         public static string TideDataDateTime_Local {

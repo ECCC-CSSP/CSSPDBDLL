@@ -34,23 +34,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CSSPDHI">
-      <HintPath>..\..\CSSPDHI\CSSPDHI\bin\Debug\CSSPDHI.dll</HintPath>
-    </Reference>
-    <Reference Include="CSSPEnumsDLL, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\CSSPEnumsDLL\CSSPEnumsDLL\bin\Debug\CSSPEnumsDLL.dll</HintPath>
-    </Reference>
-    <Reference Include="CSSPLabSheetParserDLL">
-      <HintPath>..\..\CSSPLabSheetParserDLL\CSSPLabSheetParserDLL\bin\Debug\CSSPLabSheetParserDLL.dll</HintPath>
-    </Reference>
-    <Reference Include="CSSPModelsDLL, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\CSSPDHI\CSSPDHI\bin\Debug\CSSPModelsDLL.dll</HintPath>
-    </Reference>
-    <Reference Include="CSSPReportWriterHelperDLL">
-      <HintPath>..\..\CSSPReportWriterHelperDLL\CSSPReportWriterHelperDLL\bin\Debug\CSSPReportWriterHelperDLL.dll</HintPath>
-    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -564,6 +547,22 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\CSSPDHI\CSSPDHI\CSSPDHI.csproj">
+      <Project>{146cc470-1a4e-41aa-9f93-9cdc1d71f000}</Project>
+      <Name>CSSPDHI</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\CSSPEnumsDLL\CSSPEnumsDLL\CSSPEnumsDLL.csproj">
+      <Project>{78d59e0e-c66f-4f57-9703-2f69ebe4caa6}</Project>
+      <Name>CSSPEnumsDLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\CSSPLabSheetParserDLL\CSSPLabSheetParserDLL\CSSPLabSheetParserDLL.csproj">
+      <Project>{a6e54418-b988-4814-b0ae-b8932669c9bf}</Project>
+      <Name>CSSPLabSheetParserDLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\CSSPModelsDLL\CSSPModelsDLL\CSSPModelsDLL.csproj">
+      <Project>{eb211f77-4987-405d-ad8f-53882f261c33}</Project>
+      <Name>CSSPModelsDLL</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\CSSPTemporaryDBDLL\CSSPTemporaryDBDLL.csproj">
       <Project>{7f1be557-cd50-40b5-93cb-ab089ee0ccdf}</Project>
       <Name>CSSPTemporaryDBDLL</Name>

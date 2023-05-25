@@ -243,6 +243,192 @@ namespace CSSPDBDLL.Services
                 return retStr;
             }
 
+            retStr = FieldCheckIfNotNullWithinRangeDouble(mwqmRunModel.Tide_h0_m, ServiceRes.Tide_h0_m, -20, 20);
+            if (!string.IsNullOrWhiteSpace(retStr))
+            {
+                return retStr;
+            }
+
+            retStr = FieldCheckIfNotNullWithinRangeDouble(mwqmRunModel.Tide_h1_m, ServiceRes.Tide_h1_m, -20, 20);
+            if (!string.IsNullOrWhiteSpace(retStr))
+            {
+                return retStr;
+            }
+
+            retStr = FieldCheckIfNotNullWithinRangeDouble(mwqmRunModel.Tide_h2_m, ServiceRes.Tide_h2_m, -20, 20);
+            if (!string.IsNullOrWhiteSpace(retStr))
+            {
+                return retStr;
+            }
+
+            retStr = FieldCheckIfNotNullWithinRangeDouble(mwqmRunModel.Tide_h3_m, ServiceRes.Tide_h3_m, -20, 20);
+            if (!string.IsNullOrWhiteSpace(retStr))
+            {
+                return retStr;
+            }
+
+            retStr = FieldCheckIfNotNullWithinRangeDouble(mwqmRunModel.Tide_h4_m, ServiceRes.Tide_h4_m, -20, 20);
+            if (!string.IsNullOrWhiteSpace(retStr))
+            {
+                return retStr;
+            }
+
+            retStr = FieldCheckIfNotNullWithinRangeDouble(mwqmRunModel.Tide_h5_m, ServiceRes.Tide_h5_m, -20, 20);
+            if (!string.IsNullOrWhiteSpace(retStr))
+            {
+                return retStr;
+            }
+
+            retStr = FieldCheckIfNotNullWithinRangeDouble(mwqmRunModel.Tide_h6_m, ServiceRes.Tide_h6_m, -20, 20);
+            if (!string.IsNullOrWhiteSpace(retStr))
+            {
+                return retStr;
+            }
+
+            retStr = FieldCheckIfNotNullWithinRangeDouble(mwqmRunModel.Tide_h7_m, ServiceRes.Tide_h7_m, -20, 20);
+            if (!string.IsNullOrWhiteSpace(retStr))
+            {
+                return retStr;
+            }
+
+            retStr = FieldCheckIfNotNullWithinRangeDouble(mwqmRunModel.Tide_h8_m, ServiceRes.Tide_h8_m, -20, 20);
+            if (!string.IsNullOrWhiteSpace(retStr))
+            {
+                return retStr;
+            }
+
+            retStr = FieldCheckIfNotNullWithinRangeDouble(mwqmRunModel.Tide_h9_m, ServiceRes.Tide_h9_m, -20, 20);
+            if (!string.IsNullOrWhiteSpace(retStr))
+            {
+                return retStr;
+            }
+
+            retStr = FieldCheckIfNotNullWithinRangeDouble(mwqmRunModel.Tide_h10_m, ServiceRes.Tide_h10_m, -20, 20);
+            if (!string.IsNullOrWhiteSpace(retStr))
+            {
+                return retStr;
+            }
+
+            retStr = FieldCheckIfNotNullWithinRangeDouble(mwqmRunModel.Tide_h11_m, ServiceRes.Tide_h11_m, -20, 20);
+            if (!string.IsNullOrWhiteSpace(retStr))
+            {
+                return retStr;
+            }
+
+            retStr = FieldCheckIfNotNullWithinRangeDouble(mwqmRunModel.Tide_h12_m, ServiceRes.Tide_h12_m, -20, 20);
+            if (!string.IsNullOrWhiteSpace(retStr))
+            {
+                return retStr;
+            }
+
+            retStr = FieldCheckIfNotNullWithinRangeDouble(mwqmRunModel.Tide_h13_m, ServiceRes.Tide_h13_m, -20, 20);
+            if (!string.IsNullOrWhiteSpace(retStr))
+            {
+                return retStr;
+            }
+
+            retStr = FieldCheckIfNotNullWithinRangeDouble(mwqmRunModel.Tide_h14_m, ServiceRes.Tide_h14_m, -20, 20);
+            if (!string.IsNullOrWhiteSpace(retStr))
+            {
+                return retStr;
+            }
+
+            retStr = FieldCheckIfNotNullWithinRangeDouble(mwqmRunModel.Tide_h15_m, ServiceRes.Tide_h15_m, -20, 20);
+            if (!string.IsNullOrWhiteSpace(retStr))
+            {
+                return retStr;
+            }
+
+            retStr = FieldCheckIfNotNullWithinRangeDouble(mwqmRunModel.Tide_h16_m, ServiceRes.Tide_h16_m, -20, 20);
+            if (!string.IsNullOrWhiteSpace(retStr))
+            {
+                return retStr;
+            }
+
+            retStr = FieldCheckIfNotNullWithinRangeDouble(mwqmRunModel.Tide_h17_m, ServiceRes.Tide_h17_m, -20, 20);
+            if (!string.IsNullOrWhiteSpace(retStr))
+            {
+                return retStr;
+            }
+
+            retStr = FieldCheckIfNotNullWithinRangeDouble(mwqmRunModel.Tide_h18_m, ServiceRes.Tide_h18_m, -20, 20);
+            if (!string.IsNullOrWhiteSpace(retStr))
+            {
+                return retStr;
+            }
+
+            retStr = FieldCheckIfNotNullWithinRangeDouble(mwqmRunModel.Tide_h19_m, ServiceRes.Tide_h19_m, -20, 20);
+            if (!string.IsNullOrWhiteSpace(retStr))
+            {
+                return retStr;
+            }
+
+            retStr = FieldCheckIfNotNullWithinRangeDouble(mwqmRunModel.Tide_h20_m, ServiceRes.Tide_h20_m, -20, 20);
+            if (!string.IsNullOrWhiteSpace(retStr))
+            {
+                return retStr;
+            }
+
+            retStr = FieldCheckIfNotNullWithinRangeDouble(mwqmRunModel.Tide_h21_m, ServiceRes.Tide_h21_m, -20, 20);
+            if (!string.IsNullOrWhiteSpace(retStr))
+            {
+                return retStr;
+            }
+
+            retStr = FieldCheckIfNotNullWithinRangeDouble(mwqmRunModel.Tide_h22_m, ServiceRes.Tide_h22_m, -20, 20);
+            if (!string.IsNullOrWhiteSpace(retStr))
+            {
+                return retStr;
+            }
+
+            retStr = FieldCheckIfNotNullWithinRangeDouble(mwqmRunModel.Tide_h23_m, ServiceRes.Tide_h23_m, -20, 20);
+            if (!string.IsNullOrWhiteSpace(retStr))
+            {
+                return retStr;
+            }
+
+            retStr = FieldCheckIfNotNullWithinRangeDouble(mwqmRunModel.Tide_h24_m, ServiceRes.Tide_h24_m, -20, 20);
+            if (!string.IsNullOrWhiteSpace(retStr))
+            {
+                return retStr;
+            }
+
+            retStr = FieldCheckIfNotNullWithinRangeDouble(mwqmRunModel.Tide_h25_m, ServiceRes.Tide_h25_m, -20, 20);
+            if (!string.IsNullOrWhiteSpace(retStr))
+            {
+                return retStr;
+            }
+
+            retStr = FieldCheckIfNotNullWithinRangeDouble(mwqmRunModel.Tide_h26_m, ServiceRes.Tide_h26_m, -20, 20);
+            if (!string.IsNullOrWhiteSpace(retStr))
+            {
+                return retStr;
+            }
+
+            retStr = FieldCheckIfNotNullWithinRangeDouble(mwqmRunModel.Tide_h27_m, ServiceRes.Tide_h27_m, -20, 20);
+            if (!string.IsNullOrWhiteSpace(retStr))
+            {
+                return retStr;
+            }
+
+            retStr = FieldCheckIfNotNullWithinRangeDouble(mwqmRunModel.Tide_h28_m, ServiceRes.Tide_h28_m, -20, 20);
+            if (!string.IsNullOrWhiteSpace(retStr))
+            {
+                return retStr;
+            }
+
+            retStr = FieldCheckIfNotNullWithinRangeDouble(mwqmRunModel.Tide_h29_m, ServiceRes.Tide_h29_m, -20, 20);
+            if (!string.IsNullOrWhiteSpace(retStr))
+            {
+                return retStr;
+            }
+
+            retStr = FieldCheckIfNotNullWithinRangeDouble(mwqmRunModel.Tide_h30_m, ServiceRes.Tide_h30_m, -20, 20);
+            if (!string.IsNullOrWhiteSpace(retStr))
+            {
+                return retStr;
+            }
+
             retStr = FieldCheckIfNotNullMaxLengthString(mwqmRunModel.RunComment, ServiceRes.RunComment, 10000);
             if (!string.IsNullOrWhiteSpace(retStr))
             {
@@ -306,6 +492,37 @@ namespace CSSPDBDLL.Services
             mwqmRun.RainDay8_mm = mwqmRunModel.RainDay8_mm;
             mwqmRun.RainDay9_mm = mwqmRunModel.RainDay9_mm;
             mwqmRun.RainDay10_mm = mwqmRunModel.RainDay10_mm;
+            mwqmRun.Tide_h0_m = mwqmRunModel.Tide_h0_m;
+            mwqmRun.Tide_h1_m = mwqmRunModel.Tide_h1_m;
+            mwqmRun.Tide_h2_m = mwqmRunModel.Tide_h2_m;
+            mwqmRun.Tide_h3_m = mwqmRunModel.Tide_h3_m;
+            mwqmRun.Tide_h4_m = mwqmRunModel.Tide_h4_m;
+            mwqmRun.Tide_h5_m = mwqmRunModel.Tide_h5_m;
+            mwqmRun.Tide_h6_m = mwqmRunModel.Tide_h6_m;
+            mwqmRun.Tide_h7_m = mwqmRunModel.Tide_h7_m;
+            mwqmRun.Tide_h8_m = mwqmRunModel.Tide_h8_m;
+            mwqmRun.Tide_h9_m = mwqmRunModel.Tide_h9_m;
+            mwqmRun.Tide_h10_m = mwqmRunModel.Tide_h10_m;
+            mwqmRun.Tide_h11_m = mwqmRunModel.Tide_h11_m;
+            mwqmRun.Tide_h12_m = mwqmRunModel.Tide_h12_m;
+            mwqmRun.Tide_h13_m = mwqmRunModel.Tide_h13_m;
+            mwqmRun.Tide_h14_m = mwqmRunModel.Tide_h14_m;
+            mwqmRun.Tide_h15_m = mwqmRunModel.Tide_h15_m;
+            mwqmRun.Tide_h16_m = mwqmRunModel.Tide_h16_m;
+            mwqmRun.Tide_h17_m = mwqmRunModel.Tide_h17_m;
+            mwqmRun.Tide_h18_m = mwqmRunModel.Tide_h18_m;
+            mwqmRun.Tide_h19_m = mwqmRunModel.Tide_h19_m;
+            mwqmRun.Tide_h20_m = mwqmRunModel.Tide_h20_m;
+            mwqmRun.Tide_h21_m = mwqmRunModel.Tide_h21_m;
+            mwqmRun.Tide_h22_m = mwqmRunModel.Tide_h22_m;
+            mwqmRun.Tide_h23_m = mwqmRunModel.Tide_h23_m;
+            mwqmRun.Tide_h24_m = mwqmRunModel.Tide_h24_m;
+            mwqmRun.Tide_h25_m = mwqmRunModel.Tide_h25_m;
+            mwqmRun.Tide_h26_m = mwqmRunModel.Tide_h26_m;
+            mwqmRun.Tide_h27_m = mwqmRunModel.Tide_h27_m;
+            mwqmRun.Tide_h28_m = mwqmRunModel.Tide_h28_m;
+            mwqmRun.Tide_h29_m = mwqmRunModel.Tide_h29_m;
+            mwqmRun.Tide_h30_m = mwqmRunModel.Tide_h30_m;
             mwqmRun.RemoveFromStat = mwqmRunModel.RemoveFromStat;
             mwqmRun.LastUpdateDate_UTC = DateTime.UtcNow;
             if (contactOK == null)
@@ -389,6 +606,37 @@ namespace CSSPDBDLL.Services
                                              RainDay8_mm = c.RainDay8_mm,
                                              RainDay9_mm = c.RainDay9_mm,
                                              RainDay10_mm = c.RainDay10_mm,
+                                             Tide_h0_m = c.Tide_h0_m,
+                                             Tide_h1_m = c.Tide_h1_m,
+                                             Tide_h2_m = c.Tide_h2_m,
+                                             Tide_h3_m = c.Tide_h3_m,
+                                             Tide_h4_m = c.Tide_h4_m,
+                                             Tide_h5_m = c.Tide_h5_m,
+                                             Tide_h6_m = c.Tide_h6_m,
+                                             Tide_h7_m = c.Tide_h7_m,
+                                             Tide_h8_m = c.Tide_h8_m,
+                                             Tide_h9_m = c.Tide_h9_m,
+                                             Tide_h10_m = c.Tide_h10_m,
+                                             Tide_h11_m = c.Tide_h11_m,
+                                             Tide_h12_m = c.Tide_h12_m,
+                                             Tide_h13_m = c.Tide_h13_m,
+                                             Tide_h14_m = c.Tide_h14_m,
+                                             Tide_h15_m = c.Tide_h15_m,
+                                             Tide_h16_m = c.Tide_h16_m,
+                                             Tide_h17_m = c.Tide_h17_m,
+                                             Tide_h18_m = c.Tide_h18_m,
+                                             Tide_h19_m = c.Tide_h19_m,
+                                             Tide_h20_m = c.Tide_h20_m,
+                                             Tide_h21_m = c.Tide_h21_m,
+                                             Tide_h22_m = c.Tide_h22_m,
+                                             Tide_h23_m = c.Tide_h23_m,
+                                             Tide_h24_m = c.Tide_h24_m,
+                                             Tide_h25_m = c.Tide_h25_m,
+                                             Tide_h26_m = c.Tide_h26_m,
+                                             Tide_h27_m = c.Tide_h27_m,
+                                             Tide_h28_m = c.Tide_h28_m,
+                                             Tide_h29_m = c.Tide_h29_m,
+                                             Tide_h30_m = c.Tide_h30_m,
                                              RemoveFromStat = c.RemoveFromStat,
                                              RunComment = runComment,
                                              RunWeatherComment = runWeatherComment,
@@ -445,6 +693,37 @@ namespace CSSPDBDLL.Services
                                                        RainDay8_mm = c.RainDay8_mm,
                                                        RainDay9_mm = c.RainDay9_mm,
                                                        RainDay10_mm = c.RainDay10_mm,
+                                                       Tide_h0_m = c.Tide_h0_m,
+                                                       Tide_h1_m = c.Tide_h1_m,
+                                                       Tide_h2_m = c.Tide_h2_m,
+                                                       Tide_h3_m = c.Tide_h3_m,
+                                                       Tide_h4_m = c.Tide_h4_m,
+                                                       Tide_h5_m = c.Tide_h5_m,
+                                                       Tide_h6_m = c.Tide_h6_m,
+                                                       Tide_h7_m = c.Tide_h7_m,
+                                                       Tide_h8_m = c.Tide_h8_m,
+                                                       Tide_h9_m = c.Tide_h9_m,
+                                                       Tide_h10_m = c.Tide_h10_m,
+                                                       Tide_h11_m = c.Tide_h11_m,
+                                                       Tide_h12_m = c.Tide_h12_m,
+                                                       Tide_h13_m = c.Tide_h13_m,
+                                                       Tide_h14_m = c.Tide_h14_m,
+                                                       Tide_h15_m = c.Tide_h15_m,
+                                                       Tide_h16_m = c.Tide_h16_m,
+                                                       Tide_h17_m = c.Tide_h17_m,
+                                                       Tide_h18_m = c.Tide_h18_m,
+                                                       Tide_h19_m = c.Tide_h19_m,
+                                                       Tide_h20_m = c.Tide_h20_m,
+                                                       Tide_h21_m = c.Tide_h21_m,
+                                                       Tide_h22_m = c.Tide_h22_m,
+                                                       Tide_h23_m = c.Tide_h23_m,
+                                                       Tide_h24_m = c.Tide_h24_m,
+                                                       Tide_h25_m = c.Tide_h25_m,
+                                                       Tide_h26_m = c.Tide_h26_m,
+                                                       Tide_h27_m = c.Tide_h27_m,
+                                                       Tide_h28_m = c.Tide_h28_m,
+                                                       Tide_h29_m = c.Tide_h29_m,
+                                                       Tide_h30_m = c.Tide_h30_m,
                                                        RemoveFromStat = c.RemoveFromStat,
                                                        SampleCrewInitials = c.SampleCrewInitials,
                                                        SeaStateAtEnd_BeaufortScale = (BeaufortScaleEnum)c.SeaStateAtEnd_BeaufortScale,
@@ -521,6 +800,37 @@ namespace CSSPDBDLL.Services
                                                        RainDay8_mm = c.RainDay8_mm,
                                                        RainDay9_mm = c.RainDay9_mm,
                                                        RainDay10_mm = c.RainDay10_mm,
+                                                       Tide_h0_m = c.Tide_h0_m,
+                                                       Tide_h1_m = c.Tide_h1_m,
+                                                       Tide_h2_m = c.Tide_h2_m,
+                                                       Tide_h3_m = c.Tide_h3_m,
+                                                       Tide_h4_m = c.Tide_h4_m,
+                                                       Tide_h5_m = c.Tide_h5_m,
+                                                       Tide_h6_m = c.Tide_h6_m,
+                                                       Tide_h7_m = c.Tide_h7_m,
+                                                       Tide_h8_m = c.Tide_h8_m,
+                                                       Tide_h9_m = c.Tide_h9_m,
+                                                       Tide_h10_m = c.Tide_h10_m,
+                                                       Tide_h11_m = c.Tide_h11_m,
+                                                       Tide_h12_m = c.Tide_h12_m,
+                                                       Tide_h13_m = c.Tide_h13_m,
+                                                       Tide_h14_m = c.Tide_h14_m,
+                                                       Tide_h15_m = c.Tide_h15_m,
+                                                       Tide_h16_m = c.Tide_h16_m,
+                                                       Tide_h17_m = c.Tide_h17_m,
+                                                       Tide_h18_m = c.Tide_h18_m,
+                                                       Tide_h19_m = c.Tide_h19_m,
+                                                       Tide_h20_m = c.Tide_h20_m,
+                                                       Tide_h21_m = c.Tide_h21_m,
+                                                       Tide_h22_m = c.Tide_h22_m,
+                                                       Tide_h23_m = c.Tide_h23_m,
+                                                       Tide_h24_m = c.Tide_h24_m,
+                                                       Tide_h25_m = c.Tide_h25_m,
+                                                       Tide_h26_m = c.Tide_h26_m,
+                                                       Tide_h27_m = c.Tide_h27_m,
+                                                       Tide_h28_m = c.Tide_h28_m,
+                                                       Tide_h29_m = c.Tide_h29_m,
+                                                       Tide_h30_m = c.Tide_h30_m,
                                                        RemoveFromStat = c.RemoveFromStat,
                                                        RunComment = runComment,
                                                        RunWeatherComment = runWeatherComment,
@@ -585,6 +895,37 @@ namespace CSSPDBDLL.Services
                                              RainDay8_mm = c.RainDay8_mm,
                                              RainDay9_mm = c.RainDay9_mm,
                                              RainDay10_mm = c.RainDay10_mm,
+                                             Tide_h0_m = c.Tide_h0_m,
+                                             Tide_h1_m = c.Tide_h1_m,
+                                             Tide_h2_m = c.Tide_h2_m,
+                                             Tide_h3_m = c.Tide_h3_m,
+                                             Tide_h4_m = c.Tide_h4_m,
+                                             Tide_h5_m = c.Tide_h5_m,
+                                             Tide_h6_m = c.Tide_h6_m,
+                                             Tide_h7_m = c.Tide_h7_m,
+                                             Tide_h8_m = c.Tide_h8_m,
+                                             Tide_h9_m = c.Tide_h9_m,
+                                             Tide_h10_m = c.Tide_h10_m,
+                                             Tide_h11_m = c.Tide_h11_m,
+                                             Tide_h12_m = c.Tide_h12_m,
+                                             Tide_h13_m = c.Tide_h13_m,
+                                             Tide_h14_m = c.Tide_h14_m,
+                                             Tide_h15_m = c.Tide_h15_m,
+                                             Tide_h16_m = c.Tide_h16_m,
+                                             Tide_h17_m = c.Tide_h17_m,
+                                             Tide_h18_m = c.Tide_h18_m,
+                                             Tide_h19_m = c.Tide_h19_m,
+                                             Tide_h20_m = c.Tide_h20_m,
+                                             Tide_h21_m = c.Tide_h21_m,
+                                             Tide_h22_m = c.Tide_h22_m,
+                                             Tide_h23_m = c.Tide_h23_m,
+                                             Tide_h24_m = c.Tide_h24_m,
+                                             Tide_h25_m = c.Tide_h25_m,
+                                             Tide_h26_m = c.Tide_h26_m,
+                                             Tide_h27_m = c.Tide_h27_m,
+                                             Tide_h28_m = c.Tide_h28_m,
+                                             Tide_h29_m = c.Tide_h29_m,
+                                             Tide_h30_m = c.Tide_h30_m,
                                              RemoveFromStat = c.RemoveFromStat,
                                              RunComment = runComment,
                                              RunWeatherComment = runWeatherComment,
@@ -650,6 +991,37 @@ namespace CSSPDBDLL.Services
                                              RainDay8_mm = c.RainDay8_mm,
                                              RainDay9_mm = c.RainDay9_mm,
                                              RainDay10_mm = c.RainDay10_mm,
+                                             Tide_h0_m = c.Tide_h0_m,
+                                             Tide_h1_m = c.Tide_h1_m,
+                                             Tide_h2_m = c.Tide_h2_m,
+                                             Tide_h3_m = c.Tide_h3_m,
+                                             Tide_h4_m = c.Tide_h4_m,
+                                             Tide_h5_m = c.Tide_h5_m,
+                                             Tide_h6_m = c.Tide_h6_m,
+                                             Tide_h7_m = c.Tide_h7_m,
+                                             Tide_h8_m = c.Tide_h8_m,
+                                             Tide_h9_m = c.Tide_h9_m,
+                                             Tide_h10_m = c.Tide_h10_m,
+                                             Tide_h11_m = c.Tide_h11_m,
+                                             Tide_h12_m = c.Tide_h12_m,
+                                             Tide_h13_m = c.Tide_h13_m,
+                                             Tide_h14_m = c.Tide_h14_m,
+                                             Tide_h15_m = c.Tide_h15_m,
+                                             Tide_h16_m = c.Tide_h16_m,
+                                             Tide_h17_m = c.Tide_h17_m,
+                                             Tide_h18_m = c.Tide_h18_m,
+                                             Tide_h19_m = c.Tide_h19_m,
+                                             Tide_h20_m = c.Tide_h20_m,
+                                             Tide_h21_m = c.Tide_h21_m,
+                                             Tide_h22_m = c.Tide_h22_m,
+                                             Tide_h23_m = c.Tide_h23_m,
+                                             Tide_h24_m = c.Tide_h24_m,
+                                             Tide_h25_m = c.Tide_h25_m,
+                                             Tide_h26_m = c.Tide_h26_m,
+                                             Tide_h27_m = c.Tide_h27_m,
+                                             Tide_h28_m = c.Tide_h28_m,
+                                             Tide_h29_m = c.Tide_h29_m,
+                                             Tide_h30_m = c.Tide_h30_m,
                                              RemoveFromStat = c.RemoveFromStat,
                                              RunComment = runComment,
                                              RunWeatherComment = runWeatherComment,
@@ -715,6 +1087,37 @@ namespace CSSPDBDLL.Services
                                              RainDay8_mm = c.RainDay8_mm,
                                              RainDay9_mm = c.RainDay9_mm,
                                              RainDay10_mm = c.RainDay10_mm,
+                                             Tide_h0_m = c.Tide_h0_m,
+                                             Tide_h1_m = c.Tide_h1_m,
+                                             Tide_h2_m = c.Tide_h2_m,
+                                             Tide_h3_m = c.Tide_h3_m,
+                                             Tide_h4_m = c.Tide_h4_m,
+                                             Tide_h5_m = c.Tide_h5_m,
+                                             Tide_h6_m = c.Tide_h6_m,
+                                             Tide_h7_m = c.Tide_h7_m,
+                                             Tide_h8_m = c.Tide_h8_m,
+                                             Tide_h9_m = c.Tide_h9_m,
+                                             Tide_h10_m = c.Tide_h10_m,
+                                             Tide_h11_m = c.Tide_h11_m,
+                                             Tide_h12_m = c.Tide_h12_m,
+                                             Tide_h13_m = c.Tide_h13_m,
+                                             Tide_h14_m = c.Tide_h14_m,
+                                             Tide_h15_m = c.Tide_h15_m,
+                                             Tide_h16_m = c.Tide_h16_m,
+                                             Tide_h17_m = c.Tide_h17_m,
+                                             Tide_h18_m = c.Tide_h18_m,
+                                             Tide_h19_m = c.Tide_h19_m,
+                                             Tide_h20_m = c.Tide_h20_m,
+                                             Tide_h21_m = c.Tide_h21_m,
+                                             Tide_h22_m = c.Tide_h22_m,
+                                             Tide_h23_m = c.Tide_h23_m,
+                                             Tide_h24_m = c.Tide_h24_m,
+                                             Tide_h25_m = c.Tide_h25_m,
+                                             Tide_h26_m = c.Tide_h26_m,
+                                             Tide_h27_m = c.Tide_h27_m,
+                                             Tide_h28_m = c.Tide_h28_m,
+                                             Tide_h29_m = c.Tide_h29_m,
+                                             Tide_h30_m = c.Tide_h30_m,
                                              RemoveFromStat = c.RemoveFromStat,
                                              RunComment = runComment,
                                              RunWeatherComment = runWeatherComment,
@@ -780,6 +1183,37 @@ namespace CSSPDBDLL.Services
                                                        RainDay8_mm = c.RainDay8_mm,
                                                        RainDay9_mm = c.RainDay9_mm,
                                                        RainDay10_mm = c.RainDay10_mm,
+                                                       Tide_h0_m = c.Tide_h0_m,
+                                                       Tide_h1_m = c.Tide_h1_m,
+                                                       Tide_h2_m = c.Tide_h2_m,
+                                                       Tide_h3_m = c.Tide_h3_m,
+                                                       Tide_h4_m = c.Tide_h4_m,
+                                                       Tide_h5_m = c.Tide_h5_m,
+                                                       Tide_h6_m = c.Tide_h6_m,
+                                                       Tide_h7_m = c.Tide_h7_m,
+                                                       Tide_h8_m = c.Tide_h8_m,
+                                                       Tide_h9_m = c.Tide_h9_m,
+                                                       Tide_h10_m = c.Tide_h10_m,
+                                                       Tide_h11_m = c.Tide_h11_m,
+                                                       Tide_h12_m = c.Tide_h12_m,
+                                                       Tide_h13_m = c.Tide_h13_m,
+                                                       Tide_h14_m = c.Tide_h14_m,
+                                                       Tide_h15_m = c.Tide_h15_m,
+                                                       Tide_h16_m = c.Tide_h16_m,
+                                                       Tide_h17_m = c.Tide_h17_m,
+                                                       Tide_h18_m = c.Tide_h18_m,
+                                                       Tide_h19_m = c.Tide_h19_m,
+                                                       Tide_h20_m = c.Tide_h20_m,
+                                                       Tide_h21_m = c.Tide_h21_m,
+                                                       Tide_h22_m = c.Tide_h22_m,
+                                                       Tide_h23_m = c.Tide_h23_m,
+                                                       Tide_h24_m = c.Tide_h24_m,
+                                                       Tide_h25_m = c.Tide_h25_m,
+                                                       Tide_h26_m = c.Tide_h26_m,
+                                                       Tide_h27_m = c.Tide_h27_m,
+                                                       Tide_h28_m = c.Tide_h28_m,
+                                                       Tide_h29_m = c.Tide_h29_m,
+                                                       Tide_h30_m = c.Tide_h30_m,
                                                        RemoveFromStat = c.RemoveFromStat,
                                                        RunComment = runComment,
                                                        RunWeatherComment = runWeatherComment,
@@ -845,6 +1279,37 @@ namespace CSSPDBDLL.Services
                                                 RainDay8_mm = c.RainDay8_mm,
                                                 RainDay9_mm = c.RainDay9_mm,
                                                 RainDay10_mm = c.RainDay10_mm,
+                                                Tide_h0_m = c.Tide_h0_m,
+                                                Tide_h1_m = c.Tide_h1_m,
+                                                Tide_h2_m = c.Tide_h2_m,
+                                                Tide_h3_m = c.Tide_h3_m,
+                                                Tide_h4_m = c.Tide_h4_m,
+                                                Tide_h5_m = c.Tide_h5_m,
+                                                Tide_h6_m = c.Tide_h6_m,
+                                                Tide_h7_m = c.Tide_h7_m,
+                                                Tide_h8_m = c.Tide_h8_m,
+                                                Tide_h9_m = c.Tide_h9_m,
+                                                Tide_h10_m = c.Tide_h10_m,
+                                                Tide_h11_m = c.Tide_h11_m,
+                                                Tide_h12_m = c.Tide_h12_m,
+                                                Tide_h13_m = c.Tide_h13_m,
+                                                Tide_h14_m = c.Tide_h14_m,
+                                                Tide_h15_m = c.Tide_h15_m,
+                                                Tide_h16_m = c.Tide_h16_m,
+                                                Tide_h17_m = c.Tide_h17_m,
+                                                Tide_h18_m = c.Tide_h18_m,
+                                                Tide_h19_m = c.Tide_h19_m,
+                                                Tide_h20_m = c.Tide_h20_m,
+                                                Tide_h21_m = c.Tide_h21_m,
+                                                Tide_h22_m = c.Tide_h22_m,
+                                                Tide_h23_m = c.Tide_h23_m,
+                                                Tide_h24_m = c.Tide_h24_m,
+                                                Tide_h25_m = c.Tide_h25_m,
+                                                Tide_h26_m = c.Tide_h26_m,
+                                                Tide_h27_m = c.Tide_h27_m,
+                                                Tide_h28_m = c.Tide_h28_m,
+                                                Tide_h29_m = c.Tide_h29_m,
+                                                Tide_h30_m = c.Tide_h30_m,
                                                 RemoveFromStat = c.RemoveFromStat,
                                                 RunComment = runComment,
                                                 RunWeatherComment = runWeatherComment,

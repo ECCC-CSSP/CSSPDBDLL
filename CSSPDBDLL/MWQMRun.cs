@@ -60,6 +60,37 @@ namespace CSSPDBDLL
         public Nullable<double> RainDay8_mm { get; set; }
         public Nullable<double> RainDay9_mm { get; set; }
         public Nullable<double> RainDay10_mm { get; set; }
+        public Nullable<double> Tide_h0_m { get; set; }
+        public Nullable<double> Tide_h1_m { get; set; }
+        public Nullable<double> Tide_h2_m { get; set; }
+        public Nullable<double> Tide_h3_m { get; set; }
+        public Nullable<double> Tide_h4_m { get; set; }
+        public Nullable<double> Tide_h5_m { get; set; }
+        public Nullable<double> Tide_h6_m { get; set; }
+        public Nullable<double> Tide_h7_m { get; set; }
+        public Nullable<double> Tide_h8_m { get; set; }
+        public Nullable<double> Tide_h9_m { get; set; }
+        public Nullable<double> Tide_h10_m { get; set; }
+        public Nullable<double> Tide_h11_m { get; set; }
+        public Nullable<double> Tide_h12_m { get; set; }
+        public Nullable<double> Tide_h13_m { get; set; }
+        public Nullable<double> Tide_h14_m { get; set; }
+        public Nullable<double> Tide_h15_m { get; set; }
+        public Nullable<double> Tide_h16_m { get; set; }
+        public Nullable<double> Tide_h17_m { get; set; }
+        public Nullable<double> Tide_h18_m { get; set; }
+        public Nullable<double> Tide_h19_m { get; set; }
+        public Nullable<double> Tide_h20_m { get; set; }
+        public Nullable<double> Tide_h21_m { get; set; }
+        public Nullable<double> Tide_h22_m { get; set; }
+        public Nullable<double> Tide_h23_m { get; set; }
+        public Nullable<double> Tide_h24_m { get; set; }
+        public Nullable<double> Tide_h25_m { get; set; }
+        public Nullable<double> Tide_h26_m { get; set; }
+        public Nullable<double> Tide_h27_m { get; set; }
+        public Nullable<double> Tide_h28_m { get; set; }
+        public Nullable<double> Tide_h29_m { get; set; }
+        public Nullable<double> Tide_h30_m { get; set; }
         public Nullable<bool> RemoveFromStat { get; set; }
         public System.DateTime LastUpdateDate_UTC { get; set; }
         public int LastUpdateContactTVItemID { get; set; }

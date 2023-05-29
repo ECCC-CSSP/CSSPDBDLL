@@ -11455,6 +11455,15 @@ namespace CSSPDBDLL.Services.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to TideEndFromWebTide.
+        /// </summary>
+        public static string TideEndFromWebTide {
+            get {
+                return ResourceManager.GetString("TideEndFromWebTide", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Tides.
         /// </summary>
         public static string Tides {
@@ -11514,6 +11523,15 @@ namespace CSSPDBDLL.Services.Resources {
         public static string TideStart {
             get {
                 return ResourceManager.GetString("TideStart", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to TideStartFromWebTide.
+        /// </summary>
+        public static string TideStartFromWebTide {
+            get {
+                return ResourceManager.GetString("TideStartFromWebTide", resourceCulture);
             }
         }
         

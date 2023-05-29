@@ -523,6 +523,8 @@ namespace CSSPDBDLL.Services
             mwqmRun.Tide_h28_m = mwqmRunModel.Tide_h28_m;
             mwqmRun.Tide_h29_m = mwqmRunModel.Tide_h29_m;
             mwqmRun.Tide_h30_m = mwqmRunModel.Tide_h30_m;
+            mwqmRun.Tide_Start_From_WebTide = (int?)mwqmRunModel.Tide_Start_From_WebTide;
+            mwqmRun.Tide_End_From_WebTide = (int?)mwqmRunModel.Tide_End_From_WebTide;
             mwqmRun.RemoveFromStat = mwqmRunModel.RemoveFromStat;
             mwqmRun.LastUpdateDate_UTC = DateTime.UtcNow;
             if (contactOK == null)
@@ -637,6 +639,8 @@ namespace CSSPDBDLL.Services
                                              Tide_h28_m = c.Tide_h28_m,
                                              Tide_h29_m = c.Tide_h29_m,
                                              Tide_h30_m = c.Tide_h30_m,
+                                             Tide_Start_From_WebTide = (TideTextEnum)c.Tide_Start_From_WebTide,
+                                             Tide_End_From_WebTide = (TideTextEnum)c.Tide_End_From_WebTide,
                                              RemoveFromStat = c.RemoveFromStat,
                                              RunComment = runComment,
                                              RunWeatherComment = runWeatherComment,
@@ -724,6 +728,8 @@ namespace CSSPDBDLL.Services
                                                        Tide_h28_m = c.Tide_h28_m,
                                                        Tide_h29_m = c.Tide_h29_m,
                                                        Tide_h30_m = c.Tide_h30_m,
+                                                       Tide_Start_From_WebTide = (TideTextEnum)c.Tide_Start_From_WebTide,
+                                                       Tide_End_From_WebTide = (TideTextEnum)c.Tide_End_From_WebTide,
                                                        RemoveFromStat = c.RemoveFromStat,
                                                        SampleCrewInitials = c.SampleCrewInitials,
                                                        SeaStateAtEnd_BeaufortScale = (BeaufortScaleEnum)c.SeaStateAtEnd_BeaufortScale,
@@ -831,6 +837,8 @@ namespace CSSPDBDLL.Services
                                                        Tide_h28_m = c.Tide_h28_m,
                                                        Tide_h29_m = c.Tide_h29_m,
                                                        Tide_h30_m = c.Tide_h30_m,
+                                                       Tide_Start_From_WebTide = (TideTextEnum)c.Tide_Start_From_WebTide,
+                                                       Tide_End_From_WebTide = (TideTextEnum)c.Tide_End_From_WebTide,
                                                        RemoveFromStat = c.RemoveFromStat,
                                                        RunComment = runComment,
                                                        RunWeatherComment = runWeatherComment,
@@ -926,6 +934,8 @@ namespace CSSPDBDLL.Services
                                              Tide_h28_m = c.Tide_h28_m,
                                              Tide_h29_m = c.Tide_h29_m,
                                              Tide_h30_m = c.Tide_h30_m,
+                                             Tide_Start_From_WebTide = (TideTextEnum)c.Tide_Start_From_WebTide,
+                                             Tide_End_From_WebTide = (TideTextEnum)c.Tide_End_From_WebTide,
                                              RemoveFromStat = c.RemoveFromStat,
                                              RunComment = runComment,
                                              RunWeatherComment = runWeatherComment,
@@ -1022,6 +1032,8 @@ namespace CSSPDBDLL.Services
                                              Tide_h28_m = c.Tide_h28_m,
                                              Tide_h29_m = c.Tide_h29_m,
                                              Tide_h30_m = c.Tide_h30_m,
+                                             Tide_Start_From_WebTide = (TideTextEnum)c.Tide_Start_From_WebTide,
+                                             Tide_End_From_WebTide = (TideTextEnum)c.Tide_End_From_WebTide,
                                              RemoveFromStat = c.RemoveFromStat,
                                              RunComment = runComment,
                                              RunWeatherComment = runWeatherComment,
@@ -1118,6 +1130,8 @@ namespace CSSPDBDLL.Services
                                              Tide_h28_m = c.Tide_h28_m,
                                              Tide_h29_m = c.Tide_h29_m,
                                              Tide_h30_m = c.Tide_h30_m,
+                                             Tide_Start_From_WebTide = (TideTextEnum)c.Tide_Start_From_WebTide,
+                                             Tide_End_From_WebTide = (TideTextEnum)c.Tide_End_From_WebTide,
                                              RemoveFromStat = c.RemoveFromStat,
                                              RunComment = runComment,
                                              RunWeatherComment = runWeatherComment,
@@ -1214,6 +1228,8 @@ namespace CSSPDBDLL.Services
                                                        Tide_h28_m = c.Tide_h28_m,
                                                        Tide_h29_m = c.Tide_h29_m,
                                                        Tide_h30_m = c.Tide_h30_m,
+                                                       Tide_Start_From_WebTide = (TideTextEnum)c.Tide_Start_From_WebTide,
+                                                       Tide_End_From_WebTide = (TideTextEnum)c.Tide_End_From_WebTide,
                                                        RemoveFromStat = c.RemoveFromStat,
                                                        RunComment = runComment,
                                                        RunWeatherComment = runWeatherComment,
@@ -1310,6 +1326,8 @@ namespace CSSPDBDLL.Services
                                                 Tide_h28_m = c.Tide_h28_m,
                                                 Tide_h29_m = c.Tide_h29_m,
                                                 Tide_h30_m = c.Tide_h30_m,
+                                                Tide_Start_From_WebTide = (TideTextEnum)c.Tide_Start_From_WebTide,
+                                                Tide_End_From_WebTide = (TideTextEnum)c.Tide_End_From_WebTide,
                                                 RemoveFromStat = c.RemoveFromStat,
                                                 RunComment = runComment,
                                                 RunWeatherComment = runWeatherComment,

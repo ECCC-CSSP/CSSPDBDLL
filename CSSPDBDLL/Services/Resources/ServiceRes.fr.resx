@@ -3702,6 +3702,9 @@
   <data name="TideEnd" xml:space="preserve">
     <value>TideEnd</value>
   </data>
+  <data name="TideEndFromWebTide" xml:space="preserve">
+    <value>TideEndFromWebTide</value>
+  </data>
   <data name="Tides" xml:space="preserve">
     <value>Marées</value>
   </data>
@@ -3722,6 +3725,9 @@
   </data>
   <data name="TideStart" xml:space="preserve">
     <value>TideStart</value>
+  </data>
+  <data name="TideStartFromWebTide" xml:space="preserve">
+    <value>TideStartFromWebTide</value>
   </data>
   <data name="TideText" xml:space="preserve">
     <value>Type de texte de marée</value>

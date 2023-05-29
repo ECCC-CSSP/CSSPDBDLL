@@ -311,6 +311,8 @@ namespace CSSPDBDLL.Services
                                                                        Tide_h28_m = (float?)c.Tide_h28_m,
                                                                        Tide_h29_m = (float?)c.Tide_h29_m,
                                                                        Tide_h30_m = (float?)c.Tide_h30_m,
+                                                                       Tide_Start_From_WebTide = (TideTextEnum)c.Tide_Start_From_WebTide,
+                                                                       Tide_End_From_WebTide = (TideTextEnum)c.Tide_End_From_WebTide,
                                                                        RemoveFromStat = c.RemoveFromStat,
                                                                        RunComment = cl.RunComment,
                                                                        RunWeatherComment = cl.RunWeatherComment,

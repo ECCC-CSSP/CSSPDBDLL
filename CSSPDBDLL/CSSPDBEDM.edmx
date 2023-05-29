@@ -1011,6 +1011,8 @@
           <Property Name="Tide_h28_m" Type="float" />
           <Property Name="Tide_h29_m" Type="float" />
           <Property Name="Tide_h30_m" Type="float" />
+          <Property Name="Tide_Start_From_WebTide" Type="int" />
+          <Property Name="Tide_End_From_WebTide" Type="int" />
           <Property Name="RemoveFromStat" Type="bit" />
           <Property Name="LastUpdateDate_UTC" Type="datetime" Nullable="false" />
           <Property Name="LastUpdateContactTVItemID" Type="int" Nullable="false" />
@@ -5522,6 +5524,8 @@
           <Property Name="Tide_h28_m" Type="Double" />
           <Property Name="Tide_h29_m" Type="Double" />
           <Property Name="Tide_h30_m" Type="Double" />
+          <Property Name="Tide_Start_From_WebTide" Type="Int32" />
+          <Property Name="Tide_End_From_WebTide" Type="Int32" />
           <Property Name="RemoveFromStat" Type="Boolean" />
           <Property Name="LastUpdateDate_UTC" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="LastUpdateContactTVItemID" Type="Int32" Nullable="false" />
@@ -8885,6 +8889,8 @@
                 <ScalarProperty Name="LastUpdateContactTVItemID" ColumnName="LastUpdateContactTVItemID" />
                 <ScalarProperty Name="LastUpdateDate_UTC" ColumnName="LastUpdateDate_UTC" />
                 <ScalarProperty Name="RemoveFromStat" ColumnName="RemoveFromStat" />
+                <ScalarProperty Name="Tide_End_From_WebTide" ColumnName="Tide_End_From_WebTide" />
+                <ScalarProperty Name="Tide_Start_From_WebTide" ColumnName="Tide_Start_From_WebTide" />
                 <ScalarProperty Name="Tide_h30_m" ColumnName="Tide_h30_m" />
                 <ScalarProperty Name="Tide_h29_m" ColumnName="Tide_h29_m" />
                 <ScalarProperty Name="Tide_h28_m" ColumnName="Tide_h28_m" />
